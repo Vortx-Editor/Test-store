@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#160a26" />
+    <meta name="theme-color" content="#050505" />
     <title>VORTX — Premium Digital Assets</title>
     
-    <!-- خطوط عصرية وسايبربانك -->
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Rajdhani:wght@500;600;700;800&display=swap" rel="stylesheet" />
@@ -18,17 +18,17 @@
         theme: {
           extend: {
             colors: {
-              background: 'oklch(0.13 0.035 300)',
-              foreground: 'oklch(0.97 0.01 300)',
-              card: 'oklch(0.17 0.045 300)',
-              primary: 'oklch(0.62 0.26 300)',
-              accent: 'oklch(0.85 0.15 195)',
+              background: '#050505',
+              foreground: '#ffffff',
+              card: '#0f0f0f',
+              primary: '#9333ea',
+              accent: '#06b6d4',
               gold: '#ffd700',
-              border: 'oklch(0.7 0.2 300 / 22%)',
+              border: 'rgba(147, 51, 234, 0.2)',
             },
             fontFamily: {
-              sans: ['"Chakra Petch"', 'sans-serif'], // خط النصوص الصغيرة
-              display: ['Rajdhani', 'sans-serif'],    // خط العناوين الكبيرة
+              sans: ['"Chakra Petch"', 'sans-serif'],
+              display: ['Rajdhani', 'sans-serif'],
             },
           },
         },
@@ -37,12 +37,11 @@
 
     <style>
       body {
-        background-color: theme('colors.background');
-        color: theme('colors.foreground');
+        background-color: #050505; /* ضمان إن الخلفية سوداء دايمًا */
+        color: #ffffff;
         overflow-x: hidden;
       }
       .text-glow-purple { text-shadow: 0 0 12px rgba(147, 51, 234, 0.8), 0 0 32px rgba(147, 51, 234, 0.5); }
-      .text-glow-gold { text-shadow: 0 0 10px rgba(255, 215, 0, 0.8); }
       .shadow-glow-purple { box-shadow: 0 0 20px rgba(147, 51, 234, 0.45); }
       .border-glow-purple { border-color: rgba(147, 51, 234, 0.55) !important; box-shadow: 0 0 15px rgba(147, 51, 234, 0.3); }
       
@@ -51,7 +50,6 @@
                     radial-gradient(40% 40% at 85% 20%, rgba(0,255,255,0.05), transparent 70%);
       }
 
-      /* إخفاء شريط التمرير للكاروسيل عشان الشكل */
       .no-scrollbar::-webkit-scrollbar { display: none; }
       .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
       .grab-cursor { cursor: grab; }
@@ -59,36 +57,36 @@
     </style>
   </head>
 
-  <body class="font-sans antialiased">
+  <body class="font-sans antialiased bg-background text-foreground">
     <div class="min-h-screen">
-      <!-- الهيدر -->
-      <header class="sticky top-0 z-50 border-b border-border bg-background/70 backdrop-blur-xl">
+      <!-- Header -->
+      <header class="sticky top-0 z-50 border-b border-border bg-[#050505]/80 backdrop-blur-xl">
         <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3.5 sm:px-6">
           <a href="#top" class="flex items-center gap-2.5">
             <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/15 shadow-glow-purple ring-1 ring-primary/40">
-              <svg class="h-6 w-6 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 14l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg>
+              <svg class="h-6 w-6 text-[#9333ea]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 14l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg>
             </span>
-            <span class="font-display text-2xl font-bold tracking-widest text-primary text-glow-purple">𝐕𝐎𝐑𝐓𝐗</span>
+            <span class="font-display text-2xl font-bold tracking-widest text-[#9333ea] text-glow-purple">𝐕𝐎𝐑𝐓𝐗</span>
           </a>
-          <a href="#products" class="rounded-full bg-primary px-5 py-2 text-sm font-bold text-white shadow-glow-purple hover:scale-105 transition-transform">
-            Explore Store
+          <a href="#products" class="rounded-full bg-[#9333ea] px-5 py-2 text-sm font-bold text-white shadow-glow-purple hover:scale-105 transition-transform">
+            EXPLORE STORE
           </a>
         </div>
       </header>
 
       <main>
-        <!-- الواجهة الرئيسية -->
+        <!-- Hero Section -->
         <section id="top" class="relative overflow-hidden border-b border-border py-16 sm:py-24">
           <div class="hero-backdrop pointer-events-none absolute inset-0"></div>
           
           <div class="relative mx-auto max-w-6xl px-4 text-center sm:px-6">
             <div class="flex justify-center mb-6">
               <div class="relative flex h-24 w-24 items-center justify-center rounded-3xl bg-primary/20 shadow-glow-purple ring-2 ring-primary/50">
-                <svg class="h-12 w-12 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 14l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg>
+                <svg class="h-12 w-12 text-[#9333ea]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 14l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg>
               </div>
             </div>
 
-            <h1 class="font-display text-7xl font-bold tracking-widest text-primary text-glow-purple sm:text-8xl">
+            <h1 class="font-display text-7xl font-bold tracking-widest text-[#9333ea] text-glow-purple sm:text-8xl">
               𝐕𝐎𝐑𝐓𝐗
             </h1>
 
@@ -96,72 +94,74 @@
               Official store for high-end video editing packs, 3D assets, and digital presets.
             </p>
 
-            <!-- زر الدعم الذهبي -->
+            <!-- Support Button (Gold & English Only) -->
             <div class="mt-12 flex justify-center">
               <a href="YOUR_SUPPORT_DONATION_LINK" target="_blank" class="flex items-center gap-2 rounded-full bg-gradient-to-r from-yellow-600 to-yellow-400 px-8 py-3 text-lg font-bold text-black shadow-[0_0_20px_rgba(255,215,0,0.4)] hover:shadow-[0_0_30px_rgba(255,215,0,0.7)] hover:scale-105 transition-all">
                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-                Support Me (ادعمني)
+                SUPPORT ME
               </a>
             </div>
 
-            <!-- أزرار السوشيال -->
-            <div id="links" class="mt-6 flex flex-wrap justify-center gap-3">
-              <a href="YOUR_YOUTUBE_LINK" target="_blank" class="flex items-center gap-2 rounded-full border border-primary/30 bg-card/60 px-5 py-2.5 text-sm font-semibold hover:border-glow-purple hover:scale-105 transition-all">
-                YouTube
+            <!-- Social Links with Icons -->
+            <div id="links" class="mt-6 flex flex-wrap justify-center gap-4">
+              <a href="YOUR_YOUTUBE_LINK" target="_blank" class="flex items-center gap-2 rounded-full border border-primary/30 bg-[#0f0f0f] px-6 py-3 text-sm font-bold uppercase tracking-wider hover:border-glow-purple hover:scale-105 transition-all">
+                <svg class="h-5 w-5 text-[#9333ea]" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                YOUTUBE
               </a>
-              <a href="YOUR_TELEGRAM_LINK" target="_blank" class="flex items-center gap-2 rounded-full border border-primary/30 bg-card/60 px-5 py-2.5 text-sm font-semibold hover:border-glow-purple hover:scale-105 transition-all">
-                Telegram
+              <a href="YOUR_TELEGRAM_LINK" target="_blank" class="flex items-center gap-2 rounded-full border border-primary/30 bg-[#0f0f0f] px-6 py-3 text-sm font-bold uppercase tracking-wider hover:border-glow-purple hover:scale-105 transition-all">
+                <svg class="h-5 w-5 text-[#9333ea]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.295-.6.295-.002 0-.003 0-.005 0l.213-3.054 5.56-5.022c.24-.213-.054-.334-.373-.121l-6.869 4.326-2.96-.924c-.64-.203-.658-.64.135-.954l11.566-4.458c.538-.196 1.006.128.832.94z"/></svg>
+                TELEGRAM
               </a>
             </div>
           </div>
         </section>
 
-        <!-- المنتجات والفئات -->
+        <!-- Products Section -->
         <section id="products" class="relative border-b border-border py-20">
           <div class="mx-auto max-w-6xl px-4 text-center sm:px-6 mb-10">
-            <span class="text-xs font-bold tracking-[0.2em] text-accent">DIGITAL PRODUCTS</span>
-            <h2 class="mt-2 font-display text-4xl font-bold uppercase">Featured Packs</h2>
+            <span class="text-xs font-bold tracking-[0.2em] text-[#06b6d4]">DIGITAL PRODUCTS</span>
+            <h2 class="mt-2 font-display text-4xl font-bold uppercase">FEATURED PACKS</h2>
           </div>
 
-          <!-- شريط المنتجات القابل للسحب والتوقيف -->
+          <!-- Carousel (Cards are now wider: w-[350px]) -->
           <div class="w-full overflow-hidden">
-            <div id="product-track" class="flex gap-6 px-4 py-4 overflow-x-auto no-scrollbar grab-cursor select-none w-full">
+            <div id="product-track" class="flex gap-8 px-4 py-6 overflow-x-auto no-scrollbar grab-cursor select-none w-full">
               <!-- Grid generated via JS -->
             </div>
           </div>
 
-          <!-- أزرار الفئات المربعة -->
+          <!-- Category Squares -->
           <div class="mx-auto max-w-4xl px-4 mt-16">
             <h3 class="text-center font-display text-2xl font-bold mb-6 text-gray-300">CATEGORIES</h3>
             <div class="grid grid-cols-2 gap-4 sm:grid-cols-4">
-              <a href="#" class="aspect-square flex flex-col items-center justify-center rounded-2xl border border-primary/30 bg-card/50 hover:bg-primary/20 hover:border-glow-purple transition-all group">
-                <span class="font-display text-3xl font-bold text-white group-hover:text-primary transition-colors">CC</span>
-                <span class="text-xs text-gray-400 mt-2">Color Correction</span>
+              <a href="#" class="aspect-square flex flex-col items-center justify-center rounded-2xl border border-primary/30 bg-[#0f0f0f] hover:bg-primary/20 hover:border-glow-purple transition-all group">
+                <span class="font-display text-4xl font-bold text-white group-hover:text-[#9333ea] transition-colors">CC</span>
+                <span class="text-sm font-bold text-gray-400 mt-2 uppercase">Color Correction</span>
               </a>
-              <a href="#" class="aspect-square flex flex-col items-center justify-center rounded-2xl border border-primary/30 bg-card/50 hover:bg-primary/20 hover:border-glow-purple transition-all group">
-                <span class="font-display text-3xl font-bold text-white group-hover:text-primary transition-colors">SHAKE</span>
-                <span class="text-xs text-gray-400 mt-2">Presets</span>
+              <a href="#" class="aspect-square flex flex-col items-center justify-center rounded-2xl border border-primary/30 bg-[#0f0f0f] hover:bg-primary/20 hover:border-glow-purple transition-all group">
+                <span class="font-display text-4xl font-bold text-white group-hover:text-[#9333ea] transition-colors">SHAKE</span>
+                <span class="text-sm font-bold text-gray-400 mt-2 uppercase">Presets</span>
               </a>
-              <a href="#" class="aspect-square flex flex-col items-center justify-center rounded-2xl border border-primary/30 bg-card/50 hover:bg-primary/20 hover:border-glow-purple transition-all group">
-                <span class="font-display text-3xl font-bold text-white group-hover:text-primary transition-colors">VFX</span>
-                <span class="text-xs text-gray-400 mt-2">Effects</span>
+              <a href="#" class="aspect-square flex flex-col items-center justify-center rounded-2xl border border-primary/30 bg-[#0f0f0f] hover:bg-primary/20 hover:border-glow-purple transition-all group">
+                <span class="font-display text-4xl font-bold text-white group-hover:text-[#9333ea] transition-colors">VFX</span>
+                <span class="text-sm font-bold text-gray-400 mt-2 uppercase">Effects</span>
               </a>
-              <a href="#" class="aspect-square flex flex-col items-center justify-center rounded-2xl border border-primary/30 bg-card/50 hover:bg-primary/20 hover:border-glow-purple transition-all group">
-                <span class="font-display text-3xl font-bold text-white group-hover:text-primary transition-colors">PF</span>
-                <span class="text-xs text-gray-400 mt-2">Project Files</span>
+              <a href="#" class="aspect-square flex flex-col items-center justify-center rounded-2xl border border-primary/30 bg-[#0f0f0f] hover:bg-primary/20 hover:border-glow-purple transition-all group">
+                <span class="font-display text-4xl font-bold text-white group-hover:text-[#9333ea] transition-colors">PF</span>
+                <span class="text-sm font-bold text-gray-400 mt-2 uppercase">Project Files</span>
               </a>
             </div>
           </div>
         </section>
 
-        <!-- التقييمات -->
+        <!-- Reviews -->
         <section id="reviews" class="relative py-20">
           <div class="mx-auto max-w-6xl px-4 text-center sm:px-6">
-            <span class="text-xs font-bold tracking-[0.2em] text-accent">TESTIMONIALS</span>
-            <h2 class="mt-2 font-display text-4xl font-bold uppercase">Client Reviews</h2>
+            <span class="text-xs font-bold tracking-[0.2em] text-[#06b6d4]">TESTIMONIALS</span>
+            <h2 class="mt-2 font-display text-4xl font-bold uppercase">CLIENT REVIEWS</h2>
             
-            <button onclick="toggleReviewModal()" class="mt-6 inline-flex items-center gap-2 rounded-full border border-accent/40 bg-accent/10 px-6 py-2.5 text-sm font-bold text-accent hover:bg-accent/20 transition-all">
-              + Add Your Review
+            <button onclick="toggleReviewModal()" class="mt-6 inline-flex items-center gap-2 rounded-full border border-[#06b6d4]/40 bg-[#06b6d4]/10 px-6 py-2.5 text-sm font-bold text-[#06b6d4] hover:bg-[#06b6d4]/20 transition-all uppercase tracking-wider">
+              + ADD YOUR REVIEW
             </button>
           </div>
 
@@ -171,32 +171,32 @@
         </section>
       </main>
 
-      <!-- فورم التقييم -->
+      <!-- Review Modal (All English) -->
       <div id="review-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black/80 backdrop-blur-md px-4">
-        <div class="w-full max-w-md rounded-3xl border border-primary/30 bg-card p-6 shadow-glow-purple">
-          <h3 class="font-display text-2xl font-bold text-white">Add a Review</h3>
-          <p class="text-sm text-gray-400 mt-1">Share your experience (Saves locally).</p>
+        <div class="w-full max-w-md rounded-3xl border border-primary/30 bg-[#0f0f0f] p-8 shadow-glow-purple">
+          <h3 class="font-display text-2xl font-bold text-white uppercase">ADD A REVIEW</h3>
+          <p class="text-sm text-gray-400 mt-1">Share your experience with VORTX.</p>
           
-          <form id="review-form" class="mt-6 space-y-4" onsubmit="submitReview(event)">
+          <form id="review-form" class="mt-6 space-y-5" onsubmit="submitReview(event)">
             <div>
-              <label class="block text-xs font-bold text-gray-400 uppercase">Your Name</label>
-              <input type="text" id="rev-name" required class="mt-1 w-full rounded-xl border border-border bg-background p-3 text-sm text-white focus:border-primary focus:outline-none">
+              <label class="block text-xs font-bold text-gray-400 uppercase tracking-wider">YOUR NAME</label>
+              <input type="text" id="rev-name" required class="mt-2 w-full rounded-xl border border-border bg-[#050505] p-3 text-sm text-white focus:border-primary focus:outline-none">
             </div>
             <div>
-              <label class="block text-xs font-bold text-gray-400 uppercase">Rating</label>
-              <select id="rev-rating" class="mt-1 w-full rounded-xl border border-border bg-background p-3 text-sm text-white focus:border-primary focus:outline-none">
+              <label class="block text-xs font-bold text-gray-400 uppercase tracking-wider">RATING</label>
+              <select id="rev-rating" class="mt-2 w-full rounded-xl border border-border bg-[#050505] p-3 text-sm text-white focus:border-primary focus:outline-none">
                 <option value="5">⭐⭐⭐⭐⭐ (5/5)</option>
                 <option value="4">⭐⭐⭐⭐ (4/5)</option>
                 <option value="3">⭐⭐⭐ (3/5)</option>
               </select>
             </div>
             <div>
-              <label class="block text-xs font-bold text-gray-400 uppercase">Comment</label>
-              <textarea id="rev-text" required rows="3" class="mt-1 w-full rounded-xl border border-border bg-background p-3 text-sm text-white focus:border-primary focus:outline-none"></textarea>
+              <label class="block text-xs font-bold text-gray-400 uppercase tracking-wider">COMMENT</label>
+              <textarea id="rev-text" required rows="3" class="mt-2 w-full rounded-xl border border-border bg-[#050505] p-3 text-sm text-white focus:border-primary focus:outline-none"></textarea>
             </div>
-            <div class="flex justify-end gap-3 pt-2">
-              <button type="button" onclick="toggleReviewModal()" class="rounded-full px-5 py-2 text-sm font-semibold text-gray-400 hover:text-white">Cancel</button>
-              <button type="submit" class="rounded-full bg-primary px-6 py-2 text-sm font-bold text-white shadow-glow-purple">Submit</button>
+            <div class="flex justify-end gap-3 pt-4">
+              <button type="button" onclick="toggleReviewModal()" class="rounded-full px-5 py-2 text-sm font-bold text-gray-400 hover:text-white uppercase tracking-wider">CANCEL</button>
+              <button type="submit" class="rounded-full bg-[#9333ea] px-6 py-2 text-sm font-bold text-white shadow-glow-purple uppercase tracking-wider">SUBMIT</button>
             </div>
           </form>
         </div>
@@ -205,31 +205,30 @@
 
     <script>
       // ==========================================
-      // 1. الكاروسيل (شريط المنتجات) - برمجة السحب والإيقاف
+      // Carousel Logic
       // ==========================================
       const products = [
-        { name: 'VORTX VFX Pack', price: '$9', link: '#' },
-        { name: '3D Overlays', price: '$15', link: '#' },
-        { name: 'LUTs Presets', price: '$12', link: '#' },
-        { name: 'Sound FX', price: '$9', link: '#' },
-        { name: 'Motion Suite', price: '$29', link: '#' },
+        { name: 'VORTX VFX PACK', price: '$9', link: '#' },
+        { name: '3D OVERLAYS', price: '$15', link: '#' },
+        { name: 'LUTS PRESETS', price: '$12', link: '#' },
+        { name: 'SOUND FX', price: '$9', link: '#' },
+        { name: 'MOTION SUITE', price: '$29', link: '#' },
       ];
 
       const productTrack = document.getElementById('product-track');
-      // نكرر المنتجات عشان يمديه يسحب واجد
       const productLoop = [...products, ...products, ...products, ...products]; 
       
+      // الكروت صارت أعرض (w-[350px]) والنصوص أكبر (text-2xl / text-3xl)
       productTrack.innerHTML = productLoop.map(p => `
-        <div class="flex w-64 shrink-0 flex-col justify-between rounded-3xl border border-primary/30 bg-card/60 p-5 backdrop-blur-md transition-all hover:border-glow-purple pointer-events-none">
+        <div class="flex w-[350px] shrink-0 flex-col justify-between rounded-3xl border border-[#9333ea]/30 bg-[#0f0f0f] p-8 backdrop-blur-md transition-all hover:border-glow-purple pointer-events-none">
           <div>
-            <h3 class="font-display text-xl font-bold text-white">${p.name}</h3>
-            <div class="mt-1 text-2xl font-bold text-primary">${p.price}</div>
+            <h3 class="font-display text-2xl font-bold text-white tracking-wide">${p.name}</h3>
+            <div class="mt-2 text-4xl font-bold text-[#9333ea]">${p.price}</div>
           </div>
-          <a href="${p.link}" target="_blank" class="mt-4 block text-center rounded-xl bg-primary/20 border border-primary/50 py-2 text-sm font-bold text-primary hover:bg-primary hover:text-white transition-all pointer-events-auto">Buy Now</a>
+          <a href="${p.link}" target="_blank" class="mt-8 block text-center rounded-xl bg-[#9333ea]/20 border border-[#9333ea]/50 py-3 text-lg font-bold text-[#9333ea] hover:bg-[#9333ea] hover:text-white transition-all pointer-events-auto uppercase tracking-wider">BUY NOW</a>
         </div>
       `).join('');
 
-      // لوجيك السحب والتحريك التلقائي
       let isDown = false;
       let startX;
       let scrollLeft;
@@ -249,7 +248,7 @@
 
       function handleInteractionStart(e) {
         isDown = true;
-        stopAutoScroll(); // يوقف أول ما تلمس
+        stopAutoScroll(); 
         clearTimeout(resumeTimeout);
         startX = (e.pageX || e.touches[0].pageX) - productTrack.offsetLeft;
         scrollLeft = productTrack.scrollLeft;
@@ -258,7 +257,6 @@
       function handleInteractionEnd() {
         isDown = false;
         clearTimeout(resumeTimeout);
-        // يوقف 4 ثواني بعد ما تفك إصبعك، بعدين يرجع يتحرك
         resumeTimeout = setTimeout(startAutoScroll, 4000); 
       }
 
@@ -266,42 +264,38 @@
         if (!isDown) return;
         e.preventDefault();
         const x = (e.pageX || e.touches[0].pageX) - productTrack.offsetLeft;
-        const walk = (x - startX) * 2; // سرعة السحب
+        const walk = (x - startX) * 2.5; 
         productTrack.scrollLeft = scrollLeft - walk;
       }
 
-      // أحداث الماوس
       productTrack.addEventListener('mousedown', handleInteractionStart);
       productTrack.addEventListener('mouseleave', handleInteractionEnd);
       productTrack.addEventListener('mouseup', handleInteractionEnd);
       productTrack.addEventListener('mousemove', handleInteractionMove);
 
-      // أحداث اللمس (للجوال)
       productTrack.addEventListener('touchstart', handleInteractionStart);
       productTrack.addEventListener('touchend', handleInteractionEnd);
       productTrack.addEventListener('touchmove', handleInteractionMove);
 
-      // تشغيل التحريك التلقائي بالبداية
       startAutoScroll();
 
       // ==========================================
-      // 2. التقييمات (حفظ وهمي بالـ LocalStorage)
+      // Reviews Logic
       // ==========================================
       const defaultReviews = [
-        { name: 'Alex M.', rating: 5, text: 'The VFX pack is insane! Saved me hours.' },
-        { name: 'David K.', rating: 5, text: 'High quality 3D assets and super fast.' },
+        { name: 'ALEX M.', rating: 5, text: 'The VFX pack is insane! Saved me hours.' },
+        { name: 'DAVID K.', rating: 5, text: 'High quality 3D assets and super fast.' },
       ];
 
-      // نسحب التقييمات من المتصفح لو موجودة، ولا نحط الأساسية
-      let savedReviews = JSON.parse(localStorage.getItem('vortx_reviews')) || defaultReviews;
+      let savedReviews = JSON.parse(localStorage.getItem('vortx_reviews_en')) || defaultReviews;
 
       function renderReviews() {
         const grid = document.getElementById('reviews-grid');
         grid.innerHTML = savedReviews.map(r => `
-          <div class="rounded-2xl border border-primary/20 bg-card/50 p-6 backdrop-blur-sm">
-            <div class="text-accent text-sm">${'★'.repeat(r.rating)}</div>
-            <p class="mt-3 text-sm text-gray-300 font-sans">"${r.text}"</p>
-            <div class="mt-4 font-display font-bold text-sm text-gray-500 uppercase">— ${r.name}</div>
+          <div class="rounded-2xl border border-[#9333ea]/20 bg-[#0f0f0f] p-8 backdrop-blur-sm">
+            <div class="text-[#06b6d4] text-lg">${'★'.repeat(r.rating)}</div>
+            <p class="mt-4 text-base text-gray-300 font-sans tracking-wide">"${r.text}"</p>
+            <div class="mt-6 font-display font-bold text-sm text-gray-500 uppercase tracking-widest">— ${r.name}</div>
           </div>
         `).join('');
       }
@@ -317,11 +311,8 @@
         const rating = parseInt(document.getElementById('rev-rating').value);
         const text = document.getElementById('rev-text').value;
 
-        // نضيف التقييم الجديد فوق
         savedReviews.unshift({ name, rating, text });
-        
-        // نحفظه في المتصفح عشان ما يطير إذا حدث الصفحة (بس ما يشوفه غيره)
-        localStorage.setItem('vortx_reviews', JSON.stringify(savedReviews));
+        localStorage.setItem('vortx_reviews_en', JSON.stringify(savedReviews));
         
         renderReviews();
         toggleReviewModal();
