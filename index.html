@@ -4,17 +4,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#160a26" />
-    <title>VORTX Bundles — Premium Digital Bundles</title>
+    <title>VORTX — Premium Digital Assets & Bundles</title>
     <meta
       name="description"
-      content="VORTX premium digital bundles. Standard, Premium, and Full tiers built for creators who want more."
+      content="VORTX premium digital bundles and editing assets for creators."
     />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Orbitron:wght@700;900&family=Space+Grotesk:wght@500;600;700&display=swap"
       rel="stylesheet"
     />
 
@@ -38,7 +38,7 @@
             },
             fontFamily: {
               sans: ['Geist', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-              display: ['"Space Grotesk"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+              display: ['Orbitron', '"Space Grotesk"', 'sans-serif'],
             },
           },
         },
@@ -48,16 +48,13 @@
     <style>
       :root {
         color-scheme: dark;
-        /* Dark metallic purple base */
         --background: oklch(0.13 0.035 300);
         --foreground: oklch(0.97 0.01 300);
         --card: oklch(0.17 0.045 300);
-        /* Neon purple */
         --primary: oklch(0.62 0.26 300);
         --primary-foreground: oklch(0.98 0.01 300);
         --muted: oklch(0.22 0.04 300);
         --muted-foreground: oklch(0.72 0.04 300);
-        /* Neon cyan */
         --accent: oklch(0.85 0.15 195);
         --accent-foreground: oklch(0.15 0.03 300);
         --border: oklch(0.7 0.2 300 / 22%);
@@ -68,10 +65,9 @@
         color: var(--foreground);
       }
 
-      /* Glow utilities */
       .text-glow-purple {
-        text-shadow: 0 0 8px oklch(0.62 0.26 300 / 0.7),
-          0 0 24px oklch(0.62 0.26 300 / 0.45);
+        text-shadow: 0 0 12px oklch(0.62 0.26 300 / 0.8),
+          0 0 32px oklch(0.62 0.26 300 / 0.5);
       }
       .text-glow-cyan {
         text-shadow: 0 0 8px oklch(0.85 0.15 195 / 0.8),
@@ -90,7 +86,6 @@
         filter: drop-shadow(0 0 6px oklch(0.85 0.15 195 / 0.7));
       }
 
-      /* Hero backdrop */
       .hero-backdrop {
         background: radial-gradient(
             60% 55% at 50% 0%,
@@ -104,26 +99,16 @@
           );
       }
 
-      /* Marquee */
-      @keyframes marquee-scroll {
-        from {
-          transform: translateX(0);
-        }
-        to {
-          transform: translateX(-50%);
-        }
+      /* Infinite Marquee Scroll */
+      @keyframes marquee-left-to-right {
+        0% { transform: translateX(-50%); }
+        100% { transform: translateX(0%); }
       }
-      .animate-marquee {
-        animation: marquee-scroll 40s linear infinite;
+      .animate-marquee-ltr {
+        animation: marquee-left-to-right 30s linear infinite;
       }
-      .marquee-group:hover .animate-marquee {
+      .marquee-container:hover .animate-marquee-ltr {
         animation-play-state: paused;
-      }
-
-      @media (prefers-reduced-motion: reduce) {
-        .animate-marquee {
-          animation: none;
-        }
       }
     </style>
   </head>
@@ -131,389 +116,214 @@
   <body class="font-sans antialiased">
     <div class="min-h-screen">
       <!-- Header -->
-      <header
-        class="sticky top-0 z-50 border-b border-border bg-background/70 backdrop-blur-xl"
-      >
-        <div
-          class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3.5 sm:px-6"
-        >
+      <header class="sticky top-0 z-50 border-b border-border bg-background/70 backdrop-blur-xl">
+        <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3.5 sm:px-6">
           <a href="#top" class="flex items-center gap-2.5">
-            <span
-              class="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/15 shadow-glow-purple ring-1 ring-primary/40"
-            >
-              <!-- Zap icon (شعار مبدئي) -->
-              <svg
-                class="h-5 w-5 text-primary"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-              >
-                <path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z" />
-              </svg>
+            <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/15 shadow-glow-purple ring-1 ring-primary/40">
+              <svg class="h-6 w-6 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg>
             </span>
-            <span
-              class="font-display text-lg font-bold tracking-tight text-primary text-glow-purple"
-            >
-              VORTX
-            </span>
+            <span class="font-display text-xl font-black tracking-widest text-primary text-glow-purple">𝐕𝐎𝐑𝐓𝐗</span>
           </a>
 
-          <nav aria-label="Primary" class="hidden items-center gap-7 sm:flex">
-            <a
-              href="#bundles"
-              class="text-sm font-medium text-muted-foreground transition-colors hover:text-accent hover:text-glow-cyan"
-              >Bundles</a
-            >
-            <a
-              href="#reviews"
-              class="text-sm font-medium text-muted-foreground transition-colors hover:text-accent hover:text-glow-cyan"
-              >Reviews</a
-            >
-            <a
-              href="#links"
-              class="text-sm font-medium text-muted-foreground transition-colors hover:text-accent hover:text-glow-cyan"
-              >Links</a
-            >
+          <nav class="hidden items-center gap-7 sm:flex">
+            <a href="#products" class="text-sm font-medium text-muted-foreground hover:text-accent transition-colors">Products</a>
+            <a href="#reviews" class="text-sm font-medium text-muted-foreground hover:text-accent transition-colors">Reviews</a>
+            <a href="#links" class="text-sm font-medium text-muted-foreground hover:text-accent transition-colors">Socials</a>
           </nav>
 
-          <a
-            href="#bundles"
-            class="rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-glow-purple transition-transform hover:scale-105"
-          >
-            Get Started
+          <a href="#products" class="rounded-full bg-primary px-5 py-2 text-sm font-bold text-primary-foreground shadow-glow-purple hover:scale-105 transition-transform">
+            Explore Store
           </a>
         </div>
       </header>
 
       <main>
-        <!-- Hero -->
-        <section
-          id="top"
-          class="relative overflow-hidden border-b border-border"
-        >
-          <div class="hero-backdrop pointer-events-none absolute inset-0" aria-hidden="true"></div>
-          <canvas
-            id="particles"
-            aria-hidden="true"
-            class="pointer-events-none absolute inset-0 h-full w-full"
-          ></canvas>
+        <!-- Hero Section -->
+        <section id="top" class="relative overflow-hidden border-b border-border py-16 sm:py-24">
+          <div class="hero-backdrop pointer-events-none absolute inset-0"></div>
+          <canvas id="particles" class="pointer-events-none absolute inset-0 h-full w-full"></canvas>
 
-          <div
-            class="relative mx-auto max-w-6xl px-4 py-20 text-center sm:px-6 sm:py-28"
-          >
-            <span
-              class="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-4 py-1.5 text-xs font-semibold tracking-[0.2em] text-primary shadow-glow-purple"
-            >
-              <!-- Sparkles icon -->
-              <svg
-                class="h-3.5 w-3.5"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-              >
-                <path d="M9.94 14.34a2 2 0 0 0-1.28-1.28l-6.06-1.94a.6.6 0 0 1 0-1.16l6.06-1.94a2 2 0 0 0 1.28-1.28l1.94-6.06a.6.6 0 0 1 1.16 0l1.94 6.06a2 2 0 0 0 1.28 1.28l6.06 1.94a.6.6 0 0 1 0 1.16l-6.06 1.94a2 2 0 0 0-1.28 1.28l-1.94 6.06a.6.6 0 0 1-1.16 0z" />
-                <path d="M20 3v4" />
-                <path d="M22 5h-4" />
-                <path d="M4 17v2" />
-                <path d="M5 18H3" />
-              </svg>
-              VORTX ENGINE
-            </span>
+          <div class="relative mx-auto max-w-6xl px-4 text-center sm:px-6">
+            <!-- Center Logo Banner -->
+            <div class="flex justify-center mb-6">
+              <div class="relative flex h-24 w-24 items-center justify-center rounded-3xl bg-primary/20 shadow-glow-purple ring-2 ring-primary/50">
+                <svg class="h-12 w-12 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg>
+              </div>
+            </div>
 
-            <h1
-              class="mx-auto mt-8 max-w-3xl font-display text-5xl font-bold leading-[1.05] tracking-tight text-balance sm:text-7xl"
-            >
-              <span class="text-primary text-glow-purple">VORTX</span>
-              <span class="text-foreground">BUNDLES</span>
+            <!-- Big Stylized Name -->
+            <h1 class="font-display text-6xl font-black tracking-widest text-primary text-glow-purple sm:text-8xl md:text-9xl">
+              𝐕𝐎𝐑𝐓𝐗
             </h1>
 
-            <p
-              class="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground text-pretty"
-            >
-              Premium digital bundles built for creators who want more. Pick a
-              tier, unlock the full arsenal, and level up instantly.
+            <p class="mx-auto mt-4 max-w-xl text-lg text-muted-foreground">
+              Official store for high-end video editing packs, 3D assets, and digital presets.
             </p>
 
-            <div
-              class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row"
-            >
-              <a
-                href="#bundles"
-                class="group inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-8 py-4 text-base font-bold text-primary-foreground shadow-glow-purple transition-transform hover:scale-105 sm:w-auto"
-              >
-                View Bundles
-                <!-- ArrowRight -->
-                <svg
-                  class="h-5 w-5 transition-transform group-hover:translate-x-1"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  aria-hidden="true"
-                >
-                  <path d="M5 12h14" />
-                  <path d="m12 5 7 7-7 7" />
-                </svg>
+            <!-- Social Media Bar directly under logo -->
+            <div id="links" class="mt-8 flex flex-wrap justify-center gap-3">
+              <a href="YOUR_YOUTUBE_LINK" target="_blank" class="flex items-center gap-2 rounded-full border border-primary/30 bg-card/60 px-5 py-2.5 text-sm font-semibold text-foreground hover:border-glow-purple hover:scale-105 transition-all">
+                <svg class="h-4 w-4 text-primary" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                YouTube
               </a>
-              <a
-                href="#reviews"
-                class="inline-flex w-full items-center justify-center rounded-full border border-accent/40 bg-accent/5 px-8 py-4 text-base font-semibold text-accent transition-colors hover:bg-accent/15 sm:w-auto"
-              >
-                See Reviews
+              <a href="YOUR_TELEGRAM_LINK" target="_blank" class="flex items-center gap-2 rounded-full border border-primary/30 bg-card/60 px-5 py-2.5 text-sm font-semibold text-foreground hover:border-glow-purple hover:scale-105 transition-all">
+                <svg class="h-4 w-4 text-primary" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.295-.6.295-.002 0-.003 0-.005 0l.213-3.054 5.56-5.022c.24-.213-.054-.334-.373-.121l-6.869 4.326-2.96-.924c-.64-.203-.658-.64.135-.954l11.566-4.458c.538-.196 1.006.128.832.94z"/></svg>
+                Telegram
+              </a>
+              <a href="YOUR_SUPPORT_LINK" target="_blank" class="flex items-center gap-2 rounded-full border border-primary/30 bg-card/60 px-5 py-2.5 text-sm font-semibold text-foreground hover:border-glow-purple hover:scale-105 transition-all">
+                <svg class="h-4 w-4 text-primary" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                Support
               </a>
             </div>
           </div>
         </section>
 
-        <!-- Bundles -->
-        <section id="bundles" class="relative mx-auto max-w-6xl px-4 py-20 sm:px-6">
-          <div class="text-center">
-            <span
-              class="text-sm font-semibold tracking-[0.25em] text-accent text-glow-cyan"
-            >
-              CHOOSE YOUR TIER
-            </span>
-            <h2
-              class="mt-3 font-display text-4xl font-bold tracking-tight text-balance sm:text-5xl"
-            >
-              VORTX Bundles
-            </h2>
+        <!-- Moving Product Carousel (Left to Right) -->
+        <section id="products" class="relative border-b border-border py-20 overflow-hidden">
+          <div class="mx-auto max-w-6xl px-4 text-center sm:px-6 mb-12">
+            <span class="text-xs font-bold tracking-[0.25em] text-accent text-glow-cyan">DIGITAL PRODUCTS</span>
+            <h2 class="mt-2 font-display text-4xl font-bold">Featured Packs & Bundles</h2>
           </div>
 
-          <div id="bundle-grid" class="mt-14 grid gap-6 lg:grid-cols-3"></div>
+          <div class="marquee-container relative flex overflow-hidden">
+            <div id="product-track" class="flex w-max animate-marquee-ltr gap-6 px-4">
+              <!-- Grid generated via JS -->
+            </div>
+          </div>
         </section>
 
-        <!-- Testimonials -->
-        <section
-          id="reviews"
-          class="relative overflow-hidden border-y border-border py-20"
-        >
+        <!-- Reviews Section with Add Review Button -->
+        <section id="reviews" class="relative border-b border-border py-20">
           <div class="mx-auto max-w-6xl px-4 text-center sm:px-6">
-            <span
-              class="text-sm font-semibold tracking-[0.25em] text-accent text-glow-cyan"
-            >
-              WHAT USERS SAY
-            </span>
-            <h2
-              class="mt-3 font-display text-4xl font-bold tracking-tight text-balance sm:text-5xl"
-            >
-              Loved by creators
-            </h2>
+            <span class="text-xs font-bold tracking-[0.25em] text-accent text-glow-cyan">TESTIMONIALS</span>
+            <h2 class="mt-2 font-display text-4xl font-bold">Client Reviews</h2>
+            
+            <button onclick="toggleReviewModal()" class="mt-6 inline-flex items-center gap-2 rounded-full border border-accent/40 bg-accent/10 px-6 py-2.5 text-sm font-bold text-accent hover:bg-accent/20 transition-all">
+              + Add Your Review
+            </button>
           </div>
 
-          <div class="marquee-group relative mt-12">
-            <div
-              class="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-background to-transparent sm:w-32"
-            ></div>
-            <div
-              class="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-background to-transparent sm:w-32"
-            ></div>
-
-            <div id="marquee-track" class="flex w-max animate-marquee gap-5 px-4"></div>
-          </div>
-        </section>
-
-        <!-- Official Links -->
-        <section id="links" class="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-          <div class="text-center">
-            <span
-              class="text-sm font-semibold tracking-[0.25em] text-accent text-glow-cyan"
-            >
-              STAY CONNECTED
-            </span>
-            <h2
-              class="mt-3 font-display text-4xl font-bold tracking-tight text-balance sm:text-5xl"
-            >
-              VORTX Official Links
-            </h2>
-          </div>
-
-          <div class="mx-auto mt-12 grid max-w-3xl gap-5 sm:grid-cols-3">
-            <!-- YouTube Link -->
-            <a
-              href="YOUR_YOUTUBE_LINK_HERE" 
-              target="_blank"
-              rel="noopener noreferrer"
-              class="group flex flex-col items-center gap-4 rounded-3xl border border-primary/25 bg-card/50 p-8 text-center backdrop-blur-sm transition-transform hover:-translate-y-1 hover:border-glow-purple"
-            >
-              <span class="flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/15 text-primary shadow-glow-purple ring-1 ring-primary/40 transition-transform group-hover:scale-110">
-                <svg class="h-8 w-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <circle cx="12" cy="12" r="10" />
-                  <polygon points="10 8 16 12 10 16 10 8" />
-                </svg>
-              </span>
-              <div>
-                <div class="font-display text-lg font-bold text-foreground">YouTube</div>
-                <div class="mt-0.5 text-sm text-muted-foreground">@vortx</div>
-              </div>
-            </a>
-
-            <!-- Telegram Link -->
-            <a
-              href="YOUR_TELEGRAM_LINK_HERE"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="group flex flex-col items-center gap-4 rounded-3xl border border-primary/25 bg-card/50 p-8 text-center backdrop-blur-sm transition-transform hover:-translate-y-1 hover:border-glow-purple"
-            >
-              <span class="flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/15 text-primary shadow-glow-purple ring-1 ring-primary/40 transition-transform group-hover:scale-110">
-                <svg class="h-8 w-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z" />
-                  <path d="m21.854 2.147-10.94 10.939" />
-                </svg>
-              </span>
-              <div>
-                <div class="font-display text-lg font-bold text-foreground">Telegram</div>
-                <div class="mt-0.5 text-sm text-muted-foreground">Join Channel</div>
-              </div>
-            </a>
-
-            <!-- Support/WhatsApp Link -->
-            <a
-              href="YOUR_SUPPORT_LINK_HERE"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="group flex flex-col items-center gap-4 rounded-3xl border border-primary/25 bg-card/50 p-8 text-center backdrop-blur-sm transition-transform hover:-translate-y-1 hover:border-glow-purple"
-            >
-              <span class="flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/15 text-primary shadow-glow-purple ring-1 ring-primary/40 transition-transform group-hover:scale-110">
-                <svg class="h-8 w-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22z" />
-                </svg>
-              </span>
-              <div>
-                <div class="font-display text-lg font-bold text-foreground">Support</div>
-                <div class="mt-0.5 text-sm text-muted-foreground">Chat with us</div>
-              </div>
-            </a>
+          <!-- Reviews Grid -->
+          <div class="mx-auto max-w-6xl mt-12 grid gap-6 px-4 sm:grid-cols-2 lg:grid-cols-3" id="reviews-grid">
+            <!-- Dynamic Reviews -->
           </div>
         </section>
       </main>
 
-      <footer class="border-t border-border py-8">
-        <div class="mx-auto flex max-w-6xl flex-col items-center gap-2 px-4 text-center sm:px-6">
-          <span class="font-display text-lg font-bold text-primary text-glow-purple">VORTX</span>
-          <p id="copyright" class="text-sm text-muted-foreground"></p>
+      <!-- Add Review Modal -->
+      <div id="review-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black/80 backdrop-blur-md px-4">
+        <div class="w-full max-w-md rounded-3xl border border-primary/30 bg-card p-6 shadow-glow-purple">
+          <h3 class="font-display text-2xl font-bold text-foreground">Add a Review</h3>
+          <p class="text-sm text-muted-foreground mt-1">Share your experience with VORTX products.</p>
+          
+          <form id="review-form" class="mt-6 space-y-4" onsubmit="submitReview(event)">
+            <div>
+              <label class="block text-xs font-bold text-muted-foreground uppercase">Your Name</label>
+              <input type="text" id="rev-name" required class="mt-1 w-full rounded-xl border border-border bg-background p-3 text-sm text-foreground focus:border-primary focus:outline-none">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-muted-foreground uppercase">Rating (1 to 5)</label>
+              <select id="rev-rating" class="mt-1 w-full rounded-xl border border-border bg-background p-3 text-sm text-foreground focus:border-primary focus:outline-none">
+                <option value="5">⭐⭐⭐⭐⭐ (5/5)</option>
+                <option value="4">⭐⭐⭐⭐ (4/5)</option>
+                <option value="3">⭐⭐⭐ (3/5)</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-muted-foreground uppercase">Comment</label>
+              <textarea id="rev-text" required rows="3" class="mt-1 w-full rounded-xl border border-border bg-background p-3 text-sm text-foreground focus:border-primary focus:outline-none"></textarea>
+            </div>
+            <div class="flex justify-end gap-3 pt-2">
+              <button type="button" onclick="toggleReviewModal()" class="rounded-full px-5 py-2 text-sm font-semibold text-muted-foreground hover:text-white">Cancel</button>
+              <button type="submit" class="rounded-full bg-primary px-6 py-2 text-sm font-bold text-primary-foreground shadow-glow-purple">Submit</button>
+            </div>
+          </form>
         </div>
+      </div>
+
+      <footer class="py-8 text-center border-t border-border">
+        <span class="font-display text-lg font-bold text-primary text-glow-purple">𝐕𝐎𝐑𝐓𝐗</span>
+        <p id="copyright" class="mt-2 text-xs text-muted-foreground"></p>
       </footer>
     </div>
 
     <script>
       // ==========================================
-      // عدل بيانات الباقات وروابط الدفع من هنا
+      // Products List (Moving Cards)
       // ==========================================
-      const bundles = [
-        {
-          name: 'Standard',
-          price: '$9',
-          period: '/ one-time',
-          tagline: 'البداية السريعة',
-          link: 'YOUR_PAYMENT_LINK_HERE', // حط رابط الدفع أو البوت حق الباقة هنا
-          features: [
-            'وصول أساسي للملفات',
-            'سرعة تحميل عادية',
-            'دعم مجتمعي',
-          ],
-        },
-        {
-          name: 'Premium',
-          price: '$29',
-          period: '/ one-time',
-          tagline: 'الخيار المفضل للمبدعين',
-          featured: true, // هذي تخلي الباقة منورة ومميزة بالنص
-          link: 'YOUR_PAYMENT_LINK_HERE', // حط رابط الدفع أو البوت حق الباقة هنا
-          features: [
-            'كل ميزات الأساسية',
-            'باقات حصرية',
-            'أولوية بالدعم والتحميل',
-          ],
-        },
-        {
-          name: 'Full',
-          price: '$59',
-          period: '/ one-time',
-          tagline: 'افتح كل شيء بدون قيود',
-          link: 'YOUR_PAYMENT_LINK_HERE', // حط رابط الدفع أو البوت حق الباقة هنا
-          features: [
-            'كل ميزات البريميوم',
-            'سرعة تحميل قصوى',
-            'تحديثات مدى الحياة',
-          ],
-        },
+      const products = [
+        { name: 'VORTX VFX Asset Pack', price: '$9', link: 'YOUR_LINK_HERE' },
+        { name: '3D Cyberpunk Overlays', price: '$15', link: 'YOUR_LINK_HERE' },
+        { name: 'Color Grading LUTs Presets', price: '$12', link: 'YOUR_LINK_HERE' },
+        { name: 'Full Editing Sound FX', price: '$9', link: 'YOUR_LINK_HERE' },
+        { name: 'Motion Graphics Suite', price: '$29', link: 'YOUR_LINK_HERE' },
       ]
 
       // ==========================================
-      // التقييمات الوهمية (تقدر تعدلها بأسماء عملائك الصدق)
+      // Initial Reviews
       // ==========================================
-      const reviews = [
-        { name: 'محمد', rating: 5, text: 'أفضل باقة اشتريتها، شغل احترافي.' },
-        { name: 'فهد', rating: 5, text: 'سرعة بالتسليم وجودة خيالية.' },
-        { name: 'عبدالله', rating: 5, text: 'باقة البريميوم تستاهل كل ريال.' },
-        { name: 'خالد', rating: 5, text: 'الدعم الفني سريع جداً.' },
-        { name: 'سعد', rating: 4, text: 'ممتاز جداً وأنصح فيه بقوة.' },
+      let reviews = [
+        { name: 'Alex M.', rating: 5, text: 'The VFX pack is insane! Saved me hours on my latest edit.' },
+        { name: 'David K.', rating: 5, text: 'High quality 3D assets and super fast download speed.' },
+        { name: 'Sarah L.', rating: 5, text: 'VORTX presets are top tier. Highly recommended!' },
       ]
 
-      // ---------- SVG icon strings ----------
-      const zapIcon = '<svg class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg>'
-      const checkIcon = '<svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>'
-      const starIcon = (filled) => '<svg class="h-4 w-4 ' + (filled ? 'text-accent text-glow-cyan star-glow" fill="currentColor"' : 'text-muted-foreground/40" fill="none"') + ' viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.12 2.12 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.12 2.12 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.12 2.12 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.12 2.12 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.12 2.12 0 0 0 1.597-1.16z"/></svg>'
+      // Render Products
+      const productTrack = document.getElementById('product-track')
+      const productLoop = products.concat(products).concat(products)
+      productTrack.innerHTML = productLoop.map(p => `
+        <div class="flex w-72 shrink-0 flex-col justify-between rounded-3xl border border-primary/30 bg-card/60 p-6 backdrop-blur-md transition-transform hover:-translate-y-2 hover:border-glow-purple">
+          <div>
+            <div class="h-32 w-full rounded-2xl bg-primary/10 flex items-center justify-center border border-primary/20 mb-4">
+              <svg class="h-10 w-10 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+            </div>
+            <h3 class="font-display text-lg font-bold text-foreground">${p.name}</h3>
+            <div class="mt-2 text-2xl font-black text-primary text-glow-purple">${p.price}</div>
+          </div>
+          <a href="${p.link}" target="_blank" class="mt-6 block text-center rounded-full bg-primary/20 border border-primary/50 py-2.5 text-sm font-bold text-primary hover:bg-primary hover:text-white transition-all">Buy Now</a>
+        </div>
+      `).join('')
 
-      // ---------- Render bundles ----------
-      const bundleGrid = document.getElementById('bundle-grid')
-      bundleGrid.innerHTML = bundles.map((b) => {
-          const cardBorder = b.featured ? 'border-glow-purple lg:scale-[1.03]' : 'border-primary/25'
-          const badge = b.featured ? '<span class="absolute -top-3 left-1/2 inline-flex -translate-x-1/2 items-center gap-1 rounded-full bg-primary px-3 py-1 text-xs font-bold text-primary-foreground shadow-glow-purple">' + zapIcon + 'الأكثر طلباً</span>' : ''
-          const priceColor = b.featured ? 'text-primary text-glow-purple' : 'text-foreground'
-          const btnClass = b.featured ? 'bg-primary text-primary-foreground shadow-glow-purple' : 'border border-primary/50 bg-primary/10 text-primary shadow-glow-purple hover:bg-primary/20'
-          const features = b.features.map((f) => '<li class="flex items-start gap-3 text-sm"><span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-accent/15 text-accent">' + checkIcon + '</span><span class="text-foreground/90">' + f + '</span></li>').join('')
-          
-          return (
-            '<div class="relative flex flex-col rounded-3xl border bg-card/50 p-7 backdrop-blur-sm transition-transform hover:-translate-y-1 ' + cardBorder + '">' + badge +
-            '<h3 class="font-display text-xl font-bold text-foreground">' + b.name + '</h3>' +
-            '<p class="mt-1 text-sm text-muted-foreground">' + b.tagline + '</p>' +
-            '<div class="mt-6 flex items-end gap-1"><span class="font-display text-5xl font-bold ' + priceColor + '">' + b.price + '</span><span class="mb-1.5 text-sm text-muted-foreground">' + b.period + '</span></div>' +
-            '<ul class="mt-7 flex-1 space-y-3">' + features + '</ul>' +
-            // ربط الزر برابط الباقة المضاف فوق
-            '<a href="' + (b.link || '#') + '" class="mt-8 inline-flex w-full items-center justify-center rounded-full px-6 py-3.5 text-base font-bold transition-transform hover:scale-[1.03] ' + btnClass + '">اشترِ الآن</a>' +
-            '</div>'
-          )
-        }).join('')
+      // Render Reviews
+      function renderReviews() {
+        const grid = document.getElementById('reviews-grid')
+        grid.innerHTML = reviews.map(r => `
+          <div class="rounded-2xl border border-primary/20 bg-card/50 p-6 backdrop-blur-sm">
+            <div class="text-accent text-glow-cyan text-sm">${'★'.repeat(r.rating)}</div>
+            <p class="mt-3 text-sm text-foreground/90">"${r.text}"</p>
+            <div class="mt-4 font-bold text-xs text-muted-foreground uppercase">— ${r.name}</div>
+          </div>
+        `).join('')
+      }
+      renderReviews()
 
-      // ---------- Render testimonials ----------
-      const track = document.getElementById('marquee-track')
-      const loop = reviews.concat(reviews)
-      track.innerHTML = loop.map((r) => {
-          let stars = ''
-          for (let i = 0; i < 5; i++) stars += starIcon(i < r.rating)
-          return (
-            '<figure class="flex w-72 shrink-0 flex-col rounded-2xl border border-primary/25 bg-card/60 p-5 backdrop-blur-sm sm:w-80">' +
-            '<div class="flex items-center gap-1">' + stars + '</div>' +
-            '<blockquote class="mt-4 flex-1 text-sm leading-relaxed text-foreground/90">"' + r.text + '"</blockquote>' +
-            '<figcaption class="mt-4 flex items-center gap-3 border-t border-border pt-4"><span class="flex h-8 w-8 items-center justify-center rounded-full bg-primary/20 font-display text-sm font-bold text-primary">' + r.name.charAt(0) + '</span><span class="text-sm font-semibold text-foreground">' + r.name + '</span></figcaption>' +
-            '</figure>'
-          )
-        }).join('')
+      // Modal Controls
+      function toggleReviewModal() {
+        document.getElementById('review-modal').classList.toggle('hidden')
+      }
 
-      // ---------- Copyright ----------
+      function submitReview(e) {
+        e.preventDefault()
+        const name = document.getElementById('rev-name').value
+        const rating = parseInt(document.getElementById('rev-rating').value)
+        const text = document.getElementById('rev-text').value
+
+        reviews.unshift({ name, rating, text })
+        renderReviews()
+        toggleReviewModal()
+        document.getElementById('review-form').reset()
+      }
+
       document.getElementById('copyright').textContent = '© ' + new Date().getFullYear() + ' VORTX. All rights reserved.'
 
-      // ---------- Hero particles ----------
+      // Particles Background
       ;(function () {
         const canvas = document.getElementById('particles')
         if (!canvas) return
         const ctx = canvas.getContext('2d')
-        if (!ctx) return
-        let width = 0, height = 0, raf = 0
+        let width = 0, height = 0
         const particles = []
-        const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
         function resize() {
           const rect = canvas.getBoundingClientRect()
           const dpr = Math.min(window.devicePixelRatio || 1, 2)
@@ -521,18 +331,19 @@
           canvas.width = width * dpr; canvas.height = height * dpr
           ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
         }
+
         function seed() {
           particles.length = 0
-          const count = Math.round(Math.min(90, (width * height) / 14000))
-          for (let i = 0; i < count; i++) {
+          for (let i = 0; i < 60; i++) {
             particles.push({
               x: Math.random() * width, y: Math.random() * height,
-              vx: (Math.random() - 0.5) * 0.25, vy: (Math.random() - 0.5) * 0.25,
-              r: Math.random() * 1.8 + 0.4, hue: Math.random() > 0.5 ? 195 : 300,
+              vx: (Math.random() - 0.5) * 0.2, vy: (Math.random() - 0.5) * 0.2,
+              r: Math.random() * 1.5 + 0.5, hue: Math.random() > 0.5 ? 195 : 300,
               alpha: Math.random() * 0.5 + 0.2,
             })
           }
         }
+
         function draw() {
           ctx.clearRect(0, 0, width, height)
           for (const p of particles) {
@@ -540,17 +351,13 @@
             if (p.x < 0) p.x = width; if (p.x > width) p.x = 0
             if (p.y < 0) p.y = height; if (p.y > height) p.y = 0
             ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2)
-            const light = p.hue === 195 ? 70 : 60
-            ctx.fillStyle = 'hsla(' + p.hue + ', 90%, ' + light + '%, ' + p.alpha + ')'
-            ctx.shadowBlur = 8; ctx.shadowColor = 'hsla(' + p.hue + ', 90%, ' + light + '%, 0.8)'
+            ctx.fillStyle = `hsla(${p.hue}, 90%, 60%, ${p.alpha})`
             ctx.fill()
           }
-          ctx.shadowBlur = 0
-          raf = requestAnimationFrame(draw)
+          requestAnimationFrame(draw)
         }
         resize(); seed(); draw()
-        if (prefersReduced) cancelAnimationFrame(raf)
-        window.addEventListener('resize', function () { resize(); seed() })
+        window.addEventListener('resize', () => { resize(); seed() })
       })()
     </script>
   </body>
