@@ -12,7 +12,7 @@
   <!-- Google Fonts: Cinzel & Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Inter:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800;900&family=Inter:wght@500;600;700;800&display=swap" rel="stylesheet" />
 
   <script>
     tailwind.config = {
@@ -25,7 +25,7 @@
           },
           colors: {
             ink: '#050505',
-            brand: '#9333ea', /* البنفسجي الأساسي */
+            brand: '#9333ea',
             brandLight: '#c084fc',
           },
         },
@@ -53,8 +53,8 @@
     .glow-field {
       position: fixed; inset: 0; z-index: 0; pointer-events: none;
       background:
-        radial-gradient(800px circle at 50% 0%, rgba(147,51,234,0.08), transparent 70%),
-        radial-gradient(600px circle at 100% 100%, rgba(147,51,234,0.05), transparent 70%);
+        radial-gradient(800px circle at 50% 0%, rgba(147,51,234,0.1), transparent 70%),
+        radial-gradient(600px circle at 100% 100%, rgba(147,51,234,0.06), transparent 70%);
     }
 
     /* ---------- Glassmorphism & Borders ---------- */
@@ -66,37 +66,35 @@
     }
     
     .glass:hover {
-      border: 1px solid rgba(147,51,234,0.3);
-      box-shadow: 0 10px 30px -10px rgba(147,51,234,0.1);
+      border: 1px solid rgba(147,51,234,0.4);
+      box-shadow: 0 10px 30px -10px rgba(147,51,234,0.15);
     }
 
-    /* ---------- VORTX 3D Purple Logo ---------- */
-    .text-3d-purple {
-      color: #c084fc; 
+    /* ---------- VORTX 3D Heavy Bold Logo ---------- */
+    .text-3d-heavy {
+      color: #d8b4fe;
+      font-weight: 900;
       text-shadow: 
-        0 1px 0 #9333ea, 
-        0 2px 0 #7e22ce, 
-        0 3px 0 #6b21a8, 
-        0 4px 0 #581c87, 
+        0 1px 0 #7e22ce, 
+        0 2px 0 #6b21a8, 
+        0 3px 0 #581c87, 
+        0 4px 0 #4c1d95, 
         0 5px 0 #3b0764, 
-        0 6px 1px rgba(0,0,0,.1), 
-        0 0 5px rgba(0,0,0,.1), 
-        0 1px 3px rgba(0,0,0,.3), 
-        0 3px 5px rgba(0,0,0,.2), 
-        0 5px 10px rgba(0,0,0,.25), 
-        0 10px 10px rgba(0,0,0,.2), 
-        0 0 30px rgba(147,51,234,0.6);
+        0 6px 0 #2e1065,
+        0 8px 2px rgba(0,0,0,.3), 
+        0 10px 15px rgba(147,51,234,0.7),
+        0 0 35px rgba(147,51,234,0.8);
     }
 
     /* ---------- Buttons ---------- */
     .btn-primary {
       background: #9333ea;
       color: white;
-      box-shadow: 0 0 15px rgba(147,51,234,0.4);
+      box-shadow: 0 0 20px rgba(147,51,234,0.5);
     }
     .btn-primary:hover { 
       background: #a855f7;
-      box-shadow: 0 0 25px rgba(147,51,234,0.6); 
+      box-shadow: 0 0 30px rgba(147,51,234,0.7); 
       transform: translateY(-2px); 
     }
 
@@ -141,7 +139,7 @@
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
         <!-- Logo -->
         <a href="#top" class="flex items-center gap-3 active:scale-95 transition-transform duration-200">
-          <span class="font-head text-2xl tracking-widest text-3d-purple">VORTX</span>
+          <span class="font-head font-extrabold text-2xl tracking-widest text-3d-heavy">VORTX</span>
         </a>
 
         <!-- Desktop Menu -->
@@ -166,11 +164,11 @@
     <!-- HERO SECTION -->
     <section class="max-w-4xl mx-auto px-4 sm:px-6 py-28 sm:py-36 text-center">
       <div class="reveal inline-flex items-center gap-2 glass px-5 py-2 rounded-full text-xs font-bold tracking-widest uppercase text-brandLight mb-10 border-brand/20">
-        <span class="w-2 h-2 rounded-full bg-brand box-shadow-brand"></span>
+        <span class="w-2 h-2 rounded-full bg-brand"></span>
         Premium Digital Studio
       </div>
 
-      <h1 class="reveal font-head tracking-widest text-6xl sm:text-7xl md:text-8xl text-3d-purple mb-8" style="line-height: 1.2; padding-bottom: 10px;">
+      <h1 class="reveal font-head font-black tracking-widest text-6xl sm:text-7xl md:text-8xl text-3d-heavy mb-8" style="line-height: 1.2; padding-bottom: 15px;">
         VORTX
       </h1>
       
@@ -185,14 +183,14 @@
       </div>
     </section>
 
-    <!-- WEB BUNDLES (Left Aligned, Clean) -->
+    <!-- WEB BUNDLES -->
     <section id="bundles" class="max-w-7xl mx-auto px-4 sm:px-6 py-20">
       <div class="reveal glass rounded-[2rem] p-10 sm:p-16 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-10 tilt-card">
         <div class="absolute -right-20 -top-20 w-72 h-72 rounded-full bg-brand/10 blur-3xl pointer-events-none"></div>
         
         <div class="text-left max-w-2xl relative z-10">
           <span class="text-xs tracking-widest uppercase font-bold text-brandLight">Custom Web Solutions</span>
-          <h2 class="font-head text-4xl sm:text-5xl mt-4 mb-5 text-white">Web Page Bundles</h2>
+          <h2 class="font-head font-bold text-4xl sm:text-5xl mt-4 mb-5 text-white">Web Page Bundles</h2>
           <p class="font-bold text-white/60 leading-relaxed text-base sm:text-lg">
             Launch your custom digital space today. Stand out with next-gen designs, premium performance, and join the elite creators.
           </p>
@@ -214,39 +212,73 @@
       </div>
       
       <div id="marquee" class="marquee-wrap reveal">
-        <div class="marquee-track px-4" id="marquee-track">
-          <!-- JS will duplicate the 5 items to create an infinite effect -->
-        </div>
+        <div class="marquee-track px-4" id="marquee-track"></div>
       </div>
     </section>
 
-    <!-- CATEGORIES (Clean Grid, Left Aligned) -->
+    <!-- CATEGORIES (7 Items in 2-Column Grid) -->
     <section id="categories" class="max-w-7xl mx-auto px-4 sm:px-6 py-20">
       <div class="mb-12 text-left reveal">
         <h2 class="font-head font-bold text-3xl sm:text-4xl text-white">Categories</h2>
         <p class="font-bold text-white/50 mt-3 text-sm tracking-wide">Select a module to view contents.</p>
       </div>
       
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        <!-- CC -->
-        <div onclick="openCategory('CC')" class="reveal tilt-card glass rounded-2xl p-8 flex flex-col items-start justify-between min-h-[220px] transition-all duration-300 active:scale-95 cursor-pointer group">
-          <span class="text-xs tracking-widest uppercase font-bold text-white/40 group-hover:text-brand transition-colors">Color</span>
-          <span class="font-head font-bold text-5xl text-white group-hover:text-brandLight transition-colors">CC</span>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <!-- 1. CC -->
+        <div onclick="openCategory('CC')" class="reveal tilt-card glass rounded-2xl p-8 flex flex-col items-start justify-between min-h-[180px] transition-all duration-300 active:scale-95 cursor-pointer group">
+          <div class="flex items-center justify-between w-full">
+            <span class="text-xs tracking-widest uppercase font-bold text-white/40 group-hover:text-brand transition-colors">Color Grading</span>
+            <span class="text-xs font-bold text-brandLight">01</span>
+          </div>
+          <span class="font-head font-extrabold text-4xl text-white group-hover:text-brandLight transition-colors mt-6">CC (LUTs)</span>
         </div>
-        <!-- SHAKE -->
-        <div onclick="openCategory('SHAKE')" class="reveal tilt-card glass rounded-2xl p-8 flex flex-col items-start justify-between min-h-[220px] transition-all duration-300 active:scale-95 cursor-pointer group">
-          <span class="text-xs tracking-widest uppercase font-bold text-white/40 group-hover:text-brand transition-colors">Camera</span>
-          <span class="font-head font-bold text-5xl text-white group-hover:text-brandLight transition-colors">SHAKE</span>
+        <!-- 2. SHAKE -->
+        <div onclick="openCategory('SHAKE')" class="reveal tilt-card glass rounded-2xl p-8 flex flex-col items-start justify-between min-h-[180px] transition-all duration-300 active:scale-95 cursor-pointer group">
+          <div class="flex items-center justify-between w-full">
+            <span class="text-xs tracking-widest uppercase font-bold text-white/40 group-hover:text-brand transition-colors">Camera Movements</span>
+            <span class="text-xs font-bold text-brandLight">02</span>
+          </div>
+          <span class="font-head font-extrabold text-4xl text-white group-hover:text-brandLight transition-colors mt-6">SHAKE</span>
         </div>
-        <!-- VFX -->
-        <div onclick="openCategory('VFX')" class="reveal tilt-card glass rounded-2xl p-8 flex flex-col items-start justify-between min-h-[220px] transition-all duration-300 active:scale-95 cursor-pointer group">
-          <span class="text-xs tracking-widest uppercase font-bold text-white/40 group-hover:text-brand transition-colors">Effects</span>
-          <span class="font-head font-bold text-5xl text-white group-hover:text-brandLight transition-colors">VFX</span>
+        <!-- 3. VFX -->
+        <div onclick="openCategory('VFX')" class="reveal tilt-card glass rounded-2xl p-8 flex flex-col items-start justify-between min-h-[180px] transition-all duration-300 active:scale-95 cursor-pointer group">
+          <div class="flex items-center justify-between w-full">
+            <span class="text-xs tracking-widest uppercase font-bold text-white/40 group-hover:text-brand transition-colors">Visual Effects</span>
+            <span class="text-xs font-bold text-brandLight">03</span>
+          </div>
+          <span class="font-head font-extrabold text-4xl text-white group-hover:text-brandLight transition-colors mt-6">VFX</span>
         </div>
-        <!-- PF -->
-        <div onclick="openCategory('PF')" class="reveal tilt-card glass rounded-2xl p-8 flex flex-col items-start justify-between min-h-[220px] transition-all duration-300 active:scale-95 cursor-pointer group">
-          <span class="text-xs tracking-widest uppercase font-bold text-white/40 group-hover:text-brand transition-colors">Presets</span>
-          <span class="font-head font-bold text-5xl text-white group-hover:text-brandLight transition-colors">PF</span>
+        <!-- 4. TRANS -->
+        <div onclick="openCategory('TRANS')" class="reveal tilt-card glass rounded-2xl p-8 flex flex-col items-start justify-between min-h-[180px] transition-all duration-300 active:scale-95 cursor-pointer group">
+          <div class="flex items-center justify-between w-full">
+            <span class="text-xs tracking-widest uppercase font-bold text-white/40 group-hover:text-brand transition-colors">Smart Transitions</span>
+            <span class="text-xs font-bold text-brandLight">04</span>
+          </div>
+          <span class="font-head font-extrabold text-4xl text-white group-hover:text-brandLight transition-colors mt-6">TRANS</span>
+        </div>
+        <!-- 5. SFX -->
+        <div onclick="openCategory('SFX')" class="reveal tilt-card glass rounded-2xl p-8 flex flex-col items-start justify-between min-h-[180px] transition-all duration-300 active:scale-95 cursor-pointer group">
+          <div class="flex items-center justify-between w-full">
+            <span class="text-xs tracking-widest uppercase font-bold text-white/40 group-hover:text-brand transition-colors">Sound Design</span>
+            <span class="text-xs font-bold text-brandLight">05</span>
+          </div>
+          <span class="font-head font-extrabold text-4xl text-white group-hover:text-brandLight transition-colors mt-6">SFX</span>
+        </div>
+        <!-- 6. OVER -->
+        <div onclick="openCategory('OVER')" class="reveal tilt-card glass rounded-2xl p-8 flex flex-col items-start justify-between min-h-[180px] transition-all duration-300 active:scale-95 cursor-pointer group">
+          <div class="flex items-center justify-between w-full">
+            <span class="text-xs tracking-widest uppercase font-bold text-white/40 group-hover:text-brand transition-colors">Overlays & Textures</span>
+            <span class="text-xs font-bold text-brandLight">06</span>
+          </div>
+          <span class="font-head font-extrabold text-4xl text-white group-hover:text-brandLight transition-colors mt-6">OVERLAYS</span>
+        </div>
+        <!-- 7. PROJ -->
+        <div onclick="openCategory('PROJ')" class="reveal tilt-card glass rounded-2xl p-8 flex flex-col items-start justify-between min-h-[180px] transition-all duration-300 active:scale-95 cursor-pointer group sm:col-span-2">
+          <div class="flex items-center justify-between w-full">
+            <span class="text-xs tracking-widest uppercase font-bold text-white/40 group-hover:text-brand transition-colors">Project Files & Templates</span>
+            <span class="text-xs font-bold text-brandLight">07</span>
+          </div>
+          <span class="font-head font-extrabold text-4xl text-white group-hover:text-brandLight transition-colors mt-6">PROJECT FILES</span>
         </div>
       </div>
     </section>
@@ -254,7 +286,7 @@
     <!-- FOOTER -->
     <footer class="border-t border-white/5 mt-10">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12 flex flex-col md:flex-row items-center justify-between gap-6">
-        <p class="font-head tracking-widest text-brandLight font-bold text-xl">VORTX</p>
+        <p class="font-head font-extrabold tracking-widest text-brandLight text-xl">VORTX</p>
         <p class="font-bold text-white/40 text-sm">© <span id="year"></span> VORTX Studio. Crafted for the bold.</p>
       </div>
     </footer>
@@ -266,7 +298,7 @@
       <div class="flex items-center justify-between mb-12">
         <div class="text-left">
           <span class="text-xs tracking-widest uppercase font-bold text-brandLight">Web Solutions</span>
-          <h2 class="font-head text-4xl mt-3 text-white">Development Tiers</h2>
+          <h2 class="font-head font-bold text-4xl mt-3 text-white">Development Tiers</h2>
         </div>
         <button onclick="backToHome()" class="glass px-6 py-3 rounded-full font-bold text-sm hover:bg-white/5 transition-all duration-200 active:scale-95">
           ← Back
@@ -329,7 +361,7 @@
       <div class="flex items-center justify-between mb-12">
         <div class="text-left">
           <span class="text-xs tracking-widest uppercase font-bold text-brandLight">Collection</span>
-          <h2 id="cat-title" class="font-head text-4xl mt-3 text-white">CC</h2>
+          <h2 id="cat-title" class="font-head font-bold text-4xl mt-3 text-white">CC</h2>
         </div>
         <button onclick="backToHome()" class="glass px-6 py-3 rounded-full font-bold text-sm hover:bg-white/5 transition-all duration-200 active:scale-95">
           ← Back
@@ -368,7 +400,6 @@
 
   (function buildMarquee() {
     const track = document.getElementById('marquee-track');
-    // نكرر الـ 5 كروت 6 مرات عشان السحب ما يوقف أبد (Infinite Loop Hack)
     const allPacks = [...packs5, ...packs5, ...packs5, ...packs5, ...packs5, ...packs5];
     
     const html = allPacks.map(p => `
@@ -385,7 +416,6 @@
     track.innerHTML = html;
   })();
 
-  // السحب بالماوس (Drag to Scroll)
   (function marqueeDrag() {
     const wrap = document.getElementById('marquee');
     let isDown = false, startX = 0, scrollStart = 0;
@@ -410,14 +440,13 @@
     window.addEventListener('mouseup', up);
     window.addEventListener('mouseleave', up);
     
-    // لمس الجوال
     wrap.addEventListener('touchstart', e => down(e.touches[0].pageX), { passive: true });
     wrap.addEventListener('touchmove', e => move(e.touches[0].pageX), { passive: true });
     wrap.addEventListener('touchend', up);
   })();
 
   /* =====================================================================
-     3. 3D TILT EFFECT (تأثير الميلان الاحترافي)
+     3. 3D TILT EFFECT
   ===================================================================== */
   function initTilt() {
     const tiltCards = document.querySelectorAll('.tilt-card');
@@ -428,7 +457,7 @@
         const y = e.clientY - rect.top;
         const centerX = rect.width / 2;
         const centerY = rect.height / 2;
-        const rotateX = ((y - centerY) / centerY) * -5; // قوة الميلان
+        const rotateX = ((y - centerY) / centerY) * -5;
         const rotateY = ((x - centerX) / centerX) * 5;
         
         card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
@@ -441,13 +470,16 @@
   }
 
   /* =====================================================================
-     4. SPA VIEWS
+     4. SPA VIEWS (7 Categories Data)
   ===================================================================== */
   const CATEGORY_DATA = {
-    CC:    ['Teal & Orange','Filmic Base','Night Grade','Vibrant Pop'],
-    SHAKE: ['Impact Shake','Bass Drop','Whip Pan','Earthquake'],
-    VFX:   ['Spark Burst','Glitch Distortion','Smoke Atmosphere','Lightning'],
-    PF:    ['Cinematic Suite','Gaming Montage','Anime Presets','Retro Wave'],
+    CC:    ['Teal & Orange LUT','Filmic Base','Night Grade','Vibrant Pop','Cinematic Teal','Moody Shadows'],
+    SHAKE: ['Impact Shake','Bass Drop','Whip Pan','Earthquake','Subtle Drift','Handheld Cam'],
+    VFX:   ['Spark Burst','Glitch Distortion','Smoke Atmosphere','Lightning','Cyber Grid','Laser Beams'],
+    TRANS: ['Zoom Blur','Seamless Slide','Light Leak Cut','Glitch Warp','Fast Snap','Spin Transition'],
+    SFX:   ['Cinematic Whoosh','Deep Sub Bass','Futuristic UI Click','Glitch Impact','Riser FX','Impact Boom'],
+    OVER:  ['Film Grain 4K','Dust & Scratches','Light Leaks Pack','Anamorphic Flare','CRT Scanlines','Vignette Master'],
+    PROJ:  ['Editing Masterclass','Gaming Montage Timeline','Music Video Template','Reels & TikTok Kit','VFX Composition','Color Grading Suite']
   };
 
   function showView(id) {
