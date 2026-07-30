@@ -40,23 +40,8 @@
       --brandLight: #a855f7;
     }
 
-    /* ---------- Custom Cursor ---------- */
-    body, a, button { cursor: none !important; }
     html { scroll-behavior: smooth; overflow-x: hidden; }
     body { background-color: var(--ink); color: #e8e8ef; font-family: 'Inter', sans-serif; }
-
-    .cursor-dot, .cursor-outline {
-      position: fixed; top: 0; left: 0; transform: translate(-50%, -50%);
-      border-radius: 50%; z-index: 9999; pointer-events: none;
-    }
-    .cursor-dot { width: 6px; height: 6px; background: var(--brandLight); box-shadow: 0 0 10px var(--brandLight); }
-    .cursor-outline { 
-      width: 36px; height: 36px; border: 1px solid rgba(168, 85, 247, 0.5); 
-      transition: width 0.2s, height 0.2s, background-color 0.2s; 
-    }
-    .cursor-hover .cursor-outline { 
-      width: 56px; height: 56px; background: rgba(168, 85, 247, 0.1); border-color: var(--brandLight);
-    }
 
     h1, h2, h3, .font-head { font-family: 'Cinzel', serif; letter-spacing: 1.5px; }
 
@@ -88,7 +73,7 @@
 
     /* ---------- VORTX 3D Dark & Heavy Logo ---------- */
     .text-3d-heavy {
-      color: #7e22ce; /* أساس غامق */
+      color: #7e22ce;
       font-weight: 900;
       text-shadow: 
         0 1px 0 #6b21a8, 
@@ -135,6 +120,7 @@
     @keyframes scroll-rtl { from { transform: translateX(0); } to { transform: translateX(-50%); } }
     .marquee-wrap { overflow-x: auto; scrollbar-width: none; }
     .marquee-wrap::-webkit-scrollbar { display: none; }
+    .marquee-wrap.dragging { cursor: grabbing; }
 
     /* ---------- 3D Tilt Card Base ---------- */
     .tilt-card {
@@ -149,10 +135,6 @@
 </head>
 
 <body>
-  <!-- Custom Cursor -->
-  <div class="cursor-dot"></div>
-  <div class="cursor-outline"></div>
-  
   <!-- Scroll Progress -->
   <div id="scroll-progress"></div>
 
@@ -164,17 +146,17 @@
   <header class="sticky top-0 z-50">
     <nav class="glass border-b-0 border-white/5 bg-black/30">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-        <a href="#top" class="hover-target flex items-center gap-3 active:scale-95 transition-transform duration-200">
+        <a href="#top" class="flex items-center gap-3 active:scale-95 transition-transform duration-200">
           <span class="font-head font-extrabold text-2xl tracking-widest text-3d-heavy">VORTX</span>
         </a>
 
         <ul class="hidden md:flex items-center gap-10 text-sm font-bold text-white/60">
-          <li><a href="#bundles" class="hover-target hover:text-brandLight transition active:scale-95">Bundles</a></li>
-          <li><a href="#packs" class="hover-target hover:text-brandLight transition active:scale-95">Packs</a></li>
-          <li><a href="#categories" class="hover-target hover:text-brandLight transition active:scale-95">Categories</a></li>
+          <li><a href="#bundles" class="hover:text-brandLight transition active:scale-95">Bundles</a></li>
+          <li><a href="#packs" class="hover:text-brandLight transition active:scale-95">Packs</a></li>
+          <li><a href="#categories" class="hover:text-brandLight transition active:scale-95">Categories</a></li>
         </ul>
 
-        <button class="hover-target glass px-6 py-2.5 rounded-full font-bold text-xs tracking-widest uppercase hover:bg-white/5 transition-all duration-200 active:scale-95 border-brand/50">
+        <button class="glass px-6 py-2.5 rounded-full font-bold text-xs tracking-widest uppercase hover:bg-white/5 transition-all duration-200 active:scale-95 border-brand/50">
           Sign In
         </button>
       </div>
@@ -192,16 +174,20 @@
         Premium Digital Studio
       </div>
 
-      <h1 class="reveal font-head font-black tracking-widest text-6xl sm:text-7xl md:text-8xl text-3d-heavy mb-8" style="line-height: 1.2; padding-bottom: 15px;">
-        VORTX
-      </h1>
+      <!-- VORTX Logo with Neon Glow Beam Behind It -->
+      <div class="relative inline-block mb-8">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[100%] bg-brand/50 blur-[90px] -z-10 rounded-full"></div>
+        <h1 class="reveal font-head font-black tracking-widest text-6xl sm:text-7xl md:text-8xl text-3d-heavy relative z-10" style="line-height: 1.2; padding-bottom: 15px;">
+          VORTX
+        </h1>
+      </div>
       
       <p class="reveal font-bold text-white/70 max-w-xl mx-auto text-lg leading-relaxed mb-12">
         Next-gen digital assets, cinematic presets, VFX packs & custom web solutions. Engineered exclusively for elite creators.
       </p>
 
       <div class="reveal flex items-center justify-center gap-6">
-        <a href="#bundles" class="hover-target btn-primary glitch-hover font-bold px-10 py-4 rounded-full transition-all duration-200 text-sm uppercase tracking-wider active:scale-95">
+        <a href="#bundles" class="btn-primary glitch-hover font-bold px-10 py-4 rounded-full transition-all duration-200 text-sm uppercase tracking-wider active:scale-95">
           Explore Tiers
         </a>
       </div>
@@ -209,7 +195,7 @@
 
     <!-- WEB BUNDLES -->
     <section id="bundles" class="max-w-7xl mx-auto px-4 sm:px-6 py-20">
-      <div class="reveal glass rounded-[2rem] p-10 sm:p-16 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-10 tilt-card hover-target">
+      <div class="reveal glass rounded-[2rem] p-10 sm:p-16 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-10 tilt-card">
         <div class="absolute -right-20 -top-20 w-72 h-72 rounded-full bg-brand/20 blur-[80px] pointer-events-none"></div>
         
         <div class="text-left max-w-2xl relative z-10">
@@ -221,7 +207,7 @@
         </div>
         
         <div class="w-full md:w-auto relative z-10">
-          <button onclick="openWebTiers()" class="hover-target glass border-brand/50 hover:bg-brand/20 font-bold px-10 py-4 rounded-full whitespace-nowrap transition-all duration-200 w-full md:w-auto uppercase tracking-wider text-sm active:scale-95">
+          <button onclick="openWebTiers()" class="glass border-brand/50 hover:bg-brand/20 font-bold px-10 py-4 rounded-full whitespace-nowrap transition-all duration-200 w-full md:w-auto uppercase tracking-wider text-sm active:scale-95">
             View Development Tiers
           </button>
         </div>
@@ -235,7 +221,7 @@
         <p class="font-bold text-white/50 text-sm mt-3 tracking-wide">Drag to explore — infinite loop.</p>
       </div>
       
-      <div id="marquee" class="marquee-wrap hover-target reveal">
+      <div id="marquee" class="marquee-wrap reveal">
         <div class="marquee-track px-4" id="marquee-track"></div>
       </div>
     </section>
@@ -250,36 +236,36 @@
       <!-- Grid 2x2 -->
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
         <!-- 1. CC -->
-        <div onclick="openCategory('CC')" class="hover-target reveal tilt-card glass rounded-2xl p-8 flex flex-col items-start justify-between min-h-[200px] transition-all duration-300 active:scale-95">
+        <div onclick="openCategory('CC')" class="reveal tilt-card glass rounded-2xl p-8 flex flex-col items-start justify-between min-h-[200px] transition-all duration-300 active:scale-95 cursor-pointer group">
           <div class="flex items-center justify-between w-full">
-            <span class="text-xs tracking-widest uppercase font-bold text-white/40">Color Grading</span>
+            <span class="text-xs tracking-widest uppercase font-bold text-white/40 group-hover:text-brandLight transition-colors">Color Grading</span>
             <span class="text-xs font-bold text-brandLight">01</span>
           </div>
-          <span class="font-head font-extrabold text-5xl text-white mt-6">CC</span>
+          <span class="font-head font-extrabold text-5xl text-white mt-6 group-hover:text-brandLight transition-colors">CC</span>
         </div>
         <!-- 2. SHAKE -->
-        <div onclick="openCategory('SHAKE')" class="hover-target reveal tilt-card glass rounded-2xl p-8 flex flex-col items-start justify-between min-h-[200px] transition-all duration-300 active:scale-95">
+        <div onclick="openCategory('SHAKE')" class="reveal tilt-card glass rounded-2xl p-8 flex flex-col items-start justify-between min-h-[200px] transition-all duration-300 active:scale-95 cursor-pointer group">
           <div class="flex items-center justify-between w-full">
-            <span class="text-xs tracking-widest uppercase font-bold text-white/40">Camera Movements</span>
+            <span class="text-xs tracking-widest uppercase font-bold text-white/40 group-hover:text-brandLight transition-colors">Camera Movements</span>
             <span class="text-xs font-bold text-brandLight">02</span>
           </div>
-          <span class="font-head font-extrabold text-5xl text-white mt-6">SHAKE</span>
+          <span class="font-head font-extrabold text-5xl text-white mt-6 group-hover:text-brandLight transition-colors">SHAKE</span>
         </div>
         <!-- 3. VFX -->
-        <div onclick="openCategory('VFX')" class="hover-target reveal tilt-card glass rounded-2xl p-8 flex flex-col items-start justify-between min-h-[200px] transition-all duration-300 active:scale-95">
+        <div onclick="openCategory('VFX')" class="reveal tilt-card glass rounded-2xl p-8 flex flex-col items-start justify-between min-h-[200px] transition-all duration-300 active:scale-95 cursor-pointer group">
           <div class="flex items-center justify-between w-full">
-            <span class="text-xs tracking-widest uppercase font-bold text-white/40">Visual Effects</span>
+            <span class="text-xs tracking-widest uppercase font-bold text-white/40 group-hover:text-brandLight transition-colors">Visual Effects</span>
             <span class="text-xs font-bold text-brandLight">03</span>
           </div>
-          <span class="font-head font-extrabold text-5xl text-white mt-6">VFX</span>
+          <span class="font-head font-extrabold text-5xl text-white mt-6 group-hover:text-brandLight transition-colors">VFX</span>
         </div>
         <!-- 4. PF -->
-        <div onclick="openCategory('PF')" class="hover-target reveal tilt-card glass rounded-2xl p-8 flex flex-col items-start justify-between min-h-[200px] transition-all duration-300 active:scale-95">
+        <div onclick="openCategory('PF')" class="reveal tilt-card glass rounded-2xl p-8 flex flex-col items-start justify-between min-h-[200px] transition-all duration-300 active:scale-95 cursor-pointer group">
           <div class="flex items-center justify-between w-full">
-            <span class="text-xs tracking-widest uppercase font-bold text-white/40">Presets & Filters</span>
+            <span class="text-xs tracking-widest uppercase font-bold text-white/40 group-hover:text-brandLight transition-colors">Presets & Filters</span>
             <span class="text-xs font-bold text-brandLight">04</span>
           </div>
-          <span class="font-head font-extrabold text-5xl text-white mt-6">PF</span>
+          <span class="font-head font-extrabold text-5xl text-white mt-6 group-hover:text-brandLight transition-colors">PF</span>
         </div>
       </div>
     </section>
@@ -301,11 +287,59 @@
           <span class="text-xs tracking-widest uppercase font-bold text-brandLight">Web Solutions</span>
           <h2 class="font-head font-bold text-4xl mt-3 text-white">Development Tiers</h2>
         </div>
-        <button onclick="backToHome()" class="hover-target glass px-6 py-3 rounded-full font-bold text-sm hover:bg-white/5 transition-all duration-200 active:scale-95">
+        <button onclick="backToHome()" class="glass px-6 py-3 rounded-full font-bold text-sm hover:bg-white/5 transition-all duration-200 active:scale-95">
           ← Back
         </button>
       </div>
-      <!-- Tiers grid here (same as before) -->
+      
+      <!-- رجعنا باقات الويب كاملة هنا -->
+      <div class="grid lg:grid-cols-3 gap-8">
+        <!-- Starter -->
+        <div class="reveal tilt-card glass rounded-3xl p-8 flex flex-col h-full border-t border-brand/20">
+          <div class="aspect-video bg-black/40 rounded-2xl mb-8 flex items-center justify-center font-bold text-white/20 text-sm border border-white/5">
+            [Video/Image Placeholder]
+          </div>
+          <h3 class="font-head font-bold text-2xl mb-3 text-white">STARTER</h3>
+          <p class="font-bold text-white/50 text-sm mb-8">Perfect for simple portfolios and personal landing pages.</p>
+          <ul class="text-sm text-white/80 space-y-4 mb-10 flex-1 font-bold">
+            <li class="flex items-start gap-3"><span class="text-brand">✦</span> Clean & Modern UI</li>
+            <li class="flex items-start gap-3"><span class="text-brand">✦</span> Mobile-Ready Layout</li>
+            <li class="flex items-start gap-3"><span class="text-brand">✦</span> High-Speed Performance</li>
+          </ul>
+          <button class="glass border-brand/30 hover:bg-brand/10 w-full py-4 rounded-xl font-bold uppercase tracking-wider text-sm transition-transform active:scale-95">Select Plan</button>
+        </div>
+
+        <!-- Pro -->
+        <div class="reveal tilt-card glass rounded-3xl p-8 flex flex-col h-full border border-brand/50 relative bg-brand/5 shadow-[0_0_40px_rgba(147,51,234,0.1)]">
+          <div class="absolute -top-4 left-8 bg-brand text-white text-[10px] font-bold px-4 py-1.5 rounded-full uppercase tracking-widest">Most Popular</div>
+          <div class="aspect-video bg-black/40 rounded-2xl mb-8 flex items-center justify-center font-bold text-white/20 text-sm border border-white/5 mt-2">
+            [Video/Image Placeholder]
+          </div>
+          <h3 class="font-head font-bold text-2xl mb-3 text-white">PRO</h3>
+          <p class="font-bold text-white/50 text-sm mb-8">For creators needing advanced animations & custom design.</p>
+          <ul class="text-sm text-white/80 space-y-4 mb-10 flex-1 font-bold">
+            <li class="flex items-start gap-3"><span class="text-brandLight">✦</span> Glassmorphism & Glows</li>
+            <li class="flex items-start gap-3"><span class="text-brandLight">✦</span> Scroll Animations</li>
+            <li class="flex items-start gap-3"><span class="text-brandLight">✦</span> Content Management</li>
+          </ul>
+          <button class="btn-primary w-full py-4 rounded-xl font-bold uppercase tracking-wider text-sm transition-transform active:scale-95">Select Plan</button>
+        </div>
+
+        <!-- VIP -->
+        <div class="reveal tilt-card glass rounded-3xl p-8 flex flex-col h-full border-t border-brand/20">
+          <div class="aspect-video bg-black/40 rounded-2xl mb-8 flex items-center justify-center font-bold text-white/20 text-sm border border-white/5">
+            [Video/Image Placeholder]
+          </div>
+          <h3 class="font-head font-bold text-2xl mb-3 text-white">VIP</h3>
+          <p class="font-bold text-white/50 text-sm mb-8">The absolute premium experience with custom 3D elements.</p>
+          <ul class="text-sm text-white/80 space-y-4 mb-10 flex-1 font-bold">
+            <li class="flex items-start gap-3"><span class="text-brand">✦</span> 3D Models Integration</li>
+            <li class="flex items-start gap-3"><span class="text-brand">✦</span> Mind-blowing Interactions</li>
+            <li class="flex items-start gap-3"><span class="text-brand">✦</span> Priority 24/7 Support</li>
+          </ul>
+          <button class="glass border-brand/30 hover:bg-brand/10 w-full py-4 rounded-xl font-bold uppercase tracking-wider text-sm transition-transform active:scale-95">Select Plan</button>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -317,7 +351,7 @@
           <span class="text-xs tracking-widest uppercase font-bold text-brandLight">Collection</span>
           <h2 id="cat-title" class="font-head font-bold text-4xl mt-3 text-white">CC</h2>
         </div>
-        <button onclick="backToHome()" class="hover-target glass px-6 py-3 rounded-full font-bold text-sm hover:bg-white/5 transition-all duration-200 active:scale-95">
+        <button onclick="backToHome()" class="glass px-6 py-3 rounded-full font-bold text-sm hover:bg-white/5 transition-all duration-200 active:scale-95">
           ← Back
         </button>
       </div>
@@ -326,29 +360,13 @@
   </section>
 
   <script>
-  /* --- 1. Custom Cursor & Scroll Progress --- */
-  const dot = document.querySelector('.cursor-dot');
-  const outline = document.querySelector('.cursor-outline');
+  /* --- 1. Scroll Progress --- */
   const progressBar = document.getElementById('scroll-progress');
-
-  window.addEventListener('mousemove', (e) => {
-    dot.style.left = e.clientX + 'px';
-    dot.style.top = e.clientY + 'px';
-    setTimeout(() => {
-      outline.style.left = e.clientX + 'px';
-      outline.style.top = e.clientY + 'px';
-    }, 60);
-  });
 
   window.addEventListener('scroll', () => {
     const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
     const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
     progressBar.style.width = (winScroll / height) * 100 + "%";
-  });
-
-  document.querySelectorAll('.hover-target, a, button').forEach(el => {
-    el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
-    el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
   });
 
   /* --- 2. Canvas Particles Background (Electricity) --- */
@@ -419,13 +437,42 @@
     const track = document.getElementById('marquee-track');
     const allPacks = [...packs, ...packs, ...packs, ...packs, ...packs];
     track.innerHTML = allPacks.map(p => `
-      <div class="hover-target glass rounded-[1.5rem] w-64 sm:w-72 aspect-[9/16] shrink-0 p-6 flex flex-col justify-between bg-black/40 relative overflow-hidden group tilt-card">
+      <div class="glass rounded-[1.5rem] w-64 sm:w-72 aspect-[9/16] shrink-0 p-6 flex flex-col justify-between bg-black/40 relative overflow-hidden group tilt-card cursor-pointer">
         <div class="absolute inset-0 bg-brand/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
         <div class="flex items-center justify-between relative z-10 pointer-events-none">
           <span class="text-[10px] uppercase font-bold tracking-widest px-4 py-2 rounded-full border border-white/10 bg-black/50 text-brandLight">${p.tag}</span>
         </div>
         <h3 class="font-head font-bold text-xl text-white relative z-10 pointer-events-none group-hover:-translate-y-2 transition-transform duration-300">${p.t}</h3>
       </div>`).join('');
+  })();
+  
+  (function marqueeDrag() {
+    const wrap = document.getElementById('marquee');
+    let isDown = false, startX = 0, scrollStart = 0;
+    
+    const down = (x) => { 
+      isDown = true; 
+      wrap.classList.add('dragging', 'marquee-paused'); 
+      startX = x; 
+      scrollStart = wrap.scrollLeft; 
+    };
+    const move = (x) => { 
+      if (!isDown) return; 
+      wrap.scrollLeft = scrollStart - (x - startX); 
+    };
+    const up = () => { 
+      isDown = false; 
+      wrap.classList.remove('dragging', 'marquee-paused'); 
+    };
+
+    wrap.addEventListener('mousedown', e => down(e.pageX));
+    window.addEventListener('mousemove', e => move(e.pageX));
+    window.addEventListener('mouseup', up);
+    window.addEventListener('mouseleave', up);
+    
+    wrap.addEventListener('touchstart', e => down(e.touches[0].pageX), { passive: true });
+    wrap.addEventListener('touchmove', e => move(e.touches[0].pageX), { passive: true });
+    wrap.addEventListener('touchend', up);
   })();
 
   /* --- 5. 3D Tilt Effect --- */
@@ -461,7 +508,7 @@
   function openCategory(key) {
     document.getElementById('cat-title').textContent = key;
     document.getElementById('cat-grid').innerHTML = CATEGORY_DATA[key].map((item) => `
-      <div class="reveal tilt-card hover-target glass rounded-2xl p-6 flex flex-col justify-between min-h-[140px] text-left border-l-4 border-brand/50 hover:border-brandLight">
+      <div class="reveal tilt-card glass rounded-2xl p-6 flex flex-col justify-between min-h-[140px] text-left border-l-4 border-brand/50 hover:border-brandLight cursor-pointer">
         <span class="text-[10px] font-bold tracking-widest uppercase text-brandLight">${key} Pack</span>
         <h3 class="font-head font-bold text-xl text-white mt-4">${item}</h3>
       </div>`).join('');
