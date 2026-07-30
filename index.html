@@ -10,10 +10,10 @@
   <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Google Fonts: Syne (headings) + Inter (body) -->
+  <!-- Google Fonts: Audiowide (headings) + Space Grotesk (body) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
   <script>
     tailwind.config = {
@@ -21,8 +21,8 @@
       theme: {
         extend: {
           fontFamily: {
-            head: ['Syne', 'sans-serif'],
-            body: ['Inter', 'sans-serif'],
+            head: ['Audiowide', 'sans-serif'],
+            body: ['Space Grotesk', 'sans-serif'],
           },
           colors: {
             ink: '#050505',
@@ -47,48 +47,56 @@
     body {
       background-color: var(--ink);
       color: #e8e8ef;
-      font-family: 'Inter', sans-serif;
+      font-family: 'Space Grotesk', sans-serif;
       overflow-x: hidden;
     }
 
-    h1, h2, h3, .font-head { font-family: 'Syne', sans-serif; }
+    h1, h2, h3, .font-head { font-family: 'Audiowide', sans-serif; letter-spacing: 1px; }
 
     /* ---------- Canvas background ---------- */
-    #bg-canvas {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-    }
+    #bg-canvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
     .glow-field {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
       background:
-        radial-gradient(600px circle at 15% 20%, rgba(147,51,234,0.15), transparent 60%),
-        radial-gradient(700px circle at 85% 70%, rgba(6,182,212,0.12), transparent 60%),
-        radial-gradient(500px circle at 50% 100%, rgba(147,51,234,0.08), transparent 60%);
+        radial-gradient(600px circle at 15% 20%, rgba(147,51,234,0.12), transparent 60%),
+        radial-gradient(700px circle at 85% 70%, rgba(6,182,212,0.1), transparent 60%),
+        radial-gradient(500px circle at 50% 100%, rgba(147,51,234,0.06), transparent 60%);
     }
 
     /* ---------- Glassmorphism ---------- */
     .glass {
-      background: rgba(255, 255, 255, 0.03);
-      backdrop-filter: blur(16px) saturate(140%);
-      -webkit-backdrop-filter: blur(16px) saturate(140%);
-      border: 1px solid rgba(255, 255, 255, 0.06);
+      background: rgba(255, 255, 255, 0.02);
+      backdrop-filter: blur(12px) saturate(140%);
+      -webkit-backdrop-filter: blur(12px) saturate(140%);
+      border: 1px solid rgba(255, 255, 255, 0.05);
     }
     .glass-strong {
-      background: rgba(10, 10, 14, 0.72);
-      backdrop-filter: blur(22px) saturate(150%);
-      -webkit-backdrop-filter: blur(22px) saturate(150%);
-      border: 1px solid rgba(255, 255, 255, 0.09);
+      background: rgba(10, 10, 14, 0.6);
+      backdrop-filter: blur(20px) saturate(150%);
+      -webkit-backdrop-filter: blur(20px) saturate(150%);
+      border: 1px solid rgba(255, 255, 255, 0.08);
     }
 
-    /* ---------- Glow effects ---------- */
-    .text-glow-purple {
-      text-shadow: 0 0 15px rgba(147,51,234,0.5), 0 0 35px rgba(147,51,234,0.3);
+    /* ---------- Glow & 3D effects ---------- */
+    /* خدعة الـ 3D لشعار فورتكس */
+    .text-3d-neon {
+      color: #fff;
+      text-shadow: 
+        0 1px 0 #ccc, 
+        0 2px 0 #c9c9c9, 
+        0 3px 0 #bbb, 
+        0 4px 0 #b9b9b9, 
+        0 5px 0 #aaa, 
+        0 6px 1px rgba(0,0,0,.1), 
+        0 0 5px rgba(0,0,0,.1), 
+        0 1px 3px rgba(0,0,0,.3), 
+        0 3px 5px rgba(0,0,0,.2), 
+        0 5px 10px rgba(0,0,0,.25), 
+        0 10px 10px rgba(0,0,0,.2), 
+        0 0 20px rgba(147,51,234,0.7),
+        0 0 40px rgba(147,51,234,0.4);
     }
+
     .btn-gold {
       background: linear-gradient(180deg, #ffe14d, #ffd700);
       color: #1a1500;
@@ -98,67 +106,38 @@
       box-shadow: 0 0 30px rgba(255,215,0,0.6), 0 0 60px rgba(255,215,0,0.3);
       transform: translateY(-2px);
     }
-    .ring-purple:hover { box-shadow: 0 0 0 1px rgba(147,51,234,0.6), 0 0 26px rgba(147,51,234,0.4); }
-    .ring-cyan:hover { box-shadow: 0 0 0 1px rgba(6,182,212,0.6), 0 0 26px rgba(6,182,212,0.4); }
-
-    .grad-border {
-      position: relative;
-      background: rgba(255,255,255,0.03);
-    }
+    
+    .grad-border { position: relative; background: rgba(255,255,255,0.02); }
     .grad-border::before {
-      content: "";
-      position: absolute; inset: 0;
-      border-radius: inherit;
-      padding: 1px;
-      background: linear-gradient(135deg, rgba(147,51,234,0.9), rgba(6,182,212,0.7));
+      content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1px;
+      background: linear-gradient(135deg, rgba(147,51,234,0.7), rgba(6,182,212,0.5));
       -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      pointer-events: none;
-      opacity: 0.5;
+      -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none; opacity: 0.5;
     }
 
     /* ---------- Scroll reveal ---------- */
     .reveal {
-      opacity: 0;
-      transform: translateY(40px) scale(0.98);
+      opacity: 0; transform: translateY(40px);
       transition: opacity 1s cubic-bezier(0.2, 0.8, 0.2, 1), transform 1s cubic-bezier(0.2, 0.8, 0.2, 1);
       will-change: opacity, transform;
     }
-    .reveal.in { opacity: 1; transform: translateY(0) scale(1); }
+    .reveal.in { opacity: 1; transform: translateY(0); }
 
     /* ---------- Carousel ---------- */
-    .marquee-track {
-      display: flex;
-      gap: 1.25rem;
-      width: max-content;
-      animation: scroll-rtl 40s linear infinite;
-    }
-    @keyframes scroll-rtl {
-      from { transform: translateX(-50%); }
-      to   { transform: translateX(0); }
-    }
+    .marquee-track { display: flex; gap: 1.25rem; width: max-content; animation: scroll-rtl 40s linear infinite; }
+    @keyframes scroll-rtl { from { transform: translateX(-50%); } to { transform: translateX(0); } }
     .marquee-paused .marquee-track { animation-play-state: paused; }
     .marquee-wrap { cursor: grab; }
     .marquee-wrap.dragging { cursor: grabbing; }
-
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-
-    .social-btn {
-      transition: transform .3s ease, box-shadow .3s ease, background .3s ease;
-    }
-    .social-btn:hover { transform: translateY(-5px) scale(1.05); }
 
     /* modal & views */
     .modal-hidden { opacity: 0; pointer-events: none; }
     .modal-hidden .modal-card { transform: translateY(24px) scale(.96); }
     .modal-card { transition: transform .4s cubic-bezier(.16,1,.3,1); }
-
-    .view { transition: opacity .4s ease, transform .4s ease; opacity: 1; transform: translateY(0); }
-    .view-hidden { display: none; opacity: 0; transform: translateY(20px); }
-
-    ::selection { background: rgba(147,51,234,0.5); color: #fff; }
+    .view { transition: opacity .4s ease; opacity: 1; }
+    .view-hidden { display: none; opacity: 0; }
   </style>
 </head>
 
@@ -172,17 +151,16 @@
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         <a href="#top" class="flex items-center gap-3 group">
           <span class="w-8 h-8 rounded-lg grad-border flex items-center justify-center font-head font-bold text-sm text-cyan-neon" style="color:var(--cyan)">V</span>
-          <span class="font-head font-bold tracking-wide text-lg text-glow-purple" style="color:#fff">VORTX</span>
+          <span class="font-head text-lg tracking-widest text-3d-neon">VORTX</span>
         </a>
 
         <ul class="hidden md:flex items-center gap-8 text-sm text-white/70">
           <li><a href="#bundles" class="hover:text-white transition">Bundles</a></li>
           <li><a href="#packs" class="hover:text-white transition">Packs</a></li>
           <li><a href="#categories" class="hover:text-white transition">Categories</a></li>
-          <li><a href="#reviews" class="hover:text-white transition">Reviews</a></li>
         </ul>
 
-        <a href="#" onclick="openDonate(event)" class="btn-gold font-medium text-sm px-5 py-2 rounded-full transition-all duration-300 flex items-center gap-2">
+        <a href="#" onclick="openDonate(event)" class="btn-gold font-bold text-xs tracking-wider px-5 py-2 rounded-full transition-all duration-300 uppercase">
           Support
         </a>
       </div>
@@ -202,31 +180,31 @@
 
       <!-- Gold donation button -->
       <div class="reveal mb-8">
-        <button onclick="openDonate(event)" class="btn-gold font-head font-bold tracking-wide px-8 py-3 rounded-full transition-all duration-300 text-sm">
+        <button onclick="openDonate(event)" class="btn-gold font-head font-bold tracking-wide px-8 py-3 rounded-full transition-all duration-300 text-sm uppercase">
           ★ Support / Donate
         </button>
       </div>
 
-      <h1 class="reveal font-head font-bold tracking-wide text-4xl sm:text-5xl md:text-6xl text-glow-purple mb-5" style="color:#fff; line-height: 1.2;">
+      <h1 class="reveal font-head tracking-wider text-5xl sm:text-6xl md:text-7xl text-3d-neon mb-6" style="line-height: 1.3; padding-bottom: 10px;">
         VORTX
       </h1>
-      <p class="reveal text-white/70 max-w-lg mx-auto text-base sm:text-lg leading-relaxed mb-10">
+      <p class="reveal text-white/70 max-w-lg mx-auto text-base sm:text-lg leading-relaxed mb-12">
         Next-gen digital assets, cinematic presets, VFX packs & custom web solutions — engineered for creators.
       </p>
 
-      <!-- SOCIAL BAR -->
-      <div class="reveal flex items-center justify-center gap-5 flex-wrap">
-        <a href="#" class="social-btn glass w-12 h-12 rounded-xl flex items-center justify-center hover:bg-white/10" onmouseover="this.style.boxShadow='0 0 20px rgba(239,68,68,.4)'" onmouseout="this.style.boxShadow='none'">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="#ff4d4d"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.5v-7l6.3 3.5-6.3 3.5z"/></svg>
+      <!-- SOCIAL BAR (Stretched Outline style) -->
+      <div class="reveal w-full max-w-3xl mx-auto flex items-center justify-between px-4 sm:px-10">
+        <a href="#" class="text-white/50 hover:text-[#ff4d4d] transition-colors duration-300 transform hover:scale-110">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33 2.78 2.78 0 0 0 1.94 2c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
         </a>
-        <a href="#" class="social-btn glass w-12 h-12 rounded-xl flex items-center justify-center hover:bg-white/10" onmouseover="this.style.boxShadow='0 0 20px rgba(6,182,212,.4)'" onmouseout="this.style.boxShadow='none'">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="#06b6d4"><path d="M21.9 4.3 18.6 20c-.2 1.1-.9 1.4-1.8.9l-4.9-3.6-2.4 2.3c-.3.3-.5.5-1 .5l.3-4.9L18 6.4c.4-.3-.1-.5-.6-.2L6.8 13.1l-4.7-1.5c-1-.3-1-1 .2-1.5l18.4-7.1c.9-.3 1.6.2 1.2 1.3z"/></svg>
+        <a href="#" class="text-white/50 hover:text-[#06b6d4] transition-colors duration-300 transform hover:scale-110">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
         </a>
-        <a href="#" class="social-btn glass w-12 h-12 rounded-xl flex items-center justify-center hover:bg-white/10" onmouseover="this.style.boxShadow='0 0 20px rgba(147,51,234,.4)'" onmouseout="this.style.boxShadow='none'">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c026d3" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.5" cy="6.5" r="1.2" fill="#c026d3" stroke="none"/></svg>
+        <a href="#" class="text-white/50 hover:text-[#c026d3] transition-colors duration-300 transform hover:scale-110">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
         </a>
-        <a href="#" class="social-btn glass w-12 h-12 rounded-xl flex items-center justify-center hover:bg-white/10" onmouseover="this.style.boxShadow='0 0 20px rgba(255,255,255,.3)'" onmouseout="this.style.boxShadow='none'">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M16.5 3c.3 2.2 1.6 3.9 3.8 4.2v2.7c-1.3.1-2.5-.2-3.8-.9v6.4c0 3.4-2.6 5.9-5.9 5.6-3-.3-5.2-2.9-4.9-5.9.2-2.6 2.3-4.7 4.9-4.8.4 0 .8 0 1.2.1v2.8c-.4-.1-.8-.2-1.2-.2-1.4 0-2.4 1.1-2.3 2.5 0 1.3 1.1 2.3 2.4 2.3 1.3 0 2.3-1 2.3-2.4V3h3.5z"/></svg>
+        <a href="#" class="text-white/50 hover:text-white transition-colors duration-300 transform hover:scale-110">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg>
         </a>
       </div>
     </section>
@@ -234,27 +212,27 @@
     <!-- WEB PAGE BUNDLES BANNER -->
     <section id="bundles" class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
       <div class="reveal grad-border rounded-3xl overflow-hidden glass p-8 sm:p-12 relative">
-        <div class="absolute -right-10 -top-10 w-52 h-52 rounded-full" style="background:radial-gradient(circle,rgba(6,182,212,.3),transparent 70%)"></div>
-        <div class="absolute -left-10 -bottom-10 w-52 h-52 rounded-full" style="background:radial-gradient(circle,rgba(147,51,234,.3),transparent 70%)"></div>
+        <div class="absolute -right-10 -top-10 w-52 h-52 rounded-full" style="background:radial-gradient(circle,rgba(6,182,212,.2),transparent 70%)"></div>
+        <div class="absolute -left-10 -bottom-10 w-52 h-52 rounded-full" style="background:radial-gradient(circle,rgba(147,51,234,.2),transparent 70%)"></div>
         <div class="relative flex flex-col md:flex-row items-center justify-between gap-8">
           <div class="text-center md:text-left max-w-xl">
-            <span class="text-xs tracking-widest uppercase" style="color:var(--cyan)">Custom Web Solutions</span>
-            <h2 class="font-head font-bold text-3xl sm:text-4xl mt-2 mb-3 text-glow-purple" style="color:#fff">Web Page Bundles</h2>
+            <span class="text-xs tracking-widest uppercase font-bold" style="color:var(--cyan)">Custom Web Solutions</span>
+            <h2 class="font-head text-3xl sm:text-4xl mt-3 mb-3 text-white">Web Page Bundles</h2>
             <p class="text-white/60 leading-relaxed text-sm sm:text-base">
-              Landing pages, portfolios & store fronts built to your brand — glassmorphic, animated, and conversion-ready.
+              Launch your custom digital space today. Stand out with next-gen designs and join the elite creators.
             </p>
           </div>
           <div class="w-full md:w-auto">
-            <button onclick="openWebTiers()" class="btn-gold font-medium px-8 py-3 rounded-full whitespace-nowrap transition-all duration-300 w-full md:w-auto">View Tiers</button>
+            <button onclick="openWebTiers()" class="btn-gold font-bold px-8 py-3 rounded-full whitespace-nowrap transition-all duration-300 w-full md:w-auto uppercase tracking-wide text-sm">View Tiers</button>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- FEATURED PACKS CAROUSEL -->
+    <!-- FEATURED PACKS CAROUSEL (TikTok Aspect Ratio 9:16) -->
     <section id="packs" class="py-10">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 mb-6 reveal">
-        <h2 class="font-head font-bold text-2xl sm:text-3xl" style="color:#fff">Featured Packs</h2>
+        <h2 class="font-head text-2xl sm:text-3xl" style="color:#fff">Featured Packs</h2>
         <p class="text-white/50 text-sm mt-1">Drag to explore — auto-scrolls right to left.</p>
       </div>
       <div id="marquee" class="marquee-wrap no-scrollbar overflow-hidden select-none reveal">
@@ -262,46 +240,35 @@
       </div>
     </section>
 
-    <!-- INTERACTIVE CATEGORIES (Vertical TikTok-style Cards) -->
+    <!-- INTERACTIVE CATEGORIES -->
     <section id="categories" class="max-w-7xl mx-auto px-4 sm:px-6 py-16">
       <div class="text-center mb-10 reveal">
-        <h2 class="font-head font-bold text-3xl sm:text-4xl" style="color:#fff">Categories</h2>
+        <h2 class="font-head text-3xl sm:text-4xl" style="color:#fff">Categories</h2>
         <p class="text-white/50 mt-2 text-sm">Tap a module to open its collection.</p>
       </div>
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
         <button onclick="openCategory('CC')" class="reveal ring-purple grad-border glass rounded-2xl aspect-[3/4] flex flex-col items-center justify-center gap-4 transition-all duration-300 hover:-translate-y-2">
-          <span class="font-head font-bold text-4xl" style="color:var(--purple)">CC</span>
-          <span class="text-xs tracking-widest uppercase text-white/50">Color</span>
+          <span class="font-head text-4xl" style="color:var(--purple)">CC</span>
+          <span class="text-xs tracking-widest uppercase font-bold text-white/50">Color</span>
         </button>
         <button onclick="openCategory('SHAKE')" class="reveal ring-cyan grad-border glass rounded-2xl aspect-[3/4] flex flex-col items-center justify-center gap-4 transition-all duration-300 hover:-translate-y-2">
-          <span class="font-head font-bold text-4xl" style="color:var(--cyan)">SHAKE</span>
-          <span class="text-xs tracking-widest uppercase text-white/50">Camera</span>
+          <span class="font-head text-4xl" style="color:var(--cyan)">SHAKE</span>
+          <span class="text-xs tracking-widest uppercase font-bold text-white/50">Camera</span>
         </button>
         <button onclick="openCategory('VFX')" class="reveal ring-purple grad-border glass rounded-2xl aspect-[3/4] flex flex-col items-center justify-center gap-4 transition-all duration-300 hover:-translate-y-2">
-          <span class="font-head font-bold text-4xl" style="color:var(--purple)">VFX</span>
-          <span class="text-xs tracking-widest uppercase text-white/50">Effects</span>
+          <span class="font-head text-4xl" style="color:var(--purple)">VFX</span>
+          <span class="text-xs tracking-widest uppercase font-bold text-white/50">Effects</span>
         </button>
         <button onclick="openCategory('PF')" class="reveal ring-cyan grad-border glass rounded-2xl aspect-[3/4] flex flex-col items-center justify-center gap-4 transition-all duration-300 hover:-translate-y-2">
-          <span class="font-head font-bold text-4xl" style="color:var(--cyan)">PF</span>
-          <span class="text-xs tracking-widest uppercase text-white/50">Presets</span>
+          <span class="font-head text-4xl" style="color:var(--cyan)">PF</span>
+          <span class="text-xs tracking-widest uppercase font-bold text-white/50">Presets</span>
         </button>
       </div>
-    </section>
-
-    <!-- REVIEWS -->
-    <section id="reviews" class="max-w-7xl mx-auto px-4 sm:px-6 py-16">
-      <div class="flex items-center justify-between flex-wrap gap-4 mb-8 reveal">
-        <div>
-          <h2 class="font-head font-bold text-3xl sm:text-4xl" style="color:#fff">Client Reviews</h2>
-        </div>
-        <button onclick="openReview(event)" class="ring-purple glass px-6 py-2.5 rounded-full font-medium transition-all duration-300 hover:bg-white/10 text-sm" style="color:#fff">+ Add Review</button>
-      </div>
-      <div id="reviews-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5"><!-- filled by JS --></div>
     </section>
 
     <footer class="border-t border-white/5 mt-10">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 py-10 text-center text-white/40 text-sm">
-        <p class="font-head font-bold tracking-widest text-white/60 mb-2">VORTX</p>
+        <p class="font-head tracking-widest text-white/60 mb-2">VORTX</p>
         <p>© <span id="year"></span> VORTX Studio. Crafted for the bold.</p>
       </div>
     </footer>
@@ -312,62 +279,59 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
       <div class="flex items-center justify-between flex-wrap gap-4 mb-10">
         <div>
-          <span class="text-xs tracking-widest uppercase" style="color:var(--cyan)">Web Solutions</span>
-          <h2 class="font-head font-bold text-3xl sm:text-4xl text-glow-purple mt-2" style="color:#fff">Development Tiers</h2>
+          <span class="text-xs tracking-widest uppercase font-bold" style="color:var(--cyan)">Web Solutions</span>
+          <h2 class="font-head text-3xl sm:text-4xl text-glow-purple mt-2" style="color:#fff">Development Tiers</h2>
         </div>
-        <button onclick="backToHomeFromWeb()" class="ring-cyan glass px-6 py-2.5 rounded-full font-medium flex items-center gap-2 transition-all duration-300 hover:bg-white/10 text-sm" style="color:#fff">
+        <button onclick="backToHomeFromWeb()" class="ring-cyan glass px-6 py-2.5 rounded-full font-bold flex items-center gap-2 transition-all duration-300 hover:bg-white/10 text-sm" style="color:#fff">
           Back
         </button>
       </div>
       
       <div class="grid lg:grid-cols-3 gap-6">
         <!-- Tier 1: Starter -->
-        <div class="reveal grad-border glass rounded-2xl p-6 flex flex-col h-full transition-all duration-300 hover:-translate-y-2 ring-purple">
+        <div class="reveal grad-border glass rounded-2xl p-6 flex flex-col h-full ring-purple">
           <div class="aspect-video bg-white/5 rounded-xl mb-6 flex items-center justify-center text-white/20 text-sm border border-white/5">
             [Image Placeholder 1]
           </div>
-          <h3 class="font-head font-bold text-2xl mb-2" style="color:#fff">Starter Identity</h3>
+          <h3 class="font-head text-2xl mb-2 text-white">STARTER</h3>
           <p class="text-white/40 text-sm mb-6">Perfect for simple portfolios and landing pages.</p>
-          <ul class="text-sm text-white/70 space-y-3 mb-8 flex-1">
-            <li class="flex items-start gap-2"><span>•</span> Clean & Modern UI</li>
-            <li class="flex items-start gap-2"><span>•</span> Fully Responsive (Mobile-Ready)</li>
-            <li class="flex items-start gap-2"><span>•</span> High-Speed Performance</li>
-            <li class="flex items-start gap-2"><span>•</span> Contact & Social Links</li>
+          <ul class="text-sm text-white/70 space-y-3 mb-8 flex-1 font-medium">
+            <li class="flex items-start gap-2"><span style="color:var(--purple)">•</span> Clean & Modern UI</li>
+            <li class="flex items-start gap-2"><span style="color:var(--purple)">•</span> Mobile-Ready Layout</li>
+            <li class="flex items-start gap-2"><span style="color:var(--purple)">•</span> High-Speed Performance</li>
           </ul>
-          <button class="btn-gold w-full py-2.5 rounded-xl font-medium">Select Plan</button>
+          <button class="btn-gold w-full py-2.5 rounded-xl font-bold uppercase tracking-wider text-sm">Select Plan</button>
         </div>
 
         <!-- Tier 2: Pro -->
-        <div class="reveal grad-border glass-strong rounded-2xl p-6 flex flex-col h-full transition-all duration-300 hover:-translate-y-2 ring-cyan relative transform lg:-translate-y-4">
-          <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-cyan-500 text-black text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider" style="background:var(--cyan)">Most Popular</div>
+        <div class="reveal grad-border glass-strong rounded-2xl p-6 flex flex-col h-full ring-cyan relative">
+          <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-cyan-500 text-black text-[10px] font-bold px-4 py-1 rounded-full uppercase tracking-widest" style="background:var(--cyan)">Most Popular</div>
           <div class="aspect-video bg-white/5 rounded-xl mb-6 flex items-center justify-center text-white/20 text-sm border border-white/5 mt-2">
             [Image Placeholder 2]
           </div>
-          <h3 class="font-head font-bold text-2xl mb-2" style="color:#fff">Pro Dynamic</h3>
+          <h3 class="font-head text-2xl mb-2 text-white">PRO</h3>
           <p class="text-white/40 text-sm mb-6">For creators needing advanced animations & CMS.</p>
-          <ul class="text-sm text-white/70 space-y-3 mb-8 flex-1">
-            <li class="flex items-start gap-2"><span>•</span> Glassmorphism UI & Glow Effects</li>
-            <li class="flex items-start gap-2"><span>•</span> Scroll Animations (Fade, Slide)</li>
-            <li class="flex items-start gap-2"><span>•</span> Content Management Ready</li>
-            <li class="flex items-start gap-2"><span>•</span> Basic SEO Optimization</li>
+          <ul class="text-sm text-white/70 space-y-3 mb-8 flex-1 font-medium">
+            <li class="flex items-start gap-2"><span style="color:var(--cyan)">•</span> Glassmorphism & Glows</li>
+            <li class="flex items-start gap-2"><span style="color:var(--cyan)">•</span> Scroll Animations</li>
+            <li class="flex items-start gap-2"><span style="color:var(--cyan)">•</span> Content Management</li>
           </ul>
-          <button class="btn-gold w-full py-2.5 rounded-xl font-medium">Select Plan</button>
+          <button class="btn-gold w-full py-2.5 rounded-xl font-bold uppercase tracking-wider text-sm">Select Plan</button>
         </div>
 
-        <!-- Tier 3: Ultimate -->
-        <div class="reveal grad-border glass rounded-2xl p-6 flex flex-col h-full transition-all duration-300 hover:-translate-y-2 ring-purple">
+        <!-- Tier 3: VIP -->
+        <div class="reveal grad-border glass rounded-2xl p-6 flex flex-col h-full ring-purple">
           <div class="aspect-video bg-white/5 rounded-xl mb-6 flex items-center justify-center text-white/20 text-sm border border-white/5">
             [Image Placeholder 3]
           </div>
-          <h3 class="font-head font-bold text-2xl mb-2" style="color:#fff">Ultimate Cyber</h3>
-          <p class="text-white/40 text-sm mb-6">The absolute best. 3D objects, crazy interactions.</p>
-          <ul class="text-sm text-white/70 space-y-3 mb-8 flex-1">
-            <li class="flex items-start gap-2"><span>•</span> 3D Models & Assets Integration</li>
-            <li class="flex items-start gap-2"><span>•</span> Mind-blowing Immersive Interactions</li>
-            <li class="flex items-start gap-2"><span>•</span> Amazing Colors & Coordination</li>
-            <li class="flex items-start gap-2"><span>•</span> Priority Support & Custom Dashboard</li>
+          <h3 class="font-head text-2xl mb-2 text-white">VIP</h3>
+          <p class="text-white/40 text-sm mb-6">The absolute premium experience with custom elements.</p>
+          <ul class="text-sm text-white/70 space-y-3 mb-8 flex-1 font-medium">
+            <li class="flex items-start gap-2"><span style="color:var(--purple)">•</span> 3D Models Integration</li>
+            <li class="flex items-start gap-2"><span style="color:var(--purple)">•</span> Mind-blowing Interactions</li>
+            <li class="flex items-start gap-2"><span style="color:var(--purple)">•</span> Top-Tier Priority Support</li>
           </ul>
-          <button class="btn-gold w-full py-2.5 rounded-xl font-medium">Select Plan</button>
+          <button class="btn-gold w-full py-2.5 rounded-xl font-bold uppercase tracking-wider text-sm">Select Plan</button>
         </div>
       </div>
     </div>
@@ -378,10 +342,10 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
       <div class="flex items-center justify-between flex-wrap gap-4 mb-10">
         <div>
-          <span class="text-xs tracking-widest uppercase" style="color:var(--cyan)">Collection</span>
-          <h2 id="cat-title" class="font-head font-bold text-3xl sm:text-4xl text-glow-purple mt-2" style="color:#fff">CC</h2>
+          <span class="text-xs tracking-widest uppercase font-bold" style="color:var(--cyan)">Collection</span>
+          <h2 id="cat-title" class="font-head text-3xl sm:text-4xl text-glow-purple mt-2" style="color:#fff">CC</h2>
         </div>
-        <button onclick="backToHome()" class="ring-cyan glass px-6 py-2.5 rounded-full font-medium flex items-center gap-2 transition-all duration-300 hover:bg-white/10 text-sm" style="color:#fff">
+        <button onclick="backToHome()" class="ring-cyan glass px-6 py-2.5 rounded-full font-bold flex items-center gap-2 transition-all duration-300 hover:bg-white/10 text-sm" style="color:#fff">
           Back
         </button>
       </div>
@@ -391,168 +355,110 @@
 
   <!-- =================== DONATE MODAL =================== -->
   <div id="donate-modal" class="modal-hidden fixed inset-0 z-[60] flex items-center justify-center p-4 transition-opacity duration-300">
-    <div class="absolute inset-0 bg-black/70" onclick="closeDonate()"></div>
+    <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" onclick="closeDonate()"></div>
     <div class="modal-card glass-strong grad-border rounded-2xl w-full max-w-md p-8 relative text-center">
       <button onclick="closeDonate()" class="absolute top-4 right-4 text-white/50 hover:text-white text-xl">✕</button>
-      <div class="w-14 h-14 mx-auto rounded-full btn-gold flex items-center justify-center text-2xl mb-4">★</div>
-      <h3 class="font-head font-bold text-2xl mb-2" style="color:#fff">Support VORTX</h3>
+      <div class="w-14 h-14 mx-auto rounded-full btn-gold flex items-center justify-center text-2xl mb-4 font-head">★</div>
+      <h3 class="font-head text-2xl mb-2" style="color:#fff">Support VORTX</h3>
       <p class="text-white/60 text-sm mb-6">Your support keeps the packs, presets & tools free-flowing.</p>
       <div class="grid grid-cols-3 gap-3 mb-4">
-        <button class="glass rounded-xl py-3 font-medium ring-purple transition" style="color:#fff">$5</button>
-        <button class="glass rounded-xl py-3 font-medium ring-purple transition" style="color:#fff">$15</button>
-        <button class="glass rounded-xl py-3 font-medium ring-purple transition" style="color:#fff">$50</button>
+        <button class="glass rounded-xl py-3 font-bold ring-purple transition" style="color:#fff">$5</button>
+        <button class="glass rounded-xl py-3 font-bold ring-purple transition" style="color:#fff">$15</button>
+        <button class="glass rounded-xl py-3 font-bold ring-purple transition" style="color:#fff">$50</button>
       </div>
-      <button class="btn-gold w-full py-3 rounded-xl font-medium transition-all duration-300">Donate Now</button>
+      <button class="btn-gold w-full py-3 rounded-xl font-bold transition-all duration-300 uppercase tracking-widest text-sm">Donate Now</button>
     </div>
-  </div>
-
-  <!-- =================== REVIEW MODAL =================== -->
-  <div id="review-modal" class="modal-hidden fixed inset-0 z-[60] flex items-center justify-center p-4 transition-opacity duration-300">
-    <div class="absolute inset-0 bg-black/70" onclick="closeReview()"></div>
-    <form id="review-form" class="modal-card glass-strong grad-border rounded-2xl w-full max-w-md p-6 sm:p-8 relative">
-      <button type="button" onclick="closeReview()" class="absolute top-4 right-4 text-white/50 hover:text-white text-xl">✕</button>
-      <h3 class="font-head font-bold text-2xl mb-6" style="color:#fff">Add Your Review</h3>
-
-      <label class="block text-sm text-white/60 mb-1">Name</label>
-      <input id="rv-name" required type="text" placeholder="Your name"
-        class="w-full glass rounded-xl px-4 py-3 mb-4 outline-none focus:ring-1 text-white placeholder-white/30 text-sm" style="--tw-ring-color:var(--purple)" />
-
-      <label class="block text-sm text-white/60 mb-1">Rating</label>
-      <select id="rv-rating" class="w-full glass rounded-xl px-4 py-3 mb-4 outline-none text-white bg-transparent text-sm">
-        <option class="bg-ink" value="5">★★★★★ (5)</option>
-        <option class="bg-ink" value="4">★★★★ (4)</option>
-        <option class="bg-ink" value="3">★★★ (3)</option>
-      </select>
-
-      <label class="block text-sm text-white/60 mb-1">Review</label>
-      <textarea id="rv-text" required rows="3" placeholder="Share your experience..."
-        class="w-full glass rounded-xl px-4 py-3 mb-6 outline-none focus:ring-1 text-white placeholder-white/30 resize-none text-sm" style="--tw-ring-color:var(--purple)"></textarea>
-
-      <button type="submit" class="btn-gold w-full py-3 rounded-xl font-medium transition-all duration-300">Submit Review</button>
-    </form>
   </div>
 
   <script>
   /* =====================================================================
-     1. PARTICLE + LIGHTNING CANVAS BACKGROUND
+     1. BACKGROUND EFFECTS
   ===================================================================== */
   (function () {
     const canvas = document.getElementById('bg-canvas');
     const ctx = canvas.getContext('2d');
-    let w, h, particles = [], sparks = [];
+    let w, h, particles = [];
     const COLORS = ['#9333ea', '#06b6d4'];
 
-    function resize() {
-      w = canvas.width = window.innerWidth;
-      h = canvas.height = window.innerHeight;
-    }
-    resize();
-    window.addEventListener('resize', resize);
+    function resize() { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; }
+    resize(); window.addEventListener('resize', resize);
 
     function initParticles() {
-      const count = Math.min(80, Math.floor(w / 18));
+      const count = Math.min(60, Math.floor(w / 20));
       particles = [];
       for (let i = 0; i < count; i++) {
         particles.push({
           x: Math.random() * w, y: Math.random() * h,
           r: Math.random() * 1.5 + 0.5,
-          vx: (Math.random() - 0.5) * 0.3, vy: (Math.random() - 0.5) * 0.3,
+          vx: (Math.random() - 0.5) * 0.2, vy: (Math.random() - 0.5) * 0.2,
           c: COLORS[Math.floor(Math.random() * COLORS.length)],
-          a: Math.random() * 0.5 + 0.2,
+          a: Math.random() * 0.4 + 0.1,
         });
       }
     }
-    initParticles();
-    window.addEventListener('resize', initParticles);
-
-    function spawnSpark() {
-      const x = Math.random() * w, y = Math.random() * h;
-      const segments = [];
-      let cx = x, cy = y;
-      const steps = 5 + Math.floor(Math.random() * 5);
-      for (let i = 0; i < steps; i++) {
-        cx += (Math.random() - 0.5) * 60; cy += (Math.random() - 0.2) * 50;
-        segments.push({ x: cx, y: cy });
-      }
-      sparks.push({ origin: { x, y }, segments, life: 1, color: COLORS[Math.floor(Math.random() * COLORS.length)] });
-    }
-    setInterval(() => { if (Math.random() > 0.5) spawnSpark(); }, 1500);
+    initParticles(); window.addEventListener('resize', initParticles);
 
     function draw() {
       ctx.clearRect(0, 0, w, h);
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i];
         p.x += p.vx; p.y += p.vy;
-        if (p.x < 0 || p.x > w) p.vx *= -1;
-        if (p.y < 0 || p.y > h) p.vy *= -1;
+        if (p.x < 0 || p.x > w) p.vx *= -1; if (p.y < 0 || p.y > h) p.vy *= -1;
         ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = p.c; ctx.globalAlpha = p.a;
-        ctx.shadowBlur = 6; ctx.shadowColor = p.c; ctx.fill(); ctx.shadowBlur = 0;
+        ctx.fillStyle = p.c; ctx.globalAlpha = p.a; ctx.fill();
         for (let j = i + 1; j < particles.length; j++) {
           const q = particles[j];
           const dist = Math.hypot(p.x - q.x, p.y - q.y);
-          if (dist < 100) {
+          if (dist < 120) {
             ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y);
-            ctx.strokeStyle = p.c; ctx.globalAlpha = (1 - dist / 100) * 0.1;
+            ctx.strokeStyle = p.c; ctx.globalAlpha = (1 - dist / 120) * 0.1;
             ctx.lineWidth = 0.5; ctx.stroke();
           }
         }
       }
-      ctx.globalAlpha = 1;
-      for (let i = sparks.length - 1; i >= 0; i--) {
-        const s = sparks[i];
-        ctx.beginPath(); ctx.moveTo(s.origin.x, s.origin.y);
-        s.segments.forEach(seg => ctx.lineTo(seg.x, seg.y));
-        ctx.strokeStyle = s.color; ctx.globalAlpha = s.life * 0.7; ctx.lineWidth = 1.2;
-        ctx.shadowBlur = 12; ctx.shadowColor = s.color; ctx.stroke(); ctx.shadowBlur = 0;
-        s.life -= 0.04; if (s.life <= 0) sparks.splice(i, 1);
-      }
-      ctx.globalAlpha = 1;
-      requestAnimationFrame(draw);
+      ctx.globalAlpha = 1; requestAnimationFrame(draw);
     }
     draw();
   })();
 
   /* =====================================================================
-     2. SCROLL REVEAL (Smoother Fade In)
+     2. SCROLL REVEAL
   ===================================================================== */
   const io = new IntersectionObserver((entries) => {
     entries.forEach((e) => {
-      if (e.isIntersecting) {
-        e.target.classList.add('in');
-        io.unobserve(e.target);
-      }
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
     });
   }, { threshold: 0.1 });
 
   function observeReveals() {
     document.querySelectorAll('.reveal:not(.in)').forEach((el, index) => {
-      el.style.transitionDelay = (index % 3) * 100 + 'ms';
-      io.observe(el);
+      el.style.transitionDelay = (index % 3) * 100 + 'ms'; io.observe(el);
     });
   }
 
   /* =====================================================================
-     3. FEATURED PACKS CAROUSEL
+     3. CAROUSEL (9:16 Aspect Ratio)
   ===================================================================== */
   const packs = [
-    { t: 'Neon Nights LUT', tag: 'Color', c: '#9333ea' },
-    { t: 'Cyber Shake FX', tag: 'Camera', c: '#06b6d4' },
-    { t: 'Glitch Overlays', tag: 'VFX', c: '#9333ea' },
-    { t: 'Cinematic Presets', tag: 'Presets', c: '#06b6d4' },
-    { t: 'Smoke & Sparks', tag: 'VFX', c: '#9333ea' }
+    { t: 'Neon Nights', tag: 'Color', c: '#9333ea' },
+    { t: 'Cyber Shake', tag: 'Camera', c: '#06b6d4' },
+    { t: 'Glitch VFX', tag: 'VFX', c: '#9333ea' },
+    { t: 'Cinematic', tag: 'Presets', c: '#06b6d4' },
+    { t: 'Sparks', tag: 'VFX', c: '#9333ea' }
   ];
 
   (function buildMarquee() {
     const track = document.getElementById('marquee-track');
+    // Aspect Ratio 9:16 -> w-64 is 256px, h is auto-calculated by aspect-[9/16]
     const html = [...packs, ...packs, ...packs].map(p => `
-      <div class="grad-border glass rounded-2xl w-60 shrink-0 p-5 flex flex-col justify-between h-36">
-        <div class="flex items-center justify-between">
-          <span class="text-xs uppercase tracking-widest px-2 py-1 rounded-full glass" style="color:${p.c}">${p.tag}</span>
-          <span class="w-2 h-2 rounded-full" style="background:${p.c};box-shadow:0 0 10px ${p.c}"></span>
+      <div class="grad-border glass rounded-2xl w-60 sm:w-64 aspect-[9/16] shrink-0 p-5 flex flex-col justify-between bg-white/5 relative overflow-hidden group">
+        <!-- Placeholder for actual 9:16 image -->
+        <div class="absolute inset-0 bg-black/20 z-0"></div>
+        <div class="flex items-center justify-between relative z-10">
+          <span class="text-[10px] uppercase font-bold tracking-widest px-3 py-1.5 rounded-full glass" style="color:${p.c}">${p.tag}</span>
         </div>
-        <div>
-          <h3 class="font-head font-bold text-base text-white">${p.t}</h3>
+        <div class="relative z-10">
+          <h3 class="font-head text-lg text-white group-hover:-translate-y-1 transition-transform">${p.t}</h3>
         </div>
       </div>`).join('');
     track.innerHTML = html;
@@ -574,37 +480,32 @@
   })();
 
   /* =====================================================================
-     4. SPA VIEWS (Categories & Web Tiers)
+     4. SPA VIEWS
   ===================================================================== */
   const CATEGORY_DATA = {
-    CC:    ['Teal & Orange LUT Pack','Filmic Base Correction','Night Grade Kit','Vibrant Pop LUTs'],
-    SHAKE: ['Impact Shake Bundle','Bass Drop Shakes','Whip Pan Transitions','Earthquake FX'],
-    VFX:   ['Spark Burst Overlays','Glitch Distortion Set','Smoke Atmosphere','Lightning Strikes'],
-    PF:    ['Cinematic Preset Suite','Gaming Montage Kit','Anime Edit Presets','Retro Wave Set'],
+    CC:    ['Teal & Orange LUT','Filmic Base','Night Grade','Vibrant Pop'],
+    SHAKE: ['Impact Shake','Bass Drop','Whip Pan','Earthquake'],
+    VFX:   ['Spark Burst','Glitch Distortion','Smoke Atmosphere','Lightning'],
+    PF:    ['Cinematic Suite','Gaming Montage','Anime Presets','Retro Wave'],
   };
 
   function showView(id) {
     document.querySelectorAll('.view').forEach(v => v.classList.add('view-hidden'));
     document.getElementById(id).classList.remove('view-hidden');
     window.scrollTo({ top: 0, behavior: 'instant' });
-    // Reset animations for the new view
-    document.getElementById(id).querySelectorAll('.reveal').forEach(el => {
-      el.classList.remove('in');
-      el.style.transitionDelay = '0ms';
-    });
+    document.getElementById(id).querySelectorAll('.reveal').forEach(el => { el.classList.remove('in'); el.style.transitionDelay = '0ms'; });
     setTimeout(observeReveals, 50);
   }
 
   function openCategory(key) {
     document.getElementById('cat-title').textContent = key;
-    const grid = document.getElementById('cat-grid');
-    grid.innerHTML = CATEGORY_DATA[key].map((item, i) => `
+    document.getElementById('cat-grid').innerHTML = CATEGORY_DATA[key].map((item, i) => `
       <div class="reveal grad-border glass rounded-2xl p-5 flex items-center justify-between gap-3 transition-all duration-300 hover:-translate-y-1 ${i % 2 === 0 ? 'ring-purple' : 'ring-cyan'}">
         <div>
-          <span class="text-[10px] tracking-widest uppercase" style="color:${i % 2 === 0 ? 'var(--purple)' : 'var(--cyan)'}">${key} Pack</span>
-          <h3 class="font-head font-bold text-lg text-white mt-1">${item}</h3>
+          <span class="text-[10px] font-bold tracking-widest uppercase" style="color:${i % 2 === 0 ? 'var(--purple)' : 'var(--cyan)'}">${key} Pack</span>
+          <h3 class="font-head text-lg text-white mt-1">${item}</h3>
         </div>
-        <button class="btn-gold px-4 py-2 rounded-full text-xs font-medium">Get</button>
+        <button class="btn-gold px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider">Get</button>
       </div>`).join('');
     showView('category-view');
   }
@@ -618,34 +519,9 @@
   ===================================================================== */
   function openDonate(e){ e && e.preventDefault(); document.getElementById('donate-modal').classList.remove('modal-hidden'); }
   function closeDonate(){ document.getElementById('donate-modal').classList.add('modal-hidden'); }
-  function openReview(e){ e && e.preventDefault(); document.getElementById('review-modal').classList.remove('modal-hidden'); }
-  function closeReview(){ document.getElementById('review-modal').classList.add('modal-hidden'); }
-
-  const DEFAULT_REVIEWS = [
-    { name: 'Kaito V.', rating: 5, text: 'The VFX pack transformed my montages.' },
-    { name: 'Mira S.', rating: 5, text: 'Cleanest LUTs I have used.' },
-  ];
-  let reviews = JSON.parse(localStorage.getItem('vortx_rv')) || DEFAULT_REVIEWS;
-  function renderReviews() {
-    document.getElementById('reviews-grid').innerHTML = reviews.map(r => `
-      <div class="reveal grad-border glass rounded-2xl p-5 flex flex-col gap-3">
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-full flex items-center justify-center font-head font-bold text-white bg-gradient-to-br from-purple-600 to-cyan-500">${r.name[0].toUpperCase()}</div>
-          <div><p class="font-medium text-white text-sm">${r.name}</p><p class="text-xs text-yellow-400">${'★'.repeat(r.rating)}</p></div>
-        </div>
-        <p class="text-white/60 text-sm">${r.text}</p>
-      </div>`).join('');
-    observeReveals();
-  }
-  document.getElementById('review-form').addEventListener('submit', function (e) {
-    e.preventDefault();
-    reviews.unshift({ name: document.getElementById('rv-name').value, rating: document.getElementById('rv-rating').value, text: document.getElementById('rv-text').value });
-    localStorage.setItem('vortx_rv', JSON.stringify(reviews));
-    renderReviews(); this.reset(); closeReview();
-  });
-
+  
   document.getElementById('year').textContent = new Date().getFullYear();
-  renderReviews(); observeReveals(); // initial load
+  observeReveals();
   </script>
 </body>
 </html>
