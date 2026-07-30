@@ -3,14 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>VORTX — Premium Digital Assets & Video Editing</title>
-  <meta name="description" content="VORTX — Premium digital assets, presets, VFX, and custom web solutions for creators and editors." />
+  <title>VORTX — Premium Digital Assets</title>
   <meta name="theme-color" content="#050505" />
 
   <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Google Fonts: Cinzel (للعناوين واللوقو) + Inter (للنصوص العادية) -->
+  <!-- Google Fonts: Cinzel & Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Inter:wght@500;600;700;800&display=swap" rel="stylesheet" />
@@ -26,9 +25,8 @@
           },
           colors: {
             ink: '#050505',
-            purple: { neon: '#9333ea' },
-            cyan: { neon: '#06b6d4' },
-            gold: { neon: '#ffd700' },
+            brand: '#9333ea', /* البنفسجي الأساسي */
+            brandLight: '#c084fc',
           },
         },
       },
@@ -38,9 +36,7 @@
   <style>
     :root {
       --ink: #050505;
-      --purple: #9333ea;
-      --cyan: #06b6d4;
-      --gold: #ffd700;
+      --brand: #9333ea;
     }
 
     html { scroll-behavior: smooth; }
@@ -53,34 +49,30 @@
 
     h1, h2, h3, .font-head { font-family: 'Cinzel', serif; letter-spacing: 1.5px; }
 
-    /* ---------- Canvas background ---------- */
-    #bg-canvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+    /* ---------- Background Glow ---------- */
     .glow-field {
       position: fixed; inset: 0; z-index: 0; pointer-events: none;
       background:
-        radial-gradient(600px circle at 15% 20%, rgba(147,51,234,0.12), transparent 60%),
-        radial-gradient(700px circle at 85% 70%, rgba(6,182,212,0.1), transparent 60%),
-        radial-gradient(500px circle at 50% 100%, rgba(147,51,234,0.06), transparent 60%);
+        radial-gradient(800px circle at 50% 0%, rgba(147,51,234,0.08), transparent 70%),
+        radial-gradient(600px circle at 100% 100%, rgba(147,51,234,0.05), transparent 70%);
     }
 
-    /* ---------- Glassmorphism ---------- */
+    /* ---------- Glassmorphism & Borders ---------- */
     .glass {
       background: rgba(255, 255, 255, 0.02);
-      backdrop-filter: blur(12px) saturate(140%);
-      -webkit-backdrop-filter: blur(12px) saturate(140%);
+      backdrop-filter: blur(16px) saturate(140%);
+      -webkit-backdrop-filter: blur(16px) saturate(140%);
       border: 1px solid rgba(255, 255, 255, 0.05);
     }
-    .glass-strong {
-      background: rgba(10, 10, 14, 0.6);
-      backdrop-filter: blur(20px) saturate(150%);
-      -webkit-backdrop-filter: blur(20px) saturate(150%);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+    
+    .glass:hover {
+      border: 1px solid rgba(147,51,234,0.3);
+      box-shadow: 0 10px 30px -10px rgba(147,51,234,0.1);
     }
 
-    /* ---------- Glow & 3D effects ---------- */
-    /* شعار VORTX بنفسجي وثلاثي الأبعاد */
+    /* ---------- VORTX 3D Purple Logo ---------- */
     .text-3d-purple {
-      color: #c084fc; /* بنفسجي فاتح عشان يوضح */
+      color: #c084fc; 
       text-shadow: 
         0 1px 0 #9333ea, 
         0 2px 0 #7e22ce, 
@@ -93,74 +85,76 @@
         0 3px 5px rgba(0,0,0,.2), 
         0 5px 10px rgba(0,0,0,.25), 
         0 10px 10px rgba(0,0,0,.2), 
-        0 0 20px rgba(147,51,234,0.7),
-        0 0 40px rgba(147,51,234,0.4);
+        0 0 30px rgba(147,51,234,0.6);
     }
 
-    .btn-gold {
-      background: linear-gradient(180deg, #ffe14d, #ffd700);
-      color: #1a1500;
-      box-shadow: 0 0 20px rgba(255,215,0,0.4), 0 0 40px rgba(255,215,0,0.2);
+    /* ---------- Buttons ---------- */
+    .btn-primary {
+      background: #9333ea;
+      color: white;
+      box-shadow: 0 0 15px rgba(147,51,234,0.4);
     }
-    .btn-gold:hover { box-shadow: 0 0 30px rgba(255,215,0,0.6), 0 0 60px rgba(255,215,0,0.3); transform: translateY(-2px); }
-    
-    .grad-border { position: relative; background: rgba(255,255,255,0.02); }
-    .grad-border::before {
-      content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1px;
-      background: linear-gradient(135deg, rgba(147,51,234,0.7), rgba(6,182,212,0.5));
-      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-      -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none; opacity: 0.5;
+    .btn-primary:hover { 
+      background: #a855f7;
+      box-shadow: 0 0 25px rgba(147,51,234,0.6); 
+      transform: translateY(-2px); 
     }
 
     /* ---------- Scroll reveal ---------- */
     .reveal {
       opacity: 0; transform: translateY(30px);
-      transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
       will-change: opacity, transform;
     }
     .reveal.in { opacity: 1; transform: translateY(0); }
 
-    /* ---------- Carousel ---------- */
-    .marquee-track { display: flex; gap: 1.25rem; width: max-content; animation: scroll-rtl 40s linear infinite; }
-    @keyframes scroll-rtl { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+    /* ---------- Infinite Carousel ---------- */
+    .marquee-track { 
+      display: flex; gap: 1.5rem; width: max-content; 
+      animation: scroll-rtl 35s linear infinite; 
+    }
+    @keyframes scroll-rtl { from { transform: translateX(0); } to { transform: translateX(-50%); } }
     .marquee-paused .marquee-track { animation-play-state: paused; }
-    .marquee-wrap { cursor: grab; }
+    .marquee-wrap { cursor: grab; overflow-x: auto; scrollbar-width: none; }
+    .marquee-wrap::-webkit-scrollbar { display: none; }
     .marquee-wrap.dragging { cursor: grabbing; }
-    .no-scrollbar::-webkit-scrollbar { display: none; }
-    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    /* ---------- 3D Tilt Card Base ---------- */
+    .tilt-card {
+      transition: transform 0.1s ease-out, box-shadow 0.1s ease-out;
+      transform-style: preserve-3d;
+      will-change: transform;
+    }
 
     /* modal & views */
-    .modal-hidden { opacity: 0; pointer-events: none; }
-    .modal-hidden .modal-card { transform: translateY(24px) scale(.96); }
-    .modal-card { transition: transform .4s cubic-bezier(.16,1,.3,1); }
     .view { transition: opacity .4s ease; opacity: 1; }
     .view-hidden { display: none; opacity: 0; }
   </style>
 </head>
 
-<!-- الخط الأساسي صار font-medium عشان يكون مغمق وأعرض -->
-<body class="relative font-body font-medium antialiased">
-  <canvas id="bg-canvas"></canvas>
+<body class="relative font-body font-medium antialiased text-white/90">
   <div class="glow-field"></div>
 
   <!-- =================== NAVBAR =================== -->
   <header class="sticky top-0 z-50">
-    <nav class="glass-strong">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-        <a href="#top" class="flex items-center gap-3 group active:scale-95 transition-transform duration-200">
-          <span class="w-8 h-8 rounded-lg grad-border flex items-center justify-center font-head font-bold text-sm text-cyan-neon" style="color:var(--cyan)">V</span>
-          <span class="font-head text-xl tracking-widest text-3d-purple">VORTX</span>
+    <nav class="glass border-b-0 border-white/5">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+        <!-- Logo -->
+        <a href="#top" class="flex items-center gap-3 active:scale-95 transition-transform duration-200">
+          <span class="font-head text-2xl tracking-widest text-3d-purple">VORTX</span>
         </a>
 
-        <ul class="hidden md:flex items-center gap-8 text-sm text-white/80 font-bold">
-          <li><a href="#bundles" class="hover:text-white transition active:scale-95 inline-block">Bundles</a></li>
-          <li><a href="#packs" class="hover:text-white transition active:scale-95 inline-block">Packs</a></li>
-          <li><a href="#categories" class="hover:text-white transition active:scale-95 inline-block">Categories</a></li>
+        <!-- Desktop Menu -->
+        <ul class="hidden md:flex items-center gap-10 text-sm font-bold text-white/60">
+          <li><a href="#bundles" class="hover:text-brandLight transition active:scale-95">Bundles</a></li>
+          <li><a href="#packs" class="hover:text-brandLight transition active:scale-95">Packs</a></li>
+          <li><a href="#categories" class="hover:text-brandLight transition active:scale-95">Categories</a></li>
         </ul>
 
-        <a href="#" onclick="openDonate(event)" class="btn-gold font-bold text-xs tracking-wider px-6 py-2 rounded-full transition-all duration-200 uppercase active:scale-95">
-          Support
-        </a>
+        <!-- CTA -->
+        <button class="glass px-6 py-2.5 rounded-full font-bold text-xs tracking-widest uppercase hover:bg-white/5 transition-all duration-200 active:scale-95 border-brand/30">
+          Sign In
+        </button>
       </div>
     </nav>
   </header>
@@ -169,108 +163,99 @@
   <main id="main-view" class="view relative z-10">
     <div id="top"></div>
 
-    <!-- HERO -->
-    <section class="max-w-4xl mx-auto px-4 sm:px-6 pt-20 sm:pt-28 pb-12 text-center">
-      <div class="reveal inline-flex items-center gap-2 glass px-4 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase text-cyan-neon mb-8" style="color:var(--cyan)">
-        <span class="w-2 h-2 rounded-full" style="background:var(--cyan); box-shadow:0 0 10px var(--cyan)"></span>
+    <!-- HERO SECTION -->
+    <section class="max-w-4xl mx-auto px-4 sm:px-6 py-28 sm:py-36 text-center">
+      <div class="reveal inline-flex items-center gap-2 glass px-5 py-2 rounded-full text-xs font-bold tracking-widest uppercase text-brandLight mb-10 border-brand/20">
+        <span class="w-2 h-2 rounded-full bg-brand box-shadow-brand"></span>
         Premium Digital Studio
       </div>
 
-      <!-- Gold donation button -->
-      <div class="reveal mb-8">
-        <button onclick="openDonate(event)" class="btn-gold font-head font-bold tracking-wide px-8 py-3 rounded-full transition-all duration-200 text-sm uppercase active:scale-95">
-          ★ Support / Donate
-        </button>
-      </div>
-
-      <!-- 3D Purple VORTX Logo -->
-      <h1 class="reveal font-head tracking-widest text-6xl sm:text-7xl md:text-8xl text-3d-purple mb-6" style="line-height: 1.3; padding-bottom: 10px;">
+      <h1 class="reveal font-head tracking-widest text-6xl sm:text-7xl md:text-8xl text-3d-purple mb-8" style="line-height: 1.2; padding-bottom: 10px;">
         VORTX
       </h1>
       
-      <!-- النص العريض font-bold -->
-      <p class="reveal font-bold text-white max-w-lg mx-auto text-base sm:text-lg leading-relaxed mb-12">
-        Next-gen digital assets, cinematic presets, VFX packs & custom web solutions — engineered for creators.
+      <p class="reveal font-bold text-white/70 max-w-xl mx-auto text-lg leading-relaxed mb-12">
+        Next-gen digital assets, cinematic presets, VFX packs & custom web solutions. Engineered exclusively for elite creators.
       </p>
 
-      <!-- SOCIAL BAR -->
-      <div class="reveal w-full max-w-3xl mx-auto flex items-center justify-between px-4 sm:px-10">
-        <a href="#" class="text-white/60 hover:text-[#ff4d4d] transition-all duration-200 transform hover:scale-110 active:scale-90">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33 2.78 2.78 0 0 0 1.94 2c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
-        </a>
-        <a href="#" class="text-white/60 hover:text-[#06b6d4] transition-all duration-200 transform hover:scale-110 active:scale-90">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
-        </a>
-        <a href="#" class="text-white/60 hover:text-[#c026d3] transition-all duration-200 transform hover:scale-110 active:scale-90">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-        </a>
-        <a href="#" class="text-white/60 hover:text-white transition-all duration-200 transform hover:scale-110 active:scale-90">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg>
+      <div class="reveal flex items-center justify-center gap-6">
+        <a href="#bundles" class="btn-primary font-bold px-8 py-3.5 rounded-full transition-all duration-200 text-sm uppercase tracking-wider active:scale-95">
+          Explore Tiers
         </a>
       </div>
     </section>
 
-    <!-- WEB PAGE BUNDLES BANNER -->
-    <section id="bundles" class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
-      <div class="reveal grad-border rounded-3xl overflow-hidden glass p-8 sm:p-12 relative">
-        <div class="absolute -right-10 -top-10 w-52 h-52 rounded-full" style="background:radial-gradient(circle,rgba(6,182,212,.2),transparent 70%)"></div>
-        <div class="absolute -left-10 -bottom-10 w-52 h-52 rounded-full" style="background:radial-gradient(circle,rgba(147,51,234,.2),transparent 70%)"></div>
-        <div class="relative flex flex-col md:flex-row items-center justify-between gap-8">
-          <div class="text-center md:text-left max-w-xl">
-            <span class="text-xs tracking-widest uppercase font-bold" style="color:var(--cyan)">Custom Web Solutions</span>
-            <h2 class="font-head text-3xl sm:text-4xl mt-3 mb-3 text-white">Web Page Bundles</h2>
-            <p class="font-semibold text-white/80 leading-relaxed text-sm sm:text-base">
-              Launch your custom digital space today. Stand out with next-gen designs and join the elite creators.
-            </p>
-          </div>
-          <div class="w-full md:w-auto">
-            <button onclick="openWebTiers()" class="btn-gold font-bold px-8 py-3 rounded-full whitespace-nowrap transition-all duration-200 w-full md:w-auto uppercase tracking-wide text-sm active:scale-95">View Tiers</button>
-          </div>
+    <!-- WEB BUNDLES (Left Aligned, Clean) -->
+    <section id="bundles" class="max-w-7xl mx-auto px-4 sm:px-6 py-20">
+      <div class="reveal glass rounded-[2rem] p-10 sm:p-16 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-10 tilt-card">
+        <div class="absolute -right-20 -top-20 w-72 h-72 rounded-full bg-brand/10 blur-3xl pointer-events-none"></div>
+        
+        <div class="text-left max-w-2xl relative z-10">
+          <span class="text-xs tracking-widest uppercase font-bold text-brandLight">Custom Web Solutions</span>
+          <h2 class="font-head text-4xl sm:text-5xl mt-4 mb-5 text-white">Web Page Bundles</h2>
+          <p class="font-bold text-white/60 leading-relaxed text-base sm:text-lg">
+            Launch your custom digital space today. Stand out with next-gen designs, premium performance, and join the elite creators.
+          </p>
+        </div>
+        
+        <div class="w-full md:w-auto relative z-10">
+          <button onclick="openWebTiers()" class="glass border-brand/50 hover:bg-brand/10 font-bold px-10 py-4 rounded-full whitespace-nowrap transition-all duration-200 w-full md:w-auto uppercase tracking-wider text-sm active:scale-95">
+            View Development Tiers
+          </button>
         </div>
       </div>
     </section>
 
-    <!-- FEATURED PACKS CAROUSEL (TikTok Aspect Ratio 9:16) -->
-    <section id="packs" class="py-10">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 mb-6 reveal">
-        <h2 class="font-head font-bold text-2xl sm:text-3xl" style="color:#fff">Featured Packs</h2>
-        <p class="font-bold text-white/60 text-sm mt-1">Drag to explore — auto-scrolls right to left.</p>
+    <!-- 5 INFINITE PACKS CAROUSEL -->
+    <section id="packs" class="py-20 overflow-hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 mb-10 text-left reveal">
+        <h2 class="font-head font-bold text-3xl sm:text-4xl text-white">Featured Packs</h2>
+        <p class="font-bold text-white/50 text-sm mt-3 tracking-wide">Drag to explore — infinite loop.</p>
       </div>
-      <div id="marquee" class="marquee-wrap no-scrollbar overflow-hidden select-none reveal">
-        <div class="marquee-track px-4" id="marquee-track"><!-- filled by JS --></div>
-      </div>
-    </section>
-
-    <!-- INTERACTIVE CATEGORIES -->
-    <section id="categories" class="max-w-7xl mx-auto px-4 sm:px-6 py-16">
-      <div class="text-center mb-10 reveal">
-        <h2 class="font-head font-bold text-3xl sm:text-4xl" style="color:#fff">Categories</h2>
-        <p class="font-bold text-white/60 mt-2 text-sm">Tap a module to open its collection.</p>
-      </div>
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
-        <button onclick="openCategory('CC')" class="reveal ring-purple grad-border glass rounded-2xl aspect-[3/4] flex flex-col items-center justify-center gap-4 transition-all duration-200 hover:-translate-y-2 active:scale-95">
-          <span class="font-head font-bold text-4xl" style="color:var(--purple)">CC</span>
-          <span class="text-xs tracking-widest uppercase font-bold text-white/70">Color</span>
-        </button>
-        <button onclick="openCategory('SHAKE')" class="reveal ring-cyan grad-border glass rounded-2xl aspect-[3/4] flex flex-col items-center justify-center gap-4 transition-all duration-200 hover:-translate-y-2 active:scale-95">
-          <span class="font-head font-bold text-4xl" style="color:var(--cyan)">SHAKE</span>
-          <span class="text-xs tracking-widest uppercase font-bold text-white/70">Camera</span>
-        </button>
-        <button onclick="openCategory('VFX')" class="reveal ring-purple grad-border glass rounded-2xl aspect-[3/4] flex flex-col items-center justify-center gap-4 transition-all duration-200 hover:-translate-y-2 active:scale-95">
-          <span class="font-head font-bold text-4xl" style="color:var(--purple)">VFX</span>
-          <span class="text-xs tracking-widest uppercase font-bold text-white/70">Effects</span>
-        </button>
-        <button onclick="openCategory('PF')" class="reveal ring-cyan grad-border glass rounded-2xl aspect-[3/4] flex flex-col items-center justify-center gap-4 transition-all duration-200 hover:-translate-y-2 active:scale-95">
-          <span class="font-head font-bold text-4xl" style="color:var(--cyan)">PF</span>
-          <span class="text-xs tracking-widest uppercase font-bold text-white/70">Presets</span>
-        </button>
+      
+      <div id="marquee" class="marquee-wrap reveal">
+        <div class="marquee-track px-4" id="marquee-track">
+          <!-- JS will duplicate the 5 items to create an infinite effect -->
+        </div>
       </div>
     </section>
 
+    <!-- CATEGORIES (Clean Grid, Left Aligned) -->
+    <section id="categories" class="max-w-7xl mx-auto px-4 sm:px-6 py-20">
+      <div class="mb-12 text-left reveal">
+        <h2 class="font-head font-bold text-3xl sm:text-4xl text-white">Categories</h2>
+        <p class="font-bold text-white/50 mt-3 text-sm tracking-wide">Select a module to view contents.</p>
+      </div>
+      
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- CC -->
+        <div onclick="openCategory('CC')" class="reveal tilt-card glass rounded-2xl p-8 flex flex-col items-start justify-between min-h-[220px] transition-all duration-300 active:scale-95 cursor-pointer group">
+          <span class="text-xs tracking-widest uppercase font-bold text-white/40 group-hover:text-brand transition-colors">Color</span>
+          <span class="font-head font-bold text-5xl text-white group-hover:text-brandLight transition-colors">CC</span>
+        </div>
+        <!-- SHAKE -->
+        <div onclick="openCategory('SHAKE')" class="reveal tilt-card glass rounded-2xl p-8 flex flex-col items-start justify-between min-h-[220px] transition-all duration-300 active:scale-95 cursor-pointer group">
+          <span class="text-xs tracking-widest uppercase font-bold text-white/40 group-hover:text-brand transition-colors">Camera</span>
+          <span class="font-head font-bold text-5xl text-white group-hover:text-brandLight transition-colors">SHAKE</span>
+        </div>
+        <!-- VFX -->
+        <div onclick="openCategory('VFX')" class="reveal tilt-card glass rounded-2xl p-8 flex flex-col items-start justify-between min-h-[220px] transition-all duration-300 active:scale-95 cursor-pointer group">
+          <span class="text-xs tracking-widest uppercase font-bold text-white/40 group-hover:text-brand transition-colors">Effects</span>
+          <span class="font-head font-bold text-5xl text-white group-hover:text-brandLight transition-colors">VFX</span>
+        </div>
+        <!-- PF -->
+        <div onclick="openCategory('PF')" class="reveal tilt-card glass rounded-2xl p-8 flex flex-col items-start justify-between min-h-[220px] transition-all duration-300 active:scale-95 cursor-pointer group">
+          <span class="text-xs tracking-widest uppercase font-bold text-white/40 group-hover:text-brand transition-colors">Presets</span>
+          <span class="font-head font-bold text-5xl text-white group-hover:text-brandLight transition-colors">PF</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
     <footer class="border-t border-white/5 mt-10">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 py-10 text-center text-white/50 text-sm font-bold">
-        <p class="font-head tracking-widest text-white mb-2">VORTX</p>
-        <p>© <span id="year"></span> VORTX Studio. Crafted for the bold.</p>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12 flex flex-col md:flex-row items-center justify-between gap-6">
+        <p class="font-head tracking-widest text-brandLight font-bold text-xl">VORTX</p>
+        <p class="font-bold text-white/40 text-sm">© <span id="year"></span> VORTX Studio. Crafted for the bold.</p>
       </div>
     </footer>
   </main>
@@ -278,61 +263,61 @@
   <!-- =================== WEB TIERS VIEW (SPA) =================== -->
   <section id="web-view" class="view view-hidden relative z-10 min-h-screen">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
-      <div class="flex items-center justify-between flex-wrap gap-4 mb-10">
-        <div>
-          <span class="text-xs tracking-widest uppercase font-bold" style="color:var(--cyan)">Web Solutions</span>
-          <h2 class="font-head text-3xl sm:text-4xl text-purple-neon mt-2" style="color:var(--purple)">Development Tiers</h2>
+      <div class="flex items-center justify-between mb-12">
+        <div class="text-left">
+          <span class="text-xs tracking-widest uppercase font-bold text-brandLight">Web Solutions</span>
+          <h2 class="font-head text-4xl mt-3 text-white">Development Tiers</h2>
         </div>
-        <button onclick="backToHomeFromWeb()" class="ring-cyan glass px-6 py-2.5 rounded-full font-bold flex items-center gap-2 transition-all duration-200 hover:bg-white/10 text-sm active:scale-95" style="color:#fff">
-          Back
+        <button onclick="backToHome()" class="glass px-6 py-3 rounded-full font-bold text-sm hover:bg-white/5 transition-all duration-200 active:scale-95">
+          ← Back
         </button>
       </div>
       
-      <div class="grid lg:grid-cols-3 gap-6">
-        <!-- Tier 1: Starter -->
-        <div class="reveal grad-border glass rounded-2xl p-6 flex flex-col h-full ring-purple">
-          <div class="aspect-video bg-white/5 rounded-xl mb-6 flex items-center justify-center font-bold text-white/30 text-sm border border-white/5">
-            [Image Placeholder 1]
+      <div class="grid lg:grid-cols-3 gap-8">
+        <!-- Starter -->
+        <div class="reveal tilt-card glass rounded-3xl p-8 flex flex-col h-full border-t border-brand/20">
+          <div class="aspect-video bg-black/40 rounded-2xl mb-8 flex items-center justify-center font-bold text-white/20 text-sm border border-white/5">
+            [Video/Image Placeholder]
           </div>
-          <h3 class="font-head font-bold text-2xl mb-2 text-white">STARTER</h3>
-          <p class="font-bold text-white/60 text-sm mb-6">Perfect for simple portfolios and landing pages.</p>
-          <ul class="text-sm text-white/90 space-y-3 mb-8 flex-1 font-bold">
-            <li class="flex items-start gap-2"><span style="color:var(--purple)">•</span> Clean & Modern UI</li>
-            <li class="flex items-start gap-2"><span style="color:var(--purple)">•</span> Mobile-Ready Layout</li>
-            <li class="flex items-start gap-2"><span style="color:var(--purple)">•</span> High-Speed Performance</li>
+          <h3 class="font-head font-bold text-2xl mb-3 text-white">STARTER</h3>
+          <p class="font-bold text-white/50 text-sm mb-8">Perfect for simple portfolios and personal landing pages.</p>
+          <ul class="text-sm text-white/80 space-y-4 mb-10 flex-1 font-bold">
+            <li class="flex items-start gap-3"><span class="text-brand">✦</span> Clean & Modern UI</li>
+            <li class="flex items-start gap-3"><span class="text-brand">✦</span> Mobile-Ready Layout</li>
+            <li class="flex items-start gap-3"><span class="text-brand">✦</span> High-Speed Performance</li>
           </ul>
-          <button class="btn-gold w-full py-3 rounded-xl font-bold uppercase tracking-wider text-sm transition-transform active:scale-95">Select Plan</button>
+          <button class="glass border-brand/30 hover:bg-brand/10 w-full py-4 rounded-xl font-bold uppercase tracking-wider text-sm transition-transform active:scale-95">Select Plan</button>
         </div>
 
-        <!-- Tier 2: Pro -->
-        <div class="reveal grad-border glass-strong rounded-2xl p-6 flex flex-col h-full ring-cyan relative">
-          <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-cyan-500 text-black text-[10px] font-bold px-4 py-1 rounded-full uppercase tracking-widest" style="background:var(--cyan)">Most Popular</div>
-          <div class="aspect-video bg-white/5 rounded-xl mb-6 flex items-center justify-center font-bold text-white/30 text-sm border border-white/5 mt-2">
-            [Image Placeholder 2]
+        <!-- Pro -->
+        <div class="reveal tilt-card glass rounded-3xl p-8 flex flex-col h-full border border-brand/50 relative bg-brand/5 shadow-[0_0_40px_rgba(147,51,234,0.1)]">
+          <div class="absolute -top-4 left-8 bg-brand text-white text-[10px] font-bold px-4 py-1.5 rounded-full uppercase tracking-widest">Most Popular</div>
+          <div class="aspect-video bg-black/40 rounded-2xl mb-8 flex items-center justify-center font-bold text-white/20 text-sm border border-white/5 mt-2">
+            [Video/Image Placeholder]
           </div>
-          <h3 class="font-head font-bold text-2xl mb-2 text-white">PRO</h3>
-          <p class="font-bold text-white/60 text-sm mb-6">For creators needing advanced animations & CMS.</p>
-          <ul class="text-sm text-white/90 space-y-3 mb-8 flex-1 font-bold">
-            <li class="flex items-start gap-2"><span style="color:var(--cyan)">•</span> Glassmorphism & Glows</li>
-            <li class="flex items-start gap-2"><span style="color:var(--cyan)">•</span> Scroll Animations</li>
-            <li class="flex items-start gap-2"><span style="color:var(--cyan)">•</span> Content Management</li>
+          <h3 class="font-head font-bold text-2xl mb-3 text-white">PRO</h3>
+          <p class="font-bold text-white/50 text-sm mb-8">For creators needing advanced animations & custom design.</p>
+          <ul class="text-sm text-white/80 space-y-4 mb-10 flex-1 font-bold">
+            <li class="flex items-start gap-3"><span class="text-brandLight">✦</span> Glassmorphism & Glows</li>
+            <li class="flex items-start gap-3"><span class="text-brandLight">✦</span> Scroll Animations</li>
+            <li class="flex items-start gap-3"><span class="text-brandLight">✦</span> Content Management</li>
           </ul>
-          <button class="btn-gold w-full py-3 rounded-xl font-bold uppercase tracking-wider text-sm transition-transform active:scale-95">Select Plan</button>
+          <button class="btn-primary w-full py-4 rounded-xl font-bold uppercase tracking-wider text-sm transition-transform active:scale-95">Select Plan</button>
         </div>
 
-        <!-- Tier 3: VIP -->
-        <div class="reveal grad-border glass rounded-2xl p-6 flex flex-col h-full ring-purple">
-          <div class="aspect-video bg-white/5 rounded-xl mb-6 flex items-center justify-center font-bold text-white/30 text-sm border border-white/5">
-            [Image Placeholder 3]
+        <!-- VIP -->
+        <div class="reveal tilt-card glass rounded-3xl p-8 flex flex-col h-full border-t border-brand/20">
+          <div class="aspect-video bg-black/40 rounded-2xl mb-8 flex items-center justify-center font-bold text-white/20 text-sm border border-white/5">
+            [Video/Image Placeholder]
           </div>
-          <h3 class="font-head font-bold text-2xl mb-2 text-white">VIP</h3>
-          <p class="font-bold text-white/60 text-sm mb-6">The absolute premium experience with custom elements.</p>
-          <ul class="text-sm text-white/90 space-y-3 mb-8 flex-1 font-bold">
-            <li class="flex items-start gap-2"><span style="color:var(--purple)">•</span> 3D Models Integration</li>
-            <li class="flex items-start gap-2"><span style="color:var(--purple)">•</span> Mind-blowing Interactions</li>
-            <li class="flex items-start gap-2"><span style="color:var(--purple)">•</span> Top-Tier Priority Support</li>
+          <h3 class="font-head font-bold text-2xl mb-3 text-white">VIP</h3>
+          <p class="font-bold text-white/50 text-sm mb-8">The absolute premium experience with custom 3D elements.</p>
+          <ul class="text-sm text-white/80 space-y-4 mb-10 flex-1 font-bold">
+            <li class="flex items-start gap-3"><span class="text-brand">✦</span> 3D Models Integration</li>
+            <li class="flex items-start gap-3"><span class="text-brand">✦</span> Mind-blowing Interactions</li>
+            <li class="flex items-start gap-3"><span class="text-brand">✦</span> Priority 24/7 Support</li>
           </ul>
-          <button class="btn-gold w-full py-3 rounded-xl font-bold uppercase tracking-wider text-sm transition-transform active:scale-95">Select Plan</button>
+          <button class="glass border-brand/30 hover:bg-brand/10 w-full py-4 rounded-xl font-bold uppercase tracking-wider text-sm transition-transform active:scale-95">Select Plan</button>
         </div>
       </div>
     </div>
@@ -341,89 +326,22 @@
   <!-- =================== CATEGORY VIEW (SPA) =================== -->
   <section id="category-view" class="view view-hidden relative z-10 min-h-screen">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
-      <div class="flex items-center justify-between flex-wrap gap-4 mb-10">
-        <div>
-          <span class="text-xs tracking-widest uppercase font-bold" style="color:var(--cyan)">Collection</span>
-          <h2 id="cat-title" class="font-head font-bold text-3xl sm:text-4xl text-purple-neon mt-2" style="color:var(--purple)">CC</h2>
+      <div class="flex items-center justify-between mb-12">
+        <div class="text-left">
+          <span class="text-xs tracking-widest uppercase font-bold text-brandLight">Collection</span>
+          <h2 id="cat-title" class="font-head text-4xl mt-3 text-white">CC</h2>
         </div>
-        <button onclick="backToHome()" class="ring-cyan glass px-6 py-2.5 rounded-full font-bold flex items-center gap-2 transition-all duration-200 hover:bg-white/10 text-sm active:scale-95" style="color:#fff">
-          Back
+        <button onclick="backToHome()" class="glass px-6 py-3 rounded-full font-bold text-sm hover:bg-white/5 transition-all duration-200 active:scale-95">
+          ← Back
         </button>
       </div>
-      <div id="cat-grid" class="grid sm:grid-cols-2 gap-5"><!-- filled by JS --></div>
+      <div id="cat-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"><!-- filled by JS --></div>
     </div>
   </section>
 
-  <!-- =================== DONATE MODAL =================== -->
-  <div id="donate-modal" class="modal-hidden fixed inset-0 z-[60] flex items-center justify-center p-4 transition-opacity duration-300">
-    <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" onclick="closeDonate()"></div>
-    <div class="modal-card glass-strong grad-border rounded-2xl w-full max-w-md p-8 relative text-center">
-      <button onclick="closeDonate()" class="absolute top-4 right-4 text-white/50 hover:text-white text-xl active:scale-90">✕</button>
-      <div class="w-14 h-14 mx-auto rounded-full btn-gold flex items-center justify-center text-2xl mb-4 font-head">★</div>
-      <h3 class="font-head font-bold text-2xl mb-2" style="color:#fff">Support VORTX</h3>
-      <p class="font-bold text-white/60 text-sm mb-6">Your support keeps the packs, presets & tools free-flowing.</p>
-      <div class="grid grid-cols-3 gap-3 mb-4">
-        <button class="glass rounded-xl py-3 font-bold ring-purple transition active:scale-95" style="color:#fff">$5</button>
-        <button class="glass rounded-xl py-3 font-bold ring-purple transition active:scale-95" style="color:#fff">$15</button>
-        <button class="glass rounded-xl py-3 font-bold ring-purple transition active:scale-95" style="color:#fff">$50</button>
-      </div>
-      <button class="btn-gold w-full py-3 rounded-xl font-bold transition-all duration-200 uppercase tracking-widest text-sm active:scale-95">Donate Now</button>
-    </div>
-  </div>
-
   <script>
   /* =====================================================================
-     1. BACKGROUND EFFECTS
-  ===================================================================== */
-  (function () {
-    const canvas = document.getElementById('bg-canvas');
-    const ctx = canvas.getContext('2d');
-    let w, h, particles = [];
-    const COLORS = ['#9333ea', '#06b6d4'];
-
-    function resize() { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; }
-    resize(); window.addEventListener('resize', resize);
-
-    function initParticles() {
-      const count = Math.min(60, Math.floor(w / 20));
-      particles = [];
-      for (let i = 0; i < count; i++) {
-        particles.push({
-          x: Math.random() * w, y: Math.random() * h,
-          r: Math.random() * 1.5 + 0.5,
-          vx: (Math.random() - 0.5) * 0.2, vy: (Math.random() - 0.5) * 0.2,
-          c: COLORS[Math.floor(Math.random() * COLORS.length)],
-          a: Math.random() * 0.4 + 0.1,
-        });
-      }
-    }
-    initParticles(); window.addEventListener('resize', initParticles);
-
-    function draw() {
-      ctx.clearRect(0, 0, w, h);
-      for (let i = 0; i < particles.length; i++) {
-        const p = particles[i];
-        p.x += p.vx; p.y += p.vy;
-        if (p.x < 0 || p.x > w) p.vx *= -1; if (p.y < 0 || p.y > h) p.vy *= -1;
-        ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = p.c; ctx.globalAlpha = p.a; ctx.fill();
-        for (let j = i + 1; j < particles.length; j++) {
-          const q = particles[j];
-          const dist = Math.hypot(p.x - q.x, p.y - q.y);
-          if (dist < 120) {
-            ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y);
-            ctx.strokeStyle = p.c; ctx.globalAlpha = (1 - dist / 120) * 0.1;
-            ctx.lineWidth = 0.5; ctx.stroke();
-          }
-        }
-      }
-      ctx.globalAlpha = 1; requestAnimationFrame(draw);
-    }
-    draw();
-  })();
-
-  /* =====================================================================
-     2. SCROLL REVEAL
+     1. SCROLL REVEAL
   ===================================================================== */
   const io = new IntersectionObserver((entries) => {
     entries.forEach((e) => {
@@ -438,51 +356,95 @@
   }
 
   /* =====================================================================
-     3. CAROUSEL (9:16 Aspect Ratio with active scale)
+     2. 5 INFINITE PACKS CAROUSEL
   ===================================================================== */
-  const packs = [
-    { t: 'Neon Nights', tag: 'Color', c: '#9333ea' },
-    { t: 'Cyber Shake', tag: 'Camera', c: '#06b6d4' },
-    { t: 'Glitch VFX', tag: 'VFX', c: '#9333ea' },
-    { t: 'Cinematic', tag: 'Presets', c: '#06b6d4' },
-    { t: 'Sparks', tag: 'VFX', c: '#9333ea' }
+  const packs5 = [
+    { t: 'Neon Nights', tag: 'Color' },
+    { t: 'Cyber Shake', tag: 'Camera' },
+    { t: 'Glitch VFX', tag: 'VFX' },
+    { t: 'Cinematic', tag: 'Presets' },
+    { t: 'Sparks', tag: 'VFX' }
   ];
 
   (function buildMarquee() {
     const track = document.getElementById('marquee-track');
-    const html = [...packs, ...packs, ...packs].map(p => `
-      <div class="grad-border glass rounded-2xl w-60 sm:w-64 aspect-[9/16] shrink-0 p-5 flex flex-col justify-between bg-white/5 relative overflow-hidden group transition-transform duration-200 hover:scale-[1.02] active:scale-95 cursor-pointer">
-        <div class="absolute inset-0 bg-black/20 z-0 pointer-events-none"></div>
+    // نكرر الـ 5 كروت 6 مرات عشان السحب ما يوقف أبد (Infinite Loop Hack)
+    const allPacks = [...packs5, ...packs5, ...packs5, ...packs5, ...packs5, ...packs5];
+    
+    const html = allPacks.map(p => `
+      <div class="glass rounded-[1.5rem] w-64 sm:w-72 aspect-[9/16] shrink-0 p-6 flex flex-col justify-between bg-black/40 relative overflow-hidden group transition-transform duration-200 hover:scale-[1.02] active:scale-95 cursor-pointer tilt-card">
+        <div class="absolute inset-0 bg-brand/5 z-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
         <div class="flex items-center justify-between relative z-10 pointer-events-none">
-          <span class="text-[10px] uppercase font-bold tracking-widest px-3 py-1.5 rounded-full glass" style="color:${p.c}">${p.tag}</span>
+          <span class="text-[10px] uppercase font-bold tracking-widest px-4 py-2 rounded-full border border-white/10 bg-black/50 text-brandLight">${p.tag}</span>
         </div>
-        <div class="relative z-10 pointer-events-none">
-          <h3 class="font-head font-bold text-lg text-white group-hover:-translate-y-1 transition-transform">${p.t}</h3>
+        <div class="relative z-10 pointer-events-none text-left">
+          <h3 class="font-head font-bold text-xl text-white group-hover:-translate-y-2 transition-transform duration-300">${p.t}</h3>
         </div>
       </div>`).join('');
+    
     track.innerHTML = html;
   })();
 
+  // السحب بالماوس (Drag to Scroll)
   (function marqueeDrag() {
     const wrap = document.getElementById('marquee');
-    let isDown = false, startX = 0, scrollStart = 0, resumeTimer = null;
-    wrap.style.overflowX = 'auto';
-    const down = (x) => { isDown = true; wrap.classList.add('dragging'); startX = x; scrollStart = wrap.scrollLeft; wrap.classList.add('marquee-paused'); clearTimeout(resumeTimer); };
-    const move = (x) => { if (!isDown) return; wrap.scrollLeft = scrollStart - (x - startX); };
-    const up = () => { if (!isDown) return; isDown = false; wrap.classList.remove('dragging'); resumeTimer = setTimeout(() => wrap.classList.remove('marquee-paused'), 2000); };
-    wrap.addEventListener('mousedown', e => { down(e.pageX); });
+    let isDown = false, startX = 0, scrollStart = 0;
+    
+    const down = (x) => { 
+      isDown = true; 
+      wrap.classList.add('dragging', 'marquee-paused'); 
+      startX = x; 
+      scrollStart = wrap.scrollLeft; 
+    };
+    const move = (x) => { 
+      if (!isDown) return; 
+      wrap.scrollLeft = scrollStart - (x - startX); 
+    };
+    const up = () => { 
+      isDown = false; 
+      wrap.classList.remove('dragging', 'marquee-paused'); 
+    };
+
+    wrap.addEventListener('mousedown', e => down(e.pageX));
     window.addEventListener('mousemove', e => move(e.pageX));
     window.addEventListener('mouseup', up);
+    window.addEventListener('mouseleave', up);
+    
+    // لمس الجوال
     wrap.addEventListener('touchstart', e => down(e.touches[0].pageX), { passive: true });
     wrap.addEventListener('touchmove', e => move(e.touches[0].pageX), { passive: true });
     wrap.addEventListener('touchend', up);
   })();
 
   /* =====================================================================
+     3. 3D TILT EFFECT (تأثير الميلان الاحترافي)
+  ===================================================================== */
+  function initTilt() {
+    const tiltCards = document.querySelectorAll('.tilt-card');
+    tiltCards.forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = ((y - centerY) / centerY) * -5; // قوة الميلان
+        const rotateY = ((x - centerX) / centerX) * 5;
+        
+        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+      });
+      
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+      });
+    });
+  }
+
+  /* =====================================================================
      4. SPA VIEWS
   ===================================================================== */
   const CATEGORY_DATA = {
-    CC:    ['Teal & Orange LUT','Filmic Base','Night Grade','Vibrant Pop'],
+    CC:    ['Teal & Orange','Filmic Base','Night Grade','Vibrant Pop'],
     SHAKE: ['Impact Shake','Bass Drop','Whip Pan','Earthquake'],
     VFX:   ['Spark Burst','Glitch Distortion','Smoke Atmosphere','Lightning'],
     PF:    ['Cinematic Suite','Gaming Montage','Anime Presets','Retro Wave'],
@@ -493,34 +455,25 @@
     document.getElementById(id).classList.remove('view-hidden');
     window.scrollTo({ top: 0, behavior: 'instant' });
     document.getElementById(id).querySelectorAll('.reveal').forEach(el => { el.classList.remove('in'); el.style.transitionDelay = '0ms'; });
-    setTimeout(observeReveals, 50);
+    setTimeout(() => { observeReveals(); initTilt(); }, 50);
   }
 
   function openCategory(key) {
     document.getElementById('cat-title').textContent = key;
-    document.getElementById('cat-grid').innerHTML = CATEGORY_DATA[key].map((item, i) => `
-      <div class="reveal grad-border glass rounded-2xl p-5 flex items-center justify-between gap-3 transition-all duration-200 hover:-translate-y-1 active:scale-95 ${i % 2 === 0 ? 'ring-purple' : 'ring-cyan'} cursor-pointer">
-        <div>
-          <span class="text-[10px] font-bold tracking-widest uppercase" style="color:${i % 2 === 0 ? 'var(--purple)' : 'var(--cyan)'}">${key} Pack</span>
-          <h3 class="font-head font-bold text-lg text-white mt-1">${item}</h3>
-        </div>
-        <button class="btn-gold px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider pointer-events-none">Get</button>
+    document.getElementById('cat-grid').innerHTML = CATEGORY_DATA[key].map((item) => `
+      <div class="reveal tilt-card glass rounded-2xl p-6 flex flex-col justify-between min-h-[140px] text-left transition-all duration-200 cursor-pointer border-l-4 border-brand/50 hover:border-brand">
+        <span class="text-[10px] font-bold tracking-widest uppercase text-brandLight">${key} Pack</span>
+        <h3 class="font-head font-bold text-xl text-white mt-4">${item}</h3>
       </div>`).join('');
     showView('category-view');
   }
 
   function openWebTiers() { showView('web-view'); }
   function backToHome() { showView('main-view'); }
-  function backToHomeFromWeb() { showView('main-view'); }
 
-  /* =====================================================================
-     5. MODALS & INIT
-  ===================================================================== */
-  function openDonate(e){ e && e.preventDefault(); document.getElementById('donate-modal').classList.remove('modal-hidden'); }
-  function closeDonate(){ document.getElementById('donate-modal').classList.add('modal-hidden'); }
-  
   document.getElementById('year').textContent = new Date().getFullYear();
   observeReveals();
+  setTimeout(initTilt, 100);
   </script>
 </body>
 </html>
