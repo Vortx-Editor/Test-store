@@ -117,7 +117,6 @@
 
     /* ---------- Infinite Carousels ---------- */
     .marquee-track { display: flex; gap: 1.5rem; width: max-content; animation: scroll-rtl 35s linear infinite; }
-    .top-bar-track { display: flex; width: max-content; animation: scroll-rtl 25s linear infinite; }
     @keyframes scroll-rtl { from { transform: translateX(0); } to { transform: translateX(-50%); } }
     
     .marquee-wrap { overflow-x: auto; scrollbar-width: none; }
@@ -146,30 +145,6 @@
 
   <!-- Toast Notifications Container -->
   <div id="toast-box" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[100] flex flex-col gap-3 pointer-events-none"></div>
-
-  <!-- =================== TOP ANNOUNCEMENT BAR =================== -->
-  <div class="bg-brandLight text-ink font-bold text-[10px] sm:text-xs uppercase tracking-widest py-1.5 overflow-hidden flex whitespace-nowrap relative z-[60]">
-    <div class="top-bar-track">
-      <!-- Part 1 -->
-      <div class="px-8 flex gap-8 items-center">
-        <span>🔥 NEW VFX BUNDLE DROPPED</span>
-        <span>•</span>
-        <span>USE CODE <button onclick="copyPromo('VORTX20')" class="underline decoration-ink underline-offset-2 hover:opacity-70 transition-opacity">VORTX20</button> FOR 20% OFF</span>
-        <span>•</span>
-        <span>✨ CUSTOM WEB SOLUTIONS OPEN FOR BOOKING</span>
-        <span>•</span>
-      </div>
-      <!-- Part 2 (Duplicate for smooth infinite loop) -->
-      <div class="px-8 flex gap-8 items-center">
-        <span>🔥 NEW VFX BUNDLE DROPPED</span>
-        <span>•</span>
-        <span>USE CODE <button onclick="copyPromo('VORTX20')" class="underline decoration-ink underline-offset-2 hover:opacity-70 transition-opacity">VORTX20</button> FOR 20% OFF</span>
-        <span>•</span>
-        <span>✨ CUSTOM WEB SOLUTIONS OPEN FOR BOOKING</span>
-        <span>•</span>
-      </div>
-    </div>
-  </div>
 
   <!-- =================== NAVBAR =================== -->
   <header class="sticky top-0 z-50">
@@ -406,7 +381,7 @@
   </div>
 
   <script>
-  /* --- 1. Top Bar Promo Copy & Toasts --- */
+  /* --- 1. Toasts --- */
   function showToast(msg) {
     const box = document.getElementById('toast-box');
     const toast = document.createElement('div');
@@ -414,18 +389,11 @@
     toast.innerHTML = `<span class="text-brandLight">✦</span> ${msg}`;
     box.appendChild(toast);
     
-    // Animate In
     setTimeout(() => { toast.classList.remove('translate-y-10', 'opacity-0'); }, 10);
-    // Animate Out & Remove
     setTimeout(() => { 
       toast.classList.add('translate-y-10', 'opacity-0'); 
       setTimeout(() => toast.remove(), 300); 
     }, 2500);
-  }
-
-  function copyPromo(code) {
-    navigator.clipboard.writeText(code);
-    showToast(`CODE '${code}' COPIED`);
   }
 
   /* --- 2. Quick Preview Modal --- */
@@ -546,10 +514,7 @@
     const up = (e) => { 
       isDown = false; 
       wrap.classList.remove('dragging', 'marquee-paused'); 
-      if(isDragging) {
-         // Prevent click if we were dragging
-         e.stopPropagation();
-      }
+      if(isDragging) { e.stopPropagation(); }
     };
 
     wrap.addEventListener('mousedown', down);
@@ -561,7 +526,6 @@
     wrap.addEventListener('touchmove', move, { passive: true });
     wrap.addEventListener('touchend', up);
     
-    // Disable click on children if dragging
     wrap.addEventListener('click', (e) => {
       if(isDragging) { e.preventDefault(); e.stopPropagation(); }
     }, true);
