@@ -13,7 +13,7 @@
   <!-- Google Fonts: Syne (headings) + Inter (body) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
   <script>
     tailwind.config = {
@@ -60,24 +60,23 @@
       z-index: 0;
       pointer-events: none;
     }
-    /* soft radial glows behind content */
     .glow-field {
       position: fixed;
       inset: 0;
       z-index: 0;
       pointer-events: none;
       background:
-        radial-gradient(600px circle at 15% 20%, rgba(147,51,234,0.18), transparent 60%),
-        radial-gradient(700px circle at 85% 70%, rgba(6,182,212,0.14), transparent 60%),
-        radial-gradient(500px circle at 50% 100%, rgba(147,51,234,0.10), transparent 60%);
+        radial-gradient(600px circle at 15% 20%, rgba(147,51,234,0.15), transparent 60%),
+        radial-gradient(700px circle at 85% 70%, rgba(6,182,212,0.12), transparent 60%),
+        radial-gradient(500px circle at 50% 100%, rgba(147,51,234,0.08), transparent 60%);
     }
 
     /* ---------- Glassmorphism ---------- */
     .glass {
-      background: rgba(255, 255, 255, 0.04);
+      background: rgba(255, 255, 255, 0.03);
       backdrop-filter: blur(16px) saturate(140%);
       -webkit-backdrop-filter: blur(16px) saturate(140%);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.06);
     }
     .glass-strong {
       background: rgba(10, 10, 14, 0.72);
@@ -88,15 +87,15 @@
 
     /* ---------- Glow effects ---------- */
     .text-glow-purple {
-      text-shadow: 0 0 18px rgba(147,51,234,0.65), 0 0 42px rgba(147,51,234,0.35);
+      text-shadow: 0 0 15px rgba(147,51,234,0.5), 0 0 35px rgba(147,51,234,0.3);
     }
     .btn-gold {
       background: linear-gradient(180deg, #ffe14d, #ffd700);
       color: #1a1500;
-      box-shadow: 0 0 22px rgba(255,215,0,0.55), 0 0 42px rgba(255,215,0,0.25);
+      box-shadow: 0 0 20px rgba(255,215,0,0.4), 0 0 40px rgba(255,215,0,0.2);
     }
     .btn-gold:hover {
-      box-shadow: 0 0 30px rgba(255,215,0,0.8), 0 0 60px rgba(255,215,0,0.4);
+      box-shadow: 0 0 30px rgba(255,215,0,0.6), 0 0 60px rgba(255,215,0,0.3);
       transform: translateY(-2px);
     }
     .ring-purple:hover { box-shadow: 0 0 0 1px rgba(147,51,234,0.6), 0 0 26px rgba(147,51,234,0.4); }
@@ -122,11 +121,11 @@
     /* ---------- Scroll reveal ---------- */
     .reveal {
       opacity: 0;
-      transform: translateY(38px);
-      transition: opacity 0.8s cubic-bezier(.16,1,.3,1), transform 0.8s cubic-bezier(.16,1,.3,1);
+      transform: translateY(40px) scale(0.98);
+      transition: opacity 1s cubic-bezier(0.2, 0.8, 0.2, 1), transform 1s cubic-bezier(0.2, 0.8, 0.2, 1);
       will-change: opacity, transform;
     }
-    .reveal.in { opacity: 1; transform: translateY(0); }
+    .reveal.in { opacity: 1; transform: translateY(0) scale(1); }
 
     /* ---------- Carousel ---------- */
     .marquee-track {
@@ -135,8 +134,6 @@
       width: max-content;
       animation: scroll-rtl 40s linear infinite;
     }
-    /* RIGHT -> LEFT is default flow; we start shifted -50% and move to 0
-       to create a continuous right-to-left visual with duplicated content */
     @keyframes scroll-rtl {
       from { transform: translateX(-50%); }
       to   { transform: translateX(0); }
@@ -145,40 +142,27 @@
     .marquee-wrap { cursor: grab; }
     .marquee-wrap.dragging { cursor: grabbing; }
 
-    /* hide scrollbar for drag container */
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-    /* ---------- Social icon buttons ---------- */
     .social-btn {
-      transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+      transition: transform .3s ease, box-shadow .3s ease, background .3s ease;
     }
-    .social-btn:hover { transform: translateY(-4px) scale(1.06); }
+    .social-btn:hover { transform: translateY(-5px) scale(1.05); }
 
-    /* modal */
+    /* modal & views */
     .modal-hidden { opacity: 0; pointer-events: none; }
     .modal-hidden .modal-card { transform: translateY(24px) scale(.96); }
-    .modal-card { transition: transform .35s cubic-bezier(.16,1,.3,1); }
+    .modal-card { transition: transform .4s cubic-bezier(.16,1,.3,1); }
 
-    /* view switching */
-    .view { transition: opacity .45s ease; }
-    .view-hidden { display: none; }
+    .view { transition: opacity .4s ease, transform .4s ease; opacity: 1; transform: translateY(0); }
+    .view-hidden { display: none; opacity: 0; transform: translateY(20px); }
 
     ::selection { background: rgba(147,51,234,0.5); color: #fff; }
-
-    /* animated underline for nav */
-    .nav-link { position: relative; }
-    .nav-link::after {
-      content:""; position:absolute; left:0; bottom:-4px; height:2px; width:0;
-      background: linear-gradient(90deg, var(--purple), var(--cyan));
-      transition: width .3s ease;
-    }
-    .nav-link:hover::after { width:100%; }
   </style>
 </head>
 
 <body class="relative font-body antialiased">
-  <!-- Animated particle / lightning canvas -->
   <canvas id="bg-canvas"></canvas>
   <div class="glow-field"></div>
 
@@ -186,20 +170,19 @@
   <header class="sticky top-0 z-50">
     <nav class="glass-strong">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-        <a href="#top" class="flex items-center gap-2 group">
-          <span class="w-8 h-8 rounded-lg grad-border flex items-center justify-center font-head font-extrabold text-sm text-cyan-neon" style="color:var(--cyan)">V</span>
-          <span class="font-head font-extrabold tracking-widest text-lg text-glow-purple" style="color:#fff">VORTX</span>
+        <a href="#top" class="flex items-center gap-3 group">
+          <span class="w-8 h-8 rounded-lg grad-border flex items-center justify-center font-head font-bold text-sm text-cyan-neon" style="color:var(--cyan)">V</span>
+          <span class="font-head font-bold tracking-wide text-lg text-glow-purple" style="color:#fff">VORTX</span>
         </a>
 
         <ul class="hidden md:flex items-center gap-8 text-sm text-white/70">
-          <li><a href="#bundles" class="nav-link hover:text-white transition">Bundles</a></li>
-          <li><a href="#packs" class="nav-link hover:text-white transition">Packs</a></li>
-          <li><a href="#categories" class="nav-link hover:text-white transition">Categories</a></li>
-          <li><a href="#reviews" class="nav-link hover:text-white transition">Reviews</a></li>
+          <li><a href="#bundles" class="hover:text-white transition">Bundles</a></li>
+          <li><a href="#packs" class="hover:text-white transition">Packs</a></li>
+          <li><a href="#categories" class="hover:text-white transition">Categories</a></li>
+          <li><a href="#reviews" class="hover:text-white transition">Reviews</a></li>
         </ul>
 
-        <a href="#" onclick="openDonate(event)" class="btn-gold font-semibold text-sm px-4 py-2 rounded-full transition-all duration-300 flex items-center gap-2">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        <a href="#" onclick="openDonate(event)" class="btn-gold font-medium text-sm px-5 py-2 rounded-full transition-all duration-300 flex items-center gap-2">
           Support
         </a>
       </div>
@@ -211,42 +194,38 @@
     <div id="top"></div>
 
     <!-- HERO -->
-    <section class="max-w-5xl mx-auto px-4 sm:px-6 pt-16 sm:pt-24 pb-10 text-center">
+    <section class="max-w-4xl mx-auto px-4 sm:px-6 pt-20 sm:pt-28 pb-12 text-center">
       <div class="reveal inline-flex items-center gap-2 glass px-4 py-1.5 rounded-full text-xs tracking-widest uppercase text-cyan-neon mb-8" style="color:var(--cyan)">
         <span class="w-2 h-2 rounded-full" style="background:var(--cyan); box-shadow:0 0 10px var(--cyan)"></span>
         Premium Digital Studio
       </div>
 
-      <!-- Gold donation button ABOVE social links -->
-      <div class="reveal mb-6">
-        <button onclick="openDonate(event)" class="btn-gold font-head font-bold tracking-wide px-7 py-3 rounded-full transition-all duration-300 text-sm sm:text-base">
+      <!-- Gold donation button -->
+      <div class="reveal mb-8">
+        <button onclick="openDonate(event)" class="btn-gold font-head font-bold tracking-wide px-8 py-3 rounded-full transition-all duration-300 text-sm">
           ★ Support / Donate
         </button>
       </div>
 
-      <h1 class="reveal font-head font-extrabold tracking-tight text-5xl sm:text-6xl md:text-7xl text-glow-purple mb-4" style="color:#fff">
+      <h1 class="reveal font-head font-bold tracking-wide text-4xl sm:text-5xl md:text-6xl text-glow-purple mb-5" style="color:#fff; line-height: 1.2;">
         VORTX
       </h1>
-      <p class="reveal text-white/60 max-w-xl mx-auto text-base sm:text-lg leading-relaxed mb-8">
-        Next-gen digital assets, cinematic presets, VFX packs & custom web solutions — engineered for editors who refuse to blend in.
+      <p class="reveal text-white/70 max-w-lg mx-auto text-base sm:text-lg leading-relaxed mb-10">
+        Next-gen digital assets, cinematic presets, VFX packs & custom web solutions — engineered for creators.
       </p>
 
       <!-- SOCIAL BAR -->
-      <div class="reveal flex items-center justify-center gap-4 flex-wrap">
-        <!-- YouTube -->
-        <a href="#" aria-label="YouTube" class="social-btn glass w-12 h-12 rounded-xl flex items-center justify-center hover:bg-white/10" style="box-shadow:0 0 0 0 transparent" onmouseover="this.style.boxShadow='0 0 22px rgba(239,68,68,.5)'" onmouseout="this.style.boxShadow='none'">
+      <div class="reveal flex items-center justify-center gap-5 flex-wrap">
+        <a href="#" class="social-btn glass w-12 h-12 rounded-xl flex items-center justify-center hover:bg-white/10" onmouseover="this.style.boxShadow='0 0 20px rgba(239,68,68,.4)'" onmouseout="this.style.boxShadow='none'">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="#ff4d4d"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.5v-7l6.3 3.5-6.3 3.5z"/></svg>
         </a>
-        <!-- Telegram -->
-        <a href="#" aria-label="Telegram" class="social-btn glass w-12 h-12 rounded-xl flex items-center justify-center hover:bg-white/10" onmouseover="this.style.boxShadow='0 0 22px rgba(6,182,212,.5)'" onmouseout="this.style.boxShadow='none'">
+        <a href="#" class="social-btn glass w-12 h-12 rounded-xl flex items-center justify-center hover:bg-white/10" onmouseover="this.style.boxShadow='0 0 20px rgba(6,182,212,.4)'" onmouseout="this.style.boxShadow='none'">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="#06b6d4"><path d="M21.9 4.3 18.6 20c-.2 1.1-.9 1.4-1.8.9l-4.9-3.6-2.4 2.3c-.3.3-.5.5-1 .5l.3-4.9L18 6.4c.4-.3-.1-.5-.6-.2L6.8 13.1l-4.7-1.5c-1-.3-1-1 .2-1.5l18.4-7.1c.9-.3 1.6.2 1.2 1.3z"/></svg>
         </a>
-        <!-- Instagram -->
-        <a href="#" aria-label="Instagram" class="social-btn glass w-12 h-12 rounded-xl flex items-center justify-center hover:bg-white/10" onmouseover="this.style.boxShadow='0 0 22px rgba(147,51,234,.5)'" onmouseout="this.style.boxShadow='none'">
+        <a href="#" class="social-btn glass w-12 h-12 rounded-xl flex items-center justify-center hover:bg-white/10" onmouseover="this.style.boxShadow='0 0 20px rgba(147,51,234,.4)'" onmouseout="this.style.boxShadow='none'">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c026d3" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.5" cy="6.5" r="1.2" fill="#c026d3" stroke="none"/></svg>
         </a>
-        <!-- TikTok -->
-        <a href="#" aria-label="TikTok" class="social-btn glass w-12 h-12 rounded-xl flex items-center justify-center hover:bg-white/10" onmouseover="this.style.boxShadow='0 0 22px rgba(255,255,255,.35)'" onmouseout="this.style.boxShadow='none'">
+        <a href="#" class="social-btn glass w-12 h-12 rounded-xl flex items-center justify-center hover:bg-white/10" onmouseover="this.style.boxShadow='0 0 20px rgba(255,255,255,.3)'" onmouseout="this.style.boxShadow='none'">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M16.5 3c.3 2.2 1.6 3.9 3.8 4.2v2.7c-1.3.1-2.5-.2-3.8-.9v6.4c0 3.4-2.6 5.9-5.9 5.6-3-.3-5.2-2.9-4.9-5.9.2-2.6 2.3-4.7 4.9-4.8.4 0 .8 0 1.2.1v2.8c-.4-.1-.8-.2-1.2-.2-1.4 0-2.4 1.1-2.3 2.5 0 1.3 1.1 2.3 2.4 2.3 1.3 0 2.3-1 2.3-2.4V3h3.5z"/></svg>
         </a>
       </div>
@@ -255,28 +234,27 @@
     <!-- WEB PAGE BUNDLES BANNER -->
     <section id="bundles" class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
       <div class="reveal grad-border rounded-3xl overflow-hidden glass p-8 sm:p-12 relative">
-        <div class="absolute -right-10 -top-10 w-52 h-52 rounded-full" style="background:radial-gradient(circle,rgba(6,182,212,.35),transparent 70%)"></div>
-        <div class="absolute -left-10 -bottom-10 w-52 h-52 rounded-full" style="background:radial-gradient(circle,rgba(147,51,234,.35),transparent 70%)"></div>
+        <div class="absolute -right-10 -top-10 w-52 h-52 rounded-full" style="background:radial-gradient(circle,rgba(6,182,212,.3),transparent 70%)"></div>
+        <div class="absolute -left-10 -bottom-10 w-52 h-52 rounded-full" style="background:radial-gradient(circle,rgba(147,51,234,.3),transparent 70%)"></div>
         <div class="relative flex flex-col md:flex-row items-center justify-between gap-8">
           <div class="text-center md:text-left max-w-xl">
-            <span class="text-xs tracking-[0.3em] uppercase" style="color:var(--cyan)">Custom Web Solutions</span>
-            <h2 class="font-head font-extrabold text-3xl sm:text-4xl mt-3 mb-3 text-glow-purple" style="color:#fff">Web Page Bundles</h2>
-            <p class="text-white/60 leading-relaxed">
-              Landing pages, portfolios & store fronts built to your brand — glassmorphic, animated, and conversion-ready. Delivered production-clean.
+            <span class="text-xs tracking-widest uppercase" style="color:var(--cyan)">Custom Web Solutions</span>
+            <h2 class="font-head font-bold text-3xl sm:text-4xl mt-2 mb-3 text-glow-purple" style="color:#fff">Web Page Bundles</h2>
+            <p class="text-white/60 leading-relaxed text-sm sm:text-base">
+              Landing pages, portfolios & store fronts built to your brand — glassmorphic, animated, and conversion-ready.
             </p>
           </div>
-          <div class="flex flex-col gap-3 w-full md:w-auto">
-            <button onclick="openDonate(event)" class="btn-gold font-semibold px-8 py-3 rounded-full whitespace-nowrap transition-all duration-300">Get a Web Bundle</button>
-            <span class="text-center text-xs text-white/40">Starting at <span style="color:var(--gold)">$149</span></span>
+          <div class="w-full md:w-auto">
+            <button onclick="openWebTiers()" class="btn-gold font-medium px-8 py-3 rounded-full whitespace-nowrap transition-all duration-300 w-full md:w-auto">View Tiers</button>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- FEATURED PACKS CAROUSEL (Right -> Left, draggable) -->
-    <section id="packs" class="py-8">
+    <!-- FEATURED PACKS CAROUSEL -->
+    <section id="packs" class="py-10">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 mb-6 reveal">
-        <h2 class="font-head font-extrabold text-2xl sm:text-3xl" style="color:#fff">Featured Packs</h2>
+        <h2 class="font-head font-bold text-2xl sm:text-3xl" style="color:#fff">Featured Packs</h2>
         <p class="text-white/50 text-sm mt-1">Drag to explore — auto-scrolls right to left.</p>
       </div>
       <div id="marquee" class="marquee-wrap no-scrollbar overflow-hidden select-none reveal">
@@ -284,28 +262,27 @@
       </div>
     </section>
 
-    <!-- INTERACTIVE CATEGORIES -->
+    <!-- INTERACTIVE CATEGORIES (Vertical TikTok-style Cards) -->
     <section id="categories" class="max-w-7xl mx-auto px-4 sm:px-6 py-16">
       <div class="text-center mb-10 reveal">
-        <h2 class="font-head font-extrabold text-3xl sm:text-4xl" style="color:#fff">Categories</h2>
-        <p class="text-white/50 mt-2">Tap a module to open its collection.</p>
+        <h2 class="font-head font-bold text-3xl sm:text-4xl" style="color:#fff">Categories</h2>
+        <p class="text-white/50 mt-2 text-sm">Tap a module to open its collection.</p>
       </div>
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
-        <!-- squares built by JS for cleanliness, but static here -->
-        <button onclick="openCategory('CC')" class="reveal ring-purple grad-border glass rounded-2xl aspect-square flex flex-col items-center justify-center gap-3 transition-all duration-300 hover:-translate-y-1">
-          <span class="font-head font-extrabold text-3xl" style="color:var(--purple)">CC</span>
-          <span class="text-xs tracking-widest uppercase text-white/50">Color Grading</span>
+        <button onclick="openCategory('CC')" class="reveal ring-purple grad-border glass rounded-2xl aspect-[3/4] flex flex-col items-center justify-center gap-4 transition-all duration-300 hover:-translate-y-2">
+          <span class="font-head font-bold text-4xl" style="color:var(--purple)">CC</span>
+          <span class="text-xs tracking-widest uppercase text-white/50">Color</span>
         </button>
-        <button onclick="openCategory('SHAKE')" class="reveal ring-cyan grad-border glass rounded-2xl aspect-square flex flex-col items-center justify-center gap-3 transition-all duration-300 hover:-translate-y-1">
-          <span class="font-head font-extrabold text-3xl" style="color:var(--cyan)">SHAKE</span>
-          <span class="text-xs tracking-widest uppercase text-white/50">Camera FX</span>
+        <button onclick="openCategory('SHAKE')" class="reveal ring-cyan grad-border glass rounded-2xl aspect-[3/4] flex flex-col items-center justify-center gap-4 transition-all duration-300 hover:-translate-y-2">
+          <span class="font-head font-bold text-4xl" style="color:var(--cyan)">SHAKE</span>
+          <span class="text-xs tracking-widest uppercase text-white/50">Camera</span>
         </button>
-        <button onclick="openCategory('VFX')" class="reveal ring-purple grad-border glass rounded-2xl aspect-square flex flex-col items-center justify-center gap-3 transition-all duration-300 hover:-translate-y-1">
-          <span class="font-head font-extrabold text-3xl" style="color:var(--purple)">VFX</span>
-          <span class="text-xs tracking-widest uppercase text-white/50">Visual FX</span>
+        <button onclick="openCategory('VFX')" class="reveal ring-purple grad-border glass rounded-2xl aspect-[3/4] flex flex-col items-center justify-center gap-4 transition-all duration-300 hover:-translate-y-2">
+          <span class="font-head font-bold text-4xl" style="color:var(--purple)">VFX</span>
+          <span class="text-xs tracking-widest uppercase text-white/50">Effects</span>
         </button>
-        <button onclick="openCategory('PF')" class="reveal ring-cyan grad-border glass rounded-2xl aspect-square flex flex-col items-center justify-center gap-3 transition-all duration-300 hover:-translate-y-1">
-          <span class="font-head font-extrabold text-3xl" style="color:var(--cyan)">PF</span>
+        <button onclick="openCategory('PF')" class="reveal ring-cyan grad-border glass rounded-2xl aspect-[3/4] flex flex-col items-center justify-center gap-4 transition-all duration-300 hover:-translate-y-2">
+          <span class="font-head font-bold text-4xl" style="color:var(--cyan)">PF</span>
           <span class="text-xs tracking-widest uppercase text-white/50">Presets</span>
         </button>
       </div>
@@ -315,37 +292,99 @@
     <section id="reviews" class="max-w-7xl mx-auto px-4 sm:px-6 py-16">
       <div class="flex items-center justify-between flex-wrap gap-4 mb-8 reveal">
         <div>
-          <h2 class="font-head font-extrabold text-3xl sm:text-4xl" style="color:#fff">Client Reviews</h2>
-          <p class="text-white/50 mt-2">What creators say about VORTX.</p>
+          <h2 class="font-head font-bold text-3xl sm:text-4xl" style="color:#fff">Client Reviews</h2>
         </div>
-        <button onclick="openReview(event)" class="ring-purple glass px-6 py-3 rounded-full font-semibold transition-all duration-300 hover:bg-white/10" style="color:#fff">+ Add Review</button>
+        <button onclick="openReview(event)" class="ring-purple glass px-6 py-2.5 rounded-full font-medium transition-all duration-300 hover:bg-white/10 text-sm" style="color:#fff">+ Add Review</button>
       </div>
       <div id="reviews-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5"><!-- filled by JS --></div>
     </section>
 
     <footer class="border-t border-white/5 mt-10">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 py-10 text-center text-white/40 text-sm">
-        <p class="font-head tracking-widest text-white/60 mb-2">VORTX</p>
+        <p class="font-head font-bold tracking-widest text-white/60 mb-2">VORTX</p>
         <p>© <span id="year"></span> VORTX Studio. Crafted for the bold.</p>
       </div>
     </footer>
   </main>
+
+  <!-- =================== WEB TIERS VIEW (SPA) =================== -->
+  <section id="web-view" class="view view-hidden relative z-10 min-h-screen">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
+      <div class="flex items-center justify-between flex-wrap gap-4 mb-10">
+        <div>
+          <span class="text-xs tracking-widest uppercase" style="color:var(--cyan)">Web Solutions</span>
+          <h2 class="font-head font-bold text-3xl sm:text-4xl text-glow-purple mt-2" style="color:#fff">Development Tiers</h2>
+        </div>
+        <button onclick="backToHomeFromWeb()" class="ring-cyan glass px-6 py-2.5 rounded-full font-medium flex items-center gap-2 transition-all duration-300 hover:bg-white/10 text-sm" style="color:#fff">
+          Back
+        </button>
+      </div>
+      
+      <div class="grid lg:grid-cols-3 gap-6">
+        <!-- Tier 1: Starter -->
+        <div class="reveal grad-border glass rounded-2xl p-6 flex flex-col h-full transition-all duration-300 hover:-translate-y-2 ring-purple">
+          <div class="aspect-video bg-white/5 rounded-xl mb-6 flex items-center justify-center text-white/20 text-sm border border-white/5">
+            [Image Placeholder 1]
+          </div>
+          <h3 class="font-head font-bold text-2xl mb-2" style="color:#fff">Starter Identity</h3>
+          <p class="text-white/40 text-sm mb-6">Perfect for simple portfolios and landing pages.</p>
+          <ul class="text-sm text-white/70 space-y-3 mb-8 flex-1">
+            <li class="flex items-start gap-2"><span>•</span> Clean & Modern UI</li>
+            <li class="flex items-start gap-2"><span>•</span> Fully Responsive (Mobile-Ready)</li>
+            <li class="flex items-start gap-2"><span>•</span> High-Speed Performance</li>
+            <li class="flex items-start gap-2"><span>•</span> Contact & Social Links</li>
+          </ul>
+          <button class="btn-gold w-full py-2.5 rounded-xl font-medium">Select Plan</button>
+        </div>
+
+        <!-- Tier 2: Pro -->
+        <div class="reveal grad-border glass-strong rounded-2xl p-6 flex flex-col h-full transition-all duration-300 hover:-translate-y-2 ring-cyan relative transform lg:-translate-y-4">
+          <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-cyan-500 text-black text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider" style="background:var(--cyan)">Most Popular</div>
+          <div class="aspect-video bg-white/5 rounded-xl mb-6 flex items-center justify-center text-white/20 text-sm border border-white/5 mt-2">
+            [Image Placeholder 2]
+          </div>
+          <h3 class="font-head font-bold text-2xl mb-2" style="color:#fff">Pro Dynamic</h3>
+          <p class="text-white/40 text-sm mb-6">For creators needing advanced animations & CMS.</p>
+          <ul class="text-sm text-white/70 space-y-3 mb-8 flex-1">
+            <li class="flex items-start gap-2"><span>•</span> Glassmorphism UI & Glow Effects</li>
+            <li class="flex items-start gap-2"><span>•</span> Scroll Animations (Fade, Slide)</li>
+            <li class="flex items-start gap-2"><span>•</span> Content Management Ready</li>
+            <li class="flex items-start gap-2"><span>•</span> Basic SEO Optimization</li>
+          </ul>
+          <button class="btn-gold w-full py-2.5 rounded-xl font-medium">Select Plan</button>
+        </div>
+
+        <!-- Tier 3: Ultimate -->
+        <div class="reveal grad-border glass rounded-2xl p-6 flex flex-col h-full transition-all duration-300 hover:-translate-y-2 ring-purple">
+          <div class="aspect-video bg-white/5 rounded-xl mb-6 flex items-center justify-center text-white/20 text-sm border border-white/5">
+            [Image Placeholder 3]
+          </div>
+          <h3 class="font-head font-bold text-2xl mb-2" style="color:#fff">Ultimate Cyber</h3>
+          <p class="text-white/40 text-sm mb-6">The absolute best. 3D objects, crazy interactions.</p>
+          <ul class="text-sm text-white/70 space-y-3 mb-8 flex-1">
+            <li class="flex items-start gap-2"><span>•</span> 3D Models & Assets Integration</li>
+            <li class="flex items-start gap-2"><span>•</span> Mind-blowing Immersive Interactions</li>
+            <li class="flex items-start gap-2"><span>•</span> Amazing Colors & Coordination</li>
+            <li class="flex items-start gap-2"><span>•</span> Priority Support & Custom Dashboard</li>
+          </ul>
+          <button class="btn-gold w-full py-2.5 rounded-xl font-medium">Select Plan</button>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- =================== CATEGORY VIEW (SPA) =================== -->
   <section id="category-view" class="view view-hidden relative z-10 min-h-screen">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
       <div class="flex items-center justify-between flex-wrap gap-4 mb-10">
         <div>
-          <span class="text-xs tracking-[0.3em] uppercase" style="color:var(--cyan)">Collection</span>
-          <h2 id="cat-title" class="font-head font-extrabold text-4xl sm:text-5xl text-glow-purple mt-2" style="color:#fff">CC</h2>
-          <p id="cat-sub" class="text-white/50 mt-2">Explore the collection.</p>
+          <span class="text-xs tracking-widest uppercase" style="color:var(--cyan)">Collection</span>
+          <h2 id="cat-title" class="font-head font-bold text-3xl sm:text-4xl text-glow-purple mt-2" style="color:#fff">CC</h2>
         </div>
-        <button onclick="backToHome()" class="ring-cyan glass px-6 py-3 rounded-full font-semibold flex items-center gap-2 transition-all duration-300 hover:bg-white/10" style="color:#fff">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-          Back to Home
+        <button onclick="backToHome()" class="ring-cyan glass px-6 py-2.5 rounded-full font-medium flex items-center gap-2 transition-all duration-300 hover:bg-white/10 text-sm" style="color:#fff">
+          Back
         </button>
       </div>
-      <!-- Wide rectangular cards: 2 per row -->
       <div id="cat-grid" class="grid sm:grid-cols-2 gap-5"><!-- filled by JS --></div>
     </div>
   </section>
@@ -356,42 +395,40 @@
     <div class="modal-card glass-strong grad-border rounded-2xl w-full max-w-md p-8 relative text-center">
       <button onclick="closeDonate()" class="absolute top-4 right-4 text-white/50 hover:text-white text-xl">✕</button>
       <div class="w-14 h-14 mx-auto rounded-full btn-gold flex items-center justify-center text-2xl mb-4">★</div>
-      <h3 class="font-head font-extrabold text-2xl mb-2" style="color:#fff">Support VORTX</h3>
-      <p class="text-white/60 mb-6">Your support keeps the packs, presets & tools free-flowing. Pick an amount:</p>
+      <h3 class="font-head font-bold text-2xl mb-2" style="color:#fff">Support VORTX</h3>
+      <p class="text-white/60 text-sm mb-6">Your support keeps the packs, presets & tools free-flowing.</p>
       <div class="grid grid-cols-3 gap-3 mb-4">
-        <button class="glass rounded-xl py-3 font-semibold ring-purple transition" style="color:#fff">$5</button>
-        <button class="glass rounded-xl py-3 font-semibold ring-purple transition" style="color:#fff">$15</button>
-        <button class="glass rounded-xl py-3 font-semibold ring-purple transition" style="color:#fff">$50</button>
+        <button class="glass rounded-xl py-3 font-medium ring-purple transition" style="color:#fff">$5</button>
+        <button class="glass rounded-xl py-3 font-medium ring-purple transition" style="color:#fff">$15</button>
+        <button class="glass rounded-xl py-3 font-medium ring-purple transition" style="color:#fff">$50</button>
       </div>
-      <button class="btn-gold w-full py-3 rounded-xl font-bold transition-all duration-300">Donate Now</button>
+      <button class="btn-gold w-full py-3 rounded-xl font-medium transition-all duration-300">Donate Now</button>
     </div>
   </div>
 
   <!-- =================== REVIEW MODAL =================== -->
   <div id="review-modal" class="modal-hidden fixed inset-0 z-[60] flex items-center justify-center p-4 transition-opacity duration-300">
     <div class="absolute inset-0 bg-black/70" onclick="closeReview()"></div>
-    <form id="review-form" class="modal-card glass-strong grad-border rounded-2xl w-full max-w-md p-8 relative">
+    <form id="review-form" class="modal-card glass-strong grad-border rounded-2xl w-full max-w-md p-6 sm:p-8 relative">
       <button type="button" onclick="closeReview()" class="absolute top-4 right-4 text-white/50 hover:text-white text-xl">✕</button>
-      <h3 class="font-head font-extrabold text-2xl mb-6" style="color:#fff">Add Your Review</h3>
+      <h3 class="font-head font-bold text-2xl mb-6" style="color:#fff">Add Your Review</h3>
 
       <label class="block text-sm text-white/60 mb-1">Name</label>
       <input id="rv-name" required type="text" placeholder="Your name"
-        class="w-full glass rounded-xl px-4 py-3 mb-4 outline-none focus:ring-2 focus:ring-purple-neon text-white placeholder-white/30" style="--tw-ring-color:var(--purple)" />
+        class="w-full glass rounded-xl px-4 py-3 mb-4 outline-none focus:ring-1 text-white placeholder-white/30 text-sm" style="--tw-ring-color:var(--purple)" />
 
       <label class="block text-sm text-white/60 mb-1">Rating</label>
-      <select id="rv-rating" class="w-full glass rounded-xl px-4 py-3 mb-4 outline-none text-white bg-transparent">
+      <select id="rv-rating" class="w-full glass rounded-xl px-4 py-3 mb-4 outline-none text-white bg-transparent text-sm">
         <option class="bg-ink" value="5">★★★★★ (5)</option>
         <option class="bg-ink" value="4">★★★★ (4)</option>
         <option class="bg-ink" value="3">★★★ (3)</option>
-        <option class="bg-ink" value="2">★★ (2)</option>
-        <option class="bg-ink" value="1">★ (1)</option>
       </select>
 
       <label class="block text-sm text-white/60 mb-1">Review</label>
       <textarea id="rv-text" required rows="3" placeholder="Share your experience..."
-        class="w-full glass rounded-xl px-4 py-3 mb-6 outline-none focus:ring-2 text-white placeholder-white/30 resize-none" style="--tw-ring-color:var(--purple)"></textarea>
+        class="w-full glass rounded-xl px-4 py-3 mb-6 outline-none focus:ring-1 text-white placeholder-white/30 resize-none text-sm" style="--tw-ring-color:var(--purple)"></textarea>
 
-      <button type="submit" class="btn-gold w-full py-3 rounded-xl font-bold transition-all duration-300">Submit Review</button>
+      <button type="submit" class="btn-gold w-full py-3 rounded-xl font-medium transition-all duration-300">Submit Review</button>
     </form>
   </div>
 
@@ -413,15 +450,13 @@
     window.addEventListener('resize', resize);
 
     function initParticles() {
-      const count = Math.min(90, Math.floor(w / 16));
+      const count = Math.min(80, Math.floor(w / 18));
       particles = [];
       for (let i = 0; i < count; i++) {
         particles.push({
-          x: Math.random() * w,
-          y: Math.random() * h,
-          r: Math.random() * 1.8 + 0.5,
-          vx: (Math.random() - 0.5) * 0.35,
-          vy: (Math.random() - 0.5) * 0.35,
+          x: Math.random() * w, y: Math.random() * h,
+          r: Math.random() * 1.5 + 0.5,
+          vx: (Math.random() - 0.5) * 0.3, vy: (Math.random() - 0.5) * 0.3,
           c: COLORS[Math.floor(Math.random() * COLORS.length)],
           a: Math.random() * 0.5 + 0.2,
         });
@@ -430,309 +465,187 @@
     initParticles();
     window.addEventListener('resize', initParticles);
 
-    // occasional lightning spark
     function spawnSpark() {
-      const x = Math.random() * w;
-      const y = Math.random() * h;
+      const x = Math.random() * w, y = Math.random() * h;
       const segments = [];
       let cx = x, cy = y;
-      const steps = 6 + Math.floor(Math.random() * 6);
+      const steps = 5 + Math.floor(Math.random() * 5);
       for (let i = 0; i < steps; i++) {
-        cx += (Math.random() - 0.5) * 70;
-        cy += (Math.random() - 0.2) * 60;
+        cx += (Math.random() - 0.5) * 60; cy += (Math.random() - 0.2) * 50;
         segments.push({ x: cx, y: cy });
       }
-      sparks.push({
-        origin: { x, y },
-        segments,
-        life: 1,
-        color: COLORS[Math.floor(Math.random() * COLORS.length)],
-      });
+      sparks.push({ origin: { x, y }, segments, life: 1, color: COLORS[Math.floor(Math.random() * COLORS.length)] });
     }
-    setInterval(() => { if (Math.random() > 0.4) spawnSpark(); }, 1400);
+    setInterval(() => { if (Math.random() > 0.5) spawnSpark(); }, 1500);
 
     function draw() {
       ctx.clearRect(0, 0, w, h);
-
-      // particles + connective glow lines
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i];
         p.x += p.vx; p.y += p.vy;
         if (p.x < 0 || p.x > w) p.vx *= -1;
         if (p.y < 0 || p.y > h) p.vy *= -1;
-
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = p.c;
-        ctx.globalAlpha = p.a;
-        ctx.shadowBlur = 8;
-        ctx.shadowColor = p.c;
-        ctx.fill();
-        ctx.shadowBlur = 0;
-
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = p.c; ctx.globalAlpha = p.a;
+        ctx.shadowBlur = 6; ctx.shadowColor = p.c; ctx.fill(); ctx.shadowBlur = 0;
         for (let j = i + 1; j < particles.length; j++) {
           const q = particles[j];
-          const dx = p.x - q.x, dy = p.y - q.y;
-          const dist = Math.hypot(dx, dy);
-          if (dist < 120) {
-            ctx.beginPath();
-            ctx.moveTo(p.x, p.y);
-            ctx.lineTo(q.x, q.y);
-            ctx.strokeStyle = p.c;
-            ctx.globalAlpha = (1 - dist / 120) * 0.12;
-            ctx.lineWidth = 0.6;
-            ctx.stroke();
+          const dist = Math.hypot(p.x - q.x, p.y - q.y);
+          if (dist < 100) {
+            ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y);
+            ctx.strokeStyle = p.c; ctx.globalAlpha = (1 - dist / 100) * 0.1;
+            ctx.lineWidth = 0.5; ctx.stroke();
           }
         }
       }
       ctx.globalAlpha = 1;
-
-      // lightning sparks
       for (let i = sparks.length - 1; i >= 0; i--) {
         const s = sparks[i];
-        ctx.beginPath();
-        ctx.moveTo(s.origin.x, s.origin.y);
+        ctx.beginPath(); ctx.moveTo(s.origin.x, s.origin.y);
         s.segments.forEach(seg => ctx.lineTo(seg.x, seg.y));
-        ctx.strokeStyle = s.color;
-        ctx.globalAlpha = s.life * 0.8;
-        ctx.lineWidth = 1.4;
-        ctx.shadowBlur = 16;
-        ctx.shadowColor = s.color;
-        ctx.stroke();
-        ctx.shadowBlur = 0;
-        s.life -= 0.05;
-        if (s.life <= 0) sparks.splice(i, 1);
+        ctx.strokeStyle = s.color; ctx.globalAlpha = s.life * 0.7; ctx.lineWidth = 1.2;
+        ctx.shadowBlur = 12; ctx.shadowColor = s.color; ctx.stroke(); ctx.shadowBlur = 0;
+        s.life -= 0.04; if (s.life <= 0) sparks.splice(i, 1);
       }
       ctx.globalAlpha = 1;
-
       requestAnimationFrame(draw);
     }
     draw();
   })();
 
   /* =====================================================================
-     2. SCROLL REVEAL (Intersection Observer)
+     2. SCROLL REVEAL (Smoother Fade In)
   ===================================================================== */
   const io = new IntersectionObserver((entries) => {
-    entries.forEach((e, i) => {
+    entries.forEach((e) => {
       if (e.isIntersecting) {
-        e.target.style.transitionDelay = (i % 4) * 80 + 'ms';
         e.target.classList.add('in');
         io.unobserve(e.target);
       }
     });
-  }, { threshold: 0.12 });
+  }, { threshold: 0.1 });
 
   function observeReveals() {
-    document.querySelectorAll('.reveal:not(.in)').forEach(el => io.observe(el));
+    document.querySelectorAll('.reveal:not(.in)').forEach((el, index) => {
+      el.style.transitionDelay = (index % 3) * 100 + 'ms';
+      io.observe(el);
+    });
   }
 
   /* =====================================================================
-     3. FEATURED PACKS CAROUSEL (Right -> Left, draggable w/ resume delay)
+     3. FEATURED PACKS CAROUSEL
   ===================================================================== */
   const packs = [
     { t: 'Neon Nights LUT', tag: 'Color', c: '#9333ea' },
     { t: 'Cyber Shake FX', tag: 'Camera', c: '#06b6d4' },
     { t: 'Glitch Overlays', tag: 'VFX', c: '#9333ea' },
     { t: 'Cinematic Presets', tag: 'Presets', c: '#06b6d4' },
-    { t: 'Smoke & Sparks', tag: 'VFX', c: '#9333ea' },
-    { t: 'Retro VHS Kit', tag: 'Color', c: '#06b6d4' },
-    { t: 'Motion Titles', tag: 'Graphics', c: '#9333ea' },
-    { t: 'Bass Transitions', tag: 'Camera', c: '#06b6d4' },
+    { t: 'Smoke & Sparks', tag: 'VFX', c: '#9333ea' }
   ];
 
   (function buildMarquee() {
     const track = document.getElementById('marquee-track');
-    const cardHTML = (p) => `
-      <div class="grad-border glass rounded-2xl w-64 shrink-0 p-5 flex flex-col justify-between h-40" style="box-shadow:0 0 0 0 transparent">
+    const html = [...packs, ...packs, ...packs].map(p => `
+      <div class="grad-border glass rounded-2xl w-60 shrink-0 p-5 flex flex-col justify-between h-36">
         <div class="flex items-center justify-between">
           <span class="text-xs uppercase tracking-widest px-2 py-1 rounded-full glass" style="color:${p.c}">${p.tag}</span>
-          <span class="w-2.5 h-2.5 rounded-full" style="background:${p.c};box-shadow:0 0 10px ${p.c}"></span>
+          <span class="w-2 h-2 rounded-full" style="background:${p.c};box-shadow:0 0 10px ${p.c}"></span>
         </div>
         <div>
-          <h3 class="font-head font-bold text-lg" style="color:#fff">${p.t}</h3>
-          <p class="text-white/40 text-sm mt-1">Premium pack</p>
+          <h3 class="font-head font-bold text-base text-white">${p.t}</h3>
         </div>
-      </div>`;
-    // duplicate list so -50% -> 0 loop is seamless
-    const html = [...packs, ...packs].map(cardHTML).join('');
+      </div>`).join('');
     track.innerHTML = html;
   })();
 
   (function marqueeDrag() {
     const wrap = document.getElementById('marquee');
-    const track = document.getElementById('marquee-track');
     let isDown = false, startX = 0, scrollStart = 0, resumeTimer = null;
-
-    // switch to native scroll while dragging
-    function pauseAuto() {
-      wrap.classList.add('marquee-paused');
-    }
-    function scheduleResume() {
-      clearTimeout(resumeTimer);
-      resumeTimer = setTimeout(() => {
-        // sync animation to current manual scroll position then resume
-        wrap.classList.remove('marquee-paused');
-      }, 2500); // wait a few seconds before resuming
-    }
-
-    // We give the wrapper horizontal scroll ability for manual drag
     wrap.style.overflowX = 'auto';
-
-    const down = (x) => {
-      isDown = true;
-      wrap.classList.add('dragging');
-      startX = x;
-      scrollStart = wrap.scrollLeft;
-      pauseAuto();
-      clearTimeout(resumeTimer);
-    };
-    const move = (x) => {
-      if (!isDown) return;
-      wrap.scrollLeft = scrollStart - (x - startX);
-    };
-    const up = () => {
-      if (!isDown) return;
-      isDown = false;
-      wrap.classList.remove('dragging');
-      scheduleResume();
-    };
-
+    const down = (x) => { isDown = true; wrap.classList.add('dragging'); startX = x; scrollStart = wrap.scrollLeft; wrap.classList.add('marquee-paused'); clearTimeout(resumeTimer); };
+    const move = (x) => { if (!isDown) return; wrap.scrollLeft = scrollStart - (x - startX); };
+    const up = () => { if (!isDown) return; isDown = false; wrap.classList.remove('dragging'); resumeTimer = setTimeout(() => wrap.classList.remove('marquee-paused'), 2000); };
     wrap.addEventListener('mousedown', e => { e.preventDefault(); down(e.pageX); });
     window.addEventListener('mousemove', e => move(e.pageX));
     window.addEventListener('mouseup', up);
-
     wrap.addEventListener('touchstart', e => down(e.touches[0].pageX), { passive: true });
     wrap.addEventListener('touchmove', e => move(e.touches[0].pageX), { passive: true });
     wrap.addEventListener('touchend', up);
-
-    // pause on hover for readability
-    wrap.addEventListener('mouseenter', () => wrap.classList.add('marquee-paused'));
-    wrap.addEventListener('mouseleave', () => { if (!isDown) scheduleResume(); });
   })();
 
   /* =====================================================================
-     4. SPA CATEGORY ROUTING
+     4. SPA VIEWS (Categories & Web Tiers)
   ===================================================================== */
   const CATEGORY_DATA = {
-    CC:    { sub: 'Color grading LUTs & correction tools', items: ['Teal & Orange LUT Pack','Filmic Base Correction','Skin Tone Rescue','Night Grade Kit','Vibrant Pop LUTs','Mono Noir Set'] },
-    SHAKE: { sub: 'Camera shakes, whips & impact FX', items: ['Impact Shake Bundle','Handheld Realism','Bass Drop Shakes','Whip Pan Transitions','Earthquake FX','Subtle Breathe Cam'] },
-    VFX:   { sub: 'Explosions, sparks, glitch & overlays', items: ['Spark Burst Overlays','Glitch Distortion Set','Smoke Atmosphere','Energy Blast FX','Rain & Storm Pack','Lightning Strikes'] },
-    PF:    { sub: 'Ready-to-drop editing presets', items: ['Cinematic Preset Suite','Vlog Fast Cuts','Gaming Montage Kit','Aesthetic Grade Pack','Anime Edit Presets','Retro Wave Set'] },
+    CC:    ['Teal & Orange LUT Pack','Filmic Base Correction','Night Grade Kit','Vibrant Pop LUTs'],
+    SHAKE: ['Impact Shake Bundle','Bass Drop Shakes','Whip Pan Transitions','Earthquake FX'],
+    VFX:   ['Spark Burst Overlays','Glitch Distortion Set','Smoke Atmosphere','Lightning Strikes'],
+    PF:    ['Cinematic Preset Suite','Gaming Montage Kit','Anime Edit Presets','Retro Wave Set'],
   };
 
+  function showView(id) {
+    document.querySelectorAll('.view').forEach(v => v.classList.add('view-hidden'));
+    document.getElementById(id).classList.remove('view-hidden');
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    // Reset animations for the new view
+    document.getElementById(id).querySelectorAll('.reveal').forEach(el => {
+      el.classList.remove('in');
+      el.style.transitionDelay = '0ms';
+    });
+    setTimeout(observeReveals, 50);
+  }
+
   function openCategory(key) {
-    const data = CATEGORY_DATA[key];
     document.getElementById('cat-title').textContent = key;
-    document.getElementById('cat-sub').textContent = data.sub;
-
     const grid = document.getElementById('cat-grid');
-    grid.innerHTML = data.items.map((item, i) => `
-      <div class="reveal grad-border glass rounded-2xl p-6 flex items-center justify-between gap-4 min-h-[120px] transition-all duration-300 hover:-translate-y-1 ${i % 2 === 0 ? 'ring-purple' : 'ring-cyan'}">
+    grid.innerHTML = CATEGORY_DATA[key].map((item, i) => `
+      <div class="reveal grad-border glass rounded-2xl p-5 flex items-center justify-between gap-3 transition-all duration-300 hover:-translate-y-1 ${i % 2 === 0 ? 'ring-purple' : 'ring-cyan'}">
         <div>
-          <span class="text-xs tracking-widest uppercase" style="color:${i % 2 === 0 ? 'var(--purple)' : 'var(--cyan)'}">${key} · Pack ${i + 1}</span>
-          <h3 class="font-head font-bold text-xl mt-2" style="color:#fff">${item}</h3>
-          <p class="text-white/40 text-sm mt-1">Instant download · Premium quality</p>
+          <span class="text-[10px] tracking-widest uppercase" style="color:${i % 2 === 0 ? 'var(--purple)' : 'var(--cyan)'}">${key} Pack</span>
+          <h3 class="font-head font-bold text-lg text-white mt-1">${item}</h3>
         </div>
-        <button class="btn-gold px-4 py-2 rounded-full text-sm font-semibold whitespace-nowrap transition-all duration-300">Get</button>
+        <button class="btn-gold px-4 py-2 rounded-full text-xs font-medium">Get</button>
       </div>`).join('');
-
-    document.getElementById('main-view').classList.add('view-hidden');
-    document.getElementById('category-view').classList.remove('view-hidden');
-    window.scrollTo({ top: 0, behavior: 'instant' in window ? 'instant' : 'auto' });
-    observeReveals();
+    showView('category-view');
   }
 
-  function backToHome() {
-    document.getElementById('category-view').classList.add('view-hidden');
-    document.getElementById('main-view').classList.remove('view-hidden');
-    window.scrollTo({ top: 0 });
-  }
+  function openWebTiers() { showView('web-view'); }
+  function backToHome() { showView('main-view'); }
+  function backToHomeFromWeb() { showView('main-view'); }
 
   /* =====================================================================
-     5. MODALS (Donate + Review)
+     5. MODALS & INIT
   ===================================================================== */
   function openDonate(e){ e && e.preventDefault(); document.getElementById('donate-modal').classList.remove('modal-hidden'); }
   function closeDonate(){ document.getElementById('donate-modal').classList.add('modal-hidden'); }
   function openReview(e){ e && e.preventDefault(); document.getElementById('review-modal').classList.remove('modal-hidden'); }
   function closeReview(){ document.getElementById('review-modal').classList.add('modal-hidden'); }
 
-  window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') { closeDonate(); closeReview(); }
-  });
-
-  /* =====================================================================
-     6. REVIEWS + localStorage
-  ===================================================================== */
-  const STORAGE_KEY = 'vortx_reviews';
   const DEFAULT_REVIEWS = [
-    { name: 'Kaito V.', rating: 5, text: 'The VFX pack transformed my montages. Absolutely cinematic.' },
-    { name: 'Mira S.', rating: 5, text: 'Cleanest LUTs I have used. Instant premium look.' },
-    { name: 'Devon R.', rating: 4, text: 'Web bundle delivered fast and looks insanely good on mobile.' },
+    { name: 'Kaito V.', rating: 5, text: 'The VFX pack transformed my montages.' },
+    { name: 'Mira S.', rating: 5, text: 'Cleanest LUTs I have used.' },
   ];
-
-  function loadReviews() {
-    try {
-      const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
-      if (Array.isArray(saved) && saved.length) return saved;
-    } catch (e) {}
-    return DEFAULT_REVIEWS;
-  }
-  function saveReviews(list) {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
-  }
-
-  function stars(n) {
-    return '★★★★★☆☆☆☆☆'.slice(5 - n, 10 - n);
-  }
-
-  function reviewCard(r) {
-    const initials = r.name.trim().slice(0, 1).toUpperCase();
-    return `
-      <div class="reveal grad-border glass rounded-2xl p-6 flex flex-col gap-4">
-        <div class="flex items-center gap-3">
-          <div class="w-11 h-11 rounded-full flex items-center justify-center font-head font-bold" style="background:linear-gradient(135deg,var(--purple),var(--cyan));color:#fff">${initials}</div>
-          <div>
-            <p class="font-semibold" style="color:#fff">${escapeHTML(r.name)}</p>
-            <p class="text-sm" style="color:var(--gold)">${stars(Number(r.rating))}</p>
-          </div>
-        </div>
-        <p class="text-white/60 leading-relaxed text-sm">${escapeHTML(r.text)}</p>
-      </div>`;
-  }
-
-  function escapeHTML(s) {
-    return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  }
-
-  let reviews = loadReviews();
+  let reviews = JSON.parse(localStorage.getItem('vortx_rv')) || DEFAULT_REVIEWS;
   function renderReviews() {
-    const grid = document.getElementById('reviews-grid');
-    grid.innerHTML = reviews.map(reviewCard).join('');
+    document.getElementById('reviews-grid').innerHTML = reviews.map(r => `
+      <div class="reveal grad-border glass rounded-2xl p-5 flex flex-col gap-3">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full flex items-center justify-center font-head font-bold text-white bg-gradient-to-br from-purple-600 to-cyan-500">${r.name[0].toUpperCase()}</div>
+          <div><p class="font-medium text-white text-sm">${r.name}</p><p class="text-xs text-yellow-400">${'★'.repeat(r.rating)}</p></div>
+        </div>
+        <p class="text-white/60 text-sm">${r.text}</p>
+      </div>`).join('');
     observeReveals();
   }
-
   document.getElementById('review-form').addEventListener('submit', function (e) {
     e.preventDefault();
-    const name = document.getElementById('rv-name').value.trim();
-    const rating = document.getElementById('rv-rating').value;
-    const text = document.getElementById('rv-text').value.trim();
-    if (!name || !text) return;
-
-    const newReview = { name, rating, text };
-    reviews.unshift(newReview);
-    saveReviews(reviews);
-    renderReviews();
-    this.reset();
-    closeReview();
+    reviews.unshift({ name: document.getElementById('rv-name').value, rating: document.getElementById('rv-rating').value, text: document.getElementById('rv-text').value });
+    localStorage.setItem('vortx_rv', JSON.stringify(reviews));
+    renderReviews(); this.reset(); closeReview();
   });
 
-  /* =====================================================================
-     INIT
-  ===================================================================== */
   document.getElementById('year').textContent = new Date().getFullYear();
-  renderReviews();
-  observeReveals();
+  renderReviews(); observeReveals(); // initial load
   </script>
 </body>
 </html>
