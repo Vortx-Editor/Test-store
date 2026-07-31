@@ -346,6 +346,165 @@
     .button-wrap:has(button:hover) .button-shadow::after { top: calc(var(--shadow-cuttoff-fix) - 0.875em); opacity: 1; }
     .button-wrap:has(button:active) { transform: rotate3d(1, 0, 0, 20deg); }
 
+    /* ========== UIVERSE TIER CARD STYLES ========== */
+    .tier-card {
+      --white: hsl(0, 0%, 100%);
+      --black: hsl(240, 15%, 9%);
+      --paragraph: hsl(0, 0%, 83%);
+      --line: hsl(240, 9%, 17%);
+      --primary: hsl(266, 92%, 58%);
+
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 1.25rem;
+      padding: 2rem;
+      width: 100%;
+      background-color: hsla(240, 15%, 9%, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      background-image: radial-gradient(
+          at 88% 40%,
+          hsla(240, 15%, 9%, 1) 0px,
+          transparent 85%
+        ),
+        radial-gradient(at 49% 30%, hsla(240, 15%, 9%, 1) 0px, transparent 85%),
+        radial-gradient(at 14% 26%, hsla(240, 15%, 9%, 1) 0px, transparent 85%),
+        radial-gradient(at 0% 64%, hsla(263, 93%, 56%, 0.4) 0px, transparent 85%),
+        radial-gradient(at 41% 94%, hsla(284, 100%, 84%, 0.3) 0px, transparent 85%),
+        radial-gradient(at 100% 99%, hsla(306, 100%, 57%, 0.4) 0px, transparent 85%);
+
+      border-radius: 1.75rem;
+      box-shadow: 0px -16px 24px 0px rgba(255, 255, 255, 0.15) inset;
+      overflow: hidden;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    html.light .tier-card {
+      background-color: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 15px 35px rgba(126, 34, 206, 0.15);
+    }
+
+    .tier-card:hover {
+      transform: translateY(-6px);
+    }
+
+    .tier-card .card__border {
+      overflow: hidden;
+      pointer-events: none;
+      position: absolute;
+      z-index: 1;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: calc(100% + 2px);
+      height: calc(100% + 2px);
+      background-image: linear-gradient(
+        0deg,
+        hsl(0, 0%, 100%) -50%,
+        hsl(0, 0%, 40%) 100%
+      );
+      border-radius: 1.75rem;
+    }
+
+    .tier-card .card__border::before {
+      content: "";
+      pointer-events: none;
+      position: absolute;
+      z-index: 1;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(0deg);
+      transform-origin: left;
+      width: 200%;
+      height: 12rem;
+      background-image: linear-gradient(
+        0deg,
+        hsla(0, 0%, 100%, 0) 0%,
+        hsl(277, 95%, 60%) 40%,
+        hsl(277, 95%, 60%) 60%,
+        hsla(0, 0%, 40%, 0) 100%
+      );
+      animation: rotate 8s linear infinite;
+    }
+
+    @keyframes rotate {
+      to { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    .tier-card .card_title__container .card_title {
+      font-size: 1.75rem;
+      font-weight: 900;
+      color: var(--white);
+      font-family: 'Cinzel', 'Cairo', serif;
+    }
+
+    html.light .tier-card .card_title__container .card_title {
+      color: #3b0764;
+    }
+
+    .tier-card .card_title__container .card_paragraph {
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--paragraph);
+      line-height: 1.5;
+    }
+
+    html.light .tier-card .card_title__container .card_paragraph {
+      color: #4b5563;
+    }
+
+    .tier-card .line {
+      width: 100%;
+      height: 0.1rem;
+      background-color: var(--line);
+      border: none;
+      margin: 0.5rem 0;
+    }
+
+    .tier-card .card__list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .tier-card .card__list .card__list_item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .tier-card .card__list .card__list_item .check {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 1.25rem;
+      height: 1.25rem;
+      background-color: var(--primary);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .tier-card .card__list .card__list_item .check .check_svg {
+      width: 0.85rem;
+      height: 0.85rem;
+      fill: var(--black);
+    }
+
+    .tier-card .card__list .card__list_item .list_text {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+
+    html.light .tier-card .card__list .card__list_item .list_text {
+      color: #1e1b4b;
+    }
+
     /* ---------- CUSTOM GLASS RADIO GROUP ---------- */
     .glass-radio-group {
       --bg: rgba(255, 255, 255, 0.05);
@@ -444,18 +603,6 @@
       transform: translateX(-200%);
       background: linear-gradient(135deg, rgba(234, 179, 8, 0.4), #eab308);
       box-shadow: 0 0 20px rgba(234, 179, 8, 0.6), 0 0 10px rgba(255, 255, 255, 0.5) inset;
-    }
-
-    /* Glass Elements */
-    .glass {
-      background: rgba(255, 255, 255, 0.03);
-      backdrop-filter: blur(16px) saturate(140%);
-      -webkit-backdrop-filter: blur(16px) saturate(140%);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-    }
-    html.light .glass {
-      background: rgba(255, 255, 255, 0.85);
-      border: 1px solid rgba(126, 34, 206, 0.15);
     }
 
     .text-3d-header { color: var(--nav-logo-color); font-weight: 900; }
@@ -596,7 +743,7 @@
         High-end VFX packs, cinematic presets & custom web experiences. Crafted specifically for elite creators.
       </p>
 
-      <!-- HERO EXPLORE TIERS BUTTON (3D Glass Wrapper) -->
+      <!-- HERO EXPLORE TIERS BUTTON -->
       <div class="flex items-center justify-center">
         <div class="button-wrap">
           <button onclick="document.getElementById('bundles').scrollIntoView({behavior: 'smooth'})">
@@ -634,7 +781,7 @@
           </p>
         </div>
         
-        <!-- WEB BUNDLES BUTTON (3D Glass Wrapper) -->
+        <!-- WEB BUNDLES BUTTON -->
         <div class="w-full md:w-auto relative z-10 flex justify-center md:justify-end flex-shrink-0">
           <div class="button-wrap">
             <button onclick="openWebTiers()">
@@ -744,7 +891,7 @@
     </footer>
   </main>
 
-  <!-- WEB TIERS VIEW (مع الأزرار المحدثة 3D) -->
+  <!-- WEB TIERS VIEW (مع تصميم الكروت الجديد المطلب وبزر اختر الباقة) -->
   <section id="web-view" class="view view-hidden relative z-10 min-h-screen">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
       <div class="flex items-center justify-between mb-12">
@@ -762,15 +909,37 @@
       </div>
       
       <div class="grid lg:grid-cols-3 gap-8">
-        <div class="glass rounded-3xl p-8 flex flex-col h-full border-t border-brand/20">
-          <h3 class="font-head font-bold text-2xl mb-3">STARTER</h3>
-          <p data-i18n="tier-starter-desc" class="font-bold opacity-50 text-sm mb-8">Perfect for simple portfolios and personal landing pages.</p>
-          <ul class="text-sm opacity-80 space-y-4 mb-10 flex-1 font-bold">
-            <li class="flex items-start gap-3"><span class="text-brand">✦</span> Clean & Modern UI</li>
-            <li class="flex items-start gap-3"><span class="text-brand">✦</span> Mobile-Ready Layout</li>
-          </ul>
-          
-          <div class="button-wrap w-full">
+        
+        <!-- CARD 1: STARTER -->
+        <div class="tier-card">
+          <div class="card__border"></div>
+          <div>
+            <div class="card_title__container">
+              <span class="card_title">STARTER</span>
+              <p data-i18n="tier-starter-desc" class="card_paragraph">Perfect for simple portfolios and personal landing pages.</p>
+            </div>
+            <hr class="line" />
+            <ul class="card__list">
+              <li class="card__list_item">
+                <span class="check">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="check_svg">
+                    <path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path>
+                  </svg>
+                </span>
+                <span class="list_text">Clean & Modern UI</span>
+              </li>
+              <li class="card__list_item">
+                <span class="check">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="check_svg">
+                    <path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path>
+                  </svg>
+                </span>
+                <span class="list_text">Mobile-Ready Layout</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="button-wrap w-full mt-6">
             <button onclick="showToast('PLAN ADDED')">
               <span data-i18n="select-plan">Select Plan</span>
             </button>
@@ -778,15 +947,36 @@
           </div>
         </div>
 
-        <div class="glass rounded-3xl p-8 flex flex-col h-full border border-brand/50 relative bg-brand/5">
-          <h3 class="font-head font-bold text-2xl mb-3">PRO</h3>
-          <p data-i18n="tier-pro-desc" class="font-bold opacity-50 text-sm mb-8">For creators needing advanced animations & custom design.</p>
-          <ul class="text-sm opacity-80 space-y-4 mb-10 flex-1 font-bold">
-            <li class="flex items-start gap-3"><span class="text-brandLight">✦</span> Glassmorphism & Glows</li>
-            <li class="flex items-start gap-3"><span class="text-brandLight">✦</span> Scroll Animations</li>
-          </ul>
-          
-          <div class="button-wrap w-full">
+        <!-- CARD 2: PRO -->
+        <div class="tier-card">
+          <div class="card__border"></div>
+          <div>
+            <div class="card_title__container">
+              <span class="card_title">PRO</span>
+              <p data-i18n="tier-pro-desc" class="card_paragraph">For creators needing advanced animations & custom design.</p>
+            </div>
+            <hr class="line" />
+            <ul class="card__list">
+              <li class="card__list_item">
+                <span class="check">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="check_svg">
+                    <path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path>
+                  </svg>
+                </span>
+                <span class="list_text">Glassmorphism & Glows</span>
+              </li>
+              <li class="card__list_item">
+                <span class="check">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="check_svg">
+                    <path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path>
+                  </svg>
+                </span>
+                <span class="list_text">Scroll Animations</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="button-wrap w-full mt-6">
             <button onclick="showToast('PLAN ADDED')">
               <span data-i18n="select-plan">Select Plan</span>
             </button>
@@ -794,21 +984,43 @@
           </div>
         </div>
 
-        <div class="glass rounded-3xl p-8 flex flex-col h-full border-t border-brand/20">
-          <h3 class="font-head font-bold text-2xl mb-3">VIP</h3>
-          <p data-i18n="tier-vip-desc" class="font-bold opacity-50 text-sm mb-8">The absolute premium experience with custom 3D elements.</p>
-          <ul class="text-sm opacity-80 space-y-4 mb-10 flex-1 font-bold">
-            <li class="flex items-start gap-3"><span class="text-brand">✦</span> 3D Models Integration</li>
-            <li class="flex items-start gap-3"><span class="text-brand">✦</span> Priority Support</li>
-          </ul>
-          
-          <div class="button-wrap w-full">
+        <!-- CARD 3: VIP -->
+        <div class="tier-card">
+          <div class="card__border"></div>
+          <div>
+            <div class="card_title__container">
+              <span class="card_title">VIP</span>
+              <p data-i18n="tier-vip-desc" class="card_paragraph">The absolute premium experience with custom 3D elements.</p>
+            </div>
+            <hr class="line" />
+            <ul class="card__list">
+              <li class="card__list_item">
+                <span class="check">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="check_svg">
+                    <path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path>
+                  </svg>
+                </span>
+                <span class="list_text">3D Models Integration</span>
+              </li>
+              <li class="card__list_item">
+                <span class="check">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="check_svg">
+                    <path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path>
+                  </svg>
+                </span>
+                <span class="list_text">Priority Support</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="button-wrap w-full mt-6">
             <button onclick="showToast('PLAN ADDED')">
               <span data-i18n="select-plan">Select Plan</span>
             </button>
             <div class="button-shadow"></div>
           </div>
         </div>
+
       </div>
     </div>
   </section>
@@ -972,83 +1184,4 @@
   function toggleLanguage() {
     currentLang = currentLang === 'en' ? 'ar' : 'en';
     const htmlEl = document.documentElement;
-    const isRtl = currentLang === 'ar';
-    
-    htmlEl.setAttribute('dir', isRtl ? 'rtl' : 'ltr');
-    htmlEl.setAttribute('lang', currentLang);
-
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-      const key = el.getAttribute('data-i18n');
-      if (translations[currentLang][key]) {
-        el.textContent = translations[currentLang][key];
-      }
-    });
-
-    setTimeout(() => { initSwiper(); }, 100);
-  }
-
-  function toggleTheme() {
-    const htmlEl = document.documentElement;
-    if (htmlEl.classList.contains('dark')) {
-      htmlEl.classList.remove('dark');
-      htmlEl.classList.add('light');
-    } else {
-      htmlEl.classList.remove('light');
-      htmlEl.classList.add('dark');
-    }
-  }
-
-  function showToast(msg) {
-    const box = document.getElementById('toast-box');
-    const toast = document.createElement('div');
-    toast.className = 'glass bg-black/90 text-white text-[10px] sm:text-xs font-bold uppercase tracking-widest px-6 py-3.5 rounded-full border-brand/50 flex items-center gap-2';
-    toast.innerHTML = `<span class="text-brandLight">✦</span> ${msg}`;
-    box.appendChild(toast);
-    setTimeout(() => { toast.remove(); }, 2500);
-  }
-
-  function openPreview(title, tag) {
-    document.getElementById('preview-title').textContent = title;
-    document.getElementById('preview-tag').textContent = tag;
-    const modal = document.getElementById('preview-modal');
-    const card = document.getElementById('preview-card');
-    modal.classList.remove('opacity-0', 'pointer-events-none');
-    setTimeout(() => { card.classList.remove('scale-95'); }, 10);
-  }
-
-  function closePreview() {
-    const modal = document.getElementById('preview-modal');
-    const card = document.getElementById('preview-card');
-    card.classList.add('scale-95');
-    setTimeout(() => { modal.classList.add('opacity-0', 'pointer-events-none'); }, 200);
-  }
-
-  const CATEGORY_DATA = {
-    CC: ['Teal & Orange Grade', 'Cinematic Film Base', 'Dark Knight Grade', 'Vibrant Soft Pop'],
-    SHAKE: ['Hard Impact Shake', 'Bass Drop Bounce', 'Smooth Whip Pan', 'Earthquake Wobble'],
-    XML: ['Pro Intro Template', 'Velocity Edit XML', 'Glow Shake Timeline', 'Full Transition Suite'],
-  };
-
-  function showView(id) {
-    document.querySelectorAll('.view').forEach(v => v.classList.add('view-hidden'));
-    document.getElementById(id).classList.remove('view-hidden');
-    window.scrollTo({ top: 0, behavior: 'instant' });
-  }
-
-  function openCategory(key) {
-    document.getElementById('cat-title').textContent = key;
-    document.getElementById('cat-grid').innerHTML = CATEGORY_DATA[key].map((item) => `
-      <div onclick="openPreview('${item}', '${key}')" class="glass rounded-2xl p-6 flex flex-col justify-between min-h-[140px] text-left ltr:text-left rtl:text-right border-l-4 border-brand/50 hover:border-brandLight cursor-pointer">
-        <span class="text-[10px] font-bold tracking-widest uppercase text-brandLight">${key} Pack</span>
-        <h3 class="font-head font-bold text-xl mt-4">${item}</h3>
-      </div>`).join('');
-    showView('category-view');
-  }
-
-  function openWebTiers() { showView('web-view'); }
-  function backToHome() { showView('main-view'); }
-
-  document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
-</body>
-</html>
+    const isRtl =
