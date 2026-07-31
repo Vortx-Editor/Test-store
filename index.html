@@ -49,6 +49,11 @@
       --star-bg: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
       --star-opacity: 1;
       --btn-text-color: rgba(255, 255, 255, 0.95);
+      --card-bg: rgba(255, 255, 255, 0.03);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --tier-bg: hsla(240, 15%, 9%, 0.85);
+      --tier-text: #ffffff;
+      --sub-text: rgba(255, 255, 255, 0.7);
     }
 
     html.light {
@@ -59,6 +64,11 @@
       --star-bg: radial-gradient(ellipse at bottom, #e2e8f0 0%, #cbd5e1 100%);
       --star-opacity: 0.25;
       --btn-text-color: #2e1065;
+      --card-bg: rgba(255, 255, 255, 0.85);
+      --card-border: rgba(126, 34, 206, 0.15);
+      --tier-bg: rgba(255, 255, 255, 0.92);
+      --tier-text: #1e1b4b;
+      --sub-text: #475569;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -124,7 +134,7 @@
       to { transform: translateY(-2000px); }
     }
 
-    /* VORTX WET LIQUID OIL SHINE TITLE */
+    /* VORTX WET LIQUID OIL SHINE TITLE - EXACT OVERLAY FIX */
     .vortx-wet-oil-title {
       position: relative;
       display: inline-block;
@@ -138,7 +148,10 @@
     .vortx-wet-oil-title::before {
       content: 'VORTX';
       position: absolute;
-      left: 0; top: 0; width: 100%; height: 100%;
+      inset: 0;
+      font: inherit;
+      letter-spacing: inherit;
+      line-height: inherit;
       background: linear-gradient(
         110deg,
         transparent 0%, transparent 35%,
@@ -157,6 +170,13 @@
       100% { background-position: -220% 0; }
     }
 
+    html.light .vortx-wet-oil-title {
+      background: linear-gradient(135deg, #2e1065 0%, #581c87 40%, #7e22ce 70%, #a855f7 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 5px 15px rgba(126, 34, 206, 0.2));
+    }
+
     /* CUSTOM LUXURY SWITCH BUTTON */
     .theme-switch-btn {
       width: 64px; height: 34px; border-radius: 999px;
@@ -165,6 +185,10 @@
       position: relative; cursor: pointer; padding: 3px;
       transition: all 0.4s ease;
       display: flex; align-items: center;
+    }
+    html.light .theme-switch-btn {
+      background: linear-gradient(135deg, #38bdf8, #fde047);
+      border-color: rgba(56, 189, 248, 0.6);
     }
     .theme-switch-ball {
       width: 26px; height: 26px; border-radius: 50%;
@@ -198,32 +222,41 @@
       width: 100%;
       text-align: center;
     }
+    html.light .btn-3d-style {
+      background: linear-gradient(-75deg, rgba(168, 85, 247, 0.15), rgba(168, 85, 247, 0.3), rgba(168, 85, 247, 0.15));
+      box-shadow: inset 0 0.125em 0.125em rgba(255, 255, 255, 0.8), 0 0.15em 0.25em rgba(126, 34, 206, 0.15);
+    }
     .btn-3d-style:hover { transform: scale(0.975); }
     .btn-3d-style span {
       display: block; font-weight: 800; font-size: 0.9em;
       color: var(--btn-text-color); padding: 0.9em 2em; text-transform: uppercase;
     }
 
-    /* TIER CARDS */
+    /* TIER CARDS LIGHT MODE FIX */
     .tier-card {
       position: relative; display: flex; flex-direction: column; justify-content: space-between;
       gap: 1.25rem; padding: 2rem; width: 100%;
-      background-color: hsla(240, 15%, 9%, 0.85); backdrop-filter: blur(16px);
-      border-radius: 1.75rem; border: 1px solid rgba(255,255,255,0.1);
+      background-color: var(--tier-bg); backdrop-filter: blur(16px);
+      border-radius: 1.75rem; border: 1px solid var(--card-border);
+      color: var(--tier-text);
+      transition: background-color 0.4s ease, border-color 0.4s ease;
+    }
+    html.light .tier-card {
+      box-shadow: 0 15px 35px rgba(126, 34, 206, 0.08);
     }
 
-    /* GLASS RADIO SELECTOR */
+    /* GLASS RADIO LIGHT MODE FIX */
     .glass-radio-group {
       display: flex; position: relative;
-      background: rgba(255, 255, 255, 0.05); border-radius: 999px;
-      backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.15);
+      background: var(--card-bg); border-radius: 999px;
+      backdrop-filter: blur(16px); border: 1px solid var(--card-border);
       padding: 6px; margin: 35px auto 10px auto; width: 100%; max-width: 56rem;
     }
     .glass-radio-group input { display: none; }
     .glass-radio-group label {
       flex: 1; display: flex; align-items: center; justify-content: center;
       font-size: 15px; font-weight: 800; padding: 0.9rem 1rem; cursor: pointer;
-      color: rgba(255, 255, 255, 0.7); z-index: 2;
+      color: var(--sub-text); z-index: 2; transition: color 0.3s ease;
     }
     .glass-radio-group input:checked + label { color: #ffffff; }
 
@@ -235,24 +268,26 @@
     #glass-xml:checked ~ .glass-glider { transform: translateX(100%); background: #06b6d4; }
     #glass-shake:checked ~ .glass-glider { transform: translateX(200%); background: #eab308; }
 
+    html[dir="rtl"] #glass-cc:checked ~ .glass-glider { transform: translateX(0%); }
+    html[dir="rtl"] #glass-xml:checked ~ .glass-glider { transform: translateX(-100%); }
+    html[dir="rtl"] #glass-shake:checked ~ .glass-glider { transform: translateX(-200%); }
+
     /* SWIPER 3D */
     .swiper { width: 100%; padding-top: 30px; padding-bottom: 60px; }
     .swiper-slide { width: 300px !important; height: 440px !important; border-radius: 2rem; }
 
     .glossy-bundle-card {
-      border-radius: 2.5rem; background: rgba(255, 255, 255, 0.03);
-      backdrop-filter: blur(24px); border: 1.5px solid rgba(168, 85, 247, 0.3);
+      border-radius: 2.5rem; background: var(--card-bg);
+      backdrop-filter: blur(24px); border: 1.5px solid var(--card-border);
     }
 
-    .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.08); }
-    .cat-card-glass { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 1.75rem; padding: 1.75rem 2rem; cursor: pointer; }
+    .glass { background: var(--card-bg); backdrop-filter: blur(16px); border: 1px solid var(--card-border); }
+    .cat-card-glass { background: var(--card-bg); backdrop-filter: blur(16px); border: 1px solid var(--card-border); border-radius: 1.75rem; padding: 1.75rem 2rem; cursor: pointer; }
 
     .view { transition: opacity .4s ease; opacity: 1; }
     .view-hidden { display: none !important; opacity: 0; }
 
-    /* =====================================================================
-       CINEMATIC HIGH-END LOADER
-       ===================================================================== */
+    /* CINEMATIC HIGH-END LOADER */
     #vx-loader {
       position: fixed;
       inset: 0;
@@ -300,7 +335,6 @@
       50% { transform: scale(1.08); opacity: 0.95; }
     }
 
-    /* GLITCH LETTER ASSEMBLY */
     .vx-logo-word {
       display: flex;
       font-family: 'Cinzel', serif;
@@ -341,7 +375,6 @@
       }
     }
 
-    /* LUXURY SHIMMER BAR */
     .vx-bar-track {
       width: min(78vw, 320px);
       height: 6px;
@@ -478,7 +511,7 @@
         <div class="glossy-bundle-card p-8 sm:p-14 relative flex flex-col md:flex-row items-center justify-between gap-10">
           <div class="text-center md:text-left rtl:md:text-right max-w-2xl relative z-10 w-full">
             <span data-i18n="bundle-sub" class="text-xs tracking-widest uppercase font-extrabold text-brandLight block mb-2">Custom Web Solutions</span>
-            <h2 data-i18n="bundle-title" class="font-head font-black text-3xl sm:text-4xl md:text-5xl mb-4 text-purple-300">
+            <h2 data-i18n="bundle-title" class="font-head font-black text-3xl sm:text-4xl md:text-5xl mb-4 text-purple-400">
               Web Page Bundles
             </h2>
             <p data-i18n="bundle-desc" class="font-bold opacity-80 leading-relaxed text-sm sm:text-lg">
@@ -604,8 +637,8 @@
         <div class="grid lg:grid-cols-3 gap-8">
           <div class="tier-card">
             <div>
-              <span class="text-2xl font-black text-white">STARTER</span>
-              <p data-i18n="tier-starter-desc" class="text-xs text-gray-400 mt-2">Perfect for simple portfolios and personal landing pages.</p>
+              <span class="text-2xl font-black">STARTER</span>
+              <p data-i18n="tier-starter-desc" class="text-xs opacity-75 mt-2">Perfect for simple portfolios and personal landing pages.</p>
             </div>
             <div class="button-wrap w-full mt-6" onclick="showToast('PLAN ADDED')">
               <div class="btn-3d-style"><span data-i18n="select-plan">Select Plan</span></div>
@@ -614,8 +647,8 @@
 
           <div class="tier-card">
             <div>
-              <span class="text-2xl font-black text-white">PRO</span>
-              <p data-i18n="tier-pro-desc" class="text-xs text-gray-400 mt-2">For creators needing advanced animations & custom design.</p>
+              <span class="text-2xl font-black">PRO</span>
+              <p data-i18n="tier-pro-desc" class="text-xs opacity-75 mt-2">For creators needing advanced animations & custom design.</p>
             </div>
             <div class="button-wrap w-full mt-6" onclick="showToast('PLAN ADDED')">
               <div class="btn-3d-style"><span data-i18n="select-plan">Select Plan</span></div>
@@ -624,8 +657,8 @@
 
           <div class="tier-card">
             <div>
-              <span class="text-2xl font-black text-white">VIP</span>
-              <p data-i18n="tier-vip-desc" class="text-xs text-gray-400 mt-2">The absolute premium experience with custom 3D elements.</p>
+              <span class="text-2xl font-black">VIP</span>
+              <p data-i18n="tier-vip-desc" class="text-xs opacity-75 mt-2">The absolute premium experience with custom 3D elements.</p>
             </div>
             <div class="button-wrap w-full mt-6" onclick="showToast('PLAN ADDED')">
               <div class="btn-3d-style"><span data-i18n="select-plan">Select Plan</span></div>
@@ -669,7 +702,7 @@
   </div>
 
   <script>
-  /* CINEMATIC LUXURY LOADER LOGIC (100% RELIABLE) */
+  /* CINEMATIC LUXURY LOADER LOGIC */
   (function () {
     const docEl = document.documentElement;
     docEl.classList.add('vx-loading');
@@ -680,7 +713,7 @@
     const percentEl = document.getElementById('vx-percent');
     const wordEl = document.getElementById('vx-logo-word');
 
-    // Build Assembling Glitch Letters Dynamic Elements
+    // Assembling Glitch Letters Dynamic Elements
     const letters = ['V', 'O', 'R', 'T', 'X'];
     if (wordEl && wordEl.children.length === 0) {
       letters.forEach((ch, i) => {
@@ -708,8 +741,8 @@
       }, 400);
     }
 
-    // Organic Non-Linear Progress Feel (~3.2 Seconds Duration)
-    const DURATION = 3200; // ms
+    // Organic Progress Animation (~3.2s)
+    const DURATION = 3200;
     const startTime = performance.now();
 
     function updateProgress(now) {
@@ -718,7 +751,6 @@
       const elapsed = now - startTime;
       const progress = Math.min(elapsed / DURATION, 1);
 
-      // Easing curve: quick start -> subtle slow mid -> smooth surge to 100
       let easedP = progress < 0.5 
         ? 2 * progress * progress 
         : 1 - Math.pow(-2 * progress + 2, 2) / 2;
@@ -737,10 +769,9 @@
 
     requestAnimationFrame(updateProgress);
 
-    // Hard Safety Fallback Timer (Guarantee 3.6s Max)
+    // Fallback Timer
     setTimeout(revealSite, 3600);
 
-    // Manual Skip by Tapping anywhere on loader
     if (loader) loader.addEventListener('click', revealSite);
   })();
 
