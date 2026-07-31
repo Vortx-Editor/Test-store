@@ -133,95 +133,99 @@
       to { transform: translateY(-2000px); }
     }
 
-    /* ---------- NEW UIVERSE GLASS EFFECT FOR VORTX TITLES ---------- */
-    .vortx-glass-wrapper {
+    /* ---------- REAL PURE GLASS EFFECT FOR VORTX ---------- */
+    .vortx-pure-glass-container {
       position: relative;
       display: inline-block;
-      padding: 0.5rem 1rem;
+      padding: 10px 20px;
     }
 
-    /* Bloom Glow Effects (التوهج الضوئي خلف الكلمة) */
-    .vortx-glass-wrapper .bloom {
-      height: 1px;
-      width: 1px;
+    /* Bloom Glow Effects (توهج زجاجي مائي ناعم خلف النص) */
+    .vortx-pure-glass-container .bloom {
+      height: 2px;
+      width: 2px;
       position: absolute;
       background: white;
       pointer-events: none;
       z-index: 1;
     }
 
-    .vortx-glass-wrapper .bloom1 {
-      top: 20%;
-      right: 15%;
+    .vortx-pure-glass-container .bloom1 {
+      top: 25%;
+      right: 20%;
       box-shadow:
-        rgb(255, 255, 255) 0px 0px 25px 15px,
-        rgba(168, 85, 247, 0.8) 0px 0px 45px 30px;
+        rgba(255, 255, 255, 0.9) 0px 0px 30px 20px,
+        rgba(168, 85, 247, 0.7) 0px 0px 60px 40px;
     }
 
-    .vortx-glass-wrapper .bloom2 {
-      bottom: 20%;
-      left: 15%;
+    .vortx-pure-glass-container .bloom2 {
+      bottom: 25%;
+      left: 20%;
       box-shadow:
-        rgba(255, 255, 255, 0.8) 0px 0px 20px 15px,
-        rgba(126, 34, 206, 0.8) 0px 0px 40px 25px;
+        rgba(255, 255, 255, 0.7) 0px 0px 25px 15px,
+        rgba(126, 34, 206, 0.7) 0px 0px 50px 35px;
     }
 
-    /* VORTX Main Title Text */
-    .vortx-glass-title {
+    /* VORTX Glass Typography (حروف الكلمة نفسها مصبوبة زجاج) */
+    .vortx-glass-text {
       position: relative;
       z-index: 2;
       font-weight: 900;
-      color: #ffffff;
-      text-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-      background: linear-gradient(180deg, #ffffff 30%, rgba(255, 255, 255, 0.7) 100%);
+      background: linear-gradient(
+        180deg,
+        #ffffff 0%,
+        rgba(255, 255, 255, 0.9) 45%,
+        rgba(192, 132, 252, 0.8) 75%,
+        rgba(126, 34, 206, 0.9) 100%
+      );
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.6))
+              drop-shadow(0 0 15px rgba(168, 85, 247, 0.4));
     }
 
-    html.light .vortx-glass-title {
-      background: linear-gradient(180deg, #2e1065 30%, #581c87 100%);
+    html.light .vortx-glass-text {
+      background: linear-gradient(180deg, #2e1065 0%, #581c87 60%, #7e22ce 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 10px 15px rgba(126, 34, 206, 0.15));
     }
 
-    /* Glass Overlay Layer (طبقة الزجاج المعكوسة العلوية) */
-    .vortx-glass-overlay {
+    /* Glass Refractive Overlay (إنكسار زجاجي حقيقي بدون مربع مصمت) */
+    .vortx-glass-reflection {
       position: absolute;
       inset: 0;
       z-index: 3;
-      border-radius: 1.5rem;
+      border-radius: 999px;
       background: linear-gradient(
-        90deg,
-        rgba(255, 255, 255, 0) 0%,
-        rgba(255, 255, 255, 0.25) 50%,
-        rgba(255, 255, 255, 0.05) 100%
+        115deg,
+        rgba(255, 255, 255, 0.35) 0%,
+        rgba(255, 255, 255, 0.05) 35%,
+        transparent 60%,
+        rgba(255, 255, 255, 0.15) 100%
       );
-      border-left: 2px solid rgba(255, 255, 255, 0.4);
-      border-right: 2px solid rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(2px);
-      -webkit-backdrop-filter: blur(2px);
       pointer-events: none;
       mix-blend-mode: overlay;
     }
 
-    /* VORTX Header Small Logo Glass Effect */
+    /* VORTX Header Small Logo Pure Glass */
     .vortx-header-glass {
       position: relative;
-      display: inline-block;
       font-weight: 900;
       color: var(--nav-logo-color);
       letter-spacing: 2px;
-      padding: 2px 8px;
+      padding: 4px 10px;
+      background: linear-gradient(180deg, #ffffff 30%, #c084fc 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 0 8px rgba(168, 85, 247, 0.4));
     }
 
-    .vortx-header-glass::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: 6px;
-      background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.3) 100%);
-      border-left: 1px solid rgba(255, 255, 255, 0.5);
-      pointer-events: none;
+    html.light .vortx-header-glass {
+      background: linear-gradient(180deg, #3b0764 0%, #7e22ce 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: none;
     }
 
     /* ---------- CUSTOM LUXURY SWITCH BUTTON ---------- */
@@ -490,7 +494,7 @@
   <header class="sticky top-0 z-50 w-full">
     <nav class="glass border-b-0 bg-black/40 backdrop-blur-md">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-        <!-- VORTX Header Small Logo with Glass Effect -->
+        <!-- VORTX Header Small Logo -->
         <a href="#top" class="flex items-center gap-3">
           <span class="font-head text-2xl vortx-header-glass">VORTX</span>
         </a>
@@ -506,7 +510,7 @@
             🌐
           </button>
 
-          <!-- Luxury Switch Button (الزر الفخم الأصلي) -->
+          <!-- Luxury Switch Button -->
           <button onclick="toggleTheme()" class="theme-switch-btn" title="Toggle Theme">
             <div class="theme-switch-ball">
               <svg class="w-3.5 h-3.5 text-slate-800" fill="currentColor" viewBox="0 0 20 20">
@@ -530,15 +534,15 @@
         <span data-i18n="hero-tag">Digital Assets Hub</span>
       </div>
 
-      <!-- VORTX MAIN TITLE WITH GLASS & BLOOM GLOW -->
+      <!-- VORTX MAIN TITLE WITH PURE REFRACTIVE GLASS -->
       <div class="relative my-2 px-4 inline-block">
-        <div class="vortx-glass-wrapper">
+        <div class="vortx-pure-glass-container">
           <div class="bloom bloom1"></div>
           <div class="bloom bloom2"></div>
-          <h1 class="font-head font-black tracking-[0.25em] text-7xl sm:text-9xl md:text-[10rem] vortx-glass-title relative z-10 leading-none py-4">
+          <h1 class="font-head font-black tracking-[0.25em] text-7xl sm:text-9xl md:text-[10rem] vortx-glass-text leading-none py-4">
             VORTX
           </h1>
-          <div class="vortx-glass-overlay"></div>
+          <div class="vortx-glass-reflection"></div>
         </div>
       </div>
 
