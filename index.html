@@ -9,7 +9,7 @@
   <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Google Fonts -->
+  <!-- Google Fonts: Cinzel, Inter & Cairo -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;800;900&family=Cinzel:wght@700;800;900&family=Inter:wght@500;600;700;800&display=swap" rel="stylesheet" />
@@ -48,8 +48,8 @@
       --nav-logo-color: #c084fc;
       --nav-icon-color: #c084fc;
       --card-title-color: #ffffff;
-      --tag-bg: rgba(155, 44, 243, 0.15);
-      --tag-text: #e9d5ff;
+      --star-bg: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+      --star-opacity: 1;
     }
 
     html.light {
@@ -59,13 +59,12 @@
       --nav-logo-color: #581c87;
       --nav-icon-color: #6b21a8;
       --card-title-color: #3b0764;
-      --tag-bg: rgba(126, 34, 206, 0.15);
-      --tag-text: #581c87;
+      --star-bg: radial-gradient(ellipse at bottom, #e2e8f0 0%, #cbd5e1 100%);
+      --star-opacity: 0.3;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     
-    /* إلغاء أي فراغ علوي تماماً */
     html, body { 
       width: 100%;
       max-width: 100vw; 
@@ -81,39 +80,51 @@
     h1, h2, h3, .font-head { font-family: 'Cinzel', serif; letter-spacing: 1.5px; }
     html[dir="rtl"] h1, html[dir="rtl"] h2, html[dir="rtl"] h3, html[dir="rtl"] .font-head { font-family: 'Cairo', sans-serif; letter-spacing: 0; }
 
-    /* ---------- STAR BACKGROUND FIXED ---------- */
+    /* ---------- FULL STARRY BACKGROUND (الخلفية بالكامل) ---------- */
     .stars-background-container {
       position: fixed;
       top: 0; left: 0;
       width: 100vw; height: 100vh;
-      background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+      background: var(--star-bg);
       overflow: hidden;
-      z-index: -1 !important; /* خلف الكل لتجنب منع ضغط الأزرار */
+      z-index: 0;
       pointer-events: none;
+      transition: background 0.4s ease;
     }
-
-    html.light .stars-background-container { opacity: 0.15; }
 
     #stars, #stars2, #stars3 {
       position: absolute;
       top: 0; left: 0;
       background: transparent;
+      opacity: var(--star-opacity);
+      transition: opacity 0.4s ease;
     }
 
     #stars {
       width: 1px; height: 1px;
-      box-shadow: 501px 811px #fff, 1450px 1324px #fff, 1093px 1780px #fff, 1469px 678px #fff, 904px 741px #fff, 1160px 781px #fff, 1841px 1962px #fff, 1630px 1667px #fff, 1788px 676px #fff, 367px 1734px #fff, 1343px 156px #fff, 1283px 1142px #fff, 1062px 378px #fff;
+      box-shadow: 501px 811px #fff, 1450px 1324px #fff, 1093px 1780px #fff, 1469px 678px #fff, 904px 741px #fff, 1160px 781px #fff, 1841px 1962px #fff, 1630px 1667px #fff, 1788px 676px #fff, 367px 1734px #fff, 1343px 156px #fff, 1283px 1142px #fff, 1062px 378px #fff, 1395px 467px #fff, 1017px 1891px #fff, 137px 1114px #fff, 1767px 1403px #fff, 1543px 11px #fff, 1078px 181px #fff, 1189px 1574px #fff, 1697px 1551px #fff, 439px 472px #fff, 1491px 677px #fff, 1364px 599px #fff;
       animation: animStar 50s linear infinite;
     }
+    #stars:after {
+      content: " "; position: absolute; top: 2000px; width: 1px; height: 1px; background: transparent; box-shadow: inherit;
+    }
+
     #stars2 {
       width: 2px; height: 2px;
-      box-shadow: 1925px 1320px #fff, 693px 1778px #fff, 1016px 711px #fff, 1171px 563px #fff, 661px 1919px #fff, 1610px 44px #fff, 1275px 140px #fff;
+      box-shadow: 1925px 1320px #fff, 693px 1778px #fff, 1016px 711px #fff, 1171px 563px #fff, 661px 1919px #fff, 1610px 44px #fff, 1275px 140px #fff, 1208px 1802px #fff, 1473px 1587px #fff, 11px 1117px #fff, 853px 1757px #fff, 1149px 937px #fff;
       animation: animStar 100s linear infinite;
     }
+    #stars2:after {
+      content: " "; position: absolute; top: 2000px; width: 2px; height: 2px; background: transparent; box-shadow: inherit;
+    }
+
     #stars3 {
       width: 3px; height: 3px;
-      box-shadow: 200px 981px #fff, 1731px 521px #fff, 132px 1039px #fff, 1888px 1547px #fff, 899px 1226px #fff, 1887px 580px #fff;
+      box-shadow: 200px 981px #fff, 1731px 521px #fff, 132px 1039px #fff, 1888px 1547px #fff, 899px 1226px #fff, 1887px 580px #fff, 1548px 1092px #fff, 1626px 689px #fff, 254px 1072px #fff, 1684px 1211px #fff;
       animation: animStar 150s linear infinite;
+    }
+    #stars3:after {
+      content: " "; position: absolute; top: 2000px; width: 3px; height: 3px; background: transparent; box-shadow: inherit;
     }
 
     @keyframes animStar {
@@ -121,7 +132,7 @@
       to { transform: translateY(-2000px); }
     }
 
-    /* ---------- VORTX WET TITLE ---------- */
+    /* ---------- VORTX LIQUID/WET TITLE ---------- */
     .vortx-wet-title {
       position: relative;
       display: inline-block;
@@ -185,7 +196,7 @@
       box-shadow: 0 20px 40px rgba(168, 85, 247, 0.5);
     }
 
-    /* ---------- Glass Base ---------- */
+    /* ---------- Glass Elements ---------- */
     .glass {
       background: rgba(255, 255, 255, 0.03);
       backdrop-filter: blur(16px) saturate(140%);
@@ -197,12 +208,11 @@
       border: 1px solid rgba(126, 34, 206, 0.15);
     }
 
-    .hero-pill-tag { background-color: var(--tag-bg); color: var(--tag-text); border: 1px solid rgba(168, 85, 247, 0.3); }
     .text-3d-header { color: var(--nav-logo-color); font-weight: 900; }
     .lang-btn-icon { color: var(--nav-icon-color); }
 
-    /* ---------- SWIPER FIXED LAYOUT ---------- */
-    .swiper { width: 100%; padding-top: 30px; padding-bottom: 60px; overflow: visible !important; }
+    /* ---------- SWIPER 3D FIXED ---------- */
+    .swiper { width: 100%; padding-top: 30px; padding-bottom: 60px; overflow: hidden; }
     .swiper-slide { 
       width: 300px !important; 
       height: 440px !important; 
@@ -220,7 +230,7 @@
     .card-glow-purple { box-shadow: 0 15px 45px -5px rgba(168, 85, 247, 0.45); }
     .card-glow-cyan { box-shadow: 0 15px 45px -5px rgba(6, 182, 212, 0.45); }
 
-    /* ---------- Web Bundle Banner ---------- */
+    /* ---------- Banner Cards ---------- */
     .glossy-bundle-card {
       position: relative;
       border-radius: 2.5rem;
@@ -237,7 +247,6 @@
 
     .bundle-title-text { color: var(--card-title-color); }
 
-    /* ---------- Category Cards ---------- */
     .cat-card-glass {
       background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
       backdrop-filter: blur(16px);
@@ -272,7 +281,7 @@
 
 <body>
 
-  <!-- BACKGROUND FIXED STARS -->
+  <!-- STARS BACKGROUND -->
   <div class="stars-background-container">
     <div id="stars"></div>
     <div id="stars2"></div>
@@ -282,8 +291,8 @@
   <div id="scroll-progress"></div>
   <div id="toast-box" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[100] flex flex-col gap-3 pointer-events-none"></div>
 
-  <!-- NAVBAR FIXED TOP -->
-  <header class="sticky top-0 z-50">
+  <!-- NAVBAR FIXED TOP WITHOUT SPACE -->
+  <header class="sticky top-0 z-50 w-full">
     <nav class="glass border-b-0 bg-black/40 backdrop-blur-md">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
         <a href="#top" class="flex items-center gap-3 active:scale-95 transition-transform duration-200">
@@ -323,7 +332,7 @@
 
     <!-- HERO SECTION -->
     <section class="max-w-6xl mx-auto px-4 sm:px-6 pt-12 pb-20 text-center relative">
-      <div class="inline-flex items-center gap-3 px-6 py-2.5 rounded-full text-xs font-bold tracking-widest uppercase hero-pill-tag backdrop-blur-md mb-8 shadow-sm">
+      <div class="inline-flex items-center gap-3 px-6 py-2.5 rounded-full text-xs font-bold tracking-widest uppercase glass backdrop-blur-md mb-8 shadow-sm">
         <span class="w-2 h-2 rounded-full bg-purple-400 animate-ping"></span>
         <span data-i18n="hero-tag">Digital Assets Hub</span>
       </div>
@@ -568,7 +577,6 @@
     });
   }
 
-  // تشغيل السلايدر فوراً
   window.addEventListener('DOMContentLoaded', () => {
     initSwiper();
   });
