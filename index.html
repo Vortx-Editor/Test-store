@@ -48,7 +48,7 @@
       --brandLight: #a855f7;
       --bg-color: #050505;
       --text-color: #e8e8ef;
-      --nav-logo-color: #c084fc;
+      --nav-logo-color: #ffffff;
       --nav-icon-color: #c084fc;
       --card-title-color: #ffffff;
       --star-bg: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
@@ -58,12 +58,11 @@
       --btn-text-color: rgba(255, 255, 255, 0.95);
     }
 
-    /* التوازن الدقيق للوضع النهاري (Light Mode Balance) */
     html.light {
       --ink: #f8fafc;
       --bg-color: #f1f5f9;
       --text-color: #0f172a;
-      --nav-logo-color: #581c87;
+      --nav-logo-color: #3b0764;
       --nav-icon-color: #6b21a8;
       --card-title-color: #3b0764;
       --star-bg: radial-gradient(ellipse at bottom, #e2e8f0 0%, #cbd5e1 100%);
@@ -134,42 +133,98 @@
       to { transform: translateY(-2000px); }
     }
 
-    /* ---------- VORTX TITLE WET SHINE ---------- */
-    .vortx-wet-title {
+    /* ---------- NEW UIVERSE GLASS EFFECT FOR VORTX TITLES ---------- */
+    .vortx-glass-wrapper {
+      position: relative;
+      display: inline-block;
+      padding: 0.5rem 1rem;
+    }
+
+    /* Bloom Glow Effects (التوهج الضوئي خلف الكلمة) */
+    .vortx-glass-wrapper .bloom {
+      height: 1px;
+      width: 1px;
+      position: absolute;
+      background: white;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .vortx-glass-wrapper .bloom1 {
+      top: 20%;
+      right: 15%;
+      box-shadow:
+        rgb(255, 255, 255) 0px 0px 25px 15px,
+        rgba(168, 85, 247, 0.8) 0px 0px 45px 30px;
+    }
+
+    .vortx-glass-wrapper .bloom2 {
+      bottom: 20%;
+      left: 15%;
+      box-shadow:
+        rgba(255, 255, 255, 0.8) 0px 0px 20px 15px,
+        rgba(126, 34, 206, 0.8) 0px 0px 40px 25px;
+    }
+
+    /* VORTX Main Title Text */
+    .vortx-glass-title {
+      position: relative;
+      z-index: 2;
+      font-weight: 900;
+      color: #ffffff;
+      text-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+      background: linear-gradient(180deg, #ffffff 30%, rgba(255, 255, 255, 0.7) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    html.light .vortx-glass-title {
+      background: linear-gradient(180deg, #2e1065 30%, #581c87 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Glass Overlay Layer (طبقة الزجاج المعكوسة العلوية) */
+    .vortx-glass-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      border-radius: 1.5rem;
+      background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.25) 50%,
+        rgba(255, 255, 255, 0.05) 100%
+      );
+      border-left: 2px solid rgba(255, 255, 255, 0.4);
+      border-right: 2px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px);
+      pointer-events: none;
+      mix-blend-mode: overlay;
+    }
+
+    /* VORTX Header Small Logo Glass Effect */
+    .vortx-header-glass {
       position: relative;
       display: inline-block;
       font-weight: 900;
-      background: linear-gradient(135deg, #ffffff 0%, #e9d5ff 30%, #c084fc 70%, #9333ea 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      filter: drop-shadow(0 0 20px rgba(168, 85, 247, 0.6));
+      color: var(--nav-logo-color);
+      letter-spacing: 2px;
+      padding: 2px 8px;
     }
 
-    .vortx-wet-title::before {
-      content: 'VORTX';
+    .vortx-header-glass::after {
+      content: '';
       position: absolute;
-      left: 0; top: 0; width: 100%; height: 100%;
-      background: linear-gradient(115deg, transparent 0%, transparent 40%, rgba(255, 255, 255, 0.95) 50%, rgba(255, 255, 255, 0.3) 55%, transparent 65%, transparent 100%);
-      background-size: 200% 100%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: liquidShineSweep 3.5s infinite ease-in-out;
+      inset: 0;
+      border-radius: 6px;
+      background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.3) 100%);
+      border-left: 1px solid rgba(255, 255, 255, 0.5);
       pointer-events: none;
     }
 
-    @keyframes liquidShineSweep {
-      0% { background-position: 200% 0; }
-      100% { background-position: -200% 0; }
-    }
-
-    html.light .vortx-wet-title {
-      background: linear-gradient(135deg, #2e1065 0%, #581c87 40%, #7e22ce 70%, #a855f7 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      filter: drop-shadow(0 0 10px rgba(126, 34, 206, 0.2));
-    }
-
-    /* ---------- CUSTOM LUXURY SWITCH BUTTON (زر تبديل الليل والنهار الفخم الأصلي) ---------- */
+    /* ---------- CUSTOM LUXURY SWITCH BUTTON ---------- */
     .theme-switch-btn {
       width: 64px; height: 34px; border-radius: 999px;
       background: linear-gradient(135deg, #1e1b4b, #311042);
@@ -435,8 +490,9 @@
   <header class="sticky top-0 z-50 w-full">
     <nav class="glass border-b-0 bg-black/40 backdrop-blur-md">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+        <!-- VORTX Header Small Logo with Glass Effect -->
         <a href="#top" class="flex items-center gap-3">
-          <span class="font-head font-extrabold text-2xl tracking-widest text-3d-header">VORTX</span>
+          <span class="font-head text-2xl vortx-header-glass">VORTX</span>
         </a>
 
         <ul class="hidden md:flex items-center gap-10 text-sm font-bold opacity-80 mx-auto">
@@ -446,12 +502,11 @@
         </ul>
 
         <div class="flex items-center gap-3 relative z-50">
-          <!-- زر تحويل اللغة -->
           <button onclick="toggleLanguage()" class="glass w-10 h-10 rounded-full flex items-center justify-center border-purple-500/30 text-brandLight font-extrabold text-xs" title="Change Language">
             🌐
           </button>
 
-          <!-- زر الليل والنهار الفخم الأصلي (Custom Luxury Switch Button) -->
+          <!-- Luxury Switch Button (الزر الفخم الأصلي) -->
           <button onclick="toggleTheme()" class="theme-switch-btn" title="Toggle Theme">
             <div class="theme-switch-ball">
               <svg class="w-3.5 h-3.5 text-slate-800" fill="currentColor" viewBox="0 0 20 20">
@@ -475,10 +530,16 @@
         <span data-i18n="hero-tag">Digital Assets Hub</span>
       </div>
 
-      <div class="relative my-2 px-4">
-        <h1 class="font-head font-black tracking-[0.25em] text-7xl sm:text-9xl md:text-[10rem] vortx-wet-title relative z-10 leading-none py-4">
-          VORTX
-        </h1>
+      <!-- VORTX MAIN TITLE WITH GLASS & BLOOM GLOW -->
+      <div class="relative my-2 px-4 inline-block">
+        <div class="vortx-glass-wrapper">
+          <div class="bloom bloom1"></div>
+          <div class="bloom bloom2"></div>
+          <h1 class="font-head font-black tracking-[0.25em] text-7xl sm:text-9xl md:text-[10rem] vortx-glass-title relative z-10 leading-none py-4">
+            VORTX
+          </h1>
+          <div class="vortx-glass-overlay"></div>
+        </div>
       </div>
 
       <p data-i18n="hero-desc" class="font-semibold opacity-85 max-w-2xl mx-auto text-base sm:text-xl leading-relaxed mt-4 mb-10">
