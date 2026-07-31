@@ -47,16 +47,20 @@
       --text-color: #e8e8ef;
       --nav-logo-color: #c084fc;
       --nav-icon-color: #c084fc;
-      --card-bg-light: rgba(255, 255, 255, 0.03);
+      --card-title-color: #ffffff;
+      --tag-bg: rgba(155, 44, 243, 0.15);
+      --tag-text: #e9d5ff;
     }
 
     html.light {
-      --ink: #f1f5f9;
-      --bg-color: #f8fafc;
+      --ink: #f8fafc;
+      --bg-color: #f1f5f9;
       --text-color: #0f172a;
-      --nav-logo-color: #6b21a8;
+      --nav-logo-color: #581c87;
       --nav-icon-color: #6b21a8;
-      --card-bg-light: rgba(15, 23, 42, 0.04);
+      --card-title-color: #3b0764; /* إصلاح اختفاء النص بالوضع الفاتح */
+      --tag-bg: rgba(126, 34, 206, 0.15);
+      --tag-text: #581c87;
     }
 
     *, *::before, *::after { box-sizing: border-box; }
@@ -82,14 +86,19 @@
       z-index: 9999; transition: width 0.1s ease-out;
     }
 
-    /* ---------- Canvas Background ---------- */
     #bg-canvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
     .glow-field {
       position: fixed; inset: 0; z-index: 0; pointer-events: none;
       background: radial-gradient(800px circle at 50% 0%, rgba(168, 85, 247, 0.25), transparent 70%);
     }
 
-    /* ---------- Glowing Title ---------- */
+    /* ---------- VORTX Raindrop Effect (قطرات المطر على الاسم) ---------- */
+    .vortx-rain-wrapper {
+      position: relative;
+      display: inline-block;
+      overflow: hidden;
+    }
+
     .hero-vortx-title {
       background: linear-gradient(135deg, #ffffff 0%, #e9d5ff 35%, #c084fc 70%, #9333ea 100%);
       -webkit-background-clip: text;
@@ -100,69 +109,72 @@
     }
 
     html.light .hero-vortx-title {
-      background: linear-gradient(135deg, #3b0764 0%, #6b21a8 40%, #7e22ce 70%, #a855f7 100%);
+      background: linear-gradient(135deg, #2e1065 0%, #581c87 40%, #7e22ce 70%, #a855f7 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      filter: drop-shadow(0 0 15px rgba(126, 34, 206, 0.2));
+      filter: drop-shadow(0 0 10px rgba(126, 34, 206, 0.2));
     }
 
-    /* ---------- Liquid Glass Water Drop Button (زر قطرة الموية الزجاجي) ---------- */
+    /* انيميشن قطرات المطر الشفافة */
+    .raindrop {
+      position: absolute;
+      background: linear-gradient(180deg, rgba(255,255,255,0.8), rgba(168,85,247,0.4));
+      width: 2px;
+      height: 12px;
+      opacity: 0.7;
+      border-radius: 50%;
+      animation: dropFall 2s infinite linear;
+      pointer-events: none;
+      z-index: 20;
+    }
+
+    @keyframes dropFall {
+      0% { top: -10px; opacity: 0; transform: scaleY(1); }
+      50% { opacity: 0.8; }
+      90% { opacity: 1; transform: scaleY(1.5); }
+      100% { top: 90%; opacity: 0; transform: scaleY(0.3); }
+    }
+
+    /* ---------- Water Drop Pill Button ---------- */
     .water-drop-btn {
       position: relative;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 18px 48px;
+      padding: 16px 44px;
       border-radius: 999px;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       font-weight: 800;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
       color: #ffffff;
-      background: rgba(168, 85, 247, 0.25);
-      backdrop-filter: blur(20px) saturate(200%);
-      -webkit-backdrop-filter: blur(20px) saturate(200%);
+      background: rgba(168, 85, 247, 0.3);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       border: 1.5px solid rgba(255, 255, 255, 0.4);
       box-shadow: 
-        0 20px 40px rgba(126, 34, 206, 0.4),
-        inset 0 4px 6px rgba(255, 255, 255, 0.6),
-        inset 0 -4px 6px rgba(0, 0, 0, 0.4);
-      overflow: hidden;
-      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        0 15px 35px rgba(126, 34, 206, 0.35),
+        inset 0 3px 5px rgba(255, 255, 255, 0.7),
+        inset 0 -3px 5px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     html.light .water-drop-btn {
-      color: #4c1d95;
-      background: rgba(168, 85, 247, 0.15);
-      border-color: rgba(168, 85, 247, 0.5);
+      color: #3b0764;
+      background: rgba(168, 85, 247, 0.2);
+      border-color: rgba(126, 34, 206, 0.4);
       box-shadow: 
-        0 15px 30px rgba(126, 34, 206, 0.2),
+        0 12px 25px rgba(126, 34, 206, 0.18),
         inset 0 3px 5px rgba(255, 255, 255, 0.9),
         inset 0 -3px 5px rgba(168, 85, 247, 0.2);
     }
 
-    /* لمعان قطرة الموية الضوئي العالي (Water Gloss Lens) */
-    .water-drop-btn::before {
-      content: '';
-      position: absolute;
-      top: 2px;
-      left: 10%;
-      width: 80%;
-      height: 45%;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 0.05) 100%);
-      border-radius: 999px 999px 50% 50%;
-      pointer-events: none;
-    }
-
     .water-drop-btn:hover {
-      transform: translateY(-4px) scale(1.05);
-      box-shadow: 
-        0 25px 50px rgba(168, 85, 247, 0.6),
-        inset 0 6px 10px rgba(255, 255, 255, 0.9);
-      border-color: rgba(255, 255, 255, 0.8);
+      transform: translateY(-3px) scale(1.04);
+      box-shadow: 0 20px 40px rgba(168, 85, 247, 0.5), inset 0 4px 8px rgba(255, 255, 255, 0.9);
     }
 
-    /* ---------- Glass Base & Light Mode Optimization ---------- */
+    /* ---------- Glass Styles ---------- */
     .glass {
       background: rgba(255, 255, 255, 0.03);
       backdrop-filter: blur(16px) saturate(140%);
@@ -170,35 +182,36 @@
       border: 1px solid rgba(255, 255, 255, 0.08);
     }
     html.light .glass {
-      background: rgba(255, 255, 255, 0.8);
-      border: 1px solid rgba(15, 23, 42, 0.08);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid rgba(126, 34, 206, 0.15);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    }
+
+    .hero-pill-tag {
+      background-color: var(--tag-bg);
+      color: var(--tag-text);
+      border: 1px solid rgba(168, 85, 247, 0.3);
     }
 
     .text-3d-header { color: var(--nav-logo-color); font-weight: 900; }
     .lang-btn-icon { color: var(--nav-icon-color); }
 
-    /* ---------- 3D Swiper Cards Adjustments (كروت الـ 3D المحدثة) ---------- */
+    /* ---------- Swiper 3D Fixed ---------- */
     .swiper { width: 100%; padding-top: 40px; padding-bottom: 70px; }
     .swiper-slide { 
-      width: 320px; 
-      height: 470px; 
+      width: 310px; 
+      height: 460px; 
       border-radius: 2.2rem; 
       position: relative;
-      transition: transform 0.4s ease, box-shadow 0.4s ease;
     }
 
-    /* حواف 3D بارزة للكروت */
     .card-3d-frame {
       border: 1.5px solid rgba(255, 255, 255, 0.2);
-      box-shadow: 
-        0 20px 40px -10px rgba(0,0,0,0.8),
-        inset 0 1px 2px rgba(255, 255, 255, 0.4),
-        inset 0 -2px 4px rgba(0,0,0,0.6);
+      box-shadow: 0 20px 40px -10px rgba(0,0,0,0.8), inset 0 1px 2px rgba(255, 255, 255, 0.4);
     }
     html.light .card-3d-frame {
       border-color: rgba(126, 34, 206, 0.2);
-      box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.08);
     }
 
     .card-glow-red { box-shadow: 0 15px 45px -5px rgba(239, 68, 68, 0.45); }
@@ -206,7 +219,7 @@
     .card-glow-purple { box-shadow: 0 15px 45px -5px rgba(168, 85, 247, 0.45); }
     .card-glow-cyan { box-shadow: 0 15px 45px -5px rgba(6, 182, 212, 0.45); }
 
-    /* ---------- Web Bundle Banner ---------- */
+    /* ---------- Web Bundle Banner & Fix Light Mode Text ---------- */
     .glossy-bundle-card {
       position: relative;
       border-radius: 2.5rem;
@@ -218,8 +231,13 @@
     }
 
     html.light .glossy-bundle-card {
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(243, 232, 255, 0.6) 100%);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(243, 232, 255, 0.7) 100%);
       border-color: rgba(168, 85, 247, 0.4);
+      box-shadow: 0 20px 40px rgba(126, 34, 206, 0.12);
+    }
+
+    .bundle-title-text {
+      color: var(--card-title-color);
     }
 
     /* ---------- Category Cards ---------- */
@@ -241,7 +259,7 @@
       border-color: rgba(168, 85, 247, 0.6);
     }
 
-    /* ---------- Custom Switch Button ---------- */
+    /* ---------- Custom Switch ---------- */
     .theme-switch-btn {
       width: 64px; height: 34px; border-radius: 999px;
       background: linear-gradient(135deg, #1e1b4b, #311042);
@@ -314,12 +332,20 @@
     <section class="max-w-6xl mx-auto px-4 sm:px-6 pt-16 pb-24 text-center relative">
       <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] sm:w-[800px] h-[350px] bg-purple-600/20 rounded-full blur-[150px] pointer-events-none -z-10"></div>
       
-      <div class="inline-flex items-center gap-3 px-6 py-2.5 rounded-full text-xs font-bold tracking-widest uppercase text-purple-300 border border-purple-500/20 bg-purple-950/20 backdrop-blur-md mb-8 shadow-sm">
+      <div class="inline-flex items-center gap-3 px-6 py-2.5 rounded-full text-xs font-bold tracking-widest uppercase hero-pill-tag backdrop-blur-md mb-8 shadow-sm">
         <span class="w-2 h-2 rounded-full bg-purple-400 animate-ping"></span>
         <span data-i18n="hero-tag">Digital Assets Hub</span>
       </div>
 
-      <div class="relative my-2">
+      <!-- VORTX TITLE WITH RAINDROPS EFFECT -->
+      <div class="relative my-2 vortx-rain-wrapper px-4">
+        <!-- قطرات مطر ناعمة تتساقط فوق الحروف -->
+        <div class="raindrop" style="left: 15%; animation-delay: 0s;"></div>
+        <div class="raindrop" style="left: 35%; animation-delay: 0.6s;"></div>
+        <div class="raindrop" style="left: 55%; animation-delay: 1.2s;"></div>
+        <div class="raindrop" style="left: 75%; animation-delay: 0.3s;"></div>
+        <div class="raindrop" style="left: 88%; animation-delay: 1.7s;"></div>
+
         <h1 class="font-head font-black tracking-[0.25em] text-7xl sm:text-9xl md:text-[10rem] hero-vortx-title relative z-10 leading-none py-4">
           VORTX
         </h1>
@@ -329,7 +355,6 @@
         High-end VFX packs, cinematic presets & custom web experiences. Crafted specifically for elite creators.
       </p>
 
-      <!-- Liquid Water Drop Button -->
       <div class="flex items-center justify-center">
         <a href="#bundles" data-i18n="hero-btn" class="water-drop-btn">
           Explore Tiers
@@ -342,9 +367,11 @@
       <div class="glossy-bundle-card p-8 sm:p-14 relative flex flex-col md:flex-row items-center justify-between gap-10">
         <div class="text-center md:text-left rtl:md:text-right max-w-2xl relative z-10 w-full">
           <span data-i18n="bundle-sub" class="text-xs tracking-widest uppercase font-extrabold text-brandLight block mb-2">Custom Web Solutions</span>
-          <h2 data-i18n="bundle-title" class="font-head font-black text-3xl sm:text-4xl md:text-5xl whitespace-nowrap overflow-hidden text-ellipsis mb-4 text-transparent bg-clip-text bg-gradient-to-r from-white via-purple-100 to-purple-300 light:from-purple-950 light:to-purple-700">
+          
+          <h2 data-i18n="bundle-title" class="font-head font-black text-3xl sm:text-4xl md:text-5xl whitespace-nowrap overflow-hidden text-ellipsis mb-4 bundle-title-text">
             Web Page Bundles
           </h2>
+          
           <p data-i18n="bundle-desc" class="font-bold opacity-80 leading-relaxed text-sm sm:text-lg">
             Launch your custom digital space today. Stand out with next-gen designs, premium performance, and join the elite creators.
           </p>
@@ -358,7 +385,7 @@
       </div>
     </section>
 
-    <!-- FEATURED PACKS (3D SWIPER + AUTOPLAY + PAUSE ON HOVER/CLICK) -->
+    <!-- FEATURED PACKS (SWIPER 3D AUTOPLAY FIXED) -->
     <section id="packs" class="py-16 max-w-7xl mx-auto px-4 sm:px-6">
       <div class="mb-8 text-left ltr:text-left rtl:text-right">
         <h2 data-i18n="packs-title" class="font-head font-bold text-3xl sm:text-4xl">Featured Packs</h2>
@@ -553,7 +580,7 @@
   </div>
 
   <script>
-  /* Swiper 3D + Autoplay + Pause on Hover/Touch Setup */
+  /* Swiper 3D Config */
   var swiper = new Swiper(".mySwiper", {
     effect: "coverflow",
     grabCursor: true,
@@ -641,10 +668,13 @@
 
   let currentLang = 'en';
 
+  /* إصلاح مشكلة اختفاء الكروت عند تحويل الاتجاه RTL/LTR */
   function toggleLanguage() {
     currentLang = currentLang === 'en' ? 'ar' : 'en';
     const htmlEl = document.documentElement;
-    htmlEl.setAttribute('dir', currentLang === 'ar' ? 'rtl' : 'ltr');
+    const isRtl = currentLang === 'ar';
+    
+    htmlEl.setAttribute('dir', isRtl ? 'rtl' : 'ltr');
     htmlEl.setAttribute('lang', currentLang);
 
     document.querySelectorAll('[data-i18n]').forEach(el => {
@@ -654,10 +684,13 @@
       }
     });
 
-    /* إجبار Swiper على التحديث لمنع اختفاء الكروت عند تبديل اللغة */
-    setTimeout(() => {
-      swiper.update();
-    }, 100);
+    /* تجديد حسابات Swiper فوراً لمنع اختفاء الكروت باللغة العربية */
+    if (swiper) {
+      setTimeout(() => {
+        swiper.changeLanguageDirection(isRtl ? 'rtl' : 'ltr');
+        swiper.update();
+      }, 50);
+    }
   }
 
   function toggleTheme() {
