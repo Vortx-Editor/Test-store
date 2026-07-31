@@ -56,7 +56,7 @@
     }
 
     html { scroll-behavior: smooth; overflow-x: hidden; }
-    body { background-color: var(--bg-color); color: var(--text-color); font-family: 'Inter', sans-serif; transition: background-color 0.3s ease, color 0.3s ease; }
+    body { background-color: var(--bg-color); color: var(--text-color); font-family: 'Inter', sans-serif; transition: background-color 0.4s ease, color 0.4s ease; }
 
     h1, h2, h3, .font-head { font-family: 'Cinzel', serif; letter-spacing: 1.5px; }
 
@@ -74,23 +74,19 @@
       background: radial-gradient(800px circle at 50% 0%, rgba(126, 34, 206, 0.15), transparent 70%);
     }
 
-    /* ---------- Glassmorphism & Borders ---------- */
+    /* ---------- Glassmorphism ---------- */
     .glass {
-      background: rgba(255, 255, 255, 0.02);
+      background: rgba(255, 255, 255, 0.03);
       backdrop-filter: blur(16px) saturate(140%);
       -webkit-backdrop-filter: blur(16px) saturate(140%);
       border: 1px solid rgba(255, 255, 255, 0.08);
     }
     html.light .glass {
-      background: rgba(0, 0, 0, 0.03);
+      background: rgba(0, 0, 0, 0.04);
       border: 1px solid rgba(0, 0, 0, 0.08);
     }
-    .glass:hover {
-      border: 1px solid rgba(126, 34, 206, 0.5);
-      box-shadow: 0 10px 30px -10px rgba(126, 34, 206, 0.2);
-    }
 
-    /* ---------- VORTX 3D Dark & Heavy Logo ---------- */
+    /* ---------- VORTX 3D Logo ---------- */
     .text-3d-heavy {
       color: #7e22ce;
       font-weight: 900;
@@ -106,23 +102,31 @@
         0 0 40px rgba(126,34,206,0.4);
     }
 
-    /* ---------- Buttons ---------- */
-    .btn-primary {
-      background: var(--brand); color: white;
-      box-shadow: 0 0 20px rgba(126, 34, 206, 0.5);
-    }
-
-    /* ---------- Swiper Customization ---------- */
+    /* ---------- Swiper 3D & Colorful Glows ---------- */
     .swiper {
       width: 100%;
-      padding-top: 20px;
-      padding-bottom: 50px;
+      padding-top: 30px;
+      padding-bottom: 60px;
     }
     .swiper-slide {
-      background-position: center;
-      background-size: cover;
       width: 320px;
-      height: 450px;
+      height: 460px;
+      border-radius: 2rem;
+      position: relative;
+    }
+
+    /* Glow Elements */
+    .card-glow-red {
+      box-shadow: 0 0 50px -5px rgba(239, 68, 68, 0.4);
+    }
+    .card-glow-yellow {
+      box-shadow: 0 0 50px -5px rgba(234, 179, 8, 0.4);
+    }
+    .card-glow-purple {
+      box-shadow: 0 0 50px -5px rgba(168, 85, 247, 0.4);
+    }
+    .card-glow-cyan {
+      box-shadow: 0 0 50px -5px rgba(6, 182, 212, 0.4);
     }
 
     .view { transition: opacity .4s ease; opacity: 1; }
@@ -131,14 +135,14 @@
 </head>
 
 <body>
-  <!-- Scroll Progress -->
+  <!-- Scroll Progress Bar -->
   <div id="scroll-progress"></div>
 
   <!-- Background Effects -->
   <canvas id="bg-canvas"></canvas>
   <div class="glow-field"></div>
 
-  <!-- Toast Notifications Container -->
+  <!-- Toast Container -->
   <div id="toast-box" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[100] flex flex-col gap-3 pointer-events-none"></div>
 
   <!-- =================== NAVBAR =================== -->
@@ -156,14 +160,13 @@
           <li><a href="#categories" class="hover:text-brandLight transition active:scale-95">Categories</a></li>
         </ul>
 
-        <!-- زر تحويل النمط -->
-        <button id="theme-toggle" onclick="toggleTheme()" class="relative flex items-center justify-center w-16 h-10 rounded-full glass hover:scale-105 active:scale-95 transition-transform overflow-hidden">
+        <!-- زر تحويل النمط المباشر مع حركة الـ Lottie -->
+        <button id="theme-toggle" onclick="toggleTheme()" class="relative flex items-center justify-center w-16 h-10 rounded-full glass hover:scale-105 active:scale-95 transition-transform overflow-hidden cursor-pointer">
           <dotlottie-wc 
             id="lottie-theme-btn"
             src="https://lottie.host/c872af94-2016-4421-8b86-2e8f65cfad86/iw8UWWe07O.lottie" 
             stateMachineId="StateMachine1"
-            autoplay
-            style="width: 140px; height: 140px; pointer-events: none; transform: scale(1.3);">
+            style="width: 140px; height: 140px; pointer-events: none; transform: scale(1.35);">
           </dotlottie-wc>
         </button>
       </div>
@@ -218,51 +221,70 @@
       </div>
     </section>
 
-    <!-- FEATURED PACKS (REAL TOUCH SWIPER 3D) -->
+    <!-- FEATURED PACKS (3D SWIPER + MULTI-COLOR GLOW & GLASS) -->
     <section id="packs" class="py-20 max-w-7xl mx-auto px-4 sm:px-6">
       <div class="mb-8 text-left">
         <h2 class="font-head font-bold text-3xl sm:text-4xl">Featured Packs</h2>
-        <p class="font-bold opacity-50 text-sm mt-3 tracking-wide">اسحب الكروت بأصبعك يمين ويسار</p>
+        <p class="font-bold opacity-50 text-sm mt-3 tracking-wide">Swipe left & right to interact.</p>
       </div>
       
-      <!-- Swiper Carousel -->
       <div class="swiper mySwiper">
         <div class="swiper-wrapper">
-          <!-- Card 1 -->
-          <div onclick="openPreview('Neon Nights', 'Color')" class="swiper-slide glass rounded-[2rem] p-6 flex flex-col justify-between items-center text-center cursor-pointer border border-brand/30 hover:border-brandLight transition-all">
-            <span class="text-[10px] uppercase font-bold tracking-widest px-4 py-1.5 rounded-full border border-brand/30 bg-brand/10 text-brandLight self-start">Color</span>
-            <div class="w-full h-64 my-4 rounded-2xl bg-gradient-to-br from-purple-900/40 to-black flex items-center justify-center border border-white/5">
-              <span class="font-head font-extrabold text-3xl text-brandLight">NEON</span>
+          
+          <!-- Card 1: Red/Orange Glow -->
+          <div onclick="openPreview('Flame Pack', 'VFX')" class="swiper-slide glass card-glow-red p-6 flex flex-col justify-between items-center text-center cursor-pointer border border-red-500/40 hover:border-red-400 transition-all">
+            <!-- Neon Ambient Glow Layer Inside -->
+            <div class="absolute -top-10 -right-10 w-40 h-40 bg-red-600/30 rounded-full blur-3xl pointer-events-none"></div>
+            
+            <span class="text-[10px] uppercase font-bold tracking-widest px-4 py-1.5 rounded-full border border-red-500/30 bg-red-500/10 text-red-400 self-start z-10">VFX</span>
+            
+            <!-- Glass Container for Custom Images -->
+            <div class="w-full h-64 my-4 rounded-2xl glass border border-white/10 flex items-center justify-center overflow-hidden relative z-10">
+              <img src="https://picsum.photos/400/500?random=1" class="w-full h-full object-cover opacity-80 hover:scale-105 transition-transform duration-500" alt="Sample" />
             </div>
-            <h3 class="font-head font-bold text-xl text-white">Neon Nights</h3>
+            
+            <h3 class="font-head font-bold text-xl text-white z-10">Red Inferno</h3>
           </div>
 
-          <!-- Card 2 -->
-          <div onclick="openPreview('Cyber Shake', 'Camera')" class="swiper-slide glass rounded-[2rem] p-6 flex flex-col justify-between items-center text-center cursor-pointer border border-brand/30 hover:border-brandLight transition-all">
-            <span class="text-[10px] uppercase font-bold tracking-widest px-4 py-1.5 rounded-full border border-brand/30 bg-brand/10 text-brandLight self-start">Camera</span>
-            <div class="w-full h-64 my-4 rounded-2xl bg-gradient-to-br from-blue-900/40 to-black flex items-center justify-center border border-white/5">
-              <span class="font-head font-extrabold text-3xl text-blue-400">SHAKE</span>
+          <!-- Card 2: Yellow/Gold Glow -->
+          <div onclick="openPreview('Cyber Gold', 'Color')" class="swiper-slide glass card-glow-yellow p-6 flex flex-col justify-between items-center text-center cursor-pointer border border-yellow-500/40 hover:border-yellow-400 transition-all">
+            <div class="absolute -top-10 -right-10 w-40 h-40 bg-yellow-600/30 rounded-full blur-3xl pointer-events-none"></div>
+            
+            <span class="text-[10px] uppercase font-bold tracking-widest px-4 py-1.5 rounded-full border border-yellow-500/30 bg-yellow-500/10 text-yellow-400 self-start z-10">Color</span>
+            
+            <div class="w-full h-64 my-4 rounded-2xl glass border border-white/10 flex items-center justify-center overflow-hidden relative z-10">
+              <img src="https://picsum.photos/400/500?random=2" class="w-full h-full object-cover opacity-80 hover:scale-105 transition-transform duration-500" alt="Sample" />
             </div>
-            <h3 class="font-head font-bold text-xl text-white">Cyber Shake</h3>
+            
+            <h3 class="font-head font-bold text-xl text-white z-10">Cyber Gold</h3>
           </div>
 
-          <!-- Card 3 -->
-          <div onclick="openPreview('Glitch VFX', 'VFX')" class="swiper-slide glass rounded-[2rem] p-6 flex flex-col justify-between items-center text-center cursor-pointer border border-brand/30 hover:border-brandLight transition-all">
-            <span class="text-[10px] uppercase font-bold tracking-widest px-4 py-1.5 rounded-full border border-brand/30 bg-brand/10 text-brandLight self-start">VFX</span>
-            <div class="w-full h-64 my-4 rounded-2xl bg-gradient-to-br from-pink-900/40 to-black flex items-center justify-center border border-white/5">
-              <span class="font-head font-extrabold text-3xl text-pink-500">GLITCH</span>
+          <!-- Card 3: Purple/Neon Glow -->
+          <div onclick="openPreview('Neon Nights', 'Camera')" class="swiper-slide glass card-glow-purple p-6 flex flex-col justify-between items-center text-center cursor-pointer border border-purple-500/40 hover:border-purple-400 transition-all">
+            <div class="absolute -top-10 -right-10 w-40 h-40 bg-purple-600/30 rounded-full blur-3xl pointer-events-none"></div>
+            
+            <span class="text-[10px] uppercase font-bold tracking-widest px-4 py-1.5 rounded-full border border-purple-500/30 bg-purple-500/10 text-purple-400 self-start z-10">Camera</span>
+            
+            <div class="w-full h-64 my-4 rounded-2xl glass border border-white/10 flex items-center justify-center overflow-hidden relative z-10">
+              <img src="https://picsum.photos/400/500?random=3" class="w-full h-full object-cover opacity-80 hover:scale-105 transition-transform duration-500" alt="Sample" />
             </div>
-            <h3 class="font-head font-bold text-xl text-white">Glitch VFX</h3>
+            
+            <h3 class="font-head font-bold text-xl text-white z-10">Neon Nights</h3>
           </div>
 
-          <!-- Card 4 -->
-          <div onclick="openPreview('Cinematic Suite', 'Presets')" class="swiper-slide glass rounded-[2rem] p-6 flex flex-col justify-between items-center text-center cursor-pointer border border-brand/30 hover:border-brandLight transition-all">
-            <span class="text-[10px] uppercase font-bold tracking-widest px-4 py-1.5 rounded-full border border-brand/30 bg-brand/10 text-brandLight self-start">Presets</span>
-            <div class="w-full h-64 my-4 rounded-2xl bg-gradient-to-br from-amber-900/40 to-black flex items-center justify-center border border-white/5">
-              <span class="font-head font-extrabold text-3xl text-amber-400">CINEMA</span>
+          <!-- Card 4: Cyan/Blue Glow -->
+          <div onclick="openPreview('Hyper Blue', 'Presets')" class="swiper-slide glass card-glow-cyan p-6 flex flex-col justify-between items-center text-center cursor-pointer border border-cyan-500/40 hover:border-cyan-400 transition-all">
+            <div class="absolute -top-10 -right-10 w-40 h-40 bg-cyan-600/30 rounded-full blur-3xl pointer-events-none"></div>
+            
+            <span class="text-[10px] uppercase font-bold tracking-widest px-4 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/10 text-cyan-400 self-start z-10">Presets</span>
+            
+            <div class="w-full h-64 my-4 rounded-2xl glass border border-white/10 flex items-center justify-center overflow-hidden relative z-10">
+              <img src="https://picsum.photos/400/500?random=4" class="w-full h-full object-cover opacity-80 hover:scale-105 transition-transform duration-500" alt="Sample" />
             </div>
-            <h3 class="font-head font-bold text-xl text-white">Cinematic Suite</h3>
+            
+            <h3 class="font-head font-bold text-xl text-white z-10">Hyper Blue</h3>
           </div>
+
         </div>
       </div>
     </section>
@@ -304,7 +326,7 @@
   </main>
 
   <script>
-  /* --- Swiper 3D Initialization --- */
+  /* --- Swiper 3D Config --- */
   var swiper = new Swiper(".mySwiper", {
     effect: "coverflow",
     grabCursor: true,
@@ -312,23 +334,33 @@
     slidesPerView: "auto",
     loop: true,
     coverflowEffect: {
-      rotate: 30,
+      rotate: 25,
       stretch: 0,
-      depth: 150,
+      depth: 140,
       modifier: 1,
-      slideShadows: true,
+      slideShadows: false,
     },
   });
 
-  /* --- Theme Toggle --- */
+  /* --- Dynamic Theme Toggle with Lottie Control --- */
+  let isDarkMode = true;
   function toggleTheme() {
     const htmlEl = document.documentElement;
-    if (htmlEl.classList.contains('dark')) {
-      htmlEl.classList.remove('dark');
-      htmlEl.classList.add('light');
-    } else {
+    const lottieBtn = document.getElementById('lottie-theme-btn');
+
+    isDarkMode = !isDarkMode;
+
+    if (isDarkMode) {
       htmlEl.classList.remove('light');
       htmlEl.classList.add('dark');
+    } else {
+      htmlEl.classList.remove('dark');
+      htmlEl.classList.add('light');
+    }
+
+    // إرسال أمر الحركة التفاعلي لعنصر الـ Lottie ليتحول من النهار إلى الليل والعكس
+    if (lottieBtn && lottieBtn.dotLottie) {
+      lottieBtn.dotLottie.play();
     }
   }
 
