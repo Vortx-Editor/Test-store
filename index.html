@@ -128,7 +128,7 @@
       to { transform: translateY(-2000px); }
     }
 
-    /* VORTX WET LIQUID TITLE - CLEAN GRADIENT WITHOUT DUPLICATE TEXT PSEUDO-ELEMENT */
+    /* VORTX WET LIQUID SHINE SWEEP ON BOTH TITLES */
     .vortx-wet-oil-title {
       position: relative;
       display: inline-block;
@@ -139,11 +139,47 @@
       filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.8)) drop-shadow(0 0 20px rgba(168, 85, 247, 0.5));
     }
 
+    .vortx-wet-oil-title::before {
+      content: attr(data-text);
+      position: absolute;
+      left: 0; top: 0; width: 100%; height: 100%;
+      font: inherit;
+      letter-spacing: inherit;
+      line-height: inherit;
+      background: linear-gradient(
+        110deg,
+        transparent 0%, transparent 35%,
+        rgba(255, 255, 255, 0.95) 48%, rgba(233, 213, 255, 0.6) 52%,
+        transparent 65%, transparent 100%
+      );
+      background-size: 220% 100%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: oilShineSweep 4s infinite ease-in-out;
+      pointer-events: none;
+    }
+
+    @keyframes oilShineSweep {
+      0% { background-position: 220% 0; }
+      100% { background-position: -220% 0; }
+    }
+
     html.light .vortx-wet-oil-title {
       background: linear-gradient(135deg, #2e1065 0%, #581c87 40%, #7e22ce 70%, #a855f7 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       filter: drop-shadow(0 5px 15px rgba(126, 34, 206, 0.2));
+    }
+    html.light .vortx-wet-oil-title::before {
+      background: linear-gradient(
+        110deg,
+        transparent 0%, transparent 35%,
+        rgba(126, 34, 206, 0.8) 48%, rgba(168, 85, 247, 0.5) 52%,
+        transparent 65%, transparent 100%
+      );
+      background-size: 220% 100%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
     /* CUSTOM LUXURY SWITCH BUTTON */
@@ -245,7 +281,7 @@
       text-transform: uppercase;
     }
 
-    /* TIER CARDS FULL DESIGN RESTORED */
+    /* TIER CARDS FULL DESIGN */
     .tier-card {
       --white: hsl(0, 0%, 100%);
       --black: hsl(240, 15%, 9%);
@@ -315,7 +351,7 @@
       display: flex; position: relative;
       background: rgba(255, 255, 255, 0.05); border-radius: 999px;
       backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.15);
-      padding: 6px; margin: 35px auto 10px auto; width: 100%; max-width: 56rem;
+      padding: 6px; margin: 15px auto 10px auto; width: 100%; max-width: 56rem;
     }
     html.light .glass-radio-group {
       background: rgba(126, 34, 206, 0.06);
@@ -523,7 +559,7 @@
       <nav class="glass border-b-0 bg-black/40 backdrop-blur-md">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
           <a href="#top" class="flex items-center gap-3">
-            <span class="font-head text-2xl vortx-wet-oil-title">VORTX</span>
+            <span class="font-head text-2xl vortx-wet-oil-title" data-text="VORTX">VORTX</span>
           </a>
 
           <ul class="hidden md:flex items-center gap-10 text-sm font-bold opacity-80 mx-auto">
@@ -556,7 +592,7 @@
         </div>
 
         <div class="relative my-2 px-4 inline-block">
-          <h1 class="font-head font-black tracking-[0.25em] text-7xl sm:text-9xl md:text-[10rem] vortx-wet-oil-title leading-none py-4">
+          <h1 class="font-head font-black tracking-[0.25em] text-7xl sm:text-9xl md:text-[10rem] vortx-wet-oil-title leading-none py-4" data-text="VORTX">
             VORTX
           </h1>
         </div>
@@ -565,13 +601,40 @@
           High-end VFX packs, cinematic presets & custom web experiences. Crafted specifically for elite creators.
         </p>
 
-        <div class="flex items-center justify-center">
+        <div class="flex items-center justify-center mb-6">
           <div class="button-wrap" onclick="document.getElementById('bundles').scrollIntoView({behavior: 'smooth'})">
             <div class="btn-3d-style">
               <span data-i18n="hero-btn">Explore Tiers</span>
             </div>
             <div class="button-shadow"></div>
           </div>
+        </div>
+
+        <!-- SOCIAL MEDIA LINE ICONS (FULL WIDTH ROW BELOW BUTTON) -->
+        <div class="w-full max-w-4xl mx-auto my-8 px-4 flex items-center justify-between sm:justify-around text-purple-400 dark:text-purple-300">
+          <a href="#" class="p-3.5 rounded-2xl border border-white/10 glass hover:bg-purple-500/20 hover:border-purple-400 hover:scale-110 transition-all duration-300" title="TikTok">
+            <svg class="w-6 h-6 stroke-current fill-none stroke-[1.8]" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path>
+            </svg>
+          </a>
+          <a href="#" class="p-3.5 rounded-2xl border border-white/10 glass hover:bg-purple-500/20 hover:border-purple-400 hover:scale-110 transition-all duration-300" title="Telegram">
+            <svg class="w-6 h-6 stroke-current fill-none stroke-[1.8]" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4"></path>
+            </svg>
+          </a>
+          <a href="#" class="p-3.5 rounded-2xl border border-white/10 glass hover:bg-purple-500/20 hover:border-purple-400 hover:scale-110 transition-all duration-300" title="Instagram">
+            <svg class="w-6 h-6 stroke-current fill-none stroke-[1.8]" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+          </a>
+          <a href="#" class="p-3.5 rounded-2xl border border-white/10 glass hover:bg-purple-500/20 hover:border-purple-400 hover:scale-110 transition-all duration-300" title="YouTube">
+            <svg class="w-6 h-6 stroke-current fill-none stroke-[1.8]" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="4" width="20" height="16" rx="4.5" ry="4.5"></rect>
+              <polygon points="10 8 16 12 10 16 10 8"></polygon>
+            </svg>
+          </a>
         </div>
 
         <div class="glass-radio-group">
@@ -704,7 +767,7 @@
       </footer>
     </main>
 
-    <!-- WEB TIERS VIEW (RESTORED FULL DESIGN) -->
+    <!-- WEB TIERS VIEW -->
     <section id="web-view" class="view view-hidden relative z-10 min-h-screen">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
         <div class="flex items-center justify-between mb-12">
@@ -877,7 +940,6 @@
     const percentEl = document.getElementById('vx-percent');
     const wordEl = document.getElementById('vx-logo-word');
 
-    // Assembling Glitch Letters Dynamic Elements
     const letters = ['V', 'O', 'R', 'T', 'X'];
     if (wordEl && wordEl.children.length === 0) {
       letters.forEach((ch, i) => {
@@ -905,7 +967,6 @@
       }, 400);
     }
 
-    // Organic Progress Animation (~3.2s)
     const DURATION = 3200;
     const startTime = performance.now();
 
@@ -932,8 +993,6 @@
     }
 
     requestAnimationFrame(updateProgress);
-
-    // Fallback Timer
     setTimeout(revealSite, 3600);
 
     if (loader) loader.addEventListener('click', revealSite);
@@ -1058,10 +1117,4 @@
     showView('category-view');
   }
 
-  function openWebTiers() { showView('web-view'); }
-  function backToHome() { showView('main-view'); }
-  const yr = document.getElementById('year');
-  if (yr) yr.textContent = new Date().getFullYear();
-  </script>
-</body>
-</html>
+  fu
