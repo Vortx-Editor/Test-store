@@ -73,6 +73,11 @@
       transition: background-color 0.4s ease, color 0.4s ease;
     }
 
+    html.vx-loading, html.vx-loading body {
+      overflow: hidden !important;
+      height: 100%;
+    }
+
     html[dir="rtl"] body { font-family: 'Cairo', sans-serif; }
 
     h1, h2, h3, .font-head { font-family: 'Cinzel', serif; letter-spacing: 1.5px; }
@@ -119,7 +124,7 @@
       to { transform: translateY(-2000px); }
     }
 
-    /* VORTX WET LIQUID TITLE */
+    /* VORTX WET LIQUID OIL SHINE TITLE */
     .vortx-wet-oil-title {
       position: relative;
       display: inline-block;
@@ -152,7 +157,7 @@
       100% { background-position: -220% 0; }
     }
 
-    /* SWITCH BUTTON */
+    /* CUSTOM LUXURY SWITCH BUTTON */
     .theme-switch-btn {
       width: 64px; height: 34px; border-radius: 999px;
       background: linear-gradient(135deg, #1e1b4b, #311042);
@@ -207,7 +212,7 @@
       border-radius: 1.75rem; border: 1px solid rgba(255,255,255,0.1);
     }
 
-    /* GLASS RADIO */
+    /* GLASS RADIO SELECTOR */
     .glass-radio-group {
       display: flex; position: relative;
       background: rgba(255, 255, 255, 0.05); border-radius: 999px;
@@ -245,7 +250,9 @@
     .view { transition: opacity .4s ease; opacity: 1; }
     .view-hidden { display: none !important; opacity: 0; }
 
-    /* BULLETPROOF LOADER STYLES */
+    /* =====================================================================
+       CINEMATIC HIGH-END LOADER
+       ===================================================================== */
     #vx-loader {
       position: fixed;
       inset: 0;
@@ -255,7 +262,8 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      transition: opacity 0.5s ease, visibility 0.5s ease;
+      overflow: hidden;
+      transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.8s ease;
     }
 
     #vx-loader.vx-hide {
@@ -266,55 +274,128 @@
 
     #app-content {
       opacity: 0;
-      filter: blur(10px);
-      transition: opacity 0.6s ease, filter 0.6s ease;
+      filter: blur(18px);
+      transform: scale(1.02);
+      transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                  filter 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
     }
     #app-content.vx-revealed {
       opacity: 1;
       filter: blur(0px);
+      transform: scale(1);
     }
 
+    .vx-ambient-glow {
+      position: absolute;
+      width: min(70vw, 800px);
+      height: min(70vw, 800px);
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(168, 85, 247, 0.35) 0%, rgba(126, 34, 206, 0.12) 40%, transparent 70%);
+      filter: blur(50px);
+      animation: vxGlowPulse 4s ease-in-out infinite;
+    }
+    @keyframes vxGlowPulse {
+      0%, 100% { transform: scale(0.92); opacity: 0.6; }
+      50% { transform: scale(1.08); opacity: 0.95; }
+    }
+
+    /* GLITCH LETTER ASSEMBLY */
     .vx-logo-word {
+      display: flex;
       font-family: 'Cinzel', serif;
       font-weight: 900;
-      font-size: clamp(3rem, 12vw, 6.5rem);
+      font-size: clamp(3.2rem, 12vw, 6.5rem);
       letter-spacing: 0.22em;
-      background: linear-gradient(135deg, #ffffff 0%, #c084fc 70%, #7e22ce 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      line-height: 1;
+      position: relative;
+      z-index: 2;
     }
 
+    .vx-letter {
+      display: inline-block;
+      background: linear-gradient(135deg, #ffffff 0%, #f3e8ff 35%, #c084fc 70%, #7e22ce 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.8)) drop-shadow(0 0 20px rgba(168, 85, 247, 0.6));
+      opacity: 0;
+      animation: vxLetterGlitchAssemble 0.75s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+      animation-delay: var(--ld, 0s);
+    }
+
+    @keyframes vxLetterGlitchAssemble {
+      0% {
+        opacity: 0;
+        transform: translate3d(0, -20px, 0) scale(1.3) skewX(12deg);
+        filter: drop-shadow(-4px 0 0 rgba(255, 0, 130, 0.8)) drop-shadow(4px 0 0 rgba(0, 220, 255, 0.8)) blur(6px);
+      }
+      40% {
+        opacity: 0.8;
+        transform: translate3d(0, 3px, 0) scale(0.96) skewX(-4deg);
+        filter: drop-shadow(2px 0 0 rgba(255, 0, 130, 0.5)) drop-shadow(-2px 0 0 rgba(0, 220, 255, 0.5)) blur(1px);
+      }
+      100% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) scale(1) skewX(0deg);
+        filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.8)) drop-shadow(0 0 20px rgba(168, 85, 247, 0.6));
+      }
+    }
+
+    /* LUXURY SHIMMER BAR */
     .vx-bar-track {
       width: min(78vw, 320px);
       height: 6px;
       border-radius: 999px;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(168, 85, 247, 0.35);
-      margin-top: 1.5rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(168, 85, 247, 0.4);
+      box-shadow: 0 0 15px rgba(126,34,206,0.3);
+      margin-top: 1.8rem;
+      position: relative;
       overflow: hidden;
+      z-index: 2;
     }
 
     .vx-bar-fill {
       height: 100%;
       width: 0%;
-      background: linear-gradient(90deg, #7e22ce, #a855f7);
+      border-radius: 999px;
+      background: linear-gradient(90deg, #7e22ce, #a855f7 55%, #e9d5ff);
+      box-shadow: 0 0 12px rgba(168, 85, 247, 0.9);
       transition: width 0.05s linear;
+      position: relative;
+    }
+
+    .vx-bar-fill::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.7), transparent);
+      width: 40%;
+      transform: translateX(-100%);
+      animation: vxShimmer 1.5s ease-in-out infinite;
+    }
+    @keyframes vxShimmer {
+      0% { transform: translateX(-120%); }
+      100% { transform: translateX(340%); }
     }
   </style>
 </head>
 
-<body>
+<body class="vx-loading">
 
-  <!-- LOADER -->
+  <!-- CINEMATIC LOADER -->
   <div id="vx-loader">
-    <div class="vx-logo-word">VORTX</div>
+    <div class="vx-ambient-glow"></div>
+    <div class="vx-logo-word" id="vx-logo-word"></div>
     <div class="vx-bar-track">
       <div class="vx-bar-fill" id="vx-bar-fill"></div>
     </div>
-    <p class="text-xs uppercase font-bold tracking-widest text-purple-300/60 mt-3">Loading <span id="vx-percent">0</span>%</p>
+    <p class="text-xs font-bold uppercase tracking-[0.3em] text-purple-300/80 mt-4 relative z-10">
+      INITIALIZING <span id="vx-percent" class="text-purple-200">0</span>%
+    </p>
   </div>
 
-  <!-- MAIN SITE -->
+  <!-- MAIN SITE CONTENT -->
   <div id="app-content">
 
     <div class="stars-background-container">
@@ -588,166 +669,204 @@
   </div>
 
   <script>
-    // IMMUTABLE DISMISS LOGIC (DOM DIRECT)
-    (function () {
-      const loader = document.getElementById('vx-loader');
-      const appContent = document.getElementById('app-content');
-      const barFill = document.getElementById('vx-bar-fill');
-      const percentEl = document.getElementById('vx-percent');
+  /* CINEMATIC LUXURY LOADER LOGIC (100% RELIABLE) */
+  (function () {
+    const docEl = document.documentElement;
+    docEl.classList.add('vx-loading');
 
-      let progress = 0;
-      let finished = false;
+    const loader = document.getElementById('vx-loader');
+    const appContent = document.getElementById('app-content');
+    const barFill = document.getElementById('vx-bar-fill');
+    const percentEl = document.getElementById('vx-percent');
+    const wordEl = document.getElementById('vx-logo-word');
 
-      function hideLoader() {
-        if (finished) return;
-        finished = true;
+    // Build Assembling Glitch Letters Dynamic Elements
+    const letters = ['V', 'O', 'R', 'T', 'X'];
+    if (wordEl && wordEl.children.length === 0) {
+      letters.forEach((ch, i) => {
+        const span = document.createElement('span');
+        span.className = 'vx-letter';
+        span.textContent = ch;
+        span.style.setProperty('--ld', (i * 0.12).toFixed(2) + 's');
+        wordEl.appendChild(span);
+      });
+    }
+
+    let finished = false;
+
+    function revealSite() {
+      if (finished) return;
+      finished = true;
+
+      if (barFill) barFill.style.width = '100%';
+      if (percentEl) percentEl.textContent = '100';
+
+      setTimeout(() => {
         if (loader) loader.classList.add('vx-hide');
         if (appContent) appContent.classList.add('vx-revealed');
-      }
-
-      const timer = setInterval(() => {
-        progress += 8;
-        if (progress > 100) progress = 100;
-        if (barFill) barFill.style.width = progress + '%';
-        if (percentEl) percentEl.textContent = progress;
-
-        if (progress >= 100) {
-          clearInterval(timer);
-          setTimeout(hideLoader, 200);
-        }
-      }, 30);
-
-      // Forced Maximum Timeout: 1.5 Seconds Max
-      setTimeout(hideLoader, 1500);
-
-      // Manual tap to skip
-      if (loader) loader.addEventListener('click', hideLoader);
-    })();
-
-    // SWIPER & APP FUNCTIONS
-    let swiper;
-    function initSwiper() {
-      if (typeof Swiper === 'undefined') return;
-      if (swiper) swiper.destroy(true, true);
-      swiper = new Swiper(".mySwiper", {
-        effect: "coverflow",
-        grabCursor: true,
-        centeredSlides: true,
-        slidesPerView: "auto",
-        loop: true,
-        autoplay: { delay: 2000, disableOnInteraction: false },
-        coverflowEffect: { rotate: 20, stretch: 0, depth: 120, modifier: 1, slideShadows: false },
-      });
+        docEl.classList.remove('vx-loading');
+      }, 400);
     }
 
-    document.addEventListener('DOMContentLoaded', initSwiper);
+    // Organic Non-Linear Progress Feel (~3.2 Seconds Duration)
+    const DURATION = 3200; // ms
+    const startTime = performance.now();
 
-    function scrollToCategory(catKey) {
-      const targetEl = document.getElementById(`cat-card-${catKey}`);
-      if (targetEl) {
-        targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    function updateProgress(now) {
+      if (finished) return;
+
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / DURATION, 1);
+
+      // Easing curve: quick start -> subtle slow mid -> smooth surge to 100
+      let easedP = progress < 0.5 
+        ? 2 * progress * progress 
+        : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+
+      let currentPct = Math.floor(easedP * 100);
+
+      if (barFill) barFill.style.width = currentPct + '%';
+      if (percentEl) percentEl.textContent = currentPct;
+
+      if (progress < 1) {
+        requestAnimationFrame(updateProgress);
+      } else {
+        revealSite();
       }
     }
 
-    const translations = {
-      en: {
-        "nav-bundles": "Bundles", "nav-packs": "Featured Packs", "nav-categories": "Categories",
-        "hero-tag": "Digital Assets Hub", "hero-desc": "High-end VFX packs, cinematic presets & custom web experiences.",
-        "hero-btn": "Explore Tiers", "bundle-sub": "Custom Web Solutions", "bundle-title": "Web Page Bundles",
-        "bundle-desc": "Launch your custom digital space today.", "bundle-btn": "View Development Tiers",
-        "packs-title": "Featured Packs", "packs-desc": "Autoplays continuously — Tap or hold to inspect.",
-        "card-1-title": "Red Inferno", "card-2-title": "Cyber Gold", "card-3-title": "Neon Nights", "card-4-title": "Hyper Blue",
-        "cat-sec-title": "Categories", "cat-sec-desc": "Select a category to explore editing packs.", "footer-right": "Crafted for the bold.",
-        "tiers-sub": "Web Solutions", "tiers-title": "Development Tiers", "back-btn": "← Back",
-        "tier-starter-desc": "Perfect for simple portfolios and personal landing pages.",
-        "tier-pro-desc": "For creators needing advanced animations & custom design.",
-        "tier-vip-desc": "The absolute premium experience with custom 3D elements.",
-        "select-plan": "Select Plan", "cat-view-sub": "Collection", "add-cart": "Add to Cart", "try-demo": "Try Demo"
-      },
-      ar: {
-        "nav-bundles": "الحزم المتاحة", "nav-packs": "حزم متميزة", "nav-categories": "الأقسام الرئيسية",
-        "hero-tag": "مركز الأصول الرقمية", "hero-desc": "حزم مؤثرات بصرية احترافية، إعدادات سينمائية مسبقة وتجارب ويب مخصصة للمبدعين.",
-        "hero-btn": "استكشف الباقات", "bundle-sub": "حلول المواقع المخصصة", "bundle-title": "باقات تصميم الويب",
-        "bundle-desc": "أطلق مساحتك الرقمية المخصصة اليوم.", "bundle-btn": "عرض باقات التطوير",
-        "packs-title": "الحزم المتميزة", "packs-desc": "تتحرك الكروت تلقائياً — اضغط أو مرر للتحكم بها.",
-        "card-1-title": "الجحيم الأحمر", "card-2-title": "الذهب السيبراني", "card-3-title": "ليالي النيون", "card-4-title": "النيون الأزرق",
-        "cat-sec-title": "الأقسام", "cat-sec-desc": "اختر فئة لاستكشاف الحزم المتاحة.", "footer-right": "صُنع للمبدعين والجرآء.",
-        "tiers-sub": "حلول الويب", "tiers-title": "مستويات التطوير", "back-btn": "→ العودة",
-        "tier-starter-desc": "مثالية للملفات الشخصية وصفحات الهبوط البسيطة.",
-        "tier-pro-desc": "للمبدعين الذين يحتاجون تحريكات متقدمة وتصاميم خاصة.",
-        "tier-vip-desc": "الخبرة المتميزة المطلقة مع عناصر ثلاثية الأبعاد.",
-        "select-plan": "اختر الباقة", "cat-view-sub": "المجموعة", "add-cart": "إضافة للسلة", "try-demo": "تجربة العرض"
-      }
-    };
+    requestAnimationFrame(updateProgress);
 
-    let currentLang = 'en';
-    function toggleLanguage() {
-      currentLang = currentLang === 'en' ? 'ar' : 'en';
-      const htmlEl = document.documentElement;
-      htmlEl.setAttribute('dir', currentLang === 'ar' ? 'rtl' : 'ltr');
-      htmlEl.setAttribute('lang', currentLang);
-      document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if (translations[currentLang][key]) el.textContent = translations[currentLang][key];
-      });
-      setTimeout(initSwiper, 100);
+    // Hard Safety Fallback Timer (Guarantee 3.6s Max)
+    setTimeout(revealSite, 3600);
+
+    // Manual Skip by Tapping anywhere on loader
+    if (loader) loader.addEventListener('click', revealSite);
+  })();
+
+  /* SWIPER & SITE FUNCTIONS */
+  let swiper;
+  function initSwiper() {
+    if (typeof Swiper === 'undefined') return;
+    if (swiper) swiper.destroy(true, true);
+    swiper = new Swiper(".mySwiper", {
+      effect: "coverflow",
+      grabCursor: true,
+      centeredSlides: true,
+      slidesPerView: "auto",
+      loop: true,
+      autoplay: { delay: 2000, disableOnInteraction: false },
+      coverflowEffect: { rotate: 20, stretch: 0, depth: 120, modifier: 1, slideShadows: false },
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', initSwiper);
+
+  function scrollToCategory(catKey) {
+    const targetEl = document.getElementById(`cat-card-${catKey}`);
+    if (targetEl) {
+      targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
+  }
 
-    function toggleTheme() {
-      const htmlEl = document.documentElement;
-      htmlEl.classList.toggle('dark');
-      htmlEl.classList.toggle('light');
+  const translations = {
+    en: {
+      "nav-bundles": "Bundles", "nav-packs": "Featured Packs", "nav-categories": "Categories",
+      "hero-tag": "Digital Assets Hub", "hero-desc": "High-end VFX packs, cinematic presets & custom web experiences.",
+      "hero-btn": "Explore Tiers", "bundle-sub": "Custom Web Solutions", "bundle-title": "Web Page Bundles",
+      "bundle-desc": "Launch your custom digital space today.", "bundle-btn": "View Development Tiers",
+      "packs-title": "Featured Packs", "packs-desc": "Autoplays continuously — Tap or hold to inspect.",
+      "card-1-title": "Red Inferno", "card-2-title": "Cyber Gold", "card-3-title": "Neon Nights", "card-4-title": "Hyper Blue",
+      "cat-sec-title": "Categories", "cat-sec-desc": "Select a category to explore editing packs.", "footer-right": "Crafted for the bold.",
+      "tiers-sub": "Web Solutions", "tiers-title": "Development Tiers", "back-btn": "← Back",
+      "tier-starter-desc": "Perfect for simple portfolios and personal landing pages.",
+      "tier-pro-desc": "For creators needing advanced animations & custom design.",
+      "tier-vip-desc": "The absolute premium experience with custom 3D elements.",
+      "select-plan": "Select Plan", "cat-view-sub": "Collection", "add-cart": "Add to Cart", "try-demo": "Try Demo"
+    },
+    ar: {
+      "nav-bundles": "الحزم المتاحة", "nav-packs": "حزم متميزة", "nav-categories": "الأقسام الرئيسية",
+      "hero-tag": "مركز الأصول الرقمية", "hero-desc": "حزم مؤثرات بصرية احترافية، إعدادات سينمائية مسبقة وتجارب ويب مخصصة للمبدعين.",
+      "hero-btn": "استكشف الباقات", "bundle-sub": "حلول المواقع المخصصة", "bundle-title": "باقات تصميم الويب",
+      "bundle-desc": "أطلق مساحتك الرقمية المخصصة اليوم.", "bundle-btn": "عرض باقات التطوير",
+      "packs-title": "الحزم المتميزة", "packs-desc": "تتحرك الكروت تلقائياً — اضغط أو مرر للتحكم بها.",
+      "card-1-title": "الجحيم الأحمر", "card-2-title": "الذهب السيبراني", "card-3-title": "ليالي النيون", "card-4-title": "النيون الأزرق",
+      "cat-sec-title": "الأقسام", "cat-sec-desc": "اختر فئة لاستكشاف الحزم المتاحة.", "footer-right": "صُنع للمبدعين والجرآء.",
+      "tiers-sub": "حلول الويب", "tiers-title": "مستويات التطوير", "back-btn": "→ العودة",
+      "tier-starter-desc": "مثالية للملفات الشخصية وصفحات الهبوط البسيطة.",
+      "tier-pro-desc": "للمبدعين الذين يحتاجون تحريكات متقدمة وتصاميم خاصة.",
+      "tier-vip-desc": "الخبرة المتميزة المطلقة مع عناصر ثلاثية الأبعاد.",
+      "select-plan": "اختر الباقة", "cat-view-sub": "المجموعة", "add-cart": "إضافة للسلة", "try-demo": "تجربة العرض"
     }
+  };
 
-    function showToast(msg) {
-      const box = document.getElementById('toast-box');
-      const toast = document.createElement('div');
-      toast.className = 'glass bg-black/90 text-white text-[10px] uppercase font-bold tracking-widest px-6 py-3.5 rounded-full flex items-center gap-2';
-      toast.innerHTML = `<span class="text-purple-400">✦</span> ${msg}`;
-      box.appendChild(toast);
-      setTimeout(() => toast.remove(), 2500);
-    }
+  let currentLang = 'en';
+  function toggleLanguage() {
+    currentLang = currentLang === 'en' ? 'ar' : 'en';
+    const htmlEl = document.documentElement;
+    htmlEl.setAttribute('dir', currentLang === 'ar' ? 'rtl' : 'ltr');
+    htmlEl.setAttribute('lang', currentLang);
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (translations[currentLang][key]) el.textContent = translations[currentLang][key];
+    });
+    setTimeout(initSwiper, 100);
+  }
 
-    function openPreview(title, tag) {
-      document.getElementById('preview-title').textContent = title;
-      document.getElementById('preview-tag').textContent = tag;
-      const modal = document.getElementById('preview-modal');
-      const card = document.getElementById('preview-card');
-      modal.classList.remove('opacity-0', 'pointer-events-none');
-    }
+  function toggleTheme() {
+    const htmlEl = document.documentElement;
+    htmlEl.classList.toggle('dark');
+    htmlEl.classList.toggle('light');
+  }
 
-    function closePreview() {
-      const modal = document.getElementById('preview-modal');
-      modal.classList.add('opacity-0', 'pointer-events-none');
-    }
+  function showToast(msg) {
+    const box = document.getElementById('toast-box');
+    const toast = document.createElement('div');
+    toast.className = 'glass bg-black/90 text-white text-[10px] uppercase font-bold tracking-widest px-6 py-3.5 rounded-full flex items-center gap-2';
+    toast.innerHTML = `<span class="text-purple-400">✦</span> ${msg}`;
+    box.appendChild(toast);
+    setTimeout(() => toast.remove(), 2500);
+  }
 
-    const CATEGORY_DATA = {
-      CC: ['Teal & Orange Grade', 'Cinematic Film Base', 'Dark Knight Grade', 'Vibrant Soft Pop'],
-      SHAKE: ['Hard Impact Shake', 'Bass Drop Bounce', 'Smooth Whip Pan', 'Earthquake Wobble'],
-      XML: ['Pro Intro Template', 'Velocity Edit XML', 'Glow Shake Timeline', 'Full Transition Suite'],
-    };
+  function openPreview(title, tag) {
+    document.getElementById('preview-title').textContent = title;
+    document.getElementById('preview-tag').textContent = tag;
+    const modal = document.getElementById('preview-modal');
+    modal.classList.remove('opacity-0', 'pointer-events-none');
+  }
 
-    function showView(viewId) {
-      document.querySelectorAll('.view').forEach(v => v.classList.add('view-hidden'));
-      const target = document.getElementById(viewId);
-      if (target) target.classList.remove('view-hidden');
-      window.scrollTo({ top: 0, behavior: 'instant' });
-    }
+  function closePreview() {
+    const modal = document.getElementById('preview-modal');
+    modal.classList.add('opacity-0', 'pointer-events-none');
+  }
 
-    function openCategory(key) {
-      document.getElementById('cat-title').textContent = key;
-      document.getElementById('cat-grid').innerHTML = CATEGORY_DATA[key].map((item) => `
-        <div onclick="openPreview('${item}', '${key}')" class="cat-card-glass flex flex-col justify-between min-h-[140px] text-left ltr:text-left rtl:text-right border-l-4 border-purple-500">
-          <span class="text-[10px] font-bold uppercase text-purple-400">${key} Pack</span>
-          <h3 class="font-head font-bold text-xl mt-4">${item}</h3>
-        </div>`).join('');
-      showView('category-view');
-    }
+  const CATEGORY_DATA = {
+    CC: ['Teal & Orange Grade', 'Cinematic Film Base', 'Dark Knight Grade', 'Vibrant Soft Pop'],
+    SHAKE: ['Hard Impact Shake', 'Bass Drop Bounce', 'Smooth Whip Pan', 'Earthquake Wobble'],
+    XML: ['Pro Intro Template', 'Velocity Edit XML', 'Glow Shake Timeline', 'Full Transition Suite'],
+  };
 
-    function openWebTiers() { showView('web-view'); }
-    function backToHome() { showView('main-view'); }
-    const yr = document.getElementById('year');
-    if (yr) yr.textContent = new Date().getFullYear();
+  function showView(viewId) {
+    document.querySelectorAll('.view').forEach(v => v.classList.add('view-hidden'));
+    const target = document.getElementById(viewId);
+    if (target) target.classList.remove('view-hidden');
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }
+
+  function openCategory(key) {
+    document.getElementById('cat-title').textContent = key;
+    document.getElementById('cat-grid').innerHTML = CATEGORY_DATA[key].map((item) => `
+      <div onclick="openPreview('${item}', '${key}')" class="cat-card-glass flex flex-col justify-between min-h-[140px] text-left ltr:text-left rtl:text-right border-l-4 border-purple-500">
+        <span class="text-[10px] font-bold uppercase text-purple-400">${key} Pack</span>
+        <h3 class="font-head font-bold text-xl mt-4">${item}</h3>
+      </div>`).join('');
+    showView('category-view');
+  }
+
+  function openWebTiers() { showView('web-view'); }
+  function backToHome() { showView('main-view'); }
+  const yr = document.getElementById('year');
+  if (yr) yr.textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
