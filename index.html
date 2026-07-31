@@ -58,7 +58,7 @@
       --text-color: #0f172a;
       --nav-logo-color: #581c87;
       --nav-icon-color: #6b21a8;
-      --card-title-color: #3b0764; /* إصلاح اختفاء النص بالوضع الفاتح */
+      --card-title-color: #3b0764;
       --tag-bg: rgba(126, 34, 206, 0.15);
       --tag-text: #581c87;
     }
@@ -92,47 +92,50 @@
       background: radial-gradient(800px circle at 50% 0%, rgba(168, 85, 247, 0.25), transparent 70%);
     }
 
-    /* ---------- VORTX Raindrop Effect (قطرات المطر على الاسم) ---------- */
-    .vortx-rain-wrapper {
+    /* ---------- REALISTIC LIQUID/WET SHINE VORTX TITLE EFFECT ---------- */
+    .vortx-wet-title {
       position: relative;
       display: inline-block;
-      overflow: hidden;
-    }
-
-    .hero-vortx-title {
-      background: linear-gradient(135deg, #ffffff 0%, #e9d5ff 35%, #c084fc 70%, #9333ea 100%);
+      font-weight: 900;
+      background: linear-gradient(135deg, #ffffff 0%, #e9d5ff 30%, #c084fc 70%, #9333ea 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      font-weight: 900;
-      filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.4)) 
-              drop-shadow(0 0 35px rgba(168, 85, 247, 0.8));
+      filter: drop-shadow(0 0 20px rgba(168, 85, 247, 0.6));
     }
 
-    html.light .hero-vortx-title {
+    /* تأثير الانعكاس الزيتي/المائي الملموس على الحروف */
+    .vortx-wet-title::before {
+      content: 'VORTX';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        115deg,
+        transparent 0%,
+        transparent 40%,
+        rgba(255, 255, 255, 0.95) 50%,
+        rgba(255, 255, 255, 0.3) 55%,
+        transparent 65%,
+        transparent 100%
+      );
+      background-size: 200% 100%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: liquidShineSweep 3.5s infinite ease-in-out;
+      pointer-events: none;
+    }
+
+    @keyframes liquidShineSweep {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    html.light .vortx-wet-title {
       background: linear-gradient(135deg, #2e1065 0%, #581c87 40%, #7e22ce 70%, #a855f7 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      filter: drop-shadow(0 0 10px rgba(126, 34, 206, 0.2));
-    }
-
-    /* انيميشن قطرات المطر الشفافة */
-    .raindrop {
-      position: absolute;
-      background: linear-gradient(180deg, rgba(255,255,255,0.8), rgba(168,85,247,0.4));
-      width: 2px;
-      height: 12px;
-      opacity: 0.7;
-      border-radius: 50%;
-      animation: dropFall 2s infinite linear;
-      pointer-events: none;
-      z-index: 20;
-    }
-
-    @keyframes dropFall {
-      0% { top: -10px; opacity: 0; transform: scaleY(1); }
-      50% { opacity: 0.8; }
-      90% { opacity: 1; transform: scaleY(1.5); }
-      100% { top: 90%; opacity: 0; transform: scaleY(0.3); }
     }
 
     /* ---------- Water Drop Pill Button ---------- */
@@ -219,7 +222,7 @@
     .card-glow-purple { box-shadow: 0 15px 45px -5px rgba(168, 85, 247, 0.45); }
     .card-glow-cyan { box-shadow: 0 15px 45px -5px rgba(6, 182, 212, 0.45); }
 
-    /* ---------- Web Bundle Banner & Fix Light Mode Text ---------- */
+    /* ---------- Web Bundle Banner ---------- */
     .glossy-bundle-card {
       position: relative;
       border-radius: 2.5rem;
@@ -337,16 +340,9 @@
         <span data-i18n="hero-tag">Digital Assets Hub</span>
       </div>
 
-      <!-- VORTX TITLE WITH RAINDROPS EFFECT -->
-      <div class="relative my-2 vortx-rain-wrapper px-4">
-        <!-- قطرات مطر ناعمة تتساقط فوق الحروف -->
-        <div class="raindrop" style="left: 15%; animation-delay: 0s;"></div>
-        <div class="raindrop" style="left: 35%; animation-delay: 0.6s;"></div>
-        <div class="raindrop" style="left: 55%; animation-delay: 1.2s;"></div>
-        <div class="raindrop" style="left: 75%; animation-delay: 0.3s;"></div>
-        <div class="raindrop" style="left: 88%; animation-delay: 1.7s;"></div>
-
-        <h1 class="font-head font-black tracking-[0.25em] text-7xl sm:text-9xl md:text-[10rem] hero-vortx-title relative z-10 leading-none py-4">
+      <!-- VORTX TITLE WITH WET LIQUID SHINE -->
+      <div class="relative my-2 px-4">
+        <h1 class="font-head font-black tracking-[0.25em] text-7xl sm:text-9xl md:text-[10rem] vortx-wet-title relative z-10 leading-none py-4">
           VORTX
         </h1>
       </div>
@@ -385,7 +381,7 @@
       </div>
     </section>
 
-    <!-- FEATURED PACKS (SWIPER 3D AUTOPLAY FIXED) -->
+    <!-- FEATURED PACKS (SMOOTH CONTINUOUS SWIPER 3D AUTOPLAY) -->
     <section id="packs" class="py-16 max-w-7xl mx-auto px-4 sm:px-6">
       <div class="mb-8 text-left ltr:text-left rtl:text-right">
         <h2 data-i18n="packs-title" class="font-head font-bold text-3xl sm:text-4xl">Featured Packs</h2>
@@ -580,26 +576,34 @@
   </div>
 
   <script>
-  /* Swiper 3D Config */
-  var swiper = new Swiper(".mySwiper", {
-    effect: "coverflow",
-    grabCursor: true,
-    centeredSlides: true,
-    slidesPerView: "auto",
-    loop: true,
-    autoplay: {
-      delay: 2500,
-      disableOnInteraction: false,
-      pauseOnMouseEnter: true,
-    },
-    coverflowEffect: {
-      rotate: 25,
-      stretch: 0,
-      depth: 160,
-      modifier: 1.2,
-      slideShadows: false,
-    },
-  });
+  /* Swiper 3D Config (حركة مستمرة ناعمة وسريعة الاستجابة) */
+  let swiper;
+
+  function initSwiper(rtl = false) {
+    if (swiper) swiper.destroy(true, true);
+    
+    swiper = new Swiper(".mySwiper", {
+      effect: "coverflow",
+      grabCursor: true,
+      centeredSlides: true,
+      slidesPerView: "auto",
+      loop: true,
+      autoplay: {
+        delay: 2000,
+        disableOnInteraction: false,
+        pauseOnMouseEnter: true,
+      },
+      coverflowEffect: {
+        rotate: 25,
+        stretch: 0,
+        depth: 160,
+        modifier: 1.2,
+        slideShadows: false,
+      },
+    });
+  }
+
+  initSwiper();
 
   const translations = {
     en: {
@@ -668,7 +672,7 @@
 
   let currentLang = 'en';
 
-  /* إصلاح مشكلة اختفاء الكروت عند تحويل الاتجاه RTL/LTR */
+  /* إعادة بناء السلايدر ديناميكياً لتفادي الاختفاء باللغة العربية */
   function toggleLanguage() {
     currentLang = currentLang === 'en' ? 'ar' : 'en';
     const htmlEl = document.documentElement;
@@ -684,13 +688,7 @@
       }
     });
 
-    /* تجديد حسابات Swiper فوراً لمنع اختفاء الكروت باللغة العربية */
-    if (swiper) {
-      setTimeout(() => {
-        swiper.changeLanguageDirection(isRtl ? 'rtl' : 'ltr');
-        swiper.update();
-      }, 50);
-    }
+    initSwiper(isRtl);
   }
 
   function toggleTheme() {
