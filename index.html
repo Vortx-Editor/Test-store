@@ -18,9 +18,6 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
-  <!-- DotLottie Web Component Script -->
-  <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.9.4/dist/dotlottie-wc.js" type="module"></script>
-
   <script>
     tailwind.config = {
       darkMode: 'class',
@@ -86,6 +83,59 @@
       border: 1px solid rgba(0, 0, 0, 0.08);
     }
 
+    /* ---------- Custom Theme Switcher Button (Day/Night) ---------- */
+    .theme-switch-btn {
+      width: 68px;
+      height: 36px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #1e1b4b, #311042);
+      border: 1px solid rgba(168, 85, 247, 0.4);
+      position: relative;
+      cursor: pointer;
+      padding: 3px;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.5), 0 0 12px rgba(126,34,206,0.3);
+    }
+    html.light .theme-switch-btn {
+      background: linear-gradient(135deg, #38bdf8, #fde047);
+      border-color: rgba(253, 224, 71, 0.6);
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.1), 0 0 12px rgba(250,204,21,0.4);
+    }
+
+    .theme-switch-ball {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #f1f5f9;
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.4s ease;
+      display: flex;
+      items-center;
+      justify-content: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.4);
+    }
+    html.dark .theme-switch-ball {
+      transform: translateX(0px);
+      background: #e2e8f0;
+    }
+    html.light .theme-switch-ball {
+      transform: translateX(32px);
+      background: #fef08a;
+    }
+
+    /* Icons inside ball */
+    .icon-sun, .icon-moon {
+      position: absolute;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+    html.dark .icon-sun { opacity: 0; transform: scale(0.5) rotate(-90deg); }
+    html.dark .icon-moon { opacity: 1; transform: scale(1) rotate(0deg); }
+
+    html.light .icon-sun { opacity: 1; transform: scale(1) rotate(0deg); }
+    html.light .icon-moon { opacity: 0; transform: scale(0.5) rotate(90deg); }
+
     /* ---------- VORTX 3D Logo ---------- */
     .text-3d-heavy {
       color: #7e22ce;
@@ -115,19 +165,10 @@
       position: relative;
     }
 
-    /* Glow Elements */
-    .card-glow-red {
-      box-shadow: 0 0 50px -5px rgba(239, 68, 68, 0.4);
-    }
-    .card-glow-yellow {
-      box-shadow: 0 0 50px -5px rgba(234, 179, 8, 0.4);
-    }
-    .card-glow-purple {
-      box-shadow: 0 0 50px -5px rgba(168, 85, 247, 0.4);
-    }
-    .card-glow-cyan {
-      box-shadow: 0 0 50px -5px rgba(6, 182, 212, 0.4);
-    }
+    .card-glow-red { box-shadow: 0 0 50px -5px rgba(239, 68, 68, 0.4); }
+    .card-glow-yellow { box-shadow: 0 0 50px -5px rgba(234, 179, 8, 0.4); }
+    .card-glow-purple { box-shadow: 0 0 50px -5px rgba(168, 85, 247, 0.4); }
+    .card-glow-cyan { box-shadow: 0 0 50px -5px rgba(6, 182, 212, 0.4); }
 
     .view { transition: opacity .4s ease; opacity: 1; }
     .view-hidden { display: none; opacity: 0; }
@@ -160,14 +201,18 @@
           <li><a href="#categories" class="hover:text-brandLight transition active:scale-95">Categories</a></li>
         </ul>
 
-        <!-- زر تحويل النمط المباشر مع حركة الـ Lottie -->
-        <button id="theme-toggle" onclick="toggleTheme()" class="relative flex items-center justify-center w-16 h-10 rounded-full glass hover:scale-105 active:scale-95 transition-transform overflow-hidden cursor-pointer">
-          <dotlottie-wc 
-            id="lottie-theme-btn"
-            src="https://lottie.host/c872af94-2016-4421-8b86-2e8f65cfad86/iw8UWWe07O.lottie" 
-            stateMachineId="StateMachine1"
-            style="width: 140px; height: 140px; pointer-events: none; transform: scale(1.35);">
-          </dotlottie-wc>
+        <!-- زر تحويل النمط بـ CSS التفاعلي والمضبوط -->
+        <button onclick="toggleTheme()" class="theme-switch-btn" title="Toggle Theme">
+          <div class="theme-switch-ball">
+            <!-- أيقونة القمر -->
+            <svg class="icon-moon w-4 h-4 text-slate-800" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+            </svg>
+            <!-- أيقونة الشمس -->
+            <svg class="icon-sun w-4 h-4 text-amber-600" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 100 2h1z" clip-rule="evenodd"></path>
+            </svg>
+          </div>
         </button>
       </div>
     </nav>
@@ -233,55 +278,41 @@
           
           <!-- Card 1: Red/Orange Glow -->
           <div onclick="openPreview('Flame Pack', 'VFX')" class="swiper-slide glass card-glow-red p-6 flex flex-col justify-between items-center text-center cursor-pointer border border-red-500/40 hover:border-red-400 transition-all">
-            <!-- Neon Ambient Glow Layer Inside -->
             <div class="absolute -top-10 -right-10 w-40 h-40 bg-red-600/30 rounded-full blur-3xl pointer-events-none"></div>
-            
             <span class="text-[10px] uppercase font-bold tracking-widest px-4 py-1.5 rounded-full border border-red-500/30 bg-red-500/10 text-red-400 self-start z-10">VFX</span>
-            
-            <!-- Glass Container for Custom Images -->
             <div class="w-full h-64 my-4 rounded-2xl glass border border-white/10 flex items-center justify-center overflow-hidden relative z-10">
               <img src="https://picsum.photos/400/500?random=1" class="w-full h-full object-cover opacity-80 hover:scale-105 transition-transform duration-500" alt="Sample" />
             </div>
-            
             <h3 class="font-head font-bold text-xl text-white z-10">Red Inferno</h3>
           </div>
 
           <!-- Card 2: Yellow/Gold Glow -->
           <div onclick="openPreview('Cyber Gold', 'Color')" class="swiper-slide glass card-glow-yellow p-6 flex flex-col justify-between items-center text-center cursor-pointer border border-yellow-500/40 hover:border-yellow-400 transition-all">
             <div class="absolute -top-10 -right-10 w-40 h-40 bg-yellow-600/30 rounded-full blur-3xl pointer-events-none"></div>
-            
             <span class="text-[10px] uppercase font-bold tracking-widest px-4 py-1.5 rounded-full border border-yellow-500/30 bg-yellow-500/10 text-yellow-400 self-start z-10">Color</span>
-            
             <div class="w-full h-64 my-4 rounded-2xl glass border border-white/10 flex items-center justify-center overflow-hidden relative z-10">
               <img src="https://picsum.photos/400/500?random=2" class="w-full h-full object-cover opacity-80 hover:scale-105 transition-transform duration-500" alt="Sample" />
             </div>
-            
             <h3 class="font-head font-bold text-xl text-white z-10">Cyber Gold</h3>
           </div>
 
           <!-- Card 3: Purple/Neon Glow -->
           <div onclick="openPreview('Neon Nights', 'Camera')" class="swiper-slide glass card-glow-purple p-6 flex flex-col justify-between items-center text-center cursor-pointer border border-purple-500/40 hover:border-purple-400 transition-all">
             <div class="absolute -top-10 -right-10 w-40 h-40 bg-purple-600/30 rounded-full blur-3xl pointer-events-none"></div>
-            
             <span class="text-[10px] uppercase font-bold tracking-widest px-4 py-1.5 rounded-full border border-purple-500/30 bg-purple-500/10 text-purple-400 self-start z-10">Camera</span>
-            
             <div class="w-full h-64 my-4 rounded-2xl glass border border-white/10 flex items-center justify-center overflow-hidden relative z-10">
               <img src="https://picsum.photos/400/500?random=3" class="w-full h-full object-cover opacity-80 hover:scale-105 transition-transform duration-500" alt="Sample" />
             </div>
-            
             <h3 class="font-head font-bold text-xl text-white z-10">Neon Nights</h3>
           </div>
 
           <!-- Card 4: Cyan/Blue Glow -->
           <div onclick="openPreview('Hyper Blue', 'Presets')" class="swiper-slide glass card-glow-cyan p-6 flex flex-col justify-between items-center text-center cursor-pointer border border-cyan-500/40 hover:border-cyan-400 transition-all">
             <div class="absolute -top-10 -right-10 w-40 h-40 bg-cyan-600/30 rounded-full blur-3xl pointer-events-none"></div>
-            
             <span class="text-[10px] uppercase font-bold tracking-widest px-4 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/10 text-cyan-400 self-start z-10">Presets</span>
-            
             <div class="w-full h-64 my-4 rounded-2xl glass border border-white/10 flex items-center justify-center overflow-hidden relative z-10">
               <img src="https://picsum.photos/400/500?random=4" class="w-full h-full object-cover opacity-80 hover:scale-105 transition-transform duration-500" alt="Sample" />
             </div>
-            
             <h3 class="font-head font-bold text-xl text-white z-10">Hyper Blue</h3>
           </div>
 
@@ -342,25 +373,15 @@
     },
   });
 
-  /* --- Dynamic Theme Toggle with Lottie Control --- */
-  let isDarkMode = true;
+  /* --- Pure CSS & JS Theme Toggle --- */
   function toggleTheme() {
     const htmlEl = document.documentElement;
-    const lottieBtn = document.getElementById('lottie-theme-btn');
-
-    isDarkMode = !isDarkMode;
-
-    if (isDarkMode) {
-      htmlEl.classList.remove('light');
-      htmlEl.classList.add('dark');
-    } else {
+    if (htmlEl.classList.contains('dark')) {
       htmlEl.classList.remove('dark');
       htmlEl.classList.add('light');
-    }
-
-    // إرسال أمر الحركة التفاعلي لعنصر الـ Lottie ليتحول من النهار إلى الليل والعكس
-    if (lottieBtn && lottieBtn.dotLottie) {
-      lottieBtn.dotLottie.play();
+    } else {
+      htmlEl.classList.remove('light');
+      htmlEl.classList.add('dark');
     }
   }
 
