@@ -2,7 +2,6 @@
 <html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8" />
-  <!-- إجبار الجوال يحترم المقاسات بدون زوم عشوائي -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>VORTX — Premium Digital Assets</title>
   <meta name="theme-color" content="#050505" />
@@ -14,9 +13,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800;900&family=Inter:wght@500;600;700;800&display=swap" rel="stylesheet" />
-
-  <!-- مكتبة تشغيل الأنيميشن (ضرورية عشان يشتغل ويقلب) -->
-  <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.9.4/dist/dotlottie-wc.js" type="module"></script>
 
   <script>
     tailwind.config = {
@@ -33,12 +29,8 @@
   <style>
     /* ---------- CSS Variables ---------- */
     :root {
-      --ink: #050505;
-      --brand: #7e22ce;
-      --brandLight: #a855f7;
-      --text-main: #e8e8ef;
-      --glass-bg: rgba(255, 255, 255, 0.02);
-      --glass-border: rgba(255, 255, 255, 0.05);
+      --ink: #050505; --brand: #7e22ce; --brandLight: #a855f7;
+      --text-main: #e8e8ef; --glass-bg: rgba(255, 255, 255, 0.02); --glass-border: rgba(255, 255, 255, 0.05);
     }
     
     /* Light Mode */
@@ -58,12 +50,12 @@
     ::-webkit-scrollbar { width: 8px; }
     ::-webkit-scrollbar-track { background: var(--ink); }
     ::-webkit-scrollbar-thumb { background: var(--brand); border-radius: 4px; }
+    
+    /* إخفاء شريط التمرير لقسم السحب بالأصبع */
+    .hide-scrollbar::-webkit-scrollbar { display: none; }
+    .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-    #scroll-progress {
-      position: fixed; top: 0; left: 0; width: 0%; height: 3px;
-      background: var(--brandLight); box-shadow: 0 0 10px var(--brandLight);
-      z-index: 9999; transition: width 0.1s ease-out;
-    }
+    #scroll-progress { position: fixed; top: 0; left: 0; width: 0%; height: 3px; background: var(--brandLight); box-shadow: 0 0 10px var(--brandLight); z-index: 9999; transition: width 0.1s ease-out; }
 
     /* ---------- Backgrounds (Canvas Silver Dots) ---------- */
     #bg-canvas { position: fixed; inset: 0; z-index: -2; pointer-events: none; width: 100%; height: 100%; }
@@ -87,10 +79,7 @@
     /* ---------- Controls (Theme & Lang) ---------- */
     .btn-container { display: flex; align-items: center; gap: 8px; }
     .btn-color-mode-switch { position: relative; display: inline-block; margin: 0; cursor: pointer; }
-    .btn-color-mode-switch > label.btn-color-mode-switch-inner {
-      margin: 0; width: 110px; height: 28px; background: #e0e0e0; border-radius: 26px;
-      position: relative; transition: all 0.3s ease; display: block; cursor: pointer;
-    }
+    .btn-color-mode-switch > label.btn-color-mode-switch-inner { margin: 0; width: 110px; height: 28px; background: #e0e0e0; border-radius: 26px; position: relative; transition: all 0.3s ease; display: block; cursor: pointer; }
     .btn-color-mode-switch > label.btn-color-mode-switch-inner:before { content: attr(data-on); position: absolute; font-size: 11px; font-weight: bold; top: 6px; right: 15px; color: #111; }
     .btn-color-mode-switch > label.btn-color-mode-switch-inner:after { content: attr(data-off); width: 50px; height: 20px; background: #fff; border-radius: 26px; position: absolute; left: 4px; top: 4px; text-align: center; transition: all 0.3s ease; box-shadow: 0px 0px 6px -2px #111; color: #111; font-weight: bold; line-height: 20px; font-size: 11px; }
     .btn-color-mode-switch input[type="checkbox"] { display: none; }
@@ -98,35 +87,22 @@
     .btn-color-mode-switch input[type="checkbox"]:checked + label.btn-color-mode-switch-inner:after { content: attr(data-on); left: 56px; background: var(--brandLight); color: #fff; }
     .btn-color-mode-switch input[type="checkbox"]:checked + label.btn-color-mode-switch-inner:before { content: attr(data-off); right: auto; left: 15px; color: #fff; }
     
-    .lang-globe-btn {
-      display: flex; align-items: center; justify-content: center; gap: 5px; background: #1a1a24; color: #fff;
-      border: 1px solid rgba(168, 85, 247, 0.3); padding: 6px 16px; border-radius: 26px;
-      cursor: pointer; font-weight: bold; font-size: 13px; transition: all 0.3s ease; min-width: 90px;
-    }
+    .lang-globe-btn { display: flex; align-items: center; justify-content: center; gap: 5px; background: #1a1a24; color: #fff; border: 1px solid rgba(168, 85, 247, 0.3); padding: 6px 16px; border-radius: 26px; cursor: pointer; font-weight: bold; font-size: 13px; transition: all 0.3s ease; min-width: 90px; }
     .lang-globe-btn:hover { background: var(--brandLight); box-shadow: 0 0 10px rgba(168, 85, 247, 0.5); }
 
     /* ---------- VORTX Custom Button ---------- */
-    .vortx-buy-btn {
-      position: relative; padding: 12px 20px; background-color: #1a1a24; color: #fff !important;
-      border: 2px solid var(--brandLight); border-radius: 8px; font-weight: bold; cursor: pointer;
-      overflow: hidden; z-index: 1; transition: transform 0.2s ease, box-shadow 0.2s; width: 100%; text-align: center;
-    }
+    .vortx-buy-btn { position: relative; padding: 12px 20px; background-color: #1a1a24; color: #fff !important; border: 2px solid var(--brandLight); border-radius: 8px; font-weight: bold; cursor: pointer; overflow: hidden; z-index: 1; transition: transform 0.2s ease, box-shadow 0.2s; width: 100%; text-align: center; }
     .vortx-buy-btn::before { content: ''; position: absolute; top: 100%; left: 0; width: 100%; height: 100%; background-color: var(--brandLight); z-index: -1; transition: top 0.3s ease; }
     .vortx-buy-btn:hover::before { top: 0; }
     .vortx-buy-btn:hover { box-shadow: 0 0 20px rgba(168, 85, 247, 0.6); transform: translateY(-2px); }
     
     /* ---------- VORTX Cards ---------- */
-    .vortx-card {
-      width: 100%; max-width: 350px;
-      position: relative; display: flex; flex-direction: column; gap: 1rem;
-      padding: 1.5rem; background-color: #111116; border-radius: 1rem;
-      box-shadow: 0px -16px 24px 0px rgba(255, 255, 255, 0.05) inset; overflow: hidden; border: 1px solid rgba(168,85,247,0.2);
-    }
+    .vortx-card { width: 100%; max-width: 350px; position: relative; display: flex; flex-direction: column; gap: 1rem; padding: 1.5rem; background-color: #111116; border-radius: 1rem; box-shadow: 0px -16px 24px 0px rgba(255, 255, 255, 0.05) inset; overflow: hidden; border: 1px solid rgba(168,85,247,0.2); }
     body.light-mode .vortx-card { background-color: #fff; box-shadow: 0px -16px 24px 0px rgba(0, 0, 0, 0.05) inset; border: 1px solid #ddd; }
     body.light-mode .vortx-card .card_title, body.light-mode .vortx-card .list_text { color: #111; }
 
     /* Payment inputs */
-    .radio-inputs { display: flex; flex-wrap: wrap; border-radius: 0.5rem; background-color: #1a1a24; padding: 0.25rem; width: 100%; font-size: 14px; margin: 15px 0; }
+    .radio-inputs { display: flex; flex-wrap: wrap; border-radius: 0.5rem; background-color: #1a1a24; padding: 0.25rem; width: 100%; font-size: 14px; margin: 15px 0; border: 1px solid rgba(168,85,247,0.2); }
     body.light-mode .radio-inputs { background-color: #eee; }
     .radio-inputs .radio { flex: 1 1 auto; text-align: center; }
     .radio-inputs .radio input { display: none; }
@@ -150,7 +126,7 @@
 <body class="dark-mode">
   <div id="scroll-progress"></div>
 
-  <!-- Backgrounds (النقاط الفضية الكبيرة) -->
+  <!-- Backgrounds (Silver Dots) -->
   <canvas id="bg-canvas"></canvas>
   <div class="glow-field"></div>
 
@@ -219,7 +195,7 @@
   <main id="main-view" class="view relative z-10">
     <div id="top"></div>
 
-    <!-- HERO SECTION (تصميم فخم ومتركز بدون تشتيت) -->
+    <!-- HERO SECTION -->
     <section class="max-w-4xl mx-auto px-4 sm:px-6 py-20 sm:py-32 text-center">
       <div class="reveal inline-flex items-center gap-2 glass px-5 py-2 rounded-full text-xs font-bold tracking-widest uppercase text-brandLight mb-8">
         <span class="w-2 h-2 rounded-full bg-brandLight shadow-[0_0_8px_#a855f7]"></span>
@@ -237,7 +213,7 @@
       </div>
     </section>
 
-    <!-- WEB BUNDLES -->
+    <!-- WEB BUNDLES (تم إضافة خيارات الدفع هنا) -->
     <section id="bundles" class="max-w-7xl mx-auto px-4 sm:px-6 py-16">
       <div class="reveal glass rounded-[2rem] p-8 sm:p-16 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8 tilt-card">
         <div class="absolute -end-20 -top-20 w-72 h-72 rounded-full bg-brand/20 blur-[80px] pointer-events-none"></div>
@@ -247,6 +223,17 @@
           <p class="font-bold text-white/60 leading-relaxed text-sm sm:text-lg" data-i18n="tiers-desc">
             Launch your custom digital space today. Stand out with next-gen designs, premium performance, and join the elite creators.
           </p>
+          
+          <!-- خيارات الدفع اللي طلبتها (cc, check, XML) فوق تحت حزمة الويب -->
+          <div class="mt-6 mb-2 max-w-[250px]">
+            <p class="text-xs font-bold text-white/50 mb-2" data-i18n="pay-method">Payment Method:</p>
+            <div class="radio-inputs">
+              <label class="radio"><input type="radio" name="pay_bundles" checked><span class="name">cc</span></label>
+              <label class="radio"><input type="radio" name="pay_bundles"><span class="name" data-i18n="pay-check">شيك</span></label>
+              <label class="radio"><input type="radio" name="pay_bundles"><span class="name">XML</span></label>
+            </div>
+          </div>
+          
         </div>
         <div class="w-full md:w-auto relative z-10">
           <button onclick="openWebTiers()" class="vortx-buy-btn px-8 uppercase tracking-wider text-xs sm:text-sm" data-i18n="tiers-btn">
@@ -256,18 +243,16 @@
       </div>
     </section>
 
-    <!-- PACKS CAROUSEL (هنا الأنيميشن اللي يقلب صار بمكانه زي صورتك بالضبط ويشتغل غصب) -->
+    <!-- PACKS CAROUSEL (هنا الشريط التفاعلي اللي تكبر وتتحكم فيه بيدك وتسحبه ويوقف) -->
     <section id="packs" class="py-16 overflow-hidden">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 mb-10 text-center reveal">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 mb-8 text-start reveal">
         <h2 class="font-head font-bold text-3xl sm:text-4xl" data-i18n="packs-title">Featured Packs</h2>
-        <p class="font-bold text-white/50 text-sm mt-2" data-i18n="packs-desc">Premium animated assets.</p>
+        <p class="font-bold text-white/50 text-sm mt-2" data-i18n="packs-desc">Swipe to explore packs.</p>
       </div>
       
-      <div class="flex justify-center px-4 reveal">
-        <!-- الكرت الفخم الطولي اللي داخله الأنيميشن يقلب بدون ما يعلق -->
-        <div class="glass p-2 sm:p-4 rounded-[2rem] w-full max-w-[320px] sm:max-w-md aspect-[9/16] flex items-center justify-center relative overflow-hidden tilt-card shadow-[0_0_30px_rgba(168,85,247,0.15)]">
-           <dotlottie-wc src="https://lottie.host/c93ddc27-27ce-40e8-889a-036225ad74db/WH0Z7JEvzm.lottie" autoplay loop style="width: 100%; height: 100%; object-fit: contain; background: transparent;"></dotlottie-wc>
-        </div>
+      <!-- الكروت الكبيرة المتحركة بيدك (Snap Scrolling) -->
+      <div class="flex overflow-x-auto snap-x snap-mandatory gap-6 px-4 pb-8 hide-scrollbar max-w-7xl mx-auto" id="swipe-slider">
+        <!-- بتنضاف هنا عبر الجافاسكريبت عشان تكون كبيرة ومناسبة للتحكم -->
       </div>
     </section>
 
@@ -297,8 +282,8 @@
       </div>
     </section>
 
-    <!-- SMART RATING SYSTEM (خانة التعليق تظهر بعد التقييم) -->
-    <section class="max-w-xl mx-auto px-4 py-16">
+    <!-- SMART RATING SYSTEM (مع إظهار التعليقات المحفوظة) -->
+    <section class="max-w-2xl mx-auto px-4 py-16">
       <div class="glass rounded-3xl p-8 text-center reveal">
         <h3 class="font-head font-bold text-2xl mb-2" data-i18n="rate-title">Rate VORTX</h3>
         <p class="text-white/50 text-sm mb-6" data-i18n="rate-desc">Your feedback fuels our next updates!</p>
@@ -313,12 +298,17 @@
           </div>
           <div id="feedback-display" class="feedback-box text-white" data-i18n="rate-wait">Waiting for your rating...</div>
           
-          <!-- خانة التعليق (تظهر بشكل انسيابي بعد التقييم) -->
           <div id="comment-section" class="mt-4 hidden flex-col gap-3 transition-all duration-300">
              <textarea id="rating-comment" rows="3" class="w-full bg-black/40 border border-brand/30 rounded-xl p-3 text-sm text-white focus:outline-none focus:border-brandLight" data-i18n-placeholder="rate-placeholder" placeholder="Write your comment here..."></textarea>
              <button onclick="submitRating()" class="vortx-buy-btn py-2 text-xs" data-i18n="rate-submit">Submit Rating</button>
           </div>
         </div>
+        
+        <!-- هنا تنزل التقييمات المحفوظة -->
+        <div id="reviews-list" class="mt-8 flex flex-col gap-4 text-start border-t border-white/10 pt-8 empty:hidden">
+          <!-- التعليقات بتنضاف هنا تلقائياً -->
+        </div>
+
       </div>
     </section>
 
@@ -433,7 +423,7 @@
       'nav-bundles': 'Bundles', 'nav-packs': 'Packs', 'nav-categories': 'Categories',
       'hero-tag': 'Premium Digital Studio', 'hero-desc': 'Next-gen digital assets, cinematic presets, VFX packs & custom web solutions.', 'hero-btn': 'Explore Tiers',
       'tiers-tag': 'Custom Web Solutions', 'tiers-title': 'Web Bundles', 'tiers-desc': 'Launch your custom digital space today.', 'tiers-btn': 'View Tiers',
-      'packs-title': 'Featured Packs', 'packs-desc': 'Premium animated assets.',
+      'packs-title': 'Featured Packs', 'packs-desc': 'Swipe to explore packs.',
       'cat-title': 'Categories', 'cat-desc': 'Select a module to view contents.',
       'cat-1': 'Color Grading', 'cat-2': 'Camera Movements', 'cat-3': 'Visual Effects', 'cat-4': 'Presets & Filters',
       'rate-title': 'Rate VORTX', 'rate-desc': 'Your feedback fuels our next updates!', 'rate-wait': 'Waiting for your rating...',
@@ -443,13 +433,14 @@
       'card2-title': 'PRO', 'card2-badge': 'Most Popular', 'card2-desc': 'Advanced animations.', 'card2-f1': 'Glassmorphism', 'card2-f2': 'Scroll Animations',
       'card3-title': 'VIP', 'card3-desc': 'Premium 3D experience.', 'card3-f1': '3D Models', 'card3-f3': '24/7 Support',
       'pack-btn': 'Select Plan', 'cat-tag': 'Collection',
-      'pay-method': 'Payment Method:', 'pay-check': 'Check', 'btn-cart': 'Add to Cart'
+      'pay-method': 'Payment Method:', 'pay-check': 'Check', 'btn-cart': 'Add to Cart',
+      'guest': 'Guest User'
     },
     'ar': {
       'nav-bundles': 'الباقات', 'nav-packs': 'الحزم', 'nav-categories': 'الأقسام',
       'hero-tag': 'استوديو رقمي فاخر', 'hero-desc': 'أصول رقمية حديثة، وتأثيرات سينمائية لنخبة المبدعين.', 'hero-btn': 'استكشف الباقات',
       'tiers-tag': 'حلول ويب مخصصة', 'tiers-title': 'باقات المواقع', 'tiers-desc': 'أطلق مساحتك الرقمية اليوم بتصاميم حديثة وأداء جبار.', 'tiers-btn': 'عرض الباقات',
-      'packs-title': 'حزم مميزة', 'packs-desc': 'أصول رقمية متحركة فاخرة.',
+      'packs-title': 'حزم مميزة', 'packs-desc': 'اسحب لليمين واليسار لتصفح الحزم.',
       'cat-title': 'الأقسام', 'cat-desc': 'اختر القسم لاستعراض محتواه.',
       'cat-1': 'تعديل الألوان', 'cat-2': 'حركات الكاميرا', 'cat-3': 'مؤثرات بصرية', 'cat-4': 'فلاتر جاهزة',
       'rate-title': 'قيّم VORTX', 'rate-desc': 'رأيك هو الوقود لتحديثاتنا القادمة!', 'rate-wait': 'بانتظار تقييمك...',
@@ -459,7 +450,8 @@
       'card2-title': 'احترافي', 'card2-badge': 'الأكثر طلباً', 'card2-desc': 'أنيميشن وتصميم مخصص.', 'card2-f1': 'تأثيرات زجاجية', 'card2-f2': 'أنيميشن مذهل',
       'card3-title': 'VIP', 'card3-desc': 'تجربة فخمة.', 'card3-f1': 'دمج 3D', 'card3-f3': 'دعم 24/7',
       'pack-btn': 'اختر الباقة', 'cat-tag': 'المجموعة',
-      'pay-method': 'طريقة الدفع:', 'pay-check': 'شيك', 'btn-cart': 'أضف للسلة'
+      'pay-method': 'طريقة الدفع:', 'pay-check': 'شيك', 'btn-cart': 'أضف للسلة',
+      'guest': 'مستخدم زائر'
     }
   };
 
@@ -487,13 +479,14 @@
     document.querySelectorAll('.theme-checkbox').forEach(cb => cb.checked = isDark);
   }
 
-  /* --- Rating System Logic (إظهار التعليق) --- */
+  /* --- Rating System Logic (إظهار التعليقات المحفوظة) --- */
   const starsInputs = document.querySelectorAll('input[name="rating"]');
   const feedbackDisplay = document.getElementById('feedback-display');
   const rateMessages = {
     'en': { "1": "Ouch! That bad? 💔", "2": "Needs work, noted! 🫡", "3": "Good, but we aim higher! 🚀", "4": "Awesome! Glad you like it 🔥", "5": "Legendary! You're the best 👑" },
     'ar': { "1": "يا ساتر! للدرجة ذي سيء؟ 💔", "2": "مقبول، بنعوضك 🫡", "3": "زين، بس نطمح للأعلى! 🚀", "4": "كفو! شغلك في السليم 🔥", "5": "أسطوري يا وحش! 👑" }
   };
+  
   starsInputs.forEach(star => {
     star.addEventListener('change', (e) => {
       const val = e.target.value;
@@ -505,13 +498,44 @@
     });
   });
 
+  // هنا يتم إرسال وطباعة التعليق في الأسفل
   function submitRating() {
-    const msg = dictionary[currentLang]['rate-thanks'];
-    showToast(msg);
-    const commentSection = document.getElementById('comment-section');
-    commentSection.classList.add('hidden');
-    commentSection.classList.remove('flex');
-    document.getElementById('rating-comment').value = '';
+    const commentBox = document.getElementById('rating-comment');
+    const commentText = commentBox.value.trim();
+    const selectedStar = document.querySelector('input[name="rating"]:checked');
+    
+    if (!selectedStar) return;
+    
+    const starVal = parseInt(selectedStar.value);
+    
+    // إرسال الإشعار
+    showToast(dictionary[currentLang]['rate-thanks']);
+    
+    // إنشاء كرت التعليق وإضافته للقائمة
+    if (commentText !== '') {
+      const reviewsList = document.getElementById('reviews-list');
+      
+      // بناء النجوم
+      const starsHTML = '★'.repeat(starVal) + '☆'.repeat(5 - starVal);
+      
+      const reviewHTML = `
+        <div class="glass p-4 rounded-xl border-brand/30 reveal in">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="text-brandLight text-lg tracking-widest">${starsHTML}</span>
+            <span class="text-white/40 text-xs font-bold ms-auto">${dictionary[currentLang]['guest']}</span>
+          </div>
+          <p class="text-white/80 text-sm font-bold">${commentText}</p>
+        </div>
+      `;
+      
+      // إضافته في بداية القائمة
+      reviewsList.insertAdjacentHTML('afterbegin', reviewHTML);
+    }
+    
+    // تصفير الخانات وإخفاء مربع التعليق
+    document.getElementById('comment-section').classList.add('hidden');
+    document.getElementById('comment-section').classList.remove('flex');
+    commentBox.value = '';
   }
 
   /* --- Bulletproof Reveal Animation --- */
@@ -546,6 +570,16 @@
     setTimeout(() => document.getElementById('preview-modal').classList.add('opacity-0', 'pointer-events-none'), 200);
   }
 
+  /* --- Swipe Slider المربعات الكبيرة (بديل الـ Marquee اللي يعلق) --- */
+  const packs = [{ t: 'Neon Nights', tag: 'Color' }, { t: 'Cyber Shake', tag: 'Camera' }, { t: 'Glitch VFX', tag: 'VFX' }, { t: 'Cinematic', tag: 'Presets' }];
+  // نظام السحب بالأصبع Native Snap ومقاس الكروت كبير ومحترم
+  document.getElementById('swipe-slider').innerHTML = [...packs,...packs].map(p => `
+    <div onclick="openPreview('${p.t}', '${p.tag}')" class="snap-center shrink-0 w-[85vw] max-w-[320px] aspect-[4/5] glass rounded-[2rem] p-6 flex flex-col justify-between bg-black/40 cursor-pointer tilt-card relative group overflow-hidden">
+      <div class="absolute inset-0 bg-brand/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+      <div class="flex items-center justify-between relative z-10"><span class="text-[10px] font-bold px-4 py-2 rounded-full border border-white/10 bg-black/50 text-brandLight">${p.tag}</span></div>
+      <h3 class="font-head font-bold text-2xl text-white relative z-10">${p.t}</h3>
+    </div>`).join('');
+
   /* --- Views Logic --- */
   const CATEGORY_DATA = { CC: ['Teal & Orange','Night Grade','Vibrant Pop'], SHAKE: ['Impact Shake','Bass Drop','Earthquake'], VFX: ['Spark Burst','Glitch Distortion','Lightning'], PF: ['Cinematic Suite','Gaming Montage','Anime Presets'] };
   function showView(id) {
@@ -578,8 +612,8 @@
         p.push({
           x:Math.random()*w, y:Math.random()*h,
           vx:(Math.random()-0.5)*0.3, vy:(Math.random()-0.5)*0.3,
-          r: Math.random() * 2.5 + 1.5, 
-          c: Math.random() > 0.5 ? '#e5e7eb' : '#9ca3af'
+          r: Math.random() * 2.5 + 1.5, // النقاط الكبيرة
+          c: Math.random() > 0.5 ? '#e5e7eb' : '#9ca3af' // اللون الفضي Silver
         }); 
       }
     }
