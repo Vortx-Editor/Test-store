@@ -414,7 +414,7 @@
       align-items: center;
       justify-content: center;
       overflow: hidden;
-      transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.8s ease;
+      transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.6s ease;
     }
 
     #vx-loader.vx-hide {
@@ -427,9 +427,9 @@
       opacity: 0;
       filter: blur(18px);
       transform: scale(1.02);
-      transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
-                  filter 0.9s cubic-bezier(0.16, 1, 0.3, 1),
-                  transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                  filter 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     }
     #app-content.vx-revealed {
       opacity: 1;
@@ -610,7 +610,7 @@
           </div>
         </div>
 
-        <!-- SOCIAL MEDIA LINE ICONS (FULL WIDTH ROW BELOW BUTTON) -->
+        <!-- SOCIAL MEDIA LINE ICONS -->
         <div class="w-full max-w-4xl mx-auto my-8 px-4 flex items-center justify-between sm:justify-around text-purple-400 dark:text-purple-300">
           <a href="#" class="p-3.5 rounded-2xl border border-white/10 glass hover:bg-purple-500/20 hover:border-purple-400 hover:scale-110 transition-all duration-300" title="TikTok">
             <svg class="w-6 h-6 stroke-current fill-none stroke-[1.8]" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
@@ -929,73 +929,72 @@
   </div>
 
   <script>
-  /* CINEMATIC LUXURY LOADER LOGIC */
+  /* BULLETPROOF CINEMATIC LOADER LOGIC */
   (function () {
-    const docEl = document.documentElement;
-    docEl.classList.add('vx-loading');
+    try {
+      const docEl = document.documentElement;
+      docEl.classList.add('vx-loading');
 
-    const loader = document.getElementById('vx-loader');
-    const appContent = document.getElementById('app-content');
-    const barFill = document.getElementById('vx-bar-fill');
-    const percentEl = document.getElementById('vx-percent');
-    const wordEl = document.getElementById('vx-logo-word');
+      const loader = document.getElementById('vx-loader');
+      const appContent = document.getElementById('app-content');
+      const barFill = document.getElementById('vx-bar-fill');
+      const percentEl = document.getElementById('vx-percent');
+      const wordEl = document.getElementById('vx-logo-word');
 
-    const letters = ['V', 'O', 'R', 'T', 'X'];
-    if (wordEl && wordEl.children.length === 0) {
-      letters.forEach((ch, i) => {
-        const span = document.createElement('span');
-        span.className = 'vx-letter';
-        span.textContent = ch;
-        span.style.setProperty('--ld', (i * 0.12).toFixed(2) + 's');
-        wordEl.appendChild(span);
-      });
-    }
-
-    let finished = false;
-
-    function revealSite() {
-      if (finished) return;
-      finished = true;
-
-      if (barFill) barFill.style.width = '100%';
-      if (percentEl) percentEl.textContent = '100';
-
-      setTimeout(() => {
-        if (loader) loader.classList.add('vx-hide');
-        if (appContent) appContent.classList.add('vx-revealed');
-        docEl.classList.remove('vx-loading');
-      }, 400);
-    }
-
-    const DURATION = 3200;
-    const startTime = performance.now();
-
-    function updateProgress(now) {
-      if (finished) return;
-
-      const elapsed = now - startTime;
-      const progress = Math.min(elapsed / DURATION, 1);
-
-      let easedP = progress < 0.5 
-        ? 2 * progress * progress 
-        : 1 - Math.pow(-2 * progress + 2, 2) / 2;
-
-      let currentPct = Math.floor(easedP * 100);
-
-      if (barFill) barFill.style.width = currentPct + '%';
-      if (percentEl) percentEl.textContent = currentPct;
-
-      if (progress < 1) {
-        requestAnimationFrame(updateProgress);
-      } else {
-        revealSite();
+      const letters = ['V', 'O', 'R', 'T', 'X'];
+      if (wordEl && wordEl.children.length === 0) {
+        letters.forEach((ch, i) => {
+          const span = document.createElement('span');
+          span.className = 'vx-letter';
+          span.textContent = ch;
+          span.style.setProperty('--ld', (i * 0.12).toFixed(2) + 's');
+          wordEl.appendChild(span);
+        });
       }
+
+      let progress = 0;
+      let finished = false;
+
+      function revealSite() {
+        if (finished) return;
+        finished = true;
+
+        if (barFill) barFill.style.width = '100%';
+        if (percentEl) percentEl.textContent = '100';
+
+        setTimeout(() => {
+          if (loader) {
+            loader.classList.add('vx-hide');
+            loader.style.display = 'none';
+          }
+          if (appContent) appContent.classList.add('vx-revealed');
+          docEl.classList.remove('vx-loading');
+        }, 300);
+      }
+
+      // Smooth Interval progress ~2.5 seconds
+      const timer = setInterval(() => {
+        progress += 4;
+        if (progress >= 100) {
+          progress = 100;
+          clearInterval(timer);
+          revealSite();
+        }
+        if (barFill) barFill.style.width = progress + '%';
+        if (percentEl) percentEl.textContent = progress;
+      }, 35);
+
+      setTimeout(revealSite, 3000);
+
+      if (loader) loader.addEventListener('click', revealSite);
+    } catch (e) {
+      // Immediate failsafe if JS breaks
+      const loader = document.getElementById('vx-loader');
+      const appContent = document.getElementById('app-content');
+      if (loader) loader.style.display = 'none';
+      if (appContent) appContent.classList.add('vx-revealed');
+      document.documentElement.classList.remove('vx-loading');
     }
-
-    requestAnimationFrame(updateProgress);
-    setTimeout(revealSite, 3600);
-
-    if (loader) loader.addEventListener('click', revealSite);
   })();
 
   /* SWIPER & SITE FUNCTIONS */
@@ -1111,10 +1110,4 @@
     document.getElementById('cat-title').textContent = key;
     document.getElementById('cat-grid').innerHTML = CATEGORY_DATA[key].map((item) => `
       <div onclick="openPreview('${item}', '${key}')" class="cat-card-glass flex flex-col justify-between min-h-[140px] text-left ltr:text-left rtl:text-right border-l-4 border-purple-500">
-        <span class="text-[10px] font-bold uppercase text-purple-400">${key} Pack</span>
-        <h3 class="font-head font-bold text-xl mt-4">${item}</h3>
-      </div>`).join('');
-    showView('category-view');
-  }
-
-  fu
+        <span class="text-[10px] font
