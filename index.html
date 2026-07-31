@@ -58,8 +58,6 @@
       --bg-color: #f1f5f9;
       --text-color: #0f172a;
       --nav-logo-color: #581c87;
-      --nav-icon-color: #6b21a8;
-      --card-title-color: #3b0764;
       --star-bg: radial-gradient(ellipse at bottom, #e2e8f0 0%, #cbd5e1 100%);
       --star-opacity: 0.25;
       --btn-text-color: #2e1065;
@@ -128,44 +126,44 @@
       to { transform: translateY(-2000px); }
     }
 
-    /* VORTX WET LIQUID SHINE SWEEP ON BOTH TITLES */
+    /* VORTX WET LIQUID SHINE SWEEP (SINGLE ELEMENT - NO GHOSTING / NO OVERLAY SHIFT) */
     .vortx-wet-oil-title {
-      position: relative;
       display: inline-block;
       font-weight: 900;
-      background: linear-gradient(135deg, #ffffff 0%, #f3e8ff 35%, #c084fc 70%, #7e22ce 100%);
+      background: linear-gradient(
+        110deg,
+        #ffffff 0%,
+        #f3e8ff 20%,
+        #ffffff 35%,
+        #c084fc 50%,
+        #ffffff 65%,
+        #7e22ce 80%,
+        #ffffff 100%
+      );
+      background-size: 200% 100%;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      animation: oilShineSweep 4s linear infinite;
       filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.8)) drop-shadow(0 0 20px rgba(168, 85, 247, 0.5));
     }
 
-    .vortx-wet-oil-title::before {
-      content: attr(data-text);
-      position: absolute;
-      left: 0; top: 0; width: 100%; height: 100%;
-      font: inherit;
-      letter-spacing: inherit;
-      line-height: inherit;
-      background: linear-gradient(
-        110deg,
-        transparent 0%, transparent 35%,
-        rgba(255, 255, 255, 0.95) 48%, rgba(233, 213, 255, 0.6) 52%,
-        transparent 65%, transparent 100%
-      );
-      background-size: 220% 100%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: oilShineSweep 4s infinite ease-in-out;
-      pointer-events: none;
-    }
-
     @keyframes oilShineSweep {
-      0% { background-position: 220% 0; }
-      100% { background-position: -220% 0; }
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
     }
 
     html.light .vortx-wet-oil-title {
-      background: linear-gradient(135deg, #2e1065 0%, #581c87 40%, #7e22ce 70%, #a855f7 100%);
+      background: linear-gradient(
+        110deg,
+        #2e1065 0%,
+        #581c87 20%,
+        #a855f7 35%,
+        #ffffff 50%,
+        #7e22ce 65%,
+        #3b0764 80%,
+        #2e1065 100%
+      );
+      background-size: 200% 100%;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       filter: drop-shadow(0 5px 15px rgba(126, 34, 206, 0.2));
@@ -270,7 +268,7 @@
       text-transform: uppercase;
     }
 
-    /* TIER CARDS */
+    /* TIER CARDS FULL DESIGN */
     .tier-card {
       --white: hsl(0, 0%, 100%);
       --black: hsl(240, 15%, 9%);
@@ -392,7 +390,9 @@
     .view { transition: opacity .4s ease; opacity: 1; }
     .view-hidden { display: none !important; opacity: 0; }
 
-    /* PURE CSS FAILSAFE LOADER */
+    /* =====================================================================
+       CINEMATIC HIGH-END LOADER (WITH GLITCH LETTERS & AMBIENT GLOW)
+       ===================================================================== */
     #vx-loader {
       position: fixed;
       inset: 0;
@@ -403,7 +403,7 @@
       align-items: center;
       justify-content: center;
       overflow: hidden;
-      transition: opacity 0.5s ease, visibility 0.5s ease;
+      transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.7s ease;
     }
 
     #vx-loader.vx-hide {
@@ -414,82 +414,122 @@
 
     #app-content {
       opacity: 0;
-      filter: blur(12px);
-      transition: opacity 0.6s ease, filter 0.6s ease;
+      filter: blur(18px);
+      transform: scale(1.02);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                  filter 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     }
     #app-content.vx-revealed {
       opacity: 1;
       filter: blur(0px);
+      transform: scale(1);
     }
 
     .vx-ambient-glow {
       position: absolute;
-      width: min(70vw, 800px);
-      height: min(70vw, 800px);
+      width: min(75vw, 850px);
+      height: min(75vw, 850px);
       border-radius: 50%;
       background: radial-gradient(circle, rgba(168, 85, 247, 0.35) 0%, rgba(126, 34, 206, 0.12) 40%, transparent 70%);
       filter: blur(50px);
-      animation: vxGlowPulse 3s ease-in-out infinite;
+      animation: vxGlowPulse 3.5s ease-in-out infinite;
     }
     @keyframes vxGlowPulse {
       0%, 100% { transform: scale(0.92); opacity: 0.6; }
       50% { transform: scale(1.08); opacity: 0.95; }
     }
 
-    .vx-loader-title {
+    .vx-logo-word {
+      display: flex;
       font-family: 'Cinzel', serif;
       font-weight: 900;
-      font-size: clamp(3rem, 10vw, 6rem);
-      letter-spacing: 0.2em;
-      background: linear-gradient(135deg, #ffffff 0%, #c084fc 70%, #7e22ce 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      font-size: clamp(3.2rem, 12vw, 6.5rem);
+      letter-spacing: 0.22em;
+      line-height: 1;
       position: relative;
       z-index: 2;
+    }
+
+    .vx-letter {
+      display: inline-block;
+      background: linear-gradient(135deg, #ffffff 0%, #f3e8ff 35%, #c084fc 70%, #7e22ce 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.8)) drop-shadow(0 0 20px rgba(168, 85, 247, 0.6));
+      opacity: 0;
+      animation: vxLetterGlitchAssemble 0.75s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+      animation-delay: var(--ld, 0s);
+    }
+
+    @keyframes vxLetterGlitchAssemble {
+      0% {
+        opacity: 0;
+        transform: translate3d(0, -22px, 0) scale(1.3) skewX(12deg);
+        filter: drop-shadow(-4px 0 0 rgba(255, 0, 130, 0.8)) drop-shadow(4px 0 0 rgba(0, 220, 255, 0.8)) blur(6px);
+      }
+      40% {
+        opacity: 0.8;
+        transform: translate3d(0, 3px, 0) scale(0.96) skewX(-4deg);
+        filter: drop-shadow(2px 0 0 rgba(255, 0, 130, 0.5)) drop-shadow(-2px 0 0 rgba(0, 220, 255, 0.5)) blur(1px);
+      }
+      100% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) scale(1) skewX(0deg);
+        filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.8)) drop-shadow(0 0 20px rgba(168, 85, 247, 0.6));
+      }
     }
 
     .vx-bar-track {
       width: min(78vw, 320px);
       height: 6px;
       border-radius: 999px;
-      background: rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.05);
       border: 1px solid rgba(168, 85, 247, 0.4);
-      box-shadow: 0 0 15px rgba(126, 34, 206, 0.3);
+      box-shadow: 0 0 15px rgba(126,34,206,0.3);
       margin-top: 1.8rem;
       position: relative;
       overflow: hidden;
       z-index: 2;
     }
 
-    /* CSS ANIMATION PROGRESS (GUARANTEED NO JS FREEZE) */
-    .vx-bar-fill-css {
+    .vx-bar-fill {
       height: 100%;
       width: 0%;
       border-radius: 999px;
       background: linear-gradient(90deg, #7e22ce, #a855f7 55%, #e9d5ff);
       box-shadow: 0 0 12px rgba(168, 85, 247, 0.9);
-      animation: fillBarCSS 2.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+      transition: width 0.05s linear;
+      position: relative;
     }
 
-    @keyframes fillBarCSS {
-      0% { width: 0%; }
-      50% { width: 65%; }
-      100% { width: 100%; }
+    .vx-bar-fill::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.7), transparent);
+      width: 40%;
+      transform: translateX(-100%);
+      animation: vxShimmer 1.5s ease-in-out infinite;
+    }
+    @keyframes vxShimmer {
+      0% { transform: translateX(-120%); }
+      100% { transform: translateX(340%); }
     }
   </style>
 </head>
 
 <body class="vx-loading">
 
-  <!-- CINEMATIC FAILSAFE LOADER -->
+  <!-- CINEMATIC LOADER -->
   <div id="vx-loader" onclick="dismissLoaderNow()">
     <div class="vx-ambient-glow"></div>
-    <div class="vx-loader-title">VORTX</div>
+    <div class="vx-logo-word" id="vx-logo-word"></div>
     <div class="vx-bar-track">
-      <div class="vx-bar-fill-css"></div>
+      <div class="vx-bar-fill" id="vx-bar-fill"></div>
     </div>
     <p class="text-xs font-bold uppercase tracking-[0.3em] text-purple-300/80 mt-4 relative z-10">
-      INITIALIZING...
+      INITIALIZING <span id="vx-percent" class="text-purple-200">0</span>%
     </p>
   </div>
 
@@ -508,7 +548,7 @@
       <nav class="glass border-b-0 bg-black/40 backdrop-blur-md">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
           <a href="#top" class="flex items-center gap-3">
-            <span class="font-head text-2xl vortx-wet-oil-title" data-text="VORTX">VORTX</span>
+            <span class="font-head text-2xl vortx-wet-oil-title">VORTX</span>
           </a>
 
           <ul class="hidden md:flex items-center gap-10 text-sm font-bold opacity-80 mx-auto">
@@ -541,7 +581,7 @@
         </div>
 
         <div class="relative my-2 px-4 inline-block">
-          <h1 class="font-head font-black tracking-[0.25em] text-7xl sm:text-9xl md:text-[10rem] vortx-wet-oil-title leading-none py-4" data-text="VORTX">
+          <h1 class="font-head font-black tracking-[0.25em] text-7xl sm:text-9xl md:text-[10rem] vortx-wet-oil-title leading-none py-4">
             VORTX
           </h1>
         </div>
@@ -559,26 +599,26 @@
           </div>
         </div>
 
-        <!-- SOCIAL MEDIA LINE ICONS -->
-        <div class="w-full max-w-4xl mx-auto my-8 px-4 flex items-center justify-between sm:justify-around text-purple-400 dark:text-purple-300">
-          <a href="#" class="p-3.5 rounded-2xl border border-white/10 glass hover:bg-purple-500/20 hover:border-purple-400 hover:scale-110 transition-all duration-300" title="TikTok">
+        <!-- SOCIAL MEDIA METALLIC SILVER/CHROME LINE ICONS -->
+        <div class="w-full max-w-4xl mx-auto my-8 px-4 flex items-center justify-between sm:justify-around text-slate-300">
+          <a href="#" class="p-3.5 rounded-2xl border border-slate-700/60 bg-white/[0.03] backdrop-blur-md hover:bg-white/10 hover:border-slate-300 hover:text-white hover:scale-110 transition-all duration-300 shadow-lg shadow-black/40" title="TikTok">
             <svg class="w-6 h-6 stroke-current fill-none stroke-[1.8]" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
               <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path>
             </svg>
           </a>
-          <a href="#" class="p-3.5 rounded-2xl border border-white/10 glass hover:bg-purple-500/20 hover:border-purple-400 hover:scale-110 transition-all duration-300" title="Telegram">
+          <a href="#" class="p-3.5 rounded-2xl border border-slate-700/60 bg-white/[0.03] backdrop-blur-md hover:bg-white/10 hover:border-slate-300 hover:text-white hover:scale-110 transition-all duration-300 shadow-lg shadow-black/40" title="Telegram">
             <svg class="w-6 h-6 stroke-current fill-none stroke-[1.8]" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
               <path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4"></path>
             </svg>
           </a>
-          <a href="#" class="p-3.5 rounded-2xl border border-white/10 glass hover:bg-purple-500/20 hover:border-purple-400 hover:scale-110 transition-all duration-300" title="Instagram">
+          <a href="#" class="p-3.5 rounded-2xl border border-slate-700/60 bg-white/[0.03] backdrop-blur-md hover:bg-white/10 hover:border-slate-300 hover:text-white hover:scale-110 transition-all duration-300 shadow-lg shadow-black/40" title="Instagram">
             <svg class="w-6 h-6 stroke-current fill-none stroke-[1.8]" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
               <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
               <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
               <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
             </svg>
           </a>
-          <a href="#" class="p-3.5 rounded-2xl border border-white/10 glass hover:bg-purple-500/20 hover:border-purple-400 hover:scale-110 transition-all duration-300" title="YouTube">
+          <a href="#" class="p-3.5 rounded-2xl border border-slate-700/60 bg-white/[0.03] backdrop-blur-md hover:bg-white/10 hover:border-slate-300 hover:text-white hover:scale-110 transition-all duration-300 shadow-lg shadow-black/40" title="YouTube">
             <svg class="w-6 h-6 stroke-current fill-none stroke-[1.8]" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
               <rect x="2" y="4" width="20" height="16" rx="4.5" ry="4.5"></rect>
               <polygon points="10 8 16 12 10 16 10 8"></polygon>
@@ -878,17 +918,57 @@
   </div>
 
   <script>
-  /* FAILSAFE LOADER DISMISSAL */
+  /* CINEMATIC LOADER DISMISSAL LOGIC */
   function dismissLoaderNow() {
     const loader = document.getElementById('vx-loader');
     const appContent = document.getElementById('app-content');
-    if (loader) loader.classList.add('vx-hide');
+    if (loader) {
+      loader.classList.add('vx-hide');
+      setTimeout(() => { loader.style.display = 'none'; }, 700);
+    }
     if (appContent) appContent.classList.add('vx-revealed');
     document.documentElement.classList.remove('vx-loading');
   }
 
-  // Automatic Reveal Timer
-  setTimeout(dismissLoaderNow, 2200);
+  // Smooth Percentage Increment
+  (function () {
+    try {
+      const docEl = document.documentElement;
+      docEl.classList.add('vx-loading');
+
+      const barFill = document.getElementById('vx-bar-fill');
+      const percentEl = document.getElementById('vx-percent');
+      const wordEl = document.getElementById('vx-logo-word');
+
+      const letters = ['V', 'O', 'R', 'T', 'X'];
+      if (wordEl && wordEl.children.length === 0) {
+        letters.forEach((ch, i) => {
+          const span = document.createElement('span');
+          span.className = 'vx-letter';
+          span.textContent = ch;
+          span.style.setProperty('--ld', (i * 0.12).toFixed(2) + 's');
+          wordEl.appendChild(span);
+        });
+      }
+
+      let progress = 0;
+      const timer = setInterval(() => {
+        progress += 4;
+        if (progress >= 100) {
+          progress = 100;
+          clearInterval(timer);
+          setTimeout(dismissLoaderNow, 300);
+        }
+        if (barFill) barFill.style.width = progress + '%';
+        if (percentEl) percentEl.textContent = progress;
+      }, 30);
+
+      // Failsafe max wait 3s
+      setTimeout(dismissLoaderNow, 3000);
+    } catch (e) {
+      dismissLoaderNow();
+    }
+  })();
 
   /* SWIPER & SITE FUNCTIONS */
   let swiper;
