@@ -53,8 +53,17 @@
       --text-color: #0f172a;
     }
 
-    html { scroll-behavior: smooth; overflow-x: hidden; }
-    body { background-color: var(--bg-color); color: var(--text-color); font-family: 'Inter', sans-serif; transition: background-color 0.4s ease, color 0.4s ease; }
+    /* إصلاح الفراغات والتمرير الجانبي */
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { 
+      max-width: 100vw; 
+      overflow-x: hidden !important; 
+      background-color: var(--bg-color); 
+      color: var(--text-color); 
+      font-family: 'Inter', sans-serif; 
+      transition: background-color 0.4s ease, color 0.4s ease; 
+    }
+    html { scroll-behavior: smooth; }
 
     html[dir="rtl"] body { font-family: 'Cairo', sans-serif; }
 
@@ -102,6 +111,63 @@
     html.light .glass {
       background: rgba(0, 0, 0, 0.04);
       border: 1px solid rgba(0, 0, 0, 0.08);
+    }
+
+    /* ---------- Ultra Glossy Glass Banner (كارت الويب الجديد) ---------- */
+    .glossy-bundle-card {
+      position: relative;
+      border-radius: 2rem;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+      overflow: hidden;
+    }
+
+    /* خلفية الإضاءة (Glow behind the card) */
+    .glossy-bundle-card::before {
+      content: '';
+      position: absolute;
+      top: -20%;
+      left: -10%;
+      width: 120%;
+      height: 140%;
+      background: radial-gradient(circle, rgba(168, 85, 247, 0.25) 0%, rgba(126, 34, 206, 0.05) 50%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* طبقة زجاجية لمعان مائلة (Apple Gloss Effect) */
+    .glossy-bundle-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.12), transparent);
+      transform: skewX(-25deg);
+      transition: left 0.8s ease-in-out;
+      pointer-events: none;
+    }
+    .glossy-bundle-card:hover::after {
+      left: 200%;
+    }
+
+    /* زجاجي للزر المضيء داخل الكارت */
+    .glass-gloss-btn {
+      position: relative;
+      z-index: 10;
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.3), rgba(126, 34, 206, 0.5));
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 0 20px rgba(168, 85, 247, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+    .glass-gloss-btn:hover {
+      box-shadow: 0 0 35px rgba(168, 85, 247, 0.8), inset 0 1px 2px rgba(255, 255, 255, 0.9);
+      transform: translateY(-2px) scale(1.02);
     }
 
     /* ---------- Custom Buttons & Utilities ---------- */
@@ -251,19 +317,24 @@
 
     </section>
 
-    <!-- WEB BUNDLES -->
+    <!-- WEB BUNDLES (المعدلة بالكامل مع التأثير الزجاجي والعنوان الموحد) -->
     <section id="bundles" class="max-w-7xl mx-auto px-4 sm:px-6 py-16">
-      <div class="glass rounded-[2rem] p-10 sm:p-16 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-10">
-        <div class="text-left ltr:text-left rtl:text-right max-w-2xl relative z-10">
-          <span data-i18n="bundle-sub" class="text-xs tracking-widest uppercase font-bold text-brandLight">Custom Web Solutions</span>
-          <h2 data-i18n="bundle-title" class="font-head font-bold text-4xl sm:text-5xl mt-4 mb-5">Web Page Bundles</h2>
-          <p data-i18n="bundle-desc" class="font-bold opacity-60 leading-relaxed text-base sm:text-lg">
+      <div class="glossy-bundle-card p-8 sm:p-14 relative flex flex-col md:flex-row items-center justify-between gap-10">
+        <div class="text-center md:text-left rtl:md:text-right max-w-2xl relative z-10 w-full">
+          <span data-i18n="bundle-sub" class="text-xs tracking-widest uppercase font-bold text-brandLight block mb-2">Custom Web Solutions</span>
+          
+          <!-- العنوان بسطر واحد مرن -->
+          <h2 data-i18n="bundle-title" class="font-head font-bold text-2xl sm:text-4xl md:text-5xl whitespace-nowrap overflow-hidden text-ellipsis mb-4 text-white">
+            Web Page Bundles
+          </h2>
+          
+          <p data-i18n="bundle-desc" class="font-bold opacity-75 leading-relaxed text-sm sm:text-lg text-purple-100/90">
             Launch your custom digital space today. Stand out with next-gen designs, premium performance, and join the elite creators.
           </p>
         </div>
         
-        <div class="w-full md:w-auto relative z-10">
-          <button onclick="openWebTiers()" data-i18n="bundle-btn" class="glass border-brand/50 hover:bg-brand/20 font-bold px-10 py-4 rounded-full whitespace-nowrap transition-all duration-200 w-full md:w-auto uppercase tracking-wider text-sm active:scale-95">
+        <div class="w-full md:w-auto relative z-10 flex-shrink-0">
+          <button onclick="openWebTiers()" data-i18n="bundle-btn" class="glass-gloss-btn font-bold px-10 py-4.5 rounded-full whitespace-nowrap transition-all duration-300 w-full md:w-auto uppercase tracking-wider text-sm text-white active:scale-95">
             View Development Tiers
           </button>
         </div>
