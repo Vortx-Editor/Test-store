@@ -82,7 +82,6 @@
       transition: background-color 0.4s ease, color 0.4s ease;
     }
 
-    /* Lock scroll while the loader is active */
     html.vx-loading, html.vx-loading body {
       overflow: hidden !important;
       height: 100%;
@@ -93,7 +92,7 @@
     h1, h2, h3, .font-head { font-family: 'Cinzel', serif; letter-spacing: 1.5px; }
     html[dir="rtl"] h1, html[dir="rtl"] h2, html[dir="rtl"] h3, html[dir="rtl"] .font-head { font-family: 'Cairo', sans-serif; letter-spacing: 0; }
 
-    /* ---------- STARS BACKGROUND ---------- */
+    /* STARS BACKGROUND */
     .stars-background-container {
       position: fixed;
       top: 0; left: 0;
@@ -139,7 +138,7 @@
       to { transform: translateY(-2000px); }
     }
 
-    /* ---------- VORTX WET LIQUID / OIL SHINE EFFECT ---------- */
+    /* VORTX WET LIQUID TITLE */
     .vortx-wet-oil-title {
       position: relative;
       display: inline-block;
@@ -150,7 +149,6 @@
       filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.8)) drop-shadow(0 0 20px rgba(168, 85, 247, 0.5));
     }
 
-    /* مسحة اللمعة الزيتية اللزجة المتحركة فوق الحروف */
     .vortx-wet-oil-title::before {
       content: 'VORTX';
       position: absolute;
@@ -183,7 +181,7 @@
       filter: drop-shadow(0 5px 15px rgba(126, 34, 206, 0.2));
     }
 
-    /* ---------- CUSTOM LUXURY SWITCH BUTTON ---------- */
+    /* SWITCH BUTTON */
     .theme-switch-btn {
       width: 64px; height: 34px; border-radius: 999px;
       background: linear-gradient(135deg, #1e1b4b, #311042);
@@ -206,7 +204,7 @@
     html.dark .theme-switch-ball { transform: translateX(0px); background: #e2e8f0; }
     html.light .theme-switch-ball { transform: translateX(30px); background: #fef08a; }
 
-    /* ---------- UIVERSE 3D BUTTON ---------- */
+    /* 3D BUTTON */
     .button-wrap {
       position: relative;
       z-index: 10;
@@ -285,7 +283,7 @@
       text-transform: uppercase;
     }
 
-    /* ---------- UIVERSE TIER CARD STYLES ---------- */
+    /* TIER CARDS */
     .tier-card {
       --white: hsl(0, 0%, 100%);
       --black: hsl(240, 15%, 9%);
@@ -350,7 +348,7 @@
     .tier-card .card__list .card__list_item .list_text { font-size: 0.9rem; font-weight: 700; color: var(--white); }
     html.light .tier-card .card__list .card__list_item .list_text { color: #1e1b4b; }
 
-    /* ---------- GLASS RADIO SELECTOR ---------- */
+    /* GLASS RADIO SELECTOR */
     .glass-radio-group {
       display: flex; position: relative;
       background: rgba(255, 255, 255, 0.05);
@@ -388,7 +386,7 @@
     html[dir="rtl"] #glass-xml:checked ~ .glass-glider { transform: translateX(-100%); background: linear-gradient(135deg, rgba(56, 189, 248, 0.4), #06b6d4); }
     html[dir="rtl"] #glass-shake:checked ~ .glass-glider { transform: translateX(-200%); background: linear-gradient(135deg, rgba(234, 179, 8, 0.4), #eab308); }
 
-    /* ---------- SWIPER 3D ---------- */
+    /* SWIPER 3D */
     .swiper { width: 100%; padding-top: 30px; padding-bottom: 60px; overflow: visible !important; }
     .swiper-slide {
       width: 300px !important;
@@ -432,10 +430,7 @@
     .view { transition: opacity .4s ease; opacity: 1; }
     .view-hidden { display: none !important; opacity: 0; }
 
-    /* =====================================================================
-       CINEMATIC LOADER
-       ===================================================================== */
-
+    /* LOADER STYLES */
     #vx-loader {
       position: fixed;
       inset: 0;
@@ -446,17 +441,16 @@
       justify-content: center;
       overflow: hidden;
       will-change: opacity, filter;
+      transition: opacity 800ms ease, visibility 800ms ease;
     }
 
-    /* Homepage sits behind the loader, blurred + hidden until reveal */
     #app-content {
       opacity: 0;
-      filter: blur(8px);
+      filter: blur(18px);
       transform: scale(1.015);
       transition: opacity 900ms cubic-bezier(0.16, 1, 0.3, 1),
                   filter 900ms cubic-bezier(0.16, 1, 0.3, 1),
                   transform 900ms cubic-bezier(0.16, 1, 0.3, 1);
-      will-change: opacity, filter, transform;
     }
     #app-content.vx-revealed {
       opacity: 1;
@@ -466,11 +460,10 @@
 
     #vx-loader.vx-fade-out {
       opacity: 0;
-      transition: opacity 900ms cubic-bezier(0.4, 0, 0.2, 1);
+      visibility: hidden;
       pointer-events: none;
     }
 
-    /* ambient breathing purple glow, center */
     .vx-ambient-glow {
       position: absolute;
       width: min(70vw, 900px);
@@ -480,43 +473,13 @@
       filter: blur(40px);
       opacity: 0;
       animation: vxGlowBreathe 4.5s ease-in-out infinite;
-      animation-play-state: paused;
     }
-    #vx-loader.vx-glow-in .vx-ambient-glow {
-      opacity: 1;
-      animation-play-state: running;
-      transition: opacity 1.4s ease-out;
-    }
+    #vx-loader.vx-glow-in .vx-ambient-glow { opacity: 1; }
     @keyframes vxGlowBreathe {
       0%, 100% { transform: scale(0.92); opacity: 0.55; }
       50% { transform: scale(1.06); opacity: 0.9; }
     }
 
-    /* film grain overlay, very subtle */
-    .vx-grain {
-      position: absolute;
-      inset: -50%;
-      width: 200%;
-      height: 200%;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-      opacity: 0.035;
-      mix-blend-mode: overlay;
-      animation: vxGrainShift 8s steps(8) infinite;
-      pointer-events: none;
-    }
-    @keyframes vxGrainShift {
-      0% { transform: translate(0, 0); }
-      12.5% { transform: translate(-2%, 1%); }
-      25% { transform: translate(1%, -2%); }
-      37.5% { transform: translate(-1%, 2%); }
-      50% { transform: translate(2%, 1%); }
-      62.5% { transform: translate(-2%, -1%); }
-      75% { transform: translate(1%, 2%); }
-      87.5% { transform: translate(-1%, -2%); }
-      100% { transform: translate(0, 0); }
-    }
-
-    /* floating particles */
     .vx-particles {
       position: absolute;
       inset: 0;
@@ -544,7 +507,6 @@
       100% { opacity: 0; transform: translate(calc(var(--dx, 10px) * -1), -60px) scale(0.6); }
     }
 
-    /* occasional light streak crossing the whole stage */
     .vx-streak {
       position: absolute;
       top: 50%;
@@ -556,9 +518,7 @@
       transform: rotate(-8deg);
       filter: blur(0.5px);
     }
-    .vx-streak.vx-run {
-      animation: vxStreakRun 1.4s cubic-bezier(0.4, 0, 0.2, 1);
-    }
+    .vx-streak.vx-run { animation: vxStreakRun 1.4s cubic-bezier(0.4, 0, 0.2, 1); }
     @keyframes vxStreakRun {
       0% { opacity: 0; left: -30%; }
       12% { opacity: 0.9; }
@@ -567,7 +527,6 @@
       100% { opacity: 0; left: 110%; }
     }
 
-    /* ---------- LOGO ASSEMBLY ---------- */
     .vx-logo-stage {
       position: relative;
       z-index: 3;
@@ -588,7 +547,7 @@
       font-size: clamp(3rem, 12vw, 6.5rem);
       letter-spacing: 0.22em;
       line-height: 1;
-      padding-inline-start: 0.22em; /* offset letter-spacing so it optically centers */
+      padding-inline-start: 0.22em;
     }
 
     .vx-letter {
@@ -604,68 +563,17 @@
       animation-delay: var(--ld, 0s);
     }
 
-    /* glitch fragments merging + chromatic aberration + slight distortion, then settle */
     @keyframes vxLetterAssemble {
       0% {
         opacity: 0;
         transform: translate3d(var(--gx, 0px), var(--gy, -14px), 0) scale(1.3) skewX(var(--gs, 8deg));
-        filter: drop-shadow(0 10px 25px rgba(0,0,0,0.8))
-                drop-shadow(-3px 0 0 rgba(255, 0, 130, 0.7))
-                drop-shadow(3px 0 0 rgba(0, 220, 255, 0.7))
-                blur(4px);
-      }
-      18% {
-        opacity: 0.85;
-        transform: translate3d(calc(var(--gx, 0px) * 0.4), calc(var(--gy, -14px) * 0.35), 0) scale(1.08) skewX(calc(var(--gs, 8deg) * 0.3));
-        filter: drop-shadow(0 10px 25px rgba(0,0,0,0.8))
-                drop-shadow(-2px 0 0 rgba(255, 0, 130, 0.55))
-                drop-shadow(2px 0 0 rgba(0, 220, 255, 0.55))
-                blur(1.5px);
-      }
-      32% {
-        opacity: 0.5;
-        transform: translate3d(calc(var(--gx, 0px) * -0.15), 2px, 0) scale(0.97) skewX(-2deg);
-        filter: drop-shadow(0 10px 25px rgba(0,0,0,0.8))
-                drop-shadow(1.5px 0 0 rgba(255, 0, 130, 0.4))
-                drop-shadow(-1.5px 0 0 rgba(0, 220, 255, 0.4))
-                blur(0.5px);
-      }
-      55% {
-        opacity: 1;
-        transform: translate3d(0, 0, 0) scale(1.02) skewX(0.5deg);
-        filter: drop-shadow(0 10px 25px rgba(0,0,0,0.8))
-                drop-shadow(-0.5px 0 0 rgba(255, 0, 130, 0.2))
-                drop-shadow(0.5px 0 0 rgba(0, 220, 255, 0.2))
-                blur(0px);
+        filter: drop-shadow(0 10px 25px rgba(0,0,0,0.8)) drop-shadow(-3px 0 0 rgba(255, 0, 130, 0.7)) drop-shadow(3px 0 0 rgba(0, 220, 255, 0.7)) blur(4px);
       }
       100% {
         opacity: 1;
         transform: translate3d(0, 0, 0) scale(1) skewX(0deg);
         filter: drop-shadow(0 10px 25px rgba(0,0,0,0.8)) drop-shadow(0 0 20px rgba(168, 85, 247, 0.55));
       }
-    }
-
-    /* light streak sweeping across the assembled logo */
-    .vx-logo-sweep {
-      content: '';
-      position: absolute;
-      inset: -10% -20%;
-      background: linear-gradient(100deg, transparent 40%, rgba(255,255,255,0.9) 49%, rgba(233,213,255,0.6) 52%, transparent 60%);
-      background-size: 280% 100%;
-      background-position: 280% 0;
-      -webkit-mask-image: linear-gradient(#000, #000);
-      mix-blend-mode: overlay;
-      pointer-events: none;
-      opacity: 0;
-    }
-    .vx-logo-sweep.vx-sweep-run {
-      animation: vxLogoSweepRun 0.9s ease-out forwards;
-    }
-    @keyframes vxLogoSweepRun {
-      0% { opacity: 0; background-position: 280% 0; }
-      15% { opacity: 1; }
-      70% { opacity: 0.8; }
-      100% { opacity: 0; background-position: -40% 0; }
     }
 
     .vx-loading-label {
@@ -681,18 +589,6 @@
     }
     #vx-loader.vx-logo-in .vx-loading-label { opacity: 1; }
 
-    .vx-loading-label::after {
-      content: '';
-      display: inline-block;
-      width: 1ch;
-      text-align: left;
-      animation: vxDots 1.4s steps(4, end) infinite;
-    }
-    @keyframes vxDots {
-      0% { content: ''; }
-    }
-
-    /* ---------- LUXURY LOADING BAR ---------- */
     .vx-bar-wrap {
       margin-top: 1.6rem;
       width: min(78vw, 320px);
@@ -720,25 +616,8 @@
       width: 0%;
       border-radius: 999px;
       background: linear-gradient(90deg, #7e22ce, #a855f7 55%, #e9d5ff);
-      box-shadow: 0 0 10px rgba(168, 85, 247, 0.85), 0 0 22px rgba(168, 85, 247, 0.4);
-      transition: box-shadow 0.3s ease;
-    }
-    .vx-bar-fill::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.55), transparent);
-      width: 40%;
-      transform: translateX(-100%);
-      animation: vxBarShimmer 1.8s ease-in-out infinite;
-    }
-    @keyframes vxBarShimmer {
-      0% { transform: translateX(-120%); }
-      100% { transform: translateX(340%); }
-    }
-
-    .vx-bar-fill.vx-bar-complete {
-      box-shadow: 0 0 18px rgba(216, 180, 254, 1), 0 0 40px rgba(168, 85, 247, 0.75);
+      box-shadow: 0 0 10px rgba(168, 85, 247, 0.85);
+      transition: width 0.1s linear;
     }
 
     .vx-bar-meta {
@@ -752,44 +631,21 @@
       color: rgba(216, 180, 254, 0.55);
       text-transform: uppercase;
     }
-    #vx-percent { color: rgba(233, 213, 255, 0.9); font-variant-numeric: tabular-nums; }
-
-    /* final pulse on the logo at 100% */
-    .vx-logo-stage.vx-pulse .vx-letter {
-      animation: vxFinalPulse 0.7s ease-out;
-    }
-    @keyframes vxFinalPulse {
-      0% { filter: drop-shadow(0 10px 25px rgba(0,0,0,0.8)) drop-shadow(0 0 20px rgba(168, 85, 247, 0.55)); }
-      45% { filter: drop-shadow(0 10px 25px rgba(0,0,0,0.8)) drop-shadow(0 0 46px rgba(216, 180, 254, 1)); }
-      100% { filter: drop-shadow(0 10px 25px rgba(0,0,0,0.8)) drop-shadow(0 0 20px rgba(168, 85, 247, 0.55)); }
-    }
-
-    /* respect reduced motion: skip straight to content */
-    @media (prefers-reduced-motion: reduce) {
-      #vx-loader { display: none !important; }
-      #app-content { opacity: 1; filter: none; transform: none; transition: none; }
-    }
-
-    @media (max-width: 480px) {
-      .vx-logo-word { letter-spacing: 0.14em; padding-inline-start: 0.14em; }
-    }
+    #vx-percent { color: rgba(233, 213, 255, 0.9); }
   </style>
 </head>
 
-<body>
+<body class="vx-loading">
 
-  <!-- ================= CINEMATIC LOADER ================= -->
-  <div id="vx-loader" role="status" aria-live="polite" aria-label="VORTX is loading">
+  <!-- CINEMATIC LOADER -->
+  <div id="vx-loader">
     <div class="vx-ambient-glow"></div>
-    <div class="vx-grain"></div>
     <div class="vx-particles" id="vx-particles"></div>
     <div class="vx-streak" id="vx-streak"></div>
 
     <div class="vx-logo-stage" id="vx-logo-stage">
-      <div class="vx-logo-word" id="vx-logo-word" aria-hidden="true">
-        <!-- letters injected by JS -->
-      </div>
-      <p class="vx-loading-label">Loading</p>
+      <div class="vx-logo-word" id="vx-logo-word"></div>
+      <p class="vx-loading-label">Loading...</p>
 
       <div class="vx-bar-wrap">
         <div class="vx-bar-track">
@@ -803,367 +659,451 @@
     </div>
   </div>
 
-  <!-- ================= SITE CONTENT (revealed after load) ================= -->
+  <!-- SITE CONTENT -->
   <div id="app-content">
 
-  <!-- BACKGROUND STARS -->
-  <div class="stars-background-container">
-    <div id="stars"></div>
-    <div id="stars2"></div>
-    <div id="stars3"></div>
+    <div class="stars-background-container">
+      <div id="stars"></div>
+      <div id="stars2"></div>
+      <div id="stars3"></div>
+    </div>
+
+    <div id="toast-box" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[100] flex flex-col gap-3 pointer-events-none"></div>
+
+    <header class="sticky top-0 z-50 w-full">
+      <nav class="glass border-b-0 bg-black/40 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+          <a href="#top" class="flex items-center gap-3">
+            <span class="font-head text-2xl vortx-wet-oil-title">VORTX</span>
+          </a>
+
+          <ul class="hidden md:flex items-center gap-10 text-sm font-bold opacity-80 mx-auto">
+            <li><a href="#bundles" data-i18n="nav-bundles" class="hover:text-brandLight transition">Bundles</a></li>
+            <li><a href="#packs" data-i18n="nav-packs" class="hover:text-brandLight transition">Featured Packs</a></li>
+            <li><a href="#categories" data-i18n="nav-categories" class="hover:text-brandLight transition">Categories</a></li>
+          </ul>
+
+          <div class="flex items-center gap-3 relative z-50">
+            <button onclick="toggleLanguage()" class="glass w-10 h-10 rounded-full flex items-center justify-center border-purple-500/30 text-brandLight font-extrabold text-xs" title="Change Language">🌐</button>
+            <button onclick="toggleTheme()" class="theme-switch-btn" title="Toggle Theme">
+              <div class="theme-switch-ball">
+                <svg class="w-3.5 h-3.5 text-slate-800" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                </svg>
+              </div>
+            </button>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main id="main-view" class="view relative z-10">
+      <div id="top"></div>
+
+      <section class="max-w-6xl mx-auto px-4 sm:px-6 pt-12 pb-10 text-center relative">
+        <div class="inline-flex items-center gap-3 px-6 py-2.5 rounded-full text-xs font-bold tracking-widest uppercase glass backdrop-blur-md mb-8">
+          <span class="w-2 h-2 rounded-full bg-purple-400 animate-ping"></span>
+          <span data-i18n="hero-tag">Digital Assets Hub</span>
+        </div>
+
+        <div class="relative my-2 px-4 inline-block">
+          <h1 class="font-head font-black tracking-[0.25em] text-7xl sm:text-9xl md:text-[10rem] vortx-wet-oil-title leading-none py-4">
+            VORTX
+          </h1>
+        </div>
+
+        <p data-i18n="hero-desc" class="font-semibold opacity-85 max-w-2xl mx-auto text-base sm:text-xl leading-relaxed mt-4 mb-10">
+          High-end VFX packs, cinematic presets & custom web experiences. Crafted specifically for elite creators.
+        </p>
+
+        <div class="flex items-center justify-center">
+          <div class="button-wrap" onclick="document.getElementById('bundles').scrollIntoView({behavior: 'smooth'})">
+            <div class="btn-3d-style">
+              <span data-i18n="hero-btn">Explore Tiers</span>
+            </div>
+            <div class="button-shadow"></div>
+          </div>
+        </div>
+
+        <div class="glass-radio-group">
+          <input type="radio" name="category-plan" id="glass-cc" checked onclick="scrollToCategory('CC')" />
+          <label for="glass-cc">CC</label>
+
+          <input type="radio" name="category-plan" id="glass-xml" onclick="scrollToCategory('XML')" />
+          <label for="glass-xml">XML</label>
+
+          <input type="radio" name="category-plan" id="glass-shake" onclick="scrollToCategory('SHAKE')" />
+          <label for="glass-shake">Shake</label>
+
+          <div class="glass-glider"></div>
+        </div>
+      </section>
+
+      <section id="bundles" class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
+        <div class="glossy-bundle-card p-8 sm:p-14 relative flex flex-col md:flex-row items-center justify-between gap-10">
+          <div class="text-center md:text-left rtl:md:text-right max-w-2xl relative z-10 w-full">
+            <span data-i18n="bundle-sub" class="text-xs tracking-widest uppercase font-extrabold text-brandLight block mb-2">Custom Web Solutions</span>
+            <h2 data-i18n="bundle-title" class="font-head font-black text-3xl sm:text-4xl md:text-5xl whitespace-nowrap overflow-hidden text-ellipsis mb-4 text-3d-header">
+              Web Page Bundles
+            </h2>
+            <p data-i18n="bundle-desc" class="font-bold opacity-80 leading-relaxed text-sm sm:text-lg">
+              Launch your custom digital space today. Stand out with next-gen designs, premium performance, and join the elite creators.
+            </p>
+          </div>
+
+          <div class="w-full md:w-auto relative z-10 flex justify-center md:justify-end flex-shrink-0">
+            <div class="button-wrap" onclick="openWebTiers()">
+              <div class="btn-3d-style">
+                <span data-i18n="bundle-btn">View Development Tiers</span>
+              </div>
+              <div class="button-shadow"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="packs" class="py-16 max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="mb-8 text-left ltr:text-left rtl:text-right">
+          <h2 data-i18n="packs-title" class="font-head font-bold text-3xl sm:text-4xl">Featured Packs</h2>
+          <p data-i18n="packs-desc" class="font-bold opacity-50 text-sm mt-3 tracking-wide">Autoplays continuously — Tap or hold to inspect.</p>
+        </div>
+
+        <div class="swiper mySwiper">
+          <div class="swiper-wrapper">
+            <div onclick="openPreview('Flame Pack', 'VFX')" class="swiper-slide glass card-3d-frame card-glow-red p-6 flex flex-col justify-between items-center text-center cursor-pointer">
+              <span class="text-[10px] uppercase font-bold tracking-widest px-4 py-1.5 rounded-full border border-red-500/30 bg-red-500/10 text-red-400 self-start z-10">VFX</span>
+              <div class="w-full h-60 my-3 rounded-2xl glass border border-white/10 flex items-center justify-center overflow-hidden relative z-10">
+                <img src="https://picsum.photos/400/500?random=1" class="w-full h-full object-cover opacity-85 hover:scale-105 transition-transform duration-500" alt="Sample" />
+              </div>
+              <h3 data-i18n="card-1-title" class="font-head font-bold text-xl z-10">Red Inferno</h3>
+            </div>
+
+            <div onclick="openPreview('Cyber Gold', 'Color')" class="swiper-slide glass card-3d-frame card-glow-yellow p-6 flex flex-col justify-between items-center text-center cursor-pointer">
+              <span class="text-[10px] uppercase font-bold tracking-widest px-4 py-1.5 rounded-full border border-yellow-500/30 bg-yellow-500/10 text-yellow-400 self-start z-10">Color</span>
+              <div class="w-full h-60 my-3 rounded-2xl glass border border-white/10 flex items-center justify-center overflow-hidden relative z-10">
+                <img src="https://picsum.photos/400/500?random=2" class="w-full h-full object-cover opacity-85 hover:scale-105 transition-transform duration-500" alt="Sample" />
+              </div>
+              <h3 data-i18n="card-2-title" class="font-head font-bold text-xl z-10">Cyber Gold</h3>
+            </div>
+
+            <div onclick="openPreview('Neon Nights', 'Camera')" class="swiper-slide glass card-3d-frame card-glow-purple p-6 flex flex-col justify-between items-center text-center cursor-pointer">
+              <span class="text-[10px] uppercase font-bold tracking-widest px-4 py-1.5 rounded-full border border-purple-500/30 bg-purple-500/10 text-purple-400 self-start z-10">Camera</span>
+              <div class="w-full h-60 my-3 rounded-2xl glass border border-white/10 flex items-center justify-center overflow-hidden relative z-10">
+                <img src="https://picsum.photos/400/500?random=3" class="w-full h-full object-cover opacity-85 hover:scale-105 transition-transform duration-500" alt="Sample" />
+              </div>
+              <h3 data-i18n="card-3-title" class="font-head font-bold text-xl z-10">Neon Nights</h3>
+            </div>
+
+            <div onclick="openPreview('Hyper Blue', 'Presets')" class="swiper-slide glass card-3d-frame card-glow-cyan p-6 flex flex-col justify-between items-center text-center cursor-pointer">
+              <span class="text-[10px] uppercase font-bold tracking-widest px-4 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/10 text-cyan-400 self-start z-10">Presets</span>
+              <div class="w-full h-60 my-3 rounded-2xl glass border border-white/10 flex items-center justify-center overflow-hidden relative z-10">
+                <img src="https://picsum.photos/400/500?random=4" class="w-full h-full object-cover opacity-85 hover:scale-105 transition-transform duration-500" alt="Sample" />
+              </div>
+              <h3 data-i18n="card-4-title" class="font-head font-bold text-xl z-10">Hyper Blue</h3>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="categories" class="max-w-7xl mx-auto px-4 sm:px-6 py-16">
+        <div class="mb-10 text-left ltr:text-left rtl:text-right">
+          <h2 data-i18n="cat-sec-title" class="font-head font-bold text-3xl sm:text-4xl">Categories</h2>
+          <p data-i18n="cat-sec-desc" class="font-bold opacity-50 mt-2 text-sm tracking-wide">Select a category to explore editing packs.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div id="cat-card-CC" onclick="openCategory('CC')" class="cat-card-glass flex items-center justify-between group">
+            <div class="flex items-center gap-5">
+              <div class="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 font-extrabold text-sm group-hover:scale-110 transition-transform">01</div>
+              <div>
+                <h3 class="font-head font-black text-2xl tracking-wider">CC</h3>
+                <p class="text-xs font-semibold opacity-60 mt-1">Color Corrections</p>
+              </div>
+            </div>
+            <div class="arrow-icon text-purple-400/60 text-xl font-bold">→</div>
+          </div>
+
+          <div id="cat-card-XML" onclick="openCategory('XML')" class="cat-card-glass flex items-center justify-between group">
+            <div class="flex items-center gap-5">
+              <div class="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 font-extrabold text-sm group-hover:scale-110 transition-transform">02</div>
+              <div>
+                <h3 class="font-head font-black text-2xl tracking-wider">XML</h3>
+                <p class="text-xs font-semibold opacity-60 mt-1">Project Files</p>
+              </div>
+            </div>
+            <div class="arrow-icon text-purple-400/60 text-xl font-bold">→</div>
+          </div>
+
+          <div id="cat-card-SHAKE" onclick="openCategory('SHAKE')" class="cat-card-glass flex items-center justify-between group">
+            <div class="flex items-center gap-5">
+              <div class="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 font-extrabold text-sm group-hover:scale-110 transition-transform">03</div>
+              <div>
+                <h3 class="font-head font-black text-2xl tracking-wider">SHAKE</h3>
+                <p class="text-xs font-semibold opacity-60 mt-1">Camera Shake Presets</p>
+              </div>
+            </div>
+            <div class="arrow-icon text-purple-400/60 text-xl font-bold">→</div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="border-t border-white/5 mt-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12 flex flex-col md:flex-row items-center justify-between gap-6">
+          <p class="font-head font-extrabold tracking-widest text-brandLight text-xl">VORTX</p>
+          <p class="font-bold opacity-40 text-sm">© <span id="year"></span> VORTX Studio. <span data-i18n="footer-right">Crafted for the bold.</span></p>
+        </div>
+      </footer>
+    </main>
+
+    <section id="web-view" class="view view-hidden relative z-10 min-h-screen">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
+        <div class="flex items-center justify-between mb-12">
+          <div class="text-left ltr:text-left rtl:text-right">
+            <span data-i18n="tiers-sub" class="text-xs tracking-widest uppercase font-bold text-brandLight">Web Solutions</span>
+            <h2 data-i18n="tiers-title" class="font-head font-bold text-4xl mt-3">Development Tiers</h2>
+          </div>
+
+          <div class="button-wrap" onclick="backToHome()">
+            <div class="btn-3d-style">
+              <span data-i18n="back-btn">← Back</span>
+            </div>
+            <div class="button-shadow"></div>
+          </div>
+        </div>
+
+        <div class="grid lg:grid-cols-3 gap-8">
+          <div class="tier-card">
+            <div class="card_title__container">
+              <span class="card_title">STARTER</span>
+              <p data-i18n="tier-starter-desc" class="card_paragraph">Perfect for simple portfolios and personal landing pages.</p>
+            </div>
+            <hr class="line" />
+            <ul class="card__list">
+              <li class="card__list_item">
+                <span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span>
+                <span class="list_text">Clean & Modern UI</span>
+              </li>
+              <li class="card__list_item">
+                <span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span>
+                <span class="list_text">Mobile-Ready Layout</span>
+              </li>
+            </ul>
+
+            <div class="button-wrap w-full mt-6" onclick="showToast('PLAN ADDED')">
+              <div class="btn-3d-style">
+                <span data-i18n="select-plan">Select Plan</span>
+              </div>
+              <div class="button-shadow"></div>
+            </div>
+          </div>
+
+          <div class="tier-card">
+            <div class="card_title__container">
+              <span class="card_title">PRO</span>
+              <p data-i18n="tier-pro-desc" class="card_paragraph">For creators needing advanced animations & custom design.</p>
+            </div>
+            <hr class="line" />
+            <ul class="card__list">
+              <li class="card__list_item">
+                <span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span>
+                <span class="list_text">Glassmorphism & Glows</span>
+              </li>
+              <li class="card__list_item">
+                <span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span>
+                <span class="list_text">Scroll Animations</span>
+              </li>
+            </ul>
+
+            <div class="button-wrap w-full mt-6" onclick="showToast('PLAN ADDED')">
+              <div class="btn-3d-style">
+                <span data-i18n="select-plan">Select Plan</span>
+              </div>
+              <div class="button-shadow"></div>
+            </div>
+          </div>
+
+          <div class="tier-card">
+            <div class="card_title__container">
+              <span class="card_title">VIP</span>
+              <p data-i18n="tier-vip-desc" class="card_paragraph">The absolute premium experience with custom 3D elements.</p>
+            </div>
+            <hr class="line" />
+            <ul class="card__list">
+              <li class="card__list_item">
+                <span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span>
+                <span class="list_text">3D Models Integration</span>
+              </li>
+              <li class="card__list_item">
+                <span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span>
+                <span class="list_text">Priority Support</span>
+              </li>
+            </ul>
+
+            <div class="button-wrap w-full mt-6" onclick="showToast('PLAN ADDED')">
+              <div class="btn-3d-style">
+                <span data-i18n="select-plan">Select Plan</span>
+              </div>
+              <div class="button-shadow"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="category-view" class="view view-hidden relative z-10 min-h-screen">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
+        <div class="flex items-center justify-between mb-12">
+          <div class="text-left ltr:text-left rtl:text-right">
+            <span data-i18n="cat-view-sub" class="text-xs tracking-widest uppercase font-bold text-brandLight">Collection</span>
+            <h2 id="cat-title" class="font-head font-bold text-4xl mt-3">CC</h2>
+          </div>
+          <div class="button-wrap" onclick="backToHome()">
+            <div class="btn-3d-style">
+              <span data-i18n="back-btn">← Back</span>
+            </div>
+            <div class="button-shadow"></div>
+          </div>
+        </div>
+        <div id="cat-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+      </div>
+    </section>
+
+    <div id="preview-modal" class="fixed inset-0 z-[80] flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
+      <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="closePreview()"></div>
+      <div class="glass border-brand/50 rounded-3xl max-w-md w-full relative z-10 p-1 transform scale-95 transition-transform duration-300" id="preview-card">
+        <div class="aspect-[4/3] bg-black/50 rounded-t-3xl flex items-center justify-center border-b border-white/5 relative overflow-hidden">
+          <button onclick="closePreview()" class="absolute top-4 right-4 w-8 h-8 glass rounded-full flex items-center justify-center opacity-50 hover:opacity-100 z-20">✕</button>
+          <span class="opacity-40 font-bold text-sm tracking-widest">[ PREVIEW VIDEO ]</span>
+        </div>
+        <div class="p-8 text-left ltr:text-left rtl:text-right">
+          <span id="preview-tag" class="text-[10px] font-bold tracking-widest uppercase text-brandLight">TAG</span>
+          <h3 id="preview-title" class="font-head font-bold text-2xl mt-1 mb-6">TITLE</h3>
+          <div class="flex gap-4">
+            <div class="button-wrap flex-1" onclick="showToast('ADDED TO CART'); closePreview();">
+              <div class="btn-3d-style">
+                <span data-i18n="add-cart">Add to Cart</span>
+              </div>
+              <div class="button-shadow"></div>
+            </div>
+            <div class="button-wrap flex-1" onclick="showToast('DOWNLOADING DEMO...')">
+              <div class="btn-3d-style">
+                <span data-i18n="try-demo">Try Demo</span>
+              </div>
+              <div class="button-shadow"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 
-  <div id="toast-box" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[100] flex flex-col gap-3 pointer-events-none"></div>
+  <script>
+    // LOADER DISMISS LOGIC (GUARANTEED DISMISSAL)
+    function dismissLoader() {
+      const loader = document.getElementById('vx-loader');
+      const appContent = document.getElementById('app-content');
+      if (loader && !loader.classList.contains('vx-fade-out')) {
+        loader.classList.add('vx-fade-out');
+        if (appContent) appContent.classList.add('vx-revealed');
+        document.documentElement.classList.remove('vx-loading');
+      }
+    }
 
-  <!-- NAVBAR -->
-  <header class="sticky top-0 z-50 w-full">
-    <nav class="glass border-b-0 bg-black/40 backdrop-blur-md">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-        <!-- VORTX Header Small Logo -->
-        <a href="#top" class="flex items-center gap-3">
-          <span class="font-head text-2xl vortx-wet-oil-title">VORTX</span>
-        </a>
+    window.addEventListener('load', () => {
+      const loader = document.getElementById('vx-loader');
+      const word = document.getElementById('vx-logo-word');
+      const barFill = document.getElementById('vx-bar-fill');
+      const percentEl = document.getElementById('vx-percent');
 
-        <ul class="hidden md:flex items-center gap-10 text-sm font-bold opacity-80 mx-auto">
-          <li><a href="#bundles" data-i18n="nav-bundles" class="hover:text-brandLight transition">Bundles</a></li>
-          <li><a href="#packs" data-i18n="nav-packs" class="hover:text-brandLight transition">Featured Packs</a></li>
-          <li><a href="#categories" data-i18n="nav-categories" class="hover:text-brandLight transition">Categories</a></li>
-        </ul>
+      // Build VORTX Letters Dynamically
+      if (word && word.children.length === 0) {
+        ['V', 'O', 'R', 'T', 'X'].forEach((ch, i) => {
+          const span = document.createElement('span');
+          span.className = 'vx-letter';
+          span.textContent = ch;
+          span.style.setProperty('--ld', (i * 0.08) + 's');
+          word.appendChild(span);
+        });
+      }
 
-        <div class="flex items-center gap-3 relative z-50">
-          <button onclick="toggleLanguage()" class="glass w-10 h-10 rounded-full flex items-center justify-center border-purple-500/30 text-brandLight font-extrabold text-xs" title="Change Language">
-            🌐
-          </button>
+      if (loader) loader.classList.add('vx-glow-in', 'vx-logo-in');
 
-          <!-- Luxury Switch Button -->
-          <button onclick="toggleTheme()" class="theme-switch-btn" title="Toggle Theme">
-            <div class="theme-switch-ball">
-              <svg class="w-3.5 h-3.5 text-slate-800" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
-              </svg>
-            </div>
-          </button>
-        </div>
-      </div>
-    </nav>
-  </header>
+      let progress = 0;
+      const interval = setInterval(() => {
+        progress += 5;
+        if (progress > 100) progress = 100;
+        if (barFill) barFill.style.width = progress + '%';
+        if (percentEl) percentEl.textContent = progress;
 
-  <!-- MAIN VIEW -->
-  <main id="main-view" class="view relative z-10">
-    <div id="top"></div>
+        if (progress >= 100) {
+          clearInterval(interval);
+          setTimeout(dismissLoader, 300);
+        }
+      }, 30);
+    });
 
-    <!-- HERO SECTION -->
-    <section class="max-w-6xl mx-auto px-4 sm:px-6 pt-12 pb-10 text-center relative">
-      <div class="inline-flex items-center gap-3 px-6 py-2.5 rounded-full text-xs font-bold tracking-widest uppercase glass backdrop-blur-md mb-8">
-        <span class="w-2 h-2 rounded-full bg-purple-400 animate-ping"></span>
-        <span data-i18n="hero-tag">Digital Assets Hub</span>
-      </div>
+    // Safety Fallback: Force remove loader after 3s no matter what
+    setTimeout(dismissLoader, 3000);
 
-      <!-- VORTX MAIN TITLE WITH WET LIQUID OIL SHINE -->
-      <div class="relative my-2 px-4 inline-block">
-        <h1 class="font-head font-black tracking-[0.25em] text-7xl sm:text-9xl md:text-[10rem] vortx-wet-oil-title leading-none py-4">
-          VORTX
-        </h1>
-      </div>
+    // SWIPER & SITE FUNCTIONS
+    let swiper;
+    function initSwiper() {
+      if (swiper) swiper.destroy(true, true);
+      swiper = new Swiper(".mySwiper", {
+        effect: "coverflow",
+        grabCursor: true,
+        centeredSlides: true,
+        slidesPerView: "auto",
+        loop: true,
+        autoplay: { delay: 2000, disableOnInteraction: false },
+        coverflowEffect: { rotate: 20, stretch: 0, depth: 120, modifier: 1, slideShadows: false },
+      });
+    }
 
-      <p data-i18n="hero-desc" class="font-semibold opacity-85 max-w-2xl mx-auto text-base sm:text-xl leading-relaxed mt-4 mb-10">
-        High-end VFX packs, cinematic presets & custom web experiences. Crafted specifically for elite creators.
-      </p>
+    document.addEventListener('DOMContentLoaded', initSwiper);
 
-      <div class="flex items-center justify-center">
-        <div class="button-wrap" onclick="document.getElementById('bundles').scrollIntoView({behavior: 'smooth'})">
-          <div class="btn-3d-style">
-            <span data-i18n="hero-btn">Explore Tiers</span>
-          </div>
-          <div class="button-shadow"></div>
-        </div>
-      </div>
+    function scrollToCategory(catKey) {
+      const targetEl = document.getElementById(`cat-card-${catKey}`);
+      if (targetEl) {
+        targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        targetEl.classList.add('ring-2', 'ring-purple-500', 'scale-105');
+        setTimeout(() => targetEl.classList.remove('ring-2', 'ring-purple-500', 'scale-105'), 1500);
+      }
+    }
 
-      <!-- GLASS RADIO SELECTOR -->
-      <div class="glass-radio-group">
-        <input type="radio" name="category-plan" id="glass-cc" checked onclick="scrollToCategory('CC')" />
-        <label for="glass-cc">CC</label>
+    const translations = {
+      en: {
+        "nav-bundles": "Bundles", "nav-packs": "Featured Packs", "nav-categories": "Categories",
+        "hero-tag": "Digital Assets Hub", "hero-desc": "High-end VFX packs, cinematic presets & custom web experiences.",
+        "hero-btn": "Explore Tiers", "bundle-sub": "Custom Web Solutions", "bundle-title": "Web Page Bundles",
+        "bundle-desc": "Launch your custom digital space today.", "bundle-btn": "View Development Tiers",
+        "packs-title": "Featured Packs", "packs-desc": "Autoplays continuously — Tap or hold to inspect.",
+        "card-1-title": "Red Inferno", "card-2-title": "Cyber Gold", "card-3-title": "Neon Nights", "card-4-title": "Hyper Blue",
+        "cat-sec-title": "Categories", "cat-sec-desc": "Select a category to explore editing packs.", "footer-right": "Crafted for the bold.",
+        "tiers-sub": "Web Solutions", "tiers-title": "Development Tiers", "back-btn": "← Back",
+        "tier-starter-desc": "Perfect for simple portfolios and personal landing pages.",
+        "tier-pro-desc": "For creators needing advanced animations & custom design.",
+        "tier-vip-desc": "The absolute premium experience with custom 3D elements.",
+        "select-plan": "Select Plan", "cat-view-sub": "Collection", "add-cart": "Add to Cart", "try-demo": "Try Demo"
+      },
+      ar: {
+        "nav-bundles": "الحزم المتاحة", "nav-packs": "حزم متميزة", "nav-categories": "الأقسام الرئيسية",
+        "hero-tag": "مركز الأصول الرقمية", "hero-desc": "حزم مؤثرات بصرية احترافية، إعدادات سينمائية مسبقة وتجارب ويب مخصصة للمبدعين.",
+        "hero-btn": "استكشف الباقات", "bundle-sub": "حلول المواقع المخصصة", "bundle-title": "باقات تصميم الويب",
+        "bundle-desc": "أطلق مساحتك الرقمية المخصصة اليوم.", "bundle-btn": "عرض باقات التطوير",
+        "packs-title": "الحزم المتميزة", "packs-desc": "تتحرك الكروت تلقائياً — اضغط أو مرر للتحكم بها.",
+        "card-1-title": "الجحيم الأحمر", "card-2-title": "الذهب السيبراني", "card-3-title": "ليالي النيون", "card-4-title": "النيون الأزرق",
+        "cat-sec-title": "الأقسام", "cat-sec-desc": "اختر فئة لاستكشاف الحزم المتاحة.", "footer-right": "صُنع للمبدعين والجرآء.",
+        "tiers-sub": "حلول الويب", "tiers-title": "مستويات التطوير", "back-btn": "→ العودة",
+        "tier-starter-desc": "مثالية للملفات الشخصية وصفحات الهبوط البسيطة.",
+        "tier-pro-desc": "للمبدعين الذين يحتاجون تحريكات متقدمة وتصاميم خاصة.",
+        "tier-vip-desc": "الخبرة المتميزة المطلقة مع عناصر ثلاثية الأبعاد.",
+        "select-plan": "اختر الباقة", "cat-view-sub": "المجموعة", "add-cart": "إضافة للسلة", "try-demo": "تجربة العرض"
+      }
+    };
 
-        <input type="radio" name="category-plan" id="glass-xml" onclick="scrollToCategory('XML')" />
-        <label for="glass-xml">XML</label>
-
-        <input type="radio" name="category-plan" id="glass-shake" onclick="scrollToCategory('SHAKE')" />
-        <label for="glass-shake">Shake</label>
-
-        <div class="glass-glider"></div>
-      </div>
-    </section>
-
-    <!-- WEB BUNDLES SECTION -->
-    <section id="bundles" class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
-      <div class="glossy-bundle-card p-8 sm:p-14 relative flex flex-col md:flex-row items-center justify-between gap-10">
-        <div class="text-center md:text-left rtl:md:text-right max-w-2xl relative z-10 w-full">
-          <span data-i18n="bundle-sub" class="text-xs tracking-widest uppercase font-extrabold text-brandLight block mb-2">Custom Web Solutions</span>
-          <h2 data-i18n="bundle-title" class="font-head font-black text-3xl sm:text-4xl md:text-5xl whitespace-nowrap overflow-hidden text-ellipsis mb-4 text-3d-header">
-            Web Page Bundles
-          </h2>
-          <p data-i18n="bundle-desc" class="font-bold opacity-80 leading-relaxed text-sm sm:text-lg">
-            Launch your custom digital space today. Stand out with next-gen designs, premium performance, and join the elite creators.
-          </p>
-        </div>
-
-        <div class="w-full md:w-auto relative z-10 flex justify-center md:justify-end flex-shrink-0">
-          <div class="button-wrap" onclick="openWebTiers()">
-            <div class="btn-3d-style">
-              <span data-i18n="bundle-btn">View Development Tiers</span>
-            </div>
-            <div class="button-shadow"></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- FEATURED PACKS (SWIPER 3D) -->
-    <section id="packs" class="py-16 max-w-7xl mx-auto px-4 sm:px-6">
-      <div class="mb-8 text-left ltr:text-left rtl:text-right">
-        <h2 data-i18n="packs-title" class="font-head font-bold text-3xl sm:text-4xl">Featured Packs</h2>
-        <p data-i18n="packs-desc" class="font-bold opacity-50 text-sm mt-3 tracking-wide">Autoplays continuously — Tap or hold to inspect.</p>
-      </div>
-
-      <div class="swiper mySwiper">
-        <div class="swiper-wrapper">
-
-          <div onclick="openPreview('Flame Pack', 'VFX')" class="swiper-slide glass card-3d-frame card-glow-red p-6 flex flex-col justify-between items-center text-center cursor-pointer">
-            <span class="text-[10px] uppercase font-bold tracking-widest px-4 py-1.5 rounded-full border border-red-500/30 bg-red-500/10 text-red-400 self-start z-10">VFX</span>
-            <div class="w-full h-60 my-3 rounded-2xl glass border border-white/10 flex items-center justify-center overflow-hidden relative z-10">
-              <img src="https://picsum.photos/400/500?random=1" class="w-full h-full object-cover opacity-85 hover:scale-105 transition-transform duration-500" alt="Sample" />
-            </div>
-            <h3 data-i18n="card-1-title" class="font-head font-bold text-xl z-10">Red Inferno</h3>
-          </div>
-
-          <div onclick="openPreview('Cyber Gold', 'Color')" class="swiper-slide glass card-3d-frame card-glow-yellow p-6 flex flex-col justify-between items-center text-center cursor-pointer">
-            <span class="text-[10px] uppercase font-bold tracking-widest px-4 py-1.5 rounded-full border border-yellow-500/30 bg-yellow-500/10 text-yellow-400 self-start z-10">Color</span>
-            <div class="w-full h-60 my-3 rounded-2xl glass border border-white/10 flex items-center justify-center overflow-hidden relative z-10">
-              <img src="https://picsum.photos/400/500?random=2" class="w-full h-full object-cover opacity-85 hover:scale-105 transition-transform duration-500" alt="Sample" />
-            </div>
-            <h3 data-i18n="card-2-title" class="font-head font-bold text-xl z-10">Cyber Gold</h3>
-          </div>
-
-          <div onclick="openPreview('Neon Nights', 'Camera')" class="swiper-slide glass card-3d-frame card-glow-purple p-6 flex flex-col justify-between items-center text-center cursor-pointer">
-            <span class="text-[10px] uppercase font-bold tracking-widest px-4 py-1.5 rounded-full border border-purple-500/30 bg-purple-500/10 text-purple-400 self-start z-10">Camera</span>
-            <div class="w-full h-60 my-3 rounded-2xl glass border border-white/10 flex items-center justify-center overflow-hidden relative z-10">
-              <img src="https://picsum.photos/400/500?random=3" class="w-full h-full object-cover opacity-85 hover:scale-105 transition-transform duration-500" alt="Sample" />
-            </div>
-            <h3 data-i18n="card-3-title" class="font-head font-bold text-xl z-10">Neon Nights</h3>
-          </div>
-
-          <div onclick="openPreview('Hyper Blue', 'Presets')" class="swiper-slide glass card-3d-frame card-glow-cyan p-6 flex flex-col justify-between items-center text-center cursor-pointer">
-            <span class="text-[10px] uppercase font-bold tracking-widest px-4 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/10 text-cyan-400 self-start z-10">Presets</span>
-            <div class="w-full h-60 my-3 rounded-2xl glass border border-white/10 flex items-center justify-center overflow-hidden relative z-10">
-              <img src="https://picsum.photos/400/500?random=4" class="w-full h-full object-cover opacity-85 hover:scale-105 transition-transform duration-500" alt="Sample" />
-            </div>
-            <h3 data-i18n="card-4-title" class="font-head font-bold text-xl z-10">Hyper Blue</h3>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- CATEGORIES -->
-    <section id="categories" class="max-w-7xl mx-auto px-4 sm:px-6 py-16">
-      <div class="mb-10 text-left ltr:text-left rtl:text-right">
-        <h2 data-i18n="cat-sec-title" class="font-head font-bold text-3xl sm:text-4xl">Categories</h2>
-        <p data-i18n="cat-sec-desc" class="font-bold opacity-50 mt-2 text-sm tracking-wide">Select a category to explore editing packs.</p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div id="cat-card-CC" onclick="openCategory('CC')" class="cat-card-glass flex items-center justify-between group">
-          <div class="flex items-center gap-5">
-            <div class="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 font-extrabold text-sm group-hover:scale-110 transition-transform">01</div>
-            <div>
-              <h3 class="font-head font-black text-2xl tracking-wider">CC</h3>
-              <p class="text-xs font-semibold opacity-60 mt-1">Color Corrections</p>
-            </div>
-          </div>
-          <div class="arrow-icon text-purple-400/60 text-xl font-bold">→</div>
-        </div>
-
-        <div id="cat-card-XML" onclick="openCategory('XML')" class="cat-card-glass flex items-center justify-between group">
-          <div class="flex items-center gap-5">
-            <div class="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 font-extrabold text-sm group-hover:scale-110 transition-transform">02</div>
-            <div>
-              <h3 class="font-head font-black text-2xl tracking-wider">XML</h3>
-              <p class="text-xs font-semibold opacity-60 mt-1">Project Files</p>
-            </div>
-          </div>
-          <div class="arrow-icon text-purple-400/60 text-xl font-bold">→</div>
-        </div>
-
-        <div id="cat-card-SHAKE" onclick="openCategory('SHAKE')" class="cat-card-glass flex items-center justify-between group">
-          <div class="flex items-center gap-5">
-            <div class="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 font-extrabold text-sm group-hover:scale-110 transition-transform">03</div>
-            <div>
-              <h3 class="font-head font-black text-2xl tracking-wider">SHAKE</h3>
-              <p class="text-xs font-semibold opacity-60 mt-1">Camera Shake Presets</p>
-            </div>
-          </div>
-          <div class="arrow-icon text-purple-400/60 text-xl font-bold">→</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer class="border-t border-white/5 mt-10">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12 flex flex-col md:flex-row items-center justify-between gap-6">
-        <p class="font-head font-extrabold tracking-widest text-brandLight text-xl">VORTX</p>
-        <p class="font-bold opacity-40 text-sm">© <span id="year"></span> VORTX Studio. <span data-i18n="footer-right">Crafted for the bold.</span></p>
-      </div>
-    </footer>
-  </main>
-
-  <!-- WEB TIERS VIEW -->
-  <section id="web-view" class="view view-hidden relative z-10 min-h-screen">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
-      <div class="flex items-center justify-between mb-12">
-        <div class="text-left ltr:text-left rtl:text-right">
-          <span data-i18n="tiers-sub" class="text-xs tracking-widest uppercase font-bold text-brandLight">Web Solutions</span>
-          <h2 data-i18n="tiers-title" class="font-head font-bold text-4xl mt-3">Development Tiers</h2>
-        </div>
-
-        <div class="button-wrap" onclick="backToHome()">
-          <div class="btn-3d-style">
-            <span data-i18n="back-btn">← Back</span>
-          </div>
-          <div class="button-shadow"></div>
-        </div>
-      </div>
-
-      <div class="grid lg:grid-cols-3 gap-8">
-
-        <!-- CARD 1: STARTER -->
-        <div class="tier-card">
-          <div class="card_title__container">
-            <span class="card_title">STARTER</span>
-            <p data-i18n="tier-starter-desc" class="card_paragraph">Perfect for simple portfolios and personal landing pages.</p>
-          </div>
-          <hr class="line" />
-          <ul class="card__list">
-            <li class="card__list_item">
-              <span class="check">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="check_svg">
-                  <path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path>
-                </svg>
-              </span>
-              <span class="list_text">Clean & Modern UI</span>
-            </li>
-            <li class="card__list_item">
-              <span class="check">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="check_svg">
-                  <path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path>
-                </svg>
-              </span>
-              <span class="list_text">Mobile-Ready Layout</span>
-            </li>
-          </ul>
-
-          <div class="button-wrap w-full mt-6" onclick="showToast('PLAN ADDED')">
-            <div class="btn-3d-style">
-              <span data-i18n="select-plan">Select Plan</span>
-            </div>
-            <div class="button-shadow"></div>
-          </div>
-        </div>
-
-        <!-- CARD 2: PRO -->
-        <div class="tier-card">
-          <div class="card_title__container">
-            <span class="card_title">PRO</span>
-            <p data-i18n="tier-pro-desc" class="card_paragraph">For creators needing advanced animations & custom design.</p>
-          </div>
-          <hr class="line" />
-          <ul class="card__list">
-            <li class="card__list_item">
-              <span class="check">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="check_svg">
-                  <path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path>
-                </svg>
-              </span>
-              <span class="list_text">Glassmorphism & Glows</span>
-            </li>
-            <li class="card__list_item">
-              <span class="check">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="check_svg">
-                  <path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path>
-                </svg>
-              </span>
-              <span class="list_text">Scroll Animations</span>
-            </li>
-          </ul>
-
-          <div class="button-wrap w-full mt-6" onclick="showToast('PLAN ADDED')">
-            <div class="btn-3d-style">
-              <span data-i18n="select-plan">Select Plan</span>
-            </div>
-            <div class="button-shadow"></div>
-          </div>
-        </div>
-
-        <!-- CARD 3: VIP -->
-        <div class="tier-card">
-          <div class="card_title__container">
-            <span class="card_title">VIP</span>
-            <p data-i18n="tier-vip-desc" class="card_paragraph">The absolute premium experience with custom 3D elements.</p>
-          </div>
-          <hr class="line" />
-          <ul class="card__list">
-            <li class="card__list_item">
-              <span class="check">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="check_svg">
-                  <path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path>
-                </svg>
-              </span>
-              <span class="list_text">3D Models Integration</span>
-            </li>
-            <li class="card__list_item">
-              <span class="check">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="check_svg">
-                  <path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path>
-                </svg>
-              </span>
-              <span class="list_text">Priority Support</span>
-            </li>
-          </ul>
-
-          <div class="button-wrap w-full mt-6" onclick="showToast('PLAN ADDED')">
-            <div class="btn-3d-style">
-              <span data-i18n="select-plan">Select Plan</span>
-            </div>
-            <div class="button-shadow"></div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- CATEGORY VIEW -->
-  <section id="category-view" class="view view-hidden relative z-10 min-h-screen">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
-      <div class="flex items-center justify-between mb-12">
-        <div class="text-left ltr:text-left rtl:text-right">
-          <span data-i18n="cat-view-sub" class="text-xs tracking-widest uppercase font-bold text-brandLight">Collection</span>
-          <h2 id="cat-title" class="font-head font-bold text-4xl mt-3">CC</h2>
-        </div>
-        <div class="button-wrap" onclick="backToHome()">
-          <div class="btn-3d-style">
-            <span data-i18n="back-btn">← Back</span>
-          </div>
-          <div class="button-shadow"></div>
-        </div>
-      </div>
-      <div id="cat-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
-    </div>
-  </section>
-
-  <!-- PREVIEW MODAL -->
-  <div id="preview-modal" class="fixed inset-0 z-[80] flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
-    <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="closePreview()"></div>
-    <div class="glass border-brand/50 rounded-3xl max-w-md w-full relative z-10 p-1 transform scale-95 transition-transform duration-300" id="preview-card">
-      <div class="aspect-[4/3] bg-black/50 rounded-t-3xl flex items-center justify-center border-b border-white/5 relative overflow-hidden">
-        <button onclick="closePreview()" class="absolute top-4 right-4 w-8 h-8 glass rounded-full flex items-center justify-center opacity-50 hover:opacity-100 z-20">✕</button>
-        <span class="opacity-40 font-bold
+    let currentLang = 'en';
+    function toggleLanguage() {
+      currentLang = currentLang === 'en' ? 'ar' : 'en';
+      const htmlEl = do
