@@ -39,6 +39,19 @@
   </script>
 
   <style>
+    /* Defs for Uiverse 3D Glass Button */
+    @property --angle-1 {
+      syntax: "<angle>";
+      inherits: false;
+      initial-value: -75deg;
+    }
+
+    @property --angle-2 {
+      syntax: "<angle>";
+      inherits: false;
+      initial-value: -45deg;
+    }
+
     :root {
       --ink: #050505;
       --brand: #7e22ce;
@@ -50,6 +63,10 @@
       --card-title-color: #ffffff;
       --star-bg: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
       --star-opacity: 1;
+
+      --anim--hover-time: 400ms;
+      --anim--hover-ease: cubic-bezier(0.25, 1, 0.5, 1);
+      --btn-text-color: rgba(255, 255, 255, 0.95);
     }
 
     html.light {
@@ -61,6 +78,7 @@
       --card-title-color: #3b0764;
       --star-bg: radial-gradient(ellipse at bottom, #e2e8f0 0%, #cbd5e1 100%);
       --star-opacity: 0.35;
+      --btn-text-color: rgba(30, 27, 75, 0.95);
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -166,37 +184,169 @@
       -webkit-text-fill-color: transparent;
     }
 
-    /* ---------- Water Drop Pill Button ---------- */
-    .water-drop-btn {
+    /* ========== UIVERSE 3D GLASS BUTTON STYLES ========== */
+
+    .button-wrap {
       position: relative;
-      display: inline-flex;
-      align-items: center; justify-content: center;
-      padding: 16px 44px;
-      border-radius: 999px;
-      font-size: 0.9rem; font-weight: 800;
-      letter-spacing: 0.08em; text-transform: uppercase;
-      color: #ffffff;
-      background: rgba(168, 85, 247, 0.3);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1.5px solid rgba(255, 255, 255, 0.4);
-      box-shadow: 0 15px 35px rgba(126, 34, 206, 0.35), inset 0 3px 5px rgba(255, 255, 255, 0.7);
-      transition: all 0.3s ease;
+      z-index: 2;
+      border-radius: 999vw;
+      background: transparent;
+      pointer-events: none;
+      transition: all var(--anim--hover-time) var(--anim--hover-ease);
+      display: inline-block;
+    }
+
+    .button-shadow {
+      --shadow-cuttoff-fix: 2em;
+      position: absolute;
+      width: calc(100% + var(--shadow-cuttoff-fix));
+      height: calc(100% + var(--shadow-cuttoff-fix));
+      top: calc(0% - var(--shadow-cuttoff-fix) / 2);
+      left: calc(0% - var(--shadow-cuttoff-fix) / 2);
+      filter: blur(clamp(2px, 0.125em, 12px));
+      -webkit-filter: blur(clamp(2px, 0.125em, 12px));
+      overflow: visible;
+      pointer-events: none;
+    }
+
+    .button-shadow::after {
+      content: "";
+      position: absolute;
+      z-index: 0;
+      inset: 0;
+      border-radius: 999vw;
+      background: linear-gradient(180deg, rgba(168, 85, 247, 0.3), rgba(0, 0, 0, 0.2));
+      width: calc(100% - var(--shadow-cuttoff-fix) - 0.25em);
+      height: calc(100% - var(--shadow-cuttoff-fix) - 0.25em);
+      top: calc(var(--shadow-cuttoff-fix) - 0.5em);
+      left: calc(var(--shadow-cuttoff-fix) - 0.875em);
+      padding: 0.125em;
+      box-sizing: border-box;
+      mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      mask-composite: exclude;
+      transition: all var(--anim--hover-time) var(--anim--hover-ease);
+      overflow: visible;
+      opacity: 1;
+    }
+
+    .button-wrap button {
+      --border-width: clamp(1px, 0.0625em, 4px);
+      all: unset;
       cursor: pointer;
+      position: relative;
+      -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      pointer-events: auto;
+      z-index: 3;
+      background: linear-gradient(
+        -75deg,
+        rgba(255, 255, 255, 0.08),
+        rgba(255, 255, 255, 0.28),
+        rgba(255, 255, 255, 0.08)
+      );
+      border-radius: 999vw;
+      box-shadow:
+        inset 0 0.125em 0.125em rgba(0, 0, 0, 0.05),
+        inset 0 -0.125em 0.125em rgba(255, 255, 255, 0.5),
+        0 0.25em 0.125em -0.125em rgba(0, 0, 0, 0.3),
+        0 0 0.1em 0.25em inset rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(clamp(1px, 0.125em, 6px));
+      -webkit-backdrop-filter: blur(clamp(1px, 0.125em, 6px));
+      transition: all var(--anim--hover-time) var(--anim--hover-ease);
+      width: 100%;
+      text-align: center;
     }
 
-    html.light .water-drop-btn {
-      color: #3b0764;
-      background: rgba(168, 85, 247, 0.2);
-      border-color: rgba(126, 34, 206, 0.4);
+    .button-wrap button:hover {
+      transform: scale(0.975);
+      backdrop-filter: blur(0.01em);
+      box-shadow:
+        inset 0 0.125em 0.125em rgba(0, 0, 0, 0.05),
+        inset 0 -0.125em 0.125em rgba(255, 255, 255, 0.6),
+        0 0.15em 0.05em -0.1em rgba(0, 0, 0, 0.25),
+        0 0 0.05em 0.1em inset rgba(255, 255, 255, 0.5);
     }
 
-    .water-drop-btn:hover {
-      transform: translateY(-3px) scale(1.04);
-      box-shadow: 0 20px 40px rgba(168, 85, 247, 0.5);
+    .button-wrap button span {
+      position: relative;
+      display: block;
+      user-select: none;
+      font-family: "Inter", "Cairo", sans-serif;
+      letter-spacing: -0.02em;
+      font-weight: 800;
+      font-size: 0.9em;
+      color: var(--btn-text-color);
+      text-shadow: 0em 0.15em 0.1em rgba(0, 0, 0, 0.4);
+      transition: all var(--anim--hover-time) var(--anim--hover-ease);
+      padding-inline: 2em;
+      padding-block: 0.9em;
+      text-transform: uppercase;
     }
 
-    /* ---------- CUSTOM GLASS RADIO GROUP (ممدود ومطاطي زجاجي) ---------- */
+    .button-wrap button span::after {
+      content: "";
+      display: block;
+      position: absolute;
+      z-index: 1;
+      width: calc(100% - var(--border-width));
+      height: calc(100% - var(--border-width));
+      top: calc(0% + var(--border-width) / 2);
+      left: calc(0% + var(--border-width) / 2);
+      box-sizing: border-box;
+      border-radius: 999vw;
+      overflow: clip;
+      background: linear-gradient(
+        var(--angle-2),
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.5) 40% 50%,
+        rgba(255, 255, 255, 0) 55%
+      );
+      z-index: 3;
+      mix-blend-mode: screen;
+      pointer-events: none;
+      background-size: 200% 200%;
+      background-position: 0% 50%;
+      background-repeat: no-repeat;
+      transition: background-position calc(var(--anim--hover-time) * 1.25) var(--anim--hover-ease), --angle-2 calc(var(--anim--hover-time) * 1.25) var(--anim--hover-ease);
+    }
+
+    .button-wrap button:hover span::after { background-position: 25% 50%; }
+    .button-wrap button:active span::after { background-position: 50% 15%; --angle-2: -15deg; }
+
+    .button-wrap button::after {
+      content: "";
+      position: absolute;
+      z-index: 1;
+      inset: 0;
+      border-radius: 999vw;
+      width: calc(100% + var(--border-width));
+      height: calc(100% + var(--border-width));
+      top: calc(0% - var(--border-width) / 2);
+      left: calc(0% - var(--border-width) / 2);
+      padding: var(--border-width);
+      box-sizing: border-box;
+      background: conic-gradient(
+          from var(--angle-1) at 50% 50%,
+          rgba(168, 85, 247, 0.8),
+          rgba(0, 0, 0, 0) 5% 40%,
+          rgba(168, 85, 247, 0.8) 50%,
+          rgba(0, 0, 0, 0) 60% 95%,
+          rgba(168, 85, 247, 0.8)
+        ),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.3));
+      mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      mask-composite: exclude;
+      transition: all var(--anim--hover-time) var(--anim--hover-ease), --angle-1 500ms ease;
+      box-shadow: inset 0 0 0 calc(var(--border-width) / 2) rgba(255, 255, 255, 0.5);
+    }
+
+    .button-wrap button:hover::after { --angle-1: -125deg; }
+    .button-wrap button:active::after { --angle-1: -75deg; }
+
+    .button-wrap:has(button:hover) .button-shadow { filter: blur(clamp(2px, 0.0625em, 6px)); }
+    .button-wrap:has(button:hover) .button-shadow::after { top: calc(var(--shadow-cuttoff-fix) - 0.875em); opacity: 1; }
+    .button-wrap:has(button:active) { transform: rotate3d(1, 0, 0, 20deg); }
+
+    /* ---------- CUSTOM GLASS RADIO GROUP ---------- */
     .glass-radio-group {
       --bg: rgba(255, 255, 255, 0.05);
       --text: rgba(255, 255, 255, 0.7);
@@ -215,7 +365,7 @@
       padding: 6px;
       margin: 35px auto 10px auto;
       width: 100%;
-      max-width: 56rem; /* ممدود بشكل فخم للجانبين */
+      max-width: 56rem;
     }
 
     html.light .glass-radio-group {
@@ -260,7 +410,6 @@
         box-shadow 0.4s ease-in-out;
     }
 
-    /* LTR Glide Movements */
     html[dir="ltr"] #glass-cc:checked ~ .glass-glider {
       transform: translateX(0%);
       background: linear-gradient(135deg, rgba(168, 85, 247, 0.4), #a855f7);
@@ -279,7 +428,6 @@
       box-shadow: 0 0 20px rgba(234, 179, 8, 0.6), 0 0 10px rgba(255, 255, 255, 0.5) inset;
     }
 
-    /* RTL Glide Movements (لضبط الحركة أوتوماتيكياً بالعربي) */
     html[dir="rtl"] #glass-cc:checked ~ .glass-glider {
       transform: translateX(0%);
       background: linear-gradient(135deg, rgba(168, 85, 247, 0.4), #a855f7);
@@ -332,7 +480,6 @@
     .card-glow-purple { box-shadow: 0 15px 45px -5px rgba(168, 85, 247, 0.45); }
     .card-glow-cyan { box-shadow: 0 15px 45px -5px rgba(6, 182, 212, 0.45); }
 
-    /* ---------- Banner Cards ---------- */
     .glossy-bundle-card {
       position: relative;
       border-radius: 2.5rem;
@@ -393,7 +540,7 @@
   <div id="scroll-progress"></div>
   <div id="toast-box" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[100] flex flex-col gap-3 pointer-events-none"></div>
 
-  <!-- NAVBAR FIXED TOP -->
+  <!-- NAVBAR -->
   <header class="sticky top-0 z-50 w-full">
     <nav class="glass border-b-0 bg-black/40 backdrop-blur-md">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
@@ -449,13 +596,17 @@
         High-end VFX packs, cinematic presets & custom web experiences. Crafted specifically for elite creators.
       </p>
 
+      <!-- HERO EXPLORE TIERS BUTTON (3D Glass Wrapper) -->
       <div class="flex items-center justify-center">
-        <a href="#bundles" data-i18n="hero-btn" class="water-drop-btn">
-          Explore Tiers
-        </a>
+        <div class="button-wrap">
+          <button onclick="document.getElementById('bundles').scrollIntoView({behavior: 'smooth'})">
+            <span data-i18n="hero-btn">Explore Tiers</span>
+          </button>
+          <div class="button-shadow"></div>
+        </div>
       </div>
 
-      <!-- GLASS RADIO GROUP CATEGORIES SELECTOR (بين اكسبلور تيرز وفوق حزم الويب) -->
+      <!-- GLASS RADIO GROUP CATEGORIES SELECTOR -->
       <div class="glass-radio-group">
         <input type="radio" name="category-plan" id="glass-cc" checked onclick="scrollToCategory('CC')" />
         <label for="glass-cc">CC</label>
@@ -470,7 +621,7 @@
       </div>
     </section>
 
-    <!-- WEB BUNDLES -->
+    <!-- WEB BUNDLES SECTION -->
     <section id="bundles" class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
       <div class="glossy-bundle-card p-8 sm:p-14 relative flex flex-col md:flex-row items-center justify-between gap-10">
         <div class="text-center md:text-left rtl:md:text-right max-w-2xl relative z-10 w-full">
@@ -483,10 +634,14 @@
           </p>
         </div>
         
+        <!-- WEB BUNDLES BUTTON (3D Glass Wrapper) -->
         <div class="w-full md:w-auto relative z-10 flex justify-center md:justify-end flex-shrink-0">
-          <button onclick="openWebTiers()" data-i18n="bundle-btn" class="water-drop-btn !py-4 !px-8 text-xs">
-            View Development Tiers
-          </button>
+          <div class="button-wrap">
+            <button onclick="openWebTiers()">
+              <span data-i18n="bundle-btn">View Development Tiers</span>
+            </button>
+            <div class="button-shadow"></div>
+          </div>
         </div>
       </div>
     </section>
@@ -537,7 +692,7 @@
       </div>
     </section>
 
-    <!-- CATEGORIES (مع معرّفات التوجه والتحديد) -->
+    <!-- CATEGORIES -->
     <section id="categories" class="max-w-7xl mx-auto px-4 sm:px-6 py-16">
       <div class="mb-10 text-left ltr:text-left rtl:text-right">
         <h2 data-i18n="cat-sec-title" class="font-head font-bold text-3xl sm:text-4xl">Categories</h2>
@@ -589,7 +744,7 @@
     </footer>
   </main>
 
-  <!-- WEB TIERS VIEW -->
+  <!-- WEB TIERS VIEW (مع الأزرار المحدثة 3D) -->
   <section id="web-view" class="view view-hidden relative z-10 min-h-screen">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
       <div class="flex items-center justify-between mb-12">
@@ -597,7 +752,13 @@
           <span data-i18n="tiers-sub" class="text-xs tracking-widest uppercase font-bold text-brandLight">Web Solutions</span>
           <h2 data-i18n="tiers-title" class="font-head font-bold text-4xl mt-3">Development Tiers</h2>
         </div>
-        <button onclick="backToHome()" data-i18n="back-btn" class="glass px-6 py-3 rounded-full font-bold text-sm hover:bg-white/5 transition-all duration-200 active:scale-95">← Back</button>
+        
+        <div class="button-wrap">
+          <button onclick="backToHome()">
+            <span data-i18n="back-btn">← Back</span>
+          </button>
+          <div class="button-shadow"></div>
+        </div>
       </div>
       
       <div class="grid lg:grid-cols-3 gap-8">
@@ -608,7 +769,13 @@
             <li class="flex items-start gap-3"><span class="text-brand">✦</span> Clean & Modern UI</li>
             <li class="flex items-start gap-3"><span class="text-brand">✦</span> Mobile-Ready Layout</li>
           </ul>
-          <button onclick="showToast('PLAN ADDED')" data-i18n="select-plan" class="glass border-brand/30 hover:bg-brand/10 w-full py-4 rounded-xl font-bold uppercase tracking-wider text-sm">Select Plan</button>
+          
+          <div class="button-wrap w-full">
+            <button onclick="showToast('PLAN ADDED')">
+              <span data-i18n="select-plan">Select Plan</span>
+            </button>
+            <div class="button-shadow"></div>
+          </div>
         </div>
 
         <div class="glass rounded-3xl p-8 flex flex-col h-full border border-brand/50 relative bg-brand/5">
@@ -618,7 +785,13 @@
             <li class="flex items-start gap-3"><span class="text-brandLight">✦</span> Glassmorphism & Glows</li>
             <li class="flex items-start gap-3"><span class="text-brandLight">✦</span> Scroll Animations</li>
           </ul>
-          <button onclick="showToast('PLAN ADDED')" data-i18n="select-plan" class="water-drop-btn !w-full !py-4 text-xs">Select Plan</button>
+          
+          <div class="button-wrap w-full">
+            <button onclick="showToast('PLAN ADDED')">
+              <span data-i18n="select-plan">Select Plan</span>
+            </button>
+            <div class="button-shadow"></div>
+          </div>
         </div>
 
         <div class="glass rounded-3xl p-8 flex flex-col h-full border-t border-brand/20">
@@ -628,7 +801,13 @@
             <li class="flex items-start gap-3"><span class="text-brand">✦</span> 3D Models Integration</li>
             <li class="flex items-start gap-3"><span class="text-brand">✦</span> Priority Support</li>
           </ul>
-          <button onclick="showToast('PLAN ADDED')" data-i18n="select-plan" class="glass border-brand/30 hover:bg-brand/10 w-full py-4 rounded-xl font-bold uppercase tracking-wider text-sm">Select Plan</button>
+          
+          <div class="button-wrap w-full">
+            <button onclick="showToast('PLAN ADDED')">
+              <span data-i18n="select-plan">Select Plan</span>
+            </button>
+            <div class="button-shadow"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -642,7 +821,12 @@
           <span data-i18n="cat-view-sub" class="text-xs tracking-widest uppercase font-bold text-brandLight">Collection</span>
           <h2 id="cat-title" class="font-head font-bold text-4xl mt-3">CC</h2>
         </div>
-        <button onclick="backToHome()" data-i18n="back-btn" class="glass px-6 py-3 rounded-full font-bold text-sm hover:bg-white/5 transition-all duration-200 active:scale-95">← Back</button>
+        <div class="button-wrap">
+          <button onclick="backToHome()">
+            <span data-i18n="back-btn">← Back</span>
+          </button>
+          <div class="button-shadow"></div>
+        </div>
       </div>
       <div id="cat-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
     </div>
@@ -660,8 +844,18 @@
         <span id="preview-tag" class="text-[10px] font-bold tracking-widest uppercase text-brandLight">TAG</span>
         <h3 id="preview-title" class="font-head font-bold text-2xl mt-1 mb-6">TITLE</h3>
         <div class="flex gap-4">
-          <button onclick="showToast('ADDED TO CART'); closePreview();" data-i18n="add-cart" class="water-drop-btn flex-1 !py-3.5 text-xs">Add to Cart</button>
-          <button onclick="showToast('DOWNLOADING DEMO...')" data-i18n="try-demo" class="glass flex-1 py-3.5 rounded-xl font-bold uppercase tracking-wider text-xs opacity-70">Try Demo</button>
+          <div class="button-wrap flex-1">
+            <button onclick="showToast('ADDED TO CART'); closePreview();">
+              <span data-i18n="add-cart">Add to Cart</span>
+            </button>
+            <div class="button-shadow"></div>
+          </div>
+          <div class="button-wrap flex-1">
+            <button onclick="showToast('DOWNLOADING DEMO...')">
+              <span data-i18n="try-demo">Try Demo</span>
+            </button>
+            <div class="button-shadow"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -697,7 +891,6 @@
     initSwiper();
   });
 
-  /* Scroll To Category & Highlight Effect (دالة الانتقال للأسفل والـ Highlight) */
   function scrollToCategory(catKey) {
     const targetEl = document.getElementById(`cat-card-${catKey}`);
     if (targetEl) {
