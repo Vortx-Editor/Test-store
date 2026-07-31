@@ -1,167 +1,615 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en" class="dark" dir="ltr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VORTX Store</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VORTX — Premium Digital Assets</title>
+  <meta name="theme-color" content="#050505" />
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts: Cinzel, Inter & Cairo (for Arabic) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;800;900&family=Cinzel:wght@700;800;900&family=Inter:wght@500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Swiper 3D CSS & JS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            head: ['Cinzel', 'serif'],
+            body: ['Inter', 'sans-serif'],
+            arabic: ['Cairo', 'sans-serif'],
+          },
+          colors: {
+            ink: '#050505',
+            brand: '#7e22ce',
+            brandLight: '#a855f7',
+          },
+        },
+      },
+    };
+  </script>
+
   <style>
-    /* ==========================================
-       1. إعادة ضبط العرض ومنع الفراغات الجانبية
-       ========================================== */
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    :root {
+      --ink: #050505;
+      --brand: #7e22ce;
+      --brandLight: #a855f7;
+      --bg-color: #050505;
+      --text-color: #e8e8ef;
     }
 
-    html, body {
-      width: 100%;
-      max-width: 100%;
-      overflow-x: hidden !important; /* منع التمرير الأفقي تماماً */
-      background-color: #0b0713;
-      color: #ffffff;
-      font-family: system-ui, -apple-system, sans-serif;
+    html.light {
+      --ink: #f8fafc;
+      --bg-color: #f8fafc;
+      --text-color: #0f172a;
     }
 
-    .main-container {
-      width: 100%;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 20px;
+    html { scroll-behavior: smooth; overflow-x: hidden; }
+    body { background-color: var(--bg-color); color: var(--text-color); font-family: 'Inter', sans-serif; transition: background-color 0.4s ease, color 0.4s ease; }
+
+    html[dir="rtl"] body { font-family: 'Cairo', sans-serif; }
+
+    h1, h2, h3, .font-head { font-family: 'Cinzel', serif; letter-spacing: 1.5px; }
+    html[dir="rtl"] h1, html[dir="rtl"] h2, html[dir="rtl"] h3, html[dir="rtl"] .font-head { font-family: 'Cairo', sans-serif; letter-spacing: 0; }
+
+    /* ---------- Scroll Progress Bar ---------- */
+    #scroll-progress {
+      position: fixed; top: 0; left: 0; width: 0%; height: 3px;
+      background: var(--brandLight); box-shadow: 0 0 10px var(--brandLight);
+      z-index: 9999; transition: width 0.1s ease-out;
     }
 
-    /* ==========================================
-       2. تصميم كارت Web Page Bundles (زجاجي + لمعان)
-       ========================================== */
-    .glass-card-wrapper {
-      position: relative;
-      width: 100%;
-      max-width: 500px;
-      margin: 30px auto;
-      border-radius: 20px;
-      padding: 2px; /* لإعطاء إطار مضيء خفيف */
+    /* ---------- Canvas Particles Background ---------- */
+    #bg-canvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+    .glow-field {
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background: radial-gradient(800px circle at 50% 0%, rgba(168, 85, 247, 0.25), transparent 70%);
     }
 
-    /* الوهج والإضاءة الخلفية (Glow Effect) */
-    .glass-card-wrapper::before {
-      content: '';
-      position: absolute;
-      top: -10px;
-      left: -10px;
-      right: -10px;
-      bottom: -10px;
-      background: radial-gradient(circle, rgba(168, 85, 247, 0.4) 0%, rgba(126, 34, 206, 0.1) 60%, transparent 80%);
-      filter: blur(25px);
-      z-index: 0;
-      border-radius: 30px;
-      pointer-events: none;
-    }
-
-    /* الكارت الزجاجي (Apple Glass Style) */
-    .glass-card {
-      position: relative;
-      z-index: 1;
-      background: rgba(255, 255, 255, 0.05); /* خلفية شبه شفافة */
-      backdrop-filter: blur(16px) saturate(180%);
-      -webkit-backdrop-filter: blur(16px) saturate(180%);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 20px;
-      padding: 24px 20px;
-      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 15px;
-    }
-
-    /* طبقة اللمعان الزجاجي المائل فوق الكارت (Glossy Overlay) */
-    .glass-card::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -150%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(
-        115deg,
-        transparent 20%,
-        rgba(255, 255, 255, 0.25) 45%,
-        rgba(255, 255, 255, 0.5) 50%,
-        rgba(255, 255, 255, 0.25) 55%,
-        transparent 80%
-      );
-      transition: all 0.8s ease;
-      pointer-events: none;
-    }
-
-    /* حركية اللمعان عند مرور الماوس */
-    .glass-card:hover::after {
-      left: 150%;
-    }
-
-    /* ==========================================
-       3. ضبط النص والكلمة بسطر واحد
-       ========================================== */
-    .bundle-title {
-      font-size: 1.5rem;
-      font-weight: 700;
-      white-space: nowrap; /* منع نزول الكلمة للسطر الثاني */
-      text-align: center;
-      background: linear-gradient(180deg, #ffffff 0%, rgba(255, 255, 255, 0.7) 100%);
+    /* ---------- High-Glow Crystal VORTX Title Effect ---------- */
+    .hero-vortx-title {
+      background: linear-gradient(135deg, #ffffff 0%, #e9d5ff 35%, #c084fc 70%, #9333ea 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      text-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
+      font-weight: 900;
+      filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.4)) 
+              drop-shadow(0 0 35px rgba(168, 85, 247, 0.8)) 
+              drop-shadow(0 0 65px rgba(126, 34, 206, 0.6));
+      animation: textGlowPulse 3s infinite alternate ease-in-out;
     }
 
-    .bundle-description {
-      font-size: 0.95rem;
-      color: rgba(255, 255, 255, 0.75);
-      text-align: center;
-      line-height: 1.6;
+    @keyframes textGlowPulse {
+      0% { filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.4)) drop-shadow(0 0 30px rgba(168, 85, 247, 0.7)) drop-shadow(0 0 55px rgba(126, 34, 206, 0.5)); }
+      100% { filter: drop-shadow(0 0 25px rgba(255, 255, 255, 0.8)) drop-shadow(0 0 45px rgba(192, 132, 252, 0.9)) drop-shadow(0 0 85px rgba(147, 51, 234, 0.8)); }
     }
 
-    /* زجاجي للزر الداخلي */
-    .glass-btn {
-      position: relative;
-      z-index: 2;
-      width: 100%;
-      padding: 12px 24px;
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      border-radius: 12px;
-      background: rgba(168, 85, 247, 0.2);
-      backdrop-filter: blur(8px);
-      color: #fff;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.4);
+    /* ---------- Glassmorphism Base ---------- */
+    .glass {
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(16px) saturate(140%);
+      -webkit-backdrop-filter: blur(16px) saturate(140%);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    html.light .glass {
+      background: rgba(0, 0, 0, 0.04);
+      border: 1px solid rgba(0, 0, 0, 0.08);
     }
 
-    .glass-btn:hover {
-      background: rgba(168, 85, 247, 0.4);
-      border-color: rgba(255, 255, 255, 0.6);
-      box-shadow: 0 0 15px rgba(168, 85, 247, 0.6), inset 0 1px 2px rgba(255, 255, 255, 0.8);
-      transform: translateY(-2px);
+    /* ---------- Custom Buttons & Utilities ---------- */
+    .theme-switch-btn {
+      width: 64px; height: 34px; border-radius: 999px;
+      background: linear-gradient(135deg, #1e1b4b, #311042);
+      border: 1px solid rgba(168, 85, 247, 0.4);
+      position: relative; cursor: pointer; padding: 3px;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.5), 0 0 12px rgba(126,34,206,0.3);
     }
+    html.light .theme-switch-btn {
+      background: linear-gradient(135deg, #38bdf8, #fde047);
+      border-color: rgba(253, 224, 71, 0.6);
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.1), 0 0 12px rgba(250,204,21,0.4);
+    }
+
+    .theme-switch-ball {
+      width: 26px; height: 26px; border-radius: 50%; background: #f1f5f9;
+      position: absolute; top: 3px; left: 3px;
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.4s ease;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.4);
+    }
+    html.dark .theme-switch-ball { transform: translateX(0px); background: #e2e8f0; }
+    html.light .theme-switch-ball { transform: translateX(30px); background: #fef08a; }
+
+    .icon-sun, .icon-moon { position: absolute; transition: opacity 0.3s ease, transform 0.3s ease; }
+    html.dark .icon-sun { opacity: 0; transform: scale(0.5) rotate(-90deg); }
+    html.dark .icon-moon { opacity: 1; transform: scale(1) rotate(0deg); }
+    html.light .icon-sun { opacity: 1; transform: scale(1) rotate(0deg); }
+    html.light .icon-moon { opacity: 0; transform: scale(0.5) rotate(90deg); }
+
+    .text-3d-header {
+      color: #c084fc; font-weight: 900;
+      text-shadow: 0 0 14px rgba(192, 132, 252, 0.6);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #9333ea, #6b21a8); color: white;
+      box-shadow: 0 0 25px rgba(147, 51, 234, 0.6);
+    }
+    .btn-primary:hover { box-shadow: 0 0 35px rgba(168, 85, 247, 0.9); }
+
+    /* ---------- Swiper 3D & Colorful Glows ---------- */
+    .swiper { width: 100%; padding-top: 30px; padding-bottom: 60px; }
+    .swiper-slide { width: 320px; height: 460px; border-radius: 2rem; position: relative; }
+
+    .card-glow-red { box-shadow: 0 0 50px -5px rgba(239, 68, 68, 0.4); }
+    .card-glow-yellow { box-shadow: 0 0 50px -5px rgba(234, 179, 8, 0.4); }
+    .card-glow-purple { box-shadow: 0 0 50px -5px rgba(168, 85, 247, 0.4); }
+    .card-glow-cyan { box-shadow: 0 0 50px -5px rgba(6, 182, 212, 0.4); }
+
+    .view { transition: opacity .4s ease; opacity: 1; }
+    .view-hidden { display: none; opacity: 0; }
   </style>
 </head>
-<body>
 
-  <div class="main-container">
-    
-    <!-- كارت Web Page Bundles الزجاجي والمضيء -->
-    <div class="glass-card-wrapper">
-      <div class="glass-card">
-        <h2 class="bundle-title">باقت تصميم الويب - Web Page Bundles</h2>
-        <p class="bundle-description">
-          أطلق مساحتك الرقمية اليوم، تصاميم فائقة السرعة وجيل جديد مخصص للمبدعين.
-        </p>
-        <button class="glass-btn">استكشف الباقات</button>
+<body>
+  <!-- Scroll Progress Bar -->
+  <div id="scroll-progress"></div>
+
+  <!-- Background Effects -->
+  <canvas id="bg-canvas"></canvas>
+  <div class="glow-field"></div>
+
+  <!-- Toast Container -->
+  <div id="toast-box" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[100] flex flex-col gap-3 pointer-events-none"></div>
+
+  <!-- =================== NAVBAR =================== -->
+  <header class="sticky top-0 z-50">
+    <nav class="glass border-b-0 border-white/5 bg-black/30">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+        <a href="#top" class="flex items-center gap-3 active:scale-95 transition-transform duration-200">
+          <span class="font-head font-extrabold text-2xl tracking-widest text-3d-header">VORTX</span>
+        </a>
+
+        <!-- الروابط بالنص -->
+        <ul class="hidden md:flex items-center gap-10 text-sm font-bold opacity-70 mx-auto">
+          <li><a href="#bundles" data-i18n="nav-bundles" class="hover:text-brandLight transition active:scale-95">Bundles</a></li>
+          <li><a href="#packs" data-i18n="nav-packs" class="hover:text-brandLight transition active:scale-95">Featured Packs</a></li>
+          <li><a href="#categories" data-i18n="nav-categories" class="hover:text-brandLight transition active:scale-95">Categories</a></li>
+        </ul>
+
+        <!-- الأزرار أعلى اليمين (تغيير اللغة + الليل والنهار) -->
+        <div class="flex items-center gap-3">
+          
+          <!-- زر تغيير اللغة (الكرة الأرضية الشبكية) -->
+          <button onclick="toggleLanguage()" class="glass w-10 h-10 rounded-full flex items-center justify-center hover:scale-110 active:scale-95 transition-transform border-purple-500/30 text-purple-300 hover:text-white" title="Change Language / تغيير اللغة">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9 9 0 100-18 9 9 0 000 18z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.6 9h16.8M3.6 15h16.8"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" d="M11.5 3a17 17 0 000 18M12.5 3a17 17 0 010 18"></path>
+            </svg>
+          </button>
+
+          <!-- زر الليل والنهار -->
+          <button onclick="toggleTheme()" class="theme-switch-btn" title="Toggle Theme">
+            <div class="theme-switch-ball">
+              <svg class="icon-moon w-3.5 h-3.5 text-slate-800" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+              </svg>
+              <svg class="icon-sun w-3.5 h-3.5 text-amber-600" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 100 2h1z" clip-rule="evenodd"></path>
+              </svg>
+            </div>
+          </button>
+        </div>
+
+      </div>
+    </nav>
+  </header>
+
+  <!-- =================== MAIN VIEW =================== -->
+  <main id="main-view" class="view relative z-10">
+    <div id="top"></div>
+
+    <!-- HERO SECTION -->
+    <section class="max-w-6xl mx-auto px-4 sm:px-6 pt-16 pb-24 text-center relative">
+      
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] sm:w-[800px] h-[350px] bg-purple-600/20 rounded-full blur-[150px] pointer-events-none -z-10"></div>
+      
+      <!-- Glass Pill Tag -->
+      <div class="inline-flex items-center gap-3 px-6 py-2.5 rounded-full text-xs font-bold tracking-widest uppercase text-purple-300 border border-purple-500/20 bg-purple-950/20 backdrop-blur-md mb-8 shadow-sm">
+        <span class="w-2 h-2 rounded-full bg-purple-400 animate-ping"></span>
+        <span data-i18n="hero-tag">Digital Assets Hub</span>
+      </div>
+
+      <!-- GLOWING VORTX TITLE -->
+      <div class="relative my-2">
+        <h1 class="font-head font-black tracking-[0.25em] text-7xl sm:text-9xl md:text-[10rem] hero-vortx-title relative z-10 leading-none py-4">
+          VORTX
+        </h1>
+      </div>
+
+      <!-- Description Text -->
+      <p data-i18n="hero-desc" class="font-semibold opacity-85 max-w-2xl mx-auto text-base sm:text-xl leading-relaxed mt-4 mb-10 text-purple-100/90">
+        High-end VFX packs, cinematic presets & custom web experiences. Crafted specifically for elite creators.
+      </p>
+
+      <!-- Glass Action Button -->
+      <div class="flex items-center justify-center gap-5">
+        <a href="#bundles" data-i18n="hero-btn" class="btn-primary font-extrabold px-10 py-4.5 rounded-full transition-all duration-300 text-sm uppercase tracking-wider active:scale-95 hover:scale-105">
+          Explore Tiers
+        </a>
+      </div>
+
+    </section>
+
+    <!-- WEB BUNDLES -->
+    <section id="bundles" class="max-w-7xl mx-auto px-4 sm:px-6 py-16">
+      <div class="glass rounded-[2rem] p-10 sm:p-16 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-10">
+        <div class="text-left ltr:text-left rtl:text-right max-w-2xl relative z-10">
+          <span data-i18n="bundle-sub" class="text-xs tracking-widest uppercase font-bold text-brandLight">Custom Web Solutions</span>
+          <h2 data-i18n="bundle-title" class="font-head font-bold text-4xl sm:text-5xl mt-4 mb-5">Web Page Bundles</h2>
+          <p data-i18n="bundle-desc" class="font-bold opacity-60 leading-relaxed text-base sm:text-lg">
+            Launch your custom digital space today. Stand out with next-gen designs, premium performance, and join the elite creators.
+          </p>
+        </div>
+        
+        <div class="w-full md:w-auto relative z-10">
+          <button onclick="openWebTiers()" data-i18n="bundle-btn" class="glass border-brand/50 hover:bg-brand/20 font-bold px-10 py-4 rounded-full whitespace-nowrap transition-all duration-200 w-full md:w-auto uppercase tracking-wider text-sm active:scale-95">
+            View Development Tiers
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURED PACKS (3D SWIPER) -->
+    <section id="packs" class="py-16 max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="mb-8 text-left ltr:text-left rtl:text-right">
+        <h2 data-i18n="packs-title" class="font-head font-bold text-3xl sm:text-4xl">Featured Packs</h2>
+        <p data-i18n="packs-desc" class="font-bold opacity-50 text-sm mt-3 tracking-wide">Swipe left & right to interact.</p>
+      </div>
+      
+      <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+          
+          <!-- Card 1: Red Glow -->
+          <div onclick="openPreview('Flame Pack', 'VFX')" class="swiper-slide glass card-glow-red p-6 flex flex-col justify-between items-center text-center cursor-pointer border border-red-500/40 hover:border-red-400 transition-all">
+            <div class="absolute -top-10 -right-10 w-40 h-40 bg-red-600/30 rounded-full blur-3xl pointer-events-none"></div>
+            <span class="text-[10px] uppercase font-bold tracking-widest px-4 py-1.5 rounded-full border border-red-500/30 bg-red-500/10 text-red-400 self-start z-10">VFX</span>
+            <div class="w-full h-64 my-4 rounded-2xl glass border border-white/10 flex items-center justify-center overflow-hidden relative z-10">
+              <img src="https://picsum.photos/400/500?random=1" class="w-full h-full object-cover opacity-80 hover:scale-105 transition-transform duration-500" alt="Sample" />
+            </div>
+            <h3 data-i18n="card-1-title" class="font-head font-bold text-xl text-white z-10">Red Inferno</h3>
+          </div>
+
+          <!-- Card 2: Yellow Glow -->
+          <div onclick="openPreview('Cyber Gold', 'Color')" class="swiper-slide glass card-glow-yellow p-6 flex flex-col justify-between items-center text-center cursor-pointer border border-yellow-500/40 hover:border-yellow-400 transition-all">
+            <div class="absolute -top-10 -right-10 w-40 h-40 bg-yellow-600/30 rounded-full blur-3xl pointer-events-none"></div>
+            <span class="text-[10px] uppercase font-bold tracking-widest px-4 py-1.5 rounded-full border border-yellow-500/30 bg-yellow-500/10 text-yellow-400 self-start z-10">Color</span>
+            <div class="w-full h-64 my-4 rounded-2xl glass border border-white/10 flex items-center justify-center overflow-hidden relative z-10">
+              <img src="https://picsum.photos/400/500?random=2" class="w-full h-full object-cover opacity-80 hover:scale-105 transition-transform duration-500" alt="Sample" />
+            </div>
+            <h3 data-i18n="card-2-title" class="font-head font-bold text-xl text-white z-10">Cyber Gold</h3>
+          </div>
+
+          <!-- Card 3: Purple Glow -->
+          <div onclick="openPreview('Neon Nights', 'Camera')" class="swiper-slide glass card-glow-purple p-6 flex flex-col justify-between items-center text-center cursor-pointer border border-purple-500/40 hover:border-purple-400 transition-all">
+            <div class="absolute -top-10 -right-10 w-40 h-40 bg-purple-600/30 rounded-full blur-3xl pointer-events-none"></div>
+            <span class="text-[10px] uppercase font-bold tracking-widest px-4 py-1.5 rounded-full border border-purple-500/30 bg-purple-500/10 text-purple-400 self-start z-10">Camera</span>
+            <div class="w-full h-64 my-4 rounded-2xl glass border border-white/10 flex items-center justify-center overflow-hidden relative z-10">
+              <img src="https://picsum.photos/400/500?random=3" class="w-full h-full object-cover opacity-80 hover:scale-105 transition-transform duration-500" alt="Sample" />
+            </div>
+            <h3 data-i18n="card-3-title" class="font-head font-bold text-xl text-white z-10">Neon Nights</h3>
+          </div>
+
+          <!-- Card 4: Cyan Glow -->
+          <div onclick="openPreview('Hyper Blue', 'Presets')" class="swiper-slide glass card-glow-cyan p-6 flex flex-col justify-between items-center text-center cursor-pointer border border-cyan-500/40 hover:border-cyan-400 transition-all">
+            <div class="absolute -top-10 -right-10 w-40 h-40 bg-cyan-600/30 rounded-full blur-3xl pointer-events-none"></div>
+            <span class="text-[10px] uppercase font-bold tracking-widest px-4 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/10 text-cyan-400 self-start z-10">Presets</span>
+            <div class="w-full h-64 my-4 rounded-2xl glass border border-white/10 flex items-center justify-center overflow-hidden relative z-10">
+              <img src="https://picsum.photos/400/500?random=4" class="w-full h-full object-cover opacity-80 hover:scale-105 transition-transform duration-500" alt="Sample" />
+            </div>
+            <h3 data-i18n="card-4-title" class="font-head font-bold text-xl text-white z-10">Hyper Blue</h3>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- CATEGORIES -->
+    <section id="categories" class="max-w-7xl mx-auto px-4 sm:px-6 py-16">
+      <div class="mb-12 text-left ltr:text-left rtl:text-right">
+        <h2 data-i18n="cat-sec-title" class="font-head font-bold text-3xl sm:text-4xl">Categories</h2>
+        <p data-i18n="cat-sec-desc" class="font-bold opacity-50 mt-3 text-sm tracking-wide">Select a module to view contents.</p>
+      </div>
+      
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div onclick="openCategory('CC')" class="glass rounded-2xl p-8 flex flex-col items-start justify-between min-h-[200px] cursor-pointer group">
+          <span class="text-xs font-bold text-brandLight">01</span>
+          <span class="font-head font-extrabold text-5xl mt-6 group-hover:text-brandLight transition-colors">CC</span>
+        </div>
+        <div onclick="openCategory('SHAKE')" class="glass rounded-2xl p-8 flex flex-col items-start justify-between min-h-[200px] cursor-pointer group">
+          <span class="text-xs font-bold text-brandLight">02</span>
+          <span class="font-head font-extrabold text-5xl mt-6 group-hover:text-brandLight transition-colors">SHAKE</span>
+        </div>
+        <div onclick="openCategory('VFX')" class="glass rounded-2xl p-8 flex flex-col items-start justify-between min-h-[200px] cursor-pointer group">
+          <span class="text-xs font-bold text-brandLight">03</span>
+          <span class="font-head font-extrabold text-5xl mt-6 group-hover:text-brandLight transition-colors">VFX</span>
+        </div>
+        <div onclick="openCategory('PF')" class="glass rounded-2xl p-8 flex flex-col items-start justify-between min-h-[200px] cursor-pointer group">
+          <span class="text-xs font-bold text-brandLight">04</span>
+          <span class="font-head font-extrabold text-5xl mt-6 group-hover:text-brandLight transition-colors">PF</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-white/5 mt-10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12 flex flex-col md:flex-row items-center justify-between gap-6">
+        <p class="font-head font-extrabold tracking-widest text-brandLight text-xl">VORTX</p>
+        <p class="font-bold opacity-40 text-sm">© <span id="year"></span> VORTX Studio. <span data-i18n="footer-right">Crafted for the bold.</span></p>
+      </div>
+    </footer>
+  </main>
+
+  <!-- =================== WEB TIERS VIEW =================== -->
+  <section id="web-view" class="view view-hidden relative z-10 min-h-screen">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
+      <div class="flex items-center justify-between mb-12">
+        <div class="text-left ltr:text-left rtl:text-right">
+          <span data-i18n="tiers-sub" class="text-xs tracking-widest uppercase font-bold text-brandLight">Web Solutions</span>
+          <h2 data-i18n="tiers-title" class="font-head font-bold text-4xl mt-3">Development Tiers</h2>
+        </div>
+        <button onclick="backToHome()" data-i18n="back-btn" class="glass px-6 py-3 rounded-full font-bold text-sm hover:bg-white/5 transition-all duration-200 active:scale-95">
+          ← Back
+        </button>
+      </div>
+      
+      <div class="grid lg:grid-cols-3 gap-8">
+        <!-- Starter -->
+        <div class="glass rounded-3xl p-8 flex flex-col h-full border-t border-brand/20">
+          <h3 class="font-head font-bold text-2xl mb-3">STARTER</h3>
+          <p data-i18n="tier-starter-desc" class="font-bold opacity-50 text-sm mb-8">Perfect for simple portfolios and personal landing pages.</p>
+          <ul class="text-sm opacity-80 space-y-4 mb-10 flex-1 font-bold">
+            <li class="flex items-start gap-3"><span class="text-brand">✦</span> Clean & Modern UI</li>
+            <li class="flex items-start gap-3"><span class="text-brand">✦</span> Mobile-Ready Layout</li>
+          </ul>
+          <button onclick="showToast('PLAN ADDED')" data-i18n="select-plan" class="glass border-brand/30 hover:bg-brand/10 w-full py-4 rounded-xl font-bold uppercase tracking-wider text-sm">Select Plan</button>
+        </div>
+
+        <!-- Pro -->
+        <div class="glass rounded-3xl p-8 flex flex-col h-full border border-brand/50 relative bg-brand/5">
+          <h3 class="font-head font-bold text-2xl mb-3">PRO</h3>
+          <p data-i18n="tier-pro-desc" class="font-bold opacity-50 text-sm mb-8">For creators needing advanced animations & custom design.</p>
+          <ul class="text-sm opacity-80 space-y-4 mb-10 flex-1 font-bold">
+            <li class="flex items-start gap-3"><span class="text-brandLight">✦</span> Glassmorphism & Glows</li>
+            <li class="flex items-start gap-3"><span class="text-brandLight">✦</span> Scroll Animations</li>
+          </ul>
+          <button onclick="showToast('PLAN ADDED')" data-i18n="select-plan" class="btn-primary w-full py-4 rounded-xl font-bold uppercase tracking-wider text-sm">Select Plan</button>
+        </div>
+
+        <!-- VIP -->
+        <div class="glass rounded-3xl p-8 flex flex-col h-full border-t border-brand/20">
+          <h3 class="font-head font-bold text-2xl mb-3">VIP</h3>
+          <p data-i18n="tier-vip-desc" class="font-bold opacity-50 text-sm mb-8">The absolute premium experience with custom 3D elements.</p>
+          <ul class="text-sm opacity-80 space-y-4 mb-10 flex-1 font-bold">
+            <li class="flex items-start gap-3"><span class="text-brand">✦</span> 3D Models Integration</li>
+            <li class="flex items-start gap-3"><span class="text-brand">✦</span> Priority Support</li>
+          </ul>
+          <button onclick="showToast('PLAN ADDED')" data-i18n="select-plan" class="glass border-brand/30 hover:bg-brand/10 w-full py-4 rounded-xl font-bold uppercase tracking-wider text-sm">Select Plan</button>
+        </div>
       </div>
     </div>
+  </section>
 
+  <!-- =================== CATEGORY VIEW =================== -->
+  <section id="category-view" class="view view-hidden relative z-10 min-h-screen">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
+      <div class="flex items-center justify-between mb-12">
+        <div class="text-left ltr:text-left rtl:text-right">
+          <span data-i18n="cat-view-sub" class="text-xs tracking-widest uppercase font-bold text-brandLight">Collection</span>
+          <h2 id="cat-title" class="font-head font-bold text-4xl mt-3">CC</h2>
+        </div>
+        <button onclick="backToHome()" data-i18n="back-btn" class="glass px-6 py-3 rounded-full font-bold text-sm hover:bg-white/5 transition-all duration-200 active:scale-95">
+          ← Back
+        </button>
+      </div>
+      <div id="cat-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    </div>
+  </section>
+
+  <!-- =================== QUICK PREVIEW MODAL =================== -->
+  <div id="preview-modal" class="fixed inset-0 z-[80] flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
+    <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="closePreview()"></div>
+    <div class="glass border-brand/50 rounded-3xl max-w-md w-full relative z-10 p-1 transform scale-95 transition-transform duration-300" id="preview-card">
+      <div class="aspect-[4/3] bg-black/50 rounded-t-3xl flex items-center justify-center border-b border-white/5 relative overflow-hidden">
+        <button onclick="closePreview()" class="absolute top-4 right-4 w-8 h-8 glass rounded-full flex items-center justify-center opacity-50 hover:opacity-100 z-20">✕</button>
+        <span class="opacity-40 font-bold text-sm tracking-widest">[ PREVIEW VIDEO ]</span>
+      </div>
+      <div class="p-8 text-left ltr:text-left rtl:text-right">
+        <span id="preview-tag" class="text-[10px] font-bold tracking-widest uppercase text-brandLight">TAG</span>
+        <h3 id="preview-title" class="font-head font-bold text-2xl mt-1 mb-6">TITLE</h3>
+        <div class="flex gap-4">
+          <button onclick="showToast('ADDED TO CART'); closePreview();" data-i18n="add-cart" class="btn-primary flex-1 py-3.5 rounded-xl font-bold uppercase tracking-wider text-xs">Add to Cart</button>
+          <button onclick="showToast('DOWNLOADING DEMO...')" data-i18n="try-demo" class="glass flex-1 py-3.5 rounded-xl font-bold uppercase tracking-wider text-xs opacity-70">Try Demo</button>
+        </div>
+      </div>
+    </div>
   </div>
 
+  <script>
+  /* --- Swiper 3D Config --- */
+  var swiper = new Swiper(".mySwiper", {
+    effect: "coverflow",
+    grabCursor: true,
+    centeredSlides: true,
+    slidesPerView: "auto",
+    loop: true,
+    coverflowEffect: {
+      rotate: 25,
+      stretch: 0,
+      depth: 140,
+      modifier: 1,
+      slideShadows: false,
+    },
+  });
+
+  /* --- Translation Dictionary (English / Arabic) --- */
+  const translations = {
+    en: {
+      "nav-bundles": "Bundles",
+      "nav-packs": "Featured Packs",
+      "nav-categories": "Categories",
+      "hero-tag": "Digital Assets Hub",
+      "hero-desc": "High-end VFX packs, cinematic presets & custom web experiences. Crafted specifically for elite creators.",
+      "hero-btn": "Explore Tiers",
+      "bundle-sub": "Custom Web Solutions",
+      "bundle-title": "Web Page Bundles",
+      "bundle-desc": "Launch your custom digital space today. Stand out with next-gen designs, premium performance, and join the elite creators.",
+      "bundle-btn": "View Development Tiers",
+      "packs-title": "Featured Packs",
+      "packs-desc": "Swipe left & right to interact.",
+      "card-1-title": "Red Inferno",
+      "card-2-title": "Cyber Gold",
+      "card-3-title": "Neon Nights",
+      "card-4-title": "Hyper Blue",
+      "cat-sec-title": "Categories",
+      "cat-sec-desc": "Select a module to view contents.",
+      "footer-right": "Crafted for the bold.",
+      "tiers-sub": "Web Solutions",
+      "tiers-title": "Development Tiers",
+      "back-btn": "← Back",
+      "tier-starter-desc": "Perfect for simple portfolios and personal landing pages.",
+      "tier-pro-desc": "For creators needing advanced animations & custom design.",
+      "tier-vip-desc": "The absolute premium experience with custom 3D elements.",
+      "select-plan": "Select Plan",
+      "cat-view-sub": "Collection",
+      "add-cart": "Add to Cart",
+      "try-demo": "Try Demo"
+    },
+    ar: {
+      "nav-bundles": "الحزم المتاحة",
+      "nav-packs": "حزم متميزة",
+      "nav-categories": "الأقسام الرئيسية",
+      "hero-tag": "مركز الأصول الرقمية",
+      "hero-desc": "حزم مؤثرات بصرية احترافية، إعدادات سينمائية مسبقة وتجارب ويب مخصصة للمبدعين.",
+      "hero-btn": "استكشف الباقات",
+      "bundle-sub": "حلول المواقع المخصصة",
+      "bundle-title": "باقات تصميم الويب",
+      "bundle-desc": "أطلق مساحتك الرقمية المخصصة اليوم. تميز بتصاميم جيل جديد وأداء فائق السرعة.",
+      "bundle-btn": "عرض باقات التطوير",
+      "packs-title": "الحزم المتميزة",
+      "packs-desc": "اسحب يمينًا ويسارًا للتفاعل مع الكروت.",
+      "card-1-title": "الجحيم الأحمر",
+      "card-2-title": "الذهب السايبق",
+      "card-3-title": "ليالي النيون",
+      "card-4-title": "النيون الأزرق",
+      "cat-sec-title": "الأقسام",
+      "cat-sec-desc": "اختر وحدة لعرض المحتويات جواتها.",
+      "footer-right": "صُنع للمبدعين والجرآء.",
+      "tiers-sub": "حلول الويب",
+      "tiers-title": "مستويات التطوير",
+      "back-btn": "→ العودة",
+      "tier-starter-desc": "مثالية للملفات الشخصية وصفحات الهبوط البسيطة.",
+      "tier-pro-desc": "للمبدعين الذين يحتاجون تحريكات متقدمة وتصاميم خاصة.",
+      "tier-vip-desc": "الخبرة المتميزة المطلقة مع عناصر ثلاثية الأبعاد.",
+      "select-plan": "اختر الباقة",
+      "cat-view-sub": "المجموعة",
+      "add-cart": "إضافة للسلة",
+      "try-demo": "تجربة العرض"
+    }
+  };
+
+  let currentLang = 'en';
+
+  function toggleLanguage() {
+    currentLang = currentLang === 'en' ? 'ar' : 'en';
+    const htmlEl = document.documentElement;
+    htmlEl.setAttribute('dir', currentLang === 'ar' ? 'rtl' : 'ltr');
+    htmlEl.setAttribute('lang', currentLang);
+
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (translations[currentLang][key]) {
+        el.textContent = translations[currentLang][key];
+      }
+    });
+  }
+
+  /* --- Theme Toggle --- */
+  function toggleTheme() {
+    const htmlEl = document.documentElement;
+    if (htmlEl.classList.contains('dark')) {
+      htmlEl.classList.remove('dark');
+      htmlEl.classList.add('light');
+    } else {
+      htmlEl.classList.remove('light');
+      htmlEl.classList.add('dark');
+    }
+  }
+
+  /* --- SPA & Toasts --- */
+  function showToast(msg) {
+    const box = document.getElementById('toast-box');
+    const toast = document.createElement('div');
+    toast.className = 'glass bg-black/90 text-white text-[10px] sm:text-xs font-bold uppercase tracking-widest px-6 py-3.5 rounded-full transform translate-y-10 opacity-0 transition-all duration-300 border-brand/50 flex items-center gap-2';
+    toast.innerHTML = `<span class="text-brandLight">✦</span> ${msg}`;
+    box.appendChild(toast);
+    setTimeout(() => { toast.classList.remove('translate-y-10', 'opacity-0'); }, 10);
+    setTimeout(() => { toast.classList.add('translate-y-10', 'opacity-0'); setTimeout(() => toast.remove(), 300); }, 2500);
+  }
+
+  function openPreview(title, tag) {
+    document.getElementById('preview-title').textContent = title;
+    document.getElementById('preview-tag').textContent = tag;
+    const modal = document.getElementById('preview-modal');
+    const card = document.getElementById('preview-card');
+    modal.classList.remove('opacity-0', 'pointer-events-none');
+    setTimeout(() => { card.classList.remove('scale-95'); }, 10);
+  }
+
+  function closePreview() {
+    const modal = document.getElementById('preview-modal');
+    const card = document.getElementById('preview-card');
+    card.classList.add('scale-95');
+    setTimeout(() => { modal.classList.add('opacity-0', 'pointer-events-none'); }, 200);
+  }
+
+  const CATEGORY_DATA = {
+    CC: ['Teal & Orange','Filmic Base','Night Grade','Vibrant Pop'],
+    SHAKE: ['Impact Shake','Bass Drop','Whip Pan','Earthquake'],
+    VFX: ['Spark Burst','Glitch Distortion','Smoke Atmosphere','Lightning'],
+    PF: ['Cinematic Suite','Gaming Montage','Anime Presets','Retro Wave'],
+  };
+
+  function showView(id) {
+    document.querySelectorAll('.view').forEach(v => v.classList.add('view-hidden'));
+    document.getElementById(id).classList.remove('view-hidden');
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }
+
+  function openCategory(key) {
+    document.getElementById('cat-title').textContent = key;
+    document.getElementById('cat-grid').innerHTML = CATEGORY_DATA[key].map((item) => `
+      <div onclick="openPreview('${item}', '${key}')" class="glass rounded-2xl p-6 flex flex-col justify-between min-h-[140px] text-left ltr:text-left rtl:text-right border-l-4 border-brand/50 hover:border-brandLight cursor-pointer">
+        <span class="text-[10px] font-bold tracking-widest uppercase text-brandLight">${key} Pack</span>
+        <h3 class="font-head font-bold text-xl mt-4">${item}</h3>
+      </div>`).join('');
+    showView('category-view');
+  }
+
+  function openWebTiers() { showView('web-view'); }
+  function backToHome() { showView('main-view'); }
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
