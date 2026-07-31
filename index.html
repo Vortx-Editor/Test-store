@@ -39,9 +39,6 @@
   </script>
 
   <style>
-    @property --angle-1 { syntax: "<angle>"; inherits: false; initial-value: -75deg; }
-    @property --angle-2 { syntax: "<angle>"; inherits: false; initial-value: -45deg; }
-
     :root {
       --ink: #050505;
       --brand: #7e22ce;
@@ -49,12 +46,8 @@
       --bg-color: #050505;
       --text-color: #e8e8ef;
       --nav-logo-color: #c084fc;
-      --nav-icon-color: #c084fc;
-      --card-title-color: #ffffff;
       --star-bg: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
       --star-opacity: 1;
-      --anim--hover-time: 400ms;
-      --anim--hover-ease: cubic-bezier(0.25, 1, 0.5, 1);
       --btn-text-color: rgba(255, 255, 255, 0.95);
     }
 
@@ -63,8 +56,6 @@
       --bg-color: #f1f5f9;
       --text-color: #0f172a;
       --nav-logo-color: #581c87;
-      --nav-icon-color: #6b21a8;
-      --card-title-color: #3b0764;
       --star-bg: radial-gradient(ellipse at bottom, #e2e8f0 0%, #cbd5e1 100%);
       --star-opacity: 0.25;
       --btn-text-color: #2e1065;
@@ -80,11 +71,6 @@
       color: var(--text-color);
       font-family: 'Inter', sans-serif;
       transition: background-color 0.4s ease, color 0.4s ease;
-    }
-
-    html.vx-loading, html.vx-loading body {
-      overflow: hidden !important;
-      height: 100%;
     }
 
     html[dir="rtl"] body { font-family: 'Cairo', sans-serif; }
@@ -114,24 +100,19 @@
 
     #stars {
       width: 1px; height: 1px;
-      box-shadow: 501px 811px #fff, 1450px 1324px #fff, 1093px 1780px #fff, 1469px 678px #fff, 904px 741px #fff, 1160px 781px #fff, 1841px 1962px #fff, 1630px 1667px #fff, 1788px 676px #fff, 367px 1734px #fff, 1343px 156px #fff, 1283px 1142px #fff, 1062px 378px #fff;
+      box-shadow: 501px 811px #fff, 1450px 1324px #fff, 1093px 1780px #fff, 1469px 678px #fff, 904px 741px #fff, 1160px 781px #fff;
       animation: animStar 50s linear infinite;
     }
-    #stars:after { content: " "; position: absolute; top: 2000px; width: 1px; height: 1px; background: transparent; box-shadow: inherit; }
-
     #stars2 {
       width: 2px; height: 2px;
-      box-shadow: 1925px 1320px #fff, 693px 1778px #fff, 1016px 711px #fff, 1171px 563px #fff, 661px 1919px #fff, 1610px 44px #fff, 1275px 140px #fff;
+      box-shadow: 1925px 1320px #fff, 693px 1778px #fff, 1016px 711px #fff, 1171px 563px #fff;
       animation: animStar 100s linear infinite;
     }
-    #stars2:after { content: " "; position: absolute; top: 2000px; width: 2px; height: 2px; background: transparent; box-shadow: inherit; }
-
     #stars3 {
       width: 3px; height: 3px;
-      box-shadow: 200px 981px #fff, 1731px 521px #fff, 132px 1039px #fff, 1888px 1547px #fff, 899px 1226px #fff, 1887px 580px #fff, 1548px 1092px #fff;
+      box-shadow: 200px 981px #fff, 1731px 521px #fff, 132px 1039px #fff;
       animation: animStar 150s linear infinite;
     }
-    #stars3:after { content: " "; position: absolute; top: 2000px; width: 3px; height: 3px; background: transparent; box-shadow: inherit; }
 
     @keyframes animStar {
       from { transform: translateY(0px); }
@@ -155,12 +136,9 @@
       left: 0; top: 0; width: 100%; height: 100%;
       background: linear-gradient(
         110deg,
-        transparent 0%,
-        transparent 35%,
-        rgba(255, 255, 255, 0.95) 48%,
-        rgba(233, 213, 255, 0.6) 52%,
-        transparent 65%,
-        transparent 100%
+        transparent 0%, transparent 35%,
+        rgba(255, 255, 255, 0.95) 48%, rgba(233, 213, 255, 0.6) 52%,
+        transparent 65%, transparent 100%
       );
       background-size: 220% 100%;
       -webkit-background-clip: text;
@@ -174,13 +152,6 @@
       100% { background-position: -220% 0; }
     }
 
-    html.light .vortx-wet-oil-title {
-      background: linear-gradient(135deg, #2e1065 0%, #581c87 40%, #7e22ce 70%, #a855f7 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      filter: drop-shadow(0 5px 15px rgba(126, 34, 206, 0.2));
-    }
-
     /* SWITCH BUTTON */
     .theme-switch-btn {
       width: 64px; height: 34px; border-radius: 999px;
@@ -190,16 +161,11 @@
       transition: all 0.4s ease;
       display: flex; align-items: center;
     }
-    html.light .theme-switch-btn {
-      background: linear-gradient(135deg, #38bdf8, #fde047);
-      border-color: rgba(56, 189, 248, 0.6);
-    }
     .theme-switch-ball {
       width: 26px; height: 26px; border-radius: 50%;
       position: absolute; top: 3px; left: 3px;
-      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.4s ease;
+      transition: transform 0.4s ease;
       display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
     }
     html.dark .theme-switch-ball { transform: translateX(0px); background: #e2e8f0; }
     html.light .theme-switch-ball { transform: translateX(30px); background: #fef08a; }
@@ -209,45 +175,11 @@
       position: relative;
       z-index: 10;
       border-radius: 999vw;
-      background: transparent;
       cursor: pointer;
       display: inline-block;
-      transition: all var(--anim--hover-time) var(--anim--hover-ease);
-    }
-
-    .button-shadow {
-      --shadow-cuttoff-fix: 2em;
-      position: absolute;
-      width: calc(100% + var(--shadow-cuttoff-fix));
-      height: calc(100% + var(--shadow-cuttoff-fix));
-      top: calc(0% - var(--shadow-cuttoff-fix) / 2);
-      left: calc(0% - var(--shadow-cuttoff-fix) / 2);
-      filter: blur(clamp(2px, 0.125em, 12px));
-      -webkit-filter: blur(clamp(2px, 0.125em, 12px));
-      overflow: visible;
-      pointer-events: none;
-    }
-
-    .button-shadow::after {
-      content: "";
-      position: absolute;
-      z-index: 0;
-      inset: 0;
-      border-radius: 999vw;
-      background: linear-gradient(180deg, rgba(168, 85, 247, 0.3), rgba(0, 0, 0, 0.2));
-      width: calc(100% - var(--shadow-cuttoff-fix) - 0.25em);
-      height: calc(100% - var(--shadow-cuttoff-fix) - 0.25em);
-      top: calc(var(--shadow-cuttoff-fix) - 0.5em);
-      left: calc(var(--shadow-cuttoff-fix) - 0.875em);
-      padding: 0.125em;
-      box-sizing: border-box;
-      mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-      mask-composite: exclude;
-      opacity: 1;
     }
 
     .btn-3d-style {
-      --border-width: clamp(1px, 0.0625em, 4px);
       all: unset;
       cursor: pointer;
       position: relative;
@@ -257,409 +189,132 @@
       border-radius: 999vw;
       box-shadow: inset 0 0.125em 0.125em rgba(0, 0, 0, 0.05), inset 0 -0.125em 0.125em rgba(255, 255, 255, 0.5), 0 0.25em 0.125em -0.125em rgba(0, 0, 0, 0.3);
       backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-      transition: all var(--anim--hover-time) var(--anim--hover-ease);
+      transition: transform 0.2s ease;
       width: 100%;
       text-align: center;
     }
-
-    html.light .btn-3d-style {
-      background: linear-gradient(-75deg, rgba(168, 85, 247, 0.1), rgba(168, 85, 247, 0.25), rgba(168, 85, 247, 0.1));
-      box-shadow: inset 0 0.125em 0.125em rgba(255, 255, 255, 0.8), 0 0.15em 0.25em rgba(126, 34, 206, 0.15);
-    }
-
     .btn-3d-style:hover { transform: scale(0.975); }
-
     .btn-3d-style span {
-      position: relative;
-      display: block;
-      user-select: none;
-      font-weight: 800;
-      font-size: 0.9em;
-      color: var(--btn-text-color);
-      text-shadow: 0em 0.15em 0.1em rgba(0, 0, 0, 0.2);
-      padding-inline: 2em;
-      padding-block: 0.9em;
-      text-transform: uppercase;
+      display: block; font-weight: 800; font-size: 0.9em;
+      color: var(--btn-text-color); padding: 0.9em 2em; text-transform: uppercase;
     }
 
     /* TIER CARDS */
     .tier-card {
-      --white: hsl(0, 0%, 100%);
-      --black: hsl(240, 15%, 9%);
-      --paragraph: hsl(0, 0%, 83%);
-      --line: hsl(240, 9%, 17%);
-      --primary: hsl(266, 92%, 58%);
-
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: 1.25rem;
-      padding: 2rem;
-      width: 100%;
-      background-color: hsla(240, 15%, 9%, 0.85);
-      backdrop-filter: blur(16px);
-      background-image: radial-gradient(at 88% 40%, hsla(240, 15%, 9%, 1) 0px, transparent 85%),
-                        radial-gradient(at 0% 64%, hsla(263, 93%, 56%, 0.4) 0px, transparent 85%);
-      border-radius: 1.75rem;
-      box-shadow: 0px -16px 24px 0px rgba(255, 255, 255, 0.15) inset;
-      overflow: hidden;
-      transition: transform 0.4s ease, background-color 0.4s ease;
+      position: relative; display: flex; flex-direction: column; justify-content: space-between;
+      gap: 1.25rem; padding: 2rem; width: 100%;
+      background-color: hsla(240, 15%, 9%, 0.85); backdrop-filter: blur(16px);
+      border-radius: 1.75rem; border: 1px solid rgba(255,255,255,0.1);
     }
 
-    html.light .tier-card {
-      background-color: rgba(255, 255, 255, 0.92);
-      background-image: radial-gradient(at 0% 64%, rgba(216, 180, 254, 0.4) 0px, transparent 85%);
-      box-shadow: 0 15px 35px rgba(126, 34, 206, 0.1);
-    }
-
-    .tier-card:hover { transform: translateY(-6px); }
-
-    .tier-card .card_title__container .card_title {
-      font-size: 1.75rem;
-      font-weight: 900;
-      color: var(--white);
-      font-family: 'Cinzel', 'Cairo', serif;
-    }
-    html.light .tier-card .card_title__container .card_title { color: #3b0764; }
-
-    .tier-card .card_title__container .card_paragraph {
-      margin-top: 0.5rem;
-      font-size: 0.85rem;
-      color: var(--paragraph);
-      line-height: 1.5;
-    }
-    html.light .tier-card .card_title__container .card_paragraph { color: #475569; }
-
-    .tier-card .line { width: 100%; height: 0.1rem; background-color: var(--line); border: none; margin: 0.5rem 0; }
-    html.light .tier-card .line { background-color: rgba(126, 34, 206, 0.15); }
-
-    .tier-card .card__list { display: flex; flex-direction: column; gap: 0.85rem; }
-    .tier-card .card__list .card__list_item { display: flex; align-items: center; gap: 0.75rem; }
-
-    .tier-card .card__list .card__list_item .check {
-      display: flex; justify-content: center; align-items: center;
-      width: 1.25rem; height: 1.25rem; background-color: var(--primary);
-      border-radius: 50%; flex-shrink: 0;
-    }
-
-    .tier-card .card__list .card__list_item .check .check_svg { width: 0.85rem; height: 0.85rem; fill: var(--black); }
-    .tier-card .card__list .card__list_item .list_text { font-size: 0.9rem; font-weight: 700; color: var(--white); }
-    html.light .tier-card .card__list .card__list_item .list_text { color: #1e1b4b; }
-
-    /* GLASS RADIO SELECTOR */
+    /* GLASS RADIO */
     .glass-radio-group {
       display: flex; position: relative;
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 999px; backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      padding: 6px; margin: 35px auto 10px auto;
-      width: 100%; max-width: 56rem;
+      background: rgba(255, 255, 255, 0.05); border-radius: 999px;
+      backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 6px; margin: 35px auto 10px auto; width: 100%; max-width: 56rem;
     }
-    html.light .glass-radio-group {
-      background: rgba(126, 34, 206, 0.06);
-      border-color: rgba(126, 34, 206, 0.2);
-    }
-
     .glass-radio-group input { display: none; }
     .glass-radio-group label {
       flex: 1; display: flex; align-items: center; justify-content: center;
       font-size: 15px; font-weight: 800; padding: 0.9rem 1rem; cursor: pointer;
-      color: rgba(255, 255, 255, 0.7); z-index: 2; transition: color 0.3s ease;
+      color: rgba(255, 255, 255, 0.7); z-index: 2;
     }
-    html.light .glass-radio-group label { color: #581c87; }
-
     .glass-radio-group input:checked + label { color: #ffffff; }
 
     .glass-glider {
-      position: absolute; top: 6px; bottom: 6px;
-      width: calc((100% - 12px) / 3); border-radius: 999px; z-index: 1;
-      transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.4s ease;
+      position: absolute; top: 6px; bottom: 6px; width: calc((100% - 12px) / 3);
+      border-radius: 999px; z-index: 1; transition: transform 0.4s ease;
     }
-
-    html[dir="ltr"] #glass-cc:checked ~ .glass-glider { transform: translateX(0%); background: linear-gradient(135deg, rgba(168, 85, 247, 0.4), #a855f7); }
-    html[dir="ltr"] #glass-xml:checked ~ .glass-glider { transform: translateX(100%); background: linear-gradient(135deg, rgba(56, 189, 248, 0.4), #06b6d4); }
-    html[dir="ltr"] #glass-shake:checked ~ .glass-glider { transform: translateX(200%); background: linear-gradient(135deg, rgba(234, 179, 8, 0.4), #eab308); }
-
-    html[dir="rtl"] #glass-cc:checked ~ .glass-glider { transform: translateX(0%); background: linear-gradient(135deg, rgba(168, 85, 247, 0.4), #a855f7); }
-    html[dir="rtl"] #glass-xml:checked ~ .glass-glider { transform: translateX(-100%); background: linear-gradient(135deg, rgba(56, 189, 248, 0.4), #06b6d4); }
-    html[dir="rtl"] #glass-shake:checked ~ .glass-glider { transform: translateX(-200%); background: linear-gradient(135deg, rgba(234, 179, 8, 0.4), #eab308); }
+    #glass-cc:checked ~ .glass-glider { transform: translateX(0%); background: #a855f7; }
+    #glass-xml:checked ~ .glass-glider { transform: translateX(100%); background: #06b6d4; }
+    #glass-shake:checked ~ .glass-glider { transform: translateX(200%); background: #eab308; }
 
     /* SWIPER 3D */
-    .swiper { width: 100%; padding-top: 30px; padding-bottom: 60px; overflow: visible !important; }
-    .swiper-slide {
-      width: 300px !important;
-      height: 440px !important;
-      border-radius: 2rem;
-      position: relative;
-    }
-
-    .card-3d-frame {
-      border: 1.5px solid rgba(255, 255, 255, 0.2);
-      box-shadow: 0 20px 40px -10px rgba(0,0,0,0.8);
-    }
-    html.light .card-3d-frame {
-      border-color: rgba(126, 34, 206, 0.2);
-      box-shadow: 0 15px 30px rgba(0,0,0,0.06);
-    }
-
-    .card-glow-red { box-shadow: 0 15px 45px -5px rgba(239, 68, 68, 0.45); }
-    .card-glow-yellow { box-shadow: 0 15px 45px -5px rgba(234, 179, 8, 0.45); }
-    .card-glow-purple { box-shadow: 0 15px 45px -5px rgba(168, 85, 247, 0.45); }
-    .card-glow-cyan { box-shadow: 0 15px 45px -5px rgba(6, 182, 212, 0.45); }
+    .swiper { width: 100%; padding-top: 30px; padding-bottom: 60px; }
+    .swiper-slide { width: 300px !important; height: 440px !important; border-radius: 2rem; }
 
     .glossy-bundle-card {
-      position: relative; border-radius: 2.5rem;
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.01) 100%);
+      border-radius: 2.5rem; background: rgba(255, 255, 255, 0.03);
       backdrop-filter: blur(24px); border: 1.5px solid rgba(168, 85, 247, 0.3);
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7); overflow: hidden;
-    }
-    html.light .glossy-bundle-card {
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(243, 232, 255, 0.7) 100%);
-      border-color: rgba(168, 85, 247, 0.3);
     }
 
-    .text-3d-header { color: var(--nav-logo-color); font-weight: 900; }
     .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.08); }
-    html.light .glass { background: rgba(255, 255, 255, 0.85); border-color: rgba(126, 34, 206, 0.15); }
-
     .cat-card-glass { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 1.75rem; padding: 1.75rem 2rem; cursor: pointer; }
-    html.light .cat-card-glass { background: rgba(255, 255, 255, 0.9); border-color: rgba(168, 85, 247, 0.2); }
 
     .view { transition: opacity .4s ease; opacity: 1; }
     .view-hidden { display: none !important; opacity: 0; }
 
-    /* LOADER STYLES */
+    /* BULLETPROOF LOADER STYLES */
     #vx-loader {
       position: fixed;
       inset: 0;
-      z-index: 9999;
+      z-index: 99999;
       background: #09090c;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      overflow: hidden;
-      will-change: opacity, filter;
-      transition: opacity 800ms ease, visibility 800ms ease;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
     }
 
-    #app-content {
-      opacity: 0;
-      filter: blur(18px);
-      transform: scale(1.015);
-      transition: opacity 900ms cubic-bezier(0.16, 1, 0.3, 1),
-                  filter 900ms cubic-bezier(0.16, 1, 0.3, 1),
-                  transform 900ms cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    #app-content.vx-revealed {
-      opacity: 1;
-      filter: blur(0px);
-      transform: scale(1);
-    }
-
-    #vx-loader.vx-fade-out {
+    #vx-loader.vx-hide {
       opacity: 0;
       visibility: hidden;
       pointer-events: none;
     }
 
-    .vx-ambient-glow {
-      position: absolute;
-      width: min(70vw, 900px);
-      height: min(70vw, 900px);
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(168, 85, 247, 0.35) 0%, rgba(126, 34, 206, 0.12) 40%, transparent 72%);
-      filter: blur(40px);
+    #app-content {
       opacity: 0;
-      animation: vxGlowBreathe 4.5s ease-in-out infinite;
+      filter: blur(10px);
+      transition: opacity 0.6s ease, filter 0.6s ease;
     }
-    #vx-loader.vx-glow-in .vx-ambient-glow { opacity: 1; }
-    @keyframes vxGlowBreathe {
-      0%, 100% { transform: scale(0.92); opacity: 0.55; }
-      50% { transform: scale(1.06); opacity: 0.9; }
+    #app-content.vx-revealed {
+      opacity: 1;
+      filter: blur(0px);
     }
-
-    .vx-particles {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity 1.2s ease-out;
-    }
-    #vx-loader.vx-glow-in .vx-particles { opacity: 1; }
-    .vx-particle {
-      position: absolute;
-      width: var(--s, 3px);
-      height: var(--s, 3px);
-      border-radius: 50%;
-      background: #c084fc;
-      box-shadow: 0 0 6px 1px rgba(192, 132, 252, 0.8);
-      opacity: 0;
-      animation: vxParticleFloat var(--dur, 6s) ease-in-out infinite;
-      animation-delay: var(--delay, 0s);
-    }
-    @keyframes vxParticleFloat {
-      0% { opacity: 0; transform: translate(0, 20px) scale(0.6); }
-      15% { opacity: var(--op, 0.7); }
-      50% { transform: translate(var(--dx, 10px), -30px) scale(1); }
-      85% { opacity: var(--op, 0.7); }
-      100% { opacity: 0; transform: translate(calc(var(--dx, 10px) * -1), -60px) scale(0.6); }
-    }
-
-    .vx-streak {
-      position: absolute;
-      top: 50%;
-      left: -20%;
-      width: 55%;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(216, 180, 254, 0.9), transparent);
-      opacity: 0;
-      transform: rotate(-8deg);
-      filter: blur(0.5px);
-    }
-    .vx-streak.vx-run { animation: vxStreakRun 1.4s cubic-bezier(0.4, 0, 0.2, 1); }
-    @keyframes vxStreakRun {
-      0% { opacity: 0; left: -30%; }
-      12% { opacity: 0.9; }
-      50% { opacity: 0.55; }
-      88% { opacity: 0; }
-      100% { opacity: 0; left: 110%; }
-    }
-
-    .vx-logo-stage {
-      position: relative;
-      z-index: 3;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      opacity: 0;
-      transform: translateY(10px);
-      transition: opacity 0.5s ease, transform 0.5s ease;
-    }
-    #vx-loader.vx-logo-in .vx-logo-stage { opacity: 1; transform: translateY(0); }
 
     .vx-logo-word {
-      position: relative;
-      display: flex;
       font-family: 'Cinzel', serif;
       font-weight: 900;
       font-size: clamp(3rem, 12vw, 6.5rem);
       letter-spacing: 0.22em;
-      line-height: 1;
-      padding-inline-start: 0.22em;
-    }
-
-    .vx-letter {
-      position: relative;
-      display: inline-block;
-      background: linear-gradient(135deg, #ffffff 0%, #f3e8ff 35%, #c084fc 70%, #7e22ce 100%);
+      background: linear-gradient(135deg, #ffffff 0%, #c084fc 70%, #7e22ce 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.8)) drop-shadow(0 0 20px rgba(168, 85, 247, 0.55));
-      opacity: 0;
-      will-change: transform, opacity, filter;
-      animation: vxLetterAssemble 0.72s cubic-bezier(0.19, 1, 0.22, 1) forwards;
-      animation-delay: var(--ld, 0s);
     }
-
-    @keyframes vxLetterAssemble {
-      0% {
-        opacity: 0;
-        transform: translate3d(var(--gx, 0px), var(--gy, -14px), 0) scale(1.3) skewX(var(--gs, 8deg));
-        filter: drop-shadow(0 10px 25px rgba(0,0,0,0.8)) drop-shadow(-3px 0 0 rgba(255, 0, 130, 0.7)) drop-shadow(3px 0 0 rgba(0, 220, 255, 0.7)) blur(4px);
-      }
-      100% {
-        opacity: 1;
-        transform: translate3d(0, 0, 0) scale(1) skewX(0deg);
-        filter: drop-shadow(0 10px 25px rgba(0,0,0,0.8)) drop-shadow(0 0 20px rgba(168, 85, 247, 0.55));
-      }
-    }
-
-    .vx-loading-label {
-      margin-top: 1.6rem;
-      font-family: 'Inter', sans-serif;
-      font-weight: 600;
-      font-size: 0.72rem;
-      letter-spacing: 0.42em;
-      text-transform: uppercase;
-      color: rgba(216, 180, 254, 0.75);
-      opacity: 0;
-      transition: opacity 0.6s ease 0.15s;
-    }
-    #vx-loader.vx-logo-in .vx-loading-label { opacity: 1; }
-
-    .vx-bar-wrap {
-      margin-top: 1.6rem;
-      width: min(78vw, 320px);
-      opacity: 0;
-      transform: translateY(6px);
-      transition: opacity 0.6s ease 0.3s, transform 0.6s ease 0.3s;
-    }
-    #vx-loader.vx-logo-in .vx-bar-wrap { opacity: 1; transform: translateY(0); }
 
     .vx-bar-track {
-      position: relative;
-      width: 100%;
+      width: min(78vw, 320px);
       height: 6px;
       border-radius: 999px;
-      background: rgba(255, 255, 255, 0.04);
+      background: rgba(255, 255, 255, 0.08);
       border: 1px solid rgba(168, 85, 247, 0.35);
-      box-shadow: inset 0 1px 3px rgba(0,0,0,0.6), inset 0 0 0 1px rgba(255,255,255,0.02), 0 0 12px rgba(126,34,206,0.25);
-      backdrop-filter: blur(6px);
+      margin-top: 1.5rem;
       overflow: hidden;
     }
 
     .vx-bar-fill {
-      position: relative;
       height: 100%;
       width: 0%;
-      border-radius: 999px;
-      background: linear-gradient(90deg, #7e22ce, #a855f7 55%, #e9d5ff);
-      box-shadow: 0 0 10px rgba(168, 85, 247, 0.85);
-      transition: width 0.1s linear;
+      background: linear-gradient(90deg, #7e22ce, #a855f7);
+      transition: width 0.05s linear;
     }
-
-    .vx-bar-meta {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 0.6rem;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.65rem;
-      font-weight: 700;
-      letter-spacing: 0.15em;
-      color: rgba(216, 180, 254, 0.55);
-      text-transform: uppercase;
-    }
-    #vx-percent { color: rgba(233, 213, 255, 0.9); }
   </style>
 </head>
 
-<body class="vx-loading">
+<body>
 
-  <!-- CINEMATIC LOADER -->
+  <!-- LOADER -->
   <div id="vx-loader">
-    <div class="vx-ambient-glow"></div>
-    <div class="vx-particles" id="vx-particles"></div>
-    <div class="vx-streak" id="vx-streak"></div>
-
-    <div class="vx-logo-stage" id="vx-logo-stage">
-      <div class="vx-logo-word" id="vx-logo-word"></div>
-      <p class="vx-loading-label">Loading...</p>
-
-      <div class="vx-bar-wrap">
-        <div class="vx-bar-track">
-          <div class="vx-bar-fill" id="vx-bar-fill"></div>
-        </div>
-        <div class="vx-bar-meta">
-          <span>Initializing</span>
-          <span><span id="vx-percent">0</span>%</span>
-        </div>
-      </div>
+    <div class="vx-logo-word">VORTX</div>
+    <div class="vx-bar-track">
+      <div class="vx-bar-fill" id="vx-bar-fill"></div>
     </div>
+    <p class="text-xs uppercase font-bold tracking-widest text-purple-300/60 mt-3">Loading <span id="vx-percent">0</span>%</p>
   </div>
 
-  <!-- SITE CONTENT -->
+  <!-- MAIN SITE -->
   <div id="app-content">
 
     <div class="stars-background-container">
@@ -684,8 +339,8 @@
           </ul>
 
           <div class="flex items-center gap-3 relative z-50">
-            <button onclick="toggleLanguage()" class="glass w-10 h-10 rounded-full flex items-center justify-center border-purple-500/30 text-brandLight font-extrabold text-xs" title="Change Language">🌐</button>
-            <button onclick="toggleTheme()" class="theme-switch-btn" title="Toggle Theme">
+            <button onclick="toggleLanguage()" class="glass w-10 h-10 rounded-full flex items-center justify-center border-purple-500/30 text-brandLight font-extrabold text-xs">🌐</button>
+            <button onclick="toggleTheme()" class="theme-switch-btn">
               <div class="theme-switch-ball">
                 <svg class="w-3.5 h-3.5 text-slate-800" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
@@ -721,7 +376,6 @@
             <div class="btn-3d-style">
               <span data-i18n="hero-btn">Explore Tiers</span>
             </div>
-            <div class="button-shadow"></div>
           </div>
         </div>
 
@@ -743,20 +397,19 @@
         <div class="glossy-bundle-card p-8 sm:p-14 relative flex flex-col md:flex-row items-center justify-between gap-10">
           <div class="text-center md:text-left rtl:md:text-right max-w-2xl relative z-10 w-full">
             <span data-i18n="bundle-sub" class="text-xs tracking-widest uppercase font-extrabold text-brandLight block mb-2">Custom Web Solutions</span>
-            <h2 data-i18n="bundle-title" class="font-head font-black text-3xl sm:text-4xl md:text-5xl whitespace-nowrap overflow-hidden text-ellipsis mb-4 text-3d-header">
+            <h2 data-i18n="bundle-title" class="font-head font-black text-3xl sm:text-4xl md:text-5xl mb-4 text-purple-300">
               Web Page Bundles
             </h2>
             <p data-i18n="bundle-desc" class="font-bold opacity-80 leading-relaxed text-sm sm:text-lg">
-              Launch your custom digital space today. Stand out with next-gen designs, premium performance, and join the elite creators.
+              Launch your custom digital space today. Stand out with next-gen designs and premium performance.
             </p>
           </div>
 
-          <div class="w-full md:w-auto relative z-10 flex justify-center md:justify-end flex-shrink-0">
+          <div class="w-full md:w-auto relative z-10 flex justify-center flex-shrink-0">
             <div class="button-wrap" onclick="openWebTiers()">
               <div class="btn-3d-style">
                 <span data-i18n="bundle-btn">View Development Tiers</span>
               </div>
-              <div class="button-shadow"></div>
             </div>
           </div>
         </div>
@@ -770,36 +423,36 @@
 
         <div class="swiper mySwiper">
           <div class="swiper-wrapper">
-            <div onclick="openPreview('Flame Pack', 'VFX')" class="swiper-slide glass card-3d-frame card-glow-red p-6 flex flex-col justify-between items-center text-center cursor-pointer">
-              <span class="text-[10px] uppercase font-bold tracking-widest px-4 py-1.5 rounded-full border border-red-500/30 bg-red-500/10 text-red-400 self-start z-10">VFX</span>
-              <div class="w-full h-60 my-3 rounded-2xl glass border border-white/10 flex items-center justify-center overflow-hidden relative z-10">
-                <img src="https://picsum.photos/400/500?random=1" class="w-full h-full object-cover opacity-85 hover:scale-105 transition-transform duration-500" alt="Sample" />
+            <div onclick="openPreview('Flame Pack', 'VFX')" class="swiper-slide glass p-6 flex flex-col justify-between items-center text-center cursor-pointer">
+              <span class="text-[10px] uppercase font-bold px-4 py-1.5 rounded-full border border-red-500/30 bg-red-500/10 text-red-400 self-start">VFX</span>
+              <div class="w-full h-60 my-3 rounded-2xl glass flex items-center justify-center overflow-hidden">
+                <img src="https://picsum.photos/400/500?random=1" class="w-full h-full object-cover opacity-85" alt="Sample" />
               </div>
-              <h3 data-i18n="card-1-title" class="font-head font-bold text-xl z-10">Red Inferno</h3>
+              <h3 data-i18n="card-1-title" class="font-head font-bold text-xl">Red Inferno</h3>
             </div>
 
-            <div onclick="openPreview('Cyber Gold', 'Color')" class="swiper-slide glass card-3d-frame card-glow-yellow p-6 flex flex-col justify-between items-center text-center cursor-pointer">
-              <span class="text-[10px] uppercase font-bold tracking-widest px-4 py-1.5 rounded-full border border-yellow-500/30 bg-yellow-500/10 text-yellow-400 self-start z-10">Color</span>
-              <div class="w-full h-60 my-3 rounded-2xl glass border border-white/10 flex items-center justify-center overflow-hidden relative z-10">
-                <img src="https://picsum.photos/400/500?random=2" class="w-full h-full object-cover opacity-85 hover:scale-105 transition-transform duration-500" alt="Sample" />
+            <div onclick="openPreview('Cyber Gold', 'Color')" class="swiper-slide glass p-6 flex flex-col justify-between items-center text-center cursor-pointer">
+              <span class="text-[10px] uppercase font-bold px-4 py-1.5 rounded-full border border-yellow-500/30 bg-yellow-500/10 text-yellow-400 self-start">Color</span>
+              <div class="w-full h-60 my-3 rounded-2xl glass flex items-center justify-center overflow-hidden">
+                <img src="https://picsum.photos/400/500?random=2" class="w-full h-full object-cover opacity-85" alt="Sample" />
               </div>
-              <h3 data-i18n="card-2-title" class="font-head font-bold text-xl z-10">Cyber Gold</h3>
+              <h3 data-i18n="card-2-title" class="font-head font-bold text-xl">Cyber Gold</h3>
             </div>
 
-            <div onclick="openPreview('Neon Nights', 'Camera')" class="swiper-slide glass card-3d-frame card-glow-purple p-6 flex flex-col justify-between items-center text-center cursor-pointer">
-              <span class="text-[10px] uppercase font-bold tracking-widest px-4 py-1.5 rounded-full border border-purple-500/30 bg-purple-500/10 text-purple-400 self-start z-10">Camera</span>
-              <div class="w-full h-60 my-3 rounded-2xl glass border border-white/10 flex items-center justify-center overflow-hidden relative z-10">
-                <img src="https://picsum.photos/400/500?random=3" class="w-full h-full object-cover opacity-85 hover:scale-105 transition-transform duration-500" alt="Sample" />
+            <div onclick="openPreview('Neon Nights', 'Camera')" class="swiper-slide glass p-6 flex flex-col justify-between items-center text-center cursor-pointer">
+              <span class="text-[10px] uppercase font-bold px-4 py-1.5 rounded-full border border-purple-500/30 bg-purple-500/10 text-purple-400 self-start">Camera</span>
+              <div class="w-full h-60 my-3 rounded-2xl glass flex items-center justify-center overflow-hidden">
+                <img src="https://picsum.photos/400/500?random=3" class="w-full h-full object-cover opacity-85" alt="Sample" />
               </div>
-              <h3 data-i18n="card-3-title" class="font-head font-bold text-xl z-10">Neon Nights</h3>
+              <h3 data-i18n="card-3-title" class="font-head font-bold text-xl">Neon Nights</h3>
             </div>
 
-            <div onclick="openPreview('Hyper Blue', 'Presets')" class="swiper-slide glass card-3d-frame card-glow-cyan p-6 flex flex-col justify-between items-center text-center cursor-pointer">
-              <span class="text-[10px] uppercase font-bold tracking-widest px-4 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/10 text-cyan-400 self-start z-10">Presets</span>
-              <div class="w-full h-60 my-3 rounded-2xl glass border border-white/10 flex items-center justify-center overflow-hidden relative z-10">
-                <img src="https://picsum.photos/400/500?random=4" class="w-full h-full object-cover opacity-85 hover:scale-105 transition-transform duration-500" alt="Sample" />
+            <div onclick="openPreview('Hyper Blue', 'Presets')" class="swiper-slide glass p-6 flex flex-col justify-between items-center text-center cursor-pointer">
+              <span class="text-[10px] uppercase font-bold px-4 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/10 text-cyan-400 self-start">Presets</span>
+              <div class="w-full h-60 my-3 rounded-2xl glass flex items-center justify-center overflow-hidden">
+                <img src="https://picsum.photos/400/500?random=4" class="w-full h-full object-cover opacity-85" alt="Sample" />
               </div>
-              <h3 data-i18n="card-4-title" class="font-head font-bold text-xl z-10">Hyper Blue</h3>
+              <h3 data-i18n="card-4-title" class="font-head font-bold text-xl">Hyper Blue</h3>
             </div>
           </div>
         </div>
@@ -814,7 +467,7 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div id="cat-card-CC" onclick="openCategory('CC')" class="cat-card-glass flex items-center justify-between group">
             <div class="flex items-center gap-5">
-              <div class="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 font-extrabold text-sm group-hover:scale-110 transition-transform">01</div>
+              <div class="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 font-extrabold text-sm">01</div>
               <div>
                 <h3 class="font-head font-black text-2xl tracking-wider">CC</h3>
                 <p class="text-xs font-semibold opacity-60 mt-1">Color Corrections</p>
@@ -825,7 +478,7 @@
 
           <div id="cat-card-XML" onclick="openCategory('XML')" class="cat-card-glass flex items-center justify-between group">
             <div class="flex items-center gap-5">
-              <div class="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 font-extrabold text-sm group-hover:scale-110 transition-transform">02</div>
+              <div class="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 font-extrabold text-sm">02</div>
               <div>
                 <h3 class="font-head font-black text-2xl tracking-wider">XML</h3>
                 <p class="text-xs font-semibold opacity-60 mt-1">Project Files</p>
@@ -836,7 +489,7 @@
 
           <div id="cat-card-SHAKE" onclick="openCategory('SHAKE')" class="cat-card-glass flex items-center justify-between group">
             <div class="flex items-center gap-5">
-              <div class="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 font-extrabold text-sm group-hover:scale-110 transition-transform">03</div>
+              <div class="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 font-extrabold text-sm">03</div>
               <div>
                 <h3 class="font-head font-black text-2xl tracking-wider">SHAKE</h3>
                 <p class="text-xs font-semibold opacity-60 mt-1">Camera Shake Presets</p>
@@ -858,92 +511,43 @@
     <section id="web-view" class="view view-hidden relative z-10 min-h-screen">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
         <div class="flex items-center justify-between mb-12">
-          <div class="text-left ltr:text-left rtl:text-right">
+          <div>
             <span data-i18n="tiers-sub" class="text-xs tracking-widest uppercase font-bold text-brandLight">Web Solutions</span>
             <h2 data-i18n="tiers-title" class="font-head font-bold text-4xl mt-3">Development Tiers</h2>
           </div>
-
           <div class="button-wrap" onclick="backToHome()">
-            <div class="btn-3d-style">
-              <span data-i18n="back-btn">← Back</span>
-            </div>
-            <div class="button-shadow"></div>
+            <div class="btn-3d-style"><span data-i18n="back-btn">← Back</span></div>
           </div>
         </div>
 
         <div class="grid lg:grid-cols-3 gap-8">
           <div class="tier-card">
-            <div class="card_title__container">
-              <span class="card_title">STARTER</span>
-              <p data-i18n="tier-starter-desc" class="card_paragraph">Perfect for simple portfolios and personal landing pages.</p>
+            <div>
+              <span class="text-2xl font-black text-white">STARTER</span>
+              <p data-i18n="tier-starter-desc" class="text-xs text-gray-400 mt-2">Perfect for simple portfolios and personal landing pages.</p>
             </div>
-            <hr class="line" />
-            <ul class="card__list">
-              <li class="card__list_item">
-                <span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span>
-                <span class="list_text">Clean & Modern UI</span>
-              </li>
-              <li class="card__list_item">
-                <span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span>
-                <span class="list_text">Mobile-Ready Layout</span>
-              </li>
-            </ul>
-
             <div class="button-wrap w-full mt-6" onclick="showToast('PLAN ADDED')">
-              <div class="btn-3d-style">
-                <span data-i18n="select-plan">Select Plan</span>
-              </div>
-              <div class="button-shadow"></div>
+              <div class="btn-3d-style"><span data-i18n="select-plan">Select Plan</span></div>
             </div>
           </div>
 
           <div class="tier-card">
-            <div class="card_title__container">
-              <span class="card_title">PRO</span>
-              <p data-i18n="tier-pro-desc" class="card_paragraph">For creators needing advanced animations & custom design.</p>
+            <div>
+              <span class="text-2xl font-black text-white">PRO</span>
+              <p data-i18n="tier-pro-desc" class="text-xs text-gray-400 mt-2">For creators needing advanced animations & custom design.</p>
             </div>
-            <hr class="line" />
-            <ul class="card__list">
-              <li class="card__list_item">
-                <span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span>
-                <span class="list_text">Glassmorphism & Glows</span>
-              </li>
-              <li class="card__list_item">
-                <span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span>
-                <span class="list_text">Scroll Animations</span>
-              </li>
-            </ul>
-
             <div class="button-wrap w-full mt-6" onclick="showToast('PLAN ADDED')">
-              <div class="btn-3d-style">
-                <span data-i18n="select-plan">Select Plan</span>
-              </div>
-              <div class="button-shadow"></div>
+              <div class="btn-3d-style"><span data-i18n="select-plan">Select Plan</span></div>
             </div>
           </div>
 
           <div class="tier-card">
-            <div class="card_title__container">
-              <span class="card_title">VIP</span>
-              <p data-i18n="tier-vip-desc" class="card_paragraph">The absolute premium experience with custom 3D elements.</p>
+            <div>
+              <span class="text-2xl font-black text-white">VIP</span>
+              <p data-i18n="tier-vip-desc" class="text-xs text-gray-400 mt-2">The absolute premium experience with custom 3D elements.</p>
             </div>
-            <hr class="line" />
-            <ul class="card__list">
-              <li class="card__list_item">
-                <span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span>
-                <span class="list_text">3D Models Integration</span>
-              </li>
-              <li class="card__list_item">
-                <span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span>
-                <span class="list_text">Priority Support</span>
-              </li>
-            </ul>
-
             <div class="button-wrap w-full mt-6" onclick="showToast('PLAN ADDED')">
-              <div class="btn-3d-style">
-                <span data-i18n="select-plan">Select Plan</span>
-              </div>
-              <div class="button-shadow"></div>
+              <div class="btn-3d-style"><span data-i18n="select-plan">Select Plan</span></div>
             </div>
           </div>
         </div>
@@ -953,15 +557,12 @@
     <section id="category-view" class="view view-hidden relative z-10 min-h-screen">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
         <div class="flex items-center justify-between mb-12">
-          <div class="text-left ltr:text-left rtl:text-right">
+          <div>
             <span data-i18n="cat-view-sub" class="text-xs tracking-widest uppercase font-bold text-brandLight">Collection</span>
             <h2 id="cat-title" class="font-head font-bold text-4xl mt-3">CC</h2>
           </div>
           <div class="button-wrap" onclick="backToHome()">
-            <div class="btn-3d-style">
-              <span data-i18n="back-btn">← Back</span>
-            </div>
-            <div class="button-shadow"></div>
+            <div class="btn-3d-style"><span data-i18n="back-btn">← Back</span></div>
           </div>
         </div>
         <div id="cat-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
@@ -970,27 +571,15 @@
 
     <div id="preview-modal" class="fixed inset-0 z-[80] flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
       <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="closePreview()"></div>
-      <div class="glass border-brand/50 rounded-3xl max-w-md w-full relative z-10 p-1 transform scale-95 transition-transform duration-300" id="preview-card">
-        <div class="aspect-[4/3] bg-black/50 rounded-t-3xl flex items-center justify-center border-b border-white/5 relative overflow-hidden">
-          <button onclick="closePreview()" class="absolute top-4 right-4 w-8 h-8 glass rounded-full flex items-center justify-center opacity-50 hover:opacity-100 z-20">✕</button>
-          <span class="opacity-40 font-bold text-sm tracking-widest">[ PREVIEW VIDEO ]</span>
-        </div>
-        <div class="p-8 text-left ltr:text-left rtl:text-right">
-          <span id="preview-tag" class="text-[10px] font-bold tracking-widest uppercase text-brandLight">TAG</span>
-          <h3 id="preview-title" class="font-head font-bold text-2xl mt-1 mb-6">TITLE</h3>
-          <div class="flex gap-4">
-            <div class="button-wrap flex-1" onclick="showToast('ADDED TO CART'); closePreview();">
-              <div class="btn-3d-style">
-                <span data-i18n="add-cart">Add to Cart</span>
-              </div>
-              <div class="button-shadow"></div>
-            </div>
-            <div class="button-wrap flex-1" onclick="showToast('DOWNLOADING DEMO...')">
-              <div class="btn-3d-style">
-                <span data-i18n="try-demo">Try Demo</span>
-              </div>
-              <div class="button-shadow"></div>
-            </div>
+      <div class="glass rounded-3xl max-w-md w-full relative z-10 p-6" id="preview-card">
+        <span id="preview-tag" class="text-[10px] font-bold uppercase text-brandLight">TAG</span>
+        <h3 id="preview-title" class="font-head font-bold text-2xl mt-1 mb-6">TITLE</h3>
+        <div class="flex gap-4">
+          <div class="button-wrap flex-1" onclick="showToast('ADDED TO CART'); closePreview();">
+            <div class="btn-3d-style"><span data-i18n="add-cart">Add to Cart</span></div>
+          </div>
+          <div class="button-wrap flex-1" onclick="showToast('DOWNLOADING DEMO...')">
+            <div class="btn-3d-style"><span data-i18n="try-demo">Try Demo</span></div>
           </div>
         </div>
       </div>
@@ -999,56 +588,46 @@
   </div>
 
   <script>
-    // LOADER DISMISS LOGIC (GUARANTEED DISMISSAL)
-    function dismissLoader() {
+    // IMMUTABLE DISMISS LOGIC (DOM DIRECT)
+    (function () {
       const loader = document.getElementById('vx-loader');
       const appContent = document.getElementById('app-content');
-      if (loader && !loader.classList.contains('vx-fade-out')) {
-        loader.classList.add('vx-fade-out');
-        if (appContent) appContent.classList.add('vx-revealed');
-        document.documentElement.classList.remove('vx-loading');
-      }
-    }
-
-    window.addEventListener('load', () => {
-      const loader = document.getElementById('vx-loader');
-      const word = document.getElementById('vx-logo-word');
       const barFill = document.getElementById('vx-bar-fill');
       const percentEl = document.getElementById('vx-percent');
 
-      // Build VORTX Letters Dynamically
-      if (word && word.children.length === 0) {
-        ['V', 'O', 'R', 'T', 'X'].forEach((ch, i) => {
-          const span = document.createElement('span');
-          span.className = 'vx-letter';
-          span.textContent = ch;
-          span.style.setProperty('--ld', (i * 0.08) + 's');
-          word.appendChild(span);
-        });
+      let progress = 0;
+      let finished = false;
+
+      function hideLoader() {
+        if (finished) return;
+        finished = true;
+        if (loader) loader.classList.add('vx-hide');
+        if (appContent) appContent.classList.add('vx-revealed');
       }
 
-      if (loader) loader.classList.add('vx-glow-in', 'vx-logo-in');
-
-      let progress = 0;
-      const interval = setInterval(() => {
-        progress += 5;
+      const timer = setInterval(() => {
+        progress += 8;
         if (progress > 100) progress = 100;
         if (barFill) barFill.style.width = progress + '%';
         if (percentEl) percentEl.textContent = progress;
 
         if (progress >= 100) {
-          clearInterval(interval);
-          setTimeout(dismissLoader, 300);
+          clearInterval(timer);
+          setTimeout(hideLoader, 200);
         }
       }, 30);
-    });
 
-    // Safety Fallback: Force remove loader after 3s no matter what
-    setTimeout(dismissLoader, 3000);
+      // Forced Maximum Timeout: 1.5 Seconds Max
+      setTimeout(hideLoader, 1500);
 
-    // SWIPER & SITE FUNCTIONS
+      // Manual tap to skip
+      if (loader) loader.addEventListener('click', hideLoader);
+    })();
+
+    // SWIPER & APP FUNCTIONS
     let swiper;
     function initSwiper() {
+      if (typeof Swiper === 'undefined') return;
       if (swiper) swiper.destroy(true, true);
       swiper = new Swiper(".mySwiper", {
         effect: "coverflow",
@@ -1067,8 +646,6 @@
       const targetEl = document.getElementById(`cat-card-${catKey}`);
       if (targetEl) {
         targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        targetEl.classList.add('ring-2', 'ring-purple-500', 'scale-105');
-        setTimeout(() => targetEl.classList.remove('ring-2', 'ring-purple-500', 'scale-105'), 1500);
       }
     }
 
@@ -1105,4 +682,72 @@
 
     let currentLang = 'en';
     function toggleLanguage() {
-      currentLang = currentLang =
+      currentLang = currentLang === 'en' ? 'ar' : 'en';
+      const htmlEl = document.documentElement;
+      htmlEl.setAttribute('dir', currentLang === 'ar' ? 'rtl' : 'ltr');
+      htmlEl.setAttribute('lang', currentLang);
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[currentLang][key]) el.textContent = translations[currentLang][key];
+      });
+      setTimeout(initSwiper, 100);
+    }
+
+    function toggleTheme() {
+      const htmlEl = document.documentElement;
+      htmlEl.classList.toggle('dark');
+      htmlEl.classList.toggle('light');
+    }
+
+    function showToast(msg) {
+      const box = document.getElementById('toast-box');
+      const toast = document.createElement('div');
+      toast.className = 'glass bg-black/90 text-white text-[10px] uppercase font-bold tracking-widest px-6 py-3.5 rounded-full flex items-center gap-2';
+      toast.innerHTML = `<span class="text-purple-400">✦</span> ${msg}`;
+      box.appendChild(toast);
+      setTimeout(() => toast.remove(), 2500);
+    }
+
+    function openPreview(title, tag) {
+      document.getElementById('preview-title').textContent = title;
+      document.getElementById('preview-tag').textContent = tag;
+      const modal = document.getElementById('preview-modal');
+      const card = document.getElementById('preview-card');
+      modal.classList.remove('opacity-0', 'pointer-events-none');
+    }
+
+    function closePreview() {
+      const modal = document.getElementById('preview-modal');
+      modal.classList.add('opacity-0', 'pointer-events-none');
+    }
+
+    const CATEGORY_DATA = {
+      CC: ['Teal & Orange Grade', 'Cinematic Film Base', 'Dark Knight Grade', 'Vibrant Soft Pop'],
+      SHAKE: ['Hard Impact Shake', 'Bass Drop Bounce', 'Smooth Whip Pan', 'Earthquake Wobble'],
+      XML: ['Pro Intro Template', 'Velocity Edit XML', 'Glow Shake Timeline', 'Full Transition Suite'],
+    };
+
+    function showView(viewId) {
+      document.querySelectorAll('.view').forEach(v => v.classList.add('view-hidden'));
+      const target = document.getElementById(viewId);
+      if (target) target.classList.remove('view-hidden');
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    }
+
+    function openCategory(key) {
+      document.getElementById('cat-title').textContent = key;
+      document.getElementById('cat-grid').innerHTML = CATEGORY_DATA[key].map((item) => `
+        <div onclick="openPreview('${item}', '${key}')" class="cat-card-glass flex flex-col justify-between min-h-[140px] text-left ltr:text-left rtl:text-right border-l-4 border-purple-500">
+          <span class="text-[10px] font-bold uppercase text-purple-400">${key} Pack</span>
+          <h3 class="font-head font-bold text-xl mt-4">${item}</h3>
+        </div>`).join('');
+      showView('category-view');
+    }
+
+    function openWebTiers() { showView('web-view'); }
+    function backToHome() { showView('main-view'); }
+    const yr = document.getElementById('year');
+    if (yr) yr.textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
