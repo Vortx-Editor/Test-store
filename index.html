@@ -2,14 +2,15 @@
 <html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- هنا قفلنا الزوم العشوائي عشان الجوال يحترم المقاسات -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>VORTX — Premium Digital Assets</title>
   <meta name="theme-color" content="#050505" />
 
   <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Google Fonts: Cinzel & Inter -->
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800;900&family=Inter:wght@500;600;700;800&display=swap" rel="stylesheet" />
@@ -22,15 +23,8 @@
       darkMode: 'class',
       theme: {
         extend: {
-          fontFamily: {
-            head: ['Cinzel', 'serif'],
-            body: ['Inter', 'sans-serif'],
-          },
-          colors: {
-            ink: 'var(--ink)',
-            brand: 'var(--brand)', 
-            brandLight: 'var(--brandLight)',
-          },
+          fontFamily: { head: ['Cinzel', 'serif'], body: ['Inter', 'sans-serif'] },
+          colors: { ink: 'var(--ink)', brand: 'var(--brand)', brandLight: 'var(--brandLight)' },
         },
       },
     };
@@ -47,7 +41,7 @@
       --glass-border: rgba(255, 255, 255, 0.05);
     }
     
-    /* Light Mode Overrides */
+    /* Light Mode */
     body.light-mode {
       --ink: #f0f3f5;
       --text-main: #111111;
@@ -57,109 +51,77 @@
     body.light-mode .text-white { color: #111 !important; }
     body.light-mode .text-white\/70 { color: #333 !important; }
     body.light-mode .text-white\/50 { color: #555 !important; }
-    body.light-mode .bg-black\/30, body.light-mode .bg-black\/40 { background-color: rgba(255,255,255,0.7) !important; }
+    body.light-mode .bg-black\/30 { background-color: rgba(255,255,255,0.7) !important; }
     body.light-mode .stars-container { opacity: 0.1; filter: invert(1); }
     body.light-mode #bg-canvas { opacity: 0.2; filter: invert(1); }
 
     html { scroll-behavior: smooth; overflow-x: hidden; }
-    body { background-color: var(--ink); color: var(--text-main); font-family: 'Inter', sans-serif; transition: background-color 0.4s, color 0.4s; }
+    body { background-color: var(--ink); color: var(--text-main); font-family: 'Inter', sans-serif; transition: background-color 0.4s, color 0.4s; overflow-x: hidden; }
 
-    /* ---------- Custom Scrollbar & Cursor ---------- */
     ::-webkit-scrollbar { width: 8px; }
     ::-webkit-scrollbar-track { background: var(--ink); }
     ::-webkit-scrollbar-thumb { background: var(--brand); border-radius: 4px; }
-    
-    @media (pointer: fine) {
-      body { cursor: none; }
-      .custom-cursor {
-        position: fixed; top: 0; left: 0; width: 20px; height: 20px;
-        border: 2px solid var(--brandLight); border-radius: 50%;
-        pointer-events: none; transform: translate(-50%, -50%);
-        z-index: 10000; transition: width 0.2s, height 0.2s, background-color 0.2s;
-        box-shadow: 0 0 10px var(--brandLight);
-      }
-      .custom-cursor::after {
-        content: ""; position: absolute; top: 50%; left: 50%;
-        width: 6px; height: 6px; background: var(--brandLight);
-        border-radius: 50%; transform: translate(-50%, -50%);
-      }
-      body:hover .custom-cursor { opacity: 1; }
-      a:hover ~ .custom-cursor, button:hover ~ .custom-cursor {
-        width: 40px; height: 40px; background-color: rgba(168, 85, 247, 0.2);
-      }
-    }
 
-    /* ---------- Scroll Progress Bar ---------- */
     #scroll-progress {
       position: fixed; top: 0; left: 0; width: 0%; height: 3px;
       background: var(--brandLight); box-shadow: 0 0 10px var(--brandLight);
       z-index: 9999; transition: width 0.1s ease-out;
     }
 
-    /* ---------- Backgrounds (Stars + Canvas) ---------- */
+    /* ---------- Backgrounds ---------- */
     .stars-container {
-      height: 100vh; width: 100vw; overflow: hidden;
-      position: fixed; top: 0; left: 0; z-index: -2;
+      position: fixed; inset: 0; width: 100%; height: 100%; overflow: hidden; z-index: -2;
       background: radial-gradient(ellipse at bottom, #1b2735 0%, var(--ink) 100%);
     }
     #stars { width: 1px; height: 1px; background: transparent; box-shadow: 200px 300px #fff, 500px 800px #fff, 900px 100px #fff, 1200px 400px #fff, 1500px 900px #fff, 1800px 200px #fff, 300px 600px #fff, 700px 200px #fff, 1000px 700px #fff, 1400px 100px #fff, 1900px 600px #fff, 100px 900px #fff, 600px 500px #fff, 1100px 300px #fff, 1600px 800px #fff; animation: animStar 50s linear infinite; }
     #stars:after { content: " "; position: absolute; top: 2000px; width: 1px; height: 1px; background: transparent; box-shadow: inherit; }
     #stars2 { width: 2px; height: 2px; background: transparent; box-shadow: 150px 250px #fff, 450px 750px #fff, 850px 150px #fff, 1150px 450px #fff, 1450px 850px #fff, 1750px 250px #fff, 250px 650px #fff, 650px 250px #fff, 950px 750px #fff, 1350px 150px #fff, 1850px 650px #fff; animation: animStar 100s linear infinite; }
     #stars2:after { content: " "; position: absolute; top: 2000px; width: 2px; height: 2px; background: transparent; box-shadow: inherit; }
-    #stars3 { width: 3px; height: 3px; background: transparent; box-shadow: 100px 400px #fff, 600px 200px #fff, 1200px 800px #fff, 1800px 400px #fff, 300px 900px #fff, 900px 600px #fff, 1500px 200px #fff, 400px 500px #fff, 1000px 300px #fff, 1600px 900px #fff; animation: animStar 150s linear infinite; }
-    #stars3:after { content: " "; position: absolute; top: 2000px; width: 3px; height: 3px; background: transparent; box-shadow: inherit; }
     @keyframes animStar { from { transform: translateY(0px); } to { transform: translateY(-2000px); } }
     
-    #bg-canvas { position: fixed; inset: 0; z-index: -1; pointer-events: none; }
-    .glow-field { position: fixed; inset: 0; z-index: -1; pointer-events: none; background: radial-gradient(800px circle at 50% 0%, rgba(126, 34, 206, 0.15), transparent 70%); }
+    #bg-canvas { position: fixed; inset: 0; z-index: -1; pointer-events: none; width: 100%; height: 100%; }
 
     h1, h2, h3, .font-head { font-family: 'Cinzel', serif; letter-spacing: 1.5px; }
 
-    /* ---------- Glassmorphism ---------- */
     .glass {
       background: var(--glass-bg); backdrop-filter: blur(16px) saturate(140%);
       border: 1px solid var(--glass-border); transition: all 0.3s;
     }
-    .glass:hover {
-      border: 1px solid rgba(126, 34, 206, 0.5); box-shadow: 0 10px 30px -10px rgba(126, 34, 206, 0.2);
-    }
-
     .text-3d-heavy {
       color: #7e22ce; font-weight: 900;
       text-shadow: 0 1px 0 #6b21a8, 0 2px 0 #581c87, 0 3px 0 #4c1d95, 0 4px 0 #3b0764, 0 5px 0 #2e1065, 0 8px 2px rgba(0,0,0,.6), 0 10px 15px rgba(126,34,206,0.5), 0 0 40px rgba(126,34,206,0.4);
     }
 
-    .btn-primary { background: var(--brand); color: white; box-shadow: 0 0 20px rgba(126, 34, 206, 0.5); }
-    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; will-change: opacity, transform; }
-    .reveal.in { opacity: 1; transform: translateY(0); }
-    .tilt-card { transition: transform 0.1s ease-out, box-shadow 0.1s ease-out; transform-style: preserve-3d; will-change: transform; }
-    .view { transition: opacity .4s ease; opacity: 1; }
-    .view-hidden { display: none; opacity: 0; }
+    /* ---------- Reveal Animation (FOOLPROOF) ---------- */
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+    .reveal.in { opacity: 1 !important; transform: translateY(0) !important; }
+    .tilt-card { transition: transform 0.1s ease-out, box-shadow 0.1s ease-out; transform-style: preserve-3d; }
+    .view-hidden { display: none !important; }
 
-    /* ---------- Top Controls (Theme & Lang) ---------- */
-    .top-controls { display: flex; align-items: center; gap: 15px; }
-    .btn-color-mode-switch { position: relative; display: inline-block; margin: 0; cursor: pointer;}
+    /* ---------- Controls ---------- */
+    .btn-container { display: flex; align-items: center; gap: 8px; }
+    .btn-color-mode-switch { position: relative; display: inline-block; margin: 0; cursor: pointer; }
     .btn-color-mode-switch > label.btn-color-mode-switch-inner {
-      margin: 0; width: 120px; height: 28px; background: #e0e0e0; border-radius: 26px;
+      margin: 0; width: 110px; height: 28px; background: #e0e0e0; border-radius: 26px;
       position: relative; transition: all 0.3s ease; display: block; cursor: pointer;
     }
-    .btn-color-mode-switch > label.btn-color-mode-switch-inner:before { content: attr(data-on); position: absolute; font-size: 12px; font-weight: bold; top: 5px; right: 15px; color: #111; }
-    .btn-color-mode-switch > label.btn-color-mode-switch-inner:after { content: attr(data-off); width: 60px; height: 20px; background: #fff; border-radius: 26px; position: absolute; left: 4px; top: 4px; text-align: center; transition: all 0.3s ease; box-shadow: 0px 0px 6px -2px #111; color: #111; font-weight: bold; line-height: 20px; font-size: 12px; }
+    .btn-color-mode-switch > label.btn-color-mode-switch-inner:before { content: attr(data-on); position: absolute; font-size: 11px; font-weight: bold; top: 6px; right: 15px; color: #111; }
+    .btn-color-mode-switch > label.btn-color-mode-switch-inner:after { content: attr(data-off); width: 50px; height: 20px; background: #fff; border-radius: 26px; position: absolute; left: 4px; top: 4px; text-align: center; transition: all 0.3s ease; box-shadow: 0px 0px 6px -2px #111; color: #111; font-weight: bold; line-height: 20px; font-size: 11px; }
     .btn-color-mode-switch input[type="checkbox"] { display: none; }
     .btn-color-mode-switch input[type="checkbox"]:checked + label.btn-color-mode-switch-inner { background: #1a1a24; }
     .btn-color-mode-switch input[type="checkbox"]:checked + label.btn-color-mode-switch-inner:after { content: attr(data-on); left: 56px; background: var(--brandLight); color: #fff; }
     .btn-color-mode-switch input[type="checkbox"]:checked + label.btn-color-mode-switch-inner:before { content: attr(data-off); right: auto; left: 15px; color: #fff; }
     
     .lang-globe-btn {
-      display: flex; align-items: center; gap: 5px; background: #1a1a24; color: #fff;
-      border: 1px solid rgba(168, 85, 247, 0.3); padding: 4px 12px; border-radius: 26px;
-      cursor: pointer; font-weight: bold; font-size: 12px; transition: all 0.3s ease;
+      display: flex; align-items: center; justify-content: center; gap: 5px; background: #1a1a24; color: #fff;
+      border: 1px solid rgba(168, 85, 247, 0.3); padding: 6px 16px; border-radius: 26px;
+      cursor: pointer; font-weight: bold; font-size: 13px; transition: all 0.3s ease; min-width: 90px;
     }
     .lang-globe-btn:hover { background: var(--brandLight); box-shadow: 0 0 10px rgba(168, 85, 247, 0.5); }
 
-    /* ---------- VORTX Cards (Explosive Growth style) ---------- */
+    /* ---------- VORTX Cards ---------- */
     .vortx-card {
-      --white: #fff; --paragraph: #d1d5db; --line: #374151; --primary: #a855f7;
+      width: 100%; max-width: 350px; /* مقاس محترم للجوال */
       position: relative; display: flex; flex-direction: column; gap: 1rem;
       padding: 1.5rem; background-color: #111116; border-radius: 1rem;
       box-shadow: 0px -16px 24px 0px rgba(255, 255, 255, 0.05) inset; overflow: hidden;
@@ -168,281 +130,255 @@
     body.light-mode .vortx-card { background-color: #fff; box-shadow: 0px -16px 24px 0px rgba(0, 0, 0, 0.05) inset; border: 1px solid #ddd; }
     body.light-mode .vortx-card .card_title, body.light-mode .vortx-card .list_text { color: #111; }
     
-    .vortx-card .card__border {
-      position: absolute; z-index: 0; top: 50%; left: 50%; transform: translate(-50%, -50%);
-      width: calc(100% + 2px); height: calc(100% + 2px); border-radius: 1rem; pointer-events: none;
-    }
-    .vortx-card:hover .card__border::before {
-      content: ""; position: absolute; z-index: 1; top: 50%; left: 50%;
-      transform: translate(-50%, -50%) rotate(0deg); transform-origin: left;
-      width: 200%; height: 10rem;
-      background-image: linear-gradient(0deg, transparent 0%, var(--brandLight) 40%, var(--brandLight) 60%, transparent 100%);
-      animation: rotate-border 4s linear infinite; pointer-events: none;
-    }
-    @keyframes rotate-border { to { transform: translate(-50%, -50%) rotate(360deg); } }
-    .vortx-card > * { position: relative; z-index: 2; }
-
-    /* ---------- VORTX Custom Button ---------- */
     .vortx-buy-btn {
       position: relative; padding: 12px 20px; background-color: #1a1a24; color: #fff !important;
       border: 2px solid var(--brandLight); border-radius: 8px; font-weight: bold; cursor: pointer;
       overflow: hidden; z-index: 1; transition: transform 0.2s ease, box-shadow 0.2s; width: 100%; text-align: center;
     }
-    .vortx-buy-btn::before {
-      content: ''; position: absolute; top: 100%; left: 0; width: 100%; height: 100%;
-      background-color: var(--brandLight); z-index: -1; transition: top 0.3s ease;
-    }
+    .vortx-buy-btn::before { content: ''; position: absolute; top: 100%; left: 0; width: 100%; height: 100%; background-color: var(--brandLight); z-index: -1; transition: top 0.3s ease; }
     .vortx-buy-btn:hover::before { top: 0; }
-    .vortx-buy-btn:hover { box-shadow: 0 0 20px rgba(168, 85, 247, 0.6); transform: translateY(-2px); }
-
-    /* ---------- Payment Radio Inputs ---------- */
-    .radio-inputs {
-      display: flex; flex-wrap: wrap; border-radius: 0.5rem; background-color: #1a1a24;
-      box-shadow: 0 0 0px 1px rgba(168, 85, 247, 0.3); padding: 0.25rem; width: 100%; font-size: 14px; margin: 15px 0;
-    }
+    
+    /* Payment inputs */
+    .radio-inputs { display: flex; flex-wrap: wrap; border-radius: 0.5rem; background-color: #1a1a24; padding: 0.25rem; width: 100%; font-size: 14px; margin: 15px 0; }
     body.light-mode .radio-inputs { background-color: #eee; }
     .radio-inputs .radio { flex: 1 1 auto; text-align: center; }
     .radio-inputs .radio input { display: none; }
-    .radio-inputs .radio .name {
-      display: flex; cursor: pointer; align-items: center; justify-content: center;
-      border-radius: 0.5rem; border: none; padding: .5rem 0; color: #a0a0b0; transition: all .15s ease-in-out;
-    }
-    body.light-mode .radio-inputs .radio .name { color: #555; }
+    .radio-inputs .radio .name { display: flex; cursor: pointer; align-items: center; justify-content: center; border-radius: 0.5rem; padding: .5rem 0; color: #a0a0b0; transition: all .15s ease; }
     .radio-inputs .radio input:checked + .name { background-color: var(--brandLight); color: #fff; font-weight: 600; box-shadow: 0 0 10px rgba(168, 85, 247, 0.5); }
-
-    /* ---------- Smart Rating System ---------- */
-    .rating-wrapper { text-align: center; margin: 20px auto; direction: ltr; } /* Force LTR for stars logic */
-    .radio-stars { display: flex; justify-content: center; flex-direction: row-reverse; gap: 10px; }
-    .radio-stars > input { position: absolute; appearance: none; }
-    .radio-stars > label { cursor: pointer; font-size: 30px; position: relative; display: inline-block; transition: transform 0.3s ease; }
-    .radio-stars > label > svg { fill: #666; transition: fill 0.3s ease; width: 1em; height: 1em; }
-    .radio-stars > label:hover { transform: scale(1.2); }
-    .radio-stars > label:hover ~ label > svg, .radio-stars > label:hover > svg { fill: #ff9e0b; filter: drop-shadow(0 0 10px rgba(255, 158, 11, 0.8)); }
-    .radio-stars > input:checked ~ label > svg, .radio-stars > input:checked + label > svg { fill: #ff9e0b; filter: drop-shadow(0 0 15px rgba(255, 158, 11, 0.9)); }
-    .feedback-box { margin-top: 15px; font-size: 16px; font-weight: bold; min-height: 40px; }
-    .stats-text { display: block; color: var(--brandLight); font-size: 14px; margin-top: 5px; }
+    
+    .marquee-wrap { width: 100%; max-width: 100vw; overflow-x: auto; overflow-y: hidden; scrollbar-width: none; }
   </style>
 </head>
 
 <body class="dark-mode">
-  <div class="custom-cursor" id="custom-cursor"></div>
   <div id="scroll-progress"></div>
 
   <!-- Backgrounds -->
-  <div class="stars-container"><div id="stars"></div><div id="stars2"></div><div id="stars3"></div></div>
+  <div class="stars-container"><div id="stars"></div><div id="stars2"></div></div>
   <canvas id="bg-canvas"></canvas>
-  <div class="glow-field"></div>
 
   <div id="toast-box" class="fixed bottom-6 start-1/2 -translate-x-1/2 rtl:translate-x-1/2 z-[100] flex flex-col gap-3 pointer-events-none"></div>
 
   <!-- =================== NAVBAR =================== -->
   <header class="sticky top-0 z-50">
     <nav class="glass border-b-0 border-white/5 bg-black/30">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
+        
+        <!-- Logo -->
         <a href="#top" class="flex items-center gap-3 active:scale-95 transition-transform duration-200">
           <span class="font-head font-extrabold text-2xl tracking-widest text-3d-heavy">VORTX</span>
         </a>
 
-        <ul class="hidden md:flex items-center gap-10 text-sm font-bold text-white/60 mx-auto">
-          <li><a href="#bundles" class="hover:text-brandLight transition active:scale-95" data-i18n="nav-bundles">Bundles</a></li>
-          <li><a href="#packs" class="hover:text-brandLight transition active:scale-95" data-i18n="nav-packs">Packs</a></li>
-          <li><a href="#categories" class="hover:text-brandLight transition active:scale-95" data-i18n="nav-categories">Categories</a></li>
+        <!-- Desktop Links -->
+        <ul class="hidden md:flex items-center gap-8 text-sm font-bold text-white/60">
+          <li><a href="#bundles" class="hover:text-brandLight transition" data-i18n="nav-bundles">Bundles</a></li>
+          <li><a href="#packs" class="hover:text-brandLight transition" data-i18n="nav-packs">Packs</a></li>
+          <li><a href="#categories" class="hover:text-brandLight transition" data-i18n="nav-categories">Categories</a></li>
         </ul>
 
-        <!-- Top Controls (Theme & Lang) -->
-        <div class="top-controls hidden sm:flex">
+        <!-- Desktop Controls -->
+        <div class="hidden md:flex items-center gap-6">
           <div class="btn-container">
             <svg viewBox="0 0 16 16" fill="#ff9e0b" width="18"><path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/></svg>
             <label class="switch btn-color-mode-switch">
-              <input value="1" id="color_mode" type="checkbox" checked>
+              <input class="theme-checkbox" value="1" type="checkbox" checked onchange="toggleTheme(this.checked)">
               <label class="btn-color-mode-switch-inner" data-off="Light" data-on="Dark" for="color_mode"></label>
             </label>
             <svg viewBox="0 0 16 16" fill="#a855f7" width="18"><path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"/></svg>
           </div>
-          <button id="lang-toggle" class="lang-globe-btn">
+          <button class="lang-globe-btn" onclick="toggleLang()">
             <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
-            <span id="lang-text">A / ع</span>
+            <span class="lang-text">A / ع</span>
           </button>
         </div>
+
+        <!-- Mobile Hamburger Button -->
+        <button id="mobile-menu-btn" onclick="openMenu()" class="md:hidden text-white hover:text-brandLight p-2 focus:outline-none">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        </button>
+        
       </div>
     </nav>
   </header>
+
+  <!-- =================== MOBILE FULLSCREEN MENU =================== -->
+  <div id="mobile-menu" class="fixed inset-0 bg-ink/95 backdrop-blur-2xl z-[100] flex flex-col items-center justify-center gap-8 opacity-0 pointer-events-none transition-opacity duration-300">
+    <button onclick="closeMenu()" class="absolute top-6 end-6 text-white hover:text-brandLight p-2">
+       <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+    </button>
+    
+    <a href="#bundles" class="text-3xl font-head font-bold text-white hover:text-brandLight transition" onclick="closeMenu()" data-i18n="nav-bundles">Bundles</a>
+    <a href="#packs" class="text-3xl font-head font-bold text-white hover:text-brandLight transition" onclick="closeMenu()" data-i18n="nav-packs">Packs</a>
+    <a href="#categories" class="text-3xl font-head font-bold text-white hover:text-brandLight transition" onclick="closeMenu()" data-i18n="nav-categories">Categories</a>
+    
+    <div class="flex flex-col items-center gap-6 mt-10">
+      <!-- Mobile Theme Toggle -->
+      <div class="btn-container">
+        <svg viewBox="0 0 16 16" fill="#ff9e0b" width="22"><path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/></svg>
+        <label class="switch btn-color-mode-switch">
+          <input class="theme-checkbox" value="1" type="checkbox" checked onchange="toggleTheme(this.checked)">
+          <label class="btn-color-mode-switch-inner" data-off="Light" data-on="Dark" for="color_mode"></label>
+        </label>
+        <svg viewBox="0 0 16 16" fill="#a855f7" width="22"><path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"/></svg>
+      </div>
+      <!-- Mobile Lang Toggle -->
+      <button class="lang-globe-btn px-10 py-3 text-lg" onclick="toggleLang()">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+        <span class="lang-text">A / ع</span>
+      </button>
+    </div>
+  </div>
 
   <!-- =================== MAIN VIEW =================== -->
   <main id="main-view" class="view relative z-10">
     <div id="top"></div>
 
-    <!-- HERO SECTION WITH LOTTIE -->
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 py-20 flex flex-col-reverse md:flex-row items-center justify-between gap-10">
+    <!-- HERO SECTION -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-20 flex flex-col-reverse md:flex-row items-center justify-between gap-10">
       <div class="text-start md:w-1/2 text-center md:text-start">
-        <div class="reveal inline-flex items-center gap-2 glass px-5 py-2 rounded-full text-xs font-bold tracking-widest uppercase text-brandLight mb-8 border-brand/30">
+        <div class="reveal inline-flex items-center gap-2 glass px-5 py-2 rounded-full text-xs font-bold tracking-widest uppercase text-brandLight mb-8">
           <span class="w-2 h-2 rounded-full bg-brandLight shadow-[0_0_8px_#a855f7]"></span>
           <span data-i18n="hero-tag">Premium Digital Studio</span>
         </div>
         <div class="relative inline-block mb-6">
           <div class="absolute top-1/2 start-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[100%] bg-brand/50 blur-[90px] -z-10 rounded-full rtl:translate-x-1/2"></div>
-          <h1 class="reveal font-head font-black tracking-widest text-6xl sm:text-7xl text-3d-heavy relative z-10 pb-2">VORTX</h1>
+          <h1 class="reveal font-head font-black tracking-widest text-5xl sm:text-7xl text-3d-heavy relative z-10 pb-2">VORTX</h1>
         </div>
-        <p class="reveal font-bold text-white/70 text-lg leading-relaxed mb-10" data-i18n="hero-desc">
+        <p class="reveal font-bold text-white/70 text-base sm:text-lg leading-relaxed mb-10" data-i18n="hero-desc">
           Next-gen digital assets, cinematic presets, VFX packs & custom web solutions. Engineered exclusively for elite creators.
         </p>
         <div class="reveal flex justify-center md:justify-start">
-          <a href="#bundles" class="vortx-buy-btn w-auto px-10 text-sm" data-i18n="hero-btn">Explore Tiers</a>
+          <button onclick="document.getElementById('bundles').scrollIntoView()" class="vortx-buy-btn w-auto px-10 text-sm" data-i18n="hero-btn">Explore Tiers</button>
         </div>
       </div>
       
-      <!-- Lottie Animation (TikTok Size Style) -->
-      <div class="md:w-1/2 flex justify-center reveal tilt-card">
-        <div class="glass p-2 rounded-3xl overflow-hidden border-brand/30 w-full max-w-[300px] h-[533px]">
+      <!-- Lottie Animation -->
+      <div class="md:w-1/2 flex justify-center reveal tilt-card w-full">
+        <div class="glass p-2 rounded-3xl overflow-hidden border-brand/30 w-full max-w-[260px] sm:max-w-[300px] aspect-[9/16]">
           <dotlottie-wc src="https://lottie.host/c93ddc27-27ce-40e8-889a-036225ad74db/WH0Z7JEvzm.lottie" stateMachineId="StateMachine1" style="width: 100%; height: 100%; object-fit: cover;" autoplay loop></dotlottie-wc>
         </div>
       </div>
     </section>
 
-    <!-- WEB BUNDLES (Intro) -->
-    <section id="bundles" class="max-w-7xl mx-auto px-4 sm:px-6 py-20">
-      <div class="reveal glass rounded-[2rem] p-10 sm:p-16 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-10 tilt-card">
+    <!-- WEB BUNDLES -->
+    <section id="bundles" class="max-w-7xl mx-auto px-4 sm:px-6 py-16">
+      <div class="reveal glass rounded-[2rem] p-8 sm:p-16 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8 tilt-card">
         <div class="absolute -end-20 -top-20 w-72 h-72 rounded-full bg-brand/20 blur-[80px] pointer-events-none"></div>
         <div class="text-start max-w-2xl relative z-10">
           <span class="text-xs tracking-widest uppercase font-bold text-brandLight" data-i18n="tiers-tag">Custom Web Solutions</span>
-          <h2 class="font-head font-bold text-4xl sm:text-5xl mt-4 mb-5" data-i18n="tiers-title">Web Page Bundles</h2>
-          <p class="font-bold text-white/60 leading-relaxed text-base sm:text-lg" data-i18n="tiers-desc">
+          <h2 class="font-head font-bold text-3xl sm:text-5xl mt-3 mb-4" data-i18n="tiers-title">Web Page Bundles</h2>
+          <p class="font-bold text-white/60 leading-relaxed text-sm sm:text-lg" data-i18n="tiers-desc">
             Launch your custom digital space today. Stand out with next-gen designs, premium performance, and join the elite creators.
           </p>
         </div>
         <div class="w-full md:w-auto relative z-10">
-          <button onclick="openWebTiers()" class="vortx-buy-btn px-10 whitespace-nowrap uppercase tracking-wider text-sm" data-i18n="tiers-btn">
+          <button onclick="openWebTiers()" class="vortx-buy-btn px-8 uppercase tracking-wider text-xs sm:text-sm" data-i18n="tiers-btn">
             View Development Tiers
           </button>
         </div>
       </div>
     </section>
 
-    <!-- 5 INFINITE PACKS CAROUSEL -->
-    <section id="packs" class="py-20 overflow-hidden">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 mb-10 text-start reveal">
+    <!-- PACKS CAROUSEL -->
+    <section id="packs" class="py-16 overflow-hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 mb-8 text-start reveal">
         <h2 class="font-head font-bold text-3xl sm:text-4xl" data-i18n="packs-title">Featured Packs</h2>
-        <p class="font-bold text-white/50 text-sm mt-3 tracking-wide" data-i18n="packs-desc">Click any pack for a quick preview.</p>
+        <p class="font-bold text-white/50 text-sm mt-2" data-i18n="packs-desc">Click any pack for a quick preview.</p>
       </div>
-      <div id="marquee" class="marquee-wrap reveal"><div class="marquee-track px-4" id="marquee-track"></div></div>
+      <div id="marquee" class="marquee-wrap reveal"><div class="flex gap-4 px-4 w-max" id="marquee-track"></div></div>
     </section>
 
     <!-- CATEGORIES -->
-    <section id="categories" class="max-w-7xl mx-auto px-4 sm:px-6 py-20">
-      <div class="mb-12 text-start reveal">
+    <section id="categories" class="max-w-7xl mx-auto px-4 sm:px-6 py-16">
+      <div class="mb-10 text-start reveal">
         <h2 class="font-head font-bold text-3xl sm:text-4xl" data-i18n="cat-title">Categories</h2>
-        <p class="font-bold text-white/50 mt-3 text-sm tracking-wide" data-i18n="cat-desc">Select a module to view contents.</p>
+        <p class="font-bold text-white/50 text-sm mt-2" data-i18n="cat-desc">Select a module to view contents.</p>
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-        <div onclick="openCategory('CC')" class="reveal tilt-card glass rounded-2xl p-8 flex flex-col items-start justify-between min-h-[200px] cursor-pointer group">
-          <div class="flex items-center justify-between w-full"><span class="text-xs uppercase font-bold text-white/40 group-hover:text-brandLight" data-i18n="cat-1">Color Grading</span><span class="text-xs font-bold text-brandLight">01</span></div>
-          <span class="font-head font-extrabold text-5xl mt-6 group-hover:text-brandLight transition-colors">CC</span>
+        <div onclick="openCategory('CC')" class="reveal tilt-card glass rounded-2xl p-6 sm:p-8 flex flex-col justify-between min-h-[160px] sm:min-h-[200px] cursor-pointer group">
+          <div class="flex justify-between w-full"><span class="text-xs uppercase font-bold text-white/40 group-hover:text-brandLight" data-i18n="cat-1">Color Grading</span><span class="text-xs font-bold text-brandLight">01</span></div>
+          <span class="font-head font-extrabold text-4xl sm:text-5xl mt-4 group-hover:text-brandLight transition-colors">CC</span>
         </div>
-        <div onclick="openCategory('SHAKE')" class="reveal tilt-card glass rounded-2xl p-8 flex flex-col items-start justify-between min-h-[200px] cursor-pointer group">
-          <div class="flex items-center justify-between w-full"><span class="text-xs uppercase font-bold text-white/40 group-hover:text-brandLight" data-i18n="cat-2">Camera Movements</span><span class="text-xs font-bold text-brandLight">02</span></div>
-          <span class="font-head font-extrabold text-5xl mt-6 group-hover:text-brandLight transition-colors">SHAKE</span>
+        <div onclick="openCategory('SHAKE')" class="reveal tilt-card glass rounded-2xl p-6 sm:p-8 flex flex-col justify-between min-h-[160px] sm:min-h-[200px] cursor-pointer group">
+          <div class="flex justify-between w-full"><span class="text-xs uppercase font-bold text-white/40 group-hover:text-brandLight" data-i18n="cat-2">Camera Movements</span><span class="text-xs font-bold text-brandLight">02</span></div>
+          <span class="font-head font-extrabold text-4xl sm:text-5xl mt-4 group-hover:text-brandLight transition-colors">SHAKE</span>
         </div>
-        <div onclick="openCategory('VFX')" class="reveal tilt-card glass rounded-2xl p-8 flex flex-col items-start justify-between min-h-[200px] cursor-pointer group">
-          <div class="flex items-center justify-between w-full"><span class="text-xs uppercase font-bold text-white/40 group-hover:text-brandLight" data-i18n="cat-3">Visual Effects</span><span class="text-xs font-bold text-brandLight">03</span></div>
-          <span class="font-head font-extrabold text-5xl mt-6 group-hover:text-brandLight transition-colors">VFX</span>
+        <div onclick="openCategory('VFX')" class="reveal tilt-card glass rounded-2xl p-6 sm:p-8 flex flex-col justify-between min-h-[160px] sm:min-h-[200px] cursor-pointer group">
+          <div class="flex justify-between w-full"><span class="text-xs uppercase font-bold text-white/40 group-hover:text-brandLight" data-i18n="cat-3">Visual Effects</span><span class="text-xs font-bold text-brandLight">03</span></div>
+          <span class="font-head font-extrabold text-4xl sm:text-5xl mt-4 group-hover:text-brandLight transition-colors">VFX</span>
         </div>
-        <div onclick="openCategory('PF')" class="reveal tilt-card glass rounded-2xl p-8 flex flex-col items-start justify-between min-h-[200px] cursor-pointer group">
-          <div class="flex items-center justify-between w-full"><span class="text-xs uppercase font-bold text-white/40 group-hover:text-brandLight" data-i18n="cat-4">Presets & Filters</span><span class="text-xs font-bold text-brandLight">04</span></div>
-          <span class="font-head font-extrabold text-5xl mt-6 group-hover:text-brandLight transition-colors">PF</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- SMART RATING SYSTEM -->
-    <section class="max-w-xl mx-auto px-4 py-16">
-      <div class="glass rounded-3xl p-8 text-center reveal">
-        <h3 class="font-head font-bold text-2xl mb-2" data-i18n="rate-title">Rate VORTX</h3>
-        <p class="text-white/50 text-sm mb-6" data-i18n="rate-desc">Your feedback fuels our next updates!</p>
-        <div class="rating-wrapper">
-          <div class="radio-stars">
-            <input value="5" name="rating" type="radio" id="rating-5" /><label for="rating-5"><svg viewBox="0 0 576 512"><path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"></path></svg></label>
-            <input value="4" name="rating" type="radio" id="rating-4" /><label for="rating-4"><svg viewBox="0 0 576 512"><path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"></path></svg></label>
-            <input value="3" name="rating" type="radio" id="rating-3" /><label for="rating-3"><svg viewBox="0 0 576 512"><path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"></path></svg></label>
-            <input value="2" name="rating" type="radio" id="rating-2" /><label for="rating-2"><svg viewBox="0 0 576 512"><path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"></path></svg></label>
-            <input value="1" name="rating" type="radio" id="rating-1" /><label for="rating-1"><svg viewBox="0 0 576 512"><path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"></path></svg></label>
-          </div>
-          <div id="feedback-display" class="feedback-box text-white" data-i18n="rate-wait">Waiting for your rating...</div>
+        <div onclick="openCategory('PF')" class="reveal tilt-card glass rounded-2xl p-6 sm:p-8 flex flex-col justify-between min-h-[160px] sm:min-h-[200px] cursor-pointer group">
+          <div class="flex justify-between w-full"><span class="text-xs uppercase font-bold text-white/40 group-hover:text-brandLight" data-i18n="cat-4">Presets & Filters</span><span class="text-xs font-bold text-brandLight">04</span></div>
+          <span class="font-head font-extrabold text-4xl sm:text-5xl mt-4 group-hover:text-brandLight transition-colors">PF</span>
         </div>
       </div>
     </section>
 
     <!-- FOOTER -->
     <footer class="border-t border-white/5 mt-10">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12 flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 py-10 flex flex-col items-center gap-4">
         <p class="font-head font-extrabold tracking-widest text-brandLight text-xl">VORTX</p>
-        <p class="font-bold text-white/40 text-sm">© <span id="year"></span> VORTX Studio. Crafted for the bold.</p>
+        <p class="font-bold text-white/40 text-xs text-center">© <span id="year"></span> VORTX Studio. Crafted for the bold.</p>
       </div>
     </footer>
   </main>
 
-  <!-- =================== WEB TIERS VIEW (WITH VORTX CARDS) =================== -->
+  <!-- =================== WEB TIERS VIEW =================== -->
   <section id="web-view" class="view view-hidden relative z-10 min-h-screen">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
-      <div class="flex items-center justify-between mb-12">
+      <div class="flex items-center justify-between mb-10">
         <div class="text-start">
           <span class="text-xs tracking-widest uppercase font-bold text-brandLight" data-i18n="tiers-tag">Web Solutions</span>
-          <h2 class="font-head font-bold text-4xl mt-3" data-i18n="tiers-title">Development Tiers</h2>
+          <h2 class="font-head font-bold text-3xl mt-2" data-i18n="tiers-title">Development Tiers</h2>
         </div>
-        <button onclick="backToHome()" class="glass px-6 py-3 rounded-full font-bold text-sm transition-all duration-200 active:scale-95" data-i18n="btn-back">← Back</button>
+        <button onclick="backToHome()" class="glass px-4 py-2 rounded-full font-bold text-xs sm:text-sm" data-i18n="btn-back">← Back</button>
       </div>
       
-      <!-- Grid 3 Cards -->
+      <!-- Responsive Cards Grid -->
       <div class="flex flex-wrap justify-center gap-8">
         
-        <!-- Starter Card -->
+        <!-- Starter -->
         <div class="vortx-card tilt-card reveal">
-          <div class="card__border"></div>
           <div>
-            <span class="card_title font-head font-bold text-2xl" data-i18n="card1-title">STARTER</span>
-            <p class="text-white/50 text-sm mt-2 mb-4" data-i18n="card1-desc">Perfect for simple portfolios and personal landing pages.</p>
+            <span class="font-head font-bold text-2xl" data-i18n="card1-title">STARTER</span>
+            <p class="text-white/50 text-sm mt-2 mb-4" data-i18n="card1-desc">Perfect for simple portfolios.</p>
           </div>
           <hr class="border-white/10" />
           <ul class="flex flex-col gap-3 font-bold text-sm my-4">
-            <li class="flex items-center gap-2"><span class="w-4 h-4 rounded-full bg-brand flex items-center justify-center"><svg class="w-3 fill-white" viewBox="0 0 16 16"><path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"/></svg></span><span class="list_text text-white/80" data-i18n="card1-f1">Clean & Modern UI</span></li>
-            <li class="flex items-center gap-2"><span class="w-4 h-4 rounded-full bg-brand flex items-center justify-center"><svg class="w-3 fill-white" viewBox="0 0 16 16"><path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"/></svg></span><span class="list_text text-white/80" data-i18n="card1-f2">Mobile-Ready Layout</span></li>
-            <li class="flex items-center gap-2"><span class="w-4 h-4 rounded-full bg-brand flex items-center justify-center"><svg class="w-3 fill-white" viewBox="0 0 16 16"><path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"/></svg></span><span class="list_text text-white/80" data-i18n="card1-f3">High-Speed Performance</span></li>
+            <li class="flex items-center gap-2"><span class="w-4 h-4 rounded-full bg-brand flex items-center justify-center"><svg class="w-3 fill-white" viewBox="0 0 16 16"><path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"/></svg></span><span class="text-white/80" data-i18n="card1-f1">Clean & Modern UI</span></li>
+            <li class="flex items-center gap-2"><span class="w-4 h-4 rounded-full bg-brand flex items-center justify-center"><svg class="w-3 fill-white" viewBox="0 0 16 16"><path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"/></svg></span><span class="text-white/80" data-i18n="card1-f2">Mobile-Ready Layout</span></li>
           </ul>
           <button onclick="showToast('PLAN ADDED TO CART')" class="vortx-buy-btn mt-auto" data-i18n="pack-btn">Select Plan</button>
         </div>
 
-        <!-- PRO Card -->
+        <!-- PRO -->
         <div class="vortx-card tilt-card reveal" style="border-color: var(--brand); box-shadow: 0 0 30px rgba(168,85,247,0.1);">
           <div class="absolute top-4 end-4 bg-brand text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase z-10" data-i18n="card2-badge">Most Popular</div>
-          <div class="card__border"></div>
           <div>
-            <span class="card_title font-head font-bold text-2xl text-brandLight" data-i18n="card2-title">PRO</span>
-            <p class="text-white/50 text-sm mt-2 mb-4" data-i18n="card2-desc">For creators needing advanced animations & custom design.</p>
+            <span class="font-head font-bold text-2xl text-brandLight" data-i18n="card2-title">PRO</span>
+            <p class="text-white/50 text-sm mt-2 mb-4" data-i18n="card2-desc">Advanced animations & custom design.</p>
           </div>
           <hr class="border-white/10" />
           <ul class="flex flex-col gap-3 font-bold text-sm my-4">
-            <li class="flex items-center gap-2"><span class="w-4 h-4 rounded-full bg-brandLight flex items-center justify-center"><svg class="w-3 fill-white" viewBox="0 0 16 16"><path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"/></svg></span><span class="list_text text-white/80" data-i18n="card2-f1">Glassmorphism & Glows</span></li>
-            <li class="flex items-center gap-2"><span class="w-4 h-4 rounded-full bg-brandLight flex items-center justify-center"><svg class="w-3 fill-white" viewBox="0 0 16 16"><path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"/></svg></span><span class="list_text text-white/80" data-i18n="card2-f2">Scroll Animations</span></li>
-            <li class="flex items-center gap-2"><span class="w-4 h-4 rounded-full bg-brandLight flex items-center justify-center"><svg class="w-3 fill-white" viewBox="0 0 16 16"><path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"/></svg></span><span class="list_text text-white/80" data-i18n="card2-f3">Content Management</span></li>
+            <li class="flex items-center gap-2"><span class="w-4 h-4 rounded-full bg-brandLight flex items-center justify-center"><svg class="w-3 fill-white" viewBox="0 0 16 16"><path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"/></svg></span><span class="text-white/80" data-i18n="card2-f1">Glassmorphism</span></li>
+            <li class="flex items-center gap-2"><span class="w-4 h-4 rounded-full bg-brandLight flex items-center justify-center"><svg class="w-3 fill-white" viewBox="0 0 16 16"><path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"/></svg></span><span class="text-white/80" data-i18n="card2-f2">Scroll Animations</span></li>
           </ul>
           <button onclick="showToast('PLAN ADDED TO CART')" class="vortx-buy-btn mt-auto" data-i18n="pack-btn">Select Plan</button>
         </div>
 
-        <!-- VIP Card -->
+        <!-- VIP -->
         <div class="vortx-card tilt-card reveal">
-          <div class="card__border"></div>
           <div>
-            <span class="card_title font-head font-bold text-2xl" data-i18n="card3-title">VIP</span>
-            <p class="text-white/50 text-sm mt-2 mb-4" data-i18n="card3-desc">The absolute premium experience with custom 3D elements.</p>
+            <span class="font-head font-bold text-2xl" data-i18n="card3-title">VIP</span>
+            <p class="text-white/50 text-sm mt-2 mb-4" data-i18n="card3-desc">Premium experience with 3D elements.</p>
           </div>
           <hr class="border-white/10" />
           <ul class="flex flex-col gap-3 font-bold text-sm my-4">
-            <li class="flex items-center gap-2"><span class="w-4 h-4 rounded-full bg-brand flex items-center justify-center"><svg class="w-3 fill-white" viewBox="0 0 16 16"><path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"/></svg></span><span class="list_text text-white/80" data-i18n="card3-f1">3D Models Integration</span></li>
-            <li class="flex items-center gap-2"><span class="w-4 h-4 rounded-full bg-brand flex items-center justify-center"><svg class="w-3 fill-white" viewBox="0 0 16 16"><path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"/></svg></span><span class="list_text text-white/80" data-i18n="card3-f2">Mind-blowing Interactions</span></li>
-            <li class="flex items-center gap-2"><span class="w-4 h-4 rounded-full bg-brand flex items-center justify-center"><svg class="w-3 fill-white" viewBox="0 0 16 16"><path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"/></svg></span><span class="list_text text-white/80" data-i18n="card3-f3">Priority 24/7 Support</span></li>
+            <li class="flex items-center gap-2"><span class="w-4 h-4 rounded-full bg-brand flex items-center justify-center"><svg class="w-3 fill-white" viewBox="0 0 16 16"><path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"/></svg></span><span class="text-white/80" data-i18n="card3-f1">3D Models</span></li>
+            <li class="flex items-center gap-2"><span class="w-4 h-4 rounded-full bg-brand flex items-center justify-center"><svg class="w-3 fill-white" viewBox="0 0 16 16"><path d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"/></svg></span><span class="text-white/80" data-i18n="card3-f3">24/7 Support</span></li>
           </ul>
           <button onclick="showToast('PLAN ADDED TO CART')" class="vortx-buy-btn mt-auto" data-i18n="pack-btn">Select Plan</button>
         </div>
-
       </div>
     </div>
   </section>
@@ -450,157 +386,127 @@
   <!-- =================== CATEGORY VIEW =================== -->
   <section id="category-view" class="view view-hidden relative z-10 min-h-screen">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
-      <div class="flex items-center justify-between mb-12">
+      <div class="flex items-center justify-between mb-10">
         <div class="text-start">
           <span class="text-xs tracking-widest uppercase font-bold text-brandLight" data-i18n="cat-tag">Collection</span>
-          <h2 id="cat-title" class="font-head font-bold text-4xl mt-3">CC</h2>
+          <h2 id="cat-title" class="font-head font-bold text-3xl mt-2">CC</h2>
         </div>
-        <button onclick="backToHome()" class="glass px-6 py-3 rounded-full font-bold text-sm transition-all duration-200 active:scale-95" data-i18n="btn-back">← Back</button>
+        <button onclick="backToHome()" class="glass px-4 py-2 rounded-full font-bold text-xs" data-i18n="btn-back">← Back</button>
       </div>
-      <div id="cat-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+      <div id="cat-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
     </div>
   </section>
 
-  <!-- =================== QUICK PREVIEW MODAL (WITH PAYMENT) =================== -->
-  <div id="preview-modal" class="fixed inset-0 z-[80] flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
+  <!-- =================== PREVIEW MODAL =================== -->
+  <div id="preview-modal" class="fixed inset-0 z-[120] flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
     <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="closePreview()"></div>
-    <div class="glass border-brand/50 rounded-3xl max-w-md w-full relative z-10 p-1 transform scale-95 transition-transform duration-300" id="preview-card">
-      
+    <div class="glass border-brand/50 rounded-3xl w-[95%] max-w-sm relative z-10 p-1 transform scale-95 transition-transform duration-300" id="preview-card">
       <div class="aspect-[4/3] bg-black/50 rounded-t-3xl flex items-center justify-center border-b border-white/5 relative overflow-hidden">
-        <button onclick="closePreview()" class="absolute top-4 end-4 w-8 h-8 glass rounded-full flex items-center justify-center z-20 active:scale-90 text-white">✕</button>
-        <span class="text-white/30 font-bold text-sm tracking-widest">[ PREVIEW ]</span>
+        <button onclick="closePreview()" class="absolute top-4 end-4 w-8 h-8 glass rounded-full flex items-center justify-center text-white">✕</button>
       </div>
-      
-      <div class="p-8 text-start">
+      <div class="p-6 text-start">
         <span id="preview-tag" class="text-[10px] font-bold tracking-widest uppercase text-brandLight">TAG</span>
-        <h3 id="preview-title" class="font-head font-bold text-2xl text-white mt-1">TITLE</h3>
+        <h3 id="preview-title" class="font-head font-bold text-xl text-white mt-1">TITLE</h3>
         
-        <!-- Payment Options (cc / Check / XML) -->
         <p class="text-xs font-bold text-white/50 mt-4" data-i18n="pay-method">Payment Method:</p>
         <div class="radio-inputs">
-          <label class="radio">
-            <input type="radio" name="payment_method" checked="">
-            <span class="name">cc</span>
-          </label>
-          <label class="radio">
-            <input type="radio" name="payment_method">
-            <span class="name" data-i18n="pay-check">شيك</span>
-          </label>
-          <label class="radio">
-            <input type="radio" name="payment_method">
-            <span class="name">XML</span>
-          </label>
+          <label class="radio"><input type="radio" name="pay" checked><span class="name">cc</span></label>
+          <label class="radio"><input type="radio" name="pay"><span class="name" data-i18n="pay-check">شيك</span></label>
+          <label class="radio"><input type="radio" name="pay"><span class="name">XML</span></label>
         </div>
-
-        <div class="flex gap-4 mt-6">
-          <button onclick="showToast('ADDED TO CART'); closePreview();" class="vortx-buy-btn flex-1 py-3 text-sm" data-i18n="btn-cart">Add to Cart</button>
-        </div>
+        <button onclick="showToast('ADDED TO CART'); closePreview();" class="vortx-buy-btn py-3 mt-4 text-xs" data-i18n="btn-cart">Add to Cart</button>
       </div>
     </div>
   </div>
 
   <script>
-  /* --- Dictionary (English / Arabic) --- */
+  /* --- 1. Menu Logic --- */
+  function openMenu() {
+    const m = document.getElementById('mobile-menu');
+    m.classList.remove('pointer-events-none', 'opacity-0');
+  }
+  function closeMenu() {
+    const m = document.getElementById('mobile-menu');
+    m.classList.add('opacity-0', 'pointer-events-none');
+  }
+
+  /* --- 2. Language & Dictionary --- */
   const dictionary = {
     'en': {
       'nav-bundles': 'Bundles', 'nav-packs': 'Packs', 'nav-categories': 'Categories',
-      'hero-tag': 'Premium Digital Studio',
-      'hero-desc': 'Next-gen digital assets, cinematic presets, VFX packs & custom web solutions. Engineered exclusively for elite creators.',
-      'hero-btn': 'Explore Tiers',
-      'tiers-tag': 'Custom Web Solutions', 'tiers-title': 'Web Page Bundles',
-      'tiers-desc': 'Launch your custom digital space today. Stand out with next-gen designs, premium performance, and join the elite creators.',
-      'tiers-btn': 'View Development Tiers',
+      'hero-tag': 'Premium Digital Studio', 'hero-desc': 'Next-gen digital assets, cinematic presets & VFX.', 'hero-btn': 'Explore Tiers',
+      'tiers-tag': 'Custom Web Solutions', 'tiers-title': 'Web Bundles', 'tiers-desc': 'Launch your custom digital space today.', 'tiers-btn': 'View Tiers',
       'packs-title': 'Featured Packs', 'packs-desc': 'Click any pack for a quick preview.',
       'cat-title': 'Categories', 'cat-desc': 'Select a module to view contents.',
       'cat-1': 'Color Grading', 'cat-2': 'Camera Movements', 'cat-3': 'Visual Effects', 'cat-4': 'Presets & Filters',
-      'rate-title': 'Rate VORTX', 'rate-desc': 'Your feedback fuels our next updates!', 'rate-wait': 'Waiting for your rating...',
       'btn-back': '← Back',
-      'card1-title': 'STARTER', 'card1-desc': 'Perfect for simple portfolios and personal landing pages.', 'card1-f1': 'Clean & Modern UI', 'card1-f2': 'Mobile-Ready Layout', 'card1-f3': 'High-Speed Performance',
-      'card2-title': 'PRO', 'card2-badge': 'Most Popular', 'card2-desc': 'For creators needing advanced animations & custom design.', 'card2-f1': 'Glassmorphism & Glows', 'card2-f2': 'Scroll Animations', 'card2-f3': 'Content Management',
-      'card3-title': 'VIP', 'card3-desc': 'The absolute premium experience with custom 3D elements.', 'card3-f1': '3D Models Integration', 'card3-f2': 'Mind-blowing Interactions', 'card3-f3': 'Priority 24/7 Support',
+      'card1-title': 'STARTER', 'card1-desc': 'Perfect for simple portfolios.', 'card1-f1': 'Clean & Modern UI', 'card1-f2': 'Mobile-Ready Layout',
+      'card2-title': 'PRO', 'card2-badge': 'Most Popular', 'card2-desc': 'Advanced animations.', 'card2-f1': 'Glassmorphism', 'card2-f2': 'Scroll Animations',
+      'card3-title': 'VIP', 'card3-desc': 'Premium experience.', 'card3-f1': '3D Models', 'card3-f3': '24/7 Support',
       'pack-btn': 'Select Plan', 'cat-tag': 'Collection',
       'pay-method': 'Payment Method:', 'pay-check': 'Check', 'btn-cart': 'Add to Cart'
     },
     'ar': {
       'nav-bundles': 'الباقات', 'nav-packs': 'الحزم', 'nav-categories': 'الأقسام',
-      'hero-tag': 'استوديو رقمي فاخر',
-      'hero-desc': 'أصول رقمية حديثة، تأثيرات سينمائية، وحلول ويب مخصصة. مصممة خصيصاً لنخبة صناع المحتوى.',
-      'hero-btn': 'استكشف الباقات',
-      'tiers-tag': 'حلول الويب المخصصة', 'tiers-title': 'باقات المواقع',
-      'tiers-desc': 'أطلق مساحتك الرقمية اليوم، تميز بتصاميم حديثة وأداء جبار، وانضم لنخبة المبدعين.',
-      'tiers-btn': 'عرض أسعار التطوير',
+      'hero-tag': 'استوديو رقمي فاخر', 'hero-desc': 'أصول رقمية حديثة، وتأثيرات سينمائية لنخبة المبدعين.', 'hero-btn': 'استكشف الباقات',
+      'tiers-tag': 'حلول ويب مخصصة', 'tiers-title': 'باقات المواقع', 'tiers-desc': 'أطلق مساحتك الرقمية اليوم بتصاميم حديثة وأداء جبار.', 'tiers-btn': 'عرض أسعار التطوير',
       'packs-title': 'حزم مميزة', 'packs-desc': 'اضغط على أي حزمة لمعاينتها.',
       'cat-title': 'الأقسام', 'cat-desc': 'اختر القسم لاستعراض محتواه.',
       'cat-1': 'تعديل الألوان', 'cat-2': 'حركات الكاميرا', 'cat-3': 'مؤثرات بصرية', 'cat-4': 'فلاتر جاهزة',
-      'rate-title': 'قيّم VORTX', 'rate-desc': 'رأيك هو الوقود لتحديثاتنا القادمة!', 'rate-wait': 'بانتظار تقييمك...',
       'btn-back': '← رجوع',
-      'card1-title': 'البداية', 'card1-desc': 'مثالية للمحافظ الشخصية وصفحات الهبوط.', 'card1-f1': 'واجهة عصرية ونظيفة', 'card1-f2': 'متجاوب مع الجوال', 'card1-f3': 'أداء فائق السرعة',
-      'card2-title': 'احترافي', 'card2-badge': 'الأكثر طلباً', 'card2-desc': 'للمبدعين اللي يبون حركات وتصميم مخصص.', 'card2-f1': 'تأثيرات زجاجية وإضاءة', 'card2-f2': 'أنيميشن عند التمرير', 'card2-f3': 'لوحة تحكم للمحتوى',
-      'card3-title': 'VIP', 'card3-desc': 'التجربة الفخمة مع عناصر ثلاثية الأبعاد.', 'card3-f1': 'دمج مجسمات 3D', 'card3-f2': 'تفاعلات خرافية', 'card3-f3': 'دعم فني أولوية 24/7',
+      'card1-title': 'البداية', 'card1-desc': 'مثالية للمحافظ الشخصية.', 'card1-f1': 'واجهة نظيفة', 'card1-f2': 'متجاوب مع الجوال',
+      'card2-title': 'احترافي', 'card2-badge': 'الأكثر طلباً', 'card2-desc': 'أنيميشن وتصميم مخصص.', 'card2-f1': 'تأثيرات زجاجية', 'card2-f2': 'أنيميشن عند التمرير',
+      'card3-title': 'VIP', 'card3-desc': 'التجربة الفخمة.', 'card3-f1': 'دمج 3D', 'card3-f3': 'دعم 24/7',
       'pack-btn': 'اختر الباقة', 'cat-tag': 'المجموعة',
       'pay-method': 'طريقة الدفع:', 'pay-check': 'شيك', 'btn-cart': 'أضف للسلة'
     }
   };
 
-  /* --- 1. Top Controls Logic --- */
   let currentLang = 'en';
-  const langToggle = document.getElementById('lang-toggle');
-  const langText = document.getElementById('lang-text');
-  
-  langToggle.addEventListener('click', () => {
+  function toggleLang() {
     currentLang = currentLang === 'en' ? 'ar' : 'en';
     document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
-    langText.innerText = currentLang === 'ar' ? 'ع / EN' : 'A / ع';
-    
+    document.querySelectorAll('.lang-text').forEach(el => el.innerText = currentLang === 'ar' ? 'ع / EN' : 'A / ع');
     document.querySelectorAll('[data-i18n]').forEach(el => {
       const key = el.getAttribute('data-i18n');
-      if(dictionary[currentLang][key]) { el.innerText = dictionary[currentLang][key]; }
-    });
-  });
-
-  const themeToggle = document.getElementById('color_mode');
-  themeToggle.addEventListener('change', (e) => {
-    if(!e.target.checked) document.body.classList.add('light-mode');
-    else document.body.classList.remove('light-mode');
-  });
-
-  /* --- 2. Custom Cursor --- */
-  const cursor = document.getElementById('custom-cursor');
-  if(cursor) {
-    window.addEventListener('mousemove', e => {
-      cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+      if(dictionary[currentLang][key]) el.innerText = dictionary[currentLang][key];
     });
   }
 
-  /* --- 3. Smart Rating Logic --- */
-  const starsInputs = document.querySelectorAll('input[name="rating"]');
-  const feedbackDisplay = document.getElementById('feedback-display');
-  const rateMessages = {
-    'en': { "1": "Ouch! That bad? 💔", "2": "Needs work, noted! 🫡", "3": "Good, but we aim higher! 🚀", "4": "Awesome! Glad you like it 🔥", "5": "Legendary! You're the best 👑" },
-    'ar': { "1": "يا ساتر! للدرجة ذي سيء؟ 💔", "2": "مقبول، بنعوضك 🫡", "3": "زين، بس نطمح للأعلى! 🚀", "4": "كفو! شغلك في السليم 🔥", "5": "أسطوري يا وحش! 👑" }
-  };
-  starsInputs.forEach(star => {
-    star.addEventListener('change', (e) => {
-      const val = e.target.value;
-      feedbackDisplay.innerHTML = `${rateMessages[currentLang][val]} <span class="stats-text">${currentLang === 'ar' ? 'التقييم' : 'Rating'}: ${val} / 5</span>`;
-    });
-  });
+  /* --- 3. Theme Toggle --- */
+  function toggleTheme(isDark) {
+    if (!isDark) { document.body.classList.add('light-mode'); } 
+    else { document.body.classList.remove('light-mode'); }
+    document.querySelectorAll('.theme-checkbox').forEach(cb => cb.checked = isDark);
+  }
 
-  /* --- 4. Toasts & Modals --- */
+  /* --- 4. Bulletproof Reveal Animation --- */
+  try {
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.05 });
+    document.querySelectorAll('.reveal').forEach((el, i) => { el.style.transitionDelay = (i % 3) * 100 + 'ms'; io.observe(el); });
+  } catch(e) {}
+  
+  // نظام طوارئ: يعرض كل شيء غصب بعد ثانية لو علق المتصفح!
+  setTimeout(() => { document.querySelectorAll('.reveal').forEach(el => el.classList.add('in')); }, 1000);
+
+  /* --- 5. Utilities --- */
   function showToast(msg) {
     const box = document.getElementById('toast-box');
-    const toast = document.createElement('div');
-    toast.className = 'glass bg-black/90 text-white text-[10px] sm:text-xs font-bold uppercase tracking-widest px-6 py-3.5 rounded-full transform translate-y-10 opacity-0 transition-all duration-300 border-brand/50 flex items-center gap-2';
-    toast.innerHTML = `<span class="text-brandLight">✦</span> ${msg}`;
-    box.appendChild(toast);
-    setTimeout(() => toast.classList.remove('translate-y-10', 'opacity-0'), 10);
-    setTimeout(() => { toast.classList.add('translate-y-10', 'opacity-0'); setTimeout(() => toast.remove(), 300); }, 2500);
+    const t = document.createElement('div');
+    t.className = 'glass bg-black/90 text-white text-[10px] font-bold px-5 py-3 rounded-full transform translate-y-10 opacity-0 transition-all duration-300 border-brand/50';
+    t.innerHTML = `<span class="text-brandLight">✦</span> ${msg}`;
+    box.appendChild(t);
+    setTimeout(() => t.classList.remove('translate-y-10', 'opacity-0'), 10);
+    setTimeout(() => { t.classList.add('translate-y-10', 'opacity-0'); setTimeout(() => t.remove(), 300); }, 2000);
   }
+
   function openPreview(title, tag) {
     document.getElementById('preview-title').textContent = title;
     document.getElementById('preview-tag').textContent = tag;
-    const modal = document.getElementById('preview-modal');
-    modal.classList.remove('opacity-0', 'pointer-events-none');
+    const m = document.getElementById('preview-modal');
+    m.classList.remove('opacity-0', 'pointer-events-none');
     setTimeout(() => document.getElementById('preview-card').classList.remove('scale-95'), 10);
   }
   function closePreview() {
@@ -608,90 +514,49 @@
     setTimeout(() => document.getElementById('preview-modal').classList.add('opacity-0', 'pointer-events-none'), 200);
   }
 
-  /* --- 5. Scroll Progress & Reveal --- */
-  window.addEventListener('scroll', () => {
-    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    document.getElementById('scroll-progress').style.width = (winScroll / height) * 100 + "%";
-  });
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
-  }, { threshold: 0.1 });
-  function observeReveals() {
-    document.querySelectorAll('.reveal:not(.in)').forEach((el, index) => { el.style.transitionDelay = (index % 3) * 100 + 'ms'; io.observe(el); });
-  }
-
-  /* --- 6. Background Canvas (Electricity) --- */
-  (function initCanvas() {
-    const canvas = document.getElementById('bg-canvas'); const ctx = canvas.getContext('2d');
-    let w, h, particles = [];
-    function resize() { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; }
-    resize(); window.addEventListener('resize', resize);
-    function createParticles() {
-      particles = []; for (let i = 0; i < Math.floor(w / 15); i++) {
-        particles.push({ x: Math.random()*w, y: Math.random()*h, r: Math.random()*1.5+0.5, vx: (Math.random()-0.5)*0.3, vy: (Math.random()-0.5)*0.3, c: Math.random()>0.5?'#7e22ce':'#a855f7' });
-      }
-    }
-    createParticles(); window.addEventListener('resize', createParticles);
-    function draw() {
-      ctx.clearRect(0, 0, w, h);
-      for (let i = 0; i < particles.length; i++) {
-        const p = particles[i]; p.x += p.vx; p.y += p.vy;
-        if (p.x < 0 || p.x > w) p.vx *= -1; if (p.y < 0 || p.y > h) p.vy *= -1;
-        ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fillStyle = p.c; ctx.fill();
-        for (let j = i + 1; j < particles.length; j++) {
-          const q = particles[j], dist = Math.hypot(p.x - q.x, p.y - q.y);
-          if (dist < 100) { ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y); ctx.strokeStyle = p.c; ctx.globalAlpha = (1 - dist / 100) * 0.2; ctx.lineWidth = 0.5; ctx.stroke(); ctx.globalAlpha = 1; }
-        }
-      }
-      requestAnimationFrame(draw);
-    }
-    draw();
-  })();
-
-  /* --- 7. Marquee Carousel --- */
-  const packs = [{ t: 'Neon Nights', tag: 'Color' }, { t: 'Cyber Shake', tag: 'Camera' }, { t: 'Glitch VFX', tag: 'VFX' }, { t: 'Cinematic', tag: 'Presets' }, { t: 'Sparks', tag: 'VFX' }];
-  document.getElementById('marquee-track').innerHTML = [...packs,...packs,...packs,...packs].map(p => `
-    <div onclick="openPreview('${p.t}', '${p.tag}')" class="glass rounded-[1.5rem] w-64 sm:w-72 aspect-[9/16] shrink-0 p-6 flex flex-col justify-between bg-black/40 relative overflow-hidden group tilt-card cursor-pointer">
-      <div class="absolute inset-0 bg-brand/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
-      <div class="flex items-center justify-between relative z-10 pointer-events-none"><span class="text-[10px] uppercase font-bold tracking-widest px-4 py-2 rounded-full border border-white/10 bg-black/50 text-brandLight">${p.tag}</span></div>
-      <h3 class="font-head font-bold text-xl text-white relative z-10 pointer-events-none group-hover:-translate-y-2 transition-transform duration-300">${p.t}</h3>
+  const packs = [{ t: 'Neon Nights', tag: 'Color' }, { t: 'Cyber Shake', tag: 'Camera' }, { t: 'Glitch VFX', tag: 'VFX' }, { t: 'Cinematic', tag: 'Presets' }];
+  document.getElementById('marquee-track').innerHTML = [...packs,...packs,...packs].map(p => `
+    <div onclick="openPreview('${p.t}', '${p.tag}')" class="glass rounded-[1.5rem] w-48 sm:w-64 aspect-[9/16] shrink-0 p-5 flex flex-col justify-between bg-black/40 cursor-pointer tilt-card">
+      <div class="flex items-center justify-between"><span class="text-[10px] font-bold px-3 py-1 rounded-full border border-white/10 bg-black/50 text-brandLight">${p.tag}</span></div>
+      <h3 class="font-head font-bold text-lg text-white">${p.t}</h3>
     </div>`).join('');
-  
-  (function marqueeDrag() {
-    const wrap = document.getElementById('marquee');
-    let isDown = false, startX = 0, scrollStart = 0, isDragging = false;
-    const down = (e) => { isDown = true; isDragging = false; startX = e.pageX || e.touches[0].pageX; scrollStart = wrap.scrollLeft; };
-    const move = (e) => { if (!isDown) return; const currentX = e.pageX || e.touches[0].pageX; if (Math.abs(currentX - startX) > 5) isDragging = true; wrap.scrollLeft = scrollStart - (currentX - startX); };
-    const up = (e) => { isDown = false; if(isDragging) e.stopPropagation(); };
-    wrap.addEventListener('mousedown', down); window.addEventListener('mousemove', move); window.addEventListener('mouseup', up);
-    wrap.addEventListener('touchstart', down, { passive: true }); wrap.addEventListener('touchmove', move, { passive: true }); wrap.addEventListener('touchend', up);
-    wrap.addEventListener('click', (e) => { if(isDragging) { e.preventDefault(); e.stopPropagation(); } }, true);
-  })();
 
-  /* --- 8. Tilt Effect --- */
-  function initTilt() {
-    document.querySelectorAll('.tilt-card').forEach(card => {
-      card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect(), x = e.clientX - rect.left, y = e.clientY - rect.top;
-        const rotateX = ((y - (rect.height / 2)) / (rect.height / 2)) * -5, rotateY = ((x - (rect.width / 2)) / (rect.width / 2)) * 5;
-        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-      });
-      card.addEventListener('mouseleave', () => card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`);
-    });
-  }
-
-  /* --- 9. Views Logic --- */
-  const CATEGORY_DATA = { CC: ['Teal & Orange','Filmic Base','Night Grade','Vibrant Pop'], SHAKE: ['Impact Shake','Bass Drop','Whip Pan','Earthquake'], VFX: ['Spark Burst','Glitch Distortion','Smoke Atmosphere','Lightning'], PF: ['Cinematic Suite','Gaming Montage','Anime Presets','Retro Wave'] };
+  const CATEGORY_DATA = { CC: ['Teal & Orange','Night Grade','Vibrant Pop'], SHAKE: ['Impact Shake','Bass Drop','Earthquake'], VFX: ['Spark Burst','Glitch Distortion','Lightning'], PF: ['Cinematic Suite','Gaming Montage','Anime Presets'] };
   function showView(id) {
     document.querySelectorAll('.view').forEach(v => v.classList.add('view-hidden'));
     document.getElementById(id).classList.remove('view-hidden');
     window.scrollTo({ top: 0, behavior: 'instant' });
-    document.getElementById(id).querySelectorAll('.reveal').forEach(el => { el.classList.remove('in'); el.style.transitionDelay = '0ms'; });
-    setTimeout(() => { observeReveals(); initTilt(); }, 50);
+    setTimeout(() => { document.querySelectorAll('#'+id+' .reveal').forEach(el => el.classList.add('in')); }, 50);
   }
   function openCategory(key) {
     document.getElementById('cat-title').textContent = key;
     document.getElementById('cat-grid').innerHTML = CATEGORY_DATA[key].map(item => `
-      <div onclick="openPreview('${item}', '${key}')" class="reveal tilt-card glass rounded-2xl p-6 flex flex-col justify-between min-h-[140px] text-start border-s-4 border-brand/50 hover:border-brandLight cursor-pointer">
-        <span class="text-[10px] font-bold tracking-widest uppercase text-brandLight">${key} Pack</
+      <div onclick="openPreview('${item}', '${key}')" class="reveal tilt-card glass rounded-xl p-5 border-s-4 border-brand/50 cursor-pointer">
+        <span class="text-[10px] font-bold text-brandLight">${key} Pack</span>
+        <h3 class="font-head font-bold text-lg text-white mt-2">${item}</h3>
+      </div>`).join('');
+    showView('category-view');
+  }
+  function openWebTiers() { showView('web-view'); }
+  function backToHome() { showView('main-view'); }
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+  
+  (function initCanvas() {
+    const c = document.getElementById('bg-canvas'), ctx = c.getContext('2d');
+    let w, h, p = [];
+    function rs() { w=c.width=window.innerWidth; h=c.height=window.innerHeight; p=[]; for(let i=0;i<w/20;i++) p.push({x:Math.random()*w,y:Math.random()*h,vx:(Math.random()-0.5)*0.2,vy:(Math.random()-0.5)*0.2,c:Math.random()>.5?'#7e22ce':'#a855f7'}); }
+    rs(); window.addEventListener('resize', rs);
+    function dr() {
+      ctx.clearRect(0,0,w,h);
+      for(let i=0;i<p.length;i++){
+        p[i].x+=p[i].vx; p[i].y+=p[i].vy; if(p[i].x<0||p[i].x>w)p[i].vx*=-1; if(p[i].y<0||p[i].y>h)p[i].vy*=-1;
+        ctx.beginPath(); ctx.arc(p[i].x,p[i].y,1,0,7); ctx.fillStyle=p[i].c; ctx.fill();
+      }
+      requestAnimationFrame(dr);
+    }
+    dr();
+  })();
+  </script>
+</body>
+</html>
