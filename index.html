@@ -57,7 +57,6 @@
       --nav-icon-color: #6b21a8;
     }
 
-    /* إصلاح الفراغات والتمرير الجانبي */
     *, *::before, *::after { box-sizing: border-box; }
     html, body { 
       max-width: 100vw; 
@@ -112,7 +111,7 @@
       100% { filter: drop-shadow(0 0 25px rgba(255, 255, 255, 0.8)) drop-shadow(0 0 45px rgba(192, 132, 252, 0.9)) drop-shadow(0 0 85px rgba(147, 51, 234, 0.8)); }
     }
 
-    /* ---------- Glassmorphism Base & Light Mode Tweaks ---------- */
+    /* ---------- Glassmorphism Base ---------- */
     .glass {
       background: rgba(255, 255, 255, 0.03);
       backdrop-filter: blur(16px) saturate(140%);
@@ -125,21 +124,16 @@
       box-shadow: 0 4px 20px rgba(0,0,0,0.05);
     }
 
-    /* إصلاح تباين العناصر بالوضع الفاتح */
     .text-3d-header {
       color: var(--nav-logo-color);
       font-weight: 900;
       text-shadow: 0 0 14px rgba(192, 132, 252, 0.4);
     }
-    html.light .text-3d-header {
-      text-shadow: none;
-    }
+    html.light .text-3d-header { text-shadow: none; }
     
-    .lang-btn-icon {
-      color: var(--nav-icon-color);
-    }
+    .lang-btn-icon { color: var(--nav-icon-color); }
 
-    /* ---------- Ultra Glossy Web Bundle Banner (الكرت الرئيسي للويب) ---------- */
+    /* ---------- Ultra Glossy Web Bundle Banner ---------- */
     .glossy-bundle-card {
       position: relative;
       border-radius: 2.5rem;
@@ -157,60 +151,78 @@
       box-shadow: 0 20px 40px rgba(126, 34, 206, 0.12);
     }
 
-    /* إضاءة النيون خلف الكارت الرئيسي */
     .glossy-bundle-card::before {
       content: '';
       position: absolute;
-      top: -30%;
-      left: -10%;
-      width: 120%;
-      height: 160%;
+      top: -30%; left: -10%;
+      width: 120%; height: 160%;
       background: radial-gradient(circle, rgba(168, 85, 247, 0.22) 0%, rgba(126, 34, 206, 0.05) 50%, transparent 75%);
-      pointer-events: none;
-      z-index: 0;
+      pointer-events: none; z-index: 0;
     }
 
-    /* طبقة زجاجية لمعان مائلة (Apple Gloss Effect) */
     .glossy-bundle-card::after {
       content: '';
       position: absolute;
-      top: 0;
-      left: -120%;
-      width: 100%;
-      height: 100%;
+      top: 0; left: -120%;
+      width: 100%; height: 100%;
       background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.18), transparent);
       transform: skewX(-25deg);
       transition: left 0.8s cubic-bezier(0.4, 0, 0.2, 1);
       pointer-events: none;
     }
-    .glossy-bundle-card:hover::after {
-      left: 220%;
-    }
+    .glossy-bundle-card:hover::after { left: 220%; }
 
-    /* الزر المخصص الموزون للحزمة الرئيسية */
     .bundle-action-btn {
-      position: relative;
-      z-index: 10;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 16px 36px;
-      font-size: 0.875rem;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: #ffffff;
+      position: relative; z-index: 10;
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 16px 36px; font-size: 0.875rem; font-weight: 800;
+      letter-spacing: 0.08em; text-transform: uppercase; color: #ffffff;
       border-radius: 9999px;
       background: linear-gradient(135deg, #9333ea 0%, #6b21a8 100%);
       border: 1px solid rgba(255, 255, 255, 0.3);
       box-shadow: 0 0 25px rgba(147, 51, 234, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.6);
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
-
     .bundle-action-btn:hover {
       background: linear-gradient(135deg, #a855f7 0%, #7e22ce 100%);
       box-shadow: 0 0 35px rgba(168, 85, 247, 0.8), inset 0 1px 2px rgba(255, 255, 255, 0.9);
       transform: translateY(-2px) scale(1.03);
+    }
+
+    /* ---------- NEW CATEGORIES DESIGN (الكروت الجديدة الفخمة) ---------- */
+    .cat-card-glass {
+      position: relative;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 1.75rem;
+      padding: 1.75rem 2rem;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    html.light .cat-card-glass {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(243, 232, 255, 0.5) 100%);
+      border-color: rgba(168, 85, 247, 0.2);
+    }
+
+    .cat-card-glass:hover {
+      transform: translateY(-5px);
+      border-color: rgba(168, 85, 247, 0.6);
+      box-shadow: 0 15px 30px rgba(126, 34, 206, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.3);
+    }
+
+    .cat-card-glass .arrow-icon {
+      transition: transform 0.3s ease, color 0.3s ease;
+    }
+    .cat-card-glass:hover .arrow-icon {
+      transform: translateX(6px);
+      color: #a855f7;
+    }
+    html[dir="rtl"] .cat-card-glass:hover .arrow-icon {
+      transform: translateX(-6px);
     }
 
     /* ---------- Custom Buttons & Utilities ---------- */
@@ -290,10 +302,8 @@
           <li><a href="#categories" data-i18n="nav-categories" class="hover:text-brandLight transition active:scale-95">Categories</a></li>
         </ul>
 
-        <!-- الأزرار أعلى اليمين (تغيير اللغة + الليل والنهار) -->
+        <!-- الأزرار أعلى اليمين -->
         <div class="flex items-center gap-3">
-          
-          <!-- زر تغيير اللغة (الكرة الأرضية الشبكية) -->
           <button onclick="toggleLanguage()" class="glass w-10 h-10 rounded-full flex items-center justify-center hover:scale-110 active:scale-95 transition-transform border-purple-500/30 lang-btn-icon" title="Change Language / تغيير اللغة">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9 9 0 100-18 9 9 0 000 18z"></path>
@@ -302,7 +312,6 @@
             </svg>
           </button>
 
-          <!-- زر الليل والنهار -->
           <button onclick="toggleTheme()" class="theme-switch-btn" title="Toggle Theme">
             <div class="theme-switch-ball">
               <svg class="icon-moon w-3.5 h-3.5 text-slate-800" fill="currentColor" viewBox="0 0 20 20">
@@ -325,53 +334,43 @@
 
     <!-- HERO SECTION -->
     <section class="max-w-6xl mx-auto px-4 sm:px-6 pt-16 pb-24 text-center relative">
-      
       <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] sm:w-[800px] h-[350px] bg-purple-600/20 rounded-full blur-[150px] pointer-events-none -z-10"></div>
       
-      <!-- Glass Pill Tag -->
       <div class="inline-flex items-center gap-3 px-6 py-2.5 rounded-full text-xs font-bold tracking-widest uppercase text-purple-300 light:text-purple-900 border border-purple-500/20 bg-purple-950/20 light:bg-purple-100/50 backdrop-blur-md mb-8 shadow-sm">
         <span class="w-2 h-2 rounded-full bg-purple-400 animate-ping"></span>
         <span data-i18n="hero-tag">Digital Assets Hub</span>
       </div>
 
-      <!-- GLOWING VORTX TITLE -->
       <div class="relative my-2">
         <h1 class="font-head font-black tracking-[0.25em] text-7xl sm:text-9xl md:text-[10rem] hero-vortx-title relative z-10 leading-none py-4">
           VORTX
         </h1>
       </div>
 
-      <!-- Description Text -->
       <p data-i18n="hero-desc" class="font-semibold opacity-85 max-w-2xl mx-auto text-base sm:text-xl leading-relaxed mt-4 mb-10">
         High-end VFX packs, cinematic presets & custom web experiences. Crafted specifically for elite creators.
       </p>
 
-      <!-- Glass Action Button -->
       <div class="flex items-center justify-center gap-5">
         <a href="#bundles" data-i18n="hero-btn" class="btn-primary font-extrabold px-10 py-4.5 rounded-full transition-all duration-300 text-sm uppercase tracking-wider active:scale-95 hover:scale-105">
           Explore Tiers
         </a>
       </div>
-
     </section>
 
-    <!-- WEB BUNDLES (الحزمة الرئيسية لتصميم المواقع - محدثة ومعدلة بالكامل) -->
+    <!-- WEB BUNDLES -->
     <section id="bundles" class="max-w-7xl mx-auto px-4 sm:px-6 py-16">
       <div class="glossy-bundle-card p-8 sm:p-14 relative flex flex-col md:flex-row items-center justify-between gap-10">
         <div class="text-center md:text-left rtl:md:text-right max-w-2xl relative z-10 w-full">
           <span data-i18n="bundle-sub" class="text-xs tracking-widest uppercase font-extrabold text-brandLight block mb-2">Custom Web Solutions</span>
-          
-          <!-- عنوان الباقة الرئيسية -->
           <h2 data-i18n="bundle-title" class="font-head font-black text-3xl sm:text-4xl md:text-5xl whitespace-nowrap overflow-hidden text-ellipsis mb-4 text-transparent bg-clip-text bg-gradient-to-r from-white via-purple-100 to-purple-300 light:from-purple-950 light:to-purple-700">
             Web Page Bundles
           </h2>
-          
           <p data-i18n="bundle-desc" class="font-bold opacity-80 leading-relaxed text-sm sm:text-lg">
             Launch your custom digital space today. Stand out with next-gen designs, premium performance, and join the elite creators.
           </p>
         </div>
         
-        <!-- الزر الموزون والمثالي -->
         <div class="w-full md:w-auto relative z-10 flex justify-center md:justify-end flex-shrink-0">
           <button onclick="openWebTiers()" data-i18n="bundle-btn" class="bundle-action-btn active:scale-95">
             View Development Tiers
@@ -390,7 +389,7 @@
       <div class="swiper mySwiper">
         <div class="swiper-wrapper">
           
-          <!-- Card 1: Red Glow -->
+          <!-- Card 1 -->
           <div onclick="openPreview('Flame Pack', 'VFX')" class="swiper-slide glass card-glow-red p-6 flex flex-col justify-between items-center text-center cursor-pointer border border-red-500/40 hover:border-red-400 transition-all">
             <div class="absolute -top-10 -right-10 w-40 h-40 bg-red-600/30 rounded-full blur-3xl pointer-events-none"></div>
             <span class="text-[10px] uppercase font-bold tracking-widest px-4 py-1.5 rounded-full border border-red-500/30 bg-red-500/10 text-red-400 self-start z-10">VFX</span>
@@ -400,7 +399,7 @@
             <h3 data-i18n="card-1-title" class="font-head font-bold text-xl z-10">Red Inferno</h3>
           </div>
 
-          <!-- Card 2: Yellow Glow -->
+          <!-- Card 2 -->
           <div onclick="openPreview('Cyber Gold', 'Color')" class="swiper-slide glass card-glow-yellow p-6 flex flex-col justify-between items-center text-center cursor-pointer border border-yellow-500/40 hover:border-yellow-400 transition-all">
             <div class="absolute -top-10 -right-10 w-40 h-40 bg-yellow-600/30 rounded-full blur-3xl pointer-events-none"></div>
             <span class="text-[10px] uppercase font-bold tracking-widest px-4 py-1.5 rounded-full border border-yellow-500/30 bg-yellow-500/10 text-yellow-400 self-start z-10">Color</span>
@@ -410,7 +409,7 @@
             <h3 data-i18n="card-2-title" class="font-head font-bold text-xl z-10">Cyber Gold</h3>
           </div>
 
-          <!-- Card 3: Purple Glow -->
+          <!-- Card 3 -->
           <div onclick="openPreview('Neon Nights', 'Camera')" class="swiper-slide glass card-glow-purple p-6 flex flex-col justify-between items-center text-center cursor-pointer border border-purple-500/40 hover:border-purple-400 transition-all">
             <div class="absolute -top-10 -right-10 w-40 h-40 bg-purple-600/30 rounded-full blur-3xl pointer-events-none"></div>
             <span class="text-[10px] uppercase font-bold tracking-widest px-4 py-1.5 rounded-full border border-purple-500/30 bg-purple-500/10 text-purple-400 self-start z-10">Camera</span>
@@ -420,7 +419,7 @@
             <h3 data-i18n="card-3-title" class="font-head font-bold text-xl z-10">Neon Nights</h3>
           </div>
 
-          <!-- Card 4: Cyan Glow -->
+          <!-- Card 4 -->
           <div onclick="openPreview('Hyper Blue', 'Presets')" class="swiper-slide glass card-glow-cyan p-6 flex flex-col justify-between items-center text-center cursor-pointer border border-cyan-500/40 hover:border-cyan-400 transition-all">
             <div class="absolute -top-10 -right-10 w-40 h-40 bg-cyan-600/30 rounded-full blur-3xl pointer-events-none"></div>
             <span class="text-[10px] uppercase font-bold tracking-widest px-4 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/10 text-cyan-400 self-start z-10">Presets</span>
@@ -434,30 +433,60 @@
       </div>
     </section>
 
-    <!-- CATEGORIES -->
+    <!-- =================== CATEGORIES (المصممة حديثاً: 3 فئات فقط بالإنقليزي) =================== -->
     <section id="categories" class="max-w-7xl mx-auto px-4 sm:px-6 py-16">
-      <div class="mb-12 text-left ltr:text-left rtl:text-right">
-        <h2 data-i18n="cat-sec-title" class="font-head font-bold text-3xl sm:text-4xl">Categories</h2>
-        <p data-i18n="cat-sec-desc" class="font-bold opacity-50 mt-3 text-sm tracking-wide">Select a module to view contents.</p>
+      <div class="mb-10 text-left ltr:text-left rtl:text-right flex items-end justify-between">
+        <div>
+          <h2 data-i18n="cat-sec-title" class="font-head font-bold text-3xl sm:text-4xl">Categories</h2>
+          <p data-i18n="cat-sec-desc" class="font-bold opacity-50 mt-2 text-sm tracking-wide">Select a category to explore editing packs.</p>
+        </div>
       </div>
       
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-        <div onclick="openCategory('CC')" class="glass rounded-2xl p-8 flex flex-col items-start justify-between min-h-[200px] cursor-pointer group">
-          <span class="text-xs font-bold text-brandLight">01</span>
-          <span class="font-head font-extrabold text-5xl mt-6 group-hover:text-brandLight transition-colors">CC</span>
+      <!-- الشبكة الجديدة: 3 كروت فقط أفقية وفاخرة -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <!-- Category 1: CC -->
+        <div onclick="openCategory('CC')" class="cat-card-glass flex items-center justify-between group">
+          <div class="flex items-center gap-5">
+            <div class="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 font-extrabold text-sm group-hover:scale-110 transition-transform">
+              01
+            </div>
+            <div>
+              <h3 class="font-head font-black text-2xl tracking-wider text-white light:text-purple-950">CC</h3>
+              <p class="text-xs font-semibold opacity-60 mt-1">Color Corrections</p>
+            </div>
+          </div>
+          <div class="arrow-icon text-purple-400/60 text-xl font-bold">→</div>
         </div>
-        <div onclick="openCategory('SHAKE')" class="glass rounded-2xl p-8 flex flex-col items-start justify-between min-h-[200px] cursor-pointer group">
-          <span class="text-xs font-bold text-brandLight">02</span>
-          <span class="font-head font-extrabold text-5xl mt-6 group-hover:text-brandLight transition-colors">SHAKE</span>
+
+        <!-- Category 2: SHAKE -->
+        <div onclick="openCategory('SHAKE')" class="cat-card-glass flex items-center justify-between group">
+          <div class="flex items-center gap-5">
+            <div class="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 font-extrabold text-sm group-hover:scale-110 transition-transform">
+              02
+            </div>
+            <div>
+              <h3 class="font-head font-black text-2xl tracking-wider text-white light:text-purple-950">SHAKE</h3>
+              <p class="text-xs font-semibold opacity-60 mt-1">Camera Shake Presets</p>
+            </div>
+          </div>
+          <div class="arrow-icon text-purple-400/60 text-xl font-bold">→</div>
         </div>
-        <div onclick="openCategory('VFX')" class="glass rounded-2xl p-8 flex flex-col items-start justify-between min-h-[200px] cursor-pointer group">
-          <span class="text-xs font-bold text-brandLight">03</span>
-          <span class="font-head font-extrabold text-5xl mt-6 group-hover:text-brandLight transition-colors">VFX</span>
+
+        <!-- Category 3: XML -->
+        <div onclick="openCategory('XML')" class="cat-card-glass flex items-center justify-between group">
+          <div class="flex items-center gap-5">
+            <div class="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 font-extrabold text-sm group-hover:scale-110 transition-transform">
+              03
+            </div>
+            <div>
+              <h3 class="font-head font-black text-2xl tracking-wider text-white light:text-purple-950">XML</h3>
+              <p class="text-xs font-semibold opacity-60 mt-1">Project File Projects</p>
+            </div>
+          </div>
+          <div class="arrow-icon text-purple-400/60 text-xl font-bold">→</div>
         </div>
-        <div onclick="openCategory('PF')" class="glass rounded-2xl p-8 flex flex-col items-start justify-between min-h-[200px] cursor-pointer group">
-          <span class="text-xs font-bold text-brandLight">04</span>
-          <span class="font-head font-extrabold text-5xl mt-6 group-hover:text-brandLight transition-colors">PF</span>
-        </div>
+
       </div>
     </section>
 
@@ -592,7 +621,7 @@
       "card-3-title": "Neon Nights",
       "card-4-title": "Hyper Blue",
       "cat-sec-title": "Categories",
-      "cat-sec-desc": "Select a module to view contents.",
+      "cat-sec-desc": "Select a category to explore editing packs.",
       "footer-right": "Crafted for the bold.",
       "tiers-sub": "Web Solutions",
       "tiers-title": "Development Tiers",
@@ -623,7 +652,7 @@
       "card-3-title": "ليالي النيون",
       "card-4-title": "النيون الأزرق",
       "cat-sec-title": "الأقسام",
-      "cat-sec-desc": "اختر وحدة لعرض المحتويات جواتها.",
+      "cat-sec-desc": "اختر فئة لاستكشاف الحزم المتاحة.",
       "footer-right": "صُنع للمبدعين والجرآء.",
       "tiers-sub": "حلول الويب",
       "tiers-title": "مستويات التطوير",
@@ -654,7 +683,6 @@
     });
   }
 
-  /* --- Theme Toggle --- */
   function toggleTheme() {
     const htmlEl = document.documentElement;
     if (htmlEl.classList.contains('dark')) {
@@ -666,7 +694,6 @@
     }
   }
 
-  /* --- SPA & Toasts --- */
   function showToast(msg) {
     const box = document.getElementById('toast-box');
     const toast = document.createElement('div');
@@ -693,11 +720,11 @@
     setTimeout(() => { modal.classList.add('opacity-0', 'pointer-events-none'); }, 200);
   }
 
+  /* بيانات الفئات الجديدة (CC, SHAKE, XML) */
   const CATEGORY_DATA = {
-    CC: ['Teal & Orange','Filmic Base','Night Grade','Vibrant Pop'],
-    SHAKE: ['Impact Shake','Bass Drop','Whip Pan','Earthquake'],
-    VFX: ['Spark Burst','Glitch Distortion','Smoke Atmosphere','Lightning'],
-    PF: ['Cinematic Suite','Gaming Montage','Anime Presets','Retro Wave'],
+    CC: ['Teal & Orange Grade', 'Cinematic Film Base', 'Dark Knight Grade', 'Vibrant Soft Pop'],
+    SHAKE: ['Hard Impact Shake', 'Bass Drop Bounce', 'Smooth Whip Pan', 'Earthquake Wobble'],
+    XML: ['Pro Intro Template', 'Velocity Edit XML', 'Glow Shake Timeline', 'Full Transition Suite'],
   };
 
   function showView(id) {
