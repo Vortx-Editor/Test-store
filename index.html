@@ -80,7 +80,7 @@
     h1, h2, h3, .font-head { font-family: 'Cinzel', serif; letter-spacing: 1.5px; }
     html[dir="rtl"] h1, html[dir="rtl"] h2, html[dir="rtl"] h3, html[dir="rtl"] .font-head { font-family: 'Cairo', sans-serif; letter-spacing: 0; }
 
-    /* ---------- FULL STARRY BACKGROUND (النجوم بالأحجام الأصلية) ---------- */
+    /* ---------- FULL STARRY BACKGROUND ---------- */
     .stars-background-container {
       position: fixed;
       top: 0; left: 0;
@@ -100,17 +100,15 @@
       transition: opacity 0.4s ease;
     }
 
-    /* الطبقة الأولى (1px) */
     #stars {
       width: 1px; height: 1px;
-      box-shadow: 501px 811px #fff, 1450px 1324px #fff, 1093px 1780px #fff, 1469px 678px #fff, 904px 741px #fff, 1160px 781px #fff, 1841px 1962px #fff, 1630px 1667px #fff, 1788px 676px #fff, 367px 1734px #fff, 1343px 156px #fff, 1283px 1142px #fff, 1062px 378px #fff, 1395px 467px #fff, 1017px 1891px #fff, 137px 1114px #fff, 1767px 1403px #fff, 1543px 11px #fff, 1078px 181px #fff, 1189px 1574px #fff, 1697px 1551px #fff, 439px 472px #fff, 1491px 677px #fff, 1364px 599px #fff, 34px 382px #fff, 1221px 1584px #fff, 1266px 1499px #fff, 169px 1907px #fff, 1219px 1125px #fff, 659px 18px #fff, 1731px 1959px #fff, 332px 1216px #fff, 1913px 788px #fff, 80px 712px #fff, 326px 1605px #fff, 574px 1502px #fff, 473px 1653px #fff, 404px 975px #fff, 322px 1797px #fff, 425px 1321px #fff, 1121px 1797px #fff, 731px 647px #fff, 891px 1584px #fff, 1523px 109px #fff, 1379px 244px #fff, 865px 1064px #fff, 493px 956px #fff, 624px 1380px #fff, 440px 619px #fff, 1630px 767px #fff, 955px 1196px #fff, 62px 729px #fff, 126px 946px #fff, 1256px 896px #fff, 1444px 256px #fff, 661px 1628px #fff, 1078px 1716px #fff, 300px 737px #fff, 1734px 413px #fff, 1296px 129px #fff, 1771px 1678px #fff, 977px 1764px #fff, 1879px 549px #fff, 665px 1531px #fff, 89px 701px #fff, 1084px 1183px #fff, 1597px 1576px #fff, 1354px 1774px #fff;
+      box-shadow: 501px 811px #fff, 1450px 1324px #fff, 1093px 1780px #fff, 1469px 678px #fff, 904px 741px #fff, 1160px 781px #fff, 1841px 1962px #fff, 1630px 1667px #fff, 1788px 676px #fff, 367px 1734px #fff, 1343px 156px #fff, 1283px 1142px #fff, 1062px 378px #fff, 1395px 467px #fff, 1017px 1891px #fff, 137px 1114px #fff, 1767px 1403px #fff, 1543px 11px #fff, 1078px 181px #fff, 1189px 1574px #fff, 1697px 1551px #fff, 439px 472px #fff, 1491px 677px #fff, 1364px 599px #fff;
       animation: animStar 50s linear infinite;
     }
     #stars:after {
       content: " "; position: absolute; top: 2000px; width: 1px; height: 1px; background: transparent; box-shadow: inherit;
     }
 
-    /* الطبقة الثانية (2px) */
     #stars2 {
       width: 2px; height: 2px;
       box-shadow: 1925px 1320px #fff, 693px 1778px #fff, 1016px 711px #fff, 1171px 563px #fff, 661px 1919px #fff, 1610px 44px #fff, 1275px 140px #fff, 1208px 1802px #fff, 1473px 1587px #fff, 11px 1117px #fff, 853px 1757px #fff, 1149px 937px #fff, 1353px 428px #fff, 270px 279px #fff, 258px 1404px #fff, 417px 1188px #fff, 286px 561px #fff, 393px 1765px #fff, 147px 881px #fff, 666px 1097px #fff, 1425px 1278px #fff, 806px 156px #fff, 1252px 561px #fff, 218px 52px #fff, 1371px 1980px #fff, 171px 745px #fff, 1424px 89px #fff, 137px 244px #fff, 939px 1922px #fff, 137px 1080px #fff, 1757px 50px #fff, 904px 536px #fff, 1938px 1001px #fff, 1172px 440px #fff, 72px 1475px #fff, 102px 121px #fff, 804px 1671px #fff, 1314px 270px #fff, 440px 1341px #fff, 1216px 511px #fff, 1061px 1523px #fff, 97px 274px #fff, 704px 1318px #fff, 52px 1872px #fff, 1962px 296px #fff, 111px 289px #fff;
@@ -120,7 +118,6 @@
       content: " "; position: absolute; top: 2000px; width: 2px; height: 2px; background: transparent; box-shadow: inherit;
     }
 
-    /* الطبقة الثالثة (3px) البارزة والكبيرة */
     #stars3 {
       width: 3px; height: 3px;
       box-shadow: 200px 981px #fff, 1731px 521px #fff, 132px 1039px #fff, 1888px 1547px #fff, 899px 1226px #fff, 1887px 580px #fff, 1548px 1092px #fff, 1626px 689px #fff, 254px 1072px #fff, 1684px 1211px #fff, 672px 1267px #fff, 939px 668px #fff, 1969px 645px #fff, 1126px 983px #fff, 457px 568px #fff, 476px 876px #fff, 829px 1896px #fff, 1364px 1846px #fff, 1507px 1120px #fff, 936px 1948px #fff, 1833px 832px #fff, 1424px 285px #fff, 1377px 1596px #fff, 432px 153px #fff, 1348px 1410px #fff, 1529px 954px #fff, 1102px 387px #fff, 264px 297px #fff, 811px 977px #fff, 1931px 673px #fff, 1734px 978px #fff, 1772px 1567px #fff, 1197px 1400px #fff, 764px 282px #fff, 1103px 822px #fff;
@@ -199,7 +196,109 @@
       box-shadow: 0 20px 40px rgba(168, 85, 247, 0.5);
     }
 
-    /* ---------- Glass Elements ---------- */
+    /* ---------- CUSTOM GLASS RADIO GROUP (ممدود ومطاطي زجاجي) ---------- */
+    .glass-radio-group {
+      --bg: rgba(255, 255, 255, 0.05);
+      --text: rgba(255, 255, 255, 0.7);
+
+      display: flex;
+      position: relative;
+      background: var(--bg);
+      border-radius: 999px;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow:
+        inset 1px 1px 4px rgba(255, 255, 255, 0.2),
+        inset -1px -1px 6px rgba(0, 0, 0, 0.4),
+        0 15px 30px rgba(0, 0, 0, 0.25);
+      padding: 6px;
+      margin: 35px auto 10px auto;
+      width: 100%;
+      max-width: 56rem; /* ممدود بشكل فخم للجانبين */
+    }
+
+    html.light .glass-radio-group {
+      --bg: rgba(126, 34, 206, 0.08);
+      --text: #4c1d95;
+      border-color: rgba(126, 34, 206, 0.25);
+    }
+
+    .glass-radio-group input { display: none; }
+
+    .glass-radio-group label {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      font-weight: 800;
+      padding: 0.9rem 1rem;
+      cursor: pointer;
+      letter-spacing: 1px;
+      color: var(--text);
+      position: relative;
+      z-index: 2;
+      transition: color 0.3s ease-in-out;
+    }
+
+    .glass-radio-group label:hover { color: #ffffff; }
+    html.light .glass-radio-group label:hover { color: #2e1065; }
+
+    .glass-radio-group input:checked + label { color: #ffffff; }
+
+    .glass-glider {
+      position: absolute;
+      top: 6px;
+      bottom: 6px;
+      width: calc((100% - 12px) / 3);
+      border-radius: 999px;
+      z-index: 1;
+      transition:
+        transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
+        background 0.4s ease-in-out,
+        box-shadow 0.4s ease-in-out;
+    }
+
+    /* LTR Glide Movements */
+    html[dir="ltr"] #glass-cc:checked ~ .glass-glider {
+      transform: translateX(0%);
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.4), #a855f7);
+      box-shadow: 0 0 20px rgba(168, 85, 247, 0.6), 0 0 10px rgba(255, 255, 255, 0.5) inset;
+    }
+
+    html[dir="ltr"] #glass-xml:checked ~ .glass-glider {
+      transform: translateX(100%);
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.4), #06b6d4);
+      box-shadow: 0 0 20px rgba(6, 182, 212, 0.6), 0 0 10px rgba(255, 255, 255, 0.5) inset;
+    }
+
+    html[dir="ltr"] #glass-shake:checked ~ .glass-glider {
+      transform: translateX(200%);
+      background: linear-gradient(135deg, rgba(234, 179, 8, 0.4), #eab308);
+      box-shadow: 0 0 20px rgba(234, 179, 8, 0.6), 0 0 10px rgba(255, 255, 255, 0.5) inset;
+    }
+
+    /* RTL Glide Movements (لضبط الحركة أوتوماتيكياً بالعربي) */
+    html[dir="rtl"] #glass-cc:checked ~ .glass-glider {
+      transform: translateX(0%);
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.4), #a855f7);
+      box-shadow: 0 0 20px rgba(168, 85, 247, 0.6), 0 0 10px rgba(255, 255, 255, 0.5) inset;
+    }
+
+    html[dir="rtl"] #glass-xml:checked ~ .glass-glider {
+      transform: translateX(-100%);
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.4), #06b6d4);
+      box-shadow: 0 0 20px rgba(6, 182, 212, 0.6), 0 0 10px rgba(255, 255, 255, 0.5) inset;
+    }
+
+    html[dir="rtl"] #glass-shake:checked ~ .glass-glider {
+      transform: translateX(-200%);
+      background: linear-gradient(135deg, rgba(234, 179, 8, 0.4), #eab308);
+      box-shadow: 0 0 20px rgba(234, 179, 8, 0.6), 0 0 10px rgba(255, 255, 255, 0.5) inset;
+    }
+
+    /* Glass Elements */
     .glass {
       background: rgba(255, 255, 255, 0.03);
       backdrop-filter: blur(16px) saturate(140%);
@@ -294,7 +393,7 @@
   <div id="scroll-progress"></div>
   <div id="toast-box" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[100] flex flex-col gap-3 pointer-events-none"></div>
 
-  <!-- NAVBAR FIXED TOP WITHOUT SPACE -->
+  <!-- NAVBAR FIXED TOP -->
   <header class="sticky top-0 z-50 w-full">
     <nav class="glass border-b-0 bg-black/40 backdrop-blur-md">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
@@ -334,7 +433,7 @@
     <div id="top"></div>
 
     <!-- HERO SECTION -->
-    <section class="max-w-6xl mx-auto px-4 sm:px-6 pt-12 pb-20 text-center relative">
+    <section class="max-w-6xl mx-auto px-4 sm:px-6 pt-12 pb-10 text-center relative">
       <div class="inline-flex items-center gap-3 px-6 py-2.5 rounded-full text-xs font-bold tracking-widest uppercase glass backdrop-blur-md mb-8 shadow-sm">
         <span class="w-2 h-2 rounded-full bg-purple-400 animate-ping"></span>
         <span data-i18n="hero-tag">Digital Assets Hub</span>
@@ -355,10 +454,24 @@
           Explore Tiers
         </a>
       </div>
+
+      <!-- GLASS RADIO GROUP CATEGORIES SELECTOR (بين اكسبلور تيرز وفوق حزم الويب) -->
+      <div class="glass-radio-group">
+        <input type="radio" name="category-plan" id="glass-cc" checked onclick="scrollToCategory('CC')" />
+        <label for="glass-cc">CC</label>
+
+        <input type="radio" name="category-plan" id="glass-xml" onclick="scrollToCategory('XML')" />
+        <label for="glass-xml">XML</label>
+
+        <input type="radio" name="category-plan" id="glass-shake" onclick="scrollToCategory('SHAKE')" />
+        <label for="glass-shake">Shake</label>
+
+        <div class="glass-glider"></div>
+      </div>
     </section>
 
     <!-- WEB BUNDLES -->
-    <section id="bundles" class="max-w-7xl mx-auto px-4 sm:px-6 py-16">
+    <section id="bundles" class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
       <div class="glossy-bundle-card p-8 sm:p-14 relative flex flex-col md:flex-row items-center justify-between gap-10">
         <div class="text-center md:text-left rtl:md:text-right max-w-2xl relative z-10 w-full">
           <span data-i18n="bundle-sub" class="text-xs tracking-widest uppercase font-extrabold text-brandLight block mb-2">Custom Web Solutions</span>
@@ -424,7 +537,7 @@
       </div>
     </section>
 
-    <!-- CATEGORIES -->
+    <!-- CATEGORIES (مع معرّفات التوجه والتحديد) -->
     <section id="categories" class="max-w-7xl mx-auto px-4 sm:px-6 py-16">
       <div class="mb-10 text-left ltr:text-left rtl:text-right">
         <h2 data-i18n="cat-sec-title" class="font-head font-bold text-3xl sm:text-4xl">Categories</h2>
@@ -432,7 +545,7 @@
       </div>
       
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div onclick="openCategory('CC')" class="cat-card-glass flex items-center justify-between group">
+        <div id="cat-card-CC" onclick="openCategory('CC')" class="cat-card-glass flex items-center justify-between group">
           <div class="flex items-center gap-5">
             <div class="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 font-extrabold text-sm group-hover:scale-110 transition-transform">01</div>
             <div>
@@ -443,23 +556,23 @@
           <div class="arrow-icon text-purple-400/60 text-xl font-bold">→</div>
         </div>
 
-        <div onclick="openCategory('SHAKE')" class="cat-card-glass flex items-center justify-between group">
+        <div id="cat-card-XML" onclick="openCategory('XML')" class="cat-card-glass flex items-center justify-between group">
           <div class="flex items-center gap-5">
             <div class="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 font-extrabold text-sm group-hover:scale-110 transition-transform">02</div>
             <div>
-              <h3 class="font-head font-black text-2xl tracking-wider">SHAKE</h3>
-              <p class="text-xs font-semibold opacity-60 mt-1">Camera Shake Presets</p>
+              <h3 class="font-head font-black text-2xl tracking-wider">XML</h3>
+              <p class="text-xs font-semibold opacity-60 mt-1">Project Files</p>
             </div>
           </div>
           <div class="arrow-icon text-purple-400/60 text-xl font-bold">→</div>
         </div>
 
-        <div onclick="openCategory('XML')" class="cat-card-glass flex items-center justify-between group">
+        <div id="cat-card-SHAKE" onclick="openCategory('SHAKE')" class="cat-card-glass flex items-center justify-between group">
           <div class="flex items-center gap-5">
             <div class="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 font-extrabold text-sm group-hover:scale-110 transition-transform">03</div>
             <div>
-              <h3 class="font-head font-black text-2xl tracking-wider">XML</h3>
-              <p class="text-xs font-semibold opacity-60 mt-1">Project Files</p>
+              <h3 class="font-head font-black text-2xl tracking-wider">SHAKE</h3>
+              <p class="text-xs font-semibold opacity-60 mt-1">Camera Shake Presets</p>
             </div>
           </div>
           <div class="arrow-icon text-purple-400/60 text-xl font-bold">→</div>
@@ -583,6 +696,18 @@
   window.addEventListener('DOMContentLoaded', () => {
     initSwiper();
   });
+
+  /* Scroll To Category & Highlight Effect (دالة الانتقال للأسفل والـ Highlight) */
+  function scrollToCategory(catKey) {
+    const targetEl = document.getElementById(`cat-card-${catKey}`);
+    if (targetEl) {
+      targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      targetEl.classList.add('ring-2', 'ring-purple-500', 'scale-105');
+      setTimeout(() => {
+        targetEl.classList.remove('ring-2', 'ring-purple-500', 'scale-105');
+      }, 1500);
+    }
+  }
 
   const translations = {
     en: {
