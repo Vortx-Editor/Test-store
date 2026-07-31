@@ -170,17 +170,6 @@
       -webkit-text-fill-color: transparent;
       filter: drop-shadow(0 5px 15px rgba(126, 34, 206, 0.2));
     }
-    html.light .vortx-wet-oil-title::before {
-      background: linear-gradient(
-        110deg,
-        transparent 0%, transparent 35%,
-        rgba(126, 34, 206, 0.8) 48%, rgba(168, 85, 247, 0.5) 52%,
-        transparent 65%, transparent 100%
-      );
-      background-size: 220% 100%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
 
     /* CUSTOM LUXURY SWITCH BUTTON */
     .theme-switch-btn {
@@ -281,7 +270,7 @@
       text-transform: uppercase;
     }
 
-    /* TIER CARDS FULL DESIGN */
+    /* TIER CARDS */
     .tier-card {
       --white: hsl(0, 0%, 100%);
       --black: hsl(240, 15%, 9%);
@@ -403,38 +392,34 @@
     .view { transition: opacity .4s ease; opacity: 1; }
     .view-hidden { display: none !important; opacity: 0; }
 
-    /* CINEMATIC LOADER */
+    /* PURE CSS FAILSAFE LOADER */
     #vx-loader {
       position: fixed;
       inset: 0;
-      z-index: 99999;
+      z-index: 999999;
       background: #09090c;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       overflow: hidden;
-      transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.6s ease;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
     }
 
     #vx-loader.vx-hide {
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
+      opacity: 0 !important;
+      visibility: hidden !important;
+      pointer-events: none !important;
     }
 
     #app-content {
       opacity: 0;
-      filter: blur(18px);
-      transform: scale(1.02);
-      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-                  filter 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-                  transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      filter: blur(12px);
+      transition: opacity 0.6s ease, filter 0.6s ease;
     }
     #app-content.vx-revealed {
       opacity: 1;
       filter: blur(0px);
-      transform: scale(1);
     }
 
     .vx-ambient-glow {
@@ -444,103 +429,67 @@
       border-radius: 50%;
       background: radial-gradient(circle, rgba(168, 85, 247, 0.35) 0%, rgba(126, 34, 206, 0.12) 40%, transparent 70%);
       filter: blur(50px);
-      animation: vxGlowPulse 4s ease-in-out infinite;
+      animation: vxGlowPulse 3s ease-in-out infinite;
     }
     @keyframes vxGlowPulse {
       0%, 100% { transform: scale(0.92); opacity: 0.6; }
       50% { transform: scale(1.08); opacity: 0.95; }
     }
 
-    .vx-logo-word {
-      display: flex;
+    .vx-loader-title {
       font-family: 'Cinzel', serif;
       font-weight: 900;
-      font-size: clamp(3.2rem, 12vw, 6.5rem);
-      letter-spacing: 0.22em;
-      line-height: 1;
-      position: relative;
-      z-index: 2;
-    }
-
-    .vx-letter {
-      display: inline-block;
-      background: linear-gradient(135deg, #ffffff 0%, #f3e8ff 35%, #c084fc 70%, #7e22ce 100%);
+      font-size: clamp(3rem, 10vw, 6rem);
+      letter-spacing: 0.2em;
+      background: linear-gradient(135deg, #ffffff 0%, #c084fc 70%, #7e22ce 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.8)) drop-shadow(0 0 20px rgba(168, 85, 247, 0.6));
-      opacity: 0;
-      animation: vxLetterGlitchAssemble 0.75s cubic-bezier(0.19, 1, 0.22, 1) forwards;
-      animation-delay: var(--ld, 0s);
-    }
-
-    @keyframes vxLetterGlitchAssemble {
-      0% {
-        opacity: 0;
-        transform: translate3d(0, -20px, 0) scale(1.3) skewX(12deg);
-        filter: drop-shadow(-4px 0 0 rgba(255, 0, 130, 0.8)) drop-shadow(4px 0 0 rgba(0, 220, 255, 0.8)) blur(6px);
-      }
-      40% {
-        opacity: 0.8;
-        transform: translate3d(0, 3px, 0) scale(0.96) skewX(-4deg);
-        filter: drop-shadow(2px 0 0 rgba(255, 0, 130, 0.5)) drop-shadow(-2px 0 0 rgba(0, 220, 255, 0.5)) blur(1px);
-      }
-      100% {
-        opacity: 1;
-        transform: translate3d(0, 0, 0) scale(1) skewX(0deg);
-        filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.8)) drop-shadow(0 0 20px rgba(168, 85, 247, 0.6));
-      }
+      position: relative;
+      z-index: 2;
     }
 
     .vx-bar-track {
       width: min(78vw, 320px);
       height: 6px;
       border-radius: 999px;
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(255, 255, 255, 0.08);
       border: 1px solid rgba(168, 85, 247, 0.4);
-      box-shadow: 0 0 15px rgba(126,34,206,0.3);
+      box-shadow: 0 0 15px rgba(126, 34, 206, 0.3);
       margin-top: 1.8rem;
       position: relative;
       overflow: hidden;
       z-index: 2;
     }
 
-    .vx-bar-fill {
+    /* CSS ANIMATION PROGRESS (GUARANTEED NO JS FREEZE) */
+    .vx-bar-fill-css {
       height: 100%;
       width: 0%;
       border-radius: 999px;
       background: linear-gradient(90deg, #7e22ce, #a855f7 55%, #e9d5ff);
       box-shadow: 0 0 12px rgba(168, 85, 247, 0.9);
-      transition: width 0.05s linear;
-      position: relative;
+      animation: fillBarCSS 2.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
     }
 
-    .vx-bar-fill::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.7), transparent);
-      width: 40%;
-      transform: translateX(-100%);
-      animation: vxShimmer 1.5s ease-in-out infinite;
-    }
-    @keyframes vxShimmer {
-      0% { transform: translateX(-120%); }
-      100% { transform: translateX(340%); }
+    @keyframes fillBarCSS {
+      0% { width: 0%; }
+      50% { width: 65%; }
+      100% { width: 100%; }
     }
   </style>
 </head>
 
 <body class="vx-loading">
 
-  <!-- CINEMATIC LOADER -->
-  <div id="vx-loader">
+  <!-- CINEMATIC FAILSAFE LOADER -->
+  <div id="vx-loader" onclick="dismissLoaderNow()">
     <div class="vx-ambient-glow"></div>
-    <div class="vx-logo-word" id="vx-logo-word"></div>
+    <div class="vx-loader-title">VORTX</div>
     <div class="vx-bar-track">
-      <div class="vx-bar-fill" id="vx-bar-fill"></div>
+      <div class="vx-bar-fill-css"></div>
     </div>
     <p class="text-xs font-bold uppercase tracking-[0.3em] text-purple-300/80 mt-4 relative z-10">
-      INITIALIZING <span id="vx-percent" class="text-purple-200">0</span>%
+      INITIALIZING...
     </p>
   </div>
 
@@ -929,73 +878,17 @@
   </div>
 
   <script>
-  /* BULLETPROOF CINEMATIC LOADER LOGIC */
-  (function () {
-    try {
-      const docEl = document.documentElement;
-      docEl.classList.add('vx-loading');
+  /* FAILSAFE LOADER DISMISSAL */
+  function dismissLoaderNow() {
+    const loader = document.getElementById('vx-loader');
+    const appContent = document.getElementById('app-content');
+    if (loader) loader.classList.add('vx-hide');
+    if (appContent) appContent.classList.add('vx-revealed');
+    document.documentElement.classList.remove('vx-loading');
+  }
 
-      const loader = document.getElementById('vx-loader');
-      const appContent = document.getElementById('app-content');
-      const barFill = document.getElementById('vx-bar-fill');
-      const percentEl = document.getElementById('vx-percent');
-      const wordEl = document.getElementById('vx-logo-word');
-
-      const letters = ['V', 'O', 'R', 'T', 'X'];
-      if (wordEl && wordEl.children.length === 0) {
-        letters.forEach((ch, i) => {
-          const span = document.createElement('span');
-          span.className = 'vx-letter';
-          span.textContent = ch;
-          span.style.setProperty('--ld', (i * 0.12).toFixed(2) + 's');
-          wordEl.appendChild(span);
-        });
-      }
-
-      let progress = 0;
-      let finished = false;
-
-      function revealSite() {
-        if (finished) return;
-        finished = true;
-
-        if (barFill) barFill.style.width = '100%';
-        if (percentEl) percentEl.textContent = '100';
-
-        setTimeout(() => {
-          if (loader) {
-            loader.classList.add('vx-hide');
-            loader.style.display = 'none';
-          }
-          if (appContent) appContent.classList.add('vx-revealed');
-          docEl.classList.remove('vx-loading');
-        }, 300);
-      }
-
-      // Smooth Interval progress ~2.5 seconds
-      const timer = setInterval(() => {
-        progress += 4;
-        if (progress >= 100) {
-          progress = 100;
-          clearInterval(timer);
-          revealSite();
-        }
-        if (barFill) barFill.style.width = progress + '%';
-        if (percentEl) percentEl.textContent = progress;
-      }, 35);
-
-      setTimeout(revealSite, 3000);
-
-      if (loader) loader.addEventListener('click', revealSite);
-    } catch (e) {
-      // Immediate failsafe if JS breaks
-      const loader = document.getElementById('vx-loader');
-      const appContent = document.getElementById('app-content');
-      if (loader) loader.style.display = 'none';
-      if (appContent) appContent.classList.add('vx-revealed');
-      document.documentElement.classList.remove('vx-loading');
-    }
-  })();
+  // Automatic Reveal Timer
+  setTimeout(dismissLoaderNow, 2200);
 
   /* SWIPER & SITE FUNCTIONS */
   let swiper;
@@ -1110,4 +1003,16 @@
     document.getElementById('cat-title').textContent = key;
     document.getElementById('cat-grid').innerHTML = CATEGORY_DATA[key].map((item) => `
       <div onclick="openPreview('${item}', '${key}')" class="cat-card-glass flex flex-col justify-between min-h-[140px] text-left ltr:text-left rtl:text-right border-l-4 border-purple-500">
-        <span class="text-[10px] font
+        <span class="text-[10px] font-bold uppercase text-purple-400">${key} Pack</span>
+        <h3 class="font-head font-bold text-xl mt-4">${item}</h3>
+      </div>`).join('');
+    showView('category-view');
+  }
+
+  function openWebTiers() { showView('web-view'); }
+  function backToHome() { showView('main-view'); }
+  const yr = document.getElementById('year');
+  if (yr) yr.textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
