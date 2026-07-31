@@ -48,7 +48,7 @@
       --brandLight: #a855f7;
       --bg-color: #050505;
       --text-color: #e8e8ef;
-      --nav-logo-color: #ffffff;
+      --nav-logo-color: #c084fc;
       --nav-icon-color: #c084fc;
       --card-title-color: #ffffff;
       --star-bg: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
@@ -62,7 +62,7 @@
       --ink: #f8fafc;
       --bg-color: #f1f5f9;
       --text-color: #0f172a;
-      --nav-logo-color: #3b0764;
+      --nav-logo-color: #581c87;
       --nav-icon-color: #6b21a8;
       --card-title-color: #3b0764;
       --star-bg: radial-gradient(ellipse at bottom, #e2e8f0 0%, #cbd5e1 100%);
@@ -133,99 +133,48 @@
       to { transform: translateY(-2000px); }
     }
 
-    /* ---------- REAL PURE GLASS EFFECT FOR VORTX ---------- */
-    .vortx-pure-glass-container {
+    /* ---------- VORTX WET LIQUID / OIL SHINE EFFECT ---------- */
+    .vortx-wet-oil-title {
       position: relative;
       display: inline-block;
-      padding: 10px 20px;
-    }
-
-    /* Bloom Glow Effects (توهج زجاجي مائي ناعم خلف النص) */
-    .vortx-pure-glass-container .bloom {
-      height: 2px;
-      width: 2px;
-      position: absolute;
-      background: white;
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    .vortx-pure-glass-container .bloom1 {
-      top: 25%;
-      right: 20%;
-      box-shadow:
-        rgba(255, 255, 255, 0.9) 0px 0px 30px 20px,
-        rgba(168, 85, 247, 0.7) 0px 0px 60px 40px;
-    }
-
-    .vortx-pure-glass-container .bloom2 {
-      bottom: 25%;
-      left: 20%;
-      box-shadow:
-        rgba(255, 255, 255, 0.7) 0px 0px 25px 15px,
-        rgba(126, 34, 206, 0.7) 0px 0px 50px 35px;
-    }
-
-    /* VORTX Glass Typography (حروف الكلمة نفسها مصبوبة زجاج) */
-    .vortx-glass-text {
-      position: relative;
-      z-index: 2;
       font-weight: 900;
-      background: linear-gradient(
-        180deg,
-        #ffffff 0%,
-        rgba(255, 255, 255, 0.9) 45%,
-        rgba(192, 132, 252, 0.8) 75%,
-        rgba(126, 34, 206, 0.9) 100%
-      );
+      background: linear-gradient(135deg, #ffffff 0%, #f3e8ff 35%, #c084fc 70%, #7e22ce 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.6))
-              drop-shadow(0 0 15px rgba(168, 85, 247, 0.4));
+      filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.8)) drop-shadow(0 0 20px rgba(168, 85, 247, 0.5));
     }
 
-    html.light .vortx-glass-text {
-      background: linear-gradient(180deg, #2e1065 0%, #581c87 60%, #7e22ce 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      filter: drop-shadow(0 10px 15px rgba(126, 34, 206, 0.15));
-    }
-
-    /* Glass Refractive Overlay (إنكسار زجاجي حقيقي بدون مربع مصمت) */
-    .vortx-glass-reflection {
+    /* مسحة اللمعة الزيتية اللزجة المتحركة فوق الحروف */
+    .vortx-wet-oil-title::before {
+      content: 'VORTX';
       position: absolute;
-      inset: 0;
-      z-index: 3;
-      border-radius: 999px;
+      left: 0; top: 0; width: 100%; height: 100%;
       background: linear-gradient(
-        115deg,
-        rgba(255, 255, 255, 0.35) 0%,
-        rgba(255, 255, 255, 0.05) 35%,
-        transparent 60%,
-        rgba(255, 255, 255, 0.15) 100%
+        110deg,
+        transparent 0%,
+        transparent 35%,
+        rgba(255, 255, 255, 0.95) 48%,
+        rgba(233, 213, 255, 0.6) 52%,
+        transparent 65%,
+        transparent 100%
       );
+      background-size: 220% 100%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: oilShineSweep 4s infinite ease-in-out;
       pointer-events: none;
-      mix-blend-mode: overlay;
     }
 
-    /* VORTX Header Small Logo Pure Glass */
-    .vortx-header-glass {
-      position: relative;
-      font-weight: 900;
-      color: var(--nav-logo-color);
-      letter-spacing: 2px;
-      padding: 4px 10px;
-      background: linear-gradient(180deg, #ffffff 30%, #c084fc 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      filter: drop-shadow(0 0 8px rgba(168, 85, 247, 0.4));
+    @keyframes oilShineSweep {
+      0% { background-position: 220% 0; }
+      100% { background-position: -220% 0; }
     }
 
-    html.light .vortx-header-glass {
-      background: linear-gradient(180deg, #3b0764 0%, #7e22ce 100%);
+    html.light .vortx-wet-oil-title {
+      background: linear-gradient(135deg, #2e1065 0%, #581c87 40%, #7e22ce 70%, #a855f7 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      filter: none;
+      filter: drop-shadow(0 5px 15px rgba(126, 34, 206, 0.2));
     }
 
     /* ---------- CUSTOM LUXURY SWITCH BUTTON ---------- */
@@ -496,7 +445,7 @@
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
         <!-- VORTX Header Small Logo -->
         <a href="#top" class="flex items-center gap-3">
-          <span class="font-head text-2xl vortx-header-glass">VORTX</span>
+          <span class="font-head text-2xl vortx-wet-oil-title">VORTX</span>
         </a>
 
         <ul class="hidden md:flex items-center gap-10 text-sm font-bold opacity-80 mx-auto">
@@ -534,16 +483,11 @@
         <span data-i18n="hero-tag">Digital Assets Hub</span>
       </div>
 
-      <!-- VORTX MAIN TITLE WITH PURE REFRACTIVE GLASS -->
+      <!-- VORTX MAIN TITLE WITH WET LIQUID OIL SHINE -->
       <div class="relative my-2 px-4 inline-block">
-        <div class="vortx-pure-glass-container">
-          <div class="bloom bloom1"></div>
-          <div class="bloom bloom2"></div>
-          <h1 class="font-head font-black tracking-[0.25em] text-7xl sm:text-9xl md:text-[10rem] vortx-glass-text leading-none py-4">
-            VORTX
-          </h1>
-          <div class="vortx-glass-reflection"></div>
-        </div>
+        <h1 class="font-head font-black tracking-[0.25em] text-7xl sm:text-9xl md:text-[10rem] vortx-wet-oil-title leading-none py-4">
+          VORTX
+        </h1>
       </div>
 
       <p data-i18n="hero-desc" class="font-semibold opacity-85 max-w-2xl mx-auto text-base sm:text-xl leading-relaxed mt-4 mb-10">
