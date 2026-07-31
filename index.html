@@ -9,7 +9,7 @@
   <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Google Fonts: Cinzel, Inter & Cairo -->
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;800;900&family=Cinzel:wght@700;800;900&family=Inter:wght@500;600;700;800&display=swap" rel="stylesheet" />
@@ -39,18 +39,8 @@
   </script>
 
   <style>
-    /* Defs for Uiverse 3D Glass Button */
-    @property --angle-1 {
-      syntax: "<angle>";
-      inherits: false;
-      initial-value: -75deg;
-    }
-
-    @property --angle-2 {
-      syntax: "<angle>";
-      inherits: false;
-      initial-value: -45deg;
-    }
+    @property --angle-1 { syntax: "<angle>"; inherits: false; initial-value: -75deg; }
+    @property --angle-2 { syntax: "<angle>"; inherits: false; initial-value: -45deg; }
 
     :root {
       --ink: #050505;
@@ -63,7 +53,6 @@
       --card-title-color: #ffffff;
       --star-bg: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
       --star-opacity: 1;
-
       --anim--hover-time: 400ms;
       --anim--hover-ease: cubic-bezier(0.25, 1, 0.5, 1);
       --btn-text-color: rgba(255, 255, 255, 0.95);
@@ -98,7 +87,7 @@
     h1, h2, h3, .font-head { font-family: 'Cinzel', serif; letter-spacing: 1.5px; }
     html[dir="rtl"] h1, html[dir="rtl"] h2, html[dir="rtl"] h3, html[dir="rtl"] .font-head { font-family: 'Cairo', sans-serif; letter-spacing: 0; }
 
-    /* ---------- FULL STARRY BACKGROUND ---------- */
+    /* ---------- STARS BACKGROUND ---------- */
     .stars-background-container {
       position: fixed;
       top: 0; left: 0;
@@ -120,37 +109,31 @@
 
     #stars {
       width: 1px; height: 1px;
-      box-shadow: 501px 811px #fff, 1450px 1324px #fff, 1093px 1780px #fff, 1469px 678px #fff, 904px 741px #fff, 1160px 781px #fff, 1841px 1962px #fff, 1630px 1667px #fff, 1788px 676px #fff, 367px 1734px #fff, 1343px 156px #fff, 1283px 1142px #fff, 1062px 378px #fff, 1395px 467px #fff, 1017px 1891px #fff, 137px 1114px #fff, 1767px 1403px #fff, 1543px 11px #fff, 1078px 181px #fff, 1189px 1574px #fff, 1697px 1551px #fff, 439px 472px #fff, 1491px 677px #fff, 1364px 599px #fff;
+      box-shadow: 501px 811px #fff, 1450px 1324px #fff, 1093px 1780px #fff, 1469px 678px #fff, 904px 741px #fff, 1160px 781px #fff, 1841px 1962px #fff, 1630px 1667px #fff, 1788px 676px #fff, 367px 1734px #fff, 1343px 156px #fff, 1283px 1142px #fff, 1062px 378px #fff;
       animation: animStar 50s linear infinite;
     }
-    #stars:after {
-      content: " "; position: absolute; top: 2000px; width: 1px; height: 1px; background: transparent; box-shadow: inherit;
-    }
+    #stars:after { content: " "; position: absolute; top: 2000px; width: 1px; height: 1px; background: transparent; box-shadow: inherit; }
 
     #stars2 {
       width: 2px; height: 2px;
-      box-shadow: 1925px 1320px #fff, 693px 1778px #fff, 1016px 711px #fff, 1171px 563px #fff, 661px 1919px #fff, 1610px 44px #fff, 1275px 140px #fff, 1208px 1802px #fff, 1473px 1587px #fff, 11px 1117px #fff, 853px 1757px #fff, 1149px 937px #fff, 1353px 428px #fff, 270px 279px #fff, 258px 1404px #fff, 417px 1188px #fff, 286px 561px #fff, 393px 1765px #fff, 147px 881px #fff, 666px 1097px #fff, 1425px 1278px #fff, 806px 156px #fff, 1252px 561px #fff, 218px 52px #fff, 1371px 1980px #fff, 171px 745px #fff, 1424px 89px #fff, 137px 244px #fff, 939px 1922px #fff, 137px 1080px #fff, 1757px 50px #fff, 904px 536px #fff, 1938px 1001px #fff, 1172px 440px #fff, 72px 1475px #fff, 102px 121px #fff, 804px 1671px #fff, 1314px 270px #fff, 440px 1341px #fff, 1216px 511px #fff, 1061px 1523px #fff, 97px 274px #fff, 704px 1318px #fff, 52px 1872px #fff, 1962px 296px #fff, 111px 289px #fff;
+      box-shadow: 1925px 1320px #fff, 693px 1778px #fff, 1016px 711px #fff, 1171px 563px #fff, 661px 1919px #fff, 1610px 44px #fff, 1275px 140px #fff;
       animation: animStar 100s linear infinite;
     }
-    #stars2:after {
-      content: " "; position: absolute; top: 2000px; width: 2px; height: 2px; background: transparent; box-shadow: inherit;
-    }
+    #stars2:after { content: " "; position: absolute; top: 2000px; width: 2px; height: 2px; background: transparent; box-shadow: inherit; }
 
     #stars3 {
       width: 3px; height: 3px;
-      box-shadow: 200px 981px #fff, 1731px 521px #fff, 132px 1039px #fff, 1888px 1547px #fff, 899px 1226px #fff, 1887px 580px #fff, 1548px 1092px #fff, 1626px 689px #fff, 254px 1072px #fff, 1684px 1211px #fff, 672px 1267px #fff, 939px 668px #fff, 1969px 645px #fff, 1126px 983px #fff, 457px 568px #fff, 476px 876px #fff, 829px 1896px #fff, 1364px 1846px #fff, 1507px 1120px #fff, 936px 1948px #fff, 1833px 832px #fff, 1424px 285px #fff, 1377px 1596px #fff, 432px 153px #fff, 1348px 1410px #fff, 1529px 954px #fff, 1102px 387px #fff, 264px 297px #fff, 811px 977px #fff, 1931px 673px #fff, 1734px 978px #fff, 1772px 1567px #fff, 1197px 1400px #fff, 764px 282px #fff, 1103px 822px #fff;
+      box-shadow: 200px 981px #fff, 1731px 521px #fff, 132px 1039px #fff, 1888px 1547px #fff, 899px 1226px #fff, 1887px 580px #fff, 1548px 1092px #fff;
       animation: animStar 150s linear infinite;
     }
-    #stars3:after {
-      content: " "; position: absolute; top: 2000px; width: 3px; height: 3px; background: transparent; box-shadow: inherit;
-    }
+    #stars3:after { content: " "; position: absolute; top: 2000px; width: 3px; height: 3px; background: transparent; box-shadow: inherit; }
 
     @keyframes animStar {
       from { transform: translateY(0px); }
       to { transform: translateY(-2000px); }
     }
 
-    /* ---------- VORTX LIQUID/WET TITLE ---------- */
+    /* ---------- VORTX TITLE WET SHINE ---------- */
     .vortx-wet-title {
       position: relative;
       display: inline-block;
@@ -178,23 +161,15 @@
       100% { background-position: -200% 0; }
     }
 
-    html.light .vortx-wet-title {
-      background: linear-gradient(135deg, #2e1065 0%, #581c87 40%, #7e22ce 70%, #a855f7 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    /* ========== UIVERSE 3D GLASS BUTTON STYLES ========== */
-
+    /* ---------- UIVERSE 3D BUTTON (FIXED CLICKABLE) ---------- */
     .button-wrap {
       position: relative;
       z-index: 10;
       border-radius: 999vw;
       background: transparent;
-      pointer-events: auto;
       cursor: pointer;
-      transition: all var(--anim--hover-time) var(--anim--hover-ease);
       display: inline-block;
+      transition: all var(--anim--hover-time) var(--anim--hover-ease);
     }
 
     .button-shadow {
@@ -225,129 +200,44 @@
       box-sizing: border-box;
       mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
       mask-composite: exclude;
-      transition: all var(--anim--hover-time) var(--anim--hover-ease);
-      overflow: visible;
       opacity: 1;
     }
 
-    .button-wrap button {
+    .btn-3d-style {
       --border-width: clamp(1px, 0.0625em, 4px);
       all: unset;
       cursor: pointer;
       position: relative;
-      -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-      pointer-events: auto;
+      display: block;
       z-index: 3;
-      background: linear-gradient(
-        -75deg,
-        rgba(255, 255, 255, 0.08),
-        rgba(255, 255, 255, 0.28),
-        rgba(255, 255, 255, 0.08)
-      );
+      background: linear-gradient(-75deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0.08));
       border-radius: 999vw;
-      box-shadow:
-        inset 0 0.125em 0.125em rgba(0, 0, 0, 0.05),
-        inset 0 -0.125em 0.125em rgba(255, 255, 255, 0.5),
-        0 0.25em 0.125em -0.125em rgba(0, 0, 0, 0.3),
-        0 0 0.1em 0.25em inset rgba(255, 255, 255, 0.2);
-      backdrop-filter: blur(clamp(1px, 0.125em, 6px));
-      -webkit-backdrop-filter: blur(clamp(1px, 0.125em, 6px));
+      box-shadow: inset 0 0.125em 0.125em rgba(0, 0, 0, 0.05), inset 0 -0.125em 0.125em rgba(255, 255, 255, 0.5), 0 0.25em 0.125em -0.125em rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
       transition: all var(--anim--hover-time) var(--anim--hover-ease);
       width: 100%;
       text-align: center;
     }
 
-    .button-wrap button:hover {
+    .btn-3d-style:hover {
       transform: scale(0.975);
-      backdrop-filter: blur(0.01em);
-      box-shadow:
-        inset 0 0.125em 0.125em rgba(0, 0, 0, 0.05),
-        inset 0 -0.125em 0.125em rgba(255, 255, 255, 0.6),
-        0 0.15em 0.05em -0.1em rgba(0, 0, 0, 0.25),
-        0 0 0.05em 0.1em inset rgba(255, 255, 255, 0.5);
     }
 
-    .button-wrap button span {
+    .btn-3d-style span {
       position: relative;
       display: block;
       user-select: none;
-      font-family: "Inter", "Cairo", sans-serif;
-      letter-spacing: -0.02em;
       font-weight: 800;
       font-size: 0.9em;
       color: var(--btn-text-color);
       text-shadow: 0em 0.15em 0.1em rgba(0, 0, 0, 0.4);
-      transition: all var(--anim--hover-time) var(--anim--hover-ease);
       padding-inline: 2em;
       padding-block: 0.9em;
       text-transform: uppercase;
     }
 
-    .button-wrap button span::after {
-      content: "";
-      display: block;
-      position: absolute;
-      z-index: 1;
-      width: calc(100% - var(--border-width));
-      height: calc(100% - var(--border-width));
-      top: calc(0% + var(--border-width) / 2);
-      left: calc(0% + var(--border-width) / 2);
-      box-sizing: border-box;
-      border-radius: 999vw;
-      overflow: clip;
-      background: linear-gradient(
-        var(--angle-2),
-        rgba(255, 255, 255, 0) 0%,
-        rgba(255, 255, 255, 0.5) 40% 50%,
-        rgba(255, 255, 255, 0) 55%
-      );
-      z-index: 3;
-      mix-blend-mode: screen;
-      pointer-events: none;
-      background-size: 200% 200%;
-      background-position: 0% 50%;
-      background-repeat: no-repeat;
-      transition: background-position calc(var(--anim--hover-time) * 1.25) var(--anim--hover-ease), --angle-2 calc(var(--anim--hover-time) * 1.25) var(--anim--hover-ease);
-    }
-
-    .button-wrap button:hover span::after { background-position: 25% 50%; }
-    .button-wrap button:active span::after { background-position: 50% 15%; --angle-2: -15deg; }
-
-    .button-wrap button::after {
-      content: "";
-      position: absolute;
-      z-index: 1;
-      inset: 0;
-      border-radius: 999vw;
-      width: calc(100% + var(--border-width));
-      height: calc(100% + var(--border-width));
-      top: calc(0% - var(--border-width) / 2);
-      left: calc(0% - var(--border-width) / 2);
-      padding: var(--border-width);
-      box-sizing: border-box;
-      background: conic-gradient(
-          from var(--angle-1) at 50% 50%,
-          rgba(168, 85, 247, 0.8),
-          rgba(0, 0, 0, 0) 5% 40%,
-          rgba(168, 85, 247, 0.8) 50%,
-          rgba(0, 0, 0, 0) 60% 95%,
-          rgba(168, 85, 247, 0.8)
-        ),
-        linear-gradient(180deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.3));
-      mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-      mask-composite: exclude;
-      transition: all var(--anim--hover-time) var(--anim--hover-ease), --angle-1 500ms ease;
-      box-shadow: inset 0 0 0 calc(var(--border-width) / 2) rgba(255, 255, 255, 0.5);
-    }
-
-    .button-wrap button:hover::after { --angle-1: -125deg; }
-    .button-wrap button:active::after { --angle-1: -75deg; }
-
-    .button-wrap:has(button:hover) .button-shadow { filter: blur(clamp(2px, 0.0625em, 6px)); }
-    .button-wrap:has(button:hover) .button-shadow::after { top: calc(var(--shadow-cuttoff-fix) - 0.875em); opacity: 1; }
-    .button-wrap:has(button:active) { transform: rotate3d(1, 0, 0, 20deg); }
-
-    /* ========== UIVERSE TIER CARD STYLES ========== */
+    /* ---------- UIVERSE TIER CARD STYLES ---------- */
     .tier-card {
       --white: hsl(0, 0%, 100%);
       --black: hsl(240, 15%, 9%);
@@ -364,75 +254,15 @@
       width: 100%;
       background-color: hsla(240, 15%, 9%, 0.85);
       backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      background-image: radial-gradient(
-          at 88% 40%,
-          hsla(240, 15%, 9%, 1) 0px,
-          transparent 85%
-        ),
-        radial-gradient(at 49% 30%, hsla(240, 15%, 9%, 1) 0px, transparent 85%),
-        radial-gradient(at 14% 26%, hsla(240, 15%, 9%, 1) 0px, transparent 85%),
-        radial-gradient(at 0% 64%, hsla(263, 93%, 56%, 0.4) 0px, transparent 85%),
-        radial-gradient(at 41% 94%, hsla(284, 100%, 84%, 0.3) 0px, transparent 85%),
-        radial-gradient(at 100% 99%, hsla(306, 100%, 57%, 0.4) 0px, transparent 85%);
-
+      background-image: radial-gradient(at 88% 40%, hsla(240, 15%, 9%, 1) 0px, transparent 85%),
+                        radial-gradient(at 0% 64%, hsla(263, 93%, 56%, 0.4) 0px, transparent 85%);
       border-radius: 1.75rem;
       box-shadow: 0px -16px 24px 0px rgba(255, 255, 255, 0.15) inset;
       overflow: hidden;
-      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      transition: transform 0.4s ease;
     }
 
-    html.light .tier-card {
-      background-color: rgba(255, 255, 255, 0.95);
-      box-shadow: 0 15px 35px rgba(126, 34, 206, 0.15);
-    }
-
-    .tier-card:hover {
-      transform: translateY(-6px);
-    }
-
-    .tier-card .card__border {
-      overflow: hidden;
-      pointer-events: none;
-      position: absolute;
-      z-index: 1;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: calc(100% + 2px);
-      height: calc(100% + 2px);
-      background-image: linear-gradient(
-        0deg,
-        hsl(0, 0%, 100%) -50%,
-        hsl(0, 0%, 40%) 100%
-      );
-      border-radius: 1.75rem;
-    }
-
-    .tier-card .card__border::before {
-      content: "";
-      pointer-events: none;
-      position: absolute;
-      z-index: 1;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) rotate(0deg);
-      transform-origin: left;
-      width: 200%;
-      height: 12rem;
-      background-image: linear-gradient(
-        0deg,
-        hsla(0, 0%, 100%, 0) 0%,
-        hsl(277, 95%, 60%) 40%,
-        hsl(277, 95%, 60%) 60%,
-        hsla(0, 0%, 40%, 0) 100%
-      );
-      animation: rotate 8s linear infinite;
-    }
-
-    @keyframes rotate {
-      to { transform: translate(-50%, -50%) rotate(360deg); }
-    }
+    .tier-card:hover { transform: translateY(-6px); }
 
     .tier-card .card_title__container .card_title {
       font-size: 1.75rem;
@@ -441,176 +271,61 @@
       font-family: 'Cinzel', 'Cairo', serif;
     }
 
-    html.light .tier-card .card_title__container .card_title {
-      color: #3b0764;
-    }
-
     .tier-card .card_title__container .card_paragraph {
       margin-top: 0.5rem;
       font-size: 0.85rem;
-      font-weight: 600;
       color: var(--paragraph);
       line-height: 1.5;
     }
 
-    html.light .tier-card .card_title__container .card_paragraph {
-      color: #4b5563;
-    }
-
-    .tier-card .line {
-      width: 100%;
-      height: 0.1rem;
-      background-color: var(--line);
-      border: none;
-      margin: 0.5rem 0;
-    }
-
-    .tier-card .card__list {
-      display: flex;
-      flex-direction: column;
-      gap: 0.85rem;
-      position: relative;
-      z-index: 2;
-    }
-
-    .tier-card .card__list .card__list_item {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
+    .tier-card .line { width: 100%; height: 0.1rem; background-color: var(--line); border: none; margin: 0.5rem 0; }
+    .tier-card .card__list { display: flex; flex-direction: column; gap: 0.85rem; }
+    .tier-card .card__list .card__list_item { display: flex; align-items: center; gap: 0.75rem; }
 
     .tier-card .card__list .card__list_item .check {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 1.25rem;
-      height: 1.25rem;
-      background-color: var(--primary);
-      border-radius: 50%;
-      flex-shrink: 0;
+      display: flex; justify-content: center; align-items: center;
+      width: 1.25rem; height: 1.25rem; background-color: var(--primary);
+      border-radius: 50%; flex-shrink: 0;
     }
 
-    .tier-card .card__list .card__list_item .check .check_svg {
-      width: 0.85rem;
-      height: 0.85rem;
-      fill: var(--black);
-    }
+    .tier-card .card__list .card__list_item .check .check_svg { width: 0.85rem; height: 0.85rem; fill: var(--black); }
+    .tier-card .card__list .card__list_item .list_text { font-size: 0.9rem; font-weight: 700; color: var(--white); }
 
-    .tier-card .card__list .card__list_item .list_text {
-      font-size: 0.9rem;
-      font-weight: 700;
-      color: var(--white);
-    }
-
-    html.light .tier-card .card__list .card__list_item .list_text {
-      color: #1e1b4b;
-    }
-
-    /* ---------- CUSTOM GLASS RADIO GROUP ---------- */
+    /* ---------- GLASS RADIO SELECTOR ---------- */
     .glass-radio-group {
-      --bg: rgba(255, 255, 255, 0.05);
-      --text: rgba(255, 255, 255, 0.7);
-
-      display: flex;
-      position: relative;
-      background: var(--bg);
-      border-radius: 999px;
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+      display: flex; position: relative;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 999px; backdrop-filter: blur(16px);
       border: 1px solid rgba(255, 255, 255, 0.15);
-      box-shadow:
-        inset 1px 1px 4px rgba(255, 255, 255, 0.2),
-        inset -1px -1px 6px rgba(0, 0, 0, 0.4),
-        0 15px 30px rgba(0, 0, 0, 0.25);
-      padding: 6px;
-      margin: 35px auto 10px auto;
-      width: 100%;
-      max-width: 56rem;
-    }
-
-    html.light .glass-radio-group {
-      --bg: rgba(126, 34, 206, 0.08);
-      --text: #4c1d95;
-      border-color: rgba(126, 34, 206, 0.25);
+      padding: 6px; margin: 35px auto 10px auto;
+      width: 100%; max-width: 56rem;
     }
 
     .glass-radio-group input { display: none; }
-
     .glass-radio-group label {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 15px;
-      font-weight: 800;
-      padding: 0.9rem 1rem;
-      cursor: pointer;
-      letter-spacing: 1px;
-      color: var(--text);
-      position: relative;
-      z-index: 2;
-      transition: color 0.3s ease-in-out;
+      flex: 1; display: flex; align-items: center; justify-content: center;
+      font-size: 15px; font-weight: 800; padding: 0.9rem 1rem; cursor: pointer;
+      color: rgba(255, 255, 255, 0.7); z-index: 2; transition: color 0.3s ease;
     }
-
-    .glass-radio-group label:hover { color: #ffffff; }
-    html.light .glass-radio-group label:hover { color: #2e1065; }
 
     .glass-radio-group input:checked + label { color: #ffffff; }
 
     .glass-glider {
-      position: absolute;
-      top: 6px;
-      bottom: 6px;
-      width: calc((100% - 12px) / 3);
-      border-radius: 999px;
-      z-index: 1;
-      transition:
-        transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
-        background 0.4s ease-in-out,
-        box-shadow 0.4s ease-in-out;
+      position: absolute; top: 6px; bottom: 6px;
+      width: calc((100% - 12px) / 3); border-radius: 999px; z-index: 1;
+      transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.4s ease;
     }
 
-    html[dir="ltr"] #glass-cc:checked ~ .glass-glider {
-      transform: translateX(0%);
-      background: linear-gradient(135deg, rgba(168, 85, 247, 0.4), #a855f7);
-      box-shadow: 0 0 20px rgba(168, 85, 247, 0.6), 0 0 10px rgba(255, 255, 255, 0.5) inset;
-    }
+    html[dir="ltr"] #glass-cc:checked ~ .glass-glider { transform: translateX(0%); background: linear-gradient(135deg, rgba(168, 85, 247, 0.4), #a855f7); }
+    html[dir="ltr"] #glass-xml:checked ~ .glass-glider { transform: translateX(100%); background: linear-gradient(135deg, rgba(56, 189, 248, 0.4), #06b6d4); }
+    html[dir="ltr"] #glass-shake:checked ~ .glass-glider { transform: translateX(200%); background: linear-gradient(135deg, rgba(234, 179, 8, 0.4), #eab308); }
 
-    html[dir="ltr"] #glass-xml:checked ~ .glass-glider {
-      transform: translateX(100%);
-      background: linear-gradient(135deg, rgba(56, 189, 248, 0.4), #06b6d4);
-      box-shadow: 0 0 20px rgba(6, 182, 212, 0.6), 0 0 10px rgba(255, 255, 255, 0.5) inset;
-    }
+    html[dir="rtl"] #glass-cc:checked ~ .glass-glider { transform: translateX(0%); background: linear-gradient(135deg, rgba(168, 85, 247, 0.4), #a855f7); }
+    html[dir="rtl"] #glass-xml:checked ~ .glass-glider { transform: translateX(-100%); background: linear-gradient(135deg, rgba(56, 189, 248, 0.4), #06b6d4); }
+    html[dir="rtl"] #glass-shake:checked ~ .glass-glider { transform: translateX(-200%); background: linear-gradient(135deg, rgba(234, 179, 8, 0.4), #eab308); }
 
-    html[dir="ltr"] #glass-shake:checked ~ .glass-glider {
-      transform: translateX(200%);
-      background: linear-gradient(135deg, rgba(234, 179, 8, 0.4), #eab308);
-      box-shadow: 0 0 20px rgba(234, 179, 8, 0.6), 0 0 10px rgba(255, 255, 255, 0.5) inset;
-    }
-
-    html[dir="rtl"] #glass-cc:checked ~ .glass-glider {
-      transform: translateX(0%);
-      background: linear-gradient(135deg, rgba(168, 85, 247, 0.4), #a855f7);
-      box-shadow: 0 0 20px rgba(168, 85, 247, 0.6), 0 0 10px rgba(255, 255, 255, 0.5) inset;
-    }
-
-    html[dir="rtl"] #glass-xml:checked ~ .glass-glider {
-      transform: translateX(-100%);
-      background: linear-gradient(135deg, rgba(56, 189, 248, 0.4), #06b6d4);
-      box-shadow: 0 0 20px rgba(6, 182, 212, 0.6), 0 0 10px rgba(255, 255, 255, 0.5) inset;
-    }
-
-    html[dir="rtl"] #glass-shake:checked ~ .glass-glider {
-      transform: translateX(-200%);
-      background: linear-gradient(135deg, rgba(234, 179, 8, 0.4), #eab308);
-      box-shadow: 0 0 20px rgba(234, 179, 8, 0.6), 0 0 10px rgba(255, 255, 255, 0.5) inset;
-    }
-
-    .text-3d-header { color: var(--nav-logo-color); font-weight: 900; }
-    .lang-btn-icon { color: var(--nav-icon-color); }
-
-    /* ---------- SWIPER 3D FIXED ---------- */
-    .swiper { width: 100%; padding-top: 30px; padding-bottom: 60px; overflow: hidden; }
+    /* ---------- SWIPER 3D RESTORED ---------- */
+    .swiper { width: 100%; padding-top: 30px; padding-bottom: 60px; overflow: visible !important; }
     .swiper-slide { 
       width: 300px !important; 
       height: 440px !important; 
@@ -629,70 +344,37 @@
     .card-glow-cyan { box-shadow: 0 15px 45px -5px rgba(6, 182, 212, 0.45); }
 
     .glossy-bundle-card {
-      position: relative;
-      border-radius: 2.5rem;
+      position: relative; border-radius: 2.5rem;
       background: linear-gradient(135deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.01) 100%);
-      backdrop-filter: blur(24px);
-      border: 1.5px solid rgba(168, 85, 247, 0.3);
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
-      overflow: hidden;
-    }
-    html.light .glossy-bundle-card {
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(243, 232, 255, 0.7) 100%);
-      border-color: rgba(168, 85, 247, 0.4);
+      backdrop-filter: blur(24px); border: 1.5px solid rgba(168, 85, 247, 0.3);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7); overflow: hidden;
     }
 
-    .bundle-title-text { color: var(--card-title-color); }
-
-    .cat-card-glass {
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
-      backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 1.75rem;
-      padding: 1.75rem 2rem;
-      transition: all 0.4s ease;
-      cursor: pointer;
-    }
-    html.light .cat-card-glass { background: rgba(255, 255, 255, 0.9); border-color: rgba(168, 85, 247, 0.2); }
-
-    .theme-switch-btn {
-      width: 64px; height: 34px; border-radius: 999px;
-      background: linear-gradient(135deg, #1e1b4b, #311042);
-      border: 1px solid rgba(168, 85, 247, 0.4);
-      position: relative; cursor: pointer; padding: 3px;
-    }
-    html.light .theme-switch-btn { background: linear-gradient(135deg, #38bdf8, #fde047); }
-    .theme-switch-ball {
-      width: 26px; height: 26px; border-radius: 50%; background: #f1f5f9;
-      position: absolute; top: 3px; left: 3px;
-      transition: transform 0.4s ease;
-      display: flex; align-items: center; justify-content: center;
-    }
-    html.dark .theme-switch-ball { transform: translateX(0px); background: #e2e8f0; }
-    html.light .theme-switch-ball { transform: translateX(30px); background: #fef08a; }
+    .text-3d-header { color: var(--nav-logo-color); font-weight: 900; }
+    .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.08); }
+    .cat-card-glass { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 1.75rem; padding: 1.75rem 2rem; cursor: pointer; }
 
     .view { transition: opacity .4s ease; opacity: 1; }
-    .view-hidden { display: none; opacity: 0; }
+    .view-hidden { display: none !important; opacity: 0; }
   </style>
 </head>
 
 <body>
 
-  <!-- STARS BACKGROUND -->
+  <!-- BACKGROUND STARS -->
   <div class="stars-background-container">
     <div id="stars"></div>
     <div id="stars2"></div>
     <div id="stars3"></div>
   </div>
 
-  <div id="scroll-progress"></div>
   <div id="toast-box" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[100] flex flex-col gap-3 pointer-events-none"></div>
 
   <!-- NAVBAR -->
   <header class="sticky top-0 z-50 w-full">
     <nav class="glass border-b-0 bg-black/40 backdrop-blur-md">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-        <a href="#top" class="flex items-center gap-3 active:scale-95 transition-transform duration-200">
+        <a href="#top" class="flex items-center gap-3">
           <span class="font-head font-extrabold text-2xl tracking-widest text-3d-header">VORTX</span>
         </a>
 
@@ -703,20 +385,11 @@
         </ul>
 
         <div class="flex items-center gap-3 relative z-50">
-          <button onclick="toggleLanguage()" class="glass w-10 h-10 rounded-full flex items-center justify-center hover:scale-110 active:scale-95 transition-transform border-purple-500/30 lang-btn-icon" title="Change Language">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9 9 0 100-18 9 9 0 000 18z"></path>
-              <path stroke-linecap="round" stroke-linejoin="round" d="M3.6 9h16.8M3.6 15h16.8"></path>
-              <path stroke-linecap="round" stroke-linejoin="round" d="M11.5 3a17 17 0 000 18M12.5 3a17 17 0 010 18"></path>
-            </svg>
+          <button onclick="toggleLanguage()" class="glass w-10 h-10 rounded-full flex items-center justify-center border-purple-500/30 text-purple-300">
+            🌐
           </button>
-
-          <button onclick="toggleTheme()" class="theme-switch-btn" title="Toggle Theme">
-            <div class="theme-switch-ball">
-              <svg class="icon-moon w-3.5 h-3.5 text-slate-800" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
-              </svg>
-            </div>
+          <button onclick="toggleTheme()" class="glass w-10 h-10 rounded-full flex items-center justify-center border-purple-500/30 text-yellow-300">
+            🌙
           </button>
         </div>
       </div>
@@ -729,7 +402,7 @@
 
     <!-- HERO SECTION -->
     <section class="max-w-6xl mx-auto px-4 sm:px-6 pt-12 pb-10 text-center relative">
-      <div class="inline-flex items-center gap-3 px-6 py-2.5 rounded-full text-xs font-bold tracking-widest uppercase glass backdrop-blur-md mb-8 shadow-sm">
+      <div class="inline-flex items-center gap-3 px-6 py-2.5 rounded-full text-xs font-bold tracking-widest uppercase glass backdrop-blur-md mb-8">
         <span class="w-2 h-2 rounded-full bg-purple-400 animate-ping"></span>
         <span data-i18n="hero-tag">Digital Assets Hub</span>
       </div>
@@ -744,17 +417,16 @@
         High-end VFX packs, cinematic presets & custom web experiences. Crafted specifically for elite creators.
       </p>
 
-      <!-- HERO EXPLORE TIERS BUTTON -->
       <div class="flex items-center justify-center">
         <div class="button-wrap" onclick="document.getElementById('bundles').scrollIntoView({behavior: 'smooth'})">
-          <button>
+          <div class="btn-3d-style">
             <span data-i18n="hero-btn">Explore Tiers</span>
-          </button>
+          </div>
           <div class="button-shadow"></div>
         </div>
       </div>
 
-      <!-- GLASS RADIO GROUP CATEGORIES SELECTOR -->
+      <!-- GLASS RADIO SELECTOR -->
       <div class="glass-radio-group">
         <input type="radio" name="category-plan" id="glass-cc" checked onclick="scrollToCategory('CC')" />
         <label for="glass-cc">CC</label>
@@ -769,12 +441,12 @@
       </div>
     </section>
 
-    <!-- WEB BUNDLES SECTION -->
+    <!-- WEB BUNDLES SECTION (زر حزمة الويب شغّال 100%) -->
     <section id="bundles" class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
       <div class="glossy-bundle-card p-8 sm:p-14 relative flex flex-col md:flex-row items-center justify-between gap-10">
         <div class="text-center md:text-left rtl:md:text-right max-w-2xl relative z-10 w-full">
           <span data-i18n="bundle-sub" class="text-xs tracking-widest uppercase font-extrabold text-brandLight block mb-2">Custom Web Solutions</span>
-          <h2 data-i18n="bundle-title" class="font-head font-black text-3xl sm:text-4xl md:text-5xl whitespace-nowrap overflow-hidden text-ellipsis mb-4 bundle-title-text">
+          <h2 data-i18n="bundle-title" class="font-head font-black text-3xl sm:text-4xl md:text-5xl whitespace-nowrap overflow-hidden text-ellipsis mb-4 text-white">
             Web Page Bundles
           </h2>
           <p data-i18n="bundle-desc" class="font-bold opacity-80 leading-relaxed text-sm sm:text-lg">
@@ -782,12 +454,12 @@
           </p>
         </div>
         
-        <!-- WEB BUNDLES BUTTON (دخول حزمة الويب) -->
+        <!-- زر فتح حزم الويب الصريح -->
         <div class="w-full md:w-auto relative z-10 flex justify-center md:justify-end flex-shrink-0">
           <div class="button-wrap" onclick="openWebTiers()">
-            <button>
+            <div class="btn-3d-style">
               <span data-i18n="bundle-btn">View Development Tiers</span>
-            </button>
+            </div>
             <div class="button-shadow"></div>
           </div>
         </div>
@@ -892,7 +564,7 @@
     </footer>
   </main>
 
-  <!-- WEB TIERS VIEW -->
+  <!-- WEB TIERS VIEW (باستخدام كروت Uiverse الجبارة) -->
   <section id="web-view" class="view view-hidden relative z-10 min-h-screen">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
       <div class="flex items-center justify-between mb-12">
@@ -902,9 +574,9 @@
         </div>
         
         <div class="button-wrap" onclick="backToHome()">
-          <button>
+          <div class="btn-3d-style">
             <span data-i18n="back-btn">← Back</span>
-          </button>
+          </div>
           <div class="button-shadow"></div>
         </div>
       </div>
@@ -913,111 +585,102 @@
         
         <!-- CARD 1: STARTER -->
         <div class="tier-card">
-          <div class="card__border"></div>
-          <div>
-            <div class="card_title__container">
-              <span class="card_title">STARTER</span>
-              <p data-i18n="tier-starter-desc" class="card_paragraph">Perfect for simple portfolios and personal landing pages.</p>
-            </div>
-            <hr class="line" />
-            <ul class="card__list">
-              <li class="card__list_item">
-                <span class="check">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="check_svg">
-                    <path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path>
-                  </svg>
-                </span>
-                <span class="list_text">Clean & Modern UI</span>
-              </li>
-              <li class="card__list_item">
-                <span class="check">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="check_svg">
-                    <path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path>
-                  </svg>
-                </span>
-                <span class="list_text">Mobile-Ready Layout</span>
-              </li>
-            </ul>
+          <div class="card_title__container">
+            <span class="card_title">STARTER</span>
+            <p data-i18n="tier-starter-desc" class="card_paragraph">Perfect for simple portfolios and personal landing pages.</p>
           </div>
+          <hr class="line" />
+          <ul class="card__list">
+            <li class="card__list_item">
+              <span class="check">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="check_svg">
+                  <path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path>
+                </svg>
+              </span>
+              <span class="list_text">Clean & Modern UI</span>
+            </li>
+            <li class="card__list_item">
+              <span class="check">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="check_svg">
+                  <path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path>
+                </svg>
+              </span>
+              <span class="list_text">Mobile-Ready Layout</span>
+            </li>
+          </ul>
 
           <div class="button-wrap w-full mt-6" onclick="showToast('PLAN ADDED')">
-            <button>
+            <div class="btn-3d-style">
               <span data-i18n="select-plan">Select Plan</span>
-            </button>
+            </div>
             <div class="button-shadow"></div>
           </div>
         </div>
 
         <!-- CARD 2: PRO -->
         <div class="tier-card">
-          <div class="card__border"></div>
-          <div>
-            <div class="card_title__container">
-              <span class="card_title">PRO</span>
-              <p data-i18n="tier-pro-desc" class="card_paragraph">For creators needing advanced animations & custom design.</p>
-            </div>
-            <hr class="line" />
-            <ul class="card__list">
-              <li class="card__list_item">
-                <span class="check">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="check_svg">
-                    <path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path>
-                  </svg>
-                </span>
-                <span class="list_text">Glassmorphism & Glows</span>
-              </li>
-              <li class="card__list_item">
-                <span class="check">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="check_svg">
-                    <path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path>
-                  </svg>
-                </span>
-                <span class="list_text">Scroll Animations</span>
-              </li>
-            </ul>
+          <div class="card_title__container">
+            <span class="card_title">PRO</span>
+            <p data-i18n="tier-pro-desc" class="card_paragraph">For creators needing advanced animations & custom design.</p>
           </div>
+          <hr class="line" />
+          <ul class="card__list">
+            <li class="card__list_item">
+              <span class="check">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="check_svg">
+                  <path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path>
+                </svg>
+              </span>
+              <span class="list_text">Glassmorphism & Glows</span>
+            </li>
+            <li class="card__list_item">
+              <span class="check">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="check_svg">
+                  <path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path>
+                </svg>
+              </span>
+              <span class="list_text">Scroll Animations</span>
+            </li>
+          </ul>
 
           <div class="button-wrap w-full mt-6" onclick="showToast('PLAN ADDED')">
-            <button>
+            <div class="btn-3d-style">
               <span data-i18n="select-plan">Select Plan</span>
-            </button>
+            </div>
             <div class="button-shadow"></div>
           </div>
         </div>
 
         <!-- CARD 3: VIP -->
         <div class="tier-card">
-          <div class="card__border"></div>
-          <div>
-            <div class="card_title__container">
-              <span class="card_title">VIP</span>
-              <p data-i18n="tier-vip-desc" class="card_paragraph">The absolute premium experience with custom 3D elements.</p>
-            </div>
-            <hr class="line" />
-            <ul class="card__list">
-              <li class="card__list_item">
-                <span class="check">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="check_svg">
-                    <path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path>
-                  </svg>
-                </span>
-                <span class="list_text">3D Models Integration</span>
-              </li>
-              <li class="card__list_item">
-                <span class="check">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="check_svg">
-                    <path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path>
-                  </svg>
-                </span>
-                <span class="list_text">Priority Support</span>
-              </li>
-            </ul>
+          <div class="card_title__container">
+            <span class="card_title">VIP</span>
+            <p data-i18n="tier-vip-desc" class="card_paragraph">The absolute premium experience with custom 3D elements.</p>
           </div>
+          <hr class="line" />
+          <ul class="card__list">
+            <li class="card__list_item">
+              <span class="check">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="check_svg">
+                  <path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path>
+                </svg>
+              </span>
+              <span class="list_text">3D Models Integration</span>
+            </li>
+            <li class="card__list_item">
+              <span class="check">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="check_svg">
+                  <path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path>
+                </svg>
+              </span>
+              <span class="list_text">Priority Support</span>
+            </li>
+          </ul>
 
           <div class="button-wrap w-full mt-6" onclick="showToast('PLAN ADDED')">
-            <button>
+            <div class="btn-3d-style">
               <span data-i18n="select-plan">Select Plan</span>
-            </button>
+            </div>
             <div class="button-shadow"></div>
           </div>
         </div>
@@ -1035,9 +698,9 @@
           <h2 id="cat-title" class="font-head font-bold text-4xl mt-3">CC</h2>
         </div>
         <div class="button-wrap" onclick="backToHome()">
-          <button>
+          <div class="btn-3d-style">
             <span data-i18n="back-btn">← Back</span>
-          </button>
+          </div>
           <div class="button-shadow"></div>
         </div>
       </div>
@@ -1058,15 +721,15 @@
         <h3 id="preview-title" class="font-head font-bold text-2xl mt-1 mb-6">TITLE</h3>
         <div class="flex gap-4">
           <div class="button-wrap flex-1" onclick="showToast('ADDED TO CART'); closePreview();">
-            <button>
+            <div class="btn-3d-style">
               <span data-i18n="add-cart">Add to Cart</span>
-            </button>
+            </div>
             <div class="button-shadow"></div>
           </div>
           <div class="button-wrap flex-1" onclick="showToast('DOWNLOADING DEMO...')">
-            <button>
+            <div class="btn-3d-style">
               <span data-i18n="try-demo">Try Demo</span>
-            </button>
+            </div>
             <div class="button-shadow"></div>
           </div>
         </div>
@@ -1185,4 +848,96 @@
   function toggleLanguage() {
     currentLang = currentLang === 'en' ? 'ar' : 'en';
     const htmlEl = document.documentElement;
-    const isRtl = curren
+    const isRtl = currentLang === 'ar';
+    
+    htmlEl.setAttribute('dir', isRtl ? 'rtl' : 'ltr');
+    htmlEl.setAttribute('lang', currentLang);
+
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (translations[currentLang][key]) {
+        el.textContent = translations[currentLang][key];
+      }
+    });
+
+    setTimeout(() => { initSwiper(); }, 100);
+  }
+
+  function toggleTheme() {
+    const htmlEl = document.documentElement;
+    if (htmlEl.classList.contains('dark')) {
+      htmlEl.classList.remove('dark');
+      htmlEl.classList.add('light');
+    } else {
+      htmlEl.classList.remove('light');
+      htmlEl.classList.add('dark');
+    }
+  }
+
+  function showToast(msg) {
+    const box = document.getElementById('toast-box');
+    const toast = document.createElement('div');
+    toast.className = 'glass bg-black/90 text-white text-[10px] sm:text-xs font-bold uppercase tracking-widest px-6 py-3.5 rounded-full border-brand/50 flex items-center gap-2';
+    toast.innerHTML = `<span class="text-brandLight">✦</span> ${msg}`;
+    box.appendChild(toast);
+    setTimeout(() => { toast.remove(); }, 2500);
+  }
+
+  function openPreview(title, tag) {
+    document.getElementById('preview-title').textContent = title;
+    document.getElementById('preview-tag').textContent = tag;
+    const modal = document.getElementById('preview-modal');
+    const card = document.getElementById('preview-card');
+    modal.classList.remove('opacity-0', 'pointer-events-none');
+    setTimeout(() => { card.classList.remove('scale-95'); }, 10);
+  }
+
+  function closePreview() {
+    const modal = document.getElementById('preview-modal');
+    const card = document.getElementById('preview-card');
+    card.classList.add('scale-95');
+    setTimeout(() => { modal.classList.add('opacity-0', 'pointer-events-none'); }, 200);
+  }
+
+  const CATEGORY_DATA = {
+    CC: ['Teal & Orange Grade', 'Cinematic Film Base', 'Dark Knight Grade', 'Vibrant Soft Pop'],
+    SHAKE: ['Hard Impact Shake', 'Bass Drop Bounce', 'Smooth Whip Pan', 'Earthquake Wobble'],
+    XML: ['Pro Intro Template', 'Velocity Edit XML', 'Glow Shake Timeline', 'Full Transition Suite'],
+  };
+
+  /* دالة تبديل العرض بين الصفحات بنجاح وبدون مشاكل */
+  function showView(viewId) {
+    document.querySelectorAll('.view').forEach(v => {
+      v.classList.add('view-hidden');
+    });
+    
+    const target = document.getElementById(viewId);
+    if (target) {
+      target.classList.remove('view-hidden');
+    }
+    
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }
+
+  function openCategory(key) {
+    document.getElementById('cat-title').textContent = key;
+    document.getElementById('cat-grid').innerHTML = CATEGORY_DATA[key].map((item) => `
+      <div onclick="openPreview('${item}', '${key}')" class="glass rounded-2xl p-6 flex flex-col justify-between min-h-[140px] text-left ltr:text-left rtl:text-right border-l-4 border-brand/50 hover:border-brandLight cursor-pointer">
+        <span class="text-[10px] font-bold tracking-widest uppercase text-brandLight">${key} Pack</span>
+        <h3 class="font-head font-bold text-xl mt-4">${item}</h3>
+      </div>`).join('');
+    showView('category-view');
+  }
+
+  function openWebTiers() { 
+    showView('web-view'); 
+  }
+  
+  function backToHome() { 
+    showView('main-view'); 
+  }
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
