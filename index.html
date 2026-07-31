@@ -48,12 +48,9 @@
       --nav-logo-color: #c084fc;
       --star-bg: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
       --star-opacity: 1;
+      --anim--hover-time: 400ms;
+      --anim--hover-ease: cubic-bezier(0.25, 1, 0.5, 1);
       --btn-text-color: rgba(255, 255, 255, 0.95);
-      --card-bg: rgba(255, 255, 255, 0.03);
-      --card-border: rgba(255, 255, 255, 0.08);
-      --tier-bg: hsla(240, 15%, 9%, 0.85);
-      --tier-text: #ffffff;
-      --sub-text: rgba(255, 255, 255, 0.7);
     }
 
     html.light {
@@ -61,14 +58,11 @@
       --bg-color: #f1f5f9;
       --text-color: #0f172a;
       --nav-logo-color: #581c87;
+      --nav-icon-color: #6b21a8;
+      --card-title-color: #3b0764;
       --star-bg: radial-gradient(ellipse at bottom, #e2e8f0 0%, #cbd5e1 100%);
       --star-opacity: 0.25;
       --btn-text-color: #2e1065;
-      --card-bg: rgba(255, 255, 255, 0.85);
-      --card-border: rgba(126, 34, 206, 0.15);
-      --tier-bg: rgba(255, 255, 255, 0.92);
-      --tier-text: #1e1b4b;
-      --sub-text: #475569;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -134,7 +128,7 @@
       to { transform: translateY(-2000px); }
     }
 
-    /* VORTX WET LIQUID OIL SHINE TITLE - EXACT OVERLAY FIX */
+    /* VORTX WET LIQUID TITLE - CLEAN GRADIENT WITHOUT DUPLICATE TEXT PSEUDO-ELEMENT */
     .vortx-wet-oil-title {
       position: relative;
       display: inline-block;
@@ -143,31 +137,6 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.8)) drop-shadow(0 0 20px rgba(168, 85, 247, 0.5));
-    }
-
-    .vortx-wet-oil-title::before {
-      content: 'VORTX';
-      position: absolute;
-      inset: 0;
-      font: inherit;
-      letter-spacing: inherit;
-      line-height: inherit;
-      background: linear-gradient(
-        110deg,
-        transparent 0%, transparent 35%,
-        rgba(255, 255, 255, 0.95) 48%, rgba(233, 213, 255, 0.6) 52%,
-        transparent 65%, transparent 100%
-      );
-      background-size: 220% 100%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: oilShineSweep 4s infinite ease-in-out;
-      pointer-events: none;
-    }
-
-    @keyframes oilShineSweep {
-      0% { background-position: 220% 0; }
-      100% { background-position: -220% 0; }
     }
 
     html.light .vortx-wet-oil-title {
@@ -199,13 +168,46 @@
     html.dark .theme-switch-ball { transform: translateX(0px); background: #e2e8f0; }
     html.light .theme-switch-ball { transform: translateX(30px); background: #fef08a; }
 
-    /* 3D BUTTON */
+    /* 3D BUTTON STYLES */
     .button-wrap {
       position: relative;
       z-index: 10;
       border-radius: 999vw;
+      background: transparent;
       cursor: pointer;
       display: inline-block;
+      transition: all var(--anim--hover-time) var(--anim--hover-ease);
+    }
+
+    .button-shadow {
+      --shadow-cuttoff-fix: 2em;
+      position: absolute;
+      width: calc(100% + var(--shadow-cuttoff-fix));
+      height: calc(100% + var(--shadow-cuttoff-fix));
+      top: calc(0% - var(--shadow-cuttoff-fix) / 2);
+      left: calc(0% - var(--shadow-cuttoff-fix) / 2);
+      filter: blur(clamp(2px, 0.125em, 12px));
+      -webkit-filter: blur(clamp(2px, 0.125em, 12px));
+      overflow: visible;
+      pointer-events: none;
+    }
+
+    .button-shadow::after {
+      content: "";
+      position: absolute;
+      z-index: 0;
+      inset: 0;
+      border-radius: 999vw;
+      background: linear-gradient(180deg, rgba(168, 85, 247, 0.3), rgba(0, 0, 0, 0.2));
+      width: calc(100% - var(--shadow-cuttoff-fix) - 0.25em);
+      height: calc(100% - var(--shadow-cuttoff-fix) - 0.25em);
+      top: calc(var(--shadow-cuttoff-fix) - 0.5em);
+      left: calc(var(--shadow-cuttoff-fix) - 0.875em);
+      padding: 0.125em;
+      box-sizing: border-box;
+      mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      mask-composite: exclude;
+      opacity: 1;
     }
 
     .btn-3d-style {
@@ -218,76 +220,154 @@
       border-radius: 999vw;
       box-shadow: inset 0 0.125em 0.125em rgba(0, 0, 0, 0.05), inset 0 -0.125em 0.125em rgba(255, 255, 255, 0.5), 0 0.25em 0.125em -0.125em rgba(0, 0, 0, 0.3);
       backdrop-filter: blur(6px);
-      transition: transform 0.2s ease;
+      transition: all var(--anim--hover-time) var(--anim--hover-ease);
       width: 100%;
       text-align: center;
     }
+
     html.light .btn-3d-style {
-      background: linear-gradient(-75deg, rgba(168, 85, 247, 0.15), rgba(168, 85, 247, 0.3), rgba(168, 85, 247, 0.15));
+      background: linear-gradient(-75deg, rgba(168, 85, 247, 0.1), rgba(168, 85, 247, 0.25), rgba(168, 85, 247, 0.1));
       box-shadow: inset 0 0.125em 0.125em rgba(255, 255, 255, 0.8), 0 0.15em 0.25em rgba(126, 34, 206, 0.15);
     }
+
     .btn-3d-style:hover { transform: scale(0.975); }
+
     .btn-3d-style span {
-      display: block; font-weight: 800; font-size: 0.9em;
-      color: var(--btn-text-color); padding: 0.9em 2em; text-transform: uppercase;
+      position: relative;
+      display: block;
+      user-select: none;
+      font-weight: 800;
+      font-size: 0.9em;
+      color: var(--btn-text-color);
+      text-shadow: 0em 0.15em 0.1em rgba(0, 0, 0, 0.2);
+      padding-inline: 2em;
+      padding-block: 0.9em;
+      text-transform: uppercase;
     }
 
-    /* TIER CARDS LIGHT MODE FIX */
+    /* TIER CARDS FULL DESIGN RESTORED */
     .tier-card {
-      position: relative; display: flex; flex-direction: column; justify-content: space-between;
-      gap: 1.25rem; padding: 2rem; width: 100%;
-      background-color: var(--tier-bg); backdrop-filter: blur(16px);
-      border-radius: 1.75rem; border: 1px solid var(--card-border);
-      color: var(--tier-text);
-      transition: background-color 0.4s ease, border-color 0.4s ease;
-    }
-    html.light .tier-card {
-      box-shadow: 0 15px 35px rgba(126, 34, 206, 0.08);
+      --white: hsl(0, 0%, 100%);
+      --black: hsl(240, 15%, 9%);
+      --paragraph: hsl(0, 0%, 83%);
+      --line: hsl(240, 9%, 17%);
+      --primary: hsl(266, 92%, 58%);
+
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 1.25rem;
+      padding: 2rem;
+      width: 100%;
+      background-color: hsla(240, 15%, 9%, 0.85);
+      backdrop-filter: blur(16px);
+      background-image: radial-gradient(at 88% 40%, hsla(240, 15%, 9%, 1) 0px, transparent 85%),
+                        radial-gradient(at 0% 64%, hsla(263, 93%, 56%, 0.4) 0px, transparent 85%);
+      border-radius: 1.75rem;
+      box-shadow: 0px -16px 24px 0px rgba(255, 255, 255, 0.15) inset;
+      overflow: hidden;
+      transition: transform 0.4s ease, background-color 0.4s ease;
     }
 
-    /* GLASS RADIO LIGHT MODE FIX */
+    html.light .tier-card {
+      background-color: rgba(255, 255, 255, 0.92);
+      background-image: radial-gradient(at 0% 64%, rgba(216, 180, 254, 0.4) 0px, transparent 85%);
+      box-shadow: 0 15px 35px rgba(126, 34, 206, 0.1);
+    }
+
+    .tier-card:hover { transform: translateY(-6px); }
+
+    .tier-card .card_title__container .card_title {
+      font-size: 1.75rem;
+      font-weight: 900;
+      color: var(--white);
+      font-family: 'Cinzel', 'Cairo', serif;
+    }
+    html.light .tier-card .card_title__container .card_title { color: #3b0764; }
+
+    .tier-card .card_title__container .card_paragraph {
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
+      color: var(--paragraph);
+      line-height: 1.5;
+    }
+    html.light .tier-card .card_title__container .card_paragraph { color: #475569; }
+
+    .tier-card .line { width: 100%; height: 0.1rem; background-color: var(--line); border: none; margin: 0.5rem 0; }
+    html.light .tier-card .line { background-color: rgba(126, 34, 206, 0.15); }
+
+    .tier-card .card__list { display: flex; flex-direction: column; gap: 0.85rem; }
+    .tier-card .card__list .card__list_item { display: flex; align-items: center; gap: 0.75rem; }
+
+    .tier-card .card__list .card__list_item .check {
+      display: flex; justify-content: center; align-items: center;
+      width: 1.25rem; height: 1.25rem; background-color: var(--primary);
+      border-radius: 50%; flex-shrink: 0;
+    }
+
+    .tier-card .card__list .card__list_item .check .check_svg { width: 0.85rem; height: 0.85rem; fill: var(--black); }
+    .tier-card .card__list .card__list_item .list_text { font-size: 0.9rem; font-weight: 700; color: var(--white); }
+    html.light .tier-card .card__list .card__list_item .list_text { color: #1e1b4b; }
+
+    /* GLASS RADIO SELECTOR */
     .glass-radio-group {
       display: flex; position: relative;
-      background: var(--card-bg); border-radius: 999px;
-      backdrop-filter: blur(16px); border: 1px solid var(--card-border);
+      background: rgba(255, 255, 255, 0.05); border-radius: 999px;
+      backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.15);
       padding: 6px; margin: 35px auto 10px auto; width: 100%; max-width: 56rem;
+    }
+    html.light .glass-radio-group {
+      background: rgba(126, 34, 206, 0.06);
+      border-color: rgba(126, 34, 206, 0.2);
     }
     .glass-radio-group input { display: none; }
     .glass-radio-group label {
       flex: 1; display: flex; align-items: center; justify-content: center;
       font-size: 15px; font-weight: 800; padding: 0.9rem 1rem; cursor: pointer;
-      color: var(--sub-text); z-index: 2; transition: color 0.3s ease;
+      color: rgba(255, 255, 255, 0.7); z-index: 2; transition: color 0.3s ease;
     }
+    html.light .glass-radio-group label { color: #581c87; }
     .glass-radio-group input:checked + label { color: #ffffff; }
 
     .glass-glider {
       position: absolute; top: 6px; bottom: 6px; width: calc((100% - 12px) / 3);
-      border-radius: 999px; z-index: 1; transition: transform 0.4s ease;
+      border-radius: 999px; z-index: 1; transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.4s ease;
     }
-    #glass-cc:checked ~ .glass-glider { transform: translateX(0%); background: #a855f7; }
-    #glass-xml:checked ~ .glass-glider { transform: translateX(100%); background: #06b6d4; }
-    #glass-shake:checked ~ .glass-glider { transform: translateX(200%); background: #eab308; }
+    html[dir="ltr"] #glass-cc:checked ~ .glass-glider { transform: translateX(0%); background: linear-gradient(135deg, rgba(168, 85, 247, 0.4), #a855f7); }
+    html[dir="ltr"] #glass-xml:checked ~ .glass-glider { transform: translateX(100%); background: linear-gradient(135deg, rgba(56, 189, 248, 0.4), #06b6d4); }
+    html[dir="ltr"] #glass-shake:checked ~ .glass-glider { transform: translateX(200%); background: linear-gradient(135deg, rgba(234, 179, 8, 0.4), #eab308); }
 
-    html[dir="rtl"] #glass-cc:checked ~ .glass-glider { transform: translateX(0%); }
-    html[dir="rtl"] #glass-xml:checked ~ .glass-glider { transform: translateX(-100%); }
-    html[dir="rtl"] #glass-shake:checked ~ .glass-glider { transform: translateX(-200%); }
+    html[dir="rtl"] #glass-cc:checked ~ .glass-glider { transform: translateX(0%); background: linear-gradient(135deg, rgba(168, 85, 247, 0.4), #a855f7); }
+    html[dir="rtl"] #glass-xml:checked ~ .glass-glider { transform: translateX(-100%); background: linear-gradient(135deg, rgba(56, 189, 248, 0.4), #06b6d4); }
+    html[dir="rtl"] #glass-shake:checked ~ .glass-glider { transform: translateX(-200%); background: linear-gradient(135deg, rgba(234, 179, 8, 0.4), #eab308); }
 
     /* SWIPER 3D */
-    .swiper { width: 100%; padding-top: 30px; padding-bottom: 60px; }
-    .swiper-slide { width: 300px !important; height: 440px !important; border-radius: 2rem; }
+    .swiper { width: 100%; padding-top: 30px; padding-bottom: 60px; overflow: visible !important; }
+    .swiper-slide { width: 300px !important; height: 440px !important; border-radius: 2rem; position: relative; }
 
     .glossy-bundle-card {
-      border-radius: 2.5rem; background: var(--card-bg);
-      backdrop-filter: blur(24px); border: 1.5px solid var(--card-border);
+      position: relative; border-radius: 2.5rem;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.01) 100%);
+      backdrop-filter: blur(24px); border: 1.5px solid rgba(168, 85, 247, 0.3);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7); overflow: hidden;
+    }
+    html.light .glossy-bundle-card {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(243, 232, 255, 0.7) 100%);
+      border-color: rgba(168, 85, 247, 0.3);
     }
 
-    .glass { background: var(--card-bg); backdrop-filter: blur(16px); border: 1px solid var(--card-border); }
-    .cat-card-glass { background: var(--card-bg); backdrop-filter: blur(16px); border: 1px solid var(--card-border); border-radius: 1.75rem; padding: 1.75rem 2rem; cursor: pointer; }
+    .text-3d-header { color: var(--nav-logo-color); font-weight: 900; }
+    .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.08); }
+    html.light .glass { background: rgba(255, 255, 255, 0.85); border-color: rgba(126, 34, 206, 0.15); }
+
+    .cat-card-glass { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 1.75rem; padding: 1.75rem 2rem; cursor: pointer; }
+    html.light .cat-card-glass { background: rgba(255, 255, 255, 0.9); border-color: rgba(168, 85, 247, 0.2); }
 
     .view { transition: opacity .4s ease; opacity: 1; }
     .view-hidden { display: none !important; opacity: 0; }
 
-    /* CINEMATIC HIGH-END LOADER */
+    /* CINEMATIC LOADER */
     #vx-loader {
       position: fixed;
       inset: 0;
@@ -490,6 +570,7 @@
             <div class="btn-3d-style">
               <span data-i18n="hero-btn">Explore Tiers</span>
             </div>
+            <div class="button-shadow"></div>
           </div>
         </div>
 
@@ -511,7 +592,7 @@
         <div class="glossy-bundle-card p-8 sm:p-14 relative flex flex-col md:flex-row items-center justify-between gap-10">
           <div class="text-center md:text-left rtl:md:text-right max-w-2xl relative z-10 w-full">
             <span data-i18n="bundle-sub" class="text-xs tracking-widest uppercase font-extrabold text-brandLight block mb-2">Custom Web Solutions</span>
-            <h2 data-i18n="bundle-title" class="font-head font-black text-3xl sm:text-4xl md:text-5xl mb-4 text-purple-400">
+            <h2 data-i18n="bundle-title" class="font-head font-black text-3xl sm:text-4xl md:text-5xl mb-4 text-3d-header">
               Web Page Bundles
             </h2>
             <p data-i18n="bundle-desc" class="font-bold opacity-80 leading-relaxed text-sm sm:text-lg">
@@ -524,6 +605,7 @@
               <div class="btn-3d-style">
                 <span data-i18n="bundle-btn">View Development Tiers</span>
               </div>
+              <div class="button-shadow"></div>
             </div>
           </div>
         </div>
@@ -622,48 +704,127 @@
       </footer>
     </main>
 
+    <!-- WEB TIERS VIEW (RESTORED FULL DESIGN) -->
     <section id="web-view" class="view view-hidden relative z-10 min-h-screen">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
         <div class="flex items-center justify-between mb-12">
-          <div>
+          <div class="text-left ltr:text-left rtl:text-right">
             <span data-i18n="tiers-sub" class="text-xs tracking-widest uppercase font-bold text-brandLight">Web Solutions</span>
             <h2 data-i18n="tiers-title" class="font-head font-bold text-4xl mt-3">Development Tiers</h2>
           </div>
+
           <div class="button-wrap" onclick="backToHome()">
-            <div class="btn-3d-style"><span data-i18n="back-btn">← Back</span></div>
+            <div class="btn-3d-style">
+              <span data-i18n="back-btn">← Back</span>
+            </div>
+            <div class="button-shadow"></div>
           </div>
         </div>
 
         <div class="grid lg:grid-cols-3 gap-8">
+
+          <!-- CARD 1: STARTER -->
           <div class="tier-card">
-            <div>
-              <span class="text-2xl font-black">STARTER</span>
-              <p data-i18n="tier-starter-desc" class="text-xs opacity-75 mt-2">Perfect for simple portfolios and personal landing pages.</p>
+            <div class="card_title__container">
+              <span class="card_title">STARTER</span>
+              <p data-i18n="tier-starter-desc" class="card_paragraph">Perfect for simple portfolios and personal landing pages.</p>
             </div>
+            <hr class="line" />
+            <ul class="card__list">
+              <li class="card__list_item">
+                <span class="check">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="check_svg">
+                    <path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path>
+                  </svg>
+                </span>
+                <span class="list_text">Clean & Modern UI</span>
+              </li>
+              <li class="card__list_item">
+                <span class="check">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="check_svg">
+                    <path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path>
+                  </svg>
+                </span>
+                <span class="list_text">Mobile-Ready Layout</span>
+              </li>
+            </ul>
+
             <div class="button-wrap w-full mt-6" onclick="showToast('PLAN ADDED')">
-              <div class="btn-3d-style"><span data-i18n="select-plan">Select Plan</span></div>
+              <div class="btn-3d-style">
+                <span data-i18n="select-plan">Select Plan</span>
+              </div>
+              <div class="button-shadow"></div>
             </div>
           </div>
 
+          <!-- CARD 2: PRO -->
           <div class="tier-card">
-            <div>
-              <span class="text-2xl font-black">PRO</span>
-              <p data-i18n="tier-pro-desc" class="text-xs opacity-75 mt-2">For creators needing advanced animations & custom design.</p>
+            <div class="card_title__container">
+              <span class="card_title">PRO</span>
+              <p data-i18n="tier-pro-desc" class="card_paragraph">For creators needing advanced animations & custom design.</p>
             </div>
+            <hr class="line" />
+            <ul class="card__list">
+              <li class="card__list_item">
+                <span class="check">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="check_svg">
+                    <path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path>
+                  </svg>
+                </span>
+                <span class="list_text">Glassmorphism & Glows</span>
+              </li>
+              <li class="card__list_item">
+                <span class="check">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="check_svg">
+                    <path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path>
+                  </svg>
+                </span>
+                <span class="list_text">Scroll Animations</span>
+              </li>
+            </ul>
+
             <div class="button-wrap w-full mt-6" onclick="showToast('PLAN ADDED')">
-              <div class="btn-3d-style"><span data-i18n="select-plan">Select Plan</span></div>
+              <div class="btn-3d-style">
+                <span data-i18n="select-plan">Select Plan</span>
+              </div>
+              <div class="button-shadow"></div>
             </div>
           </div>
 
+          <!-- CARD 3: VIP -->
           <div class="tier-card">
-            <div>
-              <span class="text-2xl font-black">VIP</span>
-              <p data-i18n="tier-vip-desc" class="text-xs opacity-75 mt-2">The absolute premium experience with custom 3D elements.</p>
+            <div class="card_title__container">
+              <span class="card_title">VIP</span>
+              <p data-i18n="tier-vip-desc" class="card_paragraph">The absolute premium experience with custom 3D elements.</p>
             </div>
+            <hr class="line" />
+            <ul class="card__list">
+              <li class="card__list_item">
+                <span class="check">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="check_svg">
+                    <path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path>
+                  </svg>
+                </span>
+                <span class="list_text">3D Models Integration</span>
+              </li>
+              <li class="card__list_item">
+                <span class="check">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="check_svg">
+                    <path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path>
+                  </svg>
+                </span>
+                <span class="list_text">Priority Support</span>
+              </li>
+            </ul>
+
             <div class="button-wrap w-full mt-6" onclick="showToast('PLAN ADDED')">
-              <div class="btn-3d-style"><span data-i18n="select-plan">Select Plan</span></div>
+              <div class="btn-3d-style">
+                <span data-i18n="select-plan">Select Plan</span>
+              </div>
+              <div class="button-shadow"></div>
             </div>
           </div>
+
         </div>
       </div>
     </section>
@@ -677,6 +838,7 @@
           </div>
           <div class="button-wrap" onclick="backToHome()">
             <div class="btn-3d-style"><span data-i18n="back-btn">← Back</span></div>
+            <div class="button-shadow"></div>
           </div>
         </div>
         <div id="cat-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
@@ -691,9 +853,11 @@
         <div class="flex gap-4">
           <div class="button-wrap flex-1" onclick="showToast('ADDED TO CART'); closePreview();">
             <div class="btn-3d-style"><span data-i18n="add-cart">Add to Cart</span></div>
+            <div class="button-shadow"></div>
           </div>
           <div class="button-wrap flex-1" onclick="showToast('DOWNLOADING DEMO...')">
             <div class="btn-3d-style"><span data-i18n="try-demo">Try Demo</span></div>
+            <div class="button-shadow"></div>
           </div>
         </div>
       </div>
