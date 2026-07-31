@@ -188,10 +188,11 @@
 
     .button-wrap {
       position: relative;
-      z-index: 2;
+      z-index: 10;
       border-radius: 999vw;
       background: transparent;
-      pointer-events: none;
+      pointer-events: auto;
+      cursor: pointer;
       transition: all var(--anim--hover-time) var(--anim--hover-ease);
       display: inline-block;
     }
@@ -745,8 +746,8 @@
 
       <!-- HERO EXPLORE TIERS BUTTON -->
       <div class="flex items-center justify-center">
-        <div class="button-wrap">
-          <button onclick="document.getElementById('bundles').scrollIntoView({behavior: 'smooth'})">
+        <div class="button-wrap" onclick="document.getElementById('bundles').scrollIntoView({behavior: 'smooth'})">
+          <button>
             <span data-i18n="hero-btn">Explore Tiers</span>
           </button>
           <div class="button-shadow"></div>
@@ -781,10 +782,10 @@
           </p>
         </div>
         
-        <!-- WEB BUNDLES BUTTON -->
+        <!-- WEB BUNDLES BUTTON (دخول حزمة الويب) -->
         <div class="w-full md:w-auto relative z-10 flex justify-center md:justify-end flex-shrink-0">
-          <div class="button-wrap">
-            <button onclick="openWebTiers()">
+          <div class="button-wrap" onclick="openWebTiers()">
+            <button>
               <span data-i18n="bundle-btn">View Development Tiers</span>
             </button>
             <div class="button-shadow"></div>
@@ -891,7 +892,7 @@
     </footer>
   </main>
 
-  <!-- WEB TIERS VIEW (مع تصميم الكروت الجديد المطلب وبزر اختر الباقة) -->
+  <!-- WEB TIERS VIEW -->
   <section id="web-view" class="view view-hidden relative z-10 min-h-screen">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
       <div class="flex items-center justify-between mb-12">
@@ -900,8 +901,8 @@
           <h2 data-i18n="tiers-title" class="font-head font-bold text-4xl mt-3">Development Tiers</h2>
         </div>
         
-        <div class="button-wrap">
-          <button onclick="backToHome()">
+        <div class="button-wrap" onclick="backToHome()">
+          <button>
             <span data-i18n="back-btn">← Back</span>
           </button>
           <div class="button-shadow"></div>
@@ -939,8 +940,8 @@
             </ul>
           </div>
 
-          <div class="button-wrap w-full mt-6">
-            <button onclick="showToast('PLAN ADDED')">
+          <div class="button-wrap w-full mt-6" onclick="showToast('PLAN ADDED')">
+            <button>
               <span data-i18n="select-plan">Select Plan</span>
             </button>
             <div class="button-shadow"></div>
@@ -976,8 +977,8 @@
             </ul>
           </div>
 
-          <div class="button-wrap w-full mt-6">
-            <button onclick="showToast('PLAN ADDED')">
+          <div class="button-wrap w-full mt-6" onclick="showToast('PLAN ADDED')">
+            <button>
               <span data-i18n="select-plan">Select Plan</span>
             </button>
             <div class="button-shadow"></div>
@@ -1013,8 +1014,8 @@
             </ul>
           </div>
 
-          <div class="button-wrap w-full mt-6">
-            <button onclick="showToast('PLAN ADDED')">
+          <div class="button-wrap w-full mt-6" onclick="showToast('PLAN ADDED')">
+            <button>
               <span data-i18n="select-plan">Select Plan</span>
             </button>
             <div class="button-shadow"></div>
@@ -1033,8 +1034,8 @@
           <span data-i18n="cat-view-sub" class="text-xs tracking-widest uppercase font-bold text-brandLight">Collection</span>
           <h2 id="cat-title" class="font-head font-bold text-4xl mt-3">CC</h2>
         </div>
-        <div class="button-wrap">
-          <button onclick="backToHome()">
+        <div class="button-wrap" onclick="backToHome()">
+          <button>
             <span data-i18n="back-btn">← Back</span>
           </button>
           <div class="button-shadow"></div>
@@ -1056,14 +1057,14 @@
         <span id="preview-tag" class="text-[10px] font-bold tracking-widest uppercase text-brandLight">TAG</span>
         <h3 id="preview-title" class="font-head font-bold text-2xl mt-1 mb-6">TITLE</h3>
         <div class="flex gap-4">
-          <div class="button-wrap flex-1">
-            <button onclick="showToast('ADDED TO CART'); closePreview();">
+          <div class="button-wrap flex-1" onclick="showToast('ADDED TO CART'); closePreview();">
+            <button>
               <span data-i18n="add-cart">Add to Cart</span>
             </button>
             <div class="button-shadow"></div>
           </div>
-          <div class="button-wrap flex-1">
-            <button onclick="showToast('DOWNLOADING DEMO...')">
+          <div class="button-wrap flex-1" onclick="showToast('DOWNLOADING DEMO...')">
+            <button>
               <span data-i18n="try-demo">Try Demo</span>
             </button>
             <div class="button-shadow"></div>
@@ -1184,4 +1185,4 @@
   function toggleLanguage() {
     currentLang = currentLang === 'en' ? 'ar' : 'en';
     const htmlEl = document.documentElement;
-    const isRtl =
+    const isRtl = curren
