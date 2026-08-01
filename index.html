@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>3D Cylinder Bank Cards Carousel</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-select=none" />
+  <title>3D Physical Touch Cards Carousel</title>
 
   <!-- Tailwind CSS CDN v4 -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -19,7 +19,10 @@
       background-color: #000000;
       color: #ffffff;
       overflow: hidden;
+      /* منع التحديد واللمس الافتراضي للمتصفح حت لا يخرب السحب */
+      touch-action: none; 
       user-select: none;
+      -webkit-user-select: none;
     }
 
     .perspective-container {
@@ -40,13 +43,16 @@
     }
   </style>
 </head>
-<body class="bg-black text-white h-screen w-screen flex items-center justify-center overflow-hidden select-none">
+<body class="bg-black text-white h-screen w-screen flex items-center justify-center overflow-hidden selection:bg-transparent">
+
+  <!-- Container for Pointer Events -->
+  <div id="interaction-proxy" class="absolute inset-0 z-50 cursor-grab active:cursor-grabbing"></div>
 
   <!-- 3D perspective camera space -->
-  <div class="perspective-container relative w-full h-full flex items-center justify-center pointer-events-none">
+  <div class="perspective-container relative w-full h-full flex items-center justify-center pointer-events-none z-10">
     
     <!-- Dynamic 3D coordinate viewport -->
-    <div id="card-viewport" class="absolute preserve-3d" style="width: 336px; height: 211px;">
+    <div id="card-viewport" class="absolute preserve-3d" style="width: 336px; height: 211px; transform: rotateZ(-3deg);">
       <!-- Cards will be injected dynamically via JS -->
     </div>
 
@@ -73,12 +79,30 @@
     const cardCount = 5;
     const thicknessLayers = [-1.47, -0.73, 0, 0.73, 1.47];
     
-    // Animation state
-    let progress = 0;
+    // Physical & Interaction State
+    let progress = 0; // The core rotation value
+    let targetProgress = 0;
+    
+    // Physics constants
+    const friction = 0.965; // احتكاك عالي لجعل الرمية بريميوم وثقيلة
+    const autoPlaySpeed = 0.001; // سرعة الدوران التلقائي
+    const dragSensitivity = 0.0025; // حساسية السحب (بكسل -> تقدم)
+
+    // Interaction variables
+    let isDragging = false;
+    let isThrowing = false;
+    let startY = 0;
+    let startProgress = 0;
+    let currentVelocity = 0;
+    let lastTime = 0;
+    let lastY = 0;
+    
+    // Mouse tilt interaction
     const mouse = { x: 0, y: 0, targetX: 0, targetY: 0 };
     let metrics = { cardW: 336, cardH: 211 };
     
     const viewport = document.getElementById('card-viewport');
+    const proxy = document.getElementById('interaction-proxy');
     const cardElements = [];
 
     // 1. Build Cards HTML Structure
@@ -86,9 +110,10 @@
       viewport.innerHTML = '';
       for (let i = 0; i < cardCount; i++) {
         const cardContainer = document.createElement('div');
-        cardContainer.className = 'absolute inset-0 preserve-3d';
+        cardContainer.className = 'absolute inset-0 preserve-3d pointer-events-none';
         cardContainer.style.width = `${metrics.cardW}px`;
         cardContainer.style.height = `${metrics.cardH}px`;
+        cardContainer.style.backfaceVisibility = 'hidden';
 
         const videoSrc = CARD_VIDEOS[i % CARD_VIDEOS.length];
         const details = CARD_DETAILS[i % CARD_DETAILS.length];
@@ -99,7 +124,7 @@
           const isBackFace = layerIdx === 0;
 
           const layer = document.createElement('div');
-          layer.className = 'absolute inset-0 rounded-[16px] pointer-events-none overflow-hidden';
+          layer.className = 'absolute inset-0 rounded-[16px] overflow-hidden';
           
           if (!isFrontFace && !isBackFace) {
             layer.style.backgroundColor = '#808080';
@@ -160,8 +185,8 @@
 
               <!-- Details -->
               <div class="absolute left-4 sm:left-6 bottom-4 sm:bottom-5 z-20 flex flex-col gap-0.5 sm:gap-1 text-left font-mono">
-                <div class="text-[10px] sm:text-[12px] font-medium tracking-[0.14em] text-white">${details.number}</div>
-                <div class="text-[7px] sm:text-[9px] font-medium text-white/70 tracking-wide flex items-center gap-2">
+                <div class="text-[10px] sm:text-[12px] font-medium tracking-[0.14em] text-white select-none">${details.number}</div>
+                <div class="text-[7px] sm:text-[9px] font-medium text-white/70 tracking-wide flex items-center gap-2 select-none">
                   <span class="uppercase">${details.name}</span>
                   <span class="text-white/40 font-light">•</span>
                   <span>CVV: ${details.cvv}</span>
@@ -178,11 +203,12 @@
       }
     }
 
-    // 2. Responsive Resizing
+    // 2. Physical & Responsive Resizing
     function handleResize() {
       const w = window.innerWidth;
       const h = window.innerHeight;
 
+      // نفس حسابات المقاسات السابقة
       let cardW = Math.round(w * 0.16 + 130);
       const heightFactor = Math.min(1.0, Math.max(0.65, h / 850));
       cardW = Math.round(cardW * heightFactor);
@@ -200,38 +226,117 @@
       });
     }
 
-    // 3. Mouse Inertia
-    window.addEventListener('mousemove', (e) => {
+    // 3. Physical Drag & Throw Logic (The New Core)
+    
+    // التعامل مع بداية اللمس أو الضغط
+    proxy.addEventListener('pointerdown', (e) => {
+      isDragging = true;
+      isThrowing = false; // نوقف أي رمية سابقة
+      currentVelocity = 0; // نوقف السرعة الحالية
+      
+      startY = e.clientY;
+      lastY = e.clientY;
+      lastTime = performance.now();
+      startProgress = progress;
+
+      // منع أي تأثيرات افتراضية أخرى
+      if(e.cancelable) e.preventDefault();
+    });
+
+    // التعامل مع الحركة بالسحب
+    window.addEventListener('pointermove', (e) => {
+      // حرة مؤشر الماوس للتمييل (كما في الكود السابق)
       const rx = (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2);
       const ry = (e.clientY - window.innerHeight / 2) / (window.innerHeight / 2);
       mouse.targetX = Math.max(-1, Math.min(1, rx));
       mouse.targetY = Math.max(-1, Math.min(1, ry));
+
+      if (!isDragging) return;
+
+      const currentTime = performance.now();
+      const dy = e.clientY - startY; // الفرق بين البداية والحالي
+      const dt = currentTime - lastTime; // الفرق في الزمن
+      const instantDy = e.clientY - lastY; // الفرق في آخر بكسل
+
+      // تحديث التقدم مباشرة بناءً على السحب
+      // نضرب dy في -1 لأن سحب الماوس للأعلى (سالب dy) يجب أن يزيد التقدم
+      progress = startProgress - (dy * dragSensitivity);
+
+      // حساب السرعة اللحظية (تغير المسافة / تغير الزمن)
+      // dt > 0 لمنع القسمة على صفر
+      if (dt > 0) {
+        // نضرب dt في 1000 لتحويل المللي ثانية إلى ثانية
+        const instantVelocity = (instantDy * dragSensitivity) / (dt / 1000);
+        // تنعيم السرعة (Smoothening) حت لا تكون متقطعة
+        currentVelocity = currentVelocity * 0.7 + instantVelocity * 0.3;
+      }
+
+      lastY = e.clientY;
+      lastTime = currentTime;
     });
 
-    document.addEventListener('mouseleave', () => {
-      mouse.targetX = 0;
-      mouse.targetY = 0;
+    // التعامل مع نهاية اللمس أو فلت الماوس
+    window.addEventListener('pointerup', () => {
+      if (!isDragging) return;
+      isDragging = false;
+
+      // إذا كانت السرعة عند الفلت عالية، نبدأ الرمية الفيزيائية
+      if (Math.abs(currentVelocity) > 0.1) {
+        isThrowing = true;
+      }
+    });
+
+    // في حال خرج المؤشر أو خرب اللمس
+    window.addEventListener('pointercancel', () => {
+      isDragging = false;
+      isThrowing = false;
     });
 
     window.addEventListener('resize', handleResize);
 
-    // 4. Main 60fps Physics Render Loop
+    // 5. Main 60fps Physical & Render Loop
     function renderLoop() {
-      progress += 0.0016;
+      // Logic: هل نحن نسحب، أم نرمي، أم ندور تلقائياً؟
+      
+      if (isDragging) {
+        // إذا كنا نسحب، لا نفعل شيئاً هنا، الـ Event Listener هو من يحديث Progress
+      } else if (isThrowing) {
+        // إذا كنا نرمي (إصبعك فلت والكرت يمر بسرعة)
+        
+        // نطبق السرعة على التقدم
+        progress -= currentVelocity * 0.016; // 0.016 تقريباً زمن الفريم الواحد
+        
+        // نطبق الاحتكاك لتبطئ السرعة تدريجياً
+        currentVelocity *= friction;
 
+        // إذا أصبحت السرعة بطيئة جداً، نوقف الرمية
+        if (Math.abs(currentVelocity) < 0.01) {
+          isThrowing = false;
+          currentVelocity = 0;
+        }
+      } else {
+        // الدوران التلقائي الهادئ عند عدم وجود تفاعل
+        progress += autoPlaySpeed;
+      }
+
+      // حسابات تمييل الماوس (Inertia Damping)
       mouse.x += (mouse.targetX - mouse.x) * 0.08;
       mouse.y += (mouse.targetY - mouse.y) * 0.08;
 
       const h = window.innerHeight;
       const { cardH } = metrics;
 
+      // MAGNETIC SNAP LOGIC (الجزء اللي يخلي الكرت يوقف في النص بالضبط ببريميوم)
+      // نحسب المسافة من الكرت الأقرب للمركز
       const continuousProgress = progress;
       const roundedIndex = Math.round(continuousProgress);
-      const diffFromRound = continuousProgress - roundedIndex;
+      const diffFromRound = continuousProgress - roundedIndex; // تتراوح بين [-0.5, 0.5]
       
+      // نطبق المعادلة غير الخطية لخلق "فخ مغناطيسي" يجعل الكرت يثبت في المركز بريميوم
       const easedDiff = Math.sign(diffFromRound) * Math.pow(Math.abs(diffFromRound) * 2, 4.2) / 2;
       const virtualActiveIndex = roundedIndex + easedDiff;
 
+      // حلقة العرض ثلاثي الأبعاد (كما في الكود السابق)
       for (let i = 0; i < cardCount; i++) {
         const card = cardElements[i];
         if (!card) continue;
@@ -310,6 +415,7 @@
         const maxTiltY = 15;
         const maxTiltX = 12;
 
+        // تمييل الماوس يعمل على الكرت القريب من المركز فقط
         const activeTiltX = -mouse.y * maxTiltX * centerFactor;
         const activeTiltY = mouse.x * maxTiltY * centerFactor;
 
@@ -318,7 +424,8 @@
 
         card.style.zIndex = Math.round(z).toString();
         card.style.opacity = '1';
-        card.style.transform = `translateY(${y.toFixed(2)}px) translateZ(${z.toFixed(2)}px) rotateX(${totalRotX.toFixed(2)}deg) rotateY(${totalRotY.toFixed(2)}deg) rotateZ(-3deg)`;
+        // الميلان الثابت -3deg تم نقله إلى حاوية الـ Viewport لتبسيط العمليات الحسابية
+        card.style.transform = `translateY(${y.toFixed(2)}px) translateZ(${z.toFixed(2)}px) rotateX(${totalRotX.toFixed(2)}deg) rotateY(${totalRotY.toFixed(2)}deg)`;
       }
 
       requestAnimationFrame(renderLoop);
