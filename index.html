@@ -80,9 +80,10 @@
     
     // Physical & Interaction State
     let progress = 0; 
+    let visualProgress = 0; // متغير التنعيم الانسيابي (Liquid Smooth Value)
     
-    // Physics constants (تم تعديل الاحتكاك والحساسية للانزلاق السلس)
-    const friction = 0.988; // احتكاك متوازن يسمح بمرور 5-6 بطاقات عند الرمي القوي
+    // Physics constants
+    const friction = 0.985; // احتكاك ناعم
     const autoPlaySpeed = 0.001; 
     const dragSensitivity = 0.003; 
 
@@ -245,8 +246,7 @@
 
       if (dt > 0) {
         const instantVelocity = (instantDy * dragSensitivity) / (dt / 1000);
-        // نزيد استجابة السرعة اللحظية لتلقف حركة الفلت السريعة بدقة
-        currentVelocity = currentVelocity * 0.5 + instantVelocity * 0.5;
+        currentVelocity = currentVelocity * 0.6 + instantVelocity * 0.4;
       }
 
       lastY = e.clientY;
@@ -259,8 +259,7 @@
 
       if (Math.abs(currentVelocity) > 0.05) {
         isThrowing = true;
-        // تعزيز السرعة اللحظية عند الإفلات لتندفع البطاقات لمسافة 5-6 بطاقات
-        currentVelocity *= 1.35;
+        currentVelocity *= 1.2;
       }
     });
 
@@ -271,15 +270,15 @@
 
     window.addEventListener('resize', handleResize);
 
-    // 4. Animation & Render Loop
+    // 4. Liquid Smooth Animation & Render Loop
     function renderLoop() {
       if (isDragging) {
-        // يتم تحديث Progress عبر PointerMove
+        // يتم التحديث عبر PointerMove
       } else if (isThrowing) {
         progress -= currentVelocity * 0.016; 
-        currentVelocity *= friction; // احتكاك ناعم يضمن التناقص التدريجي السلس
+        currentVelocity *= friction;
 
-        if (Math.abs(currentVelocity) < 0.005) {
+        if (Math.abs(currentVelocity) < 0.001) {
           isThrowing = false;
           currentVelocity = 0;
         }
@@ -287,18 +286,18 @@
         progress += autoPlaySpeed;
       }
 
+      // معادلة التنعيم السائل (Liquid Smoothing Layer):
+      // تجعل حركة العرض تتبع الهدف بسلاسة فائقة وبدون أي نترات
+      visualProgress += (progress - visualProgress) * 0.15;
+
       mouse.x += (mouse.targetX - mouse.x) * 0.08;
       mouse.y += (mouse.targetY - mouse.y) * 0.08;
 
       const h = window.innerHeight;
       const { cardH } = metrics;
 
-      const continuousProgress = progress;
-      const roundedIndex = Math.round(continuousProgress);
-      const diffFromRound = continuousProgress - roundedIndex; 
-      
-      const easedDiff = Math.sign(diffFromRound) * Math.pow(Math.abs(diffFromRound) * 2, 4.2) / 2;
-      const virtualActiveIndex = roundedIndex + easedDiff;
+      // نستخدم التنعيم السائل مباشرة لنلغي المطبات نهائياً
+      const virtualActiveIndex = visualProgress;
 
       for (let i = 0; i < cardCount; i++) {
         const card = cardElements[i];
