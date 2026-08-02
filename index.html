@@ -12,7 +12,7 @@
 <!-- Google Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;800;900&family=Cinzel:wght@700;800;900&family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;800;900&family=Cinzel:wght@700;800;900&family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@700;800;900&display=swap" rel="stylesheet">
 
 <script>
   window.tailwind && (tailwind.config = {
@@ -38,22 +38,26 @@
     --brandLight: #a855f7;
     --bg-color: #050505;
     --text-color: #e8e8ef;
-    --muted-color: rgba(255, 255, 255, 0.7);
+    --subtext-color: rgba(255, 255, 255, 0.75);
     --star-bg: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
     --star-opacity: 1;
     --anim--hover-time: 400ms;
     --anim--hover-ease: cubic-bezier(0.25, 1, 0.5, 1);
     --btn-text-color: rgba(255, 255, 255, 0.95);
+    --card-bg: rgba(255, 255, 255, 0.04);
+    --card-border: rgba(255, 255, 255, 0.1);
   }
 
   html.light {
     --ink: #f8fafc;
     --bg-color: #f1f5f9;
     --text-color: #0f172a;
-    --muted-color: #475569;
+    --subtext-color: #334155;
     --star-bg: radial-gradient(ellipse at bottom, #e2e8f0 0%, #cbd5e1 100%);
     --star-opacity: 0.25;
     --btn-text-color: #2e1065;
+    --card-bg: rgba(255, 255, 255, 0.85);
+    --card-border: rgba(126, 34, 206, 0.2);
   }
 
   * , *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -71,17 +75,15 @@
     -webkit-user-select: none;
   }
 
-  /* Light Mode Color Overrides for Visibility */
-  html.light p, 
-  html.light span:not(.vortx-wet-oil-title):not(.gold-heading):not(.force-eng),
-  html.light div {
-    color: inherit;
+  /* Light Mode Color Fixes & Contrast Tuning */
+  html.light p, html.light span, html.light h2, html.light h3, html.light h4 {
+    color: var(--text-color);
   }
-  
+
   html.light .text-white { color: #0f172a !important; }
   html.light .text-slate-300 { color: #334155 !important; }
-  html.light .text-purple-300 { color: #6b21a8 !important; }
-  html.light .opacity-85, html.light .opacity-80, html.light .opacity-60, html.light .opacity-50 { opacity: 0.95 !important; }
+  html.light .text-purple-300, html.light .text-purple-400 { color: #6b21a8 !important; }
+  html.light .opacity-85, html.light .opacity-80, html.light .opacity-70, html.light .opacity-60, html.light .opacity-50 { opacity: 1 !important; color: var(--subtext-color) !important; }
 
   html.vx-loading, html.vx-loading body { overflow: hidden !important; height: 100%; }
   html[dir="rtl"] body { font-family: 'Cairo', sans-serif; }
@@ -96,6 +98,19 @@
     display: inline-block;
   }
 
+  /* Scroll Reveal Animation Styles */
+  .reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(35px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+  }
+
+  .reveal-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
   /* Stars Background Animation */
   .stars-background-container { position: fixed; inset: 0; width: 100vw; height: 100vh; background: var(--star-bg); overflow: hidden; z-index: 0; pointer-events: none; transition: background .4s ease; }
   #stars, #stars2, #stars3 { position: absolute; top: 0; left: 0; background: transparent; opacity: var(--star-opacity); transition: opacity .4s ease; }
@@ -104,6 +119,7 @@
   #stars3 { width: 3px; height: 3px; box-shadow: 200px 981px #fff, 1731px 521px #fff, 132px 1039px #fff; animation: animStar 150s linear infinite; }
   @keyframes animStar { from { transform: translateY(0); } to { transform: translateY(-2000px); } }
 
+  /* Title Shines */
   .vortx-wet-oil-title {
     display: inline-block; font-weight: 900;
     background: linear-gradient(110deg, #ffffff 0%, #f3e8ff 20%, #ffffff 35%, #c084fc 50%, #ffffff 65%, #7e22ce 80%, #ffffff 100%);
@@ -112,7 +128,11 @@
     filter: drop-shadow(0 10px 25px rgba(0,0,0,.8)) drop-shadow(0 0 20px rgba(168,85,247,.5));
   }
   @keyframes oilShineSweep { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
-  html.light .vortx-wet-oil-title { background: linear-gradient(110deg, #2e1065 0%, #581c87 20%, #a855f7 35%, #7e22ce 65%, #2e1065 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  html.light .vortx-wet-oil-title {
+    background: linear-gradient(110deg, #2e1065 0%, #581c87 25%, #7e22ce 50%, #3b0764 75%, #2e1065 100%);
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 4px 12px rgba(126,34,206,.25));
+  }
 
   .gold-heading {
     font-family: 'Inter', sans-serif; font-weight: 900; letter-spacing: 0.04em;
@@ -123,23 +143,23 @@
   @keyframes goldShine { 0% { background-position: 220% 0; } 100% { background-position: -220% 0; } }
   html.light .gold-heading { background: linear-gradient(100deg, #854d0e 0%, #ca8a04 38%, #a16207 72%, #854d0e 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
 
-  /* Theme Switch Controls */
+  /* Theme Switcher */
   .theme-switch-btn { width: 64px; height: 34px; border-radius: 999px; background: linear-gradient(135deg,#1e1b4b,#311042); border: 1px solid rgba(168,85,247,.4); position: relative; cursor: pointer; padding: 3px; transition: all .4s ease; display: flex; align-items: center; }
   html.light .theme-switch-btn { background: linear-gradient(135deg,#38bdf8,#fde047); border-color: rgba(56,189,248,.6); }
   .theme-switch-ball { width: 26px; height: 26px; border-radius: 50%; position: absolute; top: 3px; left: 3px; transition: transform .4s ease; display: flex; align-items: center; justify-content: center; }
   html.dark .theme-switch-ball { transform: translateX(0); background: #e2e8f0; }
   html.light .theme-switch-ball { transform: translateX(30px); background: #fef08a; }
 
-  /* 3D Glass Buttons */
+  /* Buttons */
   .button-wrap { position: relative; z-index: 10; border-radius: 999vw; background: transparent; cursor: pointer; display: inline-block; transition: all var(--anim--hover-time) var(--anim--hover-ease); }
   .button-shadow { --shadow-cuttoff-fix: 2em; position: absolute; width: calc(100% + var(--shadow-cuttoff-fix)); height: calc(100% + var(--shadow-cuttoff-fix)); top: calc(0% - var(--shadow-cuttoff-fix) / 2); left: calc(0% - var(--shadow-cuttoff-fix) / 2); filter: blur(clamp(2px,.125em,12px)); overflow: visible; pointer-events: none; }
   .button-shadow::after { content: ""; position: absolute; z-index: 0; inset: 0; border-radius: 999vw; background: linear-gradient(180deg, rgba(168,85,247,.3), rgba(0,0,0,.2)); width: calc(100% - var(--shadow-cuttoff-fix) - .25em); height: calc(100% - var(--shadow-cuttoff-fix) - .25em); top: calc(var(--shadow-cuttoff-fix) - .5em); left: calc(var(--shadow-cuttoff-fix) - .875em); padding: .125em; box-sizing: border-box; mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); mask-composite: exclude; opacity: 1; }
   .btn-3d-style { all: unset; cursor: pointer; position: relative; display: block; z-index: 3; background: linear-gradient(-75deg, rgba(255,255,255,.08), rgba(255,255,255,.28), rgba(255,255,255,.08)); border-radius: 999vw; box-shadow: inset 0 .125em .125em rgba(0,0,0,.05), inset 0 -.125em .125em rgba(255,255,255,.5), 0 .25em .125em -.125em rgba(0,0,0,.3); backdrop-filter: blur(6px); transition: all var(--anim--hover-time) var(--anim--hover-ease); width: 100%; text-align: center; }
-  html.light .btn-3d-style { background: linear-gradient(-75deg, rgba(168,85,247,.15), rgba(168,85,247,.3), rgba(168,85,247,.15)); box-shadow: inset 0 .125em .125em rgba(255,255,255,.9), 0 .15em .25em rgba(126,34,206,.2); }
+  html.light .btn-3d-style { background: linear-gradient(-75deg, rgba(126,34,206,.2), rgba(168,85,247,.4), rgba(126,34,206,.2)); box-shadow: inset 0 .125em .125em rgba(255,255,255,.9), 0 .15em .25em rgba(126,34,206,.2); }
   .btn-3d-style:hover { transform: scale(.975); }
   .btn-3d-style span { position: relative; display: block; user-select: none; font-weight: 800; font-size: .9em; color: var(--btn-text-color); text-shadow: 0 .15em .1em rgba(0,0,0,.2); padding-inline: 2em; padding-block: .9em; text-transform: uppercase; }
 
-  /* 3D Physical Touch Infinite Carousel */
+  /* Carousel */
   .perspective-container { perspective: 1350px; }
   .preserve-3d { transform-style: preserve-3d; }
   
@@ -168,17 +188,14 @@
     z-index: 5;
   }
 
-  .tier-card { position: relative; display: flex; flex-direction: column; justify-content: space-between; gap: 1.25rem; padding: 2rem; width: 100%; background-color: hsla(240,15%,9%,.85); backdrop-filter: blur(16px); border-radius: 1.75rem; box-shadow: 0 -16px 24px 0 rgba(255,255,255,.15) inset; overflow: hidden; transition: transform .4s ease, background-color .4s ease; }
-  html.light .tier-card { background-color: rgba(255,255,255,.95); box-shadow: 0 15px 35px rgba(126,34,206,.1); }
-  
+  /* Cards & Glass Containers */
+  .tier-card { position: relative; display: flex; flex-direction: column; justify-content: space-between; gap: 1.25rem; padding: 2rem; width: 100%; background-color: var(--card-bg); backdrop-filter: blur(16px); border: 1px solid var(--card-border); border-radius: 1.75rem; box-shadow: 0 10px 30px rgba(0,0,0,0.2); overflow: hidden; transition: transform .4s ease, background-color .4s ease; }
   .golden-bundle-card { position: relative; border-radius: 2.5rem; background: linear-gradient(135deg, rgba(234,179,8,.08) 0%, rgba(255,255,255,.01) 100%); backdrop-filter: blur(24px); border: 1px solid rgba(234,179,8,.25); box-shadow: 0 25px 50px -12px rgba(234,179,8,.08); overflow: hidden; }
   html.light .golden-bundle-card { background: linear-gradient(135deg, rgba(255,255,255,.95) 0%, rgba(254,240,138,.35) 100%); border-color: rgba(234,179,8,.4); }
 
-  .glass { background: rgba(255,255,255,.03); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,.08); }
-  html.light .glass { background: rgba(255,255,255,.85); border-color: rgba(126,34,206,.15); }
-
-  .cat-card-glass { background: rgba(255,255,255,.05); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,.1); border-radius: 1.75rem; padding: 1.75rem 2rem; cursor: pointer; transition: transform .3s ease; }
-  html.light .cat-card-glass { background: rgba(255,255,255,.9); border-color: rgba(168,85,247,.2); }
+  .glass { background: var(--card-bg); backdrop-filter: blur(16px); border: 1px solid var(--card-border); }
+  .cat-card-glass { background: var(--card-bg); backdrop-filter: blur(16px); border: 1px solid var(--card-border); border-radius: 1.75rem; padding: 1.75rem 2rem; cursor: pointer; transition: transform .3s ease; }
+  .cat-card-glass:hover { transform: translateY(-5px); }
 
   .view { transition: opacity .4s ease; opacity: 1; display: block; }
   .view-hidden { display: none !important; opacity: 0; }
@@ -293,8 +310,8 @@
   <main id="main-view" class="view relative z-10">
     <div id="top"></div>
 
-    <section class="max-w-6xl mx-auto px-4 sm:px-6 pt-12 pb-10 text-center relative">
-      <!-- DOUBLE PULSING DOTS HERE -->
+    <section class="max-w-6xl mx-auto px-4 sm:px-6 pt-12 pb-10 text-center relative reveal-on-scroll">
+      <!-- DOUBLE PULSING DOTS -->
       <div class="inline-flex items-center gap-3 px-6 py-2.5 rounded-full text-xs font-bold tracking-widest uppercase glass backdrop-blur-md mb-8">
         <span class="w-2 h-2 rounded-full bg-purple-400 animate-ping"></span>
         <span data-i18n="hero-tag">Digital Assets Hub</span>
@@ -312,7 +329,7 @@
     </section>
 
     <!-- WEB PAGE BUNDLES -->
-    <section id="bundles" class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
+    <section id="bundles" class="max-w-7xl mx-auto px-4 sm:px-6 py-12 reveal-on-scroll">
       <div class="golden-bundle-card p-8 sm:p-14 relative flex flex-col md:flex-row items-center justify-between gap-10">
         <div class="text-center md:text-left rtl:md:text-right max-w-2xl relative z-10 w-full">
           <span data-i18n="bundle-sub" class="text-xs tracking-widest uppercase font-extrabold text-yellow-500 block mb-2">Custom Web Solutions</span>
@@ -328,8 +345,8 @@
       </div>
     </section>
 
-    <!-- FEATURED PACKS: INFINITE 3D PHYSICAL TOUCH CAROUSEL -->
-    <section id="packs" class="py-16 w-full relative overflow-hidden select-none">
+    <!-- FEATURED PACKS: INFINITE 3D CAROUSEL -->
+    <section id="packs" class="py-16 w-full relative overflow-hidden select-none reveal-on-scroll">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-20 text-center mb-6">
         <h2 data-i18n="packs-title" class="font-head font-bold text-3xl sm:text-5xl">Featured Packs</h2>
         <p data-i18n="packs-desc" class="font-bold opacity-60 text-sm sm:text-base mt-2 tracking-wide">Swipe horizontally for endless physical 3D cards interaction</p>
@@ -341,7 +358,7 @@
     </section>
 
     <!-- CATEGORIES -->
-    <section id="categories" class="max-w-7xl mx-auto px-4 sm:px-6 py-16">
+    <section id="categories" class="max-w-7xl mx-auto px-4 sm:px-6 py-16 reveal-on-scroll">
       <div class="mb-10 text-left"><h2 data-i18n="cat-sec-title" class="font-head font-bold text-3xl sm:text-4xl">Categories</h2><p data-i18n="cat-sec-desc" class="font-bold opacity-50 mt-2 text-sm tracking-wide">Select a category to explore editing packs.</p></div>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div id="cat-card-CC" onclick="window.openCategory('CC')" class="cat-card-glass flex items-center justify-between group"><div class="flex items-center gap-5"><div class="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 font-extrabold text-sm">01</div><div><h3 class="font-head font-black text-2xl tracking-wider">CC</h3><p class="text-xs font-semibold opacity-60 mt-1">Color Corrections</p></div></div><div class="text-purple-400/60 text-xl font-bold">→</div></div>
@@ -350,29 +367,37 @@
       </div>
     </section>
 
-    <!-- LIVE USER & PLATFORM STATS SECTION -->
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 py-12 border-t border-white/10 mt-12">
+    <!-- LIVE STATS SECTION WITH ROLLING NUMBERS & LUXURY MONO FONT -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 py-12 border-t border-white/10 mt-12 reveal-on-scroll">
       <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
         <div class="glass p-6 rounded-2xl">
-          <h4 class="font-head font-black text-3xl sm:text-4xl text-purple-400">17,000+</h4>
+          <h4 class="font-mono font-black text-3xl sm:text-4xl text-purple-400 tracking-wider">
+            <span class="counter-num" data-target="17000">0</span>+
+          </h4>
           <p data-i18n="stat-subscribers" class="text-xs font-bold opacity-70 mt-2 uppercase tracking-widest">Telegram Subscribers</p>
         </div>
         <div class="glass p-6 rounded-2xl">
-          <h4 class="font-head font-black text-3xl sm:text-4xl text-purple-400">45,000+</h4>
+          <h4 class="font-mono font-black text-3xl sm:text-4xl text-purple-400 tracking-wider">
+            <span class="counter-num" data-target="45000">0</span>+
+          </h4>
           <p data-i18n="stat-views" class="text-xs font-bold opacity-70 mt-2 uppercase tracking-widest">Monthly Visitors</p>
         </div>
         <div class="glass p-6 rounded-2xl">
-          <h4 class="font-head font-black text-3xl sm:text-4xl text-purple-400">1,250+</h4>
+          <h4 class="font-mono font-black text-3xl sm:text-4xl text-purple-400 tracking-wider">
+            <span class="counter-num" data-target="1250">0</span>+
+          </h4>
           <p data-i18n="stat-orders" class="text-xs font-bold opacity-70 mt-2 uppercase tracking-widest">Completed Assets</p>
         </div>
         <div class="glass p-6 rounded-2xl">
-          <h4 class="font-head font-black text-3xl sm:text-4xl text-yellow-400">★ 4.9/5</h4>
+          <h4 class="font-mono font-black text-3xl sm:text-4xl text-yellow-400 tracking-wider">
+            ★ <span class="counter-num-decimal" data-target="4.9">0.0</span>/5
+          </h4>
           <p data-i18n="stat-rating" class="text-xs font-bold opacity-70 mt-2 uppercase tracking-widest">Satisfaction Score</p>
         </div>
       </div>
     </section>
 
-    <footer class="border-t border-white/5 mt-6">
+    <footer class="border-t border-white/5 mt-6 reveal-on-scroll">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12 flex flex-col md:flex-row items-center justify-between gap-6">
         <p class="font-head font-extrabold tracking-widest text-brandLight text-xl force-eng">VORTX</p>
         <p class="font-bold opacity-60 text-sm">© <span id="year"></span> VORTX Studio. <span data-i18n="footer-right">Crafted for the bold.</span></p>
@@ -524,11 +549,69 @@
 
   var yr = document.getElementById('year');
   if (yr) yr.textContent = new Date().getFullYear();
+
+  /* ---------- Scroll Reveal & Counter Animations ---------- */
+  function initScrollAnimations() {
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+
+          // Trigger Counter animation if inside intersecting block
+          var counters = entry.target.querySelectorAll('.counter-num');
+          counters.forEach(function (counter) {
+            if (counter.dataset.animated) return;
+            counter.dataset.animated = "true";
+            var target = parseInt(counter.dataset.target, 10);
+            var count = 0;
+            var speed = target / 60; // 60 frames animation
+
+            function updateCount() {
+              count += speed;
+              if (count < target) {
+                counter.textContent = Math.floor(count).toLocaleString();
+                requestAnimationFrame(updateCount);
+              } else {
+                counter.textContent = target.toLocaleString();
+              }
+            }
+            updateCount();
+          });
+
+          var decimalCounters = entry.target.querySelectorAll('.counter-num-decimal');
+          decimalCounters.forEach(function (counter) {
+            if (counter.dataset.animated) return;
+            counter.dataset.animated = "true";
+            var target = parseFloat(counter.dataset.target);
+            var count = 0;
+            var speed = target / 40;
+
+            function updateDecimal() {
+              count += speed;
+              if (count < target) {
+                counter.textContent = count.toFixed(1);
+                requestAnimationFrame(updateDecimal);
+              } else {
+                counter.textContent = target.toFixed(1);
+              }
+            }
+            updateDecimal();
+          });
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.reveal-on-scroll').forEach(function (el) {
+      observer.observe(el);
+    });
+  }
+
+  window.addEventListener('DOMContentLoaded', initScrollAnimations);
 })();
 </script>
 
 <!-- ============================================================
-     3D INFINITE CAROUSEL ENGINE (SEAMLESS LOOP)
+     3D INFINITE CAROUSEL ENGINE
      ============================================================ -->
 <script>
 (function () {
@@ -641,7 +724,6 @@
           if (i === normCurrent) {
             window.openPreview(data.title, data.tag);
           } else {
-            // Find shortest directional jump for seamless click targeting
             var diff = (i - normCurrent + N) % N;
             if (diff > N / 2) diff -= N;
             targetIndex = currentIndex + diff;
@@ -658,7 +740,6 @@
     var spacing = 220;
     
     cards.forEach(function (card, i) {
-      // Calculate wrapped position relative to continuous currentIndex
       var rawOffset = i - currentIndex;
       var wrappedOffset = ((rawOffset % N) + N) % N;
       if (wrappedOffset > N / 2) wrappedOffset -= N;
@@ -723,7 +804,6 @@
     if (!isDragging) return;
     isDragging = false;
 
-    // Apply inertia and snap to closest continuous index
     targetIndex -= velocityX * 1.5;
     targetIndex = Math.round(targetIndex);
   }
