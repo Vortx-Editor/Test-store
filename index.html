@@ -2,7 +2,7 @@
 <html lang="en" class="dark" dir="ltr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-select=none" />
   <title>VORTX — Premium Digital Assets</title>
   <meta name="theme-color" content="#09090c" />
 
@@ -126,7 +126,7 @@
       to { transform: translateY(-2000px); }
     }
 
-    /* VORTX WET LIQUID SHINE SWEEP (SINGLE ELEMENT - NO GHOSTING / NO OVERLAY SHIFT) */
+    /* VORTX WET LIQUID SHINE SWEEP */
     .vortx-wet-oil-title {
       display: inline-block;
       font-weight: 900;
@@ -169,7 +169,7 @@
       filter: drop-shadow(0 5px 15px rgba(126, 34, 206, 0.2));
     }
 
-    /* CUSTOM LUXURY SWITCH BUTTON */
+    /* THEME SWITCH */
     .theme-switch-btn {
       width: 64px; height: 34px; border-radius: 999px;
       background: linear-gradient(135deg, #1e1b4b, #311042);
@@ -268,117 +268,134 @@
       text-transform: uppercase;
     }
 
-    /* TIER CARDS FULL DESIGN */
+    /* TIER CARDS */
     .tier-card {
       --white: hsl(0, 0%, 100%);
       --black: hsl(240, 15%, 9%);
       --paragraph: hsl(0, 0%, 83%);
       --line: hsl(240, 9%, 17%);
       --primary: hsl(266, 92%, 58%);
-
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: 1.25rem;
-      padding: 2rem;
-      width: 100%;
-      background-color: hsla(240, 15%, 9%, 0.85);
-      backdrop-filter: blur(16px);
+      position: relative; display: flex; flex-direction: column; justify-content: space-between; gap: 1.25rem;
+      padding: 2rem; width: 100%; background-color: hsla(240, 15%, 9%, 0.85); backdrop-filter: blur(16px);
       background-image: radial-gradient(at 88% 40%, hsla(240, 15%, 9%, 1) 0px, transparent 85%),
                         radial-gradient(at 0% 64%, hsla(263, 93%, 56%, 0.4) 0px, transparent 85%);
-      border-radius: 1.75rem;
-      box-shadow: 0px -16px 24px 0px rgba(255, 255, 255, 0.15) inset;
-      overflow: hidden;
+      border-radius: 1.75rem; box-shadow: 0px -16px 24px 0px rgba(255, 255, 255, 0.15) inset; overflow: hidden;
       transition: transform 0.4s ease, background-color 0.4s ease;
     }
-
     html.light .tier-card {
       background-color: rgba(255, 255, 255, 0.92);
       background-image: radial-gradient(at 0% 64%, rgba(216, 180, 254, 0.4) 0px, transparent 85%);
       box-shadow: 0 15px 35px rgba(126, 34, 206, 0.1);
     }
-
     .tier-card:hover { transform: translateY(-6px); }
 
-    .tier-card .card_title__container .card_title {
-      font-size: 1.75rem;
-      font-weight: 900;
-      color: var(--white);
-      font-family: 'Cinzel', 'Cairo', serif;
-    }
+    .tier-card .card_title__container .card_title { font-size: 1.75rem; font-weight: 900; color: var(--white); font-family: 'Cinzel', 'Cairo', serif; }
     html.light .tier-card .card_title__container .card_title { color: #3b0764; }
-
-    .tier-card .card_title__container .card_paragraph {
-      margin-top: 0.5rem;
-      font-size: 0.85rem;
-      color: var(--paragraph);
-      line-height: 1.5;
-    }
+    .tier-card .card_title__container .card_paragraph { margin-top: 0.5rem; font-size: 0.85rem; color: var(--paragraph); line-height: 1.5; }
     html.light .tier-card .card_title__container .card_paragraph { color: #475569; }
-
     .tier-card .line { width: 100%; height: 0.1rem; background-color: var(--line); border: none; margin: 0.5rem 0; }
     html.light .tier-card .line { background-color: rgba(126, 34, 206, 0.15); }
-
     .tier-card .card__list { display: flex; flex-direction: column; gap: 0.85rem; }
     .tier-card .card__list .card__list_item { display: flex; align-items: center; gap: 0.75rem; }
-
-    .tier-card .card__list .card__list_item .check {
-      display: flex; justify-content: center; align-items: center;
-      width: 1.25rem; height: 1.25rem; background-color: var(--primary);
-      border-radius: 50%; flex-shrink: 0;
-    }
-
+    .tier-card .card__list .card__list_item .check { display: flex; justify-content: center; align-items: center; width: 1.25rem; height: 1.25rem; background-color: var(--primary); border-radius: 50%; flex-shrink: 0; }
     .tier-card .card__list .card__list_item .check .check_svg { width: 0.85rem; height: 0.85rem; fill: var(--black); }
     .tier-card .card__list .card__list_item .list_text { font-size: 0.9rem; font-weight: 700; color: var(--white); }
     html.light .tier-card .card__list .card__list_item .list_text { color: #1e1b4b; }
 
     /* GLASS RADIO SELECTOR */
-    .glass-radio-group {
-      display: flex; position: relative;
-      background: rgba(255, 255, 255, 0.05); border-radius: 999px;
-      backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.15);
-      padding: 6px; margin: 15px auto 10px auto; width: 100%; max-width: 56rem;
-    }
-    html.light .glass-radio-group {
-      background: rgba(126, 34, 206, 0.06);
-      border-color: rgba(126, 34, 206, 0.2);
-    }
+    .glass-radio-group { display: flex; position: relative; background: rgba(255, 255, 255, 0.05); border-radius: 999px; backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.15); padding: 6px; margin: 15px auto 10px auto; width: 100%; max-width: 56rem; }
+    html.light .glass-radio-group { background: rgba(126, 34, 206, 0.06); border-color: rgba(126, 34, 206, 0.2); }
     .glass-radio-group input { display: none; }
-    .glass-radio-group label {
-      flex: 1; display: flex; align-items: center; justify-content: center;
-      font-size: 15px; font-weight: 800; padding: 0.9rem 1rem; cursor: pointer;
-      color: rgba(255, 255, 255, 0.7); z-index: 2; transition: color 0.3s ease;
-    }
+    .glass-radio-group label { flex: 1; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 800; padding: 0.9rem 1rem; cursor: pointer; color: rgba(255, 255, 255, 0.7); z-index: 2; transition: color 0.3s ease; }
     html.light .glass-radio-group label { color: #581c87; }
     .glass-radio-group input:checked + label { color: #ffffff; }
-
-    .glass-glider {
-      position: absolute; top: 6px; bottom: 6px; width: calc((100% - 12px) / 3);
-      border-radius: 999px; z-index: 1; transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.4s ease;
-    }
+    .glass-glider { position: absolute; top: 6px; bottom: 6px; width: calc((100% - 12px) / 3); border-radius: 999px; z-index: 1; transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.4s ease; }
     html[dir="ltr"] #glass-cc:checked ~ .glass-glider { transform: translateX(0%); background: linear-gradient(135deg, rgba(168, 85, 247, 0.4), #a855f7); }
     html[dir="ltr"] #glass-xml:checked ~ .glass-glider { transform: translateX(100%); background: linear-gradient(135deg, rgba(56, 189, 248, 0.4), #06b6d4); }
     html[dir="ltr"] #glass-shake:checked ~ .glass-glider { transform: translateX(200%); background: linear-gradient(135deg, rgba(234, 179, 8, 0.4), #eab308); }
-
     html[dir="rtl"] #glass-cc:checked ~ .glass-glider { transform: translateX(0%); background: linear-gradient(135deg, rgba(168, 85, 247, 0.4), #a855f7); }
     html[dir="rtl"] #glass-xml:checked ~ .glass-glider { transform: translateX(-100%); background: linear-gradient(135deg, rgba(56, 189, 248, 0.4), #06b6d4); }
     html[dir="rtl"] #glass-shake:checked ~ .glass-glider { transform: translateX(-200%); background: linear-gradient(135deg, rgba(234, 179, 8, 0.4), #eab308); }
 
-    /* SWIPER 3D */
-    .swiper { width: 100%; padding-top: 30px; padding-bottom: 60px; overflow: visible !important; }
-    .swiper-slide { width: 300px !important; height: 440px !important; border-radius: 2rem; position: relative; }
+    /* =========================================================
+       NEW 3D PHYSICAL TOUCH CARDS (SWIPER CREATIVE EFFECT)
+       ========================================================= */
+    .swiper { 
+      width: 100%; 
+      padding-top: 50px; 
+      padding-bottom: 70px; 
+      overflow: visible !important; 
+    }
+    
+    .swiper-slide { 
+      width: 320px !important; 
+      height: 480px !important; 
+      border-radius: 2rem; 
+      position: relative;
+      /* يعطي الكرت بُعد فيزيائي ثري دي */
+      transform-style: preserve-3d;
+      perspective: 1000px;
+    }
 
-    .glossy-bundle-card {
-      position: relative; border-radius: 2.5rem;
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.01) 100%);
-      backdrop-filter: blur(24px); border: 1.5px solid rgba(168, 85, 247, 0.3);
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7); overflow: hidden;
+    /* تصميم الكرت الفيزيائي الفخم */
+    .physical-card-glass { 
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%); 
+      backdrop-filter: blur(20px); 
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.15); 
+      border-radius: 2rem; 
+      padding: 1.5rem; 
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center; 
+      text-center; 
+      cursor: grab; 
+      box-shadow: 0 25px 40px -10px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.2);
     }
-    html.light .glossy-bundle-card {
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(243, 232, 255, 0.7) 100%);
-      border-color: rgba(168, 85, 247, 0.3);
+    .swiper-slide:active .physical-card-glass { cursor: grabbing; }
+
+    html.light .physical-card-glass { 
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.9) 0%, rgba(240, 240, 255, 0.6) 100%); 
+      border-color: rgba(168, 85, 247, 0.3); 
+      box-shadow: 0 20px 40px rgba(126, 34, 206, 0.15), inset 0 2px 0 #fff;
     }
+
+    /* مربع الصورة الفاضي (Placeholder) - حط صورك فيه بعدين */
+    .card-image-placeholder {
+      width: 100%;
+      flex-grow: 1;
+      margin: 15px 0;
+      border-radius: 1.25rem;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px dashed rgba(255, 255, 255, 0.2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      color: rgba(255, 255, 255, 0.4);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 0.75rem;
+      transition: all 0.3s ease;
+    }
+    html.light .card-image-placeholder {
+      background: rgba(126, 34, 206, 0.03);
+      border-color: rgba(126, 34, 206, 0.2);
+      color: rgba(126, 34, 206, 0.5);
+    }
+
+    .physical-card-glass:hover .card-image-placeholder {
+      border-color: rgba(168, 85, 247, 0.6);
+      background: rgba(168, 85, 247, 0.05);
+    }
+
+    .glossy-bundle-card { position: relative; border-radius: 2.5rem; background: linear-gradient(135deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.01) 100%); backdrop-filter: blur(24px); border: 1.5px solid rgba(168, 85, 247, 0.3); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7); overflow: hidden; }
+    html.light .glossy-bundle-card { background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(243, 232, 255, 0.7) 100%); border-color: rgba(168, 85, 247, 0.3); }
 
     .text-3d-header { color: var(--nav-logo-color); font-weight: 900; }
     .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.08); }
@@ -390,132 +407,23 @@
     .view { transition: opacity .4s ease; opacity: 1; }
     .view-hidden { display: none !important; opacity: 0; }
 
-    /* =====================================================================
-       CINEMATIC HIGH-END LOADER (WITH GLITCH LETTERS & AMBIENT GLOW)
-       ===================================================================== */
-    #vx-loader {
-      position: fixed;
-      inset: 0;
-      z-index: 999999;
-      background: #09090c;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.7s ease;
-    }
+    /* LOADER */
+    #vx-loader { position: fixed; inset: 0; z-index: 999999; background: #09090c; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.7s ease; }
+    #vx-loader.vx-hide { opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; }
+    #app-content { opacity: 0; filter: blur(18px); transform: scale(1.02); transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+    #app-content.vx-revealed { opacity: 1; filter: blur(0px); transform: scale(1); }
 
-    #vx-loader.vx-hide {
-      opacity: 0 !important;
-      visibility: hidden !important;
-      pointer-events: none !important;
-    }
+    .vx-ambient-glow { position: absolute; width: min(75vw, 850px); height: min(75vw, 850px); border-radius: 50%; background: radial-gradient(circle, rgba(168, 85, 247, 0.35) 0%, rgba(126, 34, 206, 0.12) 40%, transparent 70%); filter: blur(50px); animation: vxGlowPulse 3.5s ease-in-out infinite; }
+    @keyframes vxGlowPulse { 0%, 100% { transform: scale(0.92); opacity: 0.6; } 50% { transform: scale(1.08); opacity: 0.95; } }
 
-    #app-content {
-      opacity: 0;
-      filter: blur(18px);
-      transform: scale(1.02);
-      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-                  filter 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-                  transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    #app-content.vx-revealed {
-      opacity: 1;
-      filter: blur(0px);
-      transform: scale(1);
-    }
+    .vx-logo-word { display: flex; font-family: 'Cinzel', serif; font-weight: 900; font-size: clamp(3.2rem, 12vw, 6.5rem); letter-spacing: 0.22em; line-height: 1; position: relative; z-index: 2; }
+    .vx-letter { display: inline-block; background: linear-gradient(135deg, #ffffff 0%, #f3e8ff 35%, #c084fc 70%, #7e22ce 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.8)) drop-shadow(0 0 20px rgba(168, 85, 247, 0.6)); opacity: 0; animation: vxLetterGlitchAssemble 0.75s cubic-bezier(0.19, 1, 0.22, 1) forwards; animation-delay: var(--ld, 0s); }
+    @keyframes vxLetterGlitchAssemble { 0% { opacity: 0; transform: translate3d(0, -22px, 0) scale(1.3) skewX(12deg); filter: drop-shadow(-4px 0 0 rgba(255, 0, 130, 0.8)) drop-shadow(4px 0 0 rgba(0, 220, 255, 0.8)) blur(6px); } 40% { opacity: 0.8; transform: translate3d(0, 3px, 0) scale(0.96) skewX(-4deg); filter: drop-shadow(2px 0 0 rgba(255, 0, 130, 0.5)) drop-shadow(-2px 0 0 rgba(0, 220, 255, 0.5)) blur(1px); } 100% { opacity: 1; transform: translate3d(0, 0, 0) scale(1) skewX(0deg); filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.8)) drop-shadow(0 0 20px rgba(168, 85, 247, 0.6)); } }
 
-    .vx-ambient-glow {
-      position: absolute;
-      width: min(75vw, 850px);
-      height: min(75vw, 850px);
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(168, 85, 247, 0.35) 0%, rgba(126, 34, 206, 0.12) 40%, transparent 70%);
-      filter: blur(50px);
-      animation: vxGlowPulse 3.5s ease-in-out infinite;
-    }
-    @keyframes vxGlowPulse {
-      0%, 100% { transform: scale(0.92); opacity: 0.6; }
-      50% { transform: scale(1.08); opacity: 0.95; }
-    }
-
-    .vx-logo-word {
-      display: flex;
-      font-family: 'Cinzel', serif;
-      font-weight: 900;
-      font-size: clamp(3.2rem, 12vw, 6.5rem);
-      letter-spacing: 0.22em;
-      line-height: 1;
-      position: relative;
-      z-index: 2;
-    }
-
-    .vx-letter {
-      display: inline-block;
-      background: linear-gradient(135deg, #ffffff 0%, #f3e8ff 35%, #c084fc 70%, #7e22ce 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.8)) drop-shadow(0 0 20px rgba(168, 85, 247, 0.6));
-      opacity: 0;
-      animation: vxLetterGlitchAssemble 0.75s cubic-bezier(0.19, 1, 0.22, 1) forwards;
-      animation-delay: var(--ld, 0s);
-    }
-
-    @keyframes vxLetterGlitchAssemble {
-      0% {
-        opacity: 0;
-        transform: translate3d(0, -22px, 0) scale(1.3) skewX(12deg);
-        filter: drop-shadow(-4px 0 0 rgba(255, 0, 130, 0.8)) drop-shadow(4px 0 0 rgba(0, 220, 255, 0.8)) blur(6px);
-      }
-      40% {
-        opacity: 0.8;
-        transform: translate3d(0, 3px, 0) scale(0.96) skewX(-4deg);
-        filter: drop-shadow(2px 0 0 rgba(255, 0, 130, 0.5)) drop-shadow(-2px 0 0 rgba(0, 220, 255, 0.5)) blur(1px);
-      }
-      100% {
-        opacity: 1;
-        transform: translate3d(0, 0, 0) scale(1) skewX(0deg);
-        filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.8)) drop-shadow(0 0 20px rgba(168, 85, 247, 0.6));
-      }
-    }
-
-    .vx-bar-track {
-      width: min(78vw, 320px);
-      height: 6px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(168, 85, 247, 0.4);
-      box-shadow: 0 0 15px rgba(126,34,206,0.3);
-      margin-top: 1.8rem;
-      position: relative;
-      overflow: hidden;
-      z-index: 2;
-    }
-
-    .vx-bar-fill {
-      height: 100%;
-      width: 0%;
-      border-radius: 999px;
-      background: linear-gradient(90deg, #7e22ce, #a855f7 55%, #e9d5ff);
-      box-shadow: 0 0 12px rgba(168, 85, 247, 0.9);
-      transition: width 0.05s linear;
-      position: relative;
-    }
-
-    .vx-bar-fill::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.7), transparent);
-      width: 40%;
-      transform: translateX(-100%);
-      animation: vxShimmer 1.5s ease-in-out infinite;
-    }
-    @keyframes vxShimmer {
-      0% { transform: translateX(-120%); }
-      100% { transform: translateX(340%); }
-    }
+    .vx-bar-track { width: min(78vw, 320px); height: 6px; border-radius: 999px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(168, 85, 247, 0.4); box-shadow: 0 0 15px rgba(126,34,206,0.3); margin-top: 1.8rem; position: relative; overflow: hidden; z-index: 2; }
+    .vx-bar-fill { height: 100%; width: 0%; border-radius: 999px; background: linear-gradient(90deg, #7e22ce, #a855f7 55%, #e9d5ff); box-shadow: 0 0 12px rgba(168, 85, 247, 0.9); transition: width 0.05s linear; position: relative; }
+    .vx-bar-fill::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.7), transparent); width: 40%; transform: translateX(-100%); animation: vxShimmer 1.5s ease-in-out infinite; }
+    @keyframes vxShimmer { 0% { transform: translateX(-120%); } 100% { transform: translateX(340%); } }
   </style>
 </head>
 
@@ -663,45 +571,73 @@
         </div>
       </section>
 
-      <section id="packs" class="py-16 max-w-7xl mx-auto px-4 sm:px-6">
+      <!-- FEATURED PACKS: NEW PHYSICAL 3D CARDS (CREATIVE EFFECT) -->
+      <section id="packs" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 overflow-hidden">
         <div class="mb-8 text-left ltr:text-left rtl:text-right">
           <h2 data-i18n="packs-title" class="font-head font-bold text-3xl sm:text-4xl">Featured Packs</h2>
-          <p data-i18n="packs-desc" class="font-bold opacity-50 text-sm mt-3 tracking-wide">Autoplays continuously — Tap or hold to inspect.</p>
+          <p data-i18n="packs-desc" class="font-bold opacity-50 text-sm mt-3 tracking-wide">Swipe horizontally to tumble cards — Tap to inspect.</p>
         </div>
 
         <div class="swiper mySwiper">
           <div class="swiper-wrapper">
-            <div onclick="openPreview('Flame Pack', 'VFX')" class="swiper-slide glass p-6 flex flex-col justify-between items-center text-center cursor-pointer">
-              <span class="text-[10px] uppercase font-bold px-4 py-1.5 rounded-full border border-red-500/30 bg-red-500/10 text-red-400 self-start">VFX</span>
-              <div class="w-full h-60 my-3 rounded-2xl glass flex items-center justify-center overflow-hidden">
-                <img src="https://picsum.photos/400/500?random=1" class="w-full h-full object-cover opacity-85" alt="Sample" />
+            
+            <!-- Card 1 -->
+            <div class="swiper-slide" onclick="openPreview('Flame Pack', 'VFX')">
+              <div class="physical-card-glass">
+                <span class="text-[10px] uppercase font-bold px-4 py-1.5 rounded-full border border-red-500/30 bg-red-500/10 text-red-400 self-start">VFX</span>
+                
+                <!-- Placeholder للصورة -->
+                <div class="card-image-placeholder">
+                  <svg class="w-8 h-8 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                  <span>Image Placeholder</span>
+                </div>
+                
+                <h3 data-i18n="card-1-title" class="font-head font-bold text-2xl w-full text-center">Red Inferno</h3>
               </div>
-              <h3 data-i18n="card-1-title" class="font-head font-bold text-xl">Red Inferno</h3>
             </div>
 
-            <div onclick="openPreview('Cyber Gold', 'Color')" class="swiper-slide glass p-6 flex flex-col justify-between items-center text-center cursor-pointer">
-              <span class="text-[10px] uppercase font-bold px-4 py-1.5 rounded-full border border-yellow-500/30 bg-yellow-500/10 text-yellow-400 self-start">Color</span>
-              <div class="w-full h-60 my-3 rounded-2xl glass flex items-center justify-center overflow-hidden">
-                <img src="https://picsum.photos/400/500?random=2" class="w-full h-full object-cover opacity-85" alt="Sample" />
+            <!-- Card 2 -->
+            <div class="swiper-slide" onclick="openPreview('Cyber Gold', 'Color')">
+              <div class="physical-card-glass">
+                <span class="text-[10px] uppercase font-bold px-4 py-1.5 rounded-full border border-yellow-500/30 bg-yellow-500/10 text-yellow-400 self-start">Color</span>
+                
+                <div class="card-image-placeholder">
+                  <svg class="w-8 h-8 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                  <span>Image Placeholder</span>
+                </div>
+
+                <h3 data-i18n="card-2-title" class="font-head font-bold text-2xl w-full text-center">Cyber Gold</h3>
               </div>
-              <h3 data-i18n="card-2-title" class="font-head font-bold text-xl">Cyber Gold</h3>
             </div>
 
-            <div onclick="openPreview('Neon Nights', 'Camera')" class="swiper-slide glass p-6 flex flex-col justify-between items-center text-center cursor-pointer">
-              <span class="text-[10px] uppercase font-bold px-4 py-1.5 rounded-full border border-purple-500/30 bg-purple-500/10 text-purple-400 self-start">Camera</span>
-              <div class="w-full h-60 my-3 rounded-2xl glass flex items-center justify-center overflow-hidden">
-                <img src="https://picsum.photos/400/500?random=3" class="w-full h-full object-cover opacity-85" alt="Sample" />
+            <!-- Card 3 -->
+            <div class="swiper-slide" onclick="openPreview('Neon Nights', 'Camera')">
+              <div class="physical-card-glass">
+                <span class="text-[10px] uppercase font-bold px-4 py-1.5 rounded-full border border-purple-500/30 bg-purple-500/10 text-purple-400 self-start">Camera</span>
+                
+                <div class="card-image-placeholder">
+                  <svg class="w-8 h-8 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                  <span>Image Placeholder</span>
+                </div>
+
+                <h3 data-i18n="card-3-title" class="font-head font-bold text-2xl w-full text-center">Neon Nights</h3>
               </div>
-              <h3 data-i18n="card-3-title" class="font-head font-bold text-xl">Neon Nights</h3>
             </div>
 
-            <div onclick="openPreview('Hyper Blue', 'Presets')" class="swiper-slide glass p-6 flex flex-col justify-between items-center text-center cursor-pointer">
-              <span class="text-[10px] uppercase font-bold px-4 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/10 text-cyan-400 self-start">Presets</span>
-              <div class="w-full h-60 my-3 rounded-2xl glass flex items-center justify-center overflow-hidden">
-                <img src="https://picsum.photos/400/500?random=4" class="w-full h-full object-cover opacity-85" alt="Sample" />
+            <!-- Card 4 -->
+            <div class="swiper-slide" onclick="openPreview('Hyper Blue', 'Presets')">
+              <div class="physical-card-glass">
+                <span class="text-[10px] uppercase font-bold px-4 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/10 text-cyan-400 self-start">Presets</span>
+                
+                <div class="card-image-placeholder">
+                  <svg class="w-8 h-8 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                  <span>Image Placeholder</span>
+                </div>
+
+                <h3 data-i18n="card-4-title" class="font-head font-bold text-2xl w-full text-center">Hyper Blue</h3>
               </div>
-              <h3 data-i18n="card-4-title" class="font-head font-bold text-xl">Hyper Blue</h3>
             </div>
+
           </div>
         </div>
       </section>
@@ -774,8 +710,7 @@
         </div>
 
         <div class="grid lg:grid-cols-3 gap-8">
-
-          <!-- CARD 1: STARTER -->
+          <!-- CARD 1 -->
           <div class="tier-card">
             <div class="card_title__container">
               <span class="card_title">STARTER</span>
@@ -783,33 +718,12 @@
             </div>
             <hr class="line" />
             <ul class="card__list">
-              <li class="card__list_item">
-                <span class="check">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="check_svg">
-                    <path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path>
-                  </svg>
-                </span>
-                <span class="list_text">Clean & Modern UI</span>
-              </li>
-              <li class="card__list_item">
-                <span class="check">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="check_svg">
-                    <path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path>
-                  </svg>
-                </span>
-                <span class="list_text">Mobile-Ready Layout</span>
-              </li>
+              <li class="card__list_item"><span class="check"><svg class="check_svg" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text">Clean & Modern UI</span></li>
+              <li class="card__list_item"><span class="check"><svg class="check_svg" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text">Mobile-Ready Layout</span></li>
             </ul>
-
-            <div class="button-wrap w-full mt-6" onclick="showToast('PLAN ADDED')">
-              <div class="btn-3d-style">
-                <span data-i18n="select-plan">Select Plan</span>
-              </div>
-              <div class="button-shadow"></div>
-            </div>
+            <div class="button-wrap w-full mt-6" onclick="showToast('PLAN ADDED')"><div class="btn-3d-style"><span data-i18n="select-plan">Select Plan</span></div><div class="button-shadow"></div></div>
           </div>
-
-          <!-- CARD 2: PRO -->
+          <!-- CARD 2 -->
           <div class="tier-card">
             <div class="card_title__container">
               <span class="card_title">PRO</span>
@@ -817,33 +731,12 @@
             </div>
             <hr class="line" />
             <ul class="card__list">
-              <li class="card__list_item">
-                <span class="check">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="check_svg">
-                    <path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path>
-                  </svg>
-                </span>
-                <span class="list_text">Glassmorphism & Glows</span>
-              </li>
-              <li class="card__list_item">
-                <span class="check">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="check_svg">
-                    <path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path>
-                  </svg>
-                </span>
-                <span class="list_text">Scroll Animations</span>
-              </li>
+              <li class="card__list_item"><span class="check"><svg class="check_svg" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text">Glassmorphism & Glows</span></li>
+              <li class="card__list_item"><span class="check"><svg class="check_svg" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text">Scroll Animations</span></li>
             </ul>
-
-            <div class="button-wrap w-full mt-6" onclick="showToast('PLAN ADDED')">
-              <div class="btn-3d-style">
-                <span data-i18n="select-plan">Select Plan</span>
-              </div>
-              <div class="button-shadow"></div>
-            </div>
+            <div class="button-wrap w-full mt-6" onclick="showToast('PLAN ADDED')"><div class="btn-3d-style"><span data-i18n="select-plan">Select Plan</span></div><div class="button-shadow"></div></div>
           </div>
-
-          <!-- CARD 3: VIP -->
+          <!-- CARD 3 -->
           <div class="tier-card">
             <div class="card_title__container">
               <span class="card_title">VIP</span>
@@ -851,32 +744,11 @@
             </div>
             <hr class="line" />
             <ul class="card__list">
-              <li class="card__list_item">
-                <span class="check">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="check_svg">
-                    <path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path>
-                  </svg>
-                </span>
-                <span class="list_text">3D Models Integration</span>
-              </li>
-              <li class="card__list_item">
-                <span class="check">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="check_svg">
-                    <path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path>
-                  </svg>
-                </span>
-                <span class="list_text">Priority Support</span>
-              </li>
+              <li class="card__list_item"><span class="check"><svg class="check_svg" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text">3D Models Integration</span></li>
+              <li class="card__list_item"><span class="check"><svg class="check_svg" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text">Priority Support</span></li>
             </ul>
-
-            <div class="button-wrap w-full mt-6" onclick="showToast('PLAN ADDED')">
-              <div class="btn-3d-style">
-                <span data-i18n="select-plan">Select Plan</span>
-              </div>
-              <div class="button-shadow"></div>
-            </div>
+            <div class="button-wrap w-full mt-6" onclick="showToast('PLAN ADDED')"><div class="btn-3d-style"><span data-i18n="select-plan">Select Plan</span></div><div class="button-shadow"></div></div>
           </div>
-
         </div>
       </div>
     </section>
@@ -888,10 +760,7 @@
             <span data-i18n="cat-view-sub" class="text-xs tracking-widest uppercase font-bold text-brandLight">Collection</span>
             <h2 id="cat-title" class="font-head font-bold text-4xl mt-3">CC</h2>
           </div>
-          <div class="button-wrap" onclick="backToHome()">
-            <div class="btn-3d-style"><span data-i18n="back-btn">← Back</span></div>
-            <div class="button-shadow"></div>
-          </div>
+          <div class="button-wrap" onclick="backToHome()"><div class="btn-3d-style"><span data-i18n="back-btn">← Back</span></div><div class="button-shadow"></div></div>
         </div>
         <div id="cat-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
       </div>
@@ -903,14 +772,8 @@
         <span id="preview-tag" class="text-[10px] font-bold uppercase text-brandLight">TAG</span>
         <h3 id="preview-title" class="font-head font-bold text-2xl mt-1 mb-6">TITLE</h3>
         <div class="flex gap-4">
-          <div class="button-wrap flex-1" onclick="showToast('ADDED TO CART'); closePreview();">
-            <div class="btn-3d-style"><span data-i18n="add-cart">Add to Cart</span></div>
-            <div class="button-shadow"></div>
-          </div>
-          <div class="button-wrap flex-1" onclick="showToast('DOWNLOADING DEMO...')">
-            <div class="btn-3d-style"><span data-i18n="try-demo">Try Demo</span></div>
-            <div class="button-shadow"></div>
-          </div>
+          <div class="button-wrap flex-1" onclick="showToast('ADDED TO CART'); closePreview();"><div class="btn-3d-style"><span data-i18n="add-cart">Add to Cart</span></div><div class="button-shadow"></div></div>
+          <div class="button-wrap flex-1" onclick="showToast('DOWNLOADING DEMO...')"><div class="btn-3d-style"><span data-i18n="try-demo">Try Demo</span></div><div class="button-shadow"></div></div>
         </div>
       </div>
     </div>
@@ -918,72 +781,64 @@
   </div>
 
   <script>
-  /* CINEMATIC LOADER DISMISSAL LOGIC */
+  /* CINEMATIC LOADER */
   function dismissLoaderNow() {
     const loader = document.getElementById('vx-loader');
     const appContent = document.getElementById('app-content');
-    if (loader) {
-      loader.classList.add('vx-hide');
-      setTimeout(() => { loader.style.display = 'none'; }, 700);
-    }
+    if (loader) { loader.classList.add('vx-hide'); setTimeout(() => { loader.style.display = 'none'; }, 700); }
     if (appContent) appContent.classList.add('vx-revealed');
     document.documentElement.classList.remove('vx-loading');
   }
 
-  // Smooth Percentage Increment (Adjusted to 3.2 seconds)
   (function () {
     try {
-      const docEl = document.documentElement;
-      docEl.classList.add('vx-loading');
-
+      const docEl = document.documentElement; docEl.classList.add('vx-loading');
       const barFill = document.getElementById('vx-bar-fill');
       const percentEl = document.getElementById('vx-percent');
       const wordEl = document.getElementById('vx-logo-word');
-
       const letters = ['V', 'O', 'R', 'T', 'X'];
       if (wordEl && wordEl.children.length === 0) {
-        letters.forEach((ch, i) => {
-          const span = document.createElement('span');
-          span.className = 'vx-letter';
-          span.textContent = ch;
-          span.style.setProperty('--ld', (i * 0.12).toFixed(2) + 's');
-          wordEl.appendChild(span);
-        });
+        letters.forEach((ch, i) => { const span = document.createElement('span'); span.className = 'vx-letter'; span.textContent = ch; span.style.setProperty('--ld', (i * 0.12).toFixed(2) + 's'); wordEl.appendChild(span); });
       }
-
       let progress = 0;
-      // 100 steps * 32ms = 3200ms = 3.2 seconds
       const timer = setInterval(() => {
         progress += 1;
-        if (progress >= 100) {
-          progress = 100;
-          clearInterval(timer);
-          setTimeout(dismissLoaderNow, 300);
-        }
+        if (progress >= 100) { progress = 100; clearInterval(timer); setTimeout(dismissLoaderNow, 300); }
         if (barFill) barFill.style.width = progress + '%';
         if (percentEl) percentEl.textContent = progress;
       }, 32);
-
-      // Failsafe max wait 4.5s
       setTimeout(dismissLoaderNow, 4500);
-    } catch (e) {
-      dismissLoaderNow();
-    }
+    } catch (e) { dismissLoaderNow(); }
   })();
 
-  /* SWIPER & SITE FUNCTIONS */
+  /* SWIPER 3D PHYSICAL TOUCH (CREATIVE EFFECT) */
   let swiper;
   function initSwiper() {
     if (typeof Swiper === 'undefined') return;
     if (swiper) swiper.destroy(true, true);
+    
     swiper = new Swiper(".mySwiper", {
-      effect: "coverflow",
+      effect: "creative",
       grabCursor: true,
       centeredSlides: true,
       slidesPerView: "auto",
       loop: true,
-      autoplay: { delay: 2000, disableOnInteraction: false },
-      coverflowEffect: { rotate: 20, stretch: 0, depth: 120, modifier: 1, slideShadows: false },
+      // هذا الإعداد اللي يعطيك الشقلبة والميلان الفيزيائي الفخم يمين ويسار
+      creativeEffect: {
+        limitProgress: 2,
+        shadowPerProgress: true,
+        prev: {
+          translate: ["-110%", 0, -400],
+          rotate: [0, -25, -5],
+          opacity: 0.6
+        },
+        next: {
+          translate: ["110%", 0, -400],
+          rotate: [0, 25, 5],
+          opacity: 0.6
+        }
+      },
+      autoplay: { delay: 3000, disableOnInteraction: true },
     });
   }
 
@@ -991,40 +846,12 @@
 
   function scrollToCategory(catKey) {
     const targetEl = document.getElementById(`cat-card-${catKey}`);
-    if (targetEl) {
-      targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
+    if (targetEl) targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 
   const translations = {
-    en: {
-      "nav-bundles": "Bundles", "nav-packs": "Featured Packs", "nav-categories": "Categories",
-      "hero-tag": "Digital Assets Hub", "hero-desc": "High-end VFX packs, cinematic presets & custom web experiences.",
-      "hero-btn": "Explore Tiers", "bundle-sub": "Custom Web Solutions", "bundle-title": "Web Page Bundles",
-      "bundle-desc": "Launch your custom digital space today.", "bundle-btn": "View Development Tiers",
-      "packs-title": "Featured Packs", "packs-desc": "Autoplays continuously — Tap or hold to inspect.",
-      "card-1-title": "Red Inferno", "card-2-title": "Cyber Gold", "card-3-title": "Neon Nights", "card-4-title": "Hyper Blue",
-      "cat-sec-title": "Categories", "cat-sec-desc": "Select a category to explore editing packs.", "footer-right": "Crafted for the bold.",
-      "tiers-sub": "Web Solutions", "tiers-title": "Development Tiers", "back-btn": "← Back",
-      "tier-starter-desc": "Perfect for simple portfolios and personal landing pages.",
-      "tier-pro-desc": "For creators needing advanced animations & custom design.",
-      "tier-vip-desc": "The absolute premium experience with custom 3D elements.",
-      "select-plan": "Select Plan", "cat-view-sub": "Collection", "add-cart": "Add to Cart", "try-demo": "Try Demo"
-    },
-    ar: {
-      "nav-bundles": "الحزم المتاحة", "nav-packs": "حزم متميزة", "nav-categories": "الأقسام الرئيسية",
-      "hero-tag": "مركز الأصول الرقمية", "hero-desc": "حزم مؤثرات بصرية احترافية، إعدادات سينمائية مسبقة وتجارب ويب مخصصة للمبدعين.",
-      "hero-btn": "استكشف الباقات", "bundle-sub": "حلول المواقع المخصصة", "bundle-title": "باقات تصميم الويب",
-      "bundle-desc": "أطلق مساحتك الرقمية المخصصة اليوم.", "bundle-btn": "عرض باقات التطوير",
-      "packs-title": "الحزم المتميزة", "packs-desc": "تتحرك الكروت تلقائياً — اضغط أو مرر للتحكم بها.",
-      "card-1-title": "الجحيم الأحمر", "card-2-title": "الذهب السيبراني", "card-3-title": "ليالي النيون", "card-4-title": "النيون الأزرق",
-      "cat-sec-title": "الأقسام", "cat-sec-desc": "اختر فئة لاستكشاف الحزم المتاحة.", "footer-right": "صُنع للمبدعين والجرآء.",
-      "tiers-sub": "حلول الويب", "tiers-title": "مستويات التطوير", "back-btn": "→ العودة",
-      "tier-starter-desc": "مثالية للملفات الشخصية وصفحات الهبوط البسيطة.",
-      "tier-pro-desc": "للمبدعين الذين يحتاجون تحريكات متقدمة وتصاميم خاصة.",
-      "tier-vip-desc": "الخبرة المتميزة المطلقة مع عناصر ثلاثية الأبعاد.",
-      "select-plan": "اختر الباقة", "cat-view-sub": "المجموعة", "add-cart": "إضافة للسلة", "try-demo": "تجربة العرض"
-    }
+    en: { "nav-bundles": "Bundles", "nav-packs": "Featured Packs", "nav-categories": "Categories", "hero-tag": "Digital Assets Hub", "hero-desc": "High-end VFX packs, cinematic presets & custom web experiences.", "hero-btn": "Explore Tiers", "bundle-sub": "Custom Web Solutions", "bundle-title": "Web Page Bundles", "bundle-desc": "Launch your custom digital space today.", "bundle-btn": "View Development Tiers", "packs-title": "Featured Packs", "packs-desc": "Swipe horizontally to tumble cards — Tap to inspect.", "card-1-title": "Red Inferno", "card-2-title": "Cyber Gold", "card-3-title": "Neon Nights", "card-4-title": "Hyper Blue", "cat-sec-title": "Categories", "cat-sec-desc": "Select a category to explore editing packs.", "footer-right": "Crafted for the bold.", "tiers-sub": "Web Solutions", "tiers-title": "Development Tiers", "back-btn": "← Back", "tier-starter-desc": "Perfect for simple portfolios and personal landing pages.", "tier-pro-desc": "For creators needing advanced animations & custom design.", "tier-vip-desc": "The absolute premium experience with custom 3D elements.", "select-plan": "Select Plan", "cat-view-sub": "Collection", "add-cart": "Add to Cart", "try-demo": "Try Demo" },
+    ar: { "nav-bundles": "الحزم المتاحة", "nav-packs": "حزم متميزة", "nav-categories": "الأقسام الرئيسية", "hero-tag": "مركز الأصول الرقمية", "hero-desc": "حزم مؤثرات بصرية احترافية، إعدادات سينمائية مسبقة وتجارب ويب مخصصة للمبدعين.", "hero-btn": "استكشف الباقات", "bundle-sub": "حلول المواقع المخصصة", "bundle-title": "باقات تصميم الويب", "bundle-desc": "أطلق مساحتك الرقمية المخصصة اليوم.", "bundle-btn": "عرض باقات التطوير", "packs-title": "الحزم المتميزة", "packs-desc": "اسحب يمين ويسار لتحريك الكروت — اضغط للتفاصيل.", "card-1-title": "الجحيم الأحمر", "card-2-title": "الذهب السيبراني", "card-3-title": "ليالي النيون", "card-4-title": "النيون الأزرق", "cat-sec-title": "الأقسام", "cat-sec-desc": "اختر فئة لاستكشاف الحزم المتاحة.", "footer-right": "صُنع للمبدعين والجرآء.", "tiers-sub": "حلول الويب", "tiers-title": "مستويات التطوير", "back-btn": "→ العودة", "tier-starter-desc": "مثالية للملفات الشخصية وصفحات الهبوط البسيطة.", "tier-pro-desc": "للمبدعين الذين يحتاجون تحريكات متقدمة وتصاميم خاصة.", "tier-vip-desc": "الخبرة المتميزة المطلقة مع عناصر ثلاثية الأبعاد.", "select-plan": "اختر الباقة", "cat-view-sub": "المجموعة", "add-cart": "إضافة للسلة", "try-demo": "تجربة العرض" }
   };
 
   let currentLang = 'en';
@@ -1042,8 +869,7 @@
 
   function toggleTheme() {
     const htmlEl = document.documentElement;
-    htmlEl.classList.toggle('dark');
-    htmlEl.classList.toggle('light');
+    htmlEl.classList.toggle('dark'); htmlEl.classList.toggle('light');
   }
 
   function showToast(msg) {
@@ -1067,33 +893,7 @@
     modal.classList.add('opacity-0', 'pointer-events-none');
   }
 
-  const CATEGORY_DATA = {
-    CC: ['Teal & Orange Grade', 'Cinematic Film Base', 'Dark Knight Grade', 'Vibrant Soft Pop'],
-    SHAKE: ['Hard Impact Shake', 'Bass Drop Bounce', 'Smooth Whip Pan', 'Earthquake Wobble'],
-    XML: ['Pro Intro Template', 'Velocity Edit XML', 'Glow Shake Timeline', 'Full Transition Suite'],
-  };
+  const CATEGORY_DATA = { CC: ['Teal & Orange Grade', 'Cinematic Film Base', 'Dark Knight Grade', 'Vibrant Soft Pop'], SHAKE: ['Hard Impact Shake', 'Bass Drop Bounce', 'Smooth Whip Pan', 'Earthquake Wobble'], XML: ['Pro Intro Template', 'Velocity Edit XML', 'Glow Shake Timeline', 'Full Transition Suite'] };
 
-  function showView(viewId) {
-    document.querySelectorAll('.view').forEach(v => v.classList.add('view-hidden'));
-    const target = document.getElementById(viewId);
-    if (target) target.classList.remove('view-hidden');
-    window.scrollTo({ top: 0, behavior: 'instant' });
-  }
-
-  function openCategory(key) {
-    document.getElementById('cat-title').textContent = key;
-    document.getElementById('cat-grid').innerHTML = CATEGORY_DATA[key].map((item) => `
-      <div onclick="openPreview('${item}', '${key}')" class="cat-card-glass flex flex-col justify-between min-h-[140px] text-left ltr:text-left rtl:text-right border-l-4 border-purple-500">
-        <span class="text-[10px] font-bold uppercase text-purple-400">${key} Pack</span>
-        <h3 class="font-head font-bold text-xl mt-4">${item}</h3>
-      </div>`).join('');
-    showView('category-view');
-  }
-
-  function openWebTiers() { showView('web-view'); }
-  function backToHome() { showView('main-view'); }
-  const yr = document.getElementById('year');
-  if (yr) yr.textContent = new Date().getFullYear();
-  </script>
-</body>
-</html>
+  function showView(viewId) { document.querySelectorAll('.view').forEach(v => v.classList.add('view-hidden')); const target = document.getElementById(viewId); if (target) target.classList.remove('view-hidden'); window.scrollTo({ top: 0, behavior: 'instant' }); }
+  function openCategory(key) { document.getElementById('cat-title').textContent = key; document.getElementById('cat-grid').innerHTML = CATEGORY_DATA[key].map((item) => `<div onclick="openPreview('${item}', '${key}')" class="cat-card-glass flex flex-c
