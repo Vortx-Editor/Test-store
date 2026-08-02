@@ -582,6 +582,9 @@
 })();
 </script>
 
+<!-- ============================================================
+     3D COVERFLOW (CSS & VANILLA JS ONLY - NO MP4 DEPENDENCY)
+     ============================================================ -->
 <script>
 (function () {
   "use strict";
@@ -591,23 +594,16 @@
     var proxy = document.getElementById('interaction-proxy');
     if (!viewport || !proxy) return;
 
-    var CARD_VIDEOS = [
-      'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260506_030111_a9e15665-d379-4a7f-8116-695bbe452ad1.mp4',
-      'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260429_171347_f640c30d-ec21-426a-98bc-77e07c2c60cb.mp4',
-      'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260503_104800_bc43ae09-f494-43e3-97d7-2f8c1692cfd7.mp4',
-      'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260423_161253_c72b1869-400f-45ed-ac0c-52f68c2ed5bd.mp4',
-      'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260418_115655_b4d9cd77-feed-43cd-a198-af78ebdf1f7a.mp4'
-    ];
-
+    // كروت فخمة بتدرجات ألوان ومؤثرات زجاجية ثابتة 100% بدون الاعتماد على روابط خارجية
     var CARD_DETAILS = [
-      { tag: 'VFX',     title: 'RED INFERNO' },
-      { tag: 'COLOR',   title: 'CYBER GOLD' },
-      { tag: 'CAMERA',  title: 'NEON NIGHTS' },
-      { tag: 'PRESETS', title: 'HYPER BLUE' },
-      { tag: 'LUT',     title: 'DARK MATTER' }
+      { tag: 'VFX',     title: 'RED INFERNO',  bg: 'linear-gradient(135deg, rgba(185,28,28,0.5) 0%, rgba(15,15,15,0.95) 100%)', border: 'rgba(239,68,68,0.4)' },
+      { tag: 'COLOR',   title: 'CYBER GOLD',   bg: 'linear-gradient(135deg, rgba(202,138,4,0.5) 0%, rgba(15,15,15,0.95) 100%)', border: 'rgba(234,179,8,0.4)' },
+      { tag: 'CAMERA',  title: 'NEON NIGHTS',  bg: 'linear-gradient(135deg, rgba(147,51,234,0.5) 0%, rgba(15,15,15,0.95) 100%)', border: 'rgba(168,85,247,0.4)' },
+      { tag: 'PRESETS', title: 'HYPER BLUE',   bg: 'linear-gradient(135deg, rgba(6,182,212,0.5) 0%, rgba(15,15,15,0.95) 100%)', border: 'rgba(56,189,248,0.4)' },
+      { tag: 'LUT',     title: 'DARK MATTER', bg: 'linear-gradient(135deg, rgba(75,85,99,0.5) 0%, rgba(15,15,15,0.95) 100%)', border: 'rgba(156,163,175,0.4)' }
     ];
 
-    var cardCount = CARD_VIDEOS.length;
+    var cardCount = CARD_DETAILS.length;
     var cardW = 260;
     var cardH = 360;
 
@@ -615,14 +611,14 @@
     viewport.innerHTML = '';
     for (var i = 0; i < cardCount; i++) {
       var details = CARD_DETAILS[i % CARD_DETAILS.length];
-      var videoSrc = CARD_VIDEOS[i % CARD_VIDEOS.length];
 
       var el = document.createElement('div');
-      el.className = 'coverflow-card rounded-[24px] overflow-hidden border border-white/15 backface-hidden';
+      el.className = 'coverflow-card rounded-[24px] overflow-hidden border backface-hidden';
       el.style.width = cardW + 'px';
       el.style.height = cardH + 'px';
-      el.style.backgroundColor = '#0f0f0f';
-      el.style.boxShadow = 'inset 0 1px 1px rgba(255,255,255,0.15), 0 25px 50px -12px rgba(0,0,0,0.6)';
+      el.style.background = details.bg;
+      el.style.borderColor = details.border;
+      el.style.boxShadow = 'inset 0 1px 1px rgba(255,255,255,0.2), 0 25px 50px -12px rgba(0,0,0,0.8)';
       el.style.pointerEvents = 'auto';
       el.style.cursor = 'pointer';
 
@@ -631,8 +627,7 @@
       el.setAttribute('onclick', "window.openPreview('" + safeTitle + "', '" + safeTag + "')");
 
       el.innerHTML =
-        '<video src="' + videoSrc + '" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover rounded-[24px]"></video>' +
-        '<div class="absolute inset-0 p-5 text-white h-full w-full font-sans z-10 bg-black/15 flex flex-col justify-between pointer-events-none">' +
+        '<div class="absolute inset-0 p-5 text-white h-full w-full font-sans z-10 bg-black/20 backdrop-blur-sm flex flex-col justify-between pointer-events-none">' +
           '<div class="flex justify-between items-start w-full">' +
             '<span class="text-[10px] uppercase font-bold px-3 py-1 rounded-full border border-white/30 bg-black/40 text-white backdrop-blur-md">' + details.tag + '</span>' +
             '<h3 class="font-head font-bold text-lg text-right tracking-wider text-white drop-shadow-md force-eng">' + details.title + '</h3>' +
@@ -759,4 +754,5 @@
 
       var now = performance.now();
       var dt = now - lastPointerT;
- 
+      if (dt > 0) {
+        lastMoveV
