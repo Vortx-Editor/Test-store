@@ -72,17 +72,12 @@
       transition: background-color 0.4s ease, color 0.4s ease;
     }
 
-    html.vx-loading, html.vx-loading body {
-      overflow: hidden !important;
-      height: 100%;
-    }
-
+    html.vx-loading, html.vx-loading body { overflow: hidden !important; height: 100%; }
     html[dir="rtl"] body { font-family: 'Cairo', sans-serif; }
-
     h1, h2, h3, .font-head { font-family: 'Cinzel', serif; letter-spacing: 1.5px; }
     html[dir="rtl"] h1, html[dir="rtl"] h2, html[dir="rtl"] h3, html[dir="rtl"] .font-head { font-family: 'Cairo', sans-serif; letter-spacing: 0; }
 
-    /* جدار الحماية للوجو VORTX عشان ما يخرب خطه مع العربي */
+    /* حماية اللوجو: إجباره على الخط الإنجليزي الفخم مهما كانت اللغة */
     .force-eng { font-family: 'Cinzel', serif !important; letter-spacing: 0.25em !important; }
 
     /* STARS BACKGROUND */
@@ -94,12 +89,7 @@
     @keyframes animStar { from { transform: translateY(0px); } to { transform: translateY(-2000px); } }
 
     /* VORTX WET LIQUID SHINE SWEEP */
-    .vortx-wet-oil-title {
-      display: inline-block; font-weight: 900;
-      background: linear-gradient(110deg, #ffffff 0%, #f3e8ff 20%, #ffffff 35%, #c084fc 50%, #ffffff 65%, #7e22ce 80%, #ffffff 100%);
-      background-size: 200% 100%; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      animation: oilShineSweep 4s linear infinite; filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.8)) drop-shadow(0 0 20px rgba(168, 85, 247, 0.5));
-    }
+    .vortx-wet-oil-title { display: inline-block; font-weight: 900; background: linear-gradient(110deg, #ffffff 0%, #f3e8ff 20%, #ffffff 35%, #c084fc 50%, #ffffff 65%, #7e22ce 80%, #ffffff 100%); background-size: 200% 100%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: oilShineSweep 4s linear infinite; filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.8)) drop-shadow(0 0 20px rgba(168, 85, 247, 0.5)); }
     @keyframes oilShineSweep { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
     html.light .vortx-wet-oil-title { background: linear-gradient(110deg, #2e1065 0%, #581c87 20%, #a855f7 35%, #ffffff 50%, #7e22ce 65%, #3b0764 80%, #2e1065 100%); background-size: 200% 100%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 5px 15px rgba(126, 34, 206, 0.2)); }
 
@@ -167,7 +157,6 @@
 
     /* =========================================
        CUSTOM 3D PHYSICS CAROUSEL CLASSES
-       تم إضافة الحماية للمتصفحات زي سفاري
        ========================================= */
     .perspective-container { -webkit-perspective: 1350px; perspective: 1350px; }
     .preserve-3d { -webkit-transform-style: preserve-3d; transform-style: preserve-3d; }
@@ -194,7 +183,7 @@
 <body class="vx-loading">
 
   <!-- CINEMATIC LOADER -->
-  <div id="vx-loader" onclick="window.dismissLoaderNow()">
+  <div id="vx-loader" onclick="dismissLoaderNow()">
     <div class="vx-ambient-glow"></div>
     <div class="vx-logo-word" id="vx-logo-word"></div>
     <div class="vx-bar-track"><div class="vx-bar-fill" id="vx-bar-fill"></div></div>
@@ -203,30 +192,30 @@
 
   <script>
     (function startLoader() {
-      let progress = 0; let barFill = document.getElementById('vx-bar-fill'); let percentEl = document.getElementById('vx-percent'); let wordEl = document.getElementById('vx-logo-word');
-      if (wordEl) { ['V', 'O', 'R', 'T', 'X'].forEach(function(ch, i) { let span = document.createElement('span'); span.className = 'vx-letter'; span.textContent = ch; span.style.setProperty('--ld', (i * 0.12).toFixed(2) + 's'); wordEl.appendChild(span); }); }
-      let timer = setInterval(function() {
+      var progress = 0; var barFill = document.getElementById('vx-bar-fill'); var percentEl = document.getElementById('vx-percent'); var wordEl = document.getElementById('vx-logo-word');
+      if (wordEl) { ['V', 'O', 'R', 'T', 'X'].forEach(function(ch, i) { var span = document.createElement('span'); span.className = 'vx-letter'; span.textContent = ch; span.style.setProperty('--ld', (i * 0.12).toFixed(2) + 's'); wordEl.appendChild(span); }); }
+      var timer = setInterval(function() {
         progress += 1;
         if (percentEl) percentEl.textContent = progress; if (barFill) barFill.style.width = progress + '%';
         if (progress >= 100) {
           clearInterval(timer);
           setTimeout(function() {
-            let loader = document.getElementById('vx-loader');
+            var loader = document.getElementById('vx-loader');
             if (loader) { loader.classList.add('vx-hide'); setTimeout(function() { loader.style.display = 'none'; }, 700); }
-            let appContent = document.getElementById('app-content');
+            var appContent = document.getElementById('app-content');
             if (appContent) appContent.classList.add('vx-revealed');
             document.documentElement.classList.remove('vx-loading');
           }, 300);
         }
       }, 32);
       setTimeout(function() {
-        let loader = document.getElementById('vx-loader');
-        if (loader && loader.style.display !== 'none') { loader.style.display = 'none'; let appContent = document.getElementById('app-content'); if (appContent) appContent.classList.add('vx-revealed'); document.documentElement.classList.remove('vx-loading'); }
+        var loader = document.getElementById('vx-loader');
+        if (loader && loader.style.display !== 'none') { loader.style.display = 'none'; var appContent = document.getElementById('app-content'); if (appContent) appContent.classList.add('vx-revealed'); document.documentElement.classList.remove('vx-loading'); }
       }, 4500);
     })();
-    window.dismissLoaderNow = function() {
-      let loader = document.getElementById('vx-loader'); if (loader) { loader.style.display = 'none'; }
-      let appContent = document.getElementById('app-content'); if (appContent) appContent.classList.add('vx-revealed');
+    function dismissLoaderNow() {
+      var loader = document.getElementById('vx-loader'); if (loader) { loader.style.display = 'none'; }
+      var appContent = document.getElementById('app-content'); if (appContent) appContent.classList.add('vx-revealed');
       document.documentElement.classList.remove('vx-loading');
     }
   </script>
@@ -247,8 +236,8 @@
             <li><a href="#categories" data-i18n="nav-categories" class="hover:text-brandLight transition">Categories</a></li>
           </ul>
           <div class="flex items-center gap-3 relative z-50">
-            <button onclick="window.toggleLanguage()" class="glass w-10 h-10 rounded-full flex items-center justify-center border-purple-500/30 text-brandLight font-extrabold text-xs cursor-pointer">🌐</button>
-            <button onclick="window.toggleTheme()" class="theme-switch-btn cursor-pointer"><div class="theme-switch-ball"><svg class="w-3.5 h-3.5 text-slate-800" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg></div></button>
+            <button onclick="toggleLanguage()" class="glass w-10 h-10 rounded-full flex items-center justify-center border-purple-500/30 text-brandLight font-extrabold text-xs cursor-pointer">🌐</button>
+            <button onclick="toggleTheme()" class="theme-switch-btn cursor-pointer"><div class="theme-switch-ball"><svg class="w-3.5 h-3.5 text-slate-800" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg></div></button>
           </div>
         </div>
       </nav>
@@ -268,7 +257,15 @@
           <a href="#" class="p-3.5 rounded-2xl border border-slate-700/60 bg-white/[0.03] backdrop-blur-md hover:bg-white/10 hover:border-slate-300 hover:text-white hover:scale-110 transition-all duration-300 shadow-lg shadow-black/40"><svg class="w-6 h-6 stroke-current fill-none stroke-[1.8]" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
           <a href="#" class="p-3.5 rounded-2xl border border-slate-700/60 bg-white/[0.03] backdrop-blur-md hover:bg-white/10 hover:border-slate-300 hover:text-white hover:scale-110 transition-all duration-300 shadow-lg shadow-black/40"><svg class="w-6 h-6 stroke-current fill-none stroke-[1.8]" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="4.5" ry="4.5"></rect><polygon points="10 8 16 12 10 16 10 8"></polygon></svg></a>
         </div>
-        <div class="glass-radio-group"><input type="radio" name="category-plan" id="glass-cc" checked onclick="window.scrollToCategory('CC')" /><label for="glass-cc">CC</label><input type="radio" name="category-plan" id="glass-xml" onclick="window.scrollToCategory('XML')" /><label for="glass-xml">XML</label><input type="radio" name="category-plan" id="glass-shake" onclick="window.scrollToCategory('SHAKE')" /><label for="glass-shake">Shake</label><div class="glass-glider"></div></div>
+        <div class="glass-radio-group">
+          <input type="radio" name="category-plan" id="glass-cc" checked />
+          <label for="glass-cc" onclick="scrollToCategory('CC')">CC</label>
+          <input type="radio" name="category-plan" id="glass-xml" />
+          <label for="glass-xml" onclick="scrollToCategory('XML')">XML</label>
+          <input type="radio" name="category-plan" id="glass-shake" />
+          <label for="glass-shake" onclick="scrollToCategory('SHAKE')">Shake</label>
+          <div class="glass-glider"></div>
+        </div>
       </section>
 
       <!-- SECTION BUNDLES: كرت ذهبي فخم بتدرج ناعم وخط مرتب -->
@@ -276,7 +273,6 @@
         <div class="golden-bundle-card p-8 sm:p-14 relative flex flex-col md:flex-row items-center justify-between gap-10">
           <div class="text-center md:text-left rtl:md:text-right max-w-2xl relative z-10 w-full">
             <span data-i18n="bundle-sub" class="text-xs tracking-widest uppercase font-extrabold text-yellow-500 block mb-2">Custom Web Solutions</span>
-            <!-- تعديل خط الويب لخط حديث مع تدرج ذهبي -->
             <h2 data-i18n="bundle-title" class="font-body font-black uppercase tracking-widest text-3xl sm:text-4xl md:text-5xl mb-4 bg-clip-text text-transparent bg-gradient-to-r from-yellow-300 to-yellow-600">
               WEB PAGE BUNDLES
             </h2>
@@ -284,7 +280,7 @@
               Launch your custom digital space today. Stand out with next-gen designs and premium performance.
             </p>
           </div>
-          <div class="w-full md:w-auto relative z-10 flex justify-center flex-shrink-0"><div class="button-wrap" onclick="window.openWebTiers()"><div class="btn-3d-style"><span data-i18n="bundle-btn">View Development Tiers</span></div><div class="button-shadow"></div></div></div>
+          <div class="w-full md:w-auto relative z-10 flex justify-center flex-shrink-0"><div class="button-wrap" onclick="openWebTiers()"><div class="btn-3d-style"><span data-i18n="bundle-btn">View Development Tiers</span></div><div class="button-shadow"></div></div></div>
         </div>
       </section>
 
@@ -295,11 +291,10 @@
           <p data-i18n="packs-desc" class="font-bold opacity-50 text-sm mt-3 tracking-wide">Swipe horizontally to tumble cards.</p>
         </div>
 
-        <!-- منطقة استشعار السحب والإصبع -->
         <div id="interaction-proxy" class="absolute w-full h-full left-0 top-0 z-30 cursor-grab active:cursor-grabbing"></div>
 
-        <!-- الصندوق الحاوي للكروت الفيزيائية ومسنتر بالوسط -->
-        <div class="perspective-container absolute w-full h-full left-0 top-0 flex items-center justify-center pointer-events-none z-10">
+        <!-- سنترة الكروت وإعطائها مساحة مريحة -->
+        <div class="perspective-container absolute w-full h-full left-0 top-0 flex items-center justify-center pointer-events-none z-10 pt-16">
           <div id="card-viewport" class="relative preserve-3d" style="width: 260px; height: 360px;">
             <!-- الكروت تضاف هنا عن طريق الجافاسكربت -->
           </div>
@@ -309,9 +304,9 @@
       <section id="categories" class="max-w-7xl mx-auto px-4 sm:px-6 py-16">
         <div class="mb-10 text-left ltr:text-left rtl:text-right"><h2 data-i18n="cat-sec-title" class="font-head font-bold text-3xl sm:text-4xl">Categories</h2><p data-i18n="cat-sec-desc" class="font-bold opacity-50 mt-2 text-sm tracking-wide">Select a category to explore editing packs.</p></div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div id="cat-card-CC" onclick="window.openCategory('CC')" class="cat-card-glass flex items-center justify-between group"><div class="flex items-center gap-5"><div class="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 font-extrabold text-sm">01</div><div><h3 class="font-head font-black text-2xl tracking-wider">CC</h3><p class="text-xs font-semibold opacity-60 mt-1">Color Corrections</p></div></div><div class="arrow-icon text-purple-400/60 text-xl font-bold">→</div></div>
-          <div id="cat-card-XML" onclick="window.openCategory('XML')" class="cat-card-glass flex items-center justify-between group"><div class="flex items-center gap-5"><div class="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 font-extrabold text-sm">02</div><div><h3 class="font-head font-black text-2xl tracking-wider">XML</h3><p class="text-xs font-semibold opacity-60 mt-1">Project Files</p></div></div><div class="arrow-icon text-purple-400/60 text-xl font-bold">→</div></div>
-          <div id="cat-card-SHAKE" onclick="window.openCategory('SHAKE')" class="cat-card-glass flex items-center justify-between group"><div class="flex items-center gap-5"><div class="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 font-extrabold text-sm">03</div><div><h3 class="font-head font-black text-2xl tracking-wider">SHAKE</h3><p class="text-xs font-semibold opacity-60 mt-1">Camera Shake Presets</p></div></div><div class="arrow-icon text-purple-400/60 text-xl font-bold">→</div></div>
+          <div id="cat-card-CC" onclick="openCategory('CC')" class="cat-card-glass flex items-center justify-between group"><div class="flex items-center gap-5"><div class="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 font-extrabold text-sm">01</div><div><h3 class="font-head font-black text-2xl tracking-wider">CC</h3><p class="text-xs font-semibold opacity-60 mt-1">Color Corrections</p></div></div><div class="arrow-icon text-purple-400/60 text-xl font-bold">→</div></div>
+          <div id="cat-card-XML" onclick="openCategory('XML')" class="cat-card-glass flex items-center justify-between group"><div class="flex items-center gap-5"><div class="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 font-extrabold text-sm">02</div><div><h3 class="font-head font-black text-2xl tracking-wider">XML</h3><p class="text-xs font-semibold opacity-60 mt-1">Project Files</p></div></div><div class="arrow-icon text-purple-400/60 text-xl font-bold">→</div></div>
+          <div id="cat-card-SHAKE" onclick="openCategory('SHAKE')" class="cat-card-glass flex items-center justify-between group"><div class="flex items-center gap-5"><div class="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 font-extrabold text-sm">03</div><div><h3 class="font-head font-black text-2xl tracking-wider">SHAKE</h3><p class="text-xs font-semibold opacity-60 mt-1">Camera Shake Presets</p></div></div><div class="arrow-icon text-purple-400/60 text-xl font-bold">→</div></div>
         </div>
       </section>
 
@@ -320,88 +315,103 @@
 
     <!-- WEB TIERS VIEW -->
     <section id="web-view" class="view view-hidden relative z-10 min-h-screen">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12"><div class="flex items-center justify-between mb-12"><div class="text-left ltr:text-left rtl:text-right"><span data-i18n="tiers-sub" class="text-xs tracking-widest uppercase font-bold text-brandLight">Web Solutions</span><h2 data-i18n="tiers-title" class="font-head font-bold text-4xl mt-3">Development Tiers</h2></div><div class="button-wrap" onclick="window.backToHome()"><div class="btn-3d-style"><span data-i18n="back-btn">← Back</span></div><div class="button-shadow"></div></div></div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12"><div class="flex items-center justify-between mb-12"><div class="text-left ltr:text-left rtl:text-right"><span data-i18n="tiers-sub" class="text-xs tracking-widest uppercase font-bold text-brandLight">Web Solutions</span><h2 data-i18n="tiers-title" class="font-head font-bold text-4xl mt-3">Development Tiers</h2></div><div class="button-wrap" onclick="backToHome()"><div class="btn-3d-style"><span data-i18n="back-btn">← Back</span></div><div class="button-shadow"></div></div></div>
         <div class="grid lg:grid-cols-3 gap-8">
-          <div class="tier-card"><div class="card_title__container"><span class="card_title">STARTER</span><p data-i18n="tier-starter-desc" class="card_paragraph">Perfect for simple portfolios and personal landing pages.</p></div><hr class="line" /><ul class="card__list"><li class="card__list_item"><span class="check"><svg class="check_svg" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text">Clean & Modern UI</span></li><li class="card__list_item"><span class="check"><svg class="check_svg" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text">Mobile-Ready Layout</span></li></ul><div class="button-wrap w-full mt-6" onclick="window.showToast('PLAN ADDED')"><div class="btn-3d-style"><span data-i18n="select-plan">Select Plan</span></div><div class="button-shadow"></div></div></div>
-          <div class="tier-card"><div class="card_title__container"><span class="card_title">PRO</span><p data-i18n="tier-pro-desc" class="card_paragraph">For creators needing advanced animations & custom design.</p></div><hr class="line" /><ul class="card__list"><li class="card__list_item"><span class="check"><svg class="check_svg" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text">Glassmorphism & Glows</span></li><li class="card__list_item"><span class="check"><svg class="check_svg" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text">Scroll Animations</span></li></ul><div class="button-wrap w-full mt-6" onclick="window.showToast('PLAN ADDED')"><div class="btn-3d-style"><span data-i18n="select-plan">Select Plan</span></div><div class="button-shadow"></div></div></div>
-          <div class="tier-card"><div class="card_title__container"><span class="card_title">VIP</span><p data-i18n="tier-vip-desc" class="card_paragraph">The absolute premium experience with custom 3D elements.</p></div><hr class="line" /><ul class="card__list"><li class="card__list_item"><span class="check"><svg class="check_svg" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text">3D Models Integration</span></li><li class="card__list_item"><span class="check"><svg class="check_svg" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text">Priority Support</span></li></ul><div class="button-wrap w-full mt-6" onclick="window.showToast('PLAN ADDED')"><div class="btn-3d-style"><span data-i18n="select-plan">Select Plan</span></div><div class="button-shadow"></div></div></div>
+          <div class="tier-card"><div class="card_title__container"><span class="card_title">STARTER</span><p data-i18n="tier-starter-desc" class="card_paragraph">Perfect for simple portfolios and personal landing pages.</p></div><hr class="line" /><ul class="card__list"><li class="card__list_item"><span class="check"><svg class="check_svg" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text">Clean & Modern UI</span></li><li class="card__list_item"><span class="check"><svg class="check_svg" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text">Mobile-Ready Layout</span></li></ul><div class="button-wrap w-full mt-6" onclick="showToast('PLAN ADDED')"><div class="btn-3d-style"><span data-i18n="select-plan">Select Plan</span></div><div class="button-shadow"></div></div></div>
+          <div class="tier-card"><div class="card_title__container"><span class="card_title">PRO</span><p data-i18n="tier-pro-desc" class="card_paragraph">For creators needing advanced animations & custom design.</p></div><hr class="line" /><ul class="card__list"><li class="card__list_item"><span class="check"><svg class="check_svg" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text">Glassmorphism & Glows</span></li><li class="card__list_item"><span class="check"><svg class="check_svg" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text">Scroll Animations</span></li></ul><div class="button-wrap w-full mt-6" onclick="showToast('PLAN ADDED')"><div class="btn-3d-style"><span data-i18n="select-plan">Select Plan</span></div><div class="button-shadow"></div></div></div>
+          <div class="tier-card"><div class="card_title__container"><span class="card_title">VIP</span><p data-i18n="tier-vip-desc" class="card_paragraph">The absolute premium experience with custom 3D elements.</p></div><hr class="line" /><ul class="card__list"><li class="card__list_item"><span class="check"><svg class="check_svg" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text">3D Models Integration</span></li><li class="card__list_item"><span class="check"><svg class="check_svg" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text">Priority Support</span></li></ul><div class="button-wrap w-full mt-6" onclick="showToast('PLAN ADDED')"><div class="btn-3d-style"><span data-i18n="select-plan">Select Plan</span></div><div class="button-shadow"></div></div></div>
         </div>
       </div>
     </section>
 
     <section id="category-view" class="view view-hidden relative z-10 min-h-screen">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12"><div class="flex items-center justify-between mb-12"><div><span data-i18n="cat-view-sub" class="text-xs tracking-widest uppercase font-bold text-brandLight">Collection</span><h2 id="cat-title" class="font-head font-bold text-4xl mt-3">CC</h2></div><div class="button-wrap" onclick="window.backToHome()"><div class="btn-3d-style"><span data-i18n="back-btn">← Back</span></div><div class="button-shadow"></div></div></div><div id="cat-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div></div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12"><div class="flex items-center justify-between mb-12"><div><span data-i18n="cat-view-sub" class="text-xs tracking-widest uppercase font-bold text-brandLight">Collection</span><h2 id="cat-title" class="font-head font-bold text-4xl mt-3">CC</h2></div><div class="button-wrap" onclick="backToHome()"><div class="btn-3d-style"><span data-i18n="back-btn">← Back</span></div><div class="button-shadow"></div></div></div><div id="cat-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div></div>
     </section>
 
     <div id="preview-modal" class="fixed inset-0 z-[80] flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
-      <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="window.closePreview()"></div>
-      <div class="glass rounded-3xl max-w-md w-full relative z-10 p-6" id="preview-card"><span id="preview-tag" class="text-[10px] font-bold uppercase text-brandLight">TAG</span><h3 id="preview-title" class="font-head font-bold text-2xl mt-1 mb-6">TITLE</h3><div class="flex gap-4"><div class="button-wrap flex-1" onclick="window.showToast('ADDED TO CART'); window.closePreview();"><div class="btn-3d-style"><span data-i18n="add-cart">Add to Cart</span></div><div class="button-shadow"></div></div><div class="button-wrap flex-1" onclick="window.showToast('DOWNLOADING DEMO...')"><div class="btn-3d-style"><span data-i18n="try-demo">Try Demo</span></div><div class="button-shadow"></div></div></div></div>
+      <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="closePreview()"></div>
+      <div class="glass rounded-3xl max-w-md w-full relative z-10 p-6" id="preview-card"><span id="preview-tag" class="text-[10px] font-bold uppercase text-brandLight">TAG</span><h3 id="preview-title" class="font-head font-bold text-2xl mt-1 mb-6">TITLE</h3><div class="flex gap-4"><div class="button-wrap flex-1" onclick="showToast('ADDED TO CART'); closePreview();"><div class="btn-3d-style"><span data-i18n="add-cart">Add to Cart</span></div><div class="button-shadow"></div></div><div class="button-wrap flex-1" onclick="showToast('DOWNLOADING DEMO...')"><div class="btn-3d-style"><span data-i18n="try-demo">Try Demo</span></div><div class="button-shadow"></div></div></div></div>
     </div>
 
   </div>
 
   <script>
   /* =========================================================
-     الدوال العامة وحماية الأزرار من أخطاء التحميل
+     الدوال الأساسية للموقع (محمية ومصممة لتعمل دائماً)
      ========================================================= */
-  window.translations = {
+  var translations = {
     en: { "nav-bundles": "Bundles", "nav-packs": "Featured Packs", "nav-categories": "Categories", "hero-tag": "Digital Assets Hub", "hero-desc": "High-end VFX packs, cinematic presets & custom web experiences.", "hero-btn": "Explore Tiers", "bundle-sub": "Custom Web Solutions", "bundle-title": "Web Page Bundles", "bundle-desc": "Launch your custom digital space today. Stand out with next-gen designs and premium performance.", "bundle-btn": "View Development Tiers", "packs-title": "Featured Packs", "packs-desc": "Swipe horizontally to tumble cards.", "card-1-title": "Red Inferno", "card-2-title": "Cyber Gold", "card-3-title": "Neon Nights", "card-4-title": "Hyper Blue", "cat-sec-title": "Categories", "cat-sec-desc": "Select a category to explore editing packs.", "footer-right": "Crafted for the bold.", "tiers-sub": "Web Solutions", "tiers-title": "Development Tiers", "back-btn": "← Back", "tier-starter-desc": "Perfect for simple portfolios and personal landing pages.", "tier-pro-desc": "For creators needing advanced animations & custom design.", "tier-vip-desc": "The absolute premium experience with custom 3D elements.", "select-plan": "Select Plan", "cat-view-sub": "Collection", "add-cart": "Add to Cart", "try-demo": "Try Demo" },
     ar: { "nav-bundles": "الحزم المتاحة", "nav-packs": "حزم متميزة", "nav-categories": "الأقسام الرئيسية", "hero-tag": "مركز الأصول الرقمية", "hero-desc": "حزم مؤثرات بصرية احترافية، إعدادات سينمائية مسبقة وتجارب ويب مخصصة للمبدعين.", "hero-btn": "استكشف الباقات", "bundle-sub": "حلول المواقع المخصصة", "bundle-title": "باقات تصميم الويب", "bundle-desc": "أطلق مساحتك الرقمية المخصصة اليوم. تميز بتصاميم الجيل القادم وأداء لا يضاهى.", "bundle-btn": "عرض باقات التطوير", "packs-title": "الحزم المتميزة", "packs-desc": "اسحب يمين ويسار لتحريك الكروت.", "card-1-title": "الجحيم الأحمر", "card-2-title": "الذهب السيبراني", "card-3-title": "ليالي النيون", "card-4-title": "النيون الأزرق", "cat-sec-title": "الأقسام", "cat-sec-desc": "اختر فئة لاستكشاف الحزم المتاحة.", "footer-right": "صُنع للمبدعين والجرآء.", "tiers-sub": "حلول الويب", "tiers-title": "مستويات التطوير", "back-btn": "→ العودة", "tier-starter-desc": "مثالية للملفات الشخصية وصفحات الهبوط البسيطة.", "tier-pro-desc": "للمبدعين الذين يحتاجون تحريكات متقدمة وتصاميم خاصة.", "tier-vip-desc": "الخبرة المتميزة المطلقة مع عناصر ثلاثية الأبعاد.", "select-plan": "اختر الباقة", "cat-view-sub": "المجموعة", "add-cart": "إضافة للسلة", "try-demo": "تجربة العرض" }
   };
 
-  window.currentLang = 'en';
-  window.toggleLanguage = function() {
-    window.currentLang = window.currentLang === 'en' ? 'ar' : 'en';
-    const htmlEl = document.documentElement;
-    htmlEl.setAttribute('dir', window.currentLang === 'ar' ? 'rtl' : 'ltr');
-    htmlEl.setAttribute('lang', window.currentLang);
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-      const key = el.getAttribute('data-i18n');
-      if (window.translations[window.currentLang][key]) el.textContent = window.translations[window.currentLang][key];
+  var currentLang = 'en';
+  function toggleLanguage() {
+    currentLang = currentLang === 'en' ? 'ar' : 'en';
+    document.documentElement.setAttribute('dir', currentLang === 'ar' ? 'rtl' : 'ltr');
+    document.documentElement.setAttribute('lang', currentLang);
+    document.querySelectorAll('[data-i18n]').forEach(function(el) {
+      var key = el.getAttribute('data-i18n');
+      if (translations[currentLang][key]) el.textContent = translations[currentLang][key];
     });
-  };
+  }
 
-  window.toggleTheme = function() {
-    const htmlEl = document.documentElement;
-    htmlEl.classList.toggle('dark'); htmlEl.classList.toggle('light');
-  };
+  function toggleTheme() {
+    document.documentElement.classList.toggle('dark');
+    document.documentElement.classList.toggle('light');
+  }
 
-  window.showToast = function(msg) {
-    const box = document.getElementById('toast-box');
-    const toast = document.createElement('div');
+  function showToast(msg) {
+    var box = document.getElementById('toast-box');
+    var toast = document.createElement('div');
     toast.className = 'glass bg-black/90 text-white text-[10px] uppercase font-bold tracking-widest px-6 py-3.5 rounded-full flex items-center gap-2';
     toast.innerHTML = `<span class="text-purple-400">✦</span> ${msg}`;
     box.appendChild(toast);
-    setTimeout(() => toast.remove(), 2500);
-  };
+    setTimeout(function() { toast.remove(); }, 2500);
+  }
 
-  window.openPreview = function(title, tag) {
+  function openPreview(title, tag) {
     document.getElementById('preview-title').textContent = title;
     document.getElementById('preview-tag').textContent = tag;
-    const modal = document.getElementById('preview-modal');
-    modal.classList.remove('opacity-0', 'pointer-events-none');
-  };
+    document.getElementById('preview-modal').classList.remove('opacity-0', 'pointer-events-none');
+  }
 
-  window.closePreview = function() {
-    const modal = document.getElementById('preview-modal');
-    modal.classList.add('opacity-0', 'pointer-events-none');
-  };
+  function closePreview() {
+    document.getElementById('preview-modal').classList.add('opacity-0', 'pointer-events-none');
+  }
 
-  window.CATEGORY_DATA = { CC: ['Teal & Orange Grade', 'Cinematic Film Base', 'Dark Knight Grade'], SHAKE: ['Hard Impact Shake', 'Bass Drop Bounce', 'Smooth Whip Pan'], XML: ['Pro Intro Template', 'Velocity Edit XML', 'Glow Shake Timeline'] };
+  var CATEGORY_DATA = { CC: ['Teal & Orange Grade', 'Cinematic Film Base', 'Dark Knight Grade'], SHAKE: ['Hard Impact Shake', 'Bass Drop Bounce', 'Smooth Whip Pan'], XML: ['Pro Intro Template', 'Velocity Edit XML', 'Glow Shake Timeline'] };
   
-  window.showView = function(viewId) { document.querySelectorAll('.view').forEach(v => v.classList.add('view-hidden')); const target = document.getElementById(viewId); if (target) target.classList.remove('view-hidden'); window.scrollTo({ top: 0, behavior: 'instant' }); };
-  window.openCategory = function(key) { document.getElementById('cat-title').textContent = key; document.getElementById('cat-grid').innerHTML = window.CATEGORY_DATA[key].map((item) => `<div onclick="window.openPreview('${item}', '${key}')" class="cat-card-glass flex flex-col justify-between min-h-[140px] text-left ltr:text-left rtl:text-right border-l-4 border-purple-500"><span class="text-[10px] font-bold uppercase text-purple-400">${key} Pack</span><h3 class="font-head font-bold text-xl mt-4">${item}</h3></div>`).join(''); window.showView('category-view'); };
-  window.openWebTiers = function() { window.showView('web-view'); };
-  window.backToHome = function() { window.showView('main-view'); };
-  window.scrollToCategory = function(catKey) { const targetEl = document.getElementById(`cat-card-${catKey}`); if (targetEl) targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' }); };
+  function showView(viewId) {
+    document.querySelectorAll('.view').forEach(function(v) { v.classList.add('view-hidden'); });
+    var target = document.getElementById(viewId);
+    if (target) target.classList.remove('view-hidden');
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }
+
+  function openCategory(key) {
+    document.getElementById('cat-title').textContent = key;
+    document.getElementById('cat-grid').innerHTML = CATEGORY_DATA[key].map(function(item) {
+      return `<div onclick="openPreview('${item}', '${key}')" class="cat-card-glass flex flex-col justify-between min-h-[140px] text-left ltr:text-left rtl:text-right border-l-4 border-purple-500"><span class="text-[10px] font-bold uppercase text-purple-400">${key} Pack</span><h3 class="font-head font-bold text-xl mt-4">${item}</h3></div>`;
+    }).join('');
+    showView('category-view');
+  }
+
+  function openWebTiers() { showView('web-view'); }
+  function backToHome() { showView('main-view'); }
   
-  const yr = document.getElementById('year'); if (yr) yr.textContent = new Date().getFullYear();
+  function scrollToCategory(catKey) {
+    var targetEl = document.getElementById('cat-card-' + catKey);
+    if (targetEl) targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  var yr = document.getElementById('year');
+  if (yr) yr.textContent = new Date().getFullYear();
 
   /* =========================================================
-     فيزياء الكروت ثلاثية الأبعاد (مربوطة بانتهاء تحميل الصفحة)
+     فيزياء الكروت 3D (تشتغل فوراً وبدون تعليق)
      ========================================================= */
-  document.addEventListener('DOMContentLoaded', function() {
-    const CARD_VIDEOS = [
+  (function init3DHorizontalCarousel() {
+    var CARD_VIDEOS = [
       'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260506_030111_a9e15665-d379-4a7f-8116-695bbe452ad1.mp4',
       'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260429_171347_f640c30d-ec21-426a-98bc-77e07c2c60cb.mp4',
       'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260503_104800_bc43ae09-f494-43e3-97d7-2f8c1692cfd7.mp4',
@@ -409,7 +419,7 @@
       'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260418_115655_b4d9cd77-feed-43cd-a198-af78ebdf1f7a.mp4'
     ];
 
-    const CARD_DETAILS = [
+    var CARD_DETAILS = [
       { number: '4232 8908 1121 4892', name: 'ZACHARY MERCER', cvv: '382', tag: 'VFX', title: 'RED INFERNO' },
       { number: '4154 7831 9904 5124', name: 'SOPHIA MARTINEZ', cvv: '109', tag: 'COLOR', title: 'CYBER GOLD' },
       { number: '5457 4120 7733 9035', name: 'BENJAMIN CARTER', cvv: '764', tag: 'CAMERA', title: 'NEON NIGHTS' },
@@ -417,48 +427,50 @@
       { number: '5375 8891 2234 7713', name: 'JACKSON REID', cvv: '255', tag: 'LUT', title: 'DARK MATTER' }
     ];
 
-    const cardCount = 5;
-    const thicknessLayers = [-1.47, -0.73, 0, 0.73, 1.47];
+    var cardCount = 5;
+    var thicknessLayers = [-1.47, -0.73, 0, 0.73, 1.47];
     
-    let progress = 0; let visualProgress = 0; 
-    const friction = 0.985; const autoPlaySpeed = 0.0015; const dragSensitivity = 0.003; 
+    var progress = 0; var visualProgress = 0; 
+    var friction = 0.985; var autoPlaySpeed = 0.0015; var dragSensitivity = 0.003; 
 
-    let isDragging = false; let isThrowing = false; let startX = 0; let startProgress = 0; let currentVelocity = 0; let lastTime = 0; let lastX = 0;
-    const mouse = { x: 0, y: 0, targetX: 0, targetY: 0 };
-    const metrics = { cardW: 260, cardH: 360 };
+    var isDragging = false; var isThrowing = false; var startX = 0; var startProgress = 0; var currentVelocity = 0; var lastTime = 0; var lastX = 0;
+    var mouse = { x: 0, y: 0, targetX: 0, targetY: 0 };
+    var metrics = { cardW: 260, cardH: 360 };
     
-    const viewport = document.getElementById('card-viewport');
-    const proxy = document.getElementById('interaction-proxy');
+    var viewport = document.getElementById('card-viewport');
+    var proxy = document.getElementById('interaction-proxy');
+    
     if(!viewport || !proxy) return;
     
-    const cardElements = [];
+    viewport.innerHTML = '';
+    var cardElements = [];
 
-    // إنشاء الكروت وبناء الواجهات والتفاصيل (الفيزا)
-    for (let i = 0; i < cardCount; i++) {
-      const cardContainer = document.createElement('div');
+    // إضافة شكل الكروت الفيزيائية (فيزا)
+    for (var i = 0; i < cardCount; i++) {
+      var cardContainer = document.createElement('div');
       cardContainer.className = 'absolute top-0 left-0 preserve-3d cursor-pointer';
-      cardContainer.style.width = `${metrics.cardW}px`;
-      cardContainer.style.height = `${metrics.cardH}px`;
+      cardContainer.style.width = metrics.cardW + 'px';
+      cardContainer.style.height = metrics.cardH + 'px';
       cardContainer.style.backfaceVisibility = 'hidden';
 
-      const videoSrc = CARD_VIDEOS[i % CARD_VIDEOS.length];
-      const details = CARD_DETAILS[i % CARD_DETAILS.length];
+      var videoSrc = CARD_VIDEOS[i % CARD_VIDEOS.length];
+      var details = CARD_DETAILS[i % CARD_DETAILS.length];
 
-      thicknessLayers.forEach((zOffset, layerIdx) => {
-        const isFrontFace = layerIdx === thicknessLayers.length - 1;
-        const isBackFace = layerIdx === 0;
+      thicknessLayers.forEach(function(zOffset, layerIdx) {
+        var isFrontFace = layerIdx === thicknessLayers.length - 1;
+        var isBackFace = layerIdx === 0;
 
-        const layer = document.createElement('div');
+        var layer = document.createElement('div');
         layer.className = 'absolute inset-0 rounded-[24px] overflow-hidden';
         
         if (!isFrontFace && !isBackFace) {
           layer.style.backgroundColor = '#808080';
-          layer.style.transform = `translateZ(${zOffset}px)`;
+          layer.style.transform = 'translateZ(' + zOffset + 'px)';
           layer.classList.add('border', 'border-[#808080]');
         } else if (isFrontFace) {
           layer.classList.add('border', 'border-white/15', 'backface-hidden');
           layer.style.backgroundColor = '#0f0f0f';
-          layer.style.transform = `translateZ(${zOffset}px)`;
+          layer.style.transform = 'translateZ(' + zOffset + 'px)';
           layer.style.boxShadow = 'inset 0 1px 1px rgba(255,255,255,0.15)';
 
           layer.innerHTML = `
@@ -480,4 +492,4 @@
               </div>
               <div class="w-full flex justify-end opacity-95">
                 <svg class="w-[100px] h-auto" viewBox="0 0 341 49" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M8.75294 47.68C6.10761 47.68 4.10227 47.04 2.73694 45.76C1.41427 44.48 0.582275 42.7733 0.240941 40.64C-0.100392 38.464 -0.0790588 36.0747 0.304941 33.472C0.731608 30.8267 1.37161 28.1813 2.22494 25.536C3.07827 22.848 3.99561 20.3307 4.97694 17.984C6.00094 15.5947 6.93961 13.5893 7.79294 11.968C8.26227 11.072 8.88094 10.56 9.64894 10.432C10.4169 10.2613 11.1423 10.368 11.8249 10.752C12.5503 11.136 13.0623 11.6907 13.3609 12.416C13.7023 13.1413 13.6383 13.9307 13.1689 14.784C11.2916 18.368 9.79828 21.7813 8.68894 25.024C7.57961 28.2667 6.85427 31.1467 6.51294 33.664C6.21427 36.1387 6.23561 38.1013 6.57694 39.552C6.96094 40.96 7.68628 41.664 8.75294 41.664C9.73428 41.664 10.8009 41.3013 11.9529 40.576C13.1049 39.8507 14.3423 38.5493 15.6649 36.672C17.0303 34.6667 18.3529 32.064 19.6329 28.864C20.9556 25.6213 22.1289 21.8667 23.1529 17.6C23.4089 16.6187 23.8783 15.9573 24.5609 15.616C25.2863 15.2747 26.0329 15.2107 26.8009 15.424C27.5689 15.6373 28.1876 16.064 28.6569 16.704C29.1263 17.3013 29.2543 18.0693 29.0409 19.008C27.9316 23.616 27.3769 27.5627 27.3769 30.848C27.4196 34.1333 27.7609 36.5227 28.4009 38.016C28.8703 39.0827 29.4249 39.8507 30.0649 40.32C30.7476 40.7893 31.4943 41.024 32.3049 41.024C33.1156 41.024 33.9689 40.7253 34.8649 40.128C35.8036 39.488 36.7209 38.4 37.6169 36.864C38.5556 35.328 39.3876 33.216 40.1129 30.528C37.6809 28.48 35.6756 25.7707 34.0969 22.4C32.5183 19.0293 31.7289 15.168 31.7289 10.816C31.7289 8.93867 31.9423 7.21067 32.3689 5.632C32.7956 4.05333 33.5209 2.79467 34.5449 1.856C35.5689 0.874666 36.9769 0.383999 38.7689 0.383999C40.9449 0.383999 42.7156 1.17333 44.0809 2.752
+                  <path d="M8.75294 47.68C6.10761 47.68 4.10227 47.04 2.73694 45.76C1.41427 44.48 0.582275 42.7733 0.240941 40.64C-0.100392 38.464 -0.0790588 36.0747 0.304941 33.472C0.731608 30.8267 1.37161 28.1813 2.22494 25.536C3.07827 22.848 3.99561 20.3307 4.97694 17.984C6.00094 15.5947 6.93961 13.5893 7.79294 11.968C8.26227 11.072 8.88094 10.56 9.64894 10.432C10.4169 10.2613 11.1423 10.368 11.8249 10.752C12.5503 11.136 13.0623 11.6907 13.3609 12.416C13.7023 13.1413 13.6383 13.9307 13.1689 14.784C11.2916 18.368 9.79828 21.7813 8.68894 25.024C7.57961 28.2667 6.85427 31.1467 6.51294 33.664C6.21427 36.1387 6.23561 38.1013 6.57694 39.552C6.96094 40.96 7.68628 41.664 8.75294 41.664C9.73428 41.664 10.8009 41.3013 11.9529 40.576C13.1049 39.8507 14.3423 38.5493 15.6649 36.672C17.0303 34.6667 18.3529 32.064 19.6329 28.864C20.9556 25.6213 22.1289 21.8667 23.1529 17.6C23.4089 16.6187 23.8783 15.9573 24.5609 15.616C25.2863 15.2747 26.0329 15.2107 26.8009 15.424C27.5689 15.6373 28.1876 16.064 28.6569 16.704C29.1263 17.3013 29.2543 18.0693 29.0409 19.008C27.9316 23.616 27.3769 27.5627 27.3769 30.848C27.4196 34.1333 27.7609 36.5227 28.4009 38.016C28.8703 39.0827 29.4249 39.8507 30.0649 40.32C30.7476 40.7893 31.4943 41.024 32.3049 41.024C33.1156 41.024 33.9689 40.7253 34.8649 40.128C35.8036 39.488 36.7209 38.4 37.6169 36.864C38.5556 35.328 39.3876 33.216 40.1129 30.528C37.6809 28.48 35.6756 25.7707 34.0969 22.4C32.5183 19.0293 31.7289 15.168 31.7289 10.816C31.7289 8.93867 31.9423 7.21067 32.3689 5.632C32.7956 4.05333 33.5209 2.79467 34.5449 1.856C35.5689 0.874666 36.9769 0.383999 38.7689 0.383999C40.9449 0.383999 42.7156 1.17333 44.0809 2.752C45.4463 4.288 46.4489 6.37867 47.0889 9.024C47.7289 11.6267 48.0063 14.5493 47.9209 17.792C47.8783 21.0347 47.5369 24.3413 46.8969 27.712C47.5369 28.0107 48.2196 28.2453 48.9449 28.416C49.7129 28.5867 50.4809 28.672 51.2489 28.672C52.9983 28.672 54.7903 28.416 56.6249 27.904C58.5023 27.3493 60.1023 26.6453 61.4249 25.792C62.2783 25.2373 63.0676 25.088 63.7929 25.344C64.5183 25.5573 65.0943 26.0053 65.521 26.688C65.9476 27.328 66.1183 28.0533 6
