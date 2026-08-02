@@ -73,17 +73,37 @@
     touch-action: pan-y;
     user-select: none;
     -webkit-user-select: none;
+    -webkit-font-smoothing: antialiased;
+    scroll-behavior: smooth;
   }
 
-  /* Light Mode Color Fixes & Contrast Tuning */
+  /* Hardware Acceleration for 120Hz Smoothness */
+  .reveal-on-scroll, .card-3d, .cat-card-glass, .tier-card, header {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+  }
+
+  /* Slow & Luxurious Scroll Reveal Stagger */
+  .reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(45px);
+    transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+  }
+
+  .reveal-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Light Mode Color Fixes */
   html.light p, html.light span, html.light h2, html.light h3, html.light h4 {
     color: var(--text-color);
   }
-
   html.light .text-white { color: #0f172a !important; }
   html.light .text-slate-300 { color: #334155 !important; }
   html.light .text-purple-300, html.light .text-purple-400 { color: #6b21a8 !important; }
-  html.light .opacity-85, html.light .opacity-80, html.light .opacity-70, html.light .opacity-60, html.light .opacity-50 { opacity: 1 !important; color: var(--subtext-color) !important; }
 
   html.vx-loading, html.vx-loading body { overflow: hidden !important; height: 100%; }
   html[dir="rtl"] body { font-family: 'Cairo', sans-serif; }
@@ -96,19 +116,6 @@
     direction: ltr !important;
     unicode-bidi: isolate-override !important;
     display: inline-block;
-  }
-
-  /* Scroll Reveal Animation Styles */
-  .reveal-on-scroll {
-    opacity: 0;
-    transform: translateY(35px);
-    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    will-change: opacity, transform;
-  }
-
-  .reveal-on-scroll.is-visible {
-    opacity: 1;
-    transform: translateY(0);
   }
 
   /* Stars Background Animation */
@@ -128,11 +135,6 @@
     filter: drop-shadow(0 10px 25px rgba(0,0,0,.8)) drop-shadow(0 0 20px rgba(168,85,247,.5));
   }
   @keyframes oilShineSweep { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
-  html.light .vortx-wet-oil-title {
-    background: linear-gradient(110deg, #2e1065 0%, #581c87 25%, #7e22ce 50%, #3b0764 75%, #2e1065 100%);
-    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 4px 12px rgba(126,34,206,.25));
-  }
 
   .gold-heading {
     font-family: 'Inter', sans-serif; font-weight: 900; letter-spacing: 0.04em;
@@ -141,7 +143,6 @@
     animation: goldShine 5s linear infinite; filter: drop-shadow(0 6px 18px rgba(234,179,8,.25));
   }
   @keyframes goldShine { 0% { background-position: 220% 0; } 100% { background-position: -220% 0; } }
-  html.light .gold-heading { background: linear-gradient(100deg, #854d0e 0%, #ca8a04 38%, #a16207 72%, #854d0e 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
 
   /* Theme Switcher */
   .theme-switch-btn { width: 64px; height: 34px; border-radius: 999px; background: linear-gradient(135deg,#1e1b4b,#311042); border: 1px solid rgba(168,85,247,.4); position: relative; cursor: pointer; padding: 3px; transition: all .4s ease; display: flex; align-items: center; }
@@ -155,44 +156,26 @@
   .button-shadow { --shadow-cuttoff-fix: 2em; position: absolute; width: calc(100% + var(--shadow-cuttoff-fix)); height: calc(100% + var(--shadow-cuttoff-fix)); top: calc(0% - var(--shadow-cuttoff-fix) / 2); left: calc(0% - var(--shadow-cuttoff-fix) / 2); filter: blur(clamp(2px,.125em,12px)); overflow: visible; pointer-events: none; }
   .button-shadow::after { content: ""; position: absolute; z-index: 0; inset: 0; border-radius: 999vw; background: linear-gradient(180deg, rgba(168,85,247,.3), rgba(0,0,0,.2)); width: calc(100% - var(--shadow-cuttoff-fix) - .25em); height: calc(100% - var(--shadow-cuttoff-fix) - .25em); top: calc(var(--shadow-cuttoff-fix) - .5em); left: calc(var(--shadow-cuttoff-fix) - .875em); padding: .125em; box-sizing: border-box; mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); mask-composite: exclude; opacity: 1; }
   .btn-3d-style { all: unset; cursor: pointer; position: relative; display: block; z-index: 3; background: linear-gradient(-75deg, rgba(255,255,255,.08), rgba(255,255,255,.28), rgba(255,255,255,.08)); border-radius: 999vw; box-shadow: inset 0 .125em .125em rgba(0,0,0,.05), inset 0 -.125em .125em rgba(255,255,255,.5), 0 .25em .125em -.125em rgba(0,0,0,.3); backdrop-filter: blur(6px); transition: all var(--anim--hover-time) var(--anim--hover-ease); width: 100%; text-align: center; }
-  html.light .btn-3d-style { background: linear-gradient(-75deg, rgba(126,34,206,.2), rgba(168,85,247,.4), rgba(126,34,206,.2)); box-shadow: inset 0 .125em .125em rgba(255,255,255,.9), 0 .15em .25em rgba(126,34,206,.2); }
   .btn-3d-style:hover { transform: scale(.975); }
   .btn-3d-style span { position: relative; display: block; user-select: none; font-weight: 800; font-size: .9em; color: var(--btn-text-color); text-shadow: 0 .15em .1em rgba(0,0,0,.2); padding-inline: 2em; padding-block: .9em; text-transform: uppercase; }
 
-  /* Carousel */
+  /* 3D Carousel */
   .perspective-container { perspective: 1350px; }
   .preserve-3d { transform-style: preserve-3d; }
-  
   .card-3d {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 280px;
-    height: 420px;
-    margin-top: -210px;
-    margin-left: -140px;
-    border-radius: 20px;
-    transform-style: preserve-3d;
-    will-change: transform, opacity;
-    cursor: pointer;
-    touch-action: none;
+    position: absolute; top: 50%; left: 50%; width: 280px; height: 420px;
+    margin-top: -210px; margin-left: -140px; border-radius: 20px;
+    transform-style: preserve-3d; will-change: transform, opacity; cursor: pointer; touch-action: none;
     box-shadow: 0 30px 60px -12px rgba(0,0,0,0.85);
   }
-
   .glass-sheen {
-    position: absolute;
-    inset: 0;
-    border-radius: 20px;
+    position: absolute; inset: 0; border-radius: 20px;
     background: linear-gradient(135deg, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0.05) 40%, transparent 60%);
-    pointer-events: none;
-    z-index: 5;
+    pointer-events: none; z-index: 5;
   }
 
-  /* Cards & Glass Containers */
-  .tier-card { position: relative; display: flex; flex-direction: column; justify-content: space-between; gap: 1.25rem; padding: 2rem; width: 100%; background-color: var(--card-bg); backdrop-filter: blur(16px); border: 1px solid var(--card-border); border-radius: 1.75rem; box-shadow: 0 10px 30px rgba(0,0,0,0.2); overflow: hidden; transition: transform .4s ease, background-color .4s ease; }
+  .tier-card { position: relative; display: flex; flex-direction: column; justify-content: space-between; gap: 1.25rem; padding: 2rem; width: 100%; background-color: var(--card-bg); backdrop-filter: blur(16px); border: 1px solid var(--card-border); border-radius: 1.75rem; box-shadow: 0 10px 30px rgba(0,0,0,0.2); overflow: hidden; transition: transform .4s ease; }
   .golden-bundle-card { position: relative; border-radius: 2.5rem; background: linear-gradient(135deg, rgba(234,179,8,.08) 0%, rgba(255,255,255,.01) 100%); backdrop-filter: blur(24px); border: 1px solid rgba(234,179,8,.25); box-shadow: 0 25px 50px -12px rgba(234,179,8,.08); overflow: hidden; }
-  html.light .golden-bundle-card { background: linear-gradient(135deg, rgba(255,255,255,.95) 0%, rgba(254,240,138,.35) 100%); border-color: rgba(234,179,8,.4); }
-
   .glass { background: var(--card-bg); backdrop-filter: blur(16px); border: 1px solid var(--card-border); }
   .cat-card-glass { background: var(--card-bg); backdrop-filter: blur(16px); border: 1px solid var(--card-border); border-radius: 1.75rem; padding: 1.75rem 2rem; cursor: pointer; transition: transform .3s ease; }
   .cat-card-glass:hover { transform: translateY(-5px); }
@@ -200,18 +183,25 @@
   .view { transition: opacity .4s ease; opacity: 1; display: block; }
   .view-hidden { display: none !important; opacity: 0; }
 
-  /* Loader */
-  #vx-loader { position: fixed; inset: 0; z-index: 999999; background: #09090c; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; transition: opacity .7s cubic-bezier(.4,0,.2,1), visibility .7s ease; }
+  /* Luxury Loader & Letter Drop Animation */
+  #vx-loader { position: fixed; inset: 0; z-index: 999999; background: #050508; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; transition: opacity 0.8s cubic-bezier(0.4,0,0.2,1), visibility 0.8s ease; }
   #vx-loader.vx-hide { opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; }
-  #app-content { opacity: 0; filter: blur(18px); transform: scale(1.02); transition: opacity .8s cubic-bezier(.16,1,.3,1), filter .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1); }
+  #app-content { opacity: 0; filter: blur(20px); transform: scale(1.03); transition: opacity 1s cubic-bezier(0.16,1,0.3,1), filter 1s cubic-bezier(0.16,1,0.3,1), transform 1s cubic-bezier(0.16,1,0.3,1); }
   #app-content.vx-revealed { opacity: 1; filter: blur(0); transform: scale(1); }
-  .vx-ambient-glow { position: absolute; width: min(75vw,850px); height: min(75vw,850px); border-radius: 50%; background: radial-gradient(circle, rgba(168,85,247,.35) 0%, rgba(126,34,206,.12) 40%, transparent 70%); filter: blur(50px); animation: vxGlowPulse 3.5s ease-in-out infinite; }
-  @keyframes vxGlowPulse { 0%,100% { transform: scale(.92); opacity: .6; } 50% { transform: scale(1.08); opacity: .95; } }
-  .vx-logo-word { display: flex; font-family: 'Cinzel', serif; font-weight: 900; font-size: clamp(3.2rem,12vw,6.5rem); letter-spacing: .22em; line-height: 1; position: relative; z-index: 2; }
-  .vx-letter { display: inline-block; background: linear-gradient(135deg,#fff 0%,#f3e8ff 35%,#c084fc 70%,#7e22ce 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; opacity: 0; animation: vxLetterAssemble .75s cubic-bezier(.19,1,.22,1) forwards; animation-delay: var(--ld,0s); }
-  @keyframes vxLetterAssemble { 0% { opacity: 0; transform: translate3d(0,-22px,0) scale(1.3); } 100% { opacity: 1; transform: translate3d(0,0,0) scale(1); } }
-  .vx-bar-track { width: min(78vw,320px); height: 6px; border-radius: 999px; background: rgba(255,255,255,.05); border: 1px solid rgba(168,85,247,.4); margin-top: 1.8rem; position: relative; overflow: hidden; z-index: 2; }
-  .vx-bar-fill { height: 100%; width: 0%; border-radius: 999px; background: linear-gradient(90deg,#7e22ce,#a855f7 55%,#e9d5ff); position: relative; }
+  
+  .vx-ambient-glow { position: absolute; width: min(80vw,900px); height: min(80vw,900px); border-radius: 50%; background: radial-gradient(circle, rgba(168,85,247,0.4) 0%, rgba(126,34,206,0.15) 45%, transparent 70%); filter: blur(60px); animation: vxGlowPulse 4s ease-in-out infinite; }
+  @keyframes vxGlowPulse { 0%,100% { transform: scale(0.9); opacity: 0.5; } 50% { transform: scale(1.1); opacity: 0.9; } }
+
+  .vx-logo-word { display: flex; font-family: 'Cinzel', serif; font-weight: 900; font-size: clamp(3.5rem, 13vw, 7rem); letter-spacing: 0.25em; line-height: 1; position: relative; z-index: 2; perspective: 1000px; }
+  .vx-letter { display: inline-block; background: linear-gradient(135deg, #fff 0%, #f3e8ff 30%, #c084fc 65%, #7e22ce 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; opacity: 0; transform: translateY(-70px) rotateX(45deg) scale(1.4); filter: blur(12px); animation: vxLetterDrop 0.9s cubic-bezier(0.19, 1, 0.22, 1) forwards; animation-delay: var(--ld, 0s); }
+  @keyframes vxLetterDrop { 
+    0% { opacity: 0; transform: translateY(-70px) rotateX(45deg) scale(1.4); filter: blur(12px); } 
+    60% { opacity: 0.9; transform: translateY(8px) rotateX(-10deg) scale(0.95); filter: blur(1px); } 
+    100% { opacity: 1; transform: translateY(0) rotateX(0) scale(1); filter: drop-shadow(0 15px 30px rgba(126,34,206,0.5)); } 
+  }
+
+  .vx-bar-track { width: min(80vw, 340px); height: 5px; border-radius: 999px; background: rgba(255,255,255,0.04); border: 1px solid rgba(168,85,247,0.35); margin-top: 2rem; position: relative; overflow: hidden; z-index: 2; }
+  .vx-bar-fill { height: 100%; width: 0%; border-radius: 999px; background: linear-gradient(90deg, #7e22ce, #a855f7 50%, #f3e8ff); position: relative; }
 </style>
 </head>
 
@@ -221,8 +211,8 @@
   <div class="vx-ambient-glow"></div>
   <div class="vx-logo-word" id="vx-logo-word"></div>
   <div class="vx-bar-track"><div class="vx-bar-fill" id="vx-bar-fill"></div></div>
-  <p class="text-xs font-bold uppercase tracking-[0.3em] text-purple-300/80 mt-4 relative z-10">
-    INITIALIZING <span id="vx-percent" class="text-purple-200">0</span>%
+  <p class="text-xs font-bold uppercase tracking-[0.35em] text-purple-300/80 mt-5 relative z-10">
+    INITIALIZING VORTX <span id="vx-percent" class="text-purple-200">0</span>%
   </p>
 </div>
 
@@ -235,7 +225,7 @@
       var span = document.createElement('span');
       span.className = 'vx-letter';
       span.textContent = ch;
-      span.style.setProperty('--ld', (i * 0.12).toFixed(2) + 's');
+      span.style.setProperty('--ld', (0.2 + i * 0.14).toFixed(2) + 's');
       wordEl.appendChild(span);
     });
   }
@@ -243,7 +233,7 @@
   var barFill = document.getElementById('vx-bar-fill');
   var percentEl = document.getElementById('vx-percent');
   var loaderEl = document.getElementById('vx-loader');
-  var progress = 0, duration = 1800, startTime = null, finished = false, rafId = null;
+  var progress = 0, duration = 2100, startTime = null, finished = false, rafId = null;
 
   function paint(p) {
     var pct = Math.round(p);
@@ -259,12 +249,12 @@
     setTimeout(function () {
       if (loaderEl) {
         loaderEl.classList.add('vx-hide');
-        setTimeout(function () { loaderEl.style.display = 'none'; }, 720);
+        setTimeout(function () { loaderEl.style.display = 'none'; }, 850);
       }
       var appContent = document.getElementById('app-content');
       if (appContent) appContent.classList.add('vx-revealed');
       document.documentElement.classList.remove('vx-loading');
-    }, 220);
+    }, 250);
   }
 
   function tick(now) {
@@ -278,7 +268,7 @@
   }
 
   rafId = requestAnimationFrame(tick);
-  setTimeout(finishLoader, 4000);
+  setTimeout(finishLoader, 4500);
   if (loaderEl) loaderEl.addEventListener('click', finishLoader);
 })();
 </script>
@@ -367,7 +357,7 @@
       </div>
     </section>
 
-    <!-- LIVE STATS SECTION WITH ROLLING NUMBERS & LUXURY MONO FONT -->
+    <!-- LIVE STATS SECTION -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 py-12 border-t border-white/10 mt-12 reveal-on-scroll">
       <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
         <div class="glass p-6 rounded-2xl">
@@ -550,21 +540,20 @@
   var yr = document.getElementById('year');
   if (yr) yr.textContent = new Date().getFullYear();
 
-  /* ---------- Scroll Reveal & Counter Animations ---------- */
+  /* ---------- Slow Scroll Reveal & Smooth Counters ---------- */
   function initScrollAnimations() {
     var observer = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
           entry.target.classList.add('is-visible');
 
-          // Trigger Counter animation if inside intersecting block
           var counters = entry.target.querySelectorAll('.counter-num');
           counters.forEach(function (counter) {
             if (counter.dataset.animated) return;
             counter.dataset.animated = "true";
             var target = parseInt(counter.dataset.target, 10);
             var count = 0;
-            var speed = target / 60; // 60 frames animation
+            var speed = target / 80;
 
             function updateCount() {
               count += speed;
@@ -584,7 +573,7 @@
             counter.dataset.animated = "true";
             var target = parseFloat(counter.dataset.target);
             var count = 0;
-            var speed = target / 40;
+            var speed = target / 60;
 
             function updateDecimal() {
               count += speed;
@@ -599,7 +588,7 @@
           });
         }
       });
-    }, { threshold: 0.15 });
+    }, { threshold: 0.1 });
 
     document.querySelectorAll('.reveal-on-scroll').forEach(function (el) {
       observer.observe(el);
@@ -611,61 +600,19 @@
 </script>
 
 <!-- ============================================================
-     3D INFINITE CAROUSEL ENGINE
+     3D INFINITE CAROUSEL ENGINE (120Hz OPTIMIZED)
      ============================================================ -->
 <script>
 (function () {
   "use strict";
 
   var CARDS_DATA = [
-    {
-      title: "BLACK VIP",
-      tag: "VFX PACK",
-      number: "•••• 8829",
-      bg: "linear-gradient(135deg, #09090b 0%, #18181b 50%, #27272a 100%)",
-      border: "rgba(255, 255, 255, 0.2)",
-      chip: "linear-gradient(135deg, #e2e8f0, #94a3b8)"
-    },
-    {
-      title: "ROYAL GOLD",
-      tag: "COLOR GRADE",
-      number: "•••• 4021",
-      bg: "linear-gradient(135deg, #451a03 0%, #78350f 50%, #b45309 100%)",
-      border: "rgba(251, 191, 36, 0.4)",
-      chip: "linear-gradient(135deg, #fef08a, #ca8a04)"
-    },
-    {
-      title: "CYBER CYAN",
-      tag: "PRESET FILE",
-      number: "•••• 9102",
-      bg: "linear-gradient(135deg, #083344 0%, #0e7490 50%, #06b6d4 100%)",
-      border: "rgba(34, 211, 238, 0.4)",
-      chip: "linear-gradient(135deg, #cffafe, #0891b2)"
-    },
-    {
-      title: "NEON PURPLE",
-      tag: "VELOCITY XML",
-      number: "•••• 7731",
-      bg: "linear-gradient(135deg, #3b0764 0%, #6b21a8 50%, #9333ea 100%)",
-      border: "rgba(192, 132, 252, 0.4)",
-      chip: "linear-gradient(135deg, #f3e8ff, #7e22ce)"
-    },
-    {
-      title: "EMERALD 3D",
-      tag: "CAMERA SHAKE",
-      number: "•••• 5510",
-      bg: "linear-gradient(135deg, #022c22 0%, #065f46 50%, #059669 100%)",
-      border: "rgba(52, 211, 153, 0.4)",
-      chip: "linear-gradient(135deg, #d1fae5, #059669)"
-    },
-    {
-      title: "SAPPHIRE PRO",
-      tag: "OVERLAY LUT",
-      number: "•••• 1198",
-      bg: "linear-gradient(135deg, #172554 0%, #1e40af 50%, #2563eb 100%)",
-      border: "rgba(96, 165, 250, 0.4)",
-      chip: "linear-gradient(135deg, #dbeafe, #1d4ed8)"
-    }
+    { title: "BLACK VIP", tag: "VFX PACK", number: "•••• 8829", bg: "linear-gradient(135deg, #09090b 0%, #18181b 50%, #27272a 100%)", border: "rgba(255, 255, 255, 0.2)", chip: "linear-gradient(135deg, #e2e8f0, #94a3b8)" },
+    { title: "ROYAL GOLD", tag: "COLOR GRADE", number: "•••• 4021", bg: "linear-gradient(135deg, #451a03 0%, #78350f 50%, #b45309 100%)", border: "rgba(251, 191, 36, 0.4)", chip: "linear-gradient(135deg, #fef08a, #ca8a04)" },
+    { title: "CYBER CYAN", tag: "PRESET FILE", number: "•••• 9102", bg: "linear-gradient(135deg, #083344 0%, #0e7490 50%, #06b6d4 100%)", border: "rgba(34, 211, 238, 0.4)", chip: "linear-gradient(135deg, #cffafe, #0891b2)" },
+    { title: "NEON PURPLE", tag: "VELOCITY XML", number: "•••• 7731", bg: "linear-gradient(135deg, #3b0764 0%, #6b21a8 50%, #9333ea 100%)", border: "rgba(192, 132, 252, 0.4)", chip: "linear-gradient(135deg, #f3e8ff, #7e22ce)" },
+    { title: "EMERALD 3D", tag: "CAMERA SHAKE", number: "•••• 5510", bg: "linear-gradient(135deg, #022c22 0%, #065f46 50%, #059669 100%)", border: "rgba(52, 211, 153, 0.4)", chip: "linear-gradient(135deg, #d1fae5, #059669)" },
+    { title: "SAPPHIRE PRO", tag: "OVERLAY LUT", number: "•••• 1198", bg: "linear-gradient(135deg, #172554 0%, #1e40af 50%, #2563eb 100%)", border: "rgba(96, 165, 250, 0.4)", chip: "linear-gradient(135deg, #dbeafe, #1d4ed8)" }
   ];
 
   var stage = document.getElementById('carousel-stage');
@@ -766,7 +713,7 @@
 
   function animate() {
     if (!isDragging) {
-      currentIndex += (targetIndex - currentIndex) * 0.1;
+      currentIndex += (targetIndex - currentIndex) * 0.12;
     } else {
       currentIndex += (targetIndex - currentIndex) * 0.35;
     }
