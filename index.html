@@ -441,6 +441,7 @@
 (function () {
   "use strict";
 
+  /* ---------- i18n ---------- */
   var translations = {
     en: { "nav-bundles": "Bundles", "nav-packs": "Featured Packs", "nav-categories": "Categories", "hero-tag": "Digital Assets Hub", "hero-desc": "High-end VFX packs, cinematic presets & custom web experiences.", "hero-btn": "Explore Tiers", "bundle-sub": "Custom Web Solutions", "bundle-title": "WEB PAGE BUNDLES", "bundle-desc": "Launch your custom digital space today. Stand out with next-gen designs and premium performance.", "bundle-btn": "View Development Tiers", "packs-title": "Featured Packs", "packs-desc": "Drag or swipe horizontally to tumble cards.", "cat-sec-title": "Categories", "cat-sec-desc": "Select a category to explore editing packs.", "footer-right": "Crafted for the bold.", "tiers-sub": "Web Solutions", "tiers-title": "Development Tiers", "back-btn": "← Back", "tier-starter-desc": "Perfect for simple portfolios and personal landing pages.", "tier-pro-desc": "For creators needing advanced animations & custom design.", "tier-vip-desc": "The absolute premium experience with custom 3D elements.", "select-plan": "Select Plan", "cat-view-sub": "Collection", "add-cart": "Add to Cart", "try-demo": "Try Demo" },
     ar: { "nav-bundles": "الحزم المتاحة", "nav-packs": "حزم متميزة", "nav-categories": "الأقسام الرئيسية", "hero-tag": "مركز الأصول الرقمية", "hero-desc": "حزم مؤثرات بصرية احترافية، إعدادات سينمائية مسبقة وتجارب ويب مخصصة للمبدعين.", "hero-btn": "استكشف الباقات", "bundle-sub": "حلول المواقع المخصصة", "bundle-title": "باقات تصميم الويب", "bundle-desc": "أطلق مساحتك الرقمية المخصصة اليوم. تميز بتصاميم الجيل القادم وأداء لا يضاهى.", "bundle-btn": "عرض باقات التطوير", "packs-title": "الحزم المتميزة", "packs-desc": "اسحب يمين ويسار لتحريك الكروت.", "cat-sec-title": "الأقسام", "cat-sec-desc": "اختر فئة لاستكشاف الحزم المتاحة.", "footer-right": "صُنع للمبدعين والجرآء.", "tiers-sub": "حلول الويب", "tiers-title": "مستويات التطوير", "back-btn": "→ العودة", "tier-starter-desc": "مثالية للملفات الشخصية وصفحات الهبوط البسيطة.", "tier-pro-desc": "للمبدعين الذين يحتاجون تحريكات متقدمة وتصاميم خاصة.", "tier-vip-desc": "الخبرة المتميزة المطلقة مع عناصر ثلاثية الأبعاد.", "select-plan": "اختر الباقة", "cat-view-sub": "المجموعة", "add-cart": "إضافة للسلة", "try-demo": "تجربة العرض" }
@@ -464,6 +465,7 @@
     }
   };
 
+  /* ---------- theme ---------- */
   window.toggleTheme = function () {
     try {
       var root = document.documentElement;
@@ -474,6 +476,7 @@
     }
   };
 
+  /* ---------- toast ---------- */
   window.showToast = function (msg) {
     try {
       var box = document.getElementById('toast-box');
@@ -490,6 +493,7 @@
     }
   };
 
+  /* ---------- preview modal ---------- */
   window.openPreview = function (title, tag) {
     try {
       var titleEl = document.getElementById('preview-title');
@@ -512,6 +516,7 @@
     }
   };
 
+  /* ---------- categories ---------- */
   var CATEGORY_DATA = {
     CC: ['Teal & Orange Grade', 'Cinematic Film Base', 'Dark Knight Grade'],
     SHAKE: ['Hard Impact Shake', 'Bass Drop Bounce', 'Smooth Whip Pan'],
@@ -583,24 +588,31 @@
 </script>
 
 <!-- ============================================================
-     3D COVERFLOW (CSS & VANILLA JS ONLY - NO MP4 DEPENDENCY)
+     3D COVERFLOW — CSS/JS STRICT LOCAL RENDER (NO MP4 LINKS)
      ============================================================ -->
 <script>
 (function () {
   "use strict";
 
   function init() {
+    try {
+      initCoverflow();
+    } catch (err) {
+      console.error('Coverflow init failed:', err);
+    }
+  }
+
+  function initCoverflow() {
     var viewport = document.getElementById('card-viewport');
     var proxy = document.getElementById('interaction-proxy');
     if (!viewport || !proxy) return;
 
-    // كروت فخمة بتدرجات ألوان ومؤثرات زجاجية ثابتة 100% بدون الاعتماد على روابط خارجية
     var CARD_DETAILS = [
-      { tag: 'VFX',     title: 'RED INFERNO',  bg: 'linear-gradient(135deg, rgba(185,28,28,0.5) 0%, rgba(15,15,15,0.95) 100%)', border: 'rgba(239,68,68,0.4)' },
-      { tag: 'COLOR',   title: 'CYBER GOLD',   bg: 'linear-gradient(135deg, rgba(202,138,4,0.5) 0%, rgba(15,15,15,0.95) 100%)', border: 'rgba(234,179,8,0.4)' },
-      { tag: 'CAMERA',  title: 'NEON NIGHTS',  bg: 'linear-gradient(135deg, rgba(147,51,234,0.5) 0%, rgba(15,15,15,0.95) 100%)', border: 'rgba(168,85,247,0.4)' },
-      { tag: 'PRESETS', title: 'HYPER BLUE',   bg: 'linear-gradient(135deg, rgba(6,182,212,0.5) 0%, rgba(15,15,15,0.95) 100%)', border: 'rgba(56,189,248,0.4)' },
-      { tag: 'LUT',     title: 'DARK MATTER', bg: 'linear-gradient(135deg, rgba(75,85,99,0.5) 0%, rgba(15,15,15,0.95) 100%)', border: 'rgba(156,163,175,0.4)' }
+      { tag: 'VFX',     title: 'RED INFERNO',  grad: 'linear-gradient(145deg, #4c0519 0%, #7f1d1d 35%, #1a0508 100%)' },
+      { tag: 'COLOR',   title: 'CYBER GOLD',   grad: 'linear-gradient(145deg, #451a03 0%, #a16207 35%, #1c0a02 100%)' },
+      { tag: 'CAMERA',  title: 'NEON NIGHTS',  grad: 'linear-gradient(145deg, #3b0764 0%, #7e22ce 35%, #120321 100%)' },
+      { tag: 'PRESETS', title: 'HYPER BLUE',   grad: 'linear-gradient(145deg, #082f49 0%, #0369a1 35%, #041420 100%)' },
+      { tag: 'LUT',     title: 'DARK MATTER',  grad: 'linear-gradient(145deg, #18181b 0%, #3f3f46 35%, #09090b 100%)' }
     ];
 
     var cardCount = CARD_DETAILS.length;
@@ -613,12 +625,11 @@
       var details = CARD_DETAILS[i % CARD_DETAILS.length];
 
       var el = document.createElement('div');
-      el.className = 'coverflow-card rounded-[24px] overflow-hidden border backface-hidden';
+      el.className = 'coverflow-card rounded-[24px] overflow-hidden border-2 border-white/25 backface-hidden';
       el.style.width = cardW + 'px';
       el.style.height = cardH + 'px';
-      el.style.background = details.bg;
-      el.style.borderColor = details.border;
-      el.style.boxShadow = 'inset 0 1px 1px rgba(255,255,255,0.2), 0 25px 50px -12px rgba(0,0,0,0.8)';
+      el.style.background = details.grad;
+      el.style.boxShadow = 'inset 0 1px 1px rgba(255,255,255,0.2), 0 25px 50px -12px rgba(0,0,0,0.8), 0 0 0 1px rgba(0,0,0,0.4)';
       el.style.pointerEvents = 'auto';
       el.style.cursor = 'pointer';
 
@@ -627,7 +638,7 @@
       el.setAttribute('onclick', "window.openPreview('" + safeTitle + "', '" + safeTag + "')");
 
       el.innerHTML =
-        '<div class="absolute inset-0 p-5 text-white h-full w-full font-sans z-10 bg-black/20 backdrop-blur-sm flex flex-col justify-between pointer-events-none">' +
+        '<div class="absolute inset-0 p-5 text-white h-full w-full font-sans z-10 bg-black/15 flex flex-col justify-between pointer-events-none">' +
           '<div class="flex justify-between items-start w-full">' +
             '<span class="text-[10px] uppercase font-bold px-3 py-1 rounded-full border border-white/30 bg-black/40 text-white backdrop-blur-md">' + details.tag + '</span>' +
             '<h3 class="font-head font-bold text-lg text-right tracking-wider text-white drop-shadow-md force-eng">' + details.title + '</h3>' +
@@ -754,5 +765,4 @@
 
       var now = performance.now();
       var dt = now - lastPointerT;
-      if (dt > 0) {
-        lastMoveV
+      
