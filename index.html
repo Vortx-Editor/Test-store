@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;800;900&family=Cinzel:wght@700;800;900&family=Inter:wght@500;600;700;800&display=swap" rel="stylesheet" />
 
-  <!-- Swiper 3D CSS & JS -->
+  <!-- Swiper 3D CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
@@ -438,6 +438,57 @@
     </p>
   </div>
 
+  <!-- هذي الإضافة اللي بتشغل العداد غصب عن المتصفح أول ما يقرأ الـ HTML حقه -->
+  <script>
+    (function() {
+      let progress = 0;
+      let barFill = document.getElementById('vx-bar-fill');
+      let percentEl = document.getElementById('vx-percent');
+      let wordEl = document.getElementById('vx-logo-word');
+      
+      if (wordEl) {
+        ['V', 'O', 'R', 'T', 'X'].forEach(function(ch, i) {
+          let span = document.createElement('span');
+          span.className = 'vx-letter';
+          span.textContent = ch;
+          span.style.setProperty('--ld', (i * 0.12).toFixed(2) + 's');
+          wordEl.appendChild(span);
+        });
+      }
+
+      let timer = setInterval(function() {
+        progress += 1;
+        if (percentEl) percentEl.textContent = progress;
+        if (barFill) barFill.style.width = progress + '%';
+
+        if (progress >= 100) {
+          clearInterval(timer);
+          setTimeout(function() {
+            let loader = document.getElementById('vx-loader');
+            if (loader) {
+              loader.classList.add('vx-hide');
+              setTimeout(function() { loader.style.display = 'none'; }, 700);
+            }
+            let appContent = document.getElementById('app-content');
+            if (appContent) appContent.classList.add('vx-revealed');
+            document.documentElement.classList.remove('vx-loading');
+          }, 300);
+        }
+      }, 32);
+
+      // تأمين أخير لو علق لأي سبب غير متوقع
+      setTimeout(function() {
+        let loader = document.getElementById('vx-loader');
+        if (loader && loader.style.display !== 'none') {
+          loader.style.display = 'none';
+          let appContent = document.getElementById('app-content');
+          if (appContent) appContent.classList.add('vx-revealed');
+          document.documentElement.classList.remove('vx-loading');
+        }
+      }, 4500);
+    })();
+  </script>
+
   <!-- MAIN SITE CONTENT -->
   <div id="app-content">
 
@@ -583,7 +634,6 @@
               <div class="physical-card-glass">
                 <span class="text-[10px] uppercase font-bold px-4 py-1.5 rounded-full border border-red-500/30 bg-red-500/10 text-red-400 self-start">VFX</span>
                 
-                <!-- Placeholder للصورة -->
                 <div class="card-image-placeholder">
                   <svg class="w-8 h-8 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                   <span>Image Placeholder</span>
@@ -778,56 +828,6 @@
   </div>
 
   <script>
-  /* CINEMATIC LOADER */
-  function dismissLoaderNow() {
-    const loader = document.getElementById('vx-loader');
-    const appContent = document.getElementById('app-content');
-    if (loader) { loader.classList.add('vx-hide'); setTimeout(() => { loader.style.display = 'none'; }, 700); }
-    if (appContent) appContent.classList.add('vx-revealed');
-    document.documentElement.classList.remove('vx-loading');
-  }
-
-  function startLoader() {
-    try {
-      const docEl = document.documentElement; 
-      docEl.classList.add('vx-loading');
-      
-      const barFill = document.getElementById('vx-bar-fill');
-      const percentEl = document.getElementById('vx-percent');
-      const wordEl = document.getElementById('vx-logo-word');
-      
-      if (wordEl && wordEl.children.length === 0) {
-        const letters = ['V', 'O', 'R', 'T', 'X'];
-        letters.forEach((ch, i) => { 
-          const span = document.createElement('span'); 
-          span.className = 'vx-letter'; 
-          span.textContent = ch; 
-          span.style.setProperty('--ld', (i * 0.12).toFixed(2) + 's'); 
-          wordEl.appendChild(span); 
-        });
-      }
-      
-      let progress = 0;
-      const timer = setInterval(() => {
-        progress += 1;
-        if (progress >= 100) { 
-          progress = 100; 
-          clearInterval(timer); 
-          setTimeout(dismissLoaderNow, 300); 
-        }
-        if (barFill) barFill.style.width = progress + '%';
-        if (percentEl) percentEl.textContent = progress;
-      }, 32);
-      
-      setTimeout(dismissLoaderNow, 4500);
-    } catch (e) { 
-      dismissLoaderNow(); 
-    }
-  }
-  
-  // تشغيل العداد مباشرة وبطريقة صريحة
-  startLoader();
-
   /* SWIPER 3D PHYSICAL TOUCH (CREATIVE EFFECT) */
   let swiper;
   function initSwiper() {
@@ -912,4 +912,4 @@
   const CATEGORY_DATA = { CC: ['Teal & Orange Grade', 'Cinematic Film Base', 'Dark Knight Grade', 'Vibrant Soft Pop'], SHAKE: ['Hard Impact Shake', 'Bass Drop Bounce', 'Smooth Whip Pan', 'Earthquake Wobble'], XML: ['Pro Intro Template', 'Velocity Edit XML', 'Glow Shake Timeline', 'Full Transition Suite'] };
 
   function showView(viewId) { document.querySelectorAll('.view').forEach(v => v.classList.add('view-hidden')); const target = document.getElementById(viewId); if (target) target.classList.remove('view-hidden'); window.scrollTo({ top: 0, behavior: 'instant' }); }
-  function openCategory(key) { document.getElementById('cat-title').textContent = key; document.getElementById('cat-grid').innerHTML = CATEGORY_DATA[key].map((item) => `<div onclick="openPreview('${item}', '${key}')" class="cat-card-glass flex
+  function openCategory(key) { document.getElementById('cat-title').textCon
