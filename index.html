@@ -2,15 +2,17 @@
 <html lang="en" class="dark" dir="ltr">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-select=none" />
 <title>VORTX — Premium Digital Assets</title>
 <meta name="theme-color" content="#09090c" />
 
+<!-- Tailwind CSS CDN v4 -->
 <script src="https://cdn.tailwindcss.com"></script>
 
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;800;900&family=Cinzel:wght@700;800;900&family=Inter:wght@500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;800;900&family=Cinzel:wght@700;800;900&family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
 <script>
   window.tailwind && (tailwind.config = {
@@ -62,6 +64,9 @@
     color: var(--text-color);
     font-family: 'Inter', sans-serif;
     transition: background-color .4s ease, color .4s ease;
+    touch-action: pan-y;
+    user-select: none;
+    -webkit-user-select: none;
   }
 
   html.vx-loading, html.vx-loading body { overflow: hidden !important; height: 100%; }
@@ -77,6 +82,7 @@
     display: inline-block;
   }
 
+  /* Stars Animation */
   .stars-background-container { position: fixed; inset: 0; width: 100vw; height: 100vh; background: var(--star-bg); overflow: hidden; z-index: 0; pointer-events: none; transition: background .4s ease; }
   #stars, #stars2, #stars3 { position: absolute; top: 0; left: 0; background: transparent; opacity: var(--star-opacity); transition: opacity .4s ease; }
   #stars { width: 1px; height: 1px; box-shadow: 501px 811px #fff, 1450px 1324px #fff, 1093px 1780px #fff, 1469px 678px #fff, 904px 741px #fff, 1160px 781px #fff; animation: animStar 50s linear infinite; }
@@ -92,84 +98,69 @@
     filter: drop-shadow(0 10px 25px rgba(0,0,0,.8)) drop-shadow(0 0 20px rgba(168,85,247,.5));
   }
   @keyframes oilShineSweep { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
-  html.light .vortx-wet-oil-title { background: linear-gradient(110deg, #2e1065 0%, #581c87 20%, #a855f7 35%, #ffffff 50%, #7e22ce 65%, #3b0764 80%, #2e1065 100%); background-size: 200% 100%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 5px 15px rgba(126,34,206,.2)); }
 
   .gold-heading {
-    font-family: 'Inter', sans-serif;
-    font-weight: 900;
-    letter-spacing: 0.04em;
+    font-family: 'Inter', sans-serif; font-weight: 900; letter-spacing: 0.04em;
     background: linear-gradient(100deg, #fff7d6 0%, #f5d489 18%, #eab308 38%, #fff3c4 55%, #ca8a04 72%, #fef9c3 88%, #eab308 100%);
-    background-size: 220% 100%;
-    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
-    animation: goldShine 5s linear infinite;
-    filter: drop-shadow(0 6px 18px rgba(234,179,8,.25));
+    background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    animation: goldShine 5s linear infinite; filter: drop-shadow(0 6px 18px rgba(234,179,8,.25));
   }
   @keyframes goldShine { 0% { background-position: 220% 0; } 100% { background-position: -220% 0; } }
 
+  /* Theme Toggle Switch */
   .theme-switch-btn { width: 64px; height: 34px; border-radius: 999px; background: linear-gradient(135deg,#1e1b4b,#311042); border: 1px solid rgba(168,85,247,.4); position: relative; cursor: pointer; padding: 3px; transition: all .4s ease; display: flex; align-items: center; }
   html.light .theme-switch-btn { background: linear-gradient(135deg,#38bdf8,#fde047); border-color: rgba(56,189,248,.6); }
   .theme-switch-ball { width: 26px; height: 26px; border-radius: 50%; position: absolute; top: 3px; left: 3px; transition: transform .4s ease; display: flex; align-items: center; justify-content: center; }
   html.dark .theme-switch-ball { transform: translateX(0); background: #e2e8f0; }
   html.light .theme-switch-ball { transform: translateX(30px); background: #fef08a; }
 
+  /* 3D Glass Buttons */
   .button-wrap { position: relative; z-index: 10; border-radius: 999vw; background: transparent; cursor: pointer; display: inline-block; transition: all var(--anim--hover-time) var(--anim--hover-ease); }
   .button-shadow { --shadow-cuttoff-fix: 2em; position: absolute; width: calc(100% + var(--shadow-cuttoff-fix)); height: calc(100% + var(--shadow-cuttoff-fix)); top: calc(0% - var(--shadow-cuttoff-fix) / 2); left: calc(0% - var(--shadow-cuttoff-fix) / 2); filter: blur(clamp(2px,.125em,12px)); overflow: visible; pointer-events: none; }
   .button-shadow::after { content: ""; position: absolute; z-index: 0; inset: 0; border-radius: 999vw; background: linear-gradient(180deg, rgba(168,85,247,.3), rgba(0,0,0,.2)); width: calc(100% - var(--shadow-cuttoff-fix) - .25em); height: calc(100% - var(--shadow-cuttoff-fix) - .25em); top: calc(var(--shadow-cuttoff-fix) - .5em); left: calc(var(--shadow-cuttoff-fix) - .875em); padding: .125em; box-sizing: border-box; mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); mask-composite: exclude; opacity: 1; }
   .btn-3d-style { all: unset; cursor: pointer; position: relative; display: block; z-index: 3; background: linear-gradient(-75deg, rgba(255,255,255,.08), rgba(255,255,255,.28), rgba(255,255,255,.08)); border-radius: 999vw; box-shadow: inset 0 .125em .125em rgba(0,0,0,.05), inset 0 -.125em .125em rgba(255,255,255,.5), 0 .25em .125em -.125em rgba(0,0,0,.3); backdrop-filter: blur(6px); transition: all var(--anim--hover-time) var(--anim--hover-ease); width: 100%; text-align: center; }
-  html.light .btn-3d-style { background: linear-gradient(-75deg, rgba(168,85,247,.1), rgba(168,85,247,.25), rgba(168,85,247,.1)); box-shadow: inset 0 .125em .125em rgba(255,255,255,.8), 0 .15em .25em rgba(126,34,206,.15); }
   .btn-3d-style:hover { transform: scale(.975); }
   .btn-3d-style span { position: relative; display: block; user-select: none; font-weight: 800; font-size: .9em; color: var(--btn-text-color); text-shadow: 0 .15em .1em rgba(0,0,0,.2); padding-inline: 2em; padding-block: .9em; text-transform: uppercase; }
 
-  .tier-card { --white:#fff; --black:hsl(240,15%,9%); --paragraph:hsl(0,0%,83%); --line:hsl(240,9%,17%); --primary:hsl(266,92%,58%); position: relative; display: flex; flex-direction: column; justify-content: space-between; gap: 1.25rem; padding: 2rem; width: 100%; background-color: hsla(240,15%,9%,.85); backdrop-filter: blur(16px); background-image: radial-gradient(at 88% 40%, hsla(240,15%,9%,1) 0px, transparent 85%), radial-gradient(at 0% 64%, hsla(263,93%,56%,.4) 0px, transparent 85%); border-radius: 1.75rem; box-shadow: 0 -16px 24px 0 rgba(255,255,255,.15) inset; overflow: hidden; transition: transform .4s ease, background-color .4s ease; }
-  html.light .tier-card { background-color: rgba(255,255,255,.92); background-image: radial-gradient(at 0% 64%, rgba(216,180,254,.4) 0px, transparent 85%); box-shadow: 0 15px 35px rgba(126,34,206,.1); }
-  .tier-card:hover { transform: translateY(-6px); }
-  .tier-card .card_title { font-size: 1.75rem; font-weight: 900; color: var(--white); font-family: 'Cinzel','Cairo',serif; }
-  html.light .tier-card .card_title { color: #3b0764; }
-  .tier-card .card_paragraph { margin-top: .5rem; font-size: .85rem; color: var(--paragraph); line-height: 1.5; }
-  html.light .tier-card .card_paragraph { color: #475569; }
-  .tier-card .line { width: 100%; height: .1rem; background-color: var(--line); border: none; margin: .5rem 0; }
-  html.light .tier-card .line { background-color: rgba(126,34,206,.15); }
-  .tier-card .card__list { display: flex; flex-direction: column; gap: .85rem; }
-  .tier-card .card__list_item { display: flex; align-items: center; gap: .75rem; }
-  .tier-card .check { display: flex; justify-content: center; align-items: center; width: 1.25rem; height: 1.25rem; background-color: var(--primary); border-radius: 50%; flex-shrink: 0; }
-  .tier-card .check_svg { width: .85rem; height: .85rem; fill: var(--black); }
-  .tier-card .list_text { font-size: .9rem; font-weight: 700; color: var(--white); }
-  html.light .tier-card .list_text { color: #1e1b4b; }
+  /* 3D Physical Touch Carousel Engine */
+  .perspective-container { perspective: 1350px; }
+  .preserve-3d { transform-style: preserve-3d; }
+  
+  .card-3d {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 280px;
+    height: 420px;
+    margin-top: -210px;
+    margin-left: -140px;
+    border-radius: 20px;
+    transform-style: preserve-3d;
+    will-change: transform, opacity;
+    cursor: pointer;
+    touch-action: none;
+    box-shadow: 0 30px 60px -12px rgba(0,0,0,0.85);
+  }
 
-  .glass-radio-group { display: flex; position: relative; background: rgba(255,255,255,.05); border-radius: 999px; backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,.15); padding: 6px; margin: 15px auto 10px auto; width: 100%; max-width: 56rem; z-index: 20; }
-  html.light .glass-radio-group { background: rgba(126,34,206,.06); border-color: rgba(126,34,206,.2); }
-  .glass-radio-group input { display: none; }
-  .glass-radio-group label { flex: 1; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 800; padding: .9rem 1rem; cursor: pointer; color: rgba(255,255,255,.7); z-index: 2; transition: color .3s ease; }
-  html.light .glass-radio-group label { color: #581c87; }
-  .glass-radio-group input:checked + label { color: #fff; }
-  .glass-glider { position: absolute; top: 6px; bottom: 6px; width: calc((100% - 12px) / 3); border-radius: 999px; z-index: 1; transition: transform .45s cubic-bezier(.34,1.56,.64,1), background .4s ease; }
+  .glass-sheen {
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0.05) 40%, transparent 60%);
+    pointer-events: none;
+    z-index: 5;
+  }
 
-  html[dir="ltr"] #glass-cc:checked ~ .glass-glider { transform: translateX(0%); background: linear-gradient(135deg, rgba(168,85,247,.4), #a855f7); }
-  html[dir="ltr"] #glass-xml:checked ~ .glass-glider { transform: translateX(100%); background: linear-gradient(135deg, rgba(56,189,248,.4), #06b6d4); }
-  html[dir="ltr"] #glass-shake:checked ~ .glass-glider { transform: translateX(200%); background: linear-gradient(135deg, rgba(234,179,8,.4), #eab308); }
-  html[dir="rtl"] #glass-cc:checked ~ .glass-glider { transform: translateX(0%); background: linear-gradient(135deg, rgba(168,85,247,.4), #a855f7); }
-  html[dir="rtl"] #glass-xml:checked ~ .glass-glider { transform: translateX(-100%); background: linear-gradient(135deg, rgba(56,189,248,.4), #06b6d4); }
-  html[dir="rtl"] #glass-shake:checked ~ .glass-glider { transform: translateX(-200%); background: linear-gradient(135deg, rgba(234,179,8,.4), #eab308); }
-
+  .tier-card { position: relative; display: flex; flex-direction: column; justify-content: space-between; gap: 1.25rem; padding: 2rem; width: 100%; background-color: hsla(240,15%,9%,.85); backdrop-filter: blur(16px); border-radius: 1.75rem; box-shadow: 0 -16px 24px 0 rgba(255,255,255,.15) inset; overflow: hidden; transition: transform .4s ease; }
   .golden-bundle-card { position: relative; border-radius: 2.5rem; background: linear-gradient(135deg, rgba(234,179,8,.08) 0%, rgba(255,255,255,.01) 100%); backdrop-filter: blur(24px); border: 1px solid rgba(234,179,8,.25); box-shadow: 0 25px 50px -12px rgba(234,179,8,.08); overflow: hidden; }
-  html.light .golden-bundle-card { background: linear-gradient(135deg, rgba(255,255,255,.95) 0%, rgba(254,240,138,.3) 100%); border-color: rgba(234,179,8,.4); box-shadow: 0 20px 40px rgba(234,179,8,.1); }
-
   .glass { background: rgba(255,255,255,.03); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,.08); }
-  html.light .glass { background: rgba(255,255,255,.85); border-color: rgba(126,34,206,.15); }
-  .cat-card-glass { background: rgba(255,255,255,.05); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,.1); border-radius: 1.75rem; padding: 1.75rem 2rem; cursor: pointer; transition: transform .3s ease, background .3s ease; }
+  .cat-card-glass { background: rgba(255,255,255,.05); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,.1); border-radius: 1.75rem; padding: 1.75rem 2rem; cursor: pointer; transition: transform .3s ease; }
   .cat-card-glass:hover { transform: translateY(-5px); background: rgba(255,255,255,.08); }
-  html.light .cat-card-glass { background: rgba(255,255,255,.9); border-color: rgba(168,85,247,.2); }
-  html.light .cat-card-glass:hover { background: #fff; }
 
   .view { transition: opacity .4s ease; opacity: 1; display: block; }
   .view-hidden { display: none !important; opacity: 0; }
 
-  .perspective-container { perspective: 1350px; }
-  .preserve-3d { transform-style: preserve-3d; }
-  .backface-hidden { backface-visibility: hidden; }
-  #interaction-proxy { touch-action: pan-y; }
-  .coverflow-card { position: absolute; top: 0; left: 0; will-change: transform, opacity; }
-
+  /* Loader */
   #vx-loader { position: fixed; inset: 0; z-index: 999999; background: #09090c; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; transition: opacity .7s cubic-bezier(.4,0,.2,1), visibility .7s ease; }
   #vx-loader.vx-hide { opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; }
   #app-content { opacity: 0; filter: blur(18px); transform: scale(1.02); transition: opacity .8s cubic-bezier(.16,1,.3,1), filter .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1); }
@@ -177,12 +168,10 @@
   .vx-ambient-glow { position: absolute; width: min(75vw,850px); height: min(75vw,850px); border-radius: 50%; background: radial-gradient(circle, rgba(168,85,247,.35) 0%, rgba(126,34,206,.12) 40%, transparent 70%); filter: blur(50px); animation: vxGlowPulse 3.5s ease-in-out infinite; }
   @keyframes vxGlowPulse { 0%,100% { transform: scale(.92); opacity: .6; } 50% { transform: scale(1.08); opacity: .95; } }
   .vx-logo-word { display: flex; font-family: 'Cinzel', serif; font-weight: 900; font-size: clamp(3.2rem,12vw,6.5rem); letter-spacing: .22em; line-height: 1; position: relative; z-index: 2; }
-  .vx-letter { display: inline-block; background: linear-gradient(135deg,#fff 0%,#f3e8ff 35%,#c084fc 70%,#7e22ce 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 10px 25px rgba(0,0,0,.8)) drop-shadow(0 0 20px rgba(168,85,247,.6)); opacity: 0; animation: vxLetterAssemble .75s cubic-bezier(.19,1,.22,1) forwards; animation-delay: var(--ld,0s); }
-  @keyframes vxLetterAssemble { 0% { opacity: 0; transform: translate3d(0,-22px,0) scale(1.3) skewX(12deg); filter: drop-shadow(-4px 0 0 rgba(255,0,130,.8)) drop-shadow(4px 0 0 rgba(0,220,255,.8)) blur(6px); } 40% { opacity: .8; transform: translate3d(0,3px,0) scale(.96) skewX(-4deg); filter: drop-shadow(2px 0 0 rgba(255,0,130,.5)) drop-shadow(-2px 0 0 rgba(0,220,255,.5)) blur(1px); } 100% { opacity: 1; transform: translate3d(0,0,0) scale(1) skewX(0); filter: drop-shadow(0 10px 25px rgba(0,0,0,.8)) drop-shadow(0 0 20px rgba(168,85,247,.6)); } }
-  .vx-bar-track { width: min(78vw,320px); height: 6px; border-radius: 999px; background: rgba(255,255,255,.05); border: 1px solid rgba(168,85,247,.4); box-shadow: 0 0 15px rgba(126,34,206,.3); margin-top: 1.8rem; position: relative; overflow: hidden; z-index: 2; }
-  .vx-bar-fill { height: 100%; width: 0%; border-radius: 999px; background: linear-gradient(90deg,#7e22ce,#a855f7 55%,#e9d5ff); box-shadow: 0 0 12px rgba(168,85,247,.9); position: relative; }
-  .vx-bar-fill::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, transparent, rgba(255,255,255,.7), transparent); width: 40%; transform: translateX(-100%); animation: vxShimmer 1.5s ease-in-out infinite; }
-  @keyframes vxShimmer { 0% { transform: translateX(-120%); } 100% { transform: translateX(340%); } }
+  .vx-letter { display: inline-block; background: linear-gradient(135deg,#fff 0%,#f3e8ff 35%,#c084fc 70%,#7e22ce 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; opacity: 0; animation: vxLetterAssemble .75s cubic-bezier(.19,1,.22,1) forwards; animation-delay: var(--ld,0s); }
+  @keyframes vxLetterAssemble { 0% { opacity: 0; transform: translate3d(0,-22px,0) scale(1.3); } 100% { opacity: 1; transform: translate3d(0,0,0) scale(1); } }
+  .vx-bar-track { width: min(78vw,320px); height: 6px; border-radius: 999px; background: rgba(255,255,255,.05); border: 1px solid rgba(168,85,247,.4); margin-top: 1.8rem; position: relative; overflow: hidden; z-index: 2; }
+  .vx-bar-fill { height: 100%; width: 0%; border-radius: 999px; background: linear-gradient(90deg,#7e22ce,#a855f7 55%,#e9d5ff); position: relative; }
 </style>
 </head>
 
@@ -200,7 +189,6 @@
 <script>
 (function () {
   "use strict";
-
   var wordEl = document.getElementById('vx-logo-word');
   if (wordEl) {
     ['V', 'O', 'R', 'T', 'X'].forEach(function (ch, i) {
@@ -212,19 +200,14 @@
     });
   }
 
-  var barFill   = document.getElementById('vx-bar-fill');
+  var barFill = document.getElementById('vx-bar-fill');
   var percentEl = document.getElementById('vx-percent');
-  var loaderEl  = document.getElementById('vx-loader');
-
-  var progress   = 0;
-  var duration   = 1800;
-  var startTime  = null;
-  var finished   = false;
-  var rafId      = null;
+  var loaderEl = document.getElementById('vx-loader');
+  var progress = 0, duration = 1800, startTime = null, finished = false, rafId = null;
 
   function paint(p) {
     var pct = Math.round(p);
-    if (barFill)   barFill.style.width = pct + '%';
+    if (barFill) barFill.style.width = pct + '%';
     if (percentEl) percentEl.textContent = pct;
   }
 
@@ -233,7 +216,6 @@
     finished = true;
     if (rafId) cancelAnimationFrame(rafId);
     paint(100);
-
     setTimeout(function () {
       if (loaderEl) {
         loaderEl.classList.add('vx-hide');
@@ -251,17 +233,13 @@
     var elapsed = now - startTime;
     progress = Math.min(100, (elapsed / duration) * 100);
     paint(progress);
-    if (progress >= 100) {
-      finishLoader();
-      return;
-    }
+    if (progress >= 100) { finishLoader(); return; }
     rafId = requestAnimationFrame(tick);
   }
 
   rafId = requestAnimationFrame(tick);
   setTimeout(finishLoader, 4000);
   if (loaderEl) loaderEl.addEventListener('click', finishLoader);
-  window.vxDismissLoader = finishLoader;
 })();
 </script>
 
@@ -304,23 +282,6 @@
           <div class="button-shadow"></div>
         </div>
       </div>
-
-      <div class="w-full max-w-4xl mx-auto my-8 px-4 flex items-center justify-between sm:justify-around text-slate-300 relative z-20">
-        <a href="#" class="p-3.5 rounded-2xl border border-slate-700/60 bg-white/[0.03] backdrop-blur-md hover:bg-white/10 hover:border-slate-300 hover:text-white hover:scale-110 transition-all duration-300 shadow-lg shadow-black/40"><svg class="w-6 h-6 stroke-current fill-none stroke-[1.8]" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg></a>
-        <a href="#" class="p-3.5 rounded-2xl border border-slate-700/60 bg-white/[0.03] backdrop-blur-md hover:bg-white/10 hover:border-slate-300 hover:text-white hover:scale-110 transition-all duration-300 shadow-lg shadow-black/40"><svg class="w-6 h-6 stroke-current fill-none stroke-[1.8]" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4"></path></svg></a>
-        <a href="#" class="p-3.5 rounded-2xl border border-slate-700/60 bg-white/[0.03] backdrop-blur-md hover:bg-white/10 hover:border-slate-300 hover:text-white hover:scale-110 transition-all duration-300 shadow-lg shadow-black/40"><svg class="w-6 h-6 stroke-current fill-none stroke-[1.8]" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
-        <a href="#" class="p-3.5 rounded-2xl border border-slate-700/60 bg-white/[0.03] backdrop-blur-md hover:bg-white/10 hover:border-slate-300 hover:text-white hover:scale-110 transition-all duration-300 shadow-lg shadow-black/40"><svg class="w-6 h-6 stroke-current fill-none stroke-[1.8]" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="4.5" ry="4.5"></rect><polygon points="10 8 16 12 10 16 10 8"></polygon></svg></a>
-      </div>
-
-      <div class="glass-radio-group">
-        <input type="radio" name="category-plan" id="glass-cc" onchange="window.scrollToCategory('CC')" checked />
-        <label for="glass-cc">CC</label>
-        <input type="radio" name="category-plan" id="glass-xml" onchange="window.scrollToCategory('XML')" />
-        <label for="glass-xml">XML</label>
-        <input type="radio" name="category-plan" id="glass-shake" onchange="window.scrollToCategory('SHAKE')" />
-        <label for="glass-shake">Shake</label>
-        <div class="glass-glider"></div>
-      </div>
     </section>
 
     <!-- WEB PAGE BUNDLES -->
@@ -340,17 +301,15 @@
       </div>
     </section>
 
-    <!-- FEATURED PACKS: 3D COVERFLOW -->
-    <section id="packs" class="py-16 w-full relative overflow-hidden select-none" style="height: 620px;">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-20 pointer-events-none text-left mb-10">
-        <h2 data-i18n="packs-title" class="font-head font-bold text-3xl sm:text-4xl">Featured Packs</h2>
-        <p data-i18n="packs-desc" class="font-bold opacity-50 text-sm mt-3 tracking-wide">Drag or swipe horizontally to tumble cards.</p>
+    <!-- FEATURED PACKS: 3D PHYSICAL TOUCH CAROUSEL (HORIZONTAL) -->
+    <section id="packs" class="py-16 w-full relative overflow-hidden select-none">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-20 text-center mb-6">
+        <h2 data-i18n="packs-title" class="font-head font-bold text-3xl sm:text-5xl">Featured Packs</h2>
+        <p data-i18n="packs-desc" class="font-bold opacity-60 text-sm sm:text-base mt-2 tracking-wide">Swipe or drag horizontally to interact with physical 3D cards</p>
       </div>
 
-      <div id="interaction-proxy" class="absolute w-full h-full left-0 top-0 z-30 cursor-grab active:cursor-grabbing"></div>
-
-      <div class="perspective-container absolute w-full h-full left-0 top-0 flex items-center justify-center pointer-events-none z-10 pt-10">
-        <div id="card-viewport" class="relative preserve-3d" style="width: 260px; height: 360px;"></div>
+      <div id="carousel-stage" class="relative w-full h-[520px] flex items-center justify-center perspective-container overflow-hidden">
+        <div id="carousel-track" class="relative w-full h-full preserve-3d"></div>
       </div>
     </section>
 
@@ -382,29 +341,14 @@
       <div class="grid lg:grid-cols-3 gap-8">
         <div class="tier-card">
           <div class="card_title__container"><span class="card_title">STARTER</span><p data-i18n="tier-starter-desc" class="card_paragraph">Perfect for simple portfolios and personal landing pages.</p></div>
-          <hr class="line" />
-          <ul class="card__list">
-            <li class="card__list_item"><span class="check"><svg class="check_svg" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text">Clean &amp; Modern UI</span></li>
-            <li class="card__list_item"><span class="check"><svg class="check_svg" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text">Mobile-Ready Layout</span></li>
-          </ul>
           <div class="button-wrap w-full mt-6" onclick="window.showToast('PLAN ADDED')"><div class="btn-3d-style"><span data-i18n="select-plan">Select Plan</span></div><div class="button-shadow"></div></div>
         </div>
         <div class="tier-card">
           <div class="card_title__container"><span class="card_title">PRO</span><p data-i18n="tier-pro-desc" class="card_paragraph">For creators needing advanced animations &amp; custom design.</p></div>
-          <hr class="line" />
-          <ul class="card__list">
-            <li class="card__list_item"><span class="check"><svg class="check_svg" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text">Glassmorphism &amp; Glows</span></li>
-            <li class="card__list_item"><span class="check"><svg class="check_svg" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text">Scroll Animations</span></li>
-          </ul>
           <div class="button-wrap w-full mt-6" onclick="window.showToast('PLAN ADDED')"><div class="btn-3d-style"><span data-i18n="select-plan">Select Plan</span></div><div class="button-shadow"></div></div>
         </div>
         <div class="tier-card">
           <div class="card_title__container"><span class="card_title">VIP</span><p data-i18n="tier-vip-desc" class="card_paragraph">The absolute premium experience with custom 3D elements.</p></div>
-          <hr class="line" />
-          <ul class="card__list">
-            <li class="card__list_item"><span class="check"><svg class="check_svg" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text">3D Models Integration</span></li>
-            <li class="card__list_item"><span class="check"><svg class="check_svg" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text">Priority Support</span></li>
-          </ul>
           <div class="button-wrap w-full mt-6" onclick="window.showToast('PLAN ADDED')"><div class="btn-3d-style"><span data-i18n="select-plan">Select Plan</span></div><div class="button-shadow"></div></div>
         </div>
       </div>
@@ -441,328 +385,329 @@
 (function () {
   "use strict";
 
-  /* ---------- i18n ---------- */
   var translations = {
-    en: { "nav-bundles": "Bundles", "nav-packs": "Featured Packs", "nav-categories": "Categories", "hero-tag": "Digital Assets Hub", "hero-desc": "High-end VFX packs, cinematic presets & custom web experiences.", "hero-btn": "Explore Tiers", "bundle-sub": "Custom Web Solutions", "bundle-title": "WEB PAGE BUNDLES", "bundle-desc": "Launch your custom digital space today. Stand out with next-gen designs and premium performance.", "bundle-btn": "View Development Tiers", "packs-title": "Featured Packs", "packs-desc": "Drag or swipe horizontally to tumble cards.", "cat-sec-title": "Categories", "cat-sec-desc": "Select a category to explore editing packs.", "footer-right": "Crafted for the bold.", "tiers-sub": "Web Solutions", "tiers-title": "Development Tiers", "back-btn": "← Back", "tier-starter-desc": "Perfect for simple portfolios and personal landing pages.", "tier-pro-desc": "For creators needing advanced animations & custom design.", "tier-vip-desc": "The absolute premium experience with custom 3D elements.", "select-plan": "Select Plan", "cat-view-sub": "Collection", "add-cart": "Add to Cart", "try-demo": "Try Demo" },
-    ar: { "nav-bundles": "الحزم المتاحة", "nav-packs": "حزم متميزة", "nav-categories": "الأقسام الرئيسية", "hero-tag": "مركز الأصول الرقمية", "hero-desc": "حزم مؤثرات بصرية احترافية، إعدادات سينمائية مسبقة وتجارب ويب مخصصة للمبدعين.", "hero-btn": "استكشف الباقات", "bundle-sub": "حلول المواقع المخصصة", "bundle-title": "باقات تصميم الويب", "bundle-desc": "أطلق مساحتك الرقمية المخصصة اليوم. تميز بتصاميم الجيل القادم وأداء لا يضاهى.", "bundle-btn": "عرض باقات التطوير", "packs-title": "الحزم المتميزة", "packs-desc": "اسحب يمين ويسار لتحريك الكروت.", "cat-sec-title": "الأقسام", "cat-sec-desc": "اختر فئة لاستكشاف الحزم المتاحة.", "footer-right": "صُنع للمبدعين والجرآء.", "tiers-sub": "حلول الويب", "tiers-title": "مستويات التطوير", "back-btn": "→ العودة", "tier-starter-desc": "مثالية للملفات الشخصية وصفحات الهبوط البسيطة.", "tier-pro-desc": "للمبدعين الذين يحتاجون تحريكات متقدمة وتصاميم خاصة.", "tier-vip-desc": "الخبرة المتميزة المطلقة مع عناصر ثلاثية الأبعاد.", "select-plan": "اختر الباقة", "cat-view-sub": "المجموعة", "add-cart": "إضافة للسلة", "try-demo": "تجربة العرض" }
+    en: { "nav-bundles": "Bundles", "nav-packs": "Featured Packs", "nav-categories": "Categories", "hero-tag": "Digital Assets Hub", "hero-desc": "High-end VFX packs, cinematic presets & custom web experiences.", "hero-btn": "Explore Tiers", "bundle-sub": "Custom Web Solutions", "bundle-title": "WEB PAGE BUNDLES", "bundle-desc": "Launch your custom digital space today. Stand out with next-gen designs and premium performance.", "bundle-btn": "View Development Tiers", "packs-title": "Featured Packs", "packs-desc": "Swipe or drag horizontally to interact with physical 3D cards", "cat-sec-title": "Categories", "cat-sec-desc": "Select a category to explore editing packs.", "footer-right": "Crafted for the bold.", "tiers-sub": "Web Solutions", "tiers-title": "Development Tiers", "back-btn": "← Back", "tier-starter-desc": "Perfect for simple portfolios and personal landing pages.", "tier-pro-desc": "For creators needing advanced animations & custom design.", "tier-vip-desc": "The absolute premium experience with custom 3D elements.", "select-plan": "Select Plan", "cat-view-sub": "Collection", "add-cart": "Add to Cart", "try-demo": "Try Demo" },
+    ar: { "nav-bundles": "الحزم المتاحة", "nav-packs": "حزم متميزة", "nav-categories": "الأقسام الرئيسية", "hero-tag": "مركز الأصول الرقمية", "hero-desc": "حزم مؤثرات بصرية احترافية، إعدادات سينمائية مسبقة وتجارب ويب مخصصة للمبدعين.", "hero-btn": "استكشف الباقات", "bundle-sub": "حلول المواقع المخصصة", "bundle-title": "باقات تصميم الويب", "bundle-desc": "أطلق مساحتك الرقمية المخصصة اليوم. تميز بتصاميم الجيل القادم وأداء لا يضاهى.", "bundle-btn": "عرض باقات التطوير", "packs-title": "الحزم المتميزة", "packs-desc": "اسحب يميناً ويساراً للتفاعل مع البطاقات الفيزياء ثلاثية الأبعاد", "cat-sec-title": "الأقسام", "cat-sec-desc": "اختر فئة لاستكشاف الحزم المتاحة.", "footer-right": "صُنع للمبدعين والجرآء.", "tiers-sub": "حلول الويب", "tiers-title": "مستويات التطوير", "back-btn": "→ العودة", "tier-starter-desc": "مثالية للملفات الشخصية وصفحات الهبوط البسيطة.", "tier-pro-desc": "للمبدعين الذين يحتاجون تحريكات متقدمة وتصاميم خاصة.", "tier-vip-desc": "الخبرة المتميزة المطلقة مع عناصر ثلاثية الأبعاد.", "select-plan": "اختر الباقة", "cat-view-sub": "المجموعة", "add-cart": "إضافة للسلة", "try-demo": "تجربة العرض" }
   };
 
   var currentLang = 'en';
 
   window.toggleLanguage = function () {
-    try {
-      currentLang = currentLang === 'en' ? 'ar' : 'en';
-      document.documentElement.setAttribute('dir', currentLang === 'ar' ? 'rtl' : 'ltr');
-      document.documentElement.setAttribute('lang', currentLang);
-      var dict = translations[currentLang] || {};
-      var els = document.querySelectorAll('[data-i18n]');
-      for (var i = 0; i < els.length; i++) {
-        var key = els[i].getAttribute('data-i18n');
-        if (dict[key]) els[i].textContent = dict[key];
-      }
-    } catch (err) {
-      console.error('toggleLanguage failed:', err);
+    currentLang = currentLang === 'en' ? 'ar' : 'en';
+    document.documentElement.setAttribute('dir', currentLang === 'ar' ? 'rtl' : 'ltr');
+    document.documentElement.setAttribute('lang', currentLang);
+    var dict = translations[currentLang] || {};
+    var els = document.querySelectorAll('[data-i18n]');
+    for (var i = 0; i < els.length; i++) {
+      var key = els[i].getAttribute('data-i18n');
+      if (dict[key]) els[i].textContent = dict[key];
     }
   };
 
-  /* ---------- theme ---------- */
   window.toggleTheme = function () {
-    try {
-      var root = document.documentElement;
-      root.classList.toggle('dark');
-      root.classList.toggle('light');
-    } catch (err) {
-      console.error('toggleTheme failed:', err);
-    }
+    var root = document.documentElement;
+    root.classList.toggle('dark');
+    root.classList.toggle('light');
   };
 
-  /* ---------- toast ---------- */
   window.showToast = function (msg) {
-    try {
-      var box = document.getElementById('toast-box');
-      if (!box) return;
-      var toast = document.createElement('div');
-      toast.className = 'glass bg-black/90 text-white text-[10px] uppercase font-bold tracking-widest px-6 py-3.5 rounded-full flex items-center gap-2';
-      toast.innerHTML = '<span class="text-purple-400">✦</span> ' + msg;
-      box.appendChild(toast);
-      setTimeout(function () {
-        if (toast && toast.parentNode) toast.parentNode.removeChild(toast);
-      }, 2500);
-    } catch (err) {
-      console.error('showToast failed:', err);
-    }
+    var box = document.getElementById('toast-box');
+    if (!box) return;
+    var toast = document.createElement('div');
+    toast.className = 'glass bg-black/90 text-white text-[10px] uppercase font-bold tracking-widest px-6 py-3.5 rounded-full flex items-center gap-2';
+    toast.innerHTML = '<span class="text-purple-400">✦</span> ' + msg;
+    box.appendChild(toast);
+    setTimeout(function () {
+      if (toast && toast.parentNode) toast.parentNode.removeChild(toast);
+    }, 2500);
   };
 
-  /* ---------- preview modal ---------- */
   window.openPreview = function (title, tag) {
-    try {
-      var titleEl = document.getElementById('preview-title');
-      var tagEl = document.getElementById('preview-tag');
-      var modal = document.getElementById('preview-modal');
-      if (titleEl) titleEl.textContent = title;
-      if (tagEl) tagEl.textContent = tag;
-      if (modal) modal.classList.remove('opacity-0', 'pointer-events-none');
-    } catch (err) {
-      console.error('openPreview failed:', err);
-    }
+    var titleEl = document.getElementById('preview-title');
+    var tagEl = document.getElementById('preview-tag');
+    var modal = document.getElementById('preview-modal');
+    if (titleEl) titleEl.textContent = title;
+    if (tagEl) tagEl.textContent = tag;
+    if (modal) modal.classList.remove('opacity-0', 'pointer-events-none');
   };
 
   window.closePreview = function () {
-    try {
-      var modal = document.getElementById('preview-modal');
-      if (modal) modal.classList.add('opacity-0', 'pointer-events-none');
-    } catch (err) {
-      console.error('closePreview failed:', err);
-    }
+    var modal = document.getElementById('preview-modal');
+    if (modal) modal.classList.add('opacity-0', 'pointer-events-none');
   };
 
-  /* ---------- categories ---------- */
   var CATEGORY_DATA = {
     CC: ['Teal & Orange Grade', 'Cinematic Film Base', 'Dark Knight Grade'],
     SHAKE: ['Hard Impact Shake', 'Bass Drop Bounce', 'Smooth Whip Pan'],
     XML: ['Pro Intro Template', 'Velocity Edit XML', 'Glow Shake Timeline']
   };
 
-  function escapeAttr(str) {
-    return String(str).replace(/'/g, "\\'");
-  }
-
   window.showView = function (viewId) {
-    try {
-      var views = document.querySelectorAll('.view');
-      for (var i = 0; i < views.length; i++) views[i].classList.add('view-hidden');
-      var target = document.getElementById(viewId);
-      if (target) target.classList.remove('view-hidden');
-      window.scrollTo({ top: 0, behavior: 'instant' });
-    } catch (err) {
-      console.error('showView failed:', err);
-    }
+    var views = document.querySelectorAll('.view');
+    for (var i = 0; i < views.length; i++) views[i].classList.add('view-hidden');
+    var target = document.getElementById(viewId);
+    if (target) target.classList.remove('view-hidden');
+    window.scrollTo({ top: 0, behavior: 'instant' });
   };
 
   window.openCategory = function (key) {
-    try {
-      var titleEl = document.getElementById('cat-title');
-      var gridEl = document.getElementById('cat-grid');
-      if (titleEl) titleEl.textContent = key;
-      var items = CATEGORY_DATA[key] || [];
-      var html = '';
-      for (var i = 0; i < items.length; i++) {
-        var item = items[i];
-        html += '<div onclick="window.openPreview(\'' + escapeAttr(item) + '\', \'' + escapeAttr(key) + '\')" class="cat-card-glass flex flex-col justify-between min-h-[140px] text-left border-l-4 border-purple-500">' +
-                  '<span class="text-[10px] font-bold uppercase text-purple-400">' + key + ' Pack</span>' +
-                  '<h3 class="font-head font-bold text-xl mt-4">' + item + '</h3>' +
-                '</div>';
-      }
-      if (gridEl) gridEl.innerHTML = html;
-      window.showView('category-view');
-    } catch (err) {
-      console.error('openCategory failed:', err);
+    var titleEl = document.getElementById('cat-title');
+    var gridEl = document.getElementById('cat-grid');
+    if (titleEl) titleEl.textContent = key;
+    var items = CATEGORY_DATA[key] || [];
+    var html = '';
+    for (var i = 0; i < items.length; i++) {
+      html += '<div onclick="window.openPreview(\'' + items[i] + '\', \'' + key + '\')" class="cat-card-glass flex flex-col justify-between min-h-[140px] text-left border-l-4 border-purple-500">' +
+                '<span class="text-[10px] font-bold uppercase text-purple-400">' + key + ' Pack</span>' +
+                '<h3 class="font-head font-bold text-xl mt-4">' + items[i] + '</h3>' +
+              '</div>';
     }
+    if (gridEl) gridEl.innerHTML = html;
+    window.showView('category-view');
   };
 
   window.openWebTiers = function () { window.showView('web-view'); };
   window.backToHome  = function () { window.showView('main-view'); };
-
   window.scrollToId = function (id) {
-    try {
-      var el = document.getElementById(id);
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
-    } catch (err) {
-      console.error('scrollToId failed:', err);
-    }
-  };
-
-  window.scrollToCategory = function (catKey) {
-    try {
-      var targetEl = document.getElementById('cat-card-' + catKey);
-      if (targetEl) targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    } catch (err) {
-      console.error('scrollToCategory failed:', err);
-    }
+    var el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
 
   var yr = document.getElementById('year');
   if (yr) yr.textContent = new Date().getFullYear();
-
 })();
 </script>
 
 <!-- ============================================================
-     3D COVERFLOW — CSS/JS STRICT LOCAL RENDER (NO MP4 LINKS)
+     3D HORIZONTAL PHYSICAL TOUCH CAROUSEL ENGINE
      ============================================================ -->
 <script>
 (function () {
   "use strict";
 
-  function init() {
-    try {
-      initCoverflow();
-    } catch (err) {
-      console.error('Coverflow init failed:', err);
+  var CARDS_DATA = [
+    {
+      title: "BLACK VIP",
+      tag: "VFX PACK",
+      number: "•••• 8829",
+      bg: "linear-gradient(135deg, #09090b 0%, #18181b 50%, #27272a 100%)",
+      border: "rgba(255, 255, 255, 0.2)",
+      chip: "linear-gradient(135deg, #e2e8f0, #94a3b8)"
+    },
+    {
+      title: "ROYAL GOLD",
+      tag: "COLOR GRADE",
+      number: "•••• 4021",
+      bg: "linear-gradient(135deg, #451a03 0%, #78350f 50%, #b45309 100%)",
+      border: "rgba(251, 191, 36, 0.4)",
+      chip: "linear-gradient(135deg, #fef08a, #ca8a04)"
+    },
+    {
+      title: "CYBER CYAN",
+      tag: "PRESET FILE",
+      number: "•••• 9102",
+      bg: "linear-gradient(135deg, #083344 0%, #0e7490 50%, #06b6d4 100%)",
+      border: "rgba(34, 211, 238, 0.4)",
+      chip: "linear-gradient(135deg, #cffafe, #0891b2)"
+    },
+    {
+      title: "NEON PURPLE",
+      tag: "VELOCITY XML",
+      number: "•••• 7731",
+      bg: "linear-gradient(135deg, #3b0764 0%, #6b21a8 50%, #9333ea 100%)",
+      border: "rgba(192, 132, 252, 0.4)",
+      chip: "linear-gradient(135deg, #f3e8ff, #7e22ce)"
+    },
+    {
+      title: "EMERALD 3D",
+      tag: "CAMERA SHAKE",
+      number: "•••• 5510",
+      bg: "linear-gradient(135deg, #022c22 0%, #065f46 50%, #059669 100%)",
+      border: "rgba(52, 211, 153, 0.4)",
+      chip: "linear-gradient(135deg, #d1fae5, #059669)"
+    },
+    {
+      title: "SAPPHIRE PRO",
+      tag: "OVERLAY LUT",
+      number: "•••• 1198",
+      bg: "linear-gradient(135deg, #172554 0%, #1e40af 50%, #2563eb 100%)",
+      border: "rgba(96, 165, 250, 0.4)",
+      chip: "linear-gradient(135deg, #dbeafe, #1d4ed8)"
     }
-  }
+  ];
 
-  function initCoverflow() {
-    var viewport = document.getElementById('card-viewport');
-    var proxy = document.getElementById('interaction-proxy');
-    if (!viewport || !proxy) return;
+  var stage = document.getElementById('carousel-stage');
+  var track = document.getElementById('carousel-track');
+  if (!stage || !track) return;
 
-    var CARD_DETAILS = [
-      { tag: 'VFX',     title: 'RED INFERNO',  grad: 'linear-gradient(145deg, #4c0519 0%, #7f1d1d 35%, #1a0508 100%)' },
-      { tag: 'COLOR',   title: 'CYBER GOLD',   grad: 'linear-gradient(145deg, #451a03 0%, #a16207 35%, #1c0a02 100%)' },
-      { tag: 'CAMERA',  title: 'NEON NIGHTS',  grad: 'linear-gradient(145deg, #3b0764 0%, #7e22ce 35%, #120321 100%)' },
-      { tag: 'PRESETS', title: 'HYPER BLUE',   grad: 'linear-gradient(145deg, #082f49 0%, #0369a1 35%, #041420 100%)' },
-      { tag: 'LUT',     title: 'DARK MATTER',  grad: 'linear-gradient(145deg, #18181b 0%, #3f3f46 35%, #09090b 100%)' }
-    ];
+  var cards = [];
+  var N = CARDS_DATA.length;
+  var currentIndex = 0;
+  var targetIndex = 0;
 
-    var cardCount = CARD_DETAILS.length;
-    var cardW = 260;
-    var cardH = 360;
+  // Physics Vars
+  var isDragging = false;
+  var startX = 0;
+  var currentX = 0;
+  var dragDeltaX = 0;
+  var velocityX = 0;
+  var lastX = 0;
+  var lastTime = 0;
 
-    var cards = [];
-    viewport.innerHTML = '';
-    for (var i = 0; i < cardCount; i++) {
-      var details = CARD_DETAILS[i % CARD_DETAILS.length];
+  // Render & Build Cards
+  function buildCards() {
+    track.innerHTML = '';
+    cards = [];
 
-      var el = document.createElement('div');
-      el.className = 'coverflow-card rounded-[24px] overflow-hidden border-2 border-white/25 backface-hidden';
-      el.style.width = cardW + 'px';
-      el.style.height = cardH + 'px';
-      el.style.background = details.grad;
-      el.style.boxShadow = 'inset 0 1px 1px rgba(255,255,255,0.2), 0 25px 50px -12px rgba(0,0,0,0.8), 0 0 0 1px rgba(0,0,0,0.4)';
-      el.style.pointerEvents = 'auto';
-      el.style.cursor = 'pointer';
+    CARDS_DATA.forEach(function (data, i) {
+      var card = document.createElement('div');
+      card.className = 'card-3d';
+      card.style.background = data.bg;
+      card.style.border = '1px solid ' + data.border;
 
-      var safeTitle = String(details.title).replace(/'/g, "\\'");
-      var safeTag = String(details.tag).replace(/'/g, "\\'");
-      el.setAttribute('onclick', "window.openPreview('" + safeTitle + "', '" + safeTag + "')");
-
-      el.innerHTML =
-        '<div class="absolute inset-0 p-5 text-white h-full w-full font-sans z-10 bg-black/15 flex flex-col justify-between pointer-events-none">' +
-          '<div class="flex justify-between items-start w-full">' +
-            '<span class="text-[10px] uppercase font-bold px-3 py-1 rounded-full border border-white/30 bg-black/40 text-white backdrop-blur-md">' + details.tag + '</span>' +
-            '<h3 class="font-head font-bold text-lg text-right tracking-wider text-white drop-shadow-md force-eng">' + details.title + '</h3>' +
+      card.innerHTML = 
+        '<div class="glass-sheen"></div>' +
+        '<div class="p-6 h-full flex flex-col justify-between text-white relative z-10 pointer-events-none">' +
+          '<div class="flex justify-between items-start">' +
+            '<div>' +
+              '<p class="text-[10px] font-bold tracking-widest uppercase opacity-75">' + data.tag + '</p>' +
+              '<h3 class="font-head font-extrabold text-xl tracking-wider force-eng mt-1">' + data.title + '</h3>' +
+            '</div>' +
+            '<span class="font-head font-bold text-xs opacity-60">VORTX</span>' +
           '</div>' +
-          '<div class="flex justify-between items-center w-full my-auto">' +
-            '<svg class="w-8 h-8 opacity-90" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">' +
-              '<rect x="4" y="14" width="52" height="34" rx="6" fill="url(#chip_grad_' + i + ')" />' +
-              '<defs><linearGradient id="chip_grad_' + i + '" x1="30" y1="14" x2="30" y2="48" gradientUnits="userSpaceOnUse"><stop stop-color="white"/><stop offset="1" stop-color="#999999"/></linearGradient></defs>' +
-            '</svg>' +
-            '<div class="flex -space-x-3 items-center opacity-90">' +
-              '<div class="w-6 h-6 rounded-full bg-white/20 backdrop-blur-[1px] border border-white/10"></div>' +
-              '<div class="w-6 h-6 rounded-full bg-white/35 backdrop-blur-[1px] border border-white/10"></div>' +
+          '<div class="my-auto flex items-center justify-between">' +
+            '<div class="w-10 h-7 rounded-md" style="background:' + data.chip + '"></div>' +
+            '<div class="flex -space-x-2 opacity-80">' +
+              '<div class="w-6 h-6 rounded-full bg-white/20 border border-white/30 backdrop-blur-sm"></div>' +
+              '<div class="w-6 h-6 rounded-full bg-white/40 border border-white/30 backdrop-blur-sm"></div>' +
             '</div>' +
           '</div>' +
-          '<div class="w-full flex justify-between items-end opacity-95">' +
-            '<span class="font-mono text-[13px] tracking-widest text-white/90">VORTX•CARD</span>' +
-            '<span class="font-head font-bold text-sm tracking-wider force-eng">VIP</span>' +
+          '<div class="flex justify-between items-end font-mono text-sm tracking-widest opacity-90">' +
+            '<span>' + data.number + '</span>' +
+            '<span class="font-head font-bold text-xs">PHYSICAL 3D</span>' +
           '</div>' +
         '</div>';
 
-      viewport.appendChild(el);
-      cards.push(el);
-    }
-
-    var current = 0;
-    var targetVelocity = 0;
-    var isPointerDown = false;
-    var pointerStartX = 0;
-    var pointerStartCurrent = 0;
-    var lastPointerX = 0;
-    var lastPointerT = 0;
-    var lastMoveVelocity = 0;
-    var raf = null;
-
-    var DRAG_TO_INDEX = 1 / 140;
-    var FRICTION = 0.93;
-    var SNAP_STRENGTH = 0.12;
-    var AUTO_SPEED = 0.00028;
-    var IDLE_BEFORE_AUTOPLAY = 2600;
-    var lastInteractionT = performance.now();
-
-    function wrapDelta(d) {
-      d = d % cardCount;
-      if (d > cardCount / 2) d -= cardCount;
-      if (d < -cardCount / 2) d += cardCount;
-      return d;
-    }
-
-    function render() {
-      for (var i = 0; i < cardCount; i++) {
-        var el = cards[i];
-        var rel = wrapDelta(i - current);
-        var absRel = Math.abs(rel);
-
-        var visible = absRel < 2.6;
-        if (!visible) {
-          el.style.opacity = '0';
-          el.style.zIndex = '0';
-          el.style.pointerEvents = 'none';
-          continue;
+      card.addEventListener('click', function () {
+        if (Math.abs(dragDeltaX) < 8) {
+          if (i === Math.round(currentIndex)) {
+            window.openPreview(data.title, data.tag);
+          } else {
+            targetIndex = i;
+          }
         }
+      });
 
-        var translateX = rel * (cardW * 0.62);
-        var translateZ = -Math.abs(rel) * 180;
-        var rotateY = Math.max(-58, Math.min(58, rel * -42));
-        var scale = 1 - Math.min(0.32, absRel * 0.16);
-        var opacity = 1 - Math.min(0.85, absRel * 0.42);
+      track.appendChild(card);
+      cards.push(card);
+    });
+  }
 
-        el.style.transform =
-          'translateX(' + translateX.toFixed(2) + 'px) ' +
-          'translateZ(' + translateZ.toFixed(2) + 'px) ' +
-          'rotateY(' + rotateY.toFixed(2) + 'deg) ' +
-          'scale(' + scale.toFixed(3) + ')';
-        el.style.opacity = String(opacity);
-        el.style.zIndex = String(Math.round(1000 - absRel * 10));
-        el.style.pointerEvents = absRel < 0.5 ? 'auto' : 'none';
-      }
-    }
+  function updateTransform() {
+    var spacing = 220; // Horizontal spacing between cards
+    
+    cards.forEach(function (card, i) {
+      var offset = i - currentIndex;
+      var absOffset = Math.abs(offset);
 
-    function loop(now) {
-      if (typeof now !== 'number') now = performance.now();
+      // Calculations for 3D Curve
+      var posX = offset * spacing;
+      var posZ = -absOffset * 180;
+      var rotY = Math.max(-60, Math.min(60, offset * -28));
+      var scale = Math.max(0.65, 1 - absOffset * 0.15);
+      var opacity = Math.max(0, 1 - absOffset * 0.35);
 
-      if (isPointerDown) {
-      } else if (Math.abs(targetVelocity) > 0.0002) {
-        current += targetVelocity;
-        targetVelocity *= FRICTION;
-        lastInteractionT = now;
-      } else {
-        var nearest = Math.round(current);
-        var diff = nearest - current;
-        if (Math.abs(diff) > 0.0005) {
-          current += diff * SNAP_STRENGTH;
-        } else {
-          current = nearest;
-        }
-
-        if (now - lastInteractionT > IDLE_BEFORE_AUTOPLAY) {
-          current += AUTO_SPEED * 16.7;
-        }
-      }
-
-      render();
-      raf = requestAnimationFrame(loop);
-    }
-
-    function onPointerDown(e) {
-      isPointerDown = true;
-      targetVelocity = 0;
-      lastInteractionT = performance.now();
-      var point = (e.touches && e.touches[0]) ? e.touches[0] : e;
-      pointerStartX = point.clientX;
-      pointerStartCurrent = current;
-      lastPointerX = point.clientX;
-      lastPointerT = performance.now();
-      lastMoveVelocity = 0;
-      proxy.setPointerCapture && e.pointerId !== undefined && proxy.setPointerCapture(e.pointerId);
-    }
-
-    function onPointerMove(e) {
-      if (!isPointerDown) return;
-      var point = (e.touches && e.touches[0]) ? e.touches[0] : e;
-      var dx = point.clientX - pointerStartX;
-      current = pointerStartCurrent - dx * DRAG_TO_INDEX;
-
-      var now = performance.now();
-      var dt = now - lastPointerT;
+      card.style.transform = 
+        'translateX(' + posX.toFixed(2) + 'px) ' +
+        'translateZ(' + posZ.toFixed(2) + 'px) ' +
+        'rotateY(' + rotY.toFixed(2) + 'deg) ' +
+        'scale(' + scale.toFixed(3) + ')';
       
+      card.style.opacity = opacity.toFixed(3);
+      card.style.zIndex = Math.round(100 - absOffset * 10);
+      card.style.pointerEvents = absOffset < 2.5 ? 'auto' : 'none';
+    });
+  }
+
+  // Animation Loop
+  function animate() {
+    if (!isDragging) {
+      currentIndex += (targetIndex - currentIndex) * 0.1;
+    } else {
+      currentIndex += (targetIndex - currentIndex) * 0.3;
+    }
+
+    // Wrap continuous scrolling
+    if (targetIndex < 0) targetIndex = N - 1;
+    if (targetIndex >= N) targetIndex = 0;
+
+    updateTransform();
+    requestAnimationFrame(animate);
+  }
+
+  // Touch & Drag Handling
+  function onPointerDown(e) {
+    isDragging = true;
+    startX = e.clientX || (e.touches && e.touches[0].clientX);
+    lastX = startX;
+    dragDeltaX = 0;
+    velocityX = 0;
+    lastTime = performance.now();
+  }
+
+  function onPointerMove(e) {
+    if (!isDragging) return;
+    currentX = e.clientX || (e.touches && e.touches[0].clientX);
+    var deltaX = currentX - lastX;
+    dragDeltaX += currentX - startX;
+
+    targetIndex -= deltaX / 220;
+
+    var now = performance.now();
+    var dt = now - lastTime;
+    if (dt > 0) {
+      velocityX = deltaX / dt;
+    }
+
+    lastX = currentX;
+    lastTime = now;
+  }
+
+  function onPointerUp() {
+    if (!isDragging) return;
+    isDragging = false;
+
+    // Inertia & Snap To Center
+    targetIndex -= velocityX * 1.5;
+    targetIndex = Math.round(targetIndex);
+
+    if (targetIndex < 0) targetIndex = 0;
+    if (targetIndex >= N) targetIndex = N - 1;
+  }
+
+  stage.addEventListener('mousedown', onPointerDown);
+  window.addEventListener('mousemove', onPointerMove);
+  window.addEventListener('mouseup', onPointerUp);
+
+  stage.addEventListener('touchstart', onPointerDown, { passive: true });
+  window.addEventListener('touchmove', onPointerMove, { passive: true });
+  window.addEventListener('touchend', onPointerUp);
+
+  // Wheel horizontal navigation
+  stage.addEventListener('wheel', function (e) {
+    e.preventDefault();
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
+      targetIndex += e.deltaX > 0 ? 0.4 : -0.4;
+    } else {
+      targetIndex += e.deltaY > 0 ? 0.4 : -0.4;
+    }
+    targetIndex = Math.round(targetIndex);
+  }, { passive: false });
+
+  buildCards();
+  animate();
+})();
+</script>
+
+</body>
+</html>
