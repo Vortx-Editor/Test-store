@@ -4,9 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-select=none" />
 <title>VORTX — Premium Digital Assets</title>
-<meta name="description" content="VORTX — high-end VFX packs, cinematic color grades, camera-shake presets, and custom web development bundles for elite creators." />
 <meta name="theme-color" content="#09090c" />
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90' fill='%23a855f7'%3EV%3C/text%3E%3C/svg%3E">
 
 <!-- Tailwind CSS CDN v4 -->
 <script src="https://cdn.tailwindcss.com"></script>
@@ -79,12 +77,14 @@
     scroll-behavior: smooth;
   }
 
+  /* Hardware Acceleration for 120Hz Smoothness */
   .reveal-on-scroll, .card-3d, .cat-card-glass, .tier-card, header {
     transform: translateZ(0);
     backface-visibility: hidden;
     perspective: 1000px;
   }
 
+  /* Slow & Luxurious Scroll Reveal Stagger */
   .reveal-on-scroll {
     opacity: 0;
     transform: translateY(45px);
@@ -97,6 +97,7 @@
     transform: translateY(0);
   }
 
+  /* Light Mode Color Fixes */
   html.light p, html.light span, html.light h2, html.light h3, html.light h4 {
     color: var(--text-color);
   }
@@ -104,6 +105,7 @@
   html.light .text-slate-300 { color: #334155 !important; }
   html.light .text-purple-300, html.light .text-purple-400 { color: #6b21a8 !important; }
 
+  html.vx-loading, html.vx-loading body { overflow: hidden !important; height: 100%; }
   html[dir="rtl"] body { font-family: 'Cairo', sans-serif; }
   h1, h2, h3, .font-head { font-family: 'Cinzel', serif; letter-spacing: 1.5px; }
   html[dir="rtl"] h1, html[dir="rtl"] h2, html[dir="rtl"] h3, html[dir="rtl"] .font-head { font-family: 'Cairo', sans-serif; letter-spacing: 0; }
@@ -116,6 +118,7 @@
     display: inline-block;
   }
 
+  /* Stars Background Animation */
   .stars-background-container { position: fixed; inset: 0; width: 100vw; height: 100vh; background: var(--star-bg); overflow: hidden; z-index: 0; pointer-events: none; transition: background .4s ease; }
   #stars, #stars2, #stars3 { position: absolute; top: 0; left: 0; background: transparent; opacity: var(--star-opacity); transition: opacity .4s ease; }
   #stars { width: 1px; height: 1px; box-shadow: 501px 811px #fff, 1450px 1324px #fff, 1093px 1780px #fff, 1469px 678px #fff, 904px 741px #fff, 1160px 781px #fff; animation: animStar 50s linear infinite; }
@@ -123,6 +126,7 @@
   #stars3 { width: 3px; height: 3px; box-shadow: 200px 981px #fff, 1731px 521px #fff, 132px 1039px #fff; animation: animStar 150s linear infinite; }
   @keyframes animStar { from { transform: translateY(0); } to { transform: translateY(-2000px); } }
 
+  /* Title Shines */
   .vortx-wet-oil-title {
     display: inline-block; font-weight: 900;
     background: linear-gradient(110deg, #ffffff 0%, #f3e8ff 20%, #ffffff 35%, #c084fc 50%, #ffffff 65%, #7e22ce 80%, #ffffff 100%);
@@ -140,12 +144,14 @@
   }
   @keyframes goldShine { 0% { background-position: 220% 0; } 100% { background-position: -220% 0; } }
 
+  /* Theme Switcher */
   .theme-switch-btn { width: 64px; height: 34px; border-radius: 999px; background: linear-gradient(135deg,#1e1b4b,#311042); border: 1px solid rgba(168,85,247,.4); position: relative; cursor: pointer; padding: 3px; transition: all .4s ease; display: flex; align-items: center; }
   html.light .theme-switch-btn { background: linear-gradient(135deg,#38bdf8,#fde047); border-color: rgba(56,189,248,.6); }
   .theme-switch-ball { width: 26px; height: 26px; border-radius: 50%; position: absolute; top: 3px; left: 3px; transition: transform .4s ease; display: flex; align-items: center; justify-content: center; }
   html.dark .theme-switch-ball { transform: translateX(0); background: #e2e8f0; }
   html.light .theme-switch-ball { transform: translateX(30px); background: #fef08a; }
 
+  /* Buttons */
   .button-wrap { position: relative; z-index: 10; border-radius: 999vw; background: transparent; cursor: pointer; display: inline-block; transition: all var(--anim--hover-time) var(--anim--hover-ease); }
   .button-shadow { --shadow-cuttoff-fix: 2em; position: absolute; width: calc(100% + var(--shadow-cuttoff-fix)); height: calc(100% + var(--shadow-cuttoff-fix)); top: calc(0% - var(--shadow-cuttoff-fix) / 2); left: calc(0% - var(--shadow-cuttoff-fix) / 2); filter: blur(clamp(2px,.125em,12px)); overflow: visible; pointer-events: none; }
   .button-shadow::after { content: ""; position: absolute; z-index: 0; inset: 0; border-radius: 999vw; background: linear-gradient(180deg, rgba(168,85,247,.3), rgba(0,0,0,.2)); width: calc(100% - var(--shadow-cuttoff-fix) - .25em); height: calc(100% - var(--shadow-cuttoff-fix) - .25em); top: calc(var(--shadow-cuttoff-fix) - .5em); left: calc(var(--shadow-cuttoff-fix) - .875em); padding: .125em; box-sizing: border-box; mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); mask-composite: exclude; opacity: 1; }
@@ -153,6 +159,7 @@
   .btn-3d-style:hover { transform: scale(.975); }
   .btn-3d-style span { position: relative; display: block; user-select: none; font-weight: 800; font-size: .9em; color: var(--btn-text-color); text-shadow: 0 .15em .1em rgba(0,0,0,.2); padding-inline: 2em; padding-block: .9em; text-transform: uppercase; }
 
+  /* 3D Carousel */
   .perspective-container { perspective: 1350px; }
   .preserve-3d { transform-style: preserve-3d; }
   .card-3d {
@@ -176,172 +183,125 @@
   .view { transition: opacity .4s ease; opacity: 1; display: block; }
   .view-hidden { display: none !important; opacity: 0; }
 
-  a, button, [role="button"], [tabindex] { outline: none; }
-  a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]:focus-visible {
-    outline: 2px solid var(--brandLight);
-    outline-offset: 3px;
-    border-radius: 8px;
-  }
-  .skip-link {
-    position: fixed; top: -60px; left: 1rem; z-index: 999998;
-    background: var(--brand); color: #fff; padding: .75rem 1.25rem; border-radius: .75rem;
-    font-weight: 700; font-size: .8rem; text-transform: uppercase; letter-spacing: .05em;
-    transition: top .3s ease;
-  }
-  .skip-link:focus { top: 1rem; }
+  /* Luxury Loader & Letter Drop Animation */
+  #vx-loader { position: fixed; inset: 0; z-index: 999999; background: #050508; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; transition: opacity 0.8s cubic-bezier(0.4,0,0.2,1), visibility 0.8s ease; }
+  #vx-loader.vx-hide { opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; }
+  #app-content { opacity: 0; filter: blur(20px); transform: scale(1.03); transition: opacity 1s cubic-bezier(0.16,1,0.3,1), filter 1s cubic-bezier(0.16,1,0.3,1), transform 1s cubic-bezier(0.16,1,0.3,1); }
+  #app-content.vx-revealed { opacity: 1; filter: blur(0); transform: scale(1); }
+  
+  .vx-ambient-glow { position: absolute; width: min(80vw,900px); height: min(80vw,900px); border-radius: 50%; background: radial-gradient(circle, rgba(168,85,247,0.4) 0%, rgba(126,34,206,0.15) 45%, transparent 70%); filter: blur(60px); animation: vxGlowPulse 4s ease-in-out infinite; }
+  @keyframes vxGlowPulse { 0%,100% { transform: scale(0.9); opacity: 0.5; } 50% { transform: scale(1.1); opacity: 0.9; } }
 
-  #scroll-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0%; z-index: 60; background: linear-gradient(90deg, #7e22ce, #a855f7, #f3e8ff); box-shadow: 0 0 12px rgba(168,85,247,.8); transition: width .1s linear; }
-
-  header nav { transition: background-color .4s ease, box-shadow .4s ease, padding .4s ease; }
-  header.vx-scrolled nav { box-shadow: 0 10px 30px rgba(0,0,0,.35); }
-  header.vx-scrolled .header-inner { height: 68px; }
-  .header-inner { transition: height .35s ease; }
-
-  .nav-link { position: relative; padding-bottom: 4px; }
-  .nav-link::after {
-    content: ""; position: absolute; left: 0; bottom: -2px; width: 0%; height: 2px;
-    background: linear-gradient(90deg, var(--brand), var(--brandLight)); border-radius: 2px;
-    transition: width .35s cubic-bezier(.16,1,.3,1);
-  }
-  .nav-link:hover::after, .nav-link.active::after { width: 100%; }
-  .nav-link.active { color: var(--brandLight); }
-
-  #mobile-menu-btn { display: none; }
-  #mobile-menu {
-    position: fixed; inset: 0; z-index: 49; background: rgba(5,5,8,.97); backdrop-filter: blur(20px);
-    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2.25rem;
-    opacity: 0; pointer-events: none; transform: translateY(-12px);
-    transition: opacity .4s cubic-bezier(.16,1,.3,1), transform .4s cubic-bezier(.16,1,.3,1);
-  }
-  html.light #mobile-menu { background: rgba(241,245,249,.97); }
-  #mobile-menu.vx-open { opacity: 1; pointer-events: auto; transform: translateY(0); }
-  #mobile-menu a { font-family: 'Cinzel', serif; font-size: 1.5rem; font-weight: 800; letter-spacing: .1em; }
-  html[dir="rtl"] #mobile-menu a { font-family: 'Cairo', sans-serif; letter-spacing: 0; }
-  @media (max-width: 767px) {
-    #mobile-menu-btn { display: flex; }
+  .vx-logo-word { display: flex; font-family: 'Cinzel', serif; font-weight: 900; font-size: clamp(3.5rem, 13vw, 7rem); letter-spacing: 0.25em; line-height: 1; position: relative; z-index: 2; perspective: 1000px; }
+  .vx-letter { display: inline-block; background: linear-gradient(135deg, #fff 0%, #f3e8ff 30%, #c084fc 65%, #7e22ce 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; opacity: 0; transform: translateY(-70px) rotateX(45deg) scale(1.4); filter: blur(12px); animation: vxLetterDrop 0.9s cubic-bezier(0.19, 1, 0.22, 1) forwards; animation-delay: var(--ld, 0s); }
+  @keyframes vxLetterDrop { 
+    0% { opacity: 0; transform: translateY(-70px) rotateX(45deg) scale(1.4); filter: blur(12px); } 
+    60% { opacity: 0.9; transform: translateY(8px) rotateX(-10deg) scale(0.95); filter: blur(1px); } 
+    100% { opacity: 1; transform: translateY(0) rotateX(0) scale(1); filter: drop-shadow(0 15px 30px rgba(126,34,206,0.5)); } 
   }
 
-  .card_title__container { display: flex; flex-direction: column; gap: .75rem; }
-  .card_title {
-    font-family: 'Cinzel', serif; font-weight: 800; font-size: 1.5rem; letter-spacing: .15em;
-    color: var(--text-color);
-  }
-  .card_paragraph { font-size: .9rem; font-weight: 600; line-height: 1.6; opacity: .75; }
-
-  .tier-card { position: relative; }
-  .tier-card::before {
-    content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1px;
-    background: linear-gradient(135deg, rgba(168,85,247,.5), transparent 40%, transparent 60%, rgba(168,85,247,.25));
-    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor; mask-composite: exclude;
-    opacity: 0; transition: opacity .4s ease; pointer-events: none;
-  }
-  .tier-card:hover { transform: translateY(-8px); box-shadow: 0 25px 50px -12px rgba(126,34,206,.35); }
-  .tier-card:hover::before { opacity: 1; }
-  .tier-card.tier-featured { border-color: rgba(234,179,8,.4); transform: translateY(-4px) scale(1.02); }
-  .tier-price { font-family: 'JetBrains Mono', monospace; font-weight: 800; }
-  .tier-feature-list { display: flex; flex-direction: column; gap: .6rem; }
-  .tier-feature-list li { display: flex; align-items: center; gap: .6rem; font-size: .82rem; font-weight: 600; opacity: .85; }
-  .tier-feature-list li svg { flex-shrink: 0; color: var(--brandLight); }
-  .tier-badge {
-    position: absolute; top: 1.25rem; right: 1.25rem; font-size: .65rem; font-weight: 800;
-    letter-spacing: .1em; text-transform: uppercase; padding: .35rem .75rem; border-radius: 999px;
-    background: linear-gradient(100deg, #fff7d6, #eab308); color: #422006;
-  }
-  html[dir="rtl"] .tier-badge { right: auto; left: 1.25rem; }
-
-  .cat-card-glass { position: relative; overflow: hidden; }
-  .cat-card-glass::after {
-    content: ""; position: absolute; inset: 0; background: radial-gradient(circle at var(--mx,50%) var(--my,50%), rgba(168,85,247,.18), transparent 60%);
-    opacity: 0; transition: opacity .3s ease; pointer-events: none;
-  }
-  .cat-card-glass:hover::after { opacity: 1; }
-  .cat-card-glass:hover { border-color: rgba(168,85,247,.5); box-shadow: 0 15px 40px -10px rgba(126,34,206,.3); }
-  .cat-card-glass .arrow-ic { transition: transform .35s cubic-bezier(.16,1,.3,1); display: inline-block; }
-  .cat-card-glass:hover .arrow-ic { transform: translateX(6px); }
-  html[dir="rtl"] .cat-card-glass:hover .arrow-ic { transform: translateX(-6px); }
-
-  #preview-card { transform: scale(.92) translateY(20px); opacity: 0; transition: transform .35s cubic-bezier(.16,1,.3,1), opacity .35s ease; }
-  #preview-modal.vx-modal-open #preview-card { transform: scale(1) translateY(0); opacity: 1; }
-  .preview-close-btn {
-    position: absolute; top: 1rem; right: 1rem; width: 32px; height: 32px; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,.06);
-    border: 1px solid var(--card-border); cursor: pointer; transition: background .2s ease, transform .2s ease;
-  }
-  .preview-close-btn:hover { background: rgba(255,255,255,.14); transform: rotate(90deg); }
-  html[dir="rtl"] .preview-close-btn { right: auto; left: 1rem; }
-
-  @keyframes toastIn { from { opacity: 0; transform: translateY(16px) scale(.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
-  @keyframes toastOut { from { opacity: 1; transform: translateY(0) scale(1); } to { opacity: 0; transform: translateY(-10px) scale(.95); } }
-  .toast-in { animation: toastIn .35s cubic-bezier(.16,1,.3,1) forwards; }
-  .toast-out { animation: toastOut .3s ease forwards; }
-
-  #cart-btn { position: relative; }
-  #cart-count {
-    position: absolute; top: -6px; right: -6px; min-width: 18px; height: 18px; border-radius: 999px;
-    background: linear-gradient(135deg, #a855f7, #7e22ce); color: #fff; font-size: 10px; font-weight: 800;
-    display: flex; align-items: center; justify-content: center; padding: 0 4px;
-    transform: scale(0); transition: transform .3s cubic-bezier(.34,1.56,.64,1);
-  }
-  #cart-count.vx-show { transform: scale(1); }
-
-  .btn-3d-style { overflow: hidden; }
-  .vx-ripple { position: absolute; border-radius: 50%; background: rgba(255,255,255,.5); transform: scale(0); animation: rippleAnim .6s ease-out; pointer-events: none; }
-  @keyframes rippleAnim { to { transform: scale(2.6); opacity: 0; } }
-
-  @media (max-width: 480px) {
-    .card-3d { width: 240px; height: 380px; margin-left: -120px; margin-top: -190px; }
-  }
+  .vx-bar-track { width: min(80vw, 340px); height: 5px; border-radius: 999px; background: rgba(255,255,255,0.04); border: 1px solid rgba(168,85,247,0.35); margin-top: 2rem; position: relative; overflow: hidden; z-index: 2; }
+  .vx-bar-fill { height: 100%; width: 0%; border-radius: 999px; background: linear-gradient(90deg, #7e22ce, #a855f7 50%, #f3e8ff); position: relative; }
 </style>
 </head>
 
-<body>
+<body class="vx-loading">
+
+<div id="vx-loader">
+  <div class="vx-ambient-glow"></div>
+  <div class="vx-logo-word" id="vx-logo-word"></div>
+  <div class="vx-bar-track"><div class="vx-bar-fill" id="vx-bar-fill"></div></div>
+  <p class="text-xs font-bold uppercase tracking-[0.35em] text-purple-300/80 mt-5 relative z-10">
+    INITIALIZING VORTX <span id="vx-percent" class="text-purple-200">0</span>%
+  </p>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  var wordEl = document.getElementById('vx-logo-word');
+  if (wordEl) {
+    ['V', 'O', 'R', 'T', 'X'].forEach(function (ch, i) {
+      var span = document.createElement('span');
+      span.className = 'vx-letter';
+      span.textContent = ch;
+      span.style.setProperty('--ld', (0.2 + i * 0.14).toFixed(2) + 's');
+      wordEl.appendChild(span);
+    });
+  }
+
+  var barFill = document.getElementById('vx-bar-fill');
+  var percentEl = document.getElementById('vx-percent');
+  var loaderEl = document.getElementById('vx-loader');
+  var progress = 0, duration = 2100, startTime = null, finished = false, rafId = null;
+
+  function paint(p) {
+    var pct = Math.round(p);
+    if (barFill) barFill.style.width = pct + '%';
+    if (percentEl) percentEl.textContent = pct;
+  }
+
+  function finishLoader() {
+    if (finished) return;
+    finished = true;
+    if (rafId) cancelAnimationFrame(rafId);
+    paint(100);
+    setTimeout(function () {
+      if (loaderEl) {
+        loaderEl.classList.add('vx-hide');
+        setTimeout(function () { loaderEl.style.display = 'none'; }, 850);
+      }
+      var appContent = document.getElementById('app-content');
+      if (appContent) appContent.classList.add('vx-revealed');
+      document.documentElement.classList.remove('vx-loading');
+    }, 250);
+  }
+
+  function tick(now) {
+    if (finished) return;
+    if (startTime === null) startTime = now;
+    var elapsed = now - startTime;
+    progress = Math.min(100, (elapsed / duration) * 100);
+    paint(progress);
+    if (progress >= 100) { finishLoader(); return; }
+    rafId = requestAnimationFrame(tick);
+  }
+
+  rafId = requestAnimationFrame(tick);
+  setTimeout(finishLoader, 4500);
+  if (loaderEl) loaderEl.addEventListener('click', finishLoader);
+})();
+</script>
 
 <div id="app-content">
 
-  <a href="#main-content" class="skip-link">Skip to content</a>
-  <div id="scroll-progress"></div>
-
   <div class="stars-background-container"><div id="stars"></div><div id="stars2"></div><div id="stars3"></div></div>
-  <div id="toast-box" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[100] flex flex-col gap-3 pointer-events-none" aria-live="polite"></div>
+  <div id="toast-box" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[100] flex flex-col gap-3 pointer-events-none"></div>
 
-  <header id="site-header" class="sticky top-0 z-50 w-full">
-    <nav class="glass border-b-0 bg-black/40 backdrop-blur-md" aria-label="Primary">
-      <div class="header-inner max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+  <header class="sticky top-0 z-50 w-full">
+    <nav class="glass border-b-0 bg-black/40 backdrop-blur-md">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
         <a href="#top" class="flex items-center gap-3"><span class="text-2xl vortx-wet-oil-title force-eng">VORTX</span></a>
         <ul class="hidden md:flex items-center gap-10 text-sm font-bold opacity-80 mx-auto">
-          <li><a href="#bundles" data-i18n="nav-bundles" class="nav-link hover:text-brandLight transition">Bundles</a></li>
-          <li><a href="#packs" data-i18n="nav-packs" class="nav-link hover:text-brandLight transition">Featured Packs</a></li>
-          <li><a href="#categories" data-i18n="nav-categories" class="nav-link hover:text-brandLight transition">Categories</a></li>
+          <li><a href="#bundles" data-i18n="nav-bundles" class="hover:text-brandLight transition">Bundles</a></li>
+          <li><a href="#packs" data-i18n="nav-packs" class="hover:text-brandLight transition">Featured Packs</a></li>
+          <li><a href="#categories" data-i18n="nav-categories" class="hover:text-brandLight transition">Categories</a></li>
         </ul>
         <div class="flex items-center gap-3 relative z-50">
-          <button type="button" id="cart-btn" onclick="window.showToast('CART OPENED')" aria-label="View cart" class="glass w-10 h-10 rounded-full flex items-center justify-center border-purple-500/30 text-brandLight cursor-pointer hover:bg-white/10 transition">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m-10-4h10m-9 8a1 1 0 11-2 0 1 1 0 012 0zm10 0a1 1 0 11-2 0 1 1 0 012 0z"/></svg>
-            <span id="cart-count">0</span>
-          </button>
-          <button type="button" onclick="window.toggleLanguage()" aria-label="Toggle language" class="glass w-10 h-10 rounded-full flex items-center justify-center border-purple-500/30 text-brandLight font-extrabold text-xs cursor-pointer hover:bg-white/10 transition">🌐</button>
+          <button type="button" onclick="window.toggleLanguage()" class="glass w-10 h-10 rounded-full flex items-center justify-center border-purple-500/30 text-brandLight font-extrabold text-xs cursor-pointer hover:bg-white/10 transition">🌐</button>
           <button type="button" onclick="window.toggleTheme()" class="theme-switch-btn cursor-pointer" aria-label="Toggle theme">
             <div class="theme-switch-ball"><svg class="w-3.5 h-3.5 text-slate-800" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg></div>
-          </button>
-          <button type="button" id="mobile-menu-btn" onclick="window.toggleMobileMenu()" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-menu" class="glass w-10 h-10 rounded-full items-center justify-center border-purple-500/30 text-brandLight cursor-pointer hover:bg-white/10 transition">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
           </button>
         </div>
       </div>
     </nav>
   </header>
 
-  <div id="mobile-menu">
-    <a href="#bundles" data-i18n="nav-bundles" onclick="window.toggleMobileMenu()" class="hover:text-brandLight transition">Bundles</a>
-    <a href="#packs" data-i18n="nav-packs" onclick="window.toggleMobileMenu()" class="hover:text-brandLight transition">Featured Packs</a>
-    <a href="#categories" data-i18n="nav-categories" onclick="window.toggleMobileMenu()" class="hover:text-brandLight transition">Categories</a>
-  </div>
-
   <main id="main-view" class="view relative z-10">
     <div id="top"></div>
-    <div id="main-content"></div>
 
-    <section class="max-w-6xl mx-auto px-4 sm:px-6 pt-12 pb-10 text-center relative reveal-on-scroll is-visible">
+    <section class="max-w-6xl mx-auto px-4 sm:px-6 pt-12 pb-10 text-center relative reveal-on-scroll">
+      <!-- DOUBLE PULSING DOTS -->
       <div class="inline-flex items-center gap-3 px-6 py-2.5 rounded-full text-xs font-bold tracking-widest uppercase glass backdrop-blur-md mb-8">
         <span class="w-2 h-2 rounded-full bg-purple-400 animate-ping"></span>
         <span data-i18n="hero-tag">Digital Assets Hub</span>
@@ -359,7 +319,7 @@
     </section>
 
     <!-- WEB PAGE BUNDLES -->
-    <section id="bundles" class="max-w-7xl mx-auto px-4 sm:px-6 py-12 reveal-on-scroll is-visible">
+    <section id="bundles" class="max-w-7xl mx-auto px-4 sm:px-6 py-12 reveal-on-scroll">
       <div class="golden-bundle-card p-8 sm:p-14 relative flex flex-col md:flex-row items-center justify-between gap-10">
         <div class="text-center md:text-left rtl:md:text-right max-w-2xl relative z-10 w-full">
           <span data-i18n="bundle-sub" class="text-xs tracking-widest uppercase font-extrabold text-yellow-500 block mb-2">Custom Web Solutions</span>
@@ -376,7 +336,7 @@
     </section>
 
     <!-- FEATURED PACKS: INFINITE 3D CAROUSEL -->
-    <section id="packs" class="py-16 w-full relative overflow-hidden select-none reveal-on-scroll is-visible">
+    <section id="packs" class="py-16 w-full relative overflow-hidden select-none reveal-on-scroll">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-20 text-center mb-6">
         <h2 data-i18n="packs-title" class="font-head font-bold text-3xl sm:text-5xl">Featured Packs</h2>
         <p data-i18n="packs-desc" class="font-bold opacity-60 text-sm sm:text-base mt-2 tracking-wide">Swipe horizontally for endless physical 3D cards interaction</p>
@@ -384,52 +344,50 @@
 
       <div id="carousel-stage" class="relative w-full h-[520px] flex items-center justify-center perspective-container overflow-hidden">
         <div id="carousel-track" class="relative w-full h-full preserve-3d"></div>
-        <button type="button" id="carousel-prev" aria-label="Previous pack" class="hidden sm:flex absolute left-2 lg:left-8 top-1/2 -translate-y-1/2 z-30 w-11 h-11 rounded-full glass items-center justify-center text-brandLight hover:bg-white/10 transition"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg></button>
-        <button type="button" id="carousel-next" aria-label="Next pack" class="hidden sm:flex absolute right-2 lg:right-8 top-1/2 -translate-y-1/2 z-30 w-11 h-11 rounded-full glass items-center justify-center text-brandLight hover:bg-white/10 transition"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></button>
       </div>
     </section>
 
     <!-- CATEGORIES -->
-    <section id="categories" class="max-w-7xl mx-auto px-4 sm:px-6 py-16 reveal-on-scroll is-visible">
+    <section id="categories" class="max-w-7xl mx-auto px-4 sm:px-6 py-16 reveal-on-scroll">
       <div class="mb-10 text-left"><h2 data-i18n="cat-sec-title" class="font-head font-bold text-3xl sm:text-4xl">Categories</h2><p data-i18n="cat-sec-desc" class="font-bold opacity-50 mt-2 text-sm tracking-wide">Select a category to explore editing packs.</p></div>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <button type="button" id="cat-card-CC" onclick="window.openCategory('CC')" class="cat-card-glass flex items-center justify-between group text-left w-full"><div class="flex items-center gap-5"><div class="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 font-extrabold text-sm">01</div><div><h3 class="font-head font-black text-2xl tracking-wider">CC</h3><p class="text-xs font-semibold opacity-60 mt-1">Color Corrections</p></div></div><div class="arrow-ic text-purple-400/60 text-xl font-bold">→</div></button>
-        <button type="button" id="cat-card-XML" onclick="window.openCategory('XML')" class="cat-card-glass flex items-center justify-between group text-left w-full"><div class="flex items-center gap-5"><div class="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 font-extrabold text-sm">02</div><div><h3 class="font-head font-black text-2xl tracking-wider">XML</h3><p class="text-xs font-semibold opacity-60 mt-1">Project Files</p></div></div><div class="arrow-ic text-purple-400/60 text-xl font-bold">→</div></button>
-        <button type="button" id="cat-card-SHAKE" onclick="window.openCategory('SHAKE')" class="cat-card-glass flex items-center justify-between group text-left w-full"><div class="flex items-center gap-5"><div class="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 font-extrabold text-sm">03</div><div><h3 class="font-head font-black text-2xl tracking-wider">SHAKE</h3><p class="text-xs font-semibold opacity-60 mt-1">Camera Shake Presets</p></div></div><div class="arrow-ic text-purple-400/60 text-xl font-bold">→</div></button>
+        <div id="cat-card-CC" onclick="window.openCategory('CC')" class="cat-card-glass flex items-center justify-between group"><div class="flex items-center gap-5"><div class="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 font-extrabold text-sm">01</div><div><h3 class="font-head font-black text-2xl tracking-wider">CC</h3><p class="text-xs font-semibold opacity-60 mt-1">Color Corrections</p></div></div><div class="text-purple-400/60 text-xl font-bold">→</div></div>
+        <div id="cat-card-XML" onclick="window.openCategory('XML')" class="cat-card-glass flex items-center justify-between group"><div class="flex items-center gap-5"><div class="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 font-extrabold text-sm">02</div><div><h3 class="font-head font-black text-2xl tracking-wider">XML</h3><p class="text-xs font-semibold opacity-60 mt-1">Project Files</p></div></div><div class="text-purple-400/60 text-xl font-bold">→</div></div>
+        <div id="cat-card-SHAKE" onclick="window.openCategory('SHAKE')" class="cat-card-glass flex items-center justify-between group"><div class="flex items-center gap-5"><div class="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 font-extrabold text-sm">03</div><div><h3 class="font-head font-black text-2xl tracking-wider">SHAKE</h3><p class="text-xs font-semibold opacity-60 mt-1">Camera Shake Presets</p></div></div><div class="text-purple-400/60 text-xl font-bold">→</div></div>
       </div>
     </section>
 
     <!-- LIVE STATS SECTION -->
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 py-12 border-t border-white/10 mt-12 reveal-on-scroll is-visible">
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 py-12 border-t border-white/10 mt-12 reveal-on-scroll">
       <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
         <div class="glass p-6 rounded-2xl">
           <h4 class="font-mono font-black text-3xl sm:text-4xl text-purple-400 tracking-wider">
-            <span class="counter-num" data-target="17000">17,000</span>+
+            <span class="counter-num" data-target="17000">0</span>+
           </h4>
           <p data-i18n="stat-subscribers" class="text-xs font-bold opacity-70 mt-2 uppercase tracking-widest">Telegram Subscribers</p>
         </div>
         <div class="glass p-6 rounded-2xl">
           <h4 class="font-mono font-black text-3xl sm:text-4xl text-purple-400 tracking-wider">
-            <span class="counter-num" data-target="45000">45,000</span>+
+            <span class="counter-num" data-target="45000">0</span>+
           </h4>
           <p data-i18n="stat-views" class="text-xs font-bold opacity-70 mt-2 uppercase tracking-widest">Monthly Visitors</p>
         </div>
         <div class="glass p-6 rounded-2xl">
           <h4 class="font-mono font-black text-3xl sm:text-4xl text-purple-400 tracking-wider">
-            <span class="counter-num" data-target="1250">1,250</span>+
+            <span class="counter-num" data-target="1250">0</span>+
           </h4>
           <p data-i18n="stat-orders" class="text-xs font-bold opacity-70 mt-2 uppercase tracking-widest">Completed Assets</p>
         </div>
         <div class="glass p-6 rounded-2xl">
           <h4 class="font-mono font-black text-3xl sm:text-4xl text-yellow-400 tracking-wider">
-            ★ <span class="counter-num-decimal" data-target="4.9">4.9</span>/5
+            ★ <span class="counter-num-decimal" data-target="4.9">0.0</span>/5
           </h4>
           <p data-i18n="stat-rating" class="text-xs font-bold opacity-70 mt-2 uppercase tracking-widest">Satisfaction Score</p>
         </div>
       </div>
     </section>
 
-    <footer class="border-t border-white/5 mt-6 reveal-on-scroll is-visible">
+    <footer class="border-t border-white/5 mt-6 reveal-on-scroll">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12 flex flex-col md:flex-row items-center justify-between gap-6">
         <p class="font-head font-extrabold tracking-widest text-brandLight text-xl force-eng">VORTX</p>
         <p class="font-bold opacity-60 text-sm">© <span id="year"></span> VORTX Studio. <span data-i18n="footer-right">Crafted for the bold.</span></p>
@@ -445,45 +403,17 @@
         <div class="button-wrap" onclick="window.backToHome()"><div class="btn-3d-style"><span data-i18n="back-btn">← Back</span></div><div class="button-shadow"></div></div>
       </div>
       <div class="grid lg:grid-cols-3 gap-8">
-        <div class="tier-card reveal-on-scroll is-visible">
-          <div class="card_title__container">
-            <span class="card_title">STARTER</span>
-            <p data-i18n="tier-starter-desc" class="card_paragraph">Perfect for simple portfolios and personal landing pages.</p>
-            <div class="tier-price text-3xl mt-2">$249</div>
-            <ul class="tier-feature-list mt-2">
-              <li><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Single-page responsive build</li>
-              <li><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Core animations</li>
-              <li><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>7-day delivery</li>
-            </ul>
-          </div>
-          <div class="button-wrap w-full mt-6" onclick="window.addPlanToCart('STARTER')"><div class="btn-3d-style"><span data-i18n="select-plan">Select Plan</span></div><div class="button-shadow"></div></div>
+        <div class="tier-card">
+          <div class="card_title__container"><span class="card_title">STARTER</span><p data-i18n="tier-starter-desc" class="card_paragraph">Perfect for simple portfolios and personal landing pages.</p></div>
+          <div class="button-wrap w-full mt-6" onclick="window.showToast('PLAN ADDED')"><div class="btn-3d-style"><span data-i18n="select-plan">Select Plan</span></div><div class="button-shadow"></div></div>
         </div>
-        <div class="tier-card tier-featured reveal-on-scroll is-visible">
-          <span class="tier-badge">Most Popular</span>
-          <div class="card_title__container">
-            <span class="card_title">PRO</span>
-            <p data-i18n="tier-pro-desc" class="card_paragraph">For creators needing advanced animations &amp; custom design.</p>
-            <div class="tier-price text-3xl mt-2 text-yellow-400">$649</div>
-            <ul class="tier-feature-list mt-2">
-              <li><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Multi-section site + CMS</li>
-              <li><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Advanced scroll & motion design</li>
-              <li><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Priority 3-day delivery</li>
-            </ul>
-          </div>
-          <div class="button-wrap w-full mt-6" onclick="window.addPlanToCart('PRO')"><div class="btn-3d-style"><span data-i18n="select-plan">Select Plan</span></div><div class="button-shadow"></div></div>
+        <div class="tier-card">
+          <div class="card_title__container"><span class="card_title">PRO</span><p data-i18n="tier-pro-desc" class="card_paragraph">For creators needing advanced animations &amp; custom design.</p></div>
+          <div class="button-wrap w-full mt-6" onclick="window.showToast('PLAN ADDED')"><div class="btn-3d-style"><span data-i18n="select-plan">Select Plan</span></div><div class="button-shadow"></div></div>
         </div>
-        <div class="tier-card reveal-on-scroll is-visible">
-          <div class="card_title__container">
-            <span class="card_title">VIP</span>
-            <p data-i18n="tier-vip-desc" class="card_paragraph">The absolute premium experience with custom 3D elements.</p>
-            <div class="tier-price text-3xl mt-2">$1,499</div>
-            <ul class="tier-feature-list mt-2">
-              <li><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Full custom 3D experience</li>
-              <li><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Dedicated design & dev lead</li>
-              <li><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Unlimited revisions</li>
-            </ul>
-          </div>
-          <div class="button-wrap w-full mt-6" onclick="window.addPlanToCart('VIP')"><div class="btn-3d-style"><span data-i18n="select-plan">Select Plan</span></div><div class="button-shadow"></div></div>
+        <div class="tier-card">
+          <div class="card_title__container"><span class="card_title">VIP</span><p data-i18n="tier-vip-desc" class="card_paragraph">The absolute premium experience with custom 3D elements.</p></div>
+          <div class="button-wrap w-full mt-6" onclick="window.showToast('PLAN ADDED')"><div class="btn-3d-style"><span data-i18n="select-plan">Select Plan</span></div><div class="button-shadow"></div></div>
         </div>
       </div>
     </div>
@@ -501,10 +431,9 @@
   </section>
 
   <!-- PREVIEW MODAL -->
-  <div id="preview-modal" class="fixed inset-0 z-[80] flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300" role="dialog" aria-modal="true" aria-labelledby="preview-title">
+  <div id="preview-modal" class="fixed inset-0 z-[80] flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
     <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="window.closePreview()"></div>
     <div class="glass rounded-3xl max-w-md w-full relative z-10 p-6" id="preview-card">
-      <button type="button" class="preview-close-btn" onclick="window.closePreview()" aria-label="Close preview">✕</button>
       <span id="preview-tag" class="text-[10px] font-bold uppercase text-brandLight">TAG</span>
       <h3 id="preview-title" class="font-head font-bold text-2xl mt-1 mb-6">TITLE</h3>
       <div class="flex gap-4">
@@ -549,16 +478,12 @@
     var box = document.getElementById('toast-box');
     if (!box) return;
     var toast = document.createElement('div');
-    toast.className = 'glass bg-black/90 text-white text-[10px] uppercase font-bold tracking-widest px-6 py-3.5 rounded-full flex items-center gap-2 toast-in';
+    toast.className = 'glass bg-black/90 text-white text-[10px] uppercase font-bold tracking-widest px-6 py-3.5 rounded-full flex items-center gap-2';
     toast.innerHTML = '<span class="text-purple-400">✦</span> ' + msg;
     box.appendChild(toast);
     setTimeout(function () {
-      toast.classList.remove('toast-in');
-      toast.classList.add('toast-out');
-      setTimeout(function () {
-        if (toast && toast.parentNode) toast.parentNode.removeChild(toast);
-      }, 320);
-    }, 2400);
+      if (toast && toast.parentNode) toast.parentNode.removeChild(toast);
+    }, 2500);
   };
 
   window.openPreview = function (title, tag) {
@@ -567,99 +492,13 @@
     var modal = document.getElementById('preview-modal');
     if (titleEl) titleEl.textContent = title;
     if (tagEl) tagEl.textContent = tag;
-    if (modal) {
-      modal.classList.remove('opacity-0', 'pointer-events-none');
-      requestAnimationFrame(function () { modal.classList.add('vx-modal-open'); });
-    }
+    if (modal) modal.classList.remove('opacity-0', 'pointer-events-none');
   };
 
   window.closePreview = function () {
     var modal = document.getElementById('preview-modal');
-    if (modal) {
-      modal.classList.remove('vx-modal-open');
-      modal.classList.add('opacity-0', 'pointer-events-none');
-    }
+    if (modal) modal.classList.add('opacity-0', 'pointer-events-none');
   };
-
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape') {
-      window.closePreview();
-      window.closeMobileMenu();
-    }
-  });
-
-  var cartCount = 0;
-  window.addPlanToCart = function (planName) {
-    cartCount++;
-    var badge = document.getElementById('cart-count');
-    if (badge) {
-      badge.textContent = cartCount;
-      badge.classList.add('vx-show');
-    }
-    window.showToast(planName + ' PLAN ADDED');
-  };
-
-  window.toggleMobileMenu = function () {
-    var menu = document.getElementById('mobile-menu');
-    var btn = document.getElementById('mobile-menu-btn');
-    if (!menu) return;
-    var isOpen = menu.classList.toggle('vx-open');
-    if (btn) btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-    document.body.style.overflow = isOpen ? 'hidden' : '';
-  };
-  window.closeMobileMenu = function () {
-    var menu = document.getElementById('mobile-menu');
-    var btn = document.getElementById('mobile-menu-btn');
-    if (menu && menu.classList.contains('vx-open')) {
-      menu.classList.remove('vx-open');
-      if (btn) btn.setAttribute('aria-expanded', 'false');
-      document.body.style.overflow = '';
-    }
-  };
-
-  function initScrollChrome() {
-    var header = document.getElementById('site-header');
-    var progress = document.getElementById('scroll-progress');
-    var navLinks = document.querySelectorAll('.nav-link');
-    var sections = ['bundles', 'packs', 'categories'].map(function (id) { return document.getElementById(id); }).filter(Boolean);
-
-    function onScroll() {
-      var y = window.scrollY || document.documentElement.scrollTop;
-      if (header) header.classList.toggle('vx-scrolled', y > 40);
-
-      var docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      if (progress && docHeight > 0) progress.style.width = Math.min(100, (y / docHeight) * 100) + '%';
-
-      var activeId = null;
-      sections.forEach(function (sec) {
-        var rect = sec.getBoundingClientRect();
-        if (rect.top <= 140 && rect.bottom >= 140) activeId = sec.id;
-      });
-      navLinks.forEach(function (link) {
-        var isActive = activeId && link.getAttribute('href') === '#' + activeId;
-        link.classList.toggle('active', !!isActive);
-      });
-    }
-
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
-  }
-
-  function initRipple() {
-    document.addEventListener('click', function (e) {
-      var btn = e.target.closest('.btn-3d-style');
-      if (!btn) return;
-      var rect = btn.getBoundingClientRect();
-      var ripple = document.createElement('span');
-      var size = Math.max(rect.width, rect.height);
-      ripple.className = 'vx-ripple';
-      ripple.style.width = ripple.style.height = size + 'px';
-      ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
-      ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
-      btn.appendChild(ripple);
-      setTimeout(function () { if (ripple.parentNode) ripple.parentNode.removeChild(ripple); }, 650);
-    });
-  }
 
   var CATEGORY_DATA = {
     CC: ['Teal & Orange Grade', 'Cinematic Film Base', 'Dark Knight Grade'],
@@ -701,10 +540,62 @@
   var yr = document.getElementById('year');
   if (yr) yr.textContent = new Date().getFullYear();
 
-  window.addEventListener('DOMContentLoaded', function () {
-    initScrollChrome();
-    initRipple();
-  });
+  /* ---------- Slow Scroll Reveal & Smooth Counters ---------- */
+  function initScrollAnimations() {
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+
+          var counters = entry.target.querySelectorAll('.counter-num');
+          counters.forEach(function (counter) {
+            if (counter.dataset.animated) return;
+            counter.dataset.animated = "true";
+            var target = parseInt(counter.dataset.target, 10);
+            var count = 0;
+            var speed = target / 80;
+
+            function updateCount() {
+              count += speed;
+              if (count < target) {
+                counter.textContent = Math.floor(count).toLocaleString();
+                requestAnimationFrame(updateCount);
+              } else {
+                counter.textContent = target.toLocaleString();
+              }
+            }
+            updateCount();
+          });
+
+          var decimalCounters = entry.target.querySelectorAll('.counter-num-decimal');
+          decimalCounters.forEach(function (counter) {
+            if (counter.dataset.animated) return;
+            counter.dataset.animated = "true";
+            var target = parseFloat(counter.dataset.target);
+            var count = 0;
+            var speed = target / 60;
+
+            function updateDecimal() {
+              count += speed;
+              if (count < target) {
+                counter.textContent = count.toFixed(1);
+                requestAnimationFrame(updateDecimal);
+              } else {
+                counter.textContent = target.toFixed(1);
+              }
+            }
+            updateDecimal();
+          });
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.reveal-on-scroll').forEach(function (el) {
+      observer.observe(el);
+    });
+  }
+
+  window.addEventListener('DOMContentLoaded', initScrollAnimations);
 })();
 </script>
 
@@ -727,10 +618,6 @@
   var stage = document.getElementById('carousel-stage');
   var track = document.getElementById('carousel-track');
   if (!stage || !track) return;
-
-  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var easeFactor = reduceMotion ? 1 : 0.12;
-  var dragEaseFactor = reduceMotion ? 1 : 0.35;
 
   var cards = [];
   var N = CARDS_DATA.length;
@@ -772,4 +659,121 @@
               '<div class="w-6 h-6 rounded-full bg-white/40 border border-white/30 backdrop-blur-sm"></div>' +
             '</div>' +
           '</div>' +
-          '<div class="flex justify-between items-end font-mono text-sm 
+          '<div class="flex justify-between items-end font-mono text-sm tracking-widest text-white/90">' +
+            '<span>' + data.number + '</span>' +
+            '<span class="font-head font-bold text-xs">PHYSICAL 3D</span>' +
+          '</div>' +
+        '</div>';
+
+      card.addEventListener('click', function () {
+        if (Math.abs(dragDeltaX) < 8) {
+          var normCurrent = ((Math.round(currentIndex) % N) + N) % N;
+          if (i === normCurrent) {
+            window.openPreview(data.title, data.tag);
+          } else {
+            var diff = (i - normCurrent + N) % N;
+            if (diff > N / 2) diff -= N;
+            targetIndex = currentIndex + diff;
+          }
+        }
+      });
+
+      track.appendChild(card);
+      cards.push(card);
+    });
+  }
+
+  function updateTransform() {
+    var spacing = 220;
+    
+    cards.forEach(function (card, i) {
+      var rawOffset = i - currentIndex;
+      var wrappedOffset = ((rawOffset % N) + N) % N;
+      if (wrappedOffset > N / 2) wrappedOffset -= N;
+
+      var absOffset = Math.abs(wrappedOffset);
+
+      var posX = wrappedOffset * spacing;
+      var posZ = -absOffset * 180;
+      var rotY = Math.max(-60, Math.min(60, wrappedOffset * -28));
+      var scale = Math.max(0.65, 1 - absOffset * 0.15);
+      var opacity = Math.max(0, 1 - absOffset * 0.35);
+
+      card.style.transform = 
+        'translateX(' + posX.toFixed(2) + 'px) ' +
+        'translateZ(' + posZ.toFixed(2) + 'px) ' +
+        'rotateY(' + rotY.toFixed(2) + 'deg) ' +
+        'scale(' + scale.toFixed(3) + ')';
+      
+      card.style.opacity = opacity.toFixed(3);
+      card.style.zIndex = Math.round(100 - absOffset * 10);
+      card.style.pointerEvents = absOffset < 2.5 ? 'auto' : 'none';
+    });
+  }
+
+  function animate() {
+    if (!isDragging) {
+      currentIndex += (targetIndex - currentIndex) * 0.12;
+    } else {
+      currentIndex += (targetIndex - currentIndex) * 0.35;
+    }
+
+    updateTransform();
+    requestAnimationFrame(animate);
+  }
+
+  function onPointerDown(e) {
+    isDragging = true;
+    startX = e.clientX || (e.touches && e.touches[0].clientX);
+    lastX = startX;
+    dragDeltaX = 0;
+    velocityX = 0;
+    lastTime = performance.now();
+  }
+
+  function onPointerMove(e) {
+    if (!isDragging) return;
+    currentX = e.clientX || (e.touches && e.touches[0].clientX);
+    var deltaX = currentX - lastX;
+    dragDeltaX += currentX - startX;
+
+    targetIndex -= deltaX / 220;
+
+    var now = performance.now();
+    var dt = now - lastTime;
+    if (dt > 0) velocityX = deltaX / dt;
+
+    lastX = currentX;
+    lastTime = now;
+  }
+
+  function onPointerUp() {
+    if (!isDragging) return;
+    isDragging = false;
+
+    targetIndex -= velocityX * 1.5;
+    targetIndex = Math.round(targetIndex);
+  }
+
+  stage.addEventListener('mousedown', onPointerDown);
+  window.addEventListener('mousemove', onPointerMove);
+  window.addEventListener('mouseup', onPointerUp);
+
+  stage.addEventListener('touchstart', onPointerDown, { passive: true });
+  window.addEventListener('touchmove', onPointerMove, { passive: true });
+  window.addEventListener('touchend', onPointerUp);
+
+  stage.addEventListener('wheel', function (e) {
+    e.preventDefault();
+    var delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+    targetIndex += delta > 0 ? 0.35 : -0.35;
+    targetIndex = Math.round(targetIndex);
+  }, { passive: false });
+
+  buildCards();
+  animate();
+})();
+</script>
+
+</body>
+</html>
