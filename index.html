@@ -332,12 +332,10 @@
       height: 480px !important; 
       border-radius: 2rem; 
       position: relative;
-      /* يعطي الكرت بُعد فيزيائي ثري دي */
       transform-style: preserve-3d;
       perspective: 1000px;
     }
 
-    /* تصميم الكرت الفيزيائي الفخم */
     .physical-card-glass { 
       width: 100%;
       height: 100%;
@@ -351,7 +349,7 @@
       flex-direction: column;
       justify-content: space-between;
       align-items: center; 
-      text-center; 
+      text-align: center; 
       cursor: grab; 
       box-shadow: 0 25px 40px -10px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.2);
     }
@@ -363,7 +361,6 @@
       box-shadow: 0 20px 40px rgba(126, 34, 206, 0.15), inset 0 2px 0 #fff;
     }
 
-    /* مربع الصورة الفاضي (Placeholder) - حط صورك فيه بعدين */
     .card-image-placeholder {
       width: 100%;
       flex-grow: 1;
@@ -823,7 +820,6 @@
       centeredSlides: true,
       slidesPerView: "auto",
       loop: true,
-      // هذا الإعداد اللي يعطيك الشقلبة والميلان الفيزيائي الفخم يمين ويسار
       creativeEffect: {
         limitProgress: 2,
         shadowPerProgress: true,
@@ -896,4 +892,4 @@
   const CATEGORY_DATA = { CC: ['Teal & Orange Grade', 'Cinematic Film Base', 'Dark Knight Grade', 'Vibrant Soft Pop'], SHAKE: ['Hard Impact Shake', 'Bass Drop Bounce', 'Smooth Whip Pan', 'Earthquake Wobble'], XML: ['Pro Intro Template', 'Velocity Edit XML', 'Glow Shake Timeline', 'Full Transition Suite'] };
 
   function showView(viewId) { document.querySelectorAll('.view').forEach(v => v.classList.add('view-hidden')); const target = document.getElementById(viewId); if (target) target.classList.remove('view-hidden'); window.scrollTo({ top: 0, behavior: 'instant' }); }
-  function openCategory(key) { document.getElementById('cat-title').textContent = key; document.getElementById('cat-grid').innerHTML = CATEGORY_DATA[key].map((item) => `<div onclick="openPreview('${item}', '${key}')" class="cat-card-glass flex flex-c
+  function openCategory(key) { document.getElementById('cat-title').textContent = key; document.getElementById('cat-grid').innerHTML = CATEGORY_DATA[key].map((item) => `<div onclick="openPreview('${item}', '${key}')" class="cat-card-glass flex flex-col justify-between min-h-[140px] text-left ltr:text-left rtl:text-right border-l-4 border-purple-500"><span class="text-[10px] font-bold uppercase text-purple-400">${key} Pack</span><h3 class="font-head font-bold 
