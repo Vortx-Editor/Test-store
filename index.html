@@ -77,10 +77,10 @@
     h1, h2, h3, .font-head { font-family: 'Cinzel', serif; letter-spacing: 1.5px; }
     html[dir="rtl"] h1, html[dir="rtl"] h2, html[dir="rtl"] h3, html[dir="rtl"] .font-head { font-family: 'Cairo', sans-serif; letter-spacing: 0; }
 
-    /* حماية اللوجو: إجباره على الخط الإنجليزي الفخم مهما كانت اللغة */
+    /* ثبات خط اللوجو الإنجليزي */
     .force-eng { font-family: 'Cinzel', serif !important; letter-spacing: 0.25em !important; }
 
-    /* STARS BACKGROUND */
+    /* خلفية النجوم */
     .stars-background-container { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: var(--star-bg); overflow: hidden; z-index: 0; pointer-events: none; transition: background 0.4s ease; }
     #stars, #stars2, #stars3 { position: absolute; top: 0; left: 0; background: transparent; opacity: var(--star-opacity); transition: opacity 0.4s ease; }
     #stars { width: 1px; height: 1px; box-shadow: 501px 811px #fff, 1450px 1324px #fff, 1093px 1780px #fff, 1469px 678px #fff, 904px 741px #fff, 1160px 781px #fff; animation: animStar 50s linear infinite; }
@@ -88,19 +88,19 @@
     #stars3 { width: 3px; height: 3px; box-shadow: 200px 981px #fff, 1731px 521px #fff, 132px 1039px #fff; animation: animStar 150s linear infinite; }
     @keyframes animStar { from { transform: translateY(0px); } to { transform: translateY(-2000px); } }
 
-    /* VORTX WET LIQUID SHINE SWEEP */
+    /* لمعة VORTX */
     .vortx-wet-oil-title { display: inline-block; font-weight: 900; background: linear-gradient(110deg, #ffffff 0%, #f3e8ff 20%, #ffffff 35%, #c084fc 50%, #ffffff 65%, #7e22ce 80%, #ffffff 100%); background-size: 200% 100%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: oilShineSweep 4s linear infinite; filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.8)) drop-shadow(0 0 20px rgba(168, 85, 247, 0.5)); }
     @keyframes oilShineSweep { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
     html.light .vortx-wet-oil-title { background: linear-gradient(110deg, #2e1065 0%, #581c87 20%, #a855f7 35%, #ffffff 50%, #7e22ce 65%, #3b0764 80%, #2e1065 100%); background-size: 200% 100%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 5px 15px rgba(126, 34, 206, 0.2)); }
 
-    /* THEME SWITCH */
+    /* زر تغيير الثيم */
     .theme-switch-btn { width: 64px; height: 34px; border-radius: 999px; background: linear-gradient(135deg, #1e1b4b, #311042); border: 1px solid rgba(168, 85, 247, 0.4); position: relative; cursor: pointer; padding: 3px; transition: all 0.4s ease; display: flex; align-items: center; }
     html.light .theme-switch-btn { background: linear-gradient(135deg, #38bdf8, #fde047); border-color: rgba(56, 189, 248, 0.6); }
     .theme-switch-ball { width: 26px; height: 26px; border-radius: 50%; position: absolute; top: 3px; left: 3px; transition: transform 0.4s ease; display: flex; align-items: center; justify-content: center; }
     html.dark .theme-switch-ball { transform: translateX(0px); background: #e2e8f0; }
     html.light .theme-switch-ball { transform: translateX(30px); background: #fef08a; }
 
-    /* 3D BUTTON STYLES */
+    /* الأزرار ثلاثية الأبعاد */
     .button-wrap { position: relative; z-index: 10; border-radius: 999vw; background: transparent; cursor: pointer; display: inline-block; transition: all var(--anim--hover-time) var(--anim--hover-ease); }
     .button-shadow { --shadow-cuttoff-fix: 2em; position: absolute; width: calc(100% + var(--shadow-cuttoff-fix)); height: calc(100% + var(--shadow-cuttoff-fix)); top: calc(0% - var(--shadow-cuttoff-fix) / 2); left: calc(0% - var(--shadow-cuttoff-fix) / 2); filter: blur(clamp(2px, 0.125em, 12px)); -webkit-filter: blur(clamp(2px, 0.125em, 12px)); overflow: visible; pointer-events: none; }
     .button-shadow::after { content: ""; position: absolute; z-index: 0; inset: 0; border-radius: 999vw; background: linear-gradient(180deg, rgba(168, 85, 247, 0.3), rgba(0, 0, 0, 0.2)); width: calc(100% - var(--shadow-cuttoff-fix) - 0.25em); height: calc(100% - var(--shadow-cuttoff-fix) - 0.25em); top: calc(var(--shadow-cuttoff-fix) - 0.5em); left: calc(var(--shadow-cuttoff-fix) - 0.875em); padding: 0.125em; box-sizing: border-box; mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); mask-composite: exclude; opacity: 1; }
@@ -109,7 +109,7 @@
     .btn-3d-style:hover { transform: scale(0.975); }
     .btn-3d-style span { position: relative; display: block; user-select: none; font-weight: 800; font-size: 0.9em; color: var(--btn-text-color); text-shadow: 0em 0.15em 0.1em rgba(0, 0, 0, 0.2); padding-inline: 2em; padding-block: 0.9em; text-transform: uppercase; }
 
-    /* TIER CARDS */
+    /* كروت الباقات */
     .tier-card { --white: hsl(0, 0%, 100%); --black: hsl(240, 15%, 9%); --paragraph: hsl(0, 0%, 83%); --line: hsl(240, 9%, 17%); --primary: hsl(266, 92%, 58%); position: relative; display: flex; flex-direction: column; justify-content: space-between; gap: 1.25rem; padding: 2rem; width: 100%; background-color: hsla(240, 15%, 9%, 0.85); backdrop-filter: blur(16px); background-image: radial-gradient(at 88% 40%, hsla(240, 15%, 9%, 1) 0px, transparent 85%), radial-gradient(at 0% 64%, hsla(263, 93%, 56%, 0.4) 0px, transparent 85%); border-radius: 1.75rem; box-shadow: 0px -16px 24px 0px rgba(255, 255, 255, 0.15) inset; overflow: hidden; transition: transform 0.4s ease, background-color 0.4s ease; }
     html.light .tier-card { background-color: rgba(255, 255, 255, 0.92); background-image: radial-gradient(at 0% 64%, rgba(216, 180, 254, 0.4) 0px, transparent 85%); box-shadow: 0 15px 35px rgba(126, 34, 206, 0.1); }
     .tier-card:hover { transform: translateY(-6px); }
@@ -126,7 +126,7 @@
     .tier-card .card__list .card__list_item .list_text { font-size: 0.9rem; font-weight: 700; color: var(--white); }
     html.light .tier-card .card__list .card__list_item .list_text { color: #1e1b4b; }
 
-    /* GLASS RADIO SELECTOR */
+    /* محدد الفئات الزجاجي */
     .glass-radio-group { display: flex; position: relative; background: rgba(255, 255, 255, 0.05); border-radius: 999px; backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.15); padding: 6px; margin: 15px auto 10px auto; width: 100%; max-width: 56rem; z-index: 20; }
     html.light .glass-radio-group { background: rgba(126, 34, 206, 0.06); border-color: rgba(126, 34, 206, 0.2); }
     .glass-radio-group input { display: none; }
@@ -143,7 +143,7 @@
     html[dir="rtl"] #glass-xml:checked ~ .glass-glider { transform: translateX(-100%); background: linear-gradient(135deg, rgba(56, 189, 248, 0.4), #06b6d4); }
     html[dir="rtl"] #glass-shake:checked ~ .glass-glider { transform: translateX(-200%); background: linear-gradient(135deg, rgba(234, 179, 8, 0.4), #eab308); }
 
-    /* WEB PAGE BUNDLES CARD */
+    /* كرت الويب الذهبي */
     .golden-bundle-card { position: relative; border-radius: 2.5rem; background: linear-gradient(135deg, rgba(234, 179, 8, 0.08) 0%, rgba(255, 255, 255, 0.01) 100%); backdrop-filter: blur(24px); border: 1px solid rgba(234, 179, 8, 0.25); box-shadow: 0 25px 50px -12px rgba(234, 179, 8, 0.08); overflow: hidden; }
     html.light .golden-bundle-card { background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(254, 240, 138, 0.3) 100%); border-color: rgba(234, 179, 8, 0.4); box-shadow: 0 20px 40px rgba(234, 179, 8, 0.1); }
 
@@ -157,13 +157,13 @@
     .view { transition: opacity .4s ease; opacity: 1; display: block; }
     .view-hidden { display: none !important; opacity: 0; }
 
-    /* 3D PHYSICS CAROUSEL */
+    /* كروت الفيزياء 3D */
     .perspective-container { -webkit-perspective: 1350px; perspective: 1350px; }
     .preserve-3d { -webkit-transform-style: preserve-3d; transform-style: preserve-3d; }
     .backface-hidden { -webkit-backface-visibility: hidden; backface-visibility: hidden; }
     #interaction-proxy { touch-action: pan-y; }
 
-    /* LOADER */
+    /* العداد السينمائي */
     #vx-loader { position: fixed; inset: 0; z-index: 999999; background: #09090c; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.7s ease; }
     #vx-loader.vx-hide { opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; }
     #app-content { opacity: 0; filter: blur(18px); transform: scale(1.02); transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
@@ -190,7 +190,7 @@
     <p class="text-xs font-bold uppercase tracking-[0.3em] text-purple-300/80 mt-4 relative z-10">INITIALIZING <span id="vx-percent" class="text-purple-200">0</span>%</p>
   </div>
 
-  <!-- هذا السكريبت حطيته هنا غصب عشان المتصفح يقراه أول شيء والعداد يشتغل فوراً وما يعلق -->
+  <!-- تشغيل العداد فوراً لمنع التعليق -->
   <script>
     (function() {
       var progress = 0; 
@@ -209,7 +209,7 @@
       }
       
       var timer = setInterval(function() {
-        progress += 1;
+        progress += 2;
         if (percentEl) percentEl.textContent = progress; 
         if (barFill) barFill.style.width = progress + '%';
         
@@ -223,7 +223,7 @@
             document.documentElement.classList.remove('vx-loading');
           }, 300);
         }
-      }, 20);
+      }, 25);
 
       window.dismissLoaderNow = function() {
         var loader = document.getElementById('vx-loader'); 
@@ -233,7 +233,7 @@
         document.documentElement.classList.remove('vx-loading');
       };
 
-      setTimeout(window.dismissLoaderNow, 4500);
+      setTimeout(window.dismissLoaderNow, 3500);
     })();
   </script>
 
@@ -292,7 +292,7 @@
         <div class="golden-bundle-card p-8 sm:p-14 relative flex flex-col md:flex-row items-center justify-between gap-10">
           <div class="text-center md:text-left rtl:md:text-right max-w-2xl relative z-10 w-full">
             <span data-i18n="bundle-sub" class="text-xs tracking-widest uppercase font-extrabold text-yellow-500 block mb-2">Custom Web Solutions</span>
-            <h2 data-i18n="bundle-title" class="font-body font-black uppercase tracking-widest text-3xl sm:text-4xl md:text-5xl mb-4 bg-clip-text text-transparent bg-gradient-to-r from-yellow-300 to-yellow-600">
+            <h2 data-i18n="bundle-title" class="font-body font-black uppercase tracking-widest text-3xl sm:text-4xl md:text-5xl mb-4 bg-clip-text text-transparent bg-gradient-to-r from-yellow-300 via-amber-400 to-yellow-600">
               WEB PAGE BUNDLES
             </h2>
             <p data-i18n="bundle-desc" class="font-bold opacity-80 leading-relaxed text-sm sm:text-lg text-white">
@@ -376,7 +376,7 @@
 
   </div>
 
-  <!-- الجافاسكربت الأساسي محمي وشغال بدون تعليق -->
+  <!-- الجافاسكربت العام المربوط بـ window لضمان العمل بجميع البيئات -->
   <script>
     window.translations = {
       en: { "nav-bundles": "Bundles", "nav-packs": "Featured Packs", "nav-categories": "Categories", "hero-tag": "Digital Assets Hub", "hero-desc": "High-end VFX packs, cinematic presets & custom web experiences.", "hero-btn": "Explore Tiers", "bundle-sub": "Custom Web Solutions", "bundle-title": "Web Page Bundles", "bundle-desc": "Launch your custom digital space today. Stand out with next-gen designs and premium performance.", "bundle-btn": "View Development Tiers", "packs-title": "Featured Packs", "packs-desc": "Swipe horizontally to tumble cards.", "card-1-title": "Red Inferno", "card-2-title": "Cyber Gold", "card-3-title": "Neon Nights", "card-4-title": "Hyper Blue", "cat-sec-title": "Categories", "cat-sec-desc": "Select a category to explore editing packs.", "footer-right": "Crafted for the bold.", "tiers-sub": "Web Solutions", "tiers-title": "Development Tiers", "back-btn": "← Back", "tier-starter-desc": "Perfect for simple portfolios and personal landing pages.", "tier-pro-desc": "For creators needing advanced animations & custom design.", "tier-vip-desc": "The absolute premium experience with custom 3D elements.", "select-plan": "Select Plan", "cat-view-sub": "Collection", "add-cart": "Add to Cart", "try-demo": "Try Demo" },
@@ -457,7 +457,7 @@
     if (yr) yr.textContent = new Date().getFullYear();
 
     /* =========================================================
-       فيزياء الكروت 3D (تشتغل فوراً وبدون تعليق)
+       فيزياء الكروت 3D
        ========================================================= */
     function init3DHorizontalCarousel() {
       var CARD_VIDEOS = [
@@ -539,4 +539,4 @@
                 </div>
                 <div class="w-full flex justify-end opacity-95">
                   <svg class="w-[100px] h-auto" viewBox="0 0 341 49" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M8.75294 47.68C6.10761 47.68 4.10227 47.04 2.73694 45.76C1.41427 44.48 0.582275 42.7733 0.240941 40.64C-0.100392 38.464 -0.0790588 36.0747 0.304941 33.472C0.731608 30.8267 1.37161 28.1813 2.22494 25.536C3.07827 22.848 3.99561 20.3307 4.97694 17.984C6.00094 15.5947 6.93961 13.5893 7.79294 11.968C8.26227 11.072 8.88094 10.56 9.64894 10.432C10.4169 10.2613 11.1423 10.368 11.8249 10.752C12.5503 11.136 13.0623 11.6907 13.3609 12.416C13.7023 13.1413 13.6383 13.9307 13.1689 14.784C11.2916 18.368 9.79828 21.7813 8.68894 25.024C7.57961 28.2667 6.85427 31.1467 6.51294 33.664C6.21427 36.1387 6.23561 38.1013 6.57694 39.552C6.96094 40.96 7.68628 41.664 8.75294 41.664C9.73428 41.664 10.8009 41.3013 11.9529 40.576C13.1049 39.8507 14.3423 38.5493 15.6649 36.672C17.0303 34.6667 18.3529 32.064 19.6329 28.864C20.9556 25.6213 22.1289 21.8667 23.1529 17.6C23.4089 16.6187 23.8783 15.9573 24.5609 15.616C25.2863 15.2747 26.0329 15.2107 26.8009 15.424C27.5689 15.6373 28.1876 16.064 28.6569 16.704C29.1263 17.3013 29.2543 18.0693 29.0409 19.008C27.9316 23.616 27.3769 27.5627 27.3769 30.848C27.4196 34.1333 27.7609 36.5227 28.4009 38.016C28.8703 39.0827 29.4249 39.8507 30.0649 40.32C30.7476 40.7893 31.4943 41.024 32.3049 41.024C33.1156 41.024 33.9689 40.7253 34.8649 40.128C35.8036 39.488 36.7209 38.4 37.6169 36.864C38.5556 35.328 39.3876 33.216 40.1129 30.528C37.6809 28.48 35.6756 25.7707 34.0969 22.
+                    <path d="M8.75294 47.68C6.10761 47.68 4.10227 47.04 2.73694 45.76C1.41427 44.48 0.582275 42.7733 0.240941 40.64C-0.100392 38.464 -0.0790588 36.0747 0.304941 33.472C0.731608 30.8267 1.37161 28.1813 2.22494 25.536C3.07827 22.848 3.99561 20.3307 4.97694 17.984C6.00094 15.5947 6.93961 13.5893 7.79294 11.968C8.26227 11.072 8.88094 10.56 9.64894 10.432C10.4169 10.2613 11.1423 10.368 11.8249 10.752C12.5503 11.136 13.0623 11.6907 13.3609 12.416C13.7023 13.1413 13.6383 13.9307 13.1689 14.784C11.2916 18.368 9.79828 21.7813 8.68894 25.024C7.57961 28.2667 6.85427 31.1467 6.51294 33.664C6.21427 36.1387 6.23561 38.1013 6.57694 39.552C6.96094 40.96 7.68628 41.664 8.75294 41.664C9.73428 41.664 10.8009 41.3013 11.9529 40.576C13.1049 39.8507 14.3423 38.5493 15.6649 36.672C17.0303 34.6667 18.3529 32.064 19.6329 28.864C20.9556 25.6213 22.1289 21.8667 23.1529 17.6C23.4089 16.6187 23.8783 15.9573 24.5609 15.616C25.2863 15.2747 26.0329 15.2107 26.8009 15.424C27.5689 15.6373 28.1876 16.064 28.6569 16.704C29.1263 17.3013 29.2543 18.0693 29.0409 19.008C27.9316 23.616 27.3769 27.5627 27.3769 30.848C27.4196 34.1333 27.7609 36.5227 28.4009 38.016C28.8703 39.0827 29.4249 39.8507 30.0649 40.32C30.7476 40.7893 31.4943 41.024 32.3049 41.024C33.1156 41.024 33.9689 40.7253 34.8649 40.128C35.8036 39.488 36.7209 38.4 37.6169 36.864C38.5556 35.328 39.3876 33.216 40.1129 30.528C37.6809 28.48 35.6756 25.7707 34.0969 22.4C32.5183 19.0293 31.7289 15.168 31.7289 10.816C31.7289 8.93867 31.9423 7.21067 32.3689 5.6
