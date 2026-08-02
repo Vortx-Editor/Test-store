@@ -787,26 +787,46 @@
     document.documentElement.classList.remove('vx-loading');
   }
 
-  (function () {
+  function startLoader() {
     try {
-      const docEl = document.documentElement; docEl.classList.add('vx-loading');
+      const docEl = document.documentElement; 
+      docEl.classList.add('vx-loading');
+      
       const barFill = document.getElementById('vx-bar-fill');
       const percentEl = document.getElementById('vx-percent');
       const wordEl = document.getElementById('vx-logo-word');
-      const letters = ['V', 'O', 'R', 'T', 'X'];
+      
       if (wordEl && wordEl.children.length === 0) {
-        letters.forEach((ch, i) => { const span = document.createElement('span'); span.className = 'vx-letter'; span.textContent = ch; span.style.setProperty('--ld', (i * 0.12).toFixed(2) + 's'); wordEl.appendChild(span); });
+        const letters = ['V', 'O', 'R', 'T', 'X'];
+        letters.forEach((ch, i) => { 
+          const span = document.createElement('span'); 
+          span.className = 'vx-letter'; 
+          span.textContent = ch; 
+          span.style.setProperty('--ld', (i * 0.12).toFixed(2) + 's'); 
+          wordEl.appendChild(span); 
+        });
       }
+      
       let progress = 0;
       const timer = setInterval(() => {
         progress += 1;
-        if (progress >= 100) { progress = 100; clearInterval(timer); setTimeout(dismissLoaderNow, 300); }
+        if (progress >= 100) { 
+          progress = 100; 
+          clearInterval(timer); 
+          setTimeout(dismissLoaderNow, 300); 
+        }
         if (barFill) barFill.style.width = progress + '%';
         if (percentEl) percentEl.textContent = progress;
       }, 32);
+      
       setTimeout(dismissLoaderNow, 4500);
-    } catch (e) { dismissLoaderNow(); }
-  })();
+    } catch (e) { 
+      dismissLoaderNow(); 
+    }
+  }
+  
+  // تشغيل العداد مباشرة وبطريقة صريحة
+  startLoader();
 
   /* SWIPER 3D PHYSICAL TOUCH (CREATIVE EFFECT) */
   let swiper;
@@ -892,4 +912,4 @@
   const CATEGORY_DATA = { CC: ['Teal & Orange Grade', 'Cinematic Film Base', 'Dark Knight Grade', 'Vibrant Soft Pop'], SHAKE: ['Hard Impact Shake', 'Bass Drop Bounce', 'Smooth Whip Pan', 'Earthquake Wobble'], XML: ['Pro Intro Template', 'Velocity Edit XML', 'Glow Shake Timeline', 'Full Transition Suite'] };
 
   function showView(viewId) { document.querySelectorAll('.view').forEach(v => v.classList.add('view-hidden')); const target = document.getElementById(viewId); if (target) target.classList.remove('view-hidden'); window.scrollTo({ top: 0, behavior: 'instant' }); }
-  function openCategory(key) { document.getElementById('cat-title').textContent = key; document.getElementById('cat-grid').innerHTML = CATEGORY_DATA[key].map((item) => `<div onclick="openPreview('${item}', '${key}')" class="cat-card-glass flex flex-col justify-between min-h-[140px] text-left ltr:text-left rtl:text-right border-l-4 border-purple-500"><span class="text-[10px] font-bold uppercase text-purple-400">${key} Pack</span><h3 class="font-head font-bold 
+  function openCategory(key) { document.getElementById('cat-title').textContent = key; document.getElementById('cat-grid').innerHTML = CATEGORY_DATA[key].map((item) => `<div onclick="openPreview('${item}', '${key}')" class="cat-card-glass flex
