@@ -6,10 +6,8 @@
 <title>VORTX — Premium Digital Assets</title>
 <meta name="theme-color" content="#09090c" />
 
-<!-- Tailwind CSS CDN v4 -->
 <script src="https://cdn.tailwindcss.com"></script>
 
-<!-- Google Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;800;900&family=Cinzel:wght@700;800;900&family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@700;800;900&display=swap" rel="stylesheet">
@@ -62,24 +60,26 @@
 
   * , *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  /* Direct fix for nested scrolling frame bug: html and body unified layout */
+  /* UNIFIED NATIVE SCROLLING FIX - NO BLOCKED DRAGGING */
   html {
     width: 100%;
+    height: 100%;
     overflow-x: hidden;
+    overflow-y: auto;
     scroll-behavior: smooth;
+    touch-action: manipulation;
   }
 
   body {
     width: 100%;
-    min-height: 100vh;
+    min-height: 100%;
     overflow-x: hidden;
     background-color: var(--bg-color);
     color: var(--text-color);
     font-family: 'Inter', sans-serif;
     transition: background-color .4s ease, color .4s ease;
-    user-select: none;
-    -webkit-user-select: none;
     -webkit-font-smoothing: antialiased;
+    -webkit-overflow-scrolling: touch;
     position: relative;
   }
 
@@ -90,11 +90,11 @@
     perspective: 1000px;
   }
 
-  /* Slow & Luxurious Scroll Reveal Stagger (2 Seconds Ultra Smooth Animation) */
+  /* Slow & Luxurious Scroll Reveal Stagger */
   .reveal-on-scroll {
     opacity: 0;
-    transform: translateY(50px) scale(0.97);
-    transition: opacity 2s cubic-bezier(0.16, 1, 0.3, 1), transform 2s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: translateY(40px) scale(0.98);
+    transition: opacity 1.8s cubic-bezier(0.16, 1, 0.3, 1), transform 1.8s cubic-bezier(0.16, 1, 0.3, 1);
     will-change: opacity, transform;
   }
 
@@ -159,23 +159,6 @@
     text-shadow: none !important;
   }
 
-  /* Section Backlight Glow Effect for Light Mode */
-  html.light section.reveal-on-scroll {
-    position: relative;
-  }
-  html.light section.reveal-on-scroll::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 85%;
-    height: 85%;
-    background: radial-gradient(circle, rgba(168, 85, 247, 0.07) 0%, transparent 70%);
-    pointer-events: none;
-    z-index: -1;
-  }
-
   html.vx-loading, html.vx-loading body { overflow: hidden !important; height: 100%; }
   html[dir="rtl"] body { font-family: 'Cairo', sans-serif; }
   h1, h2, h3, .font-head { font-family: 'Cinzel', serif; letter-spacing: 1.5px; }
@@ -230,8 +213,8 @@
   .btn-3d-style:hover { transform: scale(.975); }
   .btn-3d-style span { position: relative; display: block; user-select: none; font-weight: 800; font-size: .9em; color: var(--btn-text-color); text-shadow: 0 .15em .1em rgba(0,0,0,.2); padding-inline: 2em; padding-block: .9em; text-transform: uppercase; }
 
-  /* 3D Carousel */
-  .perspective-container { perspective: 1350px; }
+  /* 3D Carousel Stage - Allows Vertical Native Scroll */
+  .perspective-container { perspective: 1350px; touch-action: pan-y; }
   .preserve-3d { transform-style: preserve-3d; }
   .card-3d {
     position: absolute; top: 50%; left: 50%; width: 280px; height: 420px;
@@ -371,9 +354,7 @@
   <main id="main-view" class="view relative z-10">
     <div id="top"></div>
 
-    <!-- HERO SECTION WITH INSTANT FAST CLICK-TO-SCROLL -->
-    <section onclick="window.scrollToId('bundles')" class="max-w-6xl mx-auto px-4 sm:px-6 pt-12 pb-10 text-center relative reveal-on-scroll cursor-pointer select-none">
-      <!-- DOUBLE PULSING DOTS -->
+    <section class="max-w-6xl mx-auto px-4 sm:px-6 pt-12 pb-10 text-center relative reveal-on-scroll">
       <div class="inline-flex items-center gap-3 px-6 py-2.5 rounded-full text-xs font-bold tracking-widest uppercase glass backdrop-blur-md mb-8">
         <span class="w-2 h-2 rounded-full bg-purple-400 animate-ping"></span>
         <span data-i18n="hero-tag">Digital Assets Hub</span>
@@ -383,14 +364,13 @@
       <div class="relative my-2 px-4 inline-block"><h1 class="font-black tracking-[0.25em] text-7xl sm:text-9xl md:text-[10rem] vortx-wet-oil-title leading-none py-4 force-eng">VORTX</h1></div>
       <p data-i18n="hero-desc" class="font-semibold opacity-85 max-w-2xl mx-auto text-base sm:text-xl leading-relaxed mt-4 mb-10">High-end VFX packs, cinematic presets &amp; custom web experiences. Crafted specifically for elite creators.</p>
       <div class="flex items-center justify-center mb-6">
-        <div class="button-wrap">
+        <div class="button-wrap" onclick="window.scrollToId('bundles')">
           <div class="btn-3d-style"><span data-i18n="hero-btn">Explore Tiers</span></div>
           <div class="button-shadow"></div>
         </div>
       </div>
     </section>
 
-    <!-- WEB PAGE BUNDLES -->
     <section id="bundles" class="max-w-7xl mx-auto px-4 sm:px-6 py-12 reveal-on-scroll">
       <div class="golden-bundle-card p-8 sm:p-14 relative flex flex-col md:flex-row items-center justify-between gap-10">
         <div class="text-center md:text-left rtl:md:text-right max-w-2xl relative z-10 w-full">
@@ -407,7 +387,6 @@
       </div>
     </section>
 
-    <!-- FEATURED PACKS: INFINITE 3D CAROUSEL -->
     <section id="packs" class="py-16 w-full relative overflow-hidden select-none reveal-on-scroll">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-20 text-center mb-6">
         <h2 data-i18n="packs-title" class="font-head font-bold text-3xl sm:text-5xl">Featured Packs</h2>
@@ -419,7 +398,6 @@
       </div>
     </section>
 
-    <!-- CATEGORIES -->
     <section id="categories" class="max-w-7xl mx-auto px-4 sm:px-6 py-16 reveal-on-scroll">
       <div class="mb-10 text-left"><h2 data-i18n="cat-sec-title" class="font-head font-bold text-3xl sm:text-4xl">Categories</h2><p data-i18n="cat-sec-desc" class="font-bold opacity-50 mt-2 text-sm tracking-wide">Select a category to explore editing packs.</p></div>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -429,30 +407,29 @@
       </div>
     </section>
 
-    <!-- LIVE STATS SECTION (FORCED PURE WHITE NUMBERS) -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 py-12 border-t border-white/10 mt-12 reveal-on-scroll">
       <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
         <div class="glass p-6 rounded-2xl">
-          <h4 class="font-mono font-black text-3xl sm:text-4xl !text-white tracking-wider">
-            <span class="counter-num !text-white" data-target="17000">0</span>+
+          <h4 class="font-mono font-black text-3xl sm:text-4xl text-white tracking-wider" style="color: #ffffff !important;">
+            <span class="counter-num text-white" style="color: #ffffff !important;" data-target="17000">0</span>+
           </h4>
           <p data-i18n="stat-subscribers" class="text-xs font-bold opacity-70 mt-2 uppercase tracking-widest">Telegram Subscribers</p>
         </div>
         <div class="glass p-6 rounded-2xl">
-          <h4 class="font-mono font-black text-3xl sm:text-4xl !text-white tracking-wider">
-            <span class="counter-num !text-white" data-target="45000">0</span>+
+          <h4 class="font-mono font-black text-3xl sm:text-4xl text-white tracking-wider" style="color: #ffffff !important;">
+            <span class="counter-num text-white" style="color: #ffffff !important;" data-target="45000">0</span>+
           </h4>
           <p data-i18n="stat-views" class="text-xs font-bold opacity-70 mt-2 uppercase tracking-widest">Monthly Visitors</p>
         </div>
         <div class="glass p-6 rounded-2xl">
-          <h4 class="font-mono font-black text-3xl sm:text-4xl !text-white tracking-wider">
-            <span class="counter-num !text-white" data-target="1250">0</span>+
+          <h4 class="font-mono font-black text-3xl sm:text-4xl text-white tracking-wider" style="color: #ffffff !important;">
+            <span class="counter-num text-white" style="color: #ffffff !important;" data-target="1250">0</span>+
           </h4>
           <p data-i18n="stat-orders" class="text-xs font-bold opacity-70 mt-2 uppercase tracking-widest">Completed Assets</p>
         </div>
         <div class="glass p-6 rounded-2xl">
-          <h4 class="font-mono font-black text-3xl sm:text-4xl !text-white tracking-wider">
-            ★ <span class="counter-num-decimal !text-white" data-target="4.9">0.0</span>/5
+          <h4 class="font-mono font-black text-3xl sm:text-4xl text-white tracking-wider" style="color: #ffffff !important;">
+            ★ <span class="counter-num-decimal text-white" style="color: #ffffff !important;" data-target="4.9">0.0</span>/5
           </h4>
           <p data-i18n="stat-rating" class="text-xs font-bold opacity-70 mt-2 uppercase tracking-widest">Satisfaction Score</p>
         </div>
@@ -467,7 +444,6 @@
     </footer>
   </main>
 
-  <!-- WEB TIERS VIEW -->
   <section id="web-view" class="view view-hidden relative z-10 min-h-screen">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
       <div class="flex items-center justify-between mb-12">
@@ -491,7 +467,6 @@
     </div>
   </section>
 
-  <!-- CATEGORY ITEMS VIEW -->
   <section id="category-view" class="view view-hidden relative z-10 min-h-screen">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
       <div class="flex items-center justify-between mb-12">
@@ -502,7 +477,6 @@
     </div>
   </section>
 
-  <!-- PREVIEW MODAL -->
   <div id="preview-modal" class="fixed inset-0 z-[80] flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
     <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="window.closePreview()"></div>
     <div class="glass rounded-3xl max-w-md w-full relative z-10 p-6" id="preview-card">
@@ -671,9 +645,6 @@
 })();
 </script>
 
-<!-- ============================================================
-     3D INFINITE CAROUSEL ENGINE (PASSIVE SCROLL)
-     ============================================================ -->
 <script>
 (function () {
   "use strict";
@@ -697,8 +668,9 @@
   var targetIndex = 0;
 
   var isDragging = false;
-  var startX = 0;
-  var currentX = 0;
+  var isHorizontalDrag = false;
+  var startX = 0, startY = 0;
+  var currentX = 0, currentY = 0;
   var dragDeltaX = 0;
   var velocityX = 0;
   var lastX = 0;
@@ -786,7 +758,7 @@
   function animate() {
     if (!isDragging) {
       currentIndex += (targetIndex - currentIndex) * 0.12;
-    } else {
+    } else if (isHorizontalDrag) {
       currentIndex += (targetIndex - currentIndex) * 0.35;
     }
 
@@ -796,7 +768,10 @@
 
   function onPointerDown(e) {
     isDragging = true;
-    startX = e.clientX || (e.touches && e.touches[0].clientX);
+    isHorizontalDrag = false;
+    var touch = e.touches ? e.touches[0] : e;
+    startX = touch.clientX;
+    startY = touch.clientY;
     lastX = startX;
     dragDeltaX = 0;
     velocityX = 0;
@@ -805,26 +780,44 @@
 
   function onPointerMove(e) {
     if (!isDragging) return;
-    currentX = e.clientX || (e.touches && e.touches[0].clientX);
-    var deltaX = currentX - lastX;
-    dragDeltaX += currentX - startX;
+    var touch = e.touches ? e.touches[0] : e;
+    currentX = touch.clientX;
+    currentY = touch.clientY;
 
-    targetIndex -= deltaX / 220;
+    var diffX = currentX - startX;
+    var diffY = currentY - startY;
 
-    var now = performance.now();
-    var dt = now - lastTime;
-    if (dt > 0) velocityX = deltaX / dt;
+    if (!isHorizontalDrag) {
+      if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 6) {
+        isHorizontalDrag = true;
+      } else if (Math.abs(diffY) > Math.abs(diffX) && Math.abs(diffY) > 6) {
+        isDragging = false; // Allow standard native vertical scrolling!
+        return;
+      }
+    }
 
-    lastX = currentX;
-    lastTime = now;
+    if (isHorizontalDrag) {
+      var deltaX = currentX - lastX;
+      dragDeltaX += currentX - startX;
+
+      targetIndex -= deltaX / 220;
+
+      var now = performance.now();
+      var dt = now - lastTime;
+      if (dt > 0) velocityX = deltaX / dt;
+
+      lastX = currentX;
+      lastTime = now;
+    }
   }
 
   function onPointerUp() {
     if (!isDragging) return;
     isDragging = false;
-
-    targetIndex -= velocityX * 1.5;
-    targetIndex = Math.round(targetIndex);
+    if (isHorizontalDrag) {
+      targetIndex -= velocityX * 1.5;
+      targetIndex = Math.round(targetIndex);
+    }
   }
 
   stage.addEventListener('mousedown', onPointerDown);
@@ -838,8 +831,10 @@
   /* Fully natural page scroll without locking wheel */
   stage.addEventListener('wheel', function (e) {
     var delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
-    targetIndex += delta > 0 ? 0.35 : -0.35;
-    targetIndex = Math.round(targetIndex);
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
+      targetIndex += delta > 0 ? 0.35 : -0.35;
+      targetIndex = Math.round(targetIndex);
+    }
   }, { passive: true });
 
   buildCards();
