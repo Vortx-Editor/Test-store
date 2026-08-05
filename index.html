@@ -55,9 +55,9 @@
     --subtext-color: #334155;
     --star-bg: radial-gradient(ellipse at bottom, #e2e8f0 0%, #cbd5e1 100%);
     --star-opacity: 0.25;
-    --btn-text-color: #2e1065;
-    --card-bg: rgba(255, 255, 255, 0.85);
-    --card-border: rgba(126, 34, 206, 0.2);
+    --btn-text-color: #ffffff;
+    --card-bg: rgba(255, 255, 255, 0.9);
+    --card-border: rgba(126, 34, 206, 0.25);
   }
 
   * , *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -84,26 +84,73 @@
     perspective: 1000px;
   }
 
-  /* Slow & Luxurious Scroll Reveal Stagger */
+  /* Slow & Luxurious Scroll Reveal Stagger (2 Seconds Ultra Smooth Animation) */
   .reveal-on-scroll {
     opacity: 0;
-    transform: translateY(45px);
-    transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: translateY(60px) scale(0.96);
+    transition: opacity 2s cubic-bezier(0.16, 1, 0.3, 1), transform 2s cubic-bezier(0.16, 1, 0.3, 1);
     will-change: opacity, transform;
   }
 
   .reveal-on-scroll.is-visible {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
   }
 
-  /* Light Mode Color Fixes */
+  /* Light Mode Visual Fixes - High Contrast & Sharp Definition */
   html.light p, html.light span, html.light h2, html.light h3, html.light h4 {
     color: var(--text-color);
   }
   html.light .text-white { color: #0f172a !important; }
   html.light .text-slate-300 { color: #334155 !important; }
   html.light .text-purple-300, html.light .text-purple-400 { color: #6b21a8 !important; }
+  
+  /* High contrast titles in Light Mode */
+  html.light .vortx-wet-oil-title {
+    background: linear-gradient(110deg, #1e1b4b 0%, #6b21a8 30%, #7e22ce 55%, #a855f7 80%, #0f172a 100%);
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 4px 12px rgba(126, 34, 206, 0.25));
+  }
+
+  html.light .gold-heading {
+    background: linear-gradient(100deg, #713f12 0%, #ca8a04 30%, #eab308 60%, #854d0e 100%);
+    background-size: 220% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 4px 10px rgba(202, 138, 4, 0.2));
+  }
+
+  html.light .glass {
+    background: rgba(255, 255, 255, 0.88) !important;
+    border: 1px solid rgba(126, 34, 206, 0.2) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05) !important;
+  }
+
+  html.light .golden-bundle-card {
+    background: linear-gradient(135deg, rgba(254, 240, 138, 0.45) 0%, rgba(255, 255, 255, 0.95) 100%) !important;
+    border: 1px solid rgba(202, 138, 4, 0.35) !important;
+    box-shadow: 0 20px 40px rgba(202, 138, 4, 0.1) !important;
+  }
+
+  html.light .btn-3d-style {
+    background: linear-gradient(135deg, #7e22ce 0%, #9333ea 100%) !important;
+    box-shadow: 0 8px 20px rgba(126, 34, 206, 0.3) !important;
+  }
+
+  html.light .btn-3d-style span {
+    color: #ffffff !important;
+    text-shadow: none !important;
+  }
+
+  html.light .cat-card-glass {
+    background: rgba(255, 255, 255, 0.9) !important;
+    border: 1px solid rgba(126, 34, 206, 0.2) !important;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.04) !important;
+  }
 
   html.vx-loading, html.vx-loading body { overflow: hidden !important; height: 100%; }
   html[dir="rtl"] body { font-family: 'Cairo', sans-serif; }
@@ -165,7 +212,7 @@
   .card-3d {
     position: absolute; top: 50%; left: 50%; width: 280px; height: 420px;
     margin-top: -210px; margin-left: -140px; border-radius: 20px;
-    transform-style: preserve-3d; will-change: transform, opacity; cursor: pointer; touch-action: none;
+    transform-style: preserve-3d; will-change: transform, opacity; cursor: pointer; touch-action: pan-y;
     box-shadow: 0 30px 60px -12px rgba(0,0,0,0.85);
   }
   .glass-sheen {
@@ -300,7 +347,8 @@
   <main id="main-view" class="view relative z-10">
     <div id="top"></div>
 
-    <section class="max-w-6xl mx-auto px-4 sm:px-6 pt-12 pb-10 text-center relative reveal-on-scroll">
+    <!-- HERO SECTION WITH INSTANT CLICK-TO-SCROLL -->
+    <section onclick="window.scrollToId('bundles')" class="max-w-6xl mx-auto px-4 sm:px-6 pt-12 pb-10 text-center relative reveal-on-scroll cursor-pointer select-none">
       <!-- DOUBLE PULSING DOTS -->
       <div class="inline-flex items-center gap-3 px-6 py-2.5 rounded-full text-xs font-bold tracking-widest uppercase glass backdrop-blur-md mb-8">
         <span class="w-2 h-2 rounded-full bg-purple-400 animate-ping"></span>
@@ -311,7 +359,7 @@
       <div class="relative my-2 px-4 inline-block"><h1 class="font-black tracking-[0.25em] text-7xl sm:text-9xl md:text-[10rem] vortx-wet-oil-title leading-none py-4 force-eng">VORTX</h1></div>
       <p data-i18n="hero-desc" class="font-semibold opacity-85 max-w-2xl mx-auto text-base sm:text-xl leading-relaxed mt-4 mb-10">High-end VFX packs, cinematic presets &amp; custom web experiences. Crafted specifically for elite creators.</p>
       <div class="flex items-center justify-center mb-6">
-        <div class="button-wrap" onclick="window.scrollToId('bundles')">
+        <div class="button-wrap">
           <div class="btn-3d-style"><span data-i18n="hero-btn">Explore Tiers</span></div>
           <div class="button-shadow"></div>
         </div>
@@ -357,30 +405,30 @@
       </div>
     </section>
 
-    <!-- LIVE STATS SECTION -->
+    <!-- LIVE STATS SECTION (NUMBERS FORCED PURE WHITE) -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 py-12 border-t border-white/10 mt-12 reveal-on-scroll">
       <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
         <div class="glass p-6 rounded-2xl">
-          <h4 class="font-mono font-black text-3xl sm:text-4xl text-purple-400 tracking-wider">
-            <span class="counter-num" data-target="17000">0</span>+
+          <h4 class="font-mono font-black text-3xl sm:text-4xl text-white tracking-wider">
+            <span class="counter-num text-white" data-target="17000">0</span>+
           </h4>
           <p data-i18n="stat-subscribers" class="text-xs font-bold opacity-70 mt-2 uppercase tracking-widest">Telegram Subscribers</p>
         </div>
         <div class="glass p-6 rounded-2xl">
-          <h4 class="font-mono font-black text-3xl sm:text-4xl text-purple-400 tracking-wider">
-            <span class="counter-num" data-target="45000">0</span>+
+          <h4 class="font-mono font-black text-3xl sm:text-4xl text-white tracking-wider">
+            <span class="counter-num text-white" data-target="45000">0</span>+
           </h4>
           <p data-i18n="stat-views" class="text-xs font-bold opacity-70 mt-2 uppercase tracking-widest">Monthly Visitors</p>
         </div>
         <div class="glass p-6 rounded-2xl">
-          <h4 class="font-mono font-black text-3xl sm:text-4xl text-purple-400 tracking-wider">
-            <span class="counter-num" data-target="1250">0</span>+
+          <h4 class="font-mono font-black text-3xl sm:text-4xl text-white tracking-wider">
+            <span class="counter-num text-white" data-target="1250">0</span>+
           </h4>
           <p data-i18n="stat-orders" class="text-xs font-bold opacity-70 mt-2 uppercase tracking-widest">Completed Assets</p>
         </div>
         <div class="glass p-6 rounded-2xl">
-          <h4 class="font-mono font-black text-3xl sm:text-4xl text-yellow-400 tracking-wider">
-            ★ <span class="counter-num-decimal" data-target="4.9">0.0</span>/5
+          <h4 class="font-mono font-black text-3xl sm:text-4xl text-white tracking-wider">
+            ★ <span class="counter-num-decimal text-white" data-target="4.9">0.0</span>/5
           </h4>
           <p data-i18n="stat-rating" class="text-xs font-bold opacity-70 mt-2 uppercase tracking-widest">Satisfaction Score</p>
         </div>
@@ -600,7 +648,7 @@
 </script>
 
 <!-- ============================================================
-     3D INFINITE CAROUSEL ENGINE (120Hz OPTIMIZED)
+     3D INFINITE CAROUSEL ENGINE (NON-BLOCKING WHEEL SCROLL)
      ============================================================ -->
 <script>
 (function () {
@@ -763,12 +811,12 @@
   window.addEventListener('touchmove', onPointerMove, { passive: true });
   window.addEventListener('touchend', onPointerUp);
 
+  /* Passive wheel event allows seamless page scrolling */
   stage.addEventListener('wheel', function (e) {
-    e.preventDefault();
     var delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
     targetIndex += delta > 0 ? 0.35 : -0.35;
     targetIndex = Math.round(targetIndex);
-  }, { passive: false });
+  }, { passive: true });
 
   buildCards();
   animate();
@@ -776,4 +824,4 @@
 </script>
 
 </body>
-      </html>
+</html>
