@@ -3,212 +3,263 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VORTX | Ultimate WebGL Experience</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <title>VORTX | Premium Store</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
     <style>
-        body, html {
-            margin: 0; padding: 0; width: 100%; height: 100%;
-            background-color: #010103; overflow: hidden;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        :root {
+            --bg-color: #030305;
+            --card-bg: rgba(255, 255, 255, 0.02);
+            --card-border: rgba(255, 255, 255, 0.05);
+            --primary: #8e2de2;
+            --accent: #00c6ff;
+            --text-main: #ffffff;
+            --text-muted: #8e8e9f;
         }
-        #canvas-container {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            overflow-x: hidden;
         }
-        .ui-layer {
-            position: relative; z-index: 2; width: 100%; height: 100%;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            pointer-events: none; /* يخلي الماوس يخترق النص للثري دي */
+
+        /* تأثير إضاءة متحركة في الخلفية */
+        .bg-glow {
+            position: fixed;
+            width: 60vw; height: 60vw;
+            background: radial-gradient(circle, rgba(142,45,226,0.1) 0%, rgba(0,0,0,0) 70%);
+            top: -20%; left: -10%;
+            z-index: -1;
+            border-radius: 50%;
+            animation: floatGlow 10s infinite alternate;
         }
-        .vortx-title {
-            font-size: 12vw; font-weight: 900; margin: 0; letter-spacing: 0.1em;
-            text-transform: uppercase;
-            background: linear-gradient(90deg, #fff, #8e2de2, #00c6ff, #fff);
-            background-size: 300% 100%;
+        .bg-glow-2 {
+            position: fixed;
+            width: 50vw; height: 50vw;
+            background: radial-gradient(circle, rgba(0,198,255,0.05) 0%, rgba(0,0,0,0) 70%);
+            bottom: -10%; right: -10%;
+            z-index: -1;
+            border-radius: 50%;
+            animation: floatGlow 8s infinite alternate-reverse;
+        }
+
+        @keyframes floatGlow {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        /* الناف بار (القائمة العلوية) */
+        nav {
+            position: fixed; top: 0; width: 100%;
+            padding: 20px 50px;
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(3, 3, 5, 0.7);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--card-border);
+            z-index: 100;
+        }
+        nav .logo { font-size: 1.5rem; font-weight: 900; letter-spacing: 2px; }
+        nav ul { display: flex; list-style: none; gap: 30px; }
+        nav ul li a { color: var(--text-main); text-decoration: none; font-size: 0.9rem; letter-spacing: 1px; transition: color 0.3s; }
+        nav ul li a:hover { color: var(--accent); }
+        .nav-btn {
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            border: none; padding: 10px 25px; border-radius: 30px;
+            color: white; font-weight: bold; cursor: pointer; transition: transform 0.3s;
+        }
+        .nav-btn:hover { transform: scale(1.05); }
+
+        /* السكشن الأول - الهيرو */
+        .hero {
+            height: 100vh; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; text-align: center;
+            padding: 0 20px;
+        }
+        .hero h1 {
+            font-size: 6rem; font-weight: 900; letter-spacing: 5px;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, var(--text-main), var(--accent));
             -webkit-background-clip: text; color: transparent;
-            animation: flow 8s ease-in-out infinite;
-            filter: drop-shadow(0 0 40px rgba(142, 45, 226, 0.4));
-            mix-blend-mode: screen;
         }
-        .subtitle {
-            font-size: 1.5rem; letter-spacing: 0.6em; color: #a0a0b5;
-            text-transform: uppercase; margin-top: -10px;
+        .hero p { font-size: 1.2rem; color: var(--text-muted); max-width: 600px; line-height: 1.6; margin-bottom: 40px; }
+        
+        /* سكشن المنتجات/الخدمات */
+        .section { padding: 100px 10%; }
+        .section-title { font-size: 3rem; margin-bottom: 50px; text-align: center; font-weight: 800; }
+        
+        .grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;
         }
-        @keyframes flow {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+
+        /* كروت المنتجات */
+        .card {
+            background: var(--card-bg); border: 1px solid var(--card-border);
+            border-radius: 20px; padding: 30px;
+            backdrop-filter: blur(10px);
+            transition: all 0.4s ease;
+            position: relative; overflow: hidden;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(0, 198, 255, 0.4);
+            box-shadow: 0 10px 40px rgba(0, 198, 255, 0.1);
+        }
+        .card-img-placeholder {
+            width: 100%; height: 200px; background: rgba(255,255,255,0.05);
+            border-radius: 10px; margin-bottom: 20px;
+            display: flex; justify-content: center; align-items: center;
+            color: var(--text-muted); font-size: 0.9rem;
+        }
+        .card h3 { font-size: 1.5rem; margin-bottom: 10px; }
+        .card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.5; margin-bottom: 20px; }
+        .price { font-size: 1.2rem; font-weight: bold; color: var(--accent); }
+        .buy-btn {
+            width: 100%; padding: 12px; background: transparent;
+            border: 1px solid var(--accent); color: var(--accent);
+            border-radius: 10px; margin-top: 15px; cursor: pointer;
+            transition: all 0.3s;
+        }
+        .buy-btn:hover { background: var(--accent); color: #000; }
+
+        /* سكشن عرض مميز (فيديو أو صورة كبيرة) */
+        .showcase {
+            display: flex; align-items: center; justify-content: space-between; gap: 50px;
+            background: rgba(255,255,255,0.01); border: 1px solid var(--card-border);
+            padding: 50px; border-radius: 30px; margin-top: 100px;
+        }
+        .showcase-text { flex: 1; }
+        .showcase-text h2 { font-size: 2.5rem; margin-bottom: 20px; }
+        .showcase-text p { color: var(--text-muted); line-height: 1.8; margin-bottom: 30px; }
+        .showcase-media {
+            flex: 1; height: 400px; background: rgba(255,255,255,0.03);
+            border-radius: 20px; display: flex; justify-content: center; align-items: center;
+            border: 1px dashed rgba(255,255,255,0.1);
+            color: var(--text-muted);
+        }
+
+        /* الفوتر */
+        footer {
+            text-align: center; padding: 40px; border-top: 1px solid var(--card-border);
+            color: var(--text-muted); font-size: 0.9rem;
+        }
+
+        /* تجاوب مع الجوال */
+        @media (max-width: 768px) {
+            nav ul { display: none; }
+            .hero h1 { font-size: 3.5rem; }
+            .showcase { flex-direction: column; text-align: center; }
         }
     </style>
 </head>
 <body>
 
-    <div id="canvas-container"></div>
-    
-    <div class="ui-layer">
-        <h1 class="vortx-title">VORTX</h1>
-        <p class="subtitle">Absolute Power</p>
-    </div>
+    <div class="bg-glow"></div>
+    <div class="bg-glow-2"></div>
+
+    <nav>
+        <div class="logo">VORTX</div>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#store">Store</a></li>
+            <li><a href="#about">About</a></li>
+        </ul>
+        <button class="nav-btn">Get Started</button>
+    </nav>
+
+    <section class="hero" id="home">
+        <h1 class="gsap-hero">ABSOLUTE POWER</h1>
+        <p class="gsap-hero">Elevate your projects with our premium cinematic assets, templates, and full-stack design services built for creators.</p>
+        <button class="nav-btn gsap-hero" style="padding: 15px 40px; font-size: 1.1rem;">Explore Products</button>
+    </section>
+
+    <section class="section" id="store">
+        <h2 class="section-title gsap-fade">Premium Assets</h2>
+        <div class="grid">
+            <div class="card gsap-slide-up">
+                <div class="card-img-placeholder">[Your Product Image/Video Here]</div>
+                <h3>Cinematic LUTs Pack</h3>
+                <p>مجموعة تلوين سينمائية تحول مقاطعك العادية إلى أفلام هوليوودية بضغطة زر.</p>
+                <div class="price">$49.99</div>
+                <button class="buy-btn">Add to Cart</button>
+            </div>
+            <div class="card gsap-slide-up">
+                <div class="card-img-placeholder">[Your Product Image/Video Here]</div>
+                <h3>VFX Transitions</h3>
+                <p>انتقالات سلسة واحترافية للمونتاج تناسب شغل الإعلانات واليوتيوب.</p>
+                <div class="price">$29.99</div>
+                <button class="buy-btn">Add to Cart</button>
+            </div>
+            <div class="card gsap-slide-up">
+                <div class="card-img-placeholder">[Your Product Image/Video Here]</div>
+                <h3>Motion UI Kit</h3>
+                <p>قوالب واجهات متحركة جاهزة للاستخدام في مشاريعك الخاصة.</p>
+                <div class="price">$79.99</div>
+                <button class="buy-btn">Add to Cart</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="about">
+        <div class="showcase gsap-fade">
+            <div class="showcase-text">
+                <h2>Designed for Excellence</h2>
+                <p>منتجاتنا مصممة بدقة عالية عشان تختصر عليك الوقت وتعطيك جودة الاستوديوهات الكبيرة. سواء كنت صانع محتوى أو مصمم، بتلقى هنا الأدوات اللي تنقل شغلك للمستوى اللي بعده بدون حوسة وتضييع وقت.</p>
+                <button class="nav-btn">Learn More</button>
+            </div>
+            <div class="showcase-media">
+                [حط مقطع فيديو يستعرض شغلك هنا]
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 VORTX. All rights reserved. Crafted with absolute power.</p>
+    </footer>
 
     <script>
-        // أنميشن الدخول
-        gsap.from(".vortx-title", { duration: 2.5, scale: 0.5, opacity: 0, ease: "expo.out" });
-        gsap.from(".subtitle", { duration: 2, y: 30, opacity: 0, ease: "power3.out", delay: 1 });
+        // تفعيل الإضافات
+        gsap.registerPlugin(ScrollTrigger);
 
-        // إعدادات الثري دي
-        const scene = new THREE.Scene();
-        scene.fog = new THREE.FogExp2(0x010103, 0.15);
-        
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 100);
-        camera.position.z = 3;
-
-        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: "high-performance" });
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-        document.getElementById('canvas-container').appendChild(renderer.domElement);
-
-        // أكواد التظليل (الرياضيات اللي تصنع البلازما)
-        const vertexShader = `
-            varying vec2 vUv;
-            varying vec3 vPosition;
-            void main() {
-                vUv = uv;
-                vPosition = position;
-                gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-            }
-        `;
-
-        const fragmentShader = `
-            uniform float time;
-            varying vec2 vUv;
-            varying vec3 vPosition;
-            
-            // معادلة توليد الضجيج (Noise)
-            vec4 permute(vec4 x){return mod(((x*34.0)+1.0)*x, 289.0);}
-            vec4 taylorInvSqrt(vec4 r){return 1.79284291400159 - 0.85373472095314 * r;}
-            vec3 fade(vec3 t) {return t*t*t*(t*(t*6.0-15.0)+10.0);}
-            float cnoise(vec3 P){
-                vec3 Pi0 = floor(P); vec3 Pi1 = Pi0 + vec3(1.0);
-                Pi0 = mod(Pi0, 289.0); Pi1 = mod(Pi1, 289.0);
-                vec3 Pf0 = fract(P); vec3 Pf1 = Pf0 - vec3(1.0);
-                vec4 ix = vec4(Pi0.x, Pi1.x, Pi0.x, Pi1.x);
-                vec4 iy = vec4(Pi0.yy, Pi1.yy);
-                vec4 iz0 = Pi0.zzzz; vec4 iz1 = Pi1.zzzz;
-                vec4 ixy = permute(permute(ix) + iy);
-                vec4 ixy0 = permute(ixy + iz0); vec4 ixy1 = permute(ixy + iz1);
-                vec4 gx0 = ixy0 / 7.0; vec4 gy0 = fract(floor(gx0) / 7.0) - 0.5;
-                gx0 = fract(gx0); vec4 gz0 = vec4(0.5) - abs(gx0) - abs(gy0);
-                vec4 sz0 = step(gz0, vec4(0.0));
-                gx0 -= sz0 * (step(0.0, gx0) - 0.5); gy0 -= sz0 * (step(0.0, gy0) - 0.5);
-                vec4 gx1 = ixy1 / 7.0; vec4 gy1 = fract(floor(gx1) / 7.0) - 0.5;
-                gx1 = fract(gx1); vec4 gz1 = vec4(0.5) - abs(gx1) - abs(gy1);
-                vec4 sz1 = step(gz1, vec4(0.0));
-                gx1 -= sz1 * (step(0.0, gx1) - 0.5); gy1 -= sz1 * (step(0.0, gy1) - 0.5);
-                vec3 g000 = vec3(gx0.x,gy0.x,gz0.x); vec3 g100 = vec3(gx0.y,gy0.y,gz0.y);
-                vec3 g010 = vec3(gx0.z,gy0.z,gz0.z); vec3 g110 = vec3(gx0.w,gy0.w,gz0.w);
-                vec3 g001 = vec3(gx1.x,gy1.x,gz1.x); vec3 g101 = vec3(gx1.y,gy1.y,gz1.y);
-                vec3 g011 = vec3(gx1.z,gy1.z,gz1.z); vec3 g111 = vec3(gx1.w,gy1.w,gz1.w);
-                vec4 norm0 = taylorInvSqrt(vec4(dot(g000, g000), dot(g010, g010), dot(g100, g100), dot(g110, g110)));
-                g000 *= norm0.x; g010 *= norm0.y; g100 *= norm0.z; g110 *= norm0.w;
-                vec4 norm1 = taylorInvSqrt(vec4(dot(g001, g001), dot(g011, g011), dot(g101, g101), dot(g111, g111)));
-                g001 *= norm1.x; g011 *= norm1.y; g101 *= norm1.z; g111 *= norm1.w;
-                float n000 = dot(g000, Pf0); float n100 = dot(g100, vec3(Pf1.x, Pf0.yz));
-                float n010 = dot(g010, vec3(Pf0.x, Pf1.y, Pf0.z)); float n110 = dot(g110, vec3(Pf1.xy, Pf0.z));
-                float n001 = dot(g001, vec3(Pf0.xy, Pf1.z)); float n101 = dot(g101, vec3(Pf1.x, Pf0.y, Pf1.z));
-                float n011 = dot(g011, vec3(Pf0.x, Pf1.yz)); float n111 = dot(g111, Pf1);
-                vec3 fade_xyz = fade(Pf0);
-                vec4 n_z = mix(vec4(n000, n100, n010, n110), vec4(n001, n101, n011, n111), fade_xyz.z);
-                vec2 n_yz = mix(n_z.xy, n_z.zw, fade_xyz.y);
-                float n_xyz = mix(n_yz.x, n_yz.y, fade_xyz.x); 
-                return 2.2 * n_xyz;
-            }
-
-            void main() {
-                // دمج الألوان وحساب الحركة
-                float noise = cnoise(vec3(vPosition.x * 2.0 + time * 0.5, vPosition.y * 2.0, vPosition.z * 2.0 - time * 0.8));
-                float intensity = pow(abs(noise), 1.2);
-                
-                // الألوان: بنفسجي غامق وأزرق سماوي
-                vec3 color1 = vec3(0.55, 0.17, 0.88); // Purple
-                vec3 color2 = vec3(0.00, 0.77, 1.00); // Cyan
-                
-                vec3 finalColor = mix(color2, color1, noise + 0.5);
-                
-                gl_FragColor = vec4(finalColor * intensity * 2.5, 1.0);
-            }
-        `;
-
-        // مجسم الطاقة (Core)
-        const uniforms = { time: { value: 0.0 } };
-        const coreGeo = new THREE.IcosahedronGeometry(1.2, 64);
-        const coreMat = new THREE.ShaderMaterial({
-            vertexShader, fragmentShader, uniforms, wireframe: false, transparent: true
-        });
-        const core = new THREE.Mesh(coreGeo, coreMat);
-        scene.add(core);
-
-        // هالة سلكية حول المجسم (Wireframe Halo)
-        const haloGeo = new THREE.IcosahedronGeometry(1.4, 3);
-        const haloMat = new THREE.MeshBasicMaterial({ 
-            color: 0x8e2de2, wireframe: true, transparent: true, opacity: 0.15 
-        });
-        const halo = new THREE.Mesh(haloGeo, haloMat);
-        scene.add(halo);
-
-        // نظام جزيئات معقدة (Particles)
-        const pGeo = new THREE.BufferGeometry();
-        const pCount = 3000;
-        const pPos = new Float32Array(pCount * 3);
-        for(let i=0; i<pCount*3; i++){
-            pPos[i] = (Math.random() - 0.5) * 15;
-        }
-        pGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
-        const pMat = new THREE.PointsMaterial({
-            color: 0x00c6ff, size: 0.03, transparent: true, opacity: 0.6, blending: THREE.AdditiveBlending
-        });
-        const particles = new THREE.Points(pGeo, pMat);
-        scene.add(particles);
-
-        // تفاعل الماوس
-        let mouseX = 0; let mouseY = 0;
-        document.addEventListener('mousemove', (e) => {
-            mouseX = (e.clientX / window.innerWidth) * 2 - 1;
-            mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
+        // أنميشن الهيرو عند فتح الموقع
+        gsap.from(".gsap-hero", {
+            y: 50,
+            opacity: 0,
+            duration: 1,
+            stagger: 0.2,
+            ease: "power3.out",
+            delay: 0.2
         });
 
-        // حلقة الأنميشن
-        const clock = new THREE.Clock();
-        function animate() {
-            requestAnimationFrame(animate);
-            const t = clock.getElapsedTime();
-            
-            // تحديث وقت المظلل (Shader)
-            uniforms.time.value = t;
-            
-            // دوران العناصر
-            core.rotation.y = t * 0.15;
-            core.rotation.z = t * 0.1;
-            
-            halo.rotation.y = -t * 0.1;
-            halo.rotation.x = t * 0.2;
-            
-            particles.rotation.y = t * 0.05;
-            particles.rotation.x = t * 0.02;
+        // أنميشن العناوين مع النزول بالسكرول
+        gsap.utils.toArray('.gsap-fade').forEach(element => {
+            gsap.from(element, {
+                scrollTrigger: {
+                    trigger: element,
+                    start: "top 80%",
+                    toggleActions: "play none none reverse"
+                },
+                opacity: 0,
+                y: 30,
+                duration: 1,
+                ease: "power2.out"
+            });
+        });
 
-            // حركة الكاميرا بنعومة (Parallax)
-            camera.position.x += (mouseX * 0.8 - camera.position.x) * 0.05;
-            camera.position.y += (mouseY * 0.8 - camera.position.y) * 0.05;
-            camera.lookAt(scene.position);
-
-            renderer.render(scene, camera);
-        }
-        animate();
-
-        // تجاوب الشاشة
-        window.addEventListener('resize', () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
+        // أنميشن الكروت تدخل ورى بعض
+        gsap.from(".gsap-slide-up", {
+            scrollTrigger: {
+                trigger: ".grid",
+                start: "top 75%",
+            },
+            y: 50,
+            opacity: 0,
+            duration: 0.8,
+            stagger: 0.2, // يخليها تطلع حبة حبة
+            ease: "power3.out"
         });
     </script>
 </body>
