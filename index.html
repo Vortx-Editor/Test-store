@@ -1,215 +1,202 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VORTX | Premium Cinematic Experience</title>
-    <!-- استدعاء المكتبات -->
+    <title>VORTX | Ultra Premium</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     
     <style>
         :root {
-            --primary: #8e2de2;
-            --secondary: #4a00e0;
-            --accent: #00c6ff;
-            --bg: #030305;
+            --bg-color: #020204;
+            --accent-glow: #00e5ff;
+            --purple-glow: #9d00ff;
         }
-        
+
         body, html {
             margin: 0; padding: 0; width: 100%; height: 100%;
-            background-color: var(--bg); color: white;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            overflow-x: hidden;
+            background-color: var(--bg-color);
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            overflow: hidden; /* عشان ما يطلع سكرول ويخرب الشكل */
+            color: white;
         }
 
-        /* حاوية الخلفية السينمائية */
-        #webgl-container {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0;
-            pointer-events: none; 
+        /* حاوية الثري دي بالخلفية */
+        #canvas-container {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 1;
         }
 
-        /* المحتوى الأساسي */
+        /* محتوى الموقع فوق الثري دي */
         .content {
-            position: relative; z-index: 1; display: flex; flex-direction: column;
-            align-items: center; justify-content: center; min-height: 100vh; text-align: center;
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            pointer-events: none; /* عشان تقدر تتفاعل مع الثري دي بالماوس */
         }
 
-        .title-container {
-            position: relative; perspective: 1000px;
-        }
-
-        /* تأثيرات شعار فورتكس */
-        h1.vortx-title {
-            font-size: 9rem; font-weight: 900; margin: 0; letter-spacing: 0.2em;
-            background: linear-gradient(270deg, var(--accent), var(--primary), var(--secondary));
-            background-size: 400% 400%;
-            -webkit-background-clip: text; color: transparent;
-            animation: gradientShift 6s ease infinite;
-            filter: drop-shadow(0 0 40px rgba(142, 45, 226, 0.5));
+        .title {
+            font-size: 8rem;
+            font-weight: 900;
+            letter-spacing: 0.15em;
+            margin: 0;
             text-transform: uppercase;
+            background: linear-gradient(to right, var(--accent-glow), var(--purple-glow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 30px rgba(157, 0, 255, 0.4));
+            opacity: 0; /* للأنميشن */
+            transform: translateY(50px);
         }
 
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        p.subtitle {
-            font-size: 1.5rem; color: #a0a0b5; margin-top: 10px;
-            letter-spacing: 4px; font-weight: 300;
+        .subtitle {
+            font-size: 1.2rem;
+            letter-spacing: 0.4em;
+            color: #a3a3b5;
+            margin-top: 15px;
             text-transform: uppercase;
-            opacity: 0; 
+            opacity: 0;
         }
 
-        /* كروت الباقات بنظام Glassmorphism */
-        .glass-cards {
-            display: flex; gap: 2.5rem; margin-top: 5rem; flex-wrap: wrap; justify-content: center;
-            opacity: 0; 
+        .action-btn {
+            margin-top: 40px;
+            padding: 15px 40px;
+            font-size: 1rem;
+            letter-spacing: 2px;
+            color: white;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            backdrop-filter: blur(10px);
+            cursor: pointer;
+            pointer-events: auto;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            opacity: 0;
         }
 
-        .card {
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 20px; padding: 40px 30px; width: 320px;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
-            transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
-            cursor: pointer; position: relative; overflow: hidden;
+        .action-btn:hover {
+            background: rgba(157, 0, 255, 0.2);
+            border-color: var(--accent-glow);
+            box-shadow: 0 0 20px rgba(0, 229, 255, 0.3);
+            transform: scale(1.05);
         }
-
-        /* لمعة الكرت عند التمرير */
-        .card::before {
-            content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
-            background: linear-gradient(to right, transparent, rgba(255,255,255,0.08), transparent);
-            transform: skewX(-20deg); transition: 0.6s;
-        }
-
-        .card:hover::before { left: 150%; }
-        .card:hover {
-            transform: translateY(-12px); border-color: rgba(142, 45, 226, 0.6);
-            box-shadow: 0 15px 50px rgba(142, 45, 226, 0.2);
-        }
-
-        .card h3 { margin: 0 0 15px 0; color: #fff; font-size: 1.6rem; letter-spacing: 1px;}
-        .card p { margin: 0; color: #8e8e9f; line-height: 1.7; font-size: 1rem;}
     </style>
 </head>
 <body>
-    
-    <!-- خلفية الجزيئات ثلاثية الأبعاد -->
-    <div id="webgl-container"></div>
-    
+
+    <div id="canvas-container"></div>
+
     <div class="content">
-        <div class="title-container">
-            <h1 class="vortx-title">VORTX</h1>
-        </div>
-        <p class="subtitle">Cinematic Editing & Design</p>
-        
-        <!-- باقاتك -->
-        <div class="glass-cards">
-            <div class="card">
-                <h3>Premium Cuts</h3>
-                <p>انتقالات سلسة وإيقاع ديناميكي يشد المشاهد من أول ثانية.</p>
-            </div>
-            <div class="card">
-                <h3>VFX & Motion</h3>
-                <p>مؤثرات بصرية وموشن جرافيك احترافي يعطي مقاطعك طابع الاستوديوهات الضخمة.</p>
-            </div>
-            <div class="card">
-                <h3>Color Grading</h3>
-                <p>تلوين سينمائي يبرز أدق التفاصيل ويعكس هوية بصرية فخمة.</p>
-            </div>
-        </div>
+        <h1 class="title">VORTX</h1>
+        <p class="subtitle">Cinematic Digital Experience</p>
+        <button class="action-btn">Explore Now</button>
     </div>
 
     <script>
-        // أنميشن دخول العناصر باستخدام GSAP
-        gsap.from(".vortx-title", { duration: 2, y: 60, opacity: 0, ease: "power4.out", delay: 0.3 });
-        gsap.to(".subtitle", { duration: 1.5, opacity: 1, y: -10, ease: "power3.out", delay: 1.2 });
-        gsap.to(".glass-cards", { duration: 1.5, opacity: 1, y: -20, ease: "power3.out", stagger: 0.2, delay: 1.8 });
+        // --- 1. أنميشن النصوص بالـ GSAP ---
+        gsap.to(".title", { duration: 1.5, opacity: 1, y: 0, ease: "power4.out", delay: 0.5 });
+        gsap.to(".subtitle", { duration: 1.5, opacity: 1, y: 0, ease: "power3.out", delay: 0.9 });
+        gsap.to(".action-btn", { duration: 1, opacity: 1, y: 0, ease: "power2.out", delay: 1.3 });
 
-        // بناء البيئة السينمائية باستخدام Three.js
-        const container = document.getElementById('webgl-container');
+        // --- 2. إعداد مشهد الـ Three.js ---
+        const container = document.getElementById('canvas-container');
         const scene = new THREE.Scene();
-        scene.fog = new THREE.FogExp2(0x030305, 0.0008); // ضباب خفيف للعمق
+        
+        // كاميرا
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.z = 30;
 
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 2000);
-        camera.position.z = 600;
-
-        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, powerPreference: "high-performance" });
+        // الريندر
+        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
         renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // تحسين الأداء
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         container.appendChild(renderer.domElement);
 
-        // إنشاء نظام الجزيئات (Particles System)
-        const particleCount = 3000;
-        const geometry = new THREE.BufferGeometry();
-        const positions = new Float32Array(particleCount * 3);
-        const colors = new Float32Array(particleCount * 3);
-
-        const color1 = new THREE.Color(0x8e2de2); // بنفسجي غامق
-        const color2 = new THREE.Color(0x00c6ff); // أزرق نيون
-
-        for (let i = 0; i < particleCount * 3; i += 3) {
-            positions[i] = (Math.random() - 0.5) * 2500;
-            positions[i + 1] = (Math.random() - 0.5) * 2500;
-            positions[i + 2] = (Math.random() - 0.5) * 2500;
-
-            // دمج الألوان عشوائياً لكل جزيء
-            const mixedColor = color1.clone().lerp(color2, Math.random());
-            colors[i] = mixedColor.r;
-            colors[i + 1] = mixedColor.g;
-            colors[i + 2] = mixedColor.b;
-        }
-
-        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-        geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-
-        // مادة الجزيئات مع إضاءة خفيفة
-        const material = new THREE.PointsMaterial({
-            size: 3.5,
-            vertexColors: true,
+        // --- 3. إنشاء الشكل الهندسي المعقد (Torus Knot) ---
+        const geometry = new THREE.TorusKnotGeometry(10, 3, 200, 32);
+        
+        // مادة الشكل (نقاط مضيئة كأنها بارتيكلز)
+        const material = new THREE.PointsMaterial({ 
+            size: 0.1, 
+            color: 0x00e5ff,
             transparent: true,
-            opacity: 0.9,
-            sizeAttenuation: true,
-            blending: THREE.AdditiveBlending,
-            depthWrite: false
+            opacity: 0.8,
+            blending: THREE.AdditiveBlending
         });
+        
+        const torusKnot = new THREE.Points(geometry, material);
+        scene.add(torusKnot);
 
-        const particles = new THREE.Points(geometry, material);
-        scene.add(particles);
+        // إضافة جزيئات صغيرة طايرة في الخلفية
+        const particlesGeometry = new THREE.BufferGeometry();
+        const particlesCount = 1500;
+        const posArray = new Float32Array(particlesCount * 3);
 
-        // تفاعل الكاميرا مع الماوس
+        for(let i = 0; i < particlesCount * 3; i++) {
+            posArray[i] = (Math.random() - 0.5) * 100;
+        }
+        
+        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+        const particlesMaterial = new THREE.PointsMaterial({
+            size: 0.05,
+            color: 0x9d00ff,
+            blending: THREE.AdditiveBlending
+        });
+        
+        const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+        scene.add(particlesMesh);
+
+        // --- 4. تفاعل الماوس (Parallax) ---
         let mouseX = 0;
         let mouseY = 0;
+        let targetX = 0;
+        let targetY = 0;
         const windowHalfX = window.innerWidth / 2;
         const windowHalfY = window.innerHeight / 2;
 
         document.addEventListener('mousemove', (event) => {
-            mouseX = (event.clientX - windowHalfX) * 0.08;
-            mouseY = (event.clientY - windowHalfY) * 0.08;
+            mouseX = (event.clientX - windowHalfX);
+            mouseY = (event.clientY - windowHalfY);
         });
 
-        // حلقة الأنميشن (Animation Loop)
+        // --- 5. حلقة الأنميشن ---
+        const clock = new THREE.Clock();
+
         function animate() {
             requestAnimationFrame(animate);
+            const elapsedTime = clock.getElapsedTime();
 
-            // دوران بطيء ومستمر للجزيئات
-            particles.rotation.y += 0.0008;
-            particles.rotation.x += 0.0004;
+            // حركة الشكل الهندسي
+            torusKnot.rotation.y += 0.005;
+            torusKnot.rotation.x += 0.002;
+            
+            // تموج الشكل الهندسي
+            torusKnot.position.y = Math.sin(elapsedTime * 0.5) * 2;
 
-            // حركة كاميرا سلسة (Parallax)
-            camera.position.x += (mouseX - camera.position.x) * 0.03;
-            camera.position.y += (-mouseY - camera.position.y) * 0.03;
-            camera.lookAt(scene.position);
+            // حركة الجزيئات الخلفية
+            particlesMesh.rotation.y = -elapsedTime * 0.05;
+
+            // نعومة حركة الكاميرا مع الماوس
+            targetX = mouseX * 0.001;
+            targetY = mouseY * 0.001;
+            
+            torusKnot.rotation.y += 0.05 * (targetX - torusKnot.rotation.y);
+            torusKnot.rotation.x += 0.05 * (targetY - torusKnot.rotation.x);
 
             renderer.render(scene, camera);
         }
+
         animate();
 
-        // تجاوب الشاشة عند تغيير الحجم
+        // --- 6. التجاوب مع حجم الشاشة ---
         window.addEventListener('resize', () => {
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
