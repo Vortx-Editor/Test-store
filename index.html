@@ -1,266 +1,385 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VORTX | Premium Store</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    
-    <style>
-        :root {
-            --bg-color: #030305;
-            --card-bg: rgba(255, 255, 255, 0.02);
-            --card-border: rgba(255, 255, 255, 0.05);
-            --primary: #8e2de2;
-            --accent: #00c6ff;
-            --text-main: #ffffff;
-            --text-muted: #8e8e9f;
-        }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#0a0a0a" />
+<title>Zyra — Web3 Wallet</title>
+<style>
+  /* ---------- Fonts ---------- */
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+  /* ---------- Tokens ---------- */
+  :root{
+    --bg:#0a0a0b;
+    --panel:#0d0d0e;
+    --fg:#f4f5f2;
+    --muted:#8b8d86;
+    --accent:#c8f135;      /* lime green */
+    --accent-fg:#0a0a0b;
+    --ring:rgba(255,255,255,.09);
+    --radius:999px;
+  }
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            overflow-x: hidden;
-        }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    background:var(--bg);
+    color:var(--fg);
+    font-family:'Inter',system-ui,-apple-system,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow:hidden;
+  }
 
-        /* تأثير إضاءة متحركة في الخلفية */
-        .bg-glow {
-            position: fixed;
-            width: 60vw; height: 60vw;
-            background: radial-gradient(circle, rgba(142,45,226,0.1) 0%, rgba(0,0,0,0) 70%);
-            top: -20%; left: -10%;
-            z-index: -1;
-            border-radius: 50%;
-            animation: floatGlow 10s infinite alternate;
-        }
-        .bg-glow-2 {
-            position: fixed;
-            width: 50vw; height: 50vw;
-            background: radial-gradient(circle, rgba(0,198,255,0.05) 0%, rgba(0,0,0,0) 70%);
-            bottom: -10%; right: -10%;
-            z-index: -1;
-            border-radius: 50%;
-            animation: floatGlow 8s infinite alternate-reverse;
-        }
+  /* ---------- Stage / hero ---------- */
+  .hero{
+    position:relative;
+    width:100%;
+    height:100vh;
+    overflow:hidden;
+    background:
+      radial-gradient(120% 80% at 50% 12%, #131314 0%, #0a0a0b 55%, #050505 100%);
+  }
 
-        @keyframes floatGlow {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(50px, 50px); }
-        }
+  /* subtle starfield */
+  .stars{position:absolute;inset:0;z-index:0;opacity:.5}
 
-        /* الناف بار (القائمة العلوية) */
-        nav {
-            position: fixed; top: 0; width: 100%;
-            padding: 20px 50px;
-            display: flex; justify-content: space-between; align-items: center;
-            background: rgba(3, 3, 5, 0.7);
-            backdrop-filter: blur(15px);
-            border-bottom: 1px solid var(--card-border);
-            z-index: 100;
-        }
-        nav .logo { font-size: 1.5rem; font-weight: 900; letter-spacing: 2px; }
-        nav ul { display: flex; list-style: none; gap: 30px; }
-        nav ul li a { color: var(--text-main); text-decoration: none; font-size: 0.9rem; letter-spacing: 1px; transition: color 0.3s; }
-        nav ul li a:hover { color: var(--accent); }
-        .nav-btn {
-            background: linear-gradient(45deg, var(--primary), var(--accent));
-            border: none; padding: 10px 25px; border-radius: 30px;
-            color: white; font-weight: bold; cursor: pointer; transition: transform 0.3s;
-        }
-        .nav-btn:hover { transform: scale(1.05); }
+  /* globe canvas */
+  #globe{
+    position:absolute;
+    top:46%;left:50%;
+    transform:translate(-50%,-50%);
+    z-index:1;
+    opacity:0;
+    animation:globeIn 1.6s cubic-bezier(.16,1,.3,1) .2s forwards;
+  }
+  @keyframes globeIn{from{opacity:0;transform:translate(-50%,-50%) scale(.82)}to{opacity:1;transform:translate(-50%,-50%) scale(1)}}
 
-        /* السكشن الأول - الهيرو */
-        .hero {
-            height: 100vh; display: flex; flex-direction: column;
-            justify-content: center; align-items: center; text-align: center;
-            padding: 0 20px;
-        }
-        .hero h1 {
-            font-size: 6rem; font-weight: 900; letter-spacing: 5px;
-            margin-bottom: 20px;
-            background: linear-gradient(to right, var(--text-main), var(--accent));
-            -webkit-background-clip: text; color: transparent;
-        }
-        .hero p { font-size: 1.2rem; color: var(--text-muted); max-width: 600px; line-height: 1.6; margin-bottom: 40px; }
-        
-        /* سكشن المنتجات/الخدمات */
-        .section { padding: 100px 10%; }
-        .section-title { font-size: 3rem; margin-bottom: 50px; text-align: center; font-weight: 800; }
-        
-        .grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;
-        }
+  /* glow under globe */
+  .floor-glow{
+    position:absolute;
+    left:50%;bottom:6%;
+    width:60%;height:220px;
+    transform:translateX(-50%);
+    background:radial-gradient(ellipse at center, rgba(255,255,255,.14), rgba(255,255,255,0) 70%);
+    filter:blur(6px);
+    z-index:1;
+    opacity:0;
+    animation:fade 2s ease 1s forwards;
+  }
+  @keyframes fade{to{opacity:1}}
 
-        /* كروت المنتجات */
-        .card {
-            background: var(--card-bg); border: 1px solid var(--card-border);
-            border-radius: 20px; padding: 30px;
-            backdrop-filter: blur(10px);
-            transition: all 0.4s ease;
-            position: relative; overflow: hidden;
-        }
-        .card:hover {
-            transform: translateY(-10px);
-            border-color: rgba(0, 198, 255, 0.4);
-            box-shadow: 0 10px 40px rgba(0, 198, 255, 0.1);
-        }
-        .card-img-placeholder {
-            width: 100%; height: 200px; background: rgba(255,255,255,0.05);
-            border-radius: 10px; margin-bottom: 20px;
-            display: flex; justify-content: center; align-items: center;
-            color: var(--text-muted); font-size: 0.9rem;
-        }
-        .card h3 { font-size: 1.5rem; margin-bottom: 10px; }
-        .card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.5; margin-bottom: 20px; }
-        .price { font-size: 1.2rem; font-weight: bold; color: var(--accent); }
-        .buy-btn {
-            width: 100%; padding: 12px; background: transparent;
-            border: 1px solid var(--accent); color: var(--accent);
-            border-radius: 10px; margin-top: 15px; cursor: pointer;
-            transition: all 0.3s;
-        }
-        .buy-btn:hover { background: var(--accent); color: #000; }
+  /* ---------- Nav ---------- */
+  nav{
+    position:absolute;top:0;left:0;right:0;z-index:10;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:28px clamp(20px,4vw,64px);
+    opacity:0;transform:translateY(-14px);
+    animation:dropIn .8s cubic-bezier(.16,1,.3,1) .15s forwards;
+  }
+  @keyframes dropIn{to{opacity:1;transform:translateY(0)}}
 
-        /* سكشن عرض مميز (فيديو أو صورة كبيرة) */
-        .showcase {
-            display: flex; align-items: center; justify-content: space-between; gap: 50px;
-            background: rgba(255,255,255,0.01); border: 1px solid var(--card-border);
-            padding: 50px; border-radius: 30px; margin-top: 100px;
-        }
-        .showcase-text { flex: 1; }
-        .showcase-text h2 { font-size: 2.5rem; margin-bottom: 20px; }
-        .showcase-text p { color: var(--text-muted); line-height: 1.8; margin-bottom: 30px; }
-        .showcase-media {
-            flex: 1; height: 400px; background: rgba(255,255,255,0.03);
-            border-radius: 20px; display: flex; justify-content: center; align-items: center;
-            border: 1px dashed rgba(255,255,255,0.1);
-            color: var(--text-muted);
-        }
+  .brand{display:flex;align-items:center;gap:10px;font-size:20px;font-weight:600;letter-spacing:-.02em}
+  .brand .mark{
+    width:24px;height:24px;border-radius:50%;
+    border:2px solid var(--fg);
+    display:grid;place-items:center;position:relative;
+  }
+  .brand .mark::after{content:"";width:9px;height:9px;border-radius:50%;background:var(--fg);
+    box-shadow:6px 0 0 -3px var(--bg);transform:translateX(-1px)}
 
-        /* الفوتر */
-        footer {
-            text-align: center; padding: 40px; border-top: 1px solid var(--card-border);
-            color: var(--text-muted); font-size: 0.9rem;
-        }
+  .menu{
+    display:flex;align-items:center;gap:6px;
+    padding:7px 8px;
+    background:rgba(255,255,255,.04);
+    border:1px solid var(--ring);
+    border-radius:var(--radius);
+    backdrop-filter:blur(8px);
+  }
+  .menu a{
+    color:var(--muted);text-decoration:none;font-size:14px;font-weight:400;
+    padding:7px 16px;border-radius:var(--radius);transition:.25s;
+  }
+  .menu a:hover{color:var(--fg);background:rgba(255,255,255,.06)}
 
-        /* تجاوب مع الجوال */
-        @media (max-width: 768px) {
-            nav ul { display: none; }
-            .hero h1 { font-size: 3.5rem; }
-            .showcase { flex-direction: column; text-align: center; }
-        }
-    </style>
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;
+    border:none;cursor:pointer;font-family:inherit;
+    font-size:14px;font-weight:500;border-radius:var(--radius);
+    transition:transform .25s, filter .25s, background .25s;
+  }
+  .btn:hover{transform:translateY(-2px)}
+  .btn-accent{background:var(--accent);color:var(--accent-fg);padding:11px 12px 11px 20px}
+  .btn-accent .ico{background:var(--accent-fg);color:var(--accent)}
+  .btn .ico{
+    width:26px;height:26px;border-radius:50%;
+    display:grid;place-items:center;font-size:13px;
+  }
+  .btn-ghost{background:transparent;color:var(--fg);padding:11px 20px}
+  .btn-ghost:hover{background:rgba(255,255,255,.05)}
+
+  /* ---------- Hero content ---------- */
+  .content{
+    position:absolute;z-index:5;
+    left:clamp(20px,4vw,64px);
+    bottom:clamp(48px,9vh,110px);
+    max-width:720px;
+  }
+  h1{
+    font-size:clamp(38px,5.4vw,78px);
+    font-weight:500;
+    line-height:1.02;
+    letter-spacing:-.03em;
+    margin-bottom:22px;
+  }
+  h1 .line{display:block;overflow:hidden}
+  h1 .word{display:inline-block;margin-right:.22em;transform:translateY(110%);opacity:0}
+  .revealed h1 .word{animation:wordUp .9s cubic-bezier(.16,1,.3,1) forwards}
+  @keyframes wordUp{to{transform:translateY(0);opacity:1}}
+
+  .sub{
+    color:var(--muted);
+    font-size:clamp(14px,1.15vw,17px);
+    line-height:1.55;
+    max-width:430px;
+    margin-bottom:34px;
+    opacity:0;transform:translateY(16px);
+  }
+  .revealed .sub{animation:upFade .8s ease 1.05s forwards}
+  @keyframes upFade{to{opacity:1;transform:translateY(0)}}
+
+  .cta{display:flex;align-items:center;gap:18px;opacity:0;transform:translateY(16px)}
+  .revealed .cta{animation:upFade .8s ease 1.25s forwards}
+  .watch{display:inline-flex;align-items:center;gap:10px;color:var(--fg);background:none;border:none;
+    cursor:pointer;font-family:inherit;font-size:14px;font-weight:400;transition:.25s}
+  .watch:hover{color:var(--accent)}
+  .watch .play{width:30px;height:30px;border:1px solid var(--ring);border-radius:50%;
+    display:grid;place-items:center;font-size:10px}
+
+  /* ---------- Supported platforms ---------- */
+  .platforms{
+    position:absolute;z-index:5;
+    right:clamp(20px,4vw,64px);
+    bottom:clamp(48px,9vh,110px);
+    display:flex;align-items:center;gap:14px;
+    opacity:0;
+  }
+  .revealed .platforms{animation:fade .8s ease 1.4s forwards}
+  .platforms span{color:var(--muted);font-size:13px}
+  .platforms .p{
+    width:40px;height:40px;border-radius:50%;
+    background:rgba(255,255,255,.05);border:1px solid var(--ring);
+    display:grid;place-items:center;color:var(--muted);transition:.25s;
+  }
+  .platforms .p:hover{color:var(--fg);border-color:rgba(255,255,255,.25);background:rgba(255,255,255,.08)}
+  .platforms .p svg{width:18px;height:18px}
+
+  @media (max-width:760px){
+    .menu{display:none}
+    .platforms{display:none}
+    h1{font-size:40px}
+  }
+</style>
 </head>
 <body>
+  <main class="hero" id="hero">
+    <canvas class="stars" id="stars"></canvas>
+    <canvas id="globe"></canvas>
+    <div class="floor-glow"></div>
 
-    <div class="bg-glow"></div>
-    <div class="bg-glow-2"></div>
-
+    <!-- Nav -->
     <nav>
-        <div class="logo">VORTX</div>
-        <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#store">Store</a></li>
-            <li><a href="#about">About</a></li>
-        </ul>
-        <button class="nav-btn">Get Started</button>
+      <div class="brand"><span class="mark"></span>Zyra</div>
+      <div class="menu">
+        <a href="#">Wallet</a>
+        <a href="#">Features</a>
+        <a href="#">Learn</a>
+        <a href="#">Pricing</a>
+        <a href="#">Community</a>
+      </div>
+      <button class="btn btn-accent">Get Started <span class="ico"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg></span></button>
     </nav>
 
-    <section class="hero" id="home">
-        <h1 class="gsap-hero">ABSOLUTE POWER</h1>
-        <p class="gsap-hero">Elevate your projects with our premium cinematic assets, templates, and full-stack design services built for creators.</p>
-        <button class="nav-btn gsap-hero" style="padding: 15px 40px; font-size: 1.1rem;">Explore Products</button>
-    </section>
+    <!-- Hero copy -->
+    <div class="content">
+      <h1>
+        <span class="line" data-text="Explore the Next"></span>
+        <span class="line" data-text="Evolution of Web3 Wallets"></span>
+      </h1>
+      <p class="sub">Secure, lightning-fast, and designed for seamless DeFi, NFTs, and multichain interaction.</p>
+      <div class="cta">
+        <button class="btn btn-accent">Get Started <span class="ico"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg></span></button>
+        <button class="watch"><span class="play"><svg viewBox="0 0 24 24" width="11" height="11" fill="currentColor"><path d="M6 4l14 8-14 8z"/></svg></span> Watch Demo</button>
+      </div>
+    </div>
 
-    <section class="section" id="store">
-        <h2 class="section-title gsap-fade">Premium Assets</h2>
-        <div class="grid">
-            <div class="card gsap-slide-up">
-                <div class="card-img-placeholder">[Your Product Image/Video Here]</div>
-                <h3>Cinematic LUTs Pack</h3>
-                <p>مجموعة تلوين سينمائية تحول مقاطعك العادية إلى أفلام هوليوودية بضغطة زر.</p>
-                <div class="price">$49.99</div>
-                <button class="buy-btn">Add to Cart</button>
-            </div>
-            <div class="card gsap-slide-up">
-                <div class="card-img-placeholder">[Your Product Image/Video Here]</div>
-                <h3>VFX Transitions</h3>
-                <p>انتقالات سلسة واحترافية للمونتاج تناسب شغل الإعلانات واليوتيوب.</p>
-                <div class="price">$29.99</div>
-                <button class="buy-btn">Add to Cart</button>
-            </div>
-            <div class="card gsap-slide-up">
-                <div class="card-img-placeholder">[Your Product Image/Video Here]</div>
-                <h3>Motion UI Kit</h3>
-                <p>قوالب واجهات متحركة جاهزة للاستخدام في مشاريعك الخاصة.</p>
-                <div class="price">$79.99</div>
-                <button class="buy-btn">Add to Cart</button>
-            </div>
-        </div>
-    </section>
+    <!-- Supported platforms -->
+    <div class="platforms">
+      <span>Supported platform:</span>
+      <div class="p" title="Web">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 2.5 15.4 0 18M12 3c-2.5 2.6-2.5 15.4 0 18"/></svg>
+      </div>
+      <div class="p" title="macOS">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.4 12.6c0-2 1.6-3 1.7-3-1-1.4-2.4-1.6-2.9-1.6-1.3-.1-2.4.7-3 .7-.6 0-1.6-.7-2.6-.7-1.3 0-2.6.8-3.3 2-1.4 2.4-.4 6 1 8 .7 1 1.4 2 2.4 2 1 0 1.3-.6 2.5-.6s1.5.6 2.5.6 1.7-.9 2.3-1.9c.7-1 1-2 1-2.1 0 0-2-.8-2.1-2.9zM14.6 6c.5-.7.9-1.6.8-2.5-.8 0-1.7.5-2.3 1.2-.5.6-.9 1.5-.8 2.4.9.1 1.7-.4 2.3-1.1z"/></svg>
+      </div>
+      <div class="p" title="Mobile">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="7" y="3" width="10" height="18" rx="2.5"/><path d="M11 18h2"/></svg>
+      </div>
+    </div>
+  </main>
 
-    <section class="section" id="about">
-        <div class="showcase gsap-fade">
-            <div class="showcase-text">
-                <h2>Designed for Excellence</h2>
-                <p>منتجاتنا مصممة بدقة عالية عشان تختصر عليك الوقت وتعطيك جودة الاستوديوهات الكبيرة. سواء كنت صانع محتوى أو مصمم، بتلقى هنا الأدوات اللي تنقل شغلك للمستوى اللي بعده بدون حوسة وتضييع وقت.</p>
-                <button class="nav-btn">Learn More</button>
-            </div>
-            <div class="showcase-media">
-                [حط مقطع فيديو يستعرض شغلك هنا]
-            </div>
-        </div>
-    </section>
+<script>
+/* ============ Split hero text into animated words ============ */
+document.querySelectorAll('h1 .line').forEach((line, li)=>{
+  const words = line.dataset.text.split(' ');
+  words.forEach((w, wi)=>{
+    const span = document.createElement('span');
+    span.className = 'word';
+    span.textContent = w;
+    // stagger delay per word across both lines
+    span.style.animationDelay = (0.35 + (li*3 + wi) * 0.09) + 's';
+    line.appendChild(span);
+  });
+});
+requestAnimationFrame(()=>document.getElementById('hero').classList.add('revealed'));
 
-    <footer>
-        <p>&copy; 2026 VORTX. All rights reserved. Crafted with absolute power.</p>
-    </footer>
+/* ============ Starfield ============ */
+(function(){
+  const c = document.getElementById('stars'), x = c.getContext('2d');
+  let stars = [];
+  function size(){
+    c.width = innerWidth; c.height = innerHeight;
+    stars = Array.from({length: Math.floor(innerWidth*innerHeight/6000)}, ()=>({
+      x:Math.random()*c.width, y:Math.random()*c.height,
+      r:Math.random()*1.2+.2, a:Math.random()*.6+.1, s:Math.random()*.02+.004
+    }));
+  }
+  size(); addEventListener('resize', size);
+  (function loop(){
+    x.clearRect(0,0,c.width,c.height);
+    for(const st of stars){
+      st.a += st.s; if(st.a>.7||st.a<.1) st.s*=-1;
+      x.beginPath(); x.arc(st.x,st.y,st.r,0,7); 
+      x.fillStyle='rgba(255,255,255,'+st.a+')'; x.fill();
+    }
+    requestAnimationFrame(loop);
+  })();
+})();
 
-    <script>
-        // تفعيل الإضافات
-        gsap.registerPlugin(ScrollTrigger);
+/* ============ Rotating wireframe network sphere ============ */
+(function(){
+  const canvas = document.getElementById('globe');
+  const ctx = canvas.getContext('2d');
+  let W, H, R, DPR = Math.min(devicePixelRatio||1, 2);
 
-        // أنميشن الهيرو عند فتح الموقع
-        gsap.from(".gsap-hero", {
-            y: 50,
-            opacity: 0,
-            duration: 1,
-            stagger: 0.2,
-            ease: "power3.out",
-            delay: 0.2
-        });
+  function resize(){
+    const base = Math.min(innerWidth, innerHeight);
+    R = base * 0.42;                 // sphere radius
+    const size = R * 2.4;
+    canvas.style.width = size + 'px';
+    canvas.style.height = size + 'px';
+    canvas.width = size * DPR;
+    canvas.height = size * DPR;
+    W = canvas.width; H = canvas.height;
+  }
+  resize(); addEventListener('resize', resize);
 
-        // أنميشن العناوين مع النزول بالسكرول
-        gsap.utils.toArray('.gsap-fade').forEach(element => {
-            gsap.from(element, {
-                scrollTrigger: {
-                    trigger: element,
-                    start: "top 80%",
-                    toggleActions: "play none none reverse"
-                },
-                opacity: 0,
-                y: 30,
-                duration: 1,
-                ease: "power2.out"
-            });
-        });
+  // Fibonacci sphere of points
+  const N = 620;
+  const pts = [];
+  for(let i=0;i<N;i++){
+    const phi = Math.acos(1 - 2*(i+0.5)/N);
+    const theta = Math.PI*(1+Math.sqrt(5))*i;
+    pts.push({
+      x:Math.sin(phi)*Math.cos(theta),
+      y:Math.sin(phi)*Math.sin(theta),
+      z:Math.cos(phi)
+    });
+  }
 
-        // أنميشن الكروت تدخل ورى بعض
-        gsap.from(".gsap-slide-up", {
-            scrollTrigger: {
-                trigger: ".grid",
-                start: "top 75%",
-            },
-            y: 50,
-            opacity: 0,
-            duration: 0.8,
-            stagger: 0.2, // يخليها تطلع حبة حبة
-            ease: "power3.out"
-        });
-    </script>
+  // orbital rings (points on great circles at varying radii)
+  const rings = [];
+  [1.0, 0.72, 0.46].forEach((rr, idx)=>{
+    const rp = [];
+    const tilt = (idx*0.5 + 0.3);
+    for(let a=0;a<Math.PI*2;a+=0.13){
+      rp.push({
+        x:Math.cos(a)*rr,
+        y:Math.sin(a)*Math.sin(tilt)*rr,
+        z:Math.sin(a)*Math.cos(tilt)*rr
+      });
+    }
+    rings.push(rp);
+  });
+
+  let rot = 0;
+  function rotY(p, s, c){ return {x:p.x*c + p.z*s, y:p.y, z:-p.x*s + p.z*c}; }
+  function rotX(p, s, c){ return {x:p.x, y:p.y*c - p.z*s, z:p.y*s + p.z*c}; }
+
+  const tiltS = Math.sin(-0.35), tiltC = Math.cos(-0.35);
+
+  function draw(){
+    rot += 0.0016;
+    const s = Math.sin(rot), c = Math.cos(rot);
+    ctx.clearRect(0,0,W,H);
+    ctx.save();
+    ctx.translate(W/2, H/2);
+    const scale = R * DPR;
+
+    // transform helper -> screen
+    function proj(p){
+      let q = rotY(p, s, c);
+      q = rotX(q, tiltS, tiltC);
+      const persp = 1.6 / (1.6 - q.z*0.55);
+      return { X:q.x*scale*persp, Y:q.y*scale*persp, z:q.z, persp };
+    }
+
+    // project sphere points
+    const sp = pts.map(proj);
+
+    // connective lines between nearby points
+    ctx.lineWidth = 0.65*DPR;
+    for(let i=0;i<sp.length;i++){
+      const a = sp[i];
+      for(let j=i+1;j<i+9 && j<sp.length;j++){
+        const b = sp[j];
+        const dx=a.X-b.X, dy=a.Y-b.Y;
+        const d2 = dx*dx+dy*dy;
+        if(d2 < (scale*0.185)*(scale*0.185)){
+          const depth = (a.z+b.z)/2;
+          const alpha = Math.max(0, (depth+1)/2) * 0.42;
+          ctx.strokeStyle = 'rgba(205,210,200,'+alpha+')';
+          ctx.beginPath(); ctx.moveTo(a.X,a.Y); ctx.lineTo(b.X,b.Y); ctx.stroke();
+        }
+      }
+    }
+
+    // rings
+    rings.forEach(rp=>{
+      const proj2 = rp.map(proj);
+      ctx.beginPath();
+      proj2.forEach((p,i)=> i?ctx.lineTo(p.X,p.Y):ctx.moveTo(p.X,p.Y));
+      ctx.closePath();
+      ctx.strokeStyle='rgba(190,195,185,.2)';
+      ctx.lineWidth=0.9*DPR;
+      ctx.stroke();
+    });
+
+    // points on top
+    for(const p of sp){
+      const depth = (p.z+1)/2;
+      const r = (0.7 + depth*1.7) * DPR;
+      ctx.beginPath();
+      ctx.arc(p.X, p.Y, r, 0, 7);
+      ctx.fillStyle = 'rgba(233,236,228,'+(0.32 + depth*0.65)+')';
+      ctx.fill();
+    }
+
+    ctx.restore();
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+</script>
 </body>
 </html>
