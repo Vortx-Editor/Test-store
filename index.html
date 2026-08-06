@@ -2,7 +2,7 @@
 <html lang="en" class="dark vx-loading" dir="ltr">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <title>VORTX — Premium Digital Assets</title>
 <meta name="theme-color" content="#09090c" />
 
@@ -36,10 +36,10 @@
     --ink: #050505;
     --brand: #7e22ce;
     --brandLight: #a855f7;
-    --bg-color: #050505;
+    --bg-color: #050505; /* Unified dark bg */
     --text-color: #e8e8ef;
     --subtext-color: rgba(255, 255, 255, 0.75);
-    /* Updated background to match the Web3 Zyra theme for the whole site */
+    /* Unified Dark Star Background */
     --star-bg: radial-gradient(120% 80% at 50% 12%, #131314 0%, #0a0a0b 55%, #050505 100%);
     --star-opacity: 0.6;
     --anim--hover-time: 400ms;
@@ -47,6 +47,14 @@
     --btn-text-color: rgba(255, 255, 255, 0.95);
     --card-bg: rgba(255, 255, 255, 0.04);
     --card-border: rgba(255, 255, 255, 0.1);
+    
+    /* Globe Colors - White/Light for dark mode */
+    --globe-line: 205, 210, 200; 
+    --globe-ring: 190, 195, 185;
+    --globe-point: 233, 236, 228;
+    
+    /* Loader unified bg */
+    --loader-bg: #050505;
   }
 
   html.light {
@@ -54,23 +62,44 @@
     --bg-color: #f8fafc;
     --text-color: #0f172a;
     --subtext-color: #475569;
-    --star-bg: radial-gradient(circle at 50% 20%, rgba(168, 85, 247, 0.12) 0%, rgba(241, 245, 249, 1) 75%);
+    /* Unified Light Star Background */
+    --star-bg: radial-gradient(circle at 50% 20%, rgba(200, 200, 200, 0.12) 0%, rgba(241, 245, 249, 1) 75%);
     --star-opacity: 0.35;
     --btn-text-color: #ffffff;
     --card-bg: rgba(255, 255, 255, 0.88);
     --card-border: rgba(168, 85, 247, 0.22);
+    
+    /* Globe Colors - Black/Dark for light mode */
+    --globe-line: 30, 30, 30;
+    --globe-ring: 50, 50, 50;
+    --globe-point: 10, 10, 10;
+    
+    /* Loader unified bg */
+    --loader-bg: #f8fafc;
   }
 
   * , *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+  /* FIX FOR HORIZONTAL SCROLLING ON MOBILE */
+  html, body {
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+  
   html { width: 100%; min-height: 100%; scroll-behavior: smooth; }
 
   body {
-    width: 100%; min-height: 100vh; overflow-x: hidden;
+    width: 100%; min-height: 100vh;
     background-color: var(--bg-color); color: var(--text-color);
     font-family: 'Inter', sans-serif;
     transition: background-color .4s ease, color .4s ease;
     -webkit-font-smoothing: antialiased; position: relative;
+  }
+  
+  /* Hide scrollbar completely to prevent the "column" effect */
+  ::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; 
   }
 
   html.vx-loading, html.vx-loading body { overflow: hidden !important; }
@@ -100,20 +129,30 @@
 
   /* ================== ZYRA GLOBE & STARS BACKGROUND ================== */
   .stars-background-container { 
-    position: fixed; inset: 0; width: 100vw; height: 100vh; 
+    position: absolute; inset: 0; width: 100%; height: 100%; 
     background: var(--star-bg); overflow: hidden; z-index: 0; 
     pointer-events: none; transition: background .4s ease; 
+  }
+  
+  /* Absolute positioning for background container to cover body */
+  body > .stars-background-container {
+      position: fixed;
   }
   
   #stars-canvas {
     position: absolute; inset: 0; z-index: 0; opacity: var(--star-opacity);
     transition: opacity .4s ease;
   }
+  
+  html.light #stars-canvas {
+      /* Invert stars color in light mode to make them visible (blackish) */
+      filter: invert(1);
+  }
 
   /* Globe specific styling */
   #hero-section {
     position: relative;
-    min-height: 90vh; /* Make hero take up most of the screen */
+    min-height: 90vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -126,8 +165,7 @@
     transform: translate(-50%,-50%);
     z-index: 1;
     opacity: 0;
-    pointer-events: none; /* So you can click buttons over it */
-    /* SLOWED DOWN APPEARANCE (3.5s instead of 1.6s) */
+    pointer-events: none;
     animation: globeIn 3.5s cubic-bezier(.16,1,.3,1) 0.5s forwards;
   }
   @keyframes globeIn { from { opacity: 0; transform: translate(-50%,-50%) scale(0.82); } to { opacity: 1; transform: translate(-50%,-50%) scale(1); } }
@@ -137,20 +175,21 @@
     left: 50%; bottom: 6%;
     width: 60%; height: 220px;
     transform: translateX(-50%);
-    background: radial-gradient(ellipse at center, rgba(168,85,247,.15), rgba(255,255,255,0) 70%);
+    background: radial-gradient(ellipse at center, rgba(255,255,255,.10), rgba(255,255,255,0) 70%);
     filter: blur(8px);
     z-index: 1;
     opacity: 0;
     pointer-events: none;
-    /* SLOWED DOWN FADE */
     animation: fadeGlow 3s ease 1.5s forwards;
+  }
+  html.light .floor-glow {
+      background: radial-gradient(ellipse at center, rgba(0,0,0,.08), rgba(0,0,0,0) 70%);
   }
   @keyframes fadeGlow { to { opacity: 1; } }
 
   /* ================== ZYRA TEXT REVEAL ANIMATION ================== */
   .animated-title .line { display: block; overflow: hidden; }
   .animated-title .word { display: inline-block; margin-right: 0.22em; transform: translateY(110%); opacity: 0; }
-  /* Will trigger when .revealed is added to hero */
   .revealed .animated-title .word { animation: wordUp 1.2s cubic-bezier(.16,1,.3,1) forwards; }
   @keyframes wordUp { to { transform: translateY(0); opacity: 1; } }
 
@@ -160,10 +199,15 @@
   /* Title Shines */
   .vortx-wet-oil-title {
     display: inline-block; font-weight: 900;
-    background: linear-gradient(110deg, #ffffff 0%, #f3e8ff 20%, #ffffff 35%, #c084fc 50%, #ffffff 65%, #7e22ce 80%, #ffffff 100%);
+    background: linear-gradient(110deg, #ffffff 0%, #e0e0e0 20%, #ffffff 35%, #a0a0a0 50%, #ffffff 65%, #606060 80%, #ffffff 100%);
     background-size: 200% 100%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
     animation: oilShineSweep 4s linear infinite;
-    filter: drop-shadow(0 10px 25px rgba(0,0,0,.8)) drop-shadow(0 0 20px rgba(168,85,247,.5));
+    filter: drop-shadow(0 10px 25px rgba(0,0,0,.8)) drop-shadow(0 0 20px rgba(255,255,255,.1));
+  }
+  html.light .vortx-wet-oil-title {
+      background: linear-gradient(110deg, #111 0%, #555 30%, #222 55%, #777 80%, #000 100%);
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 6px 18px rgba(0,0,0, 0.2));
   }
   @keyframes oilShineSweep { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
 
@@ -185,7 +229,8 @@
   /* Buttons */
   .button-wrap { position: relative; z-index: 10; border-radius: 999vw; background: transparent; cursor: pointer; display: inline-block; transition: all var(--anim--hover-time) var(--anim--hover-ease); }
   .button-shadow { --shadow-cuttoff-fix: 2em; position: absolute; width: calc(100% + var(--shadow-cuttoff-fix)); height: calc(100% + var(--shadow-cuttoff-fix)); top: calc(0% - var(--shadow-cuttoff-fix) / 2); left: calc(0% - var(--shadow-cuttoff-fix) / 2); filter: blur(clamp(2px,.125em,12px)); overflow: visible; pointer-events: none; }
-  .button-shadow::after { content: ""; position: absolute; z-index: 0; inset: 0; border-radius: 999vw; background: linear-gradient(180deg, rgba(168,85,247,.3), rgba(0,0,0,.2)); width: calc(100% - var(--shadow-cuttoff-fix) - .25em); height: calc(100% - var(--shadow-cuttoff-fix) - .25em); top: calc(var(--shadow-cuttoff-fix) - .5em); left: calc(var(--shadow-cuttoff-fix) - .875em); padding: .125em; box-sizing: border-box; mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); mask-composite: exclude; opacity: 1; }
+  .button-shadow::after { content: ""; position: absolute; z-index: 0; inset: 0; border-radius: 999vw; background: linear-gradient(180deg, rgba(255,255,255,.3), rgba(0,0,0,.2)); width: calc(100% - var(--shadow-cuttoff-fix) - .25em); height: calc(100% - var(--shadow-cuttoff-fix) - .25em); top: calc(var(--shadow-cuttoff-fix) - .5em); left: calc(var(--shadow-cuttoff-fix) - .875em); padding: .125em; box-sizing: border-box; mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); mask-composite: exclude; opacity: 1; }
+  html.light .button-shadow::after { background: linear-gradient(180deg, rgba(0,0,0,.3), rgba(0,0,0,.1)); }
   .btn-3d-style { all: unset; cursor: pointer; position: relative; display: block; z-index: 3; background: linear-gradient(-75deg, rgba(255,255,255,.08), rgba(255,255,255,.28), rgba(255,255,255,.08)); border-radius: 999vw; box-shadow: inset 0 .125em .125em rgba(0,0,0,.05), inset 0 -.125em .125em rgba(255,255,255,.5), 0 .25em .125em -.125em rgba(0,0,0,.3); backdrop-filter: blur(6px); transition: all var(--anim--hover-time) var(--anim--hover-ease); width: 100%; text-align: center; }
   .btn-3d-style:hover { transform: scale(.975); }
   .btn-3d-style span { position: relative; display: block; user-select: none; font-weight: 800; font-size: .9em; color: var(--btn-text-color); text-shadow: 0 .15em .1em rgba(0,0,0,.2); padding-inline: 2em; padding-block: .9em; text-transform: uppercase; }
@@ -214,25 +259,43 @@
   .view { transition: opacity .4s ease; opacity: 1; display: block; }
   .view-hidden { display: none !important; opacity: 0; }
 
-  /* Luxury Loader & Letter Drop Animation */
-  #vx-loader { position: fixed; inset: 0; z-index: 999999; background: #050508; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; transition: opacity 0.8s cubic-bezier(0.4,0,0.2,1), visibility 0.8s ease; }
+  /* Luxury Loader & Letter Drop Animation - UNIFIED COLORS */
+  #vx-loader { position: fixed; inset: 0; z-index: 999999; background: var(--loader-bg); transition: background-color .4s ease, opacity 0.8s cubic-bezier(0.4,0,0.2,1), visibility 0.8s ease; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; }
   #vx-loader.vx-hide { opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; }
   #app-content { opacity: 0; filter: blur(20px); transform: scale(1.03); transition: opacity 1s cubic-bezier(0.16,1,0.3,1), filter 1s cubic-bezier(0.16,1,0.3,1), transform 1s cubic-bezier(0.16,1,0.3,1); }
   #app-content.vx-revealed { opacity: 1; filter: blur(0); transform: scale(1); }
   
-  .vx-ambient-glow { position: absolute; width: min(80vw,900px); height: min(80vw,900px); border-radius: 50%; background: radial-gradient(circle, rgba(168,85,247,0.4) 0%, rgba(126,34,206,0.15) 45%, transparent 70%); filter: blur(60px); animation: vxGlowPulse 4s ease-in-out infinite; }
+  .vx-ambient-glow { position: absolute; width: min(80vw,900px); height: min(80vw,900px); border-radius: 50%; background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 45%, transparent 70%); filter: blur(60px); animation: vxGlowPulse 4s ease-in-out infinite; }
+  html.light .vx-ambient-glow { background: radial-gradient(circle, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.02) 45%, transparent 70%); }
   @keyframes vxGlowPulse { 0%,100% { transform: scale(0.9); opacity: 0.5; } 50% { transform: scale(1.1); opacity: 0.9; } }
 
   .vx-logo-word { display: flex; font-family: 'Cinzel', serif; font-weight: 900; font-size: clamp(3.5rem, 13vw, 7rem); letter-spacing: 0.25em; line-height: 1; position: relative; z-index: 2; perspective: 1000px; }
-  .vx-letter { display: inline-block; background: linear-gradient(135deg, #fff 0%, #f3e8ff 30%, #c084fc 65%, #7e22ce 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; opacity: 0; transform: translateY(-70px) rotateX(45deg) scale(1.4); filter: blur(12px); animation: vxLetterDrop 0.9s cubic-bezier(0.19, 1, 0.22, 1) forwards; animation-delay: var(--ld, 0s); }
+  
+  /* Adjusted Loader Text for Unified Theme */
+  .vx-letter { display: inline-block; background: linear-gradient(135deg, #fff 0%, #ccc 50%, #999 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; opacity: 0; transform: translateY(-70px) rotateX(45deg) scale(1.4); filter: blur(12px); animation: vxLetterDrop 0.9s cubic-bezier(0.19, 1, 0.22, 1) forwards; animation-delay: var(--ld, 0s); }
+  html.light .vx-letter { background: linear-gradient(135deg, #111 0%, #444 50%, #777 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 15px 30px rgba(0,0,0,0.2)); }
   @keyframes vxLetterDrop { 
     0% { opacity: 0; transform: translateY(-70px) rotateX(45deg) scale(1.4); filter: blur(12px); } 
     60% { opacity: 0.9; transform: translateY(8px) rotateX(-10deg) scale(0.95); filter: blur(1px); } 
-    100% { opacity: 1; transform: translateY(0) rotateX(0) scale(1); filter: drop-shadow(0 15px 30px rgba(126,34,206,0.5)); } 
+    100% { opacity: 1; transform: translateY(0) rotateX(0) scale(1); filter: drop-shadow(0 15px 30px rgba(255,255,255,0.1)); } 
   }
 
-  .vx-bar-track { width: min(80vw, 340px); height: 5px; border-radius: 999px; background: rgba(255,255,255,0.04); border: 1px solid rgba(168,85,247,0.35); margin-top: 2rem; position: relative; overflow: hidden; z-index: 2; }
-  .vx-bar-fill { height: 100%; width: 0%; border-radius: 999px; background: linear-gradient(90deg, #7e22ce, #a855f7 50%, #f3e8ff); position: relative; }
+  .vx-bar-track { width: min(80vw, 340px); height: 5px; border-radius: 999px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); margin-top: 2rem; position: relative; overflow: hidden; z-index: 2; }
+  html.light .vx-bar-track { background: rgba(0,0,0,0.1); border: 1px solid rgba(0,0,0,0.2); }
+  
+  .vx-bar-fill { height: 100%; width: 0%; border-radius: 999px; background: linear-gradient(90deg, #555, #ccc, #fff); position: relative; }
+  html.light .vx-bar-fill { background: linear-gradient(90deg, #333, #666, #111); }
+  
+  /* Loading text adjustments */
+  .loader-text { color: rgba(255,255,255,0.7); }
+  html.light .loader-text { color: rgba(0,0,0,0.7); }
+  
+  #vx-percent { color: #fff; }
+  html.light #vx-percent { color: #000; }
+  
+  /* Top Nav fixes for light mode */
+  header .glass { border-bottom: 1px solid rgba(255,255,255,0.05); }
+  html.light header .glass { border-bottom: 1px solid rgba(0,0,0,0.1); background: rgba(255,255,255,0.7) !important; }
 </style>
 </head>
 
@@ -242,8 +305,8 @@
   <div class="vx-ambient-glow"></div>
   <div class="vx-logo-word" id="vx-logo-word"></div>
   <div class="vx-bar-track"><div class="vx-bar-fill" id="vx-bar-fill"></div></div>
-  <p class="text-xs font-bold uppercase tracking-[0.35em] text-purple-300/80 mt-5 relative z-10">
-    INITIALIZING VORTX <span id="vx-percent" class="text-purple-200">0</span>%
+  <p class="loader-text text-xs font-bold uppercase tracking-[0.35em] mt-5 relative z-10">
+    INITIALIZING VORTX <span id="vx-percent">0</span>%
   </p>
 </div>
 
@@ -285,7 +348,6 @@
       var appContent = document.getElementById('app-content');
       if (appContent) {
         appContent.classList.add('vx-revealed');
-        // Trigger the Hero Text & Globe Animation after loader finishes
         setTimeout(function(){
             var heroSec = document.getElementById('hero-section');
             if(heroSec) heroSec.classList.add('revealed');
@@ -331,7 +393,7 @@
           <li><a href="#categories" data-i18n="nav-categories" class="hover:text-brandLight transition">Categories</a></li>
         </ul>
         <div class="flex items-center gap-3 relative z-50">
-          <button type="button" onclick="window.toggleLanguage()" class="glass w-10 h-10 rounded-full flex items-center justify-center border-purple-500/30 text-brandLight font-extrabold text-xs cursor-pointer hover:bg-white/10 transition">🌐</button>
+          <button type="button" onclick="window.toggleLanguage()" class="glass w-10 h-10 rounded-full flex items-center justify-center border-white/10 text-brandLight font-extrabold text-xs cursor-pointer hover:bg-white/10 transition">🌐</button>
           <button type="button" onclick="window.toggleTheme()" class="theme-switch-btn cursor-pointer" aria-label="Toggle theme">
             <div class="theme-switch-ball"><svg class="w-3.5 h-3.5 text-slate-800" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg></div>
           </button>
@@ -354,9 +416,9 @@
       <div class="relative z-20 flex flex-col items-center justify-center">
         
         <div class="fade-up-item inline-flex items-center gap-3 px-6 py-2.5 rounded-full text-xs font-bold tracking-widest uppercase glass backdrop-blur-md mb-8" style="animation-delay: 1.4s;">
-          <span class="w-2 h-2 rounded-full bg-purple-400 animate-ping"></span>
+          <span class="w-2 h-2 rounded-full bg-white/40 animate-ping"></span>
           <span data-i18n="hero-tag">Digital Assets Hub</span>
-          <span class="w-2 h-2 rounded-full bg-purple-400 animate-ping"></span>
+          <span class="w-2 h-2 rounded-full bg-white/40 animate-ping"></span>
         </div>
 
         <!-- Animated Title - Replaced the giant VORTX with elegant phrasing -->
@@ -396,7 +458,7 @@
       </div>
     </section>
 
-    <!-- FEATURED PACKS: INFINITE 3D CAROUSEL -->
+    <!-- FEATURED PACKS: INFINITE 3D CAROUSEL (RESTORED) -->
     <section id="packs" class="py-16 w-full relative overflow-hidden select-none reveal-on-scroll">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-20 text-center mb-6">
         <h2 data-i18n="packs-title" class="font-head font-bold text-3xl sm:text-5xl">Featured Packs</h2>
@@ -408,13 +470,13 @@
       </div>
     </section>
 
-    <!-- CATEGORIES -->
+    <!-- CATEGORIES (RESTORED) -->
     <section id="categories" class="max-w-7xl mx-auto px-4 sm:px-6 py-16 reveal-on-scroll">
       <div class="mb-10 text-left"><h2 data-i18n="cat-sec-title" class="font-head font-bold text-3xl sm:text-4xl">Categories</h2><p data-i18n="cat-sec-desc" class="font-bold opacity-50 mt-2 text-sm tracking-wide">Select a category to explore editing packs.</p></div>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div id="cat-card-CC" onclick="window.openCategory('CC')" class="cat-card-glass flex items-center justify-between group"><div class="flex items-center gap-5"><div class="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 font-extrabold text-sm">01</div><div><h3 class="font-head font-black text-2xl tracking-wider">CC</h3><p class="text-xs font-semibold opacity-60 mt-1">Color Corrections</p></div></div><div class="text-purple-400/60 text-xl font-bold">→</div></div>
-        <div id="cat-card-XML" onclick="window.openCategory('XML')" class="cat-card-glass flex items-center justify-between group"><div class="flex items-center gap-5"><div class="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 font-extrabold text-sm">02</div><div><h3 class="font-head font-black text-2xl tracking-wider">XML</h3><p class="text-xs font-semibold opacity-60 mt-1">Project Files</p></div></div><div class="text-purple-400/60 text-xl font-bold">→</div></div>
-        <div id="cat-card-SHAKE" onclick="window.openCategory('SHAKE')" class="cat-card-glass flex items-center justify-between group"><div class="flex items-center gap-5"><div class="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 font-extrabold text-sm">03</div><div><h3 class="font-head font-black text-2xl tracking-wider">SHAKE</h3><p class="text-xs font-semibold opacity-60 mt-1">Camera Shake Presets</p></div></div><div class="text-purple-400/60 text-xl font-bold">→</div></div>
+        <div id="cat-card-CC" onclick="window.openCategory('CC')" class="cat-card-glass flex items-center justify-between group"><div class="flex items-center gap-5"><div class="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-current font-extrabold text-sm">01</div><div><h3 class="font-head font-black text-2xl tracking-wider">CC</h3><p class="text-xs font-semibold opacity-60 mt-1">Color Corrections</p></div></div><div class="opacity-60 text-xl font-bold">→</div></div>
+        <div id="cat-card-XML" onclick="window.openCategory('XML')" class="cat-card-glass flex items-center justify-between group"><div class="flex items-center gap-5"><div class="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-current font-extrabold text-sm">02</div><div><h3 class="font-head font-black text-2xl tracking-wider">XML</h3><p class="text-xs font-semibold opacity-60 mt-1">Project Files</p></div></div><div class="opacity-60 text-xl font-bold">→</div></div>
+        <div id="cat-card-SHAKE" onclick="window.openCategory('SHAKE')" class="cat-card-glass flex items-center justify-between group"><div class="flex items-center gap-5"><div class="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-current font-extrabold text-sm">03</div><div><h3 class="font-head font-black text-2xl tracking-wider">SHAKE</h3><p class="text-xs font-semibold opacity-60 mt-1">Camera Shake Presets</p></div></div><div class="opacity-60 text-xl font-bold">→</div></div>
       </div>
     </section>
 
@@ -422,26 +484,26 @@
     <section class="max-w-7xl mx-auto px-4 sm:px-6 py-12 border-t border-white/10 mt-12 reveal-on-scroll">
       <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
         <div class="glass p-6 rounded-2xl">
-          <h4 class="font-mono font-black text-3xl sm:text-4xl text-white tracking-wider" style="color: #ffffff !important;">
-            <span class="counter-num text-white" style="color: #ffffff !important;" data-target="17000">0</span>+
+          <h4 class="font-mono font-black text-3xl sm:text-4xl text-current tracking-wider">
+            <span class="counter-num text-current" data-target="17000">0</span>+
           </h4>
           <p data-i18n="stat-subscribers" class="text-xs font-bold opacity-70 mt-2 uppercase tracking-widest">Telegram Subscribers</p>
         </div>
         <div class="glass p-6 rounded-2xl">
-          <h4 class="font-mono font-black text-3xl sm:text-4xl text-white tracking-wider" style="color: #ffffff !important;">
-            <span class="counter-num text-white" style="color: #ffffff !important;" data-target="45000">0</span>+
+          <h4 class="font-mono font-black text-3xl sm:text-4xl text-current tracking-wider">
+            <span class="counter-num text-current" data-target="45000">0</span>+
           </h4>
           <p data-i18n="stat-views" class="text-xs font-bold opacity-70 mt-2 uppercase tracking-widest">Monthly Visitors</p>
         </div>
         <div class="glass p-6 rounded-2xl">
-          <h4 class="font-mono font-black text-3xl sm:text-4xl text-white tracking-wider" style="color: #ffffff !important;">
-            <span class="counter-num text-white" style="color: #ffffff !important;" data-target="1250">0</span>+
+          <h4 class="font-mono font-black text-3xl sm:text-4xl text-current tracking-wider">
+            <span class="counter-num text-current" data-target="1250">0</span>+
           </h4>
           <p data-i18n="stat-orders" class="text-xs font-bold opacity-70 mt-2 uppercase tracking-widest">Completed Assets</p>
         </div>
         <div class="glass p-6 rounded-2xl">
-          <h4 class="font-mono font-black text-3xl sm:text-4xl text-white tracking-wider" style="color: #ffffff !important;">
-            ★ <span class="counter-num-decimal text-white" style="color: #ffffff !important;" data-target="4.9">0.0</span>/5
+          <h4 class="font-mono font-black text-3xl sm:text-4xl text-current tracking-wider">
+            ★ <span class="counter-num-decimal text-current" data-target="4.9">0.0</span>/5
           </h4>
           <p data-i18n="stat-rating" class="text-xs font-bold opacity-70 mt-2 uppercase tracking-widest">Satisfaction Score</p>
         </div>
@@ -450,7 +512,7 @@
 
     <footer class="border-t border-white/5 mt-6 reveal-on-scroll">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12 flex flex-col md:flex-row items-center justify-between gap-6">
-        <p class="font-head font-extrabold tracking-widest text-brandLight text-xl force-eng">VORTX</p>
+        <p class="font-head font-extrabold tracking-widest text-current text-xl force-eng">VORTX</p>
         <p class="font-bold opacity-60 text-sm">© <span id="year"></span> VORTX Studio. <span data-i18n="footer-right">Crafted for the bold.</span></p>
       </div>
     </footer>
@@ -460,20 +522,20 @@
   <section id="web-view" class="view view-hidden relative z-10 min-h-screen">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
       <div class="flex items-center justify-between mb-12">
-        <div class="text-left"><span data-i18n="tiers-sub" class="text-xs tracking-widest uppercase font-bold text-brandLight">Web Solutions</span><h2 data-i18n="tiers-title" class="font-head font-bold text-4xl mt-3">Development Tiers</h2></div>
+        <div class="text-left"><span data-i18n="tiers-sub" class="text-xs tracking-widest uppercase font-bold text-current opacity-70">Web Solutions</span><h2 data-i18n="tiers-title" class="font-head font-bold text-4xl mt-3">Development Tiers</h2></div>
         <div class="button-wrap" onclick="window.backToHome()"><div class="btn-3d-style"><span data-i18n="back-btn">← Back</span></div><div class="button-shadow"></div></div>
       </div>
       <div class="grid lg:grid-cols-3 gap-8">
         <div class="tier-card">
-          <div class="card_title__container"><span class="card_title">STARTER</span><p data-i18n="tier-starter-desc" class="card_paragraph">Perfect for simple portfolios and personal landing pages.</p></div>
+          <div class="card_title__container"><span class="card_title font-head font-bold text-2xl">STARTER</span><p data-i18n="tier-starter-desc" class="card_paragraph mt-2 opacity-80 text-sm">Perfect for simple portfolios and personal landing pages.</p></div>
           <div class="button-wrap w-full mt-6" onclick="window.showToast('PLAN ADDED')"><div class="btn-3d-style"><span data-i18n="select-plan">Select Plan</span></div><div class="button-shadow"></div></div>
         </div>
         <div class="tier-card">
-          <div class="card_title__container"><span class="card_title">PRO</span><p data-i18n="tier-pro-desc" class="card_paragraph">For creators needing advanced animations &amp; custom design.</p></div>
+          <div class="card_title__container"><span class="card_title font-head font-bold text-2xl">PRO</span><p data-i18n="tier-pro-desc" class="card_paragraph mt-2 opacity-80 text-sm">For creators needing advanced animations &amp; custom design.</p></div>
           <div class="button-wrap w-full mt-6" onclick="window.showToast('PLAN ADDED')"><div class="btn-3d-style"><span data-i18n="select-plan">Select Plan</span></div><div class="button-shadow"></div></div>
         </div>
         <div class="tier-card">
-          <div class="card_title__container"><span class="card_title">VIP</span><p data-i18n="tier-vip-desc" class="card_paragraph">The absolute premium experience with custom 3D elements.</p></div>
+          <div class="card_title__container"><span class="card_title font-head font-bold text-2xl">VIP</span><p data-i18n="tier-vip-desc" class="card_paragraph mt-2 opacity-80 text-sm">The absolute premium experience with custom 3D elements.</p></div>
           <div class="button-wrap w-full mt-6" onclick="window.showToast('PLAN ADDED')"><div class="btn-3d-style"><span data-i18n="select-plan">Select Plan</span></div><div class="button-shadow"></div></div>
         </div>
       </div>
@@ -484,7 +546,7 @@
   <section id="category-view" class="view view-hidden relative z-10 min-h-screen">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
       <div class="flex items-center justify-between mb-12">
-        <div><span data-i18n="cat-view-sub" class="text-xs tracking-widest uppercase font-bold text-brandLight">Collection</span><h2 id="cat-title" class="font-head font-bold text-4xl mt-3">CC</h2></div>
+        <div><span data-i18n="cat-view-sub" class="text-xs tracking-widest uppercase font-bold text-current opacity-70">Collection</span><h2 id="cat-title" class="font-head font-bold text-4xl mt-3">CC</h2></div>
         <div class="button-wrap" onclick="window.backToHome()"><div class="btn-3d-style"><span data-i18n="back-btn">← Back</span></div><div class="button-shadow"></div></div>
       </div>
       <div id="cat-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
@@ -495,7 +557,7 @@
   <div id="preview-modal" class="fixed inset-0 z-[80] flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
     <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="window.closePreview()"></div>
     <div class="glass rounded-3xl max-w-md w-full relative z-10 p-6" id="preview-card">
-      <span id="preview-tag" class="text-[10px] font-bold uppercase text-brandLight">TAG</span>
+      <span id="preview-tag" class="text-[10px] font-bold uppercase text-current opacity-70">TAG</span>
       <h3 id="preview-title" class="font-head font-bold text-2xl mt-1 mb-6">TITLE</h3>
       <div class="flex gap-4">
         <div class="button-wrap flex-1" onclick="window.showToast('ADDED TO CART'); window.closePreview();"><div class="btn-3d-style"><span data-i18n="add-cart">Add to Cart</span></div><div class="button-shadow"></div></div>
@@ -597,13 +659,18 @@
     var tiltS = Math.sin(-0.35), tiltC = Math.cos(-0.35);
 
     function draw(){
-      // SLOWED DOWN ROTATION SPEED (0.0007 instead of 0.0016)
       rot += 0.0007; 
       var s = Math.sin(rot), c = Math.cos(rot);
       ctx.clearRect(0,0,W,H);
       ctx.save();
       ctx.translate(W/2, H/2);
       var scale = R * DPR;
+      
+      // Get colors from CSS variables based on theme
+      var rootStyles = getComputedStyle(document.documentElement);
+      var rgbLine = rootStyles.getPropertyValue('--globe-line').trim() || '205,210,200';
+      var rgbRing = rootStyles.getPropertyValue('--globe-ring').trim() || '190,195,185';
+      var rgbPoint = rootStyles.getPropertyValue('--globe-point').trim() || '233,236,228';
 
       function proj(p){
         var q = rotY(p, s, c);
@@ -624,7 +691,7 @@
           if(d2 < (scale*0.185)*(scale*0.185)){
             var depth = (a.z+b.z)/2;
             var alpha = Math.max(0, (depth+1)/2) * 0.42;
-            ctx.strokeStyle = 'rgba(205,210,200,'+alpha+')';
+            ctx.strokeStyle = 'rgba('+rgbLine+','+alpha+')';
             ctx.beginPath(); ctx.moveTo(a.X,a.Y); ctx.lineTo(b.X,b.Y); ctx.stroke();
           }
         }
@@ -635,7 +702,7 @@
         ctx.beginPath();
         proj2.forEach(function(p,i) { i?ctx.lineTo(p.X,p.Y):ctx.moveTo(p.X,p.Y) });
         ctx.closePath();
-        ctx.strokeStyle='rgba(190,195,185,.2)';
+        ctx.strokeStyle='rgba('+rgbRing+',.2)';
         ctx.lineWidth=0.9*DPR;
         ctx.stroke();
       });
@@ -646,7 +713,7 @@
         var r = (0.7 + depth*1.7) * DPR;
         ctx.beginPath();
         ctx.arc(p.X, p.Y, r, 0, 7);
-        ctx.fillStyle = 'rgba(233,236,228,'+(0.32 + depth*0.65)+')';
+        ctx.fillStyle = 'rgba('+rgbPoint+','+(0.32 + depth*0.65)+')';
         ctx.fill();
       }
 
@@ -730,7 +797,7 @@
     var html = '';
     for (var i = 0; i < items.length; i++) {
       html += '<div onclick="window.openPreview(\'' + items[i] + '\', \'' + key + '\')" class="cat-card-glass flex flex-col justify-between min-h-[140px] text-left border-l-4 border-purple-500">' +
-                '<span class="text-[10px] font-bold uppercase text-purple-400">' + key + ' Pack</span>' +
+                '<span class="text-[10px] font-bold uppercase opacity-70">' + key + ' Pack</span>' +
                 '<h3 class="font-head font-bold text-xl mt-4">' + items[i] + '</h3>' +
               '</div>';
     }
@@ -831,64 +898,4 @@
   var currentIndex = 0;
   var targetIndex = 0;
 
-  var isDragging = false;
-  var isHorizontalDrag = false;
-  var startX = 0, startY = 0;
-  var currentX = 0, currentY = 0;
-  var dragDeltaX = 0;
-  var velocityX = 0;
-  var lastX = 0;
-  var lastTime = 0;
-
-  function buildCards() {
-    track.innerHTML = '';
-    cards = [];
-
-    CARDS_DATA.forEach(function (data, i) {
-      var card = document.createElement('div');
-      card.className = 'card-3d';
-      card.style.background = data.bg;
-      card.style.border = '1px solid ' + data.border;
-
-      card.innerHTML = 
-        '<div class="glass-sheen"></div>' +
-        '<div class="p-6 h-full flex flex-col justify-between text-white relative z-10 pointer-events-none">' +
-          '<div class="flex justify-between items-start">' +
-            '<div>' +
-              '<p class="text-[10px] font-bold tracking-widest uppercase opacity-80 text-white">' + data.tag + '</p>' +
-              '<h3 class="font-head font-extrabold text-xl tracking-wider force-eng mt-1 text-white">' + data.title + '</h3>' +
-            '</div>' +
-            '<span class="font-head font-bold text-xs opacity-70 text-white">VORTX</span>' +
-          '</div>' +
-          '<div class="my-auto flex items-center justify-between">' +
-            '<div class="w-10 h-7 rounded-md" style="background:' + data.chip + '"></div>' +
-            '<div class="flex -space-x-2 opacity-80">' +
-              '<div class="w-6 h-6 rounded-full bg-white/20 border border-white/30 backdrop-blur-sm"></div>' +
-              '<div class="w-6 h-6 rounded-full bg-white/40 border border-white/30 backdrop-blur-sm"></div>' +
-            '</div>' +
-          '</div>' +
-          '<div class="flex justify-between items-end font-mono text-sm tracking-widest text-white/90">' +
-            '<span>' + data.number + '</span>' +
-            '<span class="font-head font-bold text-xs">PHYSICAL 3D</span>' +
-          '</div>' +
-        '</div>';
-
-      card.addEventListener('click', function () {
-        if (Math.abs(dragDeltaX) < 8) {
-          var normCurrent = ((Math.round(currentIndex) % N) + N) % N;
-          if (i === normCurrent) {
-            window.openPreview(data.title, data.tag);
-          } else {
-            var diff = (i - normCurrent + N) % N;
-            if (diff > N / 2) diff -= N;
-            targetIndex = currentIndex + diff;
-          }
-        }
-      });
-
-      track.appendChild(card);
-      cards.push(card);
-    });
-  }
-
-  function updat
+  var isDragging = false
