@@ -70,7 +70,6 @@
 
   * , *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  /* FIX: Clean Scroll Settings. Removed all overflow locks on html */
   html { width: 100%; scroll-behavior: smooth; }
 
   body {
@@ -79,7 +78,6 @@
     font-family: 'Inter', sans-serif;
     transition: background-color .4s ease, color .4s ease;
     -webkit-font-smoothing: antialiased; position: relative;
-    /* FIX: overflow-x clip prevents horizontal drift without killing 3D or vertical touch scroll */
     overflow-x: clip; 
   }
 
@@ -90,7 +88,6 @@
   .reveal-on-scroll { opacity: 0; transform: translateY(40px); transition: opacity 1.8s cubic-bezier(0.16, 1, 0.3, 1), transform 1.8s cubic-bezier(0.16, 1, 0.3, 1); will-change: opacity, transform; }
   .reveal-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
 
-  /* FIX: Light Mode Text Clipped Properly */
   html.light p, html.light span, html.light h2, html.light h3, html.light h4 { color: var(--text-color); }
   html.light .text-white { color: #0f172a !important; }
   html.light .text-slate-300 { color: #334155 !important; }
@@ -99,7 +96,7 @@
   html.light .vortx-wet-oil-title { 
     background: linear-gradient(110deg, #111 0%, #555 30%, #222 55%, #777 80%, #000 100%); 
     background-size: 200% 100%; 
-    -webkit-background-clip: text; /* This prevents the silver box */
+    -webkit-background-clip: text; 
     background-clip: text; 
     -webkit-text-fill-color: transparent; 
     filter: drop-shadow(0 6px 18px rgba(0,0,0, 0.2)); 
@@ -125,7 +122,6 @@
   html[dir="rtl"] h1, html[dir="rtl"] h2, html[dir="rtl"] h3, html[dir="rtl"] .font-head { font-family: 'Cairo', sans-serif; letter-spacing: 0; }
   .force-eng { font-family: 'Cinzel', serif !important; letter-spacing: 0.25em !important; direction: ltr !important; unicode-bidi: isolate-override !important; display: inline-block; }
 
-  /* ================== ZYRA GLOBE & STARS BACKGROUND ================== */
   .stars-background-container { 
     position: absolute; inset: 0; width: 100%; height: 100%; 
     background: var(--star-bg); overflow: hidden; z-index: 0; 
@@ -141,14 +137,13 @@
   
   html.light #stars-canvas { filter: invert(1); }
 
-  /* FIX: Hero Section Mobile Scroll Fix (Changed overflow: hidden to clip) */
   #hero-section {
     position: relative;
     min-height: 90vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    overflow: clip; /* Ensures touches aren't trapped while keeping glow inside */
+    overflow: clip;
   }
 
   #globe {
@@ -179,7 +174,6 @@
   }
   @keyframes fadeGlow { to { opacity: 1; } }
 
-  /* ================== ZYRA TEXT REVEAL ANIMATION ================== */
   .animated-title .line { display: block; overflow: hidden; }
   .animated-title .word { display: inline-block; margin-right: 0.22em; transform: translateY(110%); opacity: 0; }
   .revealed .animated-title .word { animation: wordUp 1.2s cubic-bezier(.16,1,.3,1) forwards; }
@@ -188,7 +182,6 @@
   .revealed .fade-up-item { animation: upFade 1s ease forwards; opacity: 0; transform: translateY(16px); }
   @keyframes upFade { to { opacity: 1; transform: translateY(0); } }
 
-  /* Dark Mode Title Shines */
   .vortx-wet-oil-title {
     display: inline-block; font-weight: 900;
     background: linear-gradient(110deg, #ffffff 0%, #e0e0e0 20%, #ffffff 35%, #a0a0a0 50%, #ffffff 65%, #606060 80%, #ffffff 100%);
@@ -206,14 +199,12 @@
   }
   @keyframes goldShine { 0% { background-position: 220% 0; } 100% { background-position: -220% 0; } }
 
-  /* Theme Switcher */
   .theme-switch-btn { width: 64px; height: 34px; border-radius: 999px; background: linear-gradient(135deg,#1e1b4b,#311042); border: 1px solid rgba(168,85,247,.4); position: relative; cursor: pointer; padding: 3px; transition: all .4s ease; display: flex; align-items: center; }
   html.light .theme-switch-btn { background: linear-gradient(135deg,#38bdf8,#fde047); border-color: rgba(56,189,248,.6); }
   .theme-switch-ball { width: 26px; height: 26px; border-radius: 50%; position: absolute; top: 3px; left: 3px; transition: transform .4s ease; display: flex; align-items: center; justify-content: center; }
   html.dark .theme-switch-ball { transform: translateX(0); background: #e2e8f0; }
   html.light .theme-switch-ball { transform: translateX(30px); background: #fef08a; }
 
-  /* Buttons */
   .button-wrap { position: relative; z-index: 10; border-radius: 999vw; background: transparent; cursor: pointer; display: inline-block; transition: all var(--anim--hover-time) var(--anim--hover-ease); }
   .button-shadow { --shadow-cuttoff-fix: 2em; position: absolute; width: calc(100% + var(--shadow-cuttoff-fix)); height: calc(100% + var(--shadow-cuttoff-fix)); top: calc(0% - var(--shadow-cuttoff-fix) / 2); left: calc(0% - var(--shadow-cuttoff-fix) / 2); filter: blur(clamp(2px,.125em,12px)); overflow: visible; pointer-events: none; }
   .button-shadow::after { content: ""; position: absolute; z-index: 0; inset: 0; border-radius: 999vw; background: linear-gradient(180deg, rgba(255,255,255,.3), rgba(0,0,0,.2)); width: calc(100% - var(--shadow-cuttoff-fix) - .25em); height: calc(100% - var(--shadow-cuttoff-fix) - .25em); top: calc(var(--shadow-cuttoff-fix) - .5em); left: calc(var(--shadow-cuttoff-fix) - .875em); padding: .125em; box-sizing: border-box; mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); mask-composite: exclude; opacity: 1; }
@@ -246,7 +237,7 @@
   .view { transition: opacity .4s ease; opacity: 1; display: block; }
   .view-hidden { display: none !important; opacity: 0; }
 
-  /* Luxury Loader & Letter Drop Animation */
+  /* Luxury Loader */
   #vx-loader { position: fixed; inset: 0; z-index: 999999; background: var(--loader-bg); transition: background-color .4s ease, opacity 0.8s cubic-bezier(0.4,0,0.2,1), visibility 0.8s ease; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; }
   #vx-loader.vx-hide { opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; }
   #app-content { opacity: 0; filter: blur(20px); transform: scale(1.03); transition: opacity 1s cubic-bezier(0.16,1,0.3,1), filter 1s cubic-bezier(0.16,1,0.3,1), transform 1s cubic-bezier(0.16,1,0.3,1); }
@@ -418,7 +409,6 @@
       </div>
     </section>
 
-    <!-- WEB PAGE BUNDLES -->
     <section id="bundles" class="max-w-7xl mx-auto px-4 sm:px-6 py-12 reveal-on-scroll">
       <div class="golden-bundle-card p-8 sm:p-14 relative flex flex-col md:flex-row items-center justify-between gap-10">
         <div class="text-center md:text-left rtl:md:text-right max-w-2xl relative z-10 w-full">
@@ -435,7 +425,6 @@
       </div>
     </section>
 
-    <!-- FIX: FEATURED PACKS (Removed overflow-hidden from container to keep 3D cards visible) -->
     <section id="packs" class="py-16 w-full relative select-none reveal-on-scroll">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-20 text-center mb-6">
         <h2 data-i18n="packs-title" class="font-head font-bold text-3xl sm:text-5xl">Featured Packs</h2>
@@ -447,7 +436,6 @@
       </div>
     </section>
 
-    <!-- CATEGORIES -->
     <section id="categories" class="max-w-7xl mx-auto px-4 sm:px-6 py-16 reveal-on-scroll">
       <div class="mb-10 text-left"><h2 data-i18n="cat-sec-title" class="font-head font-bold text-3xl sm:text-4xl">Categories</h2><p data-i18n="cat-sec-desc" class="font-bold opacity-50 mt-2 text-sm tracking-wide">Select a category to explore editing packs.</p></div>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -457,7 +445,6 @@
       </div>
     </section>
 
-    <!-- LIVE STATS SECTION -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 py-12 border-t border-white/10 mt-12 reveal-on-scroll">
       <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
         <div class="glass p-6 rounded-2xl">
@@ -552,20 +539,17 @@
 (function () {
   "use strict";
 
-  /* --- Text Reveal Preparation --- */
   document.querySelectorAll('.animated-title .line').forEach(function(line, li) {
     var words = line.dataset.text.split(' ');
     words.forEach(function(w, wi) {
       var span = document.createElement('span');
       span.className = 'word';
       span.textContent = w;
-      // Stagger delay
       span.style.animationDelay = (0.35 + (li * 3 + wi) * 0.12) + 's';
       line.appendChild(span);
     });
   });
 
-  /* --- Zyra Starfield (Canvas based) --- */
   (function(){
     var c = document.getElementById('stars-canvas');
     if(!c) return;
@@ -593,7 +577,6 @@
     })();
   })();
 
-  /* --- Zyra Rotating Globe --- */
   (function(){
     var canvas = document.getElementById('globe');
     if(!canvas) return;
@@ -699,7 +682,6 @@
     draw();
   })();
 
-  /* --- VORTX Functionality --- */
   var translations = {
     en: { "nav-bundles": "Bundles", "nav-packs": "Featured Packs", "nav-categories": "Categories", "hero-tag": "Digital Assets Hub", "hero-desc": "High-end VFX packs, cinematic presets & custom web experiences. Crafted specifically for elite creators.", "hero-btn": "Explore Tiers", "bundle-sub": "Custom Web Solutions", "bundle-title": "WEB PAGE BUNDLES", "bundle-desc": "Launch your custom digital space today. Stand out with next-gen designs and premium performance.", "bundle-btn": "View Development Tiers", "packs-title": "Featured Packs", "packs-desc": "Swipe horizontally for endless physical 3D cards interaction", "cat-sec-title": "Categories", "cat-sec-desc": "Select a category to explore editing packs.", "footer-right": "Crafted for the bold.", "tiers-sub": "Web Solutions", "tiers-title": "Development Tiers", "back-btn": "← Back", "tier-starter-desc": "Perfect for simple portfolios and personal landing pages.", "tier-pro-desc": "For creators needing advanced animations & custom design.", "tier-vip-desc": "The absolute premium experience with custom 3D elements.", "select-plan": "Select Plan", "cat-view-sub": "Collection", "add-cart": "Add to Cart", "try-demo": "Try Demo", "stat-subscribers": "Telegram Subscribers", "stat-views": "Monthly Visitors", "stat-orders": "Completed Assets", "stat-rating": "Satisfaction Score" },
     ar: { "nav-bundles": "الحزم المتاحة", "nav-packs": "حزم متميزة", "nav-categories": "الأقسام الرئيسية", "hero-tag": "مركز الأصول الرقمية", "hero-desc": "حزم مؤثرات بصرية احترافية، إعدادات سينمائية مسبقة وتجارب ويب مخصصة. صُممت خصيصاً لنخبة المبدعين.", "hero-btn": "استكشف الباقات", "bundle-sub": "حلول المواقع المخصصة", "bundle-title": "باقات تصميم الويب", "bundle-desc": "أطلق مساحتك الرقمية المخصصة اليوم. تميز بتصاميم الجيل القادم وأداء لا يضاهى.", "bundle-btn": "عرض باقات التطوير", "packs-title": "الحزم المتميزة", "packs-desc": "اسحب يميناً ويساراً للتنقل غير المنتهي بين البطاقات ثلاثية الأبعاد", "cat-sec-title": "الأقسام", "cat-sec-desc": "اختر فئة لاستكشاف الحزم المتاحة.", "footer-right": "صُنع للمبدعين والجرآء.", "tiers-sub": "حلول الويب", "tiers-title": "مستويات التطوير", "back-btn": "→ العودة", "tier-starter-desc": "مثالية للملفات الشخصية وصفحات الهبوط البسيطة.", "tier-pro-desc": "للمبدعين الذين يحتاجون تحريكات متقدمة وتصاميم خاصة.", "tier-vip-desc": "الخبرة المتميزة المطلقة مع عناصر ثلاثية الأبعاد.", "select-plan": "اختر الباقة", "cat-view-sub": "المجموعة", "add-cart": "إضافة للسلة", "try-demo": "تجربة العرض", "stat-subscribers": "مشتركي التليجرام", "stat-views": "زائر شهرياً", "stat-orders": "أصل مكتمل", "stat-rating": "معدل التقييم" }
@@ -772,6 +754,7 @@
     var items = CATEGORY_DATA[key] || [];
     var html = '';
     for (var i = 0; i < items.length; i++) {
+      /* FIX: Escaped quotes correctly here to avoid Syntax Error */
       html += '<div onclick="window.openPreview(\'' + items[i] + '\', \'' + key + '\')" class="cat-card-glass flex flex-col justify-between min-h-[140px] text-left border-l-4 border-purple-500">' +
                 '<span class="text-[10px] font-bold uppercase opacity-70">' + key + ' Pack</span>' +
                 '<h3 class="font-head font-bold text-xl mt-4">' + items[i] + '</h3>' +
@@ -853,7 +836,8 @@
      3D CAROUSEL ENGINE 
      ============================================================ -->
 <script>
-(function () {
+/* FIX: Added DOMContentLoaded to ensure elements exist before executing */
+document.addEventListener('DOMContentLoaded', function() {
   "use strict";
 
   var CARDS_DATA = [
@@ -901,4 +885,16 @@
               '<p class="text-[10px] font-bold tracking-widest uppercase opacity-80 text-white">' + data.tag + '</p>' +
               '<h3 class="font-head font-extrabold text-xl tracking-wider force-eng mt-1 text-white">' + data.title + '</h3>' +
             '</div>' +
-            '<span class="font-hea
+            '<span class="font-head font-bold text-xs opacity-70 text-white">VORTX</span>' +
+          '</div>' +
+          '<div class="my-auto flex items-center justify-between">' +
+            '<div class="w-10 h-7 rounded-md" style="background:' + data.chip + '"></div>' +
+            '<div class="flex -space-x-2 opacity-80">' +
+              '<div class="w-6 h-6 rounded-full bg-white/20 border border-white/30 backdrop-blur-sm"></div>' +
+              '<div class="w-6 h-6 rounded-full bg-white/40 border border-white/30 backdrop-blur-sm"></div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="flex justify-between items-end font-mono text-sm tracking-widest text-white/90">' +
+            '<span>' + data.number + '</span>' +
+            '<span class="font-head font-bold text-xs">PHYSICAL 3D</span>' +
+          '</di
