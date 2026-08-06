@@ -78,13 +78,14 @@
     font-family: 'Inter', sans-serif;
     transition: background-color .4s ease, color .4s ease;
     -webkit-font-smoothing: antialiased; position: relative;
-    overflow-x: clip; 
+    overflow-x: hidden; /* يمنع اللف يمين ويسار بدون ما يعلق الشاشة */
   }
 
   html.vx-loading, html.vx-loading body { overflow: hidden !important; }
 
   .card-3d, .cat-card-glass, .tier-card, header { transform: translateZ(0); backface-visibility: hidden; }
 
+  /* كلاس الشفافية اللي كان يخفي العناصر */
   .reveal-on-scroll { opacity: 0; transform: translateY(40px); transition: opacity 1.8s cubic-bezier(0.16, 1, 0.3, 1), transform 1.8s cubic-bezier(0.16, 1, 0.3, 1); will-change: opacity, transform; }
   .reveal-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
 
@@ -143,19 +144,24 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    overflow: clip;
   }
 
   #globe {
     position: absolute;
     top: 55%; left: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%) scale(0);
     z-index: 1;
     opacity: 0;
     pointer-events: none;
-    animation: globeIn 3.5s cubic-bezier(.16,1,.3,1) 0.5s forwards;
+    /* التعديل الجديد على ظهور الكورة ببطء وتكبر وترجع */
+    animation: globeIn 3.5s ease-out 0.2s forwards;
   }
-  @keyframes globeIn { from { opacity: 0; transform: translate(-50%,-50%) scale(0.82); } to { opacity: 1; transform: translate(-50%,-50%) scale(1); } }
+  
+  @keyframes globeIn { 
+    0% { opacity: 0; transform: translate(-50%,-50%) scale(0.1); } 
+    60% { opacity: 1; transform: translate(-50%,-50%) scale(1.15); } 
+    100% { opacity: 1; transform: translate(-50%,-50%) scale(1); } 
+  }
 
   .floor-glow {
     position: absolute;
@@ -425,13 +431,14 @@
       </div>
     </section>
 
-    <section id="packs" class="py-16 w-full relative select-none reveal-on-scroll">
+    <!-- شلت كلاس reveal-on-scroll من هنا عشان تظهر البطاقات على طول بدون أي تعليق من متصفح الجوال -->
+    <section id="packs" class="py-16 w-full relative select-none">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-20 text-center mb-6">
         <h2 data-i18n="packs-title" class="font-head font-bold text-3xl sm:text-5xl">Featured Packs</h2>
         <p data-i18n="packs-desc" class="font-bold opacity-60 text-sm sm:text-base mt-2 tracking-wide">Swipe horizontally for endless physical 3D cards interaction</p>
       </div>
 
-      <div id="carousel-stage" class="relative w-full h-[520px] flex items-center justify-center perspective-container">
+      <div id="carousel-stage" class="relative w-full h-[520px] flex items-center justify-center perspective-container overflow-hidden">
         <div id="carousel-track" class="relative w-full h-full preserve-3d"></div>
       </div>
     </section>
@@ -754,7 +761,6 @@
     var items = CATEGORY_DATA[key] || [];
     var html = '';
     for (var i = 0; i < items.length; i++) {
-      /* FIX: Escaped quotes correctly here to avoid Syntax Error */
       html += '<div onclick="window.openPreview(\'' + items[i] + '\', \'' + key + '\')" class="cat-card-glass flex flex-col justify-between min-h-[140px] text-left border-l-4 border-purple-500">' +
                 '<span class="text-[10px] font-bold uppercase opacity-70">' + key + ' Pack</span>' +
                 '<h3 class="font-head font-bold text-xl mt-4">' + items[i] + '</h3>' +
@@ -836,8 +842,7 @@
      3D CAROUSEL ENGINE 
      ============================================================ -->
 <script>
-/* FIX: Added DOMContentLoaded to ensure elements exist before executing */
-document.addEventListener('DOMContentLoaded', function() {
+(function () {
   "use strict";
 
   var CARDS_DATA = [
@@ -895,6 +900,4 @@ document.addEventListener('DOMContentLoaded', function() {
             '</div>' +
           '</div>' +
           '<div class="flex justify-between items-end font-mono text-sm tracking-widest text-white/90">' +
-            '<span>' + data.number + '</span>' +
-            '<span class="font-head font-bold text-xs">PHYSICAL 3D</span>' +
-          '</di
+            '<span>'
