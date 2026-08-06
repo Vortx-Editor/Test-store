@@ -2,7 +2,7 @@
 <html lang="en" class="dark vx-loading" dir="ltr">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>VORTX — Premium Digital Assets</title>
 <meta name="theme-color" content="#09090c" />
 
@@ -36,10 +36,9 @@
     --ink: #050505;
     --brand: #7e22ce;
     --brandLight: #a855f7;
-    --bg-color: #050505; /* Unified dark bg */
+    --bg-color: #050505; 
     --text-color: #e8e8ef;
     --subtext-color: rgba(255, 255, 255, 0.75);
-    /* Unified Dark Star Background */
     --star-bg: radial-gradient(120% 80% at 50% 12%, #131314 0%, #0a0a0b 55%, #050505 100%);
     --star-opacity: 0.6;
     --anim--hover-time: 400ms;
@@ -47,13 +46,9 @@
     --btn-text-color: rgba(255, 255, 255, 0.95);
     --card-bg: rgba(255, 255, 255, 0.04);
     --card-border: rgba(255, 255, 255, 0.1);
-    
-    /* Globe Colors - White/Light for dark mode */
     --globe-line: 205, 210, 200; 
     --globe-ring: 190, 195, 185;
     --globe-point: 233, 236, 228;
-    
-    /* Loader unified bg */
     --loader-bg: #050505;
   }
 
@@ -62,31 +57,21 @@
     --bg-color: #f8fafc;
     --text-color: #0f172a;
     --subtext-color: #475569;
-    /* Unified Light Star Background */
     --star-bg: radial-gradient(circle at 50% 20%, rgba(200, 200, 200, 0.12) 0%, rgba(241, 245, 249, 1) 75%);
     --star-opacity: 0.35;
     --btn-text-color: #ffffff;
     --card-bg: rgba(255, 255, 255, 0.88);
     --card-border: rgba(168, 85, 247, 0.22);
-    
-    /* Globe Colors - Black/Dark for light mode */
     --globe-line: 30, 30, 30;
     --globe-ring: 50, 50, 50;
     --globe-point: 10, 10, 10;
-    
-    /* Loader unified bg */
     --loader-bg: #f8fafc;
   }
 
   * , *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  /* FIX FOR HORIZONTAL SCROLLING ON MOBILE */
-  html, body {
-    max-width: 100vw;
-    overflow-x: hidden;
-  }
-  
-  html { width: 100%; min-height: 100%; scroll-behavior: smooth; }
+  /* FIX: Clean Scroll Settings. Removed all overflow locks on html */
+  html { width: 100%; scroll-behavior: smooth; }
 
   body {
     width: 100%; min-height: 100vh;
@@ -94,12 +79,8 @@
     font-family: 'Inter', sans-serif;
     transition: background-color .4s ease, color .4s ease;
     -webkit-font-smoothing: antialiased; position: relative;
-  }
-  
-  /* Hide scrollbar completely to prevent the "column" effect */
-  ::-webkit-scrollbar {
-    width: 0px;
-    background: transparent; 
+    /* FIX: overflow-x clip prevents horizontal drift without killing 3D or vertical touch scroll */
+    overflow-x: clip; 
   }
 
   html.vx-loading, html.vx-loading body { overflow: hidden !important; }
@@ -109,13 +90,30 @@
   .reveal-on-scroll { opacity: 0; transform: translateY(40px); transition: opacity 1.8s cubic-bezier(0.16, 1, 0.3, 1), transform 1.8s cubic-bezier(0.16, 1, 0.3, 1); will-change: opacity, transform; }
   .reveal-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
 
-  /* Light Mode Specifics */
+  /* FIX: Light Mode Text Clipped Properly */
   html.light p, html.light span, html.light h2, html.light h3, html.light h4 { color: var(--text-color); }
   html.light .text-white { color: #0f172a !important; }
   html.light .text-slate-300 { color: #334155 !important; }
   html.light .text-purple-300, html.light .text-purple-400 { color: #7e22ce !important; }
-  html.light .vortx-wet-oil-title { background: linear-gradient(110deg, #1e1b4b 0%, #6b21a8 30%, #7e22ce 55%, #a855f7 80%, #0f172a 100%); background-size: 200% 100%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 6px 18px rgba(126, 34, 206, 0.2)); }
-  html.light .gold-heading { background: linear-gradient(100deg, #713f12 0%, #ca8a04 30%, #eab308 60%, #854d0e 100%); background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 4px 12px rgba(202, 138, 4, 0.25)); }
+  
+  html.light .vortx-wet-oil-title { 
+    background: linear-gradient(110deg, #111 0%, #555 30%, #222 55%, #777 80%, #000 100%); 
+    background-size: 200% 100%; 
+    -webkit-background-clip: text; /* This prevents the silver box */
+    background-clip: text; 
+    -webkit-text-fill-color: transparent; 
+    filter: drop-shadow(0 6px 18px rgba(0,0,0, 0.2)); 
+  }
+  
+  html.light .gold-heading { 
+    background: linear-gradient(100deg, #713f12 0%, #ca8a04 30%, #eab308 60%, #854d0e 100%); 
+    background-size: 220% 100%; 
+    -webkit-background-clip: text; 
+    background-clip: text; 
+    -webkit-text-fill-color: transparent; 
+    filter: drop-shadow(0 4px 12px rgba(202, 138, 4, 0.25)); 
+  }
+
   html.light .glass { background: rgba(255, 255, 255, 0.85) !important; border: 1px solid rgba(168, 85, 247, 0.22) !important; box-shadow: 0 15px 35px -10px rgba(126, 34, 206, 0.08), 0 0 25px rgba(168, 85, 247, 0.06) !important; backdrop-filter: blur(20px) !important; }
   html.light .golden-bundle-card { background: linear-gradient(135deg, rgba(254, 240, 138, 0.35) 0%, rgba(255, 255, 255, 0.95) 100%) !important; border: 1px solid rgba(234, 179, 8, 0.4) !important; box-shadow: 0 25px 50px -12px rgba(234, 179, 8, 0.18), inset 0 0 35px rgba(254, 240, 138, 0.25) !important; }
   html.light .cat-card-glass, html.light .tier-card { background: rgba(255, 255, 255, 0.88) !important; border: 1px solid rgba(126, 34, 206, 0.2) !important; box-shadow: 0 12px 30px rgba(126, 34, 206, 0.06), 0 0 20px rgba(168, 85, 247, 0.05) !important; }
@@ -134,29 +132,23 @@
     pointer-events: none; transition: background .4s ease; 
   }
   
-  /* Absolute positioning for background container to cover body */
-  body > .stars-background-container {
-      position: fixed;
-  }
+  body > .stars-background-container { position: fixed; }
   
   #stars-canvas {
     position: absolute; inset: 0; z-index: 0; opacity: var(--star-opacity);
     transition: opacity .4s ease;
   }
   
-  html.light #stars-canvas {
-      /* Invert stars color in light mode to make them visible (blackish) */
-      filter: invert(1);
-  }
+  html.light #stars-canvas { filter: invert(1); }
 
-  /* Globe specific styling */
+  /* FIX: Hero Section Mobile Scroll Fix (Changed overflow: hidden to clip) */
   #hero-section {
     position: relative;
     min-height: 90vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    overflow: hidden;
+    overflow: clip; /* Ensures touches aren't trapped while keeping glow inside */
   }
 
   #globe {
@@ -196,18 +188,13 @@
   .revealed .fade-up-item { animation: upFade 1s ease forwards; opacity: 0; transform: translateY(16px); }
   @keyframes upFade { to { opacity: 1; transform: translateY(0); } }
 
-  /* Title Shines */
+  /* Dark Mode Title Shines */
   .vortx-wet-oil-title {
     display: inline-block; font-weight: 900;
     background: linear-gradient(110deg, #ffffff 0%, #e0e0e0 20%, #ffffff 35%, #a0a0a0 50%, #ffffff 65%, #606060 80%, #ffffff 100%);
     background-size: 200% 100%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
     animation: oilShineSweep 4s linear infinite;
     filter: drop-shadow(0 10px 25px rgba(0,0,0,.8)) drop-shadow(0 0 20px rgba(255,255,255,.1));
-  }
-  html.light .vortx-wet-oil-title {
-      background: linear-gradient(110deg, #111 0%, #555 30%, #222 55%, #777 80%, #000 100%);
-      -webkit-text-fill-color: transparent;
-      filter: drop-shadow(0 6px 18px rgba(0,0,0, 0.2));
   }
   @keyframes oilShineSweep { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
 
@@ -259,7 +246,7 @@
   .view { transition: opacity .4s ease; opacity: 1; display: block; }
   .view-hidden { display: none !important; opacity: 0; }
 
-  /* Luxury Loader & Letter Drop Animation - UNIFIED COLORS */
+  /* Luxury Loader & Letter Drop Animation */
   #vx-loader { position: fixed; inset: 0; z-index: 999999; background: var(--loader-bg); transition: background-color .4s ease, opacity 0.8s cubic-bezier(0.4,0,0.2,1), visibility 0.8s ease; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; }
   #vx-loader.vx-hide { opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; }
   #app-content { opacity: 0; filter: blur(20px); transform: scale(1.03); transition: opacity 1s cubic-bezier(0.16,1,0.3,1), filter 1s cubic-bezier(0.16,1,0.3,1), transform 1s cubic-bezier(0.16,1,0.3,1); }
@@ -271,7 +258,6 @@
 
   .vx-logo-word { display: flex; font-family: 'Cinzel', serif; font-weight: 900; font-size: clamp(3.5rem, 13vw, 7rem); letter-spacing: 0.25em; line-height: 1; position: relative; z-index: 2; perspective: 1000px; }
   
-  /* Adjusted Loader Text for Unified Theme */
   .vx-letter { display: inline-block; background: linear-gradient(135deg, #fff 0%, #ccc 50%, #999 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; opacity: 0; transform: translateY(-70px) rotateX(45deg) scale(1.4); filter: blur(12px); animation: vxLetterDrop 0.9s cubic-bezier(0.19, 1, 0.22, 1) forwards; animation-delay: var(--ld, 0s); }
   html.light .vx-letter { background: linear-gradient(135deg, #111 0%, #444 50%, #777 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 15px 30px rgba(0,0,0,0.2)); }
   @keyframes vxLetterDrop { 
@@ -286,14 +272,12 @@
   .vx-bar-fill { height: 100%; width: 0%; border-radius: 999px; background: linear-gradient(90deg, #555, #ccc, #fff); position: relative; }
   html.light .vx-bar-fill { background: linear-gradient(90deg, #333, #666, #111); }
   
-  /* Loading text adjustments */
   .loader-text { color: rgba(255,255,255,0.7); }
   html.light .loader-text { color: rgba(0,0,0,0.7); }
   
   #vx-percent { color: #fff; }
   html.light #vx-percent { color: #000; }
   
-  /* Top Nav fixes for light mode */
   header .glass { border-bottom: 1px solid rgba(255,255,255,0.05); }
   html.light header .glass { border-bottom: 1px solid rgba(0,0,0,0.1); background: rgba(255,255,255,0.7) !important; }
 </style>
@@ -376,7 +360,6 @@
 
 <div id="app-content">
 
-  <!-- ZYRA CANVAS STARS BACKGROUND -->
   <div class="stars-background-container">
     <canvas id="stars-canvas"></canvas>
   </div>
@@ -405,23 +388,18 @@
   <main id="main-view" class="view relative z-10">
     <div id="top"></div>
 
-    <!-- NEW HERO SECTION WITH ZYRA GLOBE AND TEXT REVEAL -->
     <section id="hero-section" class="max-w-7xl mx-auto px-4 sm:px-6 text-center">
       
-      <!-- Globe elements -->
       <canvas id="globe"></canvas>
       <div class="floor-glow"></div>
 
-      <!-- Hero Content (Positioned over globe) -->
       <div class="relative z-20 flex flex-col items-center justify-center">
-        
         <div class="fade-up-item inline-flex items-center gap-3 px-6 py-2.5 rounded-full text-xs font-bold tracking-widest uppercase glass backdrop-blur-md mb-8" style="animation-delay: 1.4s;">
           <span class="w-2 h-2 rounded-full bg-white/40 animate-ping"></span>
           <span data-i18n="hero-tag">Digital Assets Hub</span>
           <span class="w-2 h-2 rounded-full bg-white/40 animate-ping"></span>
         </div>
 
-        <!-- Animated Title - Replaced the giant VORTX with elegant phrasing -->
         <h1 class="animated-title font-black text-4xl sm:text-6xl md:text-7xl leading-tight mb-6">
           <span class="line force-eng vortx-wet-oil-title tracking-widest py-2" data-text="VORTX STUDIO"></span><br>
           <span class="line mt-2" data-text="Evolution of Digital Assets"></span>
@@ -437,7 +415,6 @@
             <div class="button-shadow"></div>
           </div>
         </div>
-
       </div>
     </section>
 
@@ -458,19 +435,19 @@
       </div>
     </section>
 
-    <!-- FEATURED PACKS: INFINITE 3D CAROUSEL (RESTORED) -->
-    <section id="packs" class="py-16 w-full relative overflow-hidden select-none reveal-on-scroll">
+    <!-- FIX: FEATURED PACKS (Removed overflow-hidden from container to keep 3D cards visible) -->
+    <section id="packs" class="py-16 w-full relative select-none reveal-on-scroll">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-20 text-center mb-6">
         <h2 data-i18n="packs-title" class="font-head font-bold text-3xl sm:text-5xl">Featured Packs</h2>
         <p data-i18n="packs-desc" class="font-bold opacity-60 text-sm sm:text-base mt-2 tracking-wide">Swipe horizontally for endless physical 3D cards interaction</p>
       </div>
 
-      <div id="carousel-stage" class="relative w-full h-[520px] flex items-center justify-center perspective-container overflow-hidden">
+      <div id="carousel-stage" class="relative w-full h-[520px] flex items-center justify-center perspective-container">
         <div id="carousel-track" class="relative w-full h-full preserve-3d"></div>
       </div>
     </section>
 
-    <!-- CATEGORIES (RESTORED) -->
+    <!-- CATEGORIES -->
     <section id="categories" class="max-w-7xl mx-auto px-4 sm:px-6 py-16 reveal-on-scroll">
       <div class="mb-10 text-left"><h2 data-i18n="cat-sec-title" class="font-head font-bold text-3xl sm:text-4xl">Categories</h2><p data-i18n="cat-sec-desc" class="font-bold opacity-50 mt-2 text-sm tracking-wide">Select a category to explore editing packs.</p></div>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -666,7 +643,6 @@
       ctx.translate(W/2, H/2);
       var scale = R * DPR;
       
-      // Get colors from CSS variables based on theme
       var rootStyles = getComputedStyle(document.documentElement);
       var rgbLine = rootStyles.getPropertyValue('--globe-line').trim() || '205,210,200';
       var rgbRing = rootStyles.getPropertyValue('--globe-ring').trim() || '190,195,185';
@@ -898,4 +874,31 @@
   var currentIndex = 0;
   var targetIndex = 0;
 
-  var isDragging = false
+  var isDragging = false;
+  var isHorizontalDrag = false;
+  var startX = 0, startY = 0;
+  var currentX = 0, currentY = 0;
+  var dragDeltaX = 0;
+  var velocityX = 0;
+  var lastX = 0;
+  var lastTime = 0;
+
+  function buildCards() {
+    track.innerHTML = '';
+    cards = [];
+
+    CARDS_DATA.forEach(function (data, i) {
+      var card = document.createElement('div');
+      card.className = 'card-3d';
+      card.style.background = data.bg;
+      card.style.border = '1px solid ' + data.border;
+
+      card.innerHTML = 
+        '<div class="glass-sheen"></div>' +
+        '<div class="p-6 h-full flex flex-col justify-between text-white relative z-10 pointer-events-none">' +
+          '<div class="flex justify-between items-start">' +
+            '<div>' +
+              '<p class="text-[10px] font-bold tracking-widest uppercase opacity-80 text-white">' + data.tag + '</p>' +
+              '<h3 class="font-head font-extrabold text-xl tracking-wider force-eng mt-1 text-white">' + data.title + '</h3>' +
+            '</div>' +
+            '<span class="font-hea
