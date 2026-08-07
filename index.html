@@ -84,6 +84,13 @@
     -webkit-font-smoothing: antialiased; position: relative;
   }
 
+  html.light body::before {
+    content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+    background: 
+      radial-gradient(circle at 15% 30%, rgba(124, 42, 232, 0.05), transparent 45%),
+      radial-gradient(circle at 85% 70%, rgba(124, 42, 232, 0.04), transparent 45%);
+  }
+
   html.vx-loading, html.vx-loading body { overflow: hidden !important; }
 
   .card-3d, .cat-card-glass, .tier-card, header { transform: translateZ(0); backface-visibility: hidden; }
@@ -92,32 +99,45 @@
   .reveal-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
 
   html.light p, html.light span, html.light h2, html.light h3, html.light h4 { color: var(--text-color); }
-  html.light .text-white { color: #0f172a !important; }
-  html.light .text-slate-300 { color: #334155 !important; }
-  html.light .text-purple-300, html.light .text-purple-400 { color: #7e22ce !important; }
+  html.light .text-white { color: #17131F !important; }
+  html.light .text-slate-300 { color: #625D6B !important; }
+  html.light .text-purple-300, html.light .text-purple-400 { color: #7C2AE8 !important; }
   
   html.light .vortx-wet-oil-title { 
-    background: linear-gradient(110deg, #111 0%, #555 30%, #222 55%, #777 80%, #000 100%); 
+    background: linear-gradient(110deg, #17131F 0%, #4C1D95 30%, #17131F 55%, #7C2AE8 80%, #17131F 100%); 
     background-size: 200% 100%; 
     -webkit-background-clip: text; 
     background-clip: text; 
     -webkit-text-fill-color: transparent; 
-    filter: drop-shadow(0 6px 18px rgba(0,0,0, 0.2)); 
+    filter: drop-shadow(0 4px 12px rgba(124, 42, 232, 0.15)); 
   }
   
   html.light .gold-heading { 
-    background: linear-gradient(100deg, #713f12 0%, #ca8a04 30%, #eab308 60%, #854d0e 100%); 
+    background: linear-gradient(100deg, #17131F 0%, #C49A3A 30%, #17131F 60%, #17131F 100%); 
     background-size: 220% 100%; 
     -webkit-background-clip: text; 
     background-clip: text; 
     -webkit-text-fill-color: transparent; 
-    filter: drop-shadow(0 4px 12px rgba(202, 138, 4, 0.25)); 
+    filter: drop-shadow(0 4px 12px rgba(196, 154, 58, 0.15)); 
   }
 
-  html.light .glass { background: rgba(255, 255, 255, 0.85) !important; border: 1px solid rgba(168, 85, 247, 0.22) !important; box-shadow: 0 15px 35px -10px rgba(126, 34, 206, 0.08), 0 0 25px rgba(168, 85, 247, 0.06) !important; backdrop-filter: blur(20px) !important; }
-  html.light .golden-bundle-card { background: linear-gradient(135deg, rgba(254, 240, 138, 0.35) 0%, rgba(255, 255, 255, 0.95) 100%) !important; border: 1px solid rgba(234, 179, 8, 0.4) !important; box-shadow: 0 25px 50px -12px rgba(234, 179, 8, 0.18), inset 0 0 35px rgba(254, 240, 138, 0.25) !important; }
-  html.light .cat-card-glass, html.light .tier-card { background: rgba(255, 255, 255, 0.88) !important; border: 1px solid rgba(126, 34, 206, 0.2) !important; box-shadow: 0 12px 30px rgba(126, 34, 206, 0.06), 0 0 20px rgba(168, 85, 247, 0.05) !important; }
-  html.light .btn-3d-style { background: linear-gradient(135deg, #7e22ce 0%, #9333ea 100%) !important; box-shadow: 0 10px 22px rgba(126, 34, 206, 0.3) !important; }
+  html.light .glass, html.light .cat-card-glass, html.light .tier-card { 
+    background: rgba(255, 255, 255, 0.75) !important; 
+    border: 1px solid rgba(124, 42, 232, 0.15) !important; 
+    box-shadow: 0 15px 35px -10px rgba(124, 42, 232, 0.08), inset 0 0 20px rgba(255,255,255,0.6) !important; 
+    backdrop-filter: blur(24px) !important; 
+  }
+  
+  html.light .golden-bundle-card { 
+    background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(244,242,247,0.8) 100%) !important; 
+    border: 1px solid rgba(196, 154, 58, 0.2) !important; 
+    box-shadow: 0 25px 50px -12px rgba(124, 42, 232, 0.08), inset 0 0 35px rgba(255,255,255,0.8) !important; 
+  }
+
+  html.light .btn-3d-style { 
+    background: linear-gradient(135deg, #6D28D9 0%, #8B2BE8 100%) !important; 
+    box-shadow: 0 8px 20px -4px rgba(124, 42, 232, 0.4), inset 0 1px 1px rgba(255,255,255,0.3) !important; 
+  }
   html.light .btn-3d-style span { color: #ffffff !important; text-shadow: none !important; }
 
   html[dir="rtl"] body { font-family: 'Cairo', sans-serif; }
@@ -134,7 +154,7 @@
   
   html.light .stars-background-container::after {
     content: ''; position: absolute; inset: 0;
-    background-image: radial-gradient(rgba(0,0,0,0.12) 2.5px, transparent 2.5px);
+    background-image: radial-gradient(rgba(124, 42, 232, 0.06) 1.5px, transparent 1.5px);
     background-size: 32px 32px; z-index: 1;
   }
   
@@ -159,7 +179,6 @@
   }
   
   .revealed #globe {
-    /* شلت الارتداد القوي وحطيت ease-in-out عشان الانسيابية بدون وقفات */
     animation: globeBounce 2.8s ease-in-out 0.1s both;
   }
   
@@ -181,7 +200,7 @@
     pointer-events: none;
     animation: fadeGlow 3s ease 1.5s forwards;
   }
-  html.light .floor-glow { background: radial-gradient(ellipse at center, rgba(168, 85, 247, 0.25), rgba(255,255,255,0) 70%); }
+  html.light .floor-glow { background: radial-gradient(ellipse at center, rgba(124, 42, 232, 0.18), rgba(244,242,247,0) 70%); }
   @keyframes fadeGlow { to { opacity: 1; } }
 
   .animated-title .line { display: block; overflow: hidden; }
@@ -482,16 +501,24 @@
         </div>
       </div>
     </section>
+
+    <!-- هنا مكان الكرت الأصفر شلناه وحطينا الفيديو حقك مع كود الضغط الذكي -->
     <section id="bundles" class="max-w-7xl mx-auto px-4 sm:px-6 py-12 reveal-on-scroll">
-      <div class="golden-bundle-card p-8 sm:p-14 relative flex flex-col md:flex-row items-center justify-between gap-10">
-        <div class="text-center md:text-left rtl:md:text-right max-w-2xl relative z-10 w-full">
-          <span data-i18n="bundle-sub" class="text-xs tracking-widest uppercase font-extrabold text-yellow-500 block mb-2">Custom Web Solutions</span>
-          <h2 data-i18n="bundle-title" class="gold-heading uppercase text-3xl sm:text-4xl md:text-5xl mb-4">WEB PAGE BUNDLES</h2>
-          <p data-i18n="bundle-desc" class="font-bold opacity-80 leading-relaxed text-sm sm:text-lg">Launch your custom digital space today. Stand out with next-gen designs and premium performance.</p>
-        </div>
-        <div class="w-full md:w-auto relative z-10 flex justify-center flex-shrink-0">
+      <div class="relative w-full h-[300px] sm:h-[400px] rounded-3xl overflow-hidden shadow-2xl border border-white/10 group">
+        <video 
+          src="https://res.cloudinary.com/eon6wcph/video/upload/q_auto,f_auto/v1/VORTX_4K_CLEAN_FULL_kd7uui.mp4" 
+          autoplay 
+          loop 
+          muted 
+          playsinline 
+          class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+          style="pointer-events: none;">
+        </video>
+        <div class="absolute inset-0 bg-black/30 flex flex-col items-center justify-center gap-4 transition-opacity duration-500">
           <div class="button-wrap" onclick="window.openWebTiers()">
-            <div class="btn-3d-style"><span data-i18n="bundle-btn">View Development Tiers</span></div>
+            <div class="btn-3d-style">
+              <span data-i18n="bundle-btn">View Development Tiers</span>
+            </div>
             <div class="button-shadow"></div>
           </div>
         </div>
@@ -562,7 +589,6 @@
       </div>
     </footer>
   </main>
-
   <!-- WEB TIERS VIEW -->
   <section id="web-view" class="view view-hidden relative z-10 min-h-screen">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
