@@ -6,6 +6,9 @@
 <title>VORTX — Premium Digital Assets</title>
 <meta name="theme-color" content="#09090c" />
 
+<!-- التحميل المسبق للفيديو بالخلفية أثناء اللودر عشان يشتغل بلمح البصر -->
+<link rel="preload" href="https://res.cloudinary.com/eon6wcph/video/upload/v1/VORTX_4K_CLEAN_FULL_kd7uui.mp4" as="video" type="video/mp4">
+
 <!-- Tailwind CSS CDN v4 -->
 <script src="https://cdn.tailwindcss.com"></script>
 
@@ -257,7 +260,6 @@
   html.light .icon-moon { display: none; }
   html.light .icon-sun { display: block; }
 
-  /* تصميم زر "EXPLORE PACKAGES" مع التوهج الفضي الفاخر بدل البنفسجي */
   .vortx-explore-btn {
     position: relative; display: inline-flex; flex-direction: column; align-items: center; justify-content: center;
     padding: 0.85rem 2.2rem; border-radius: 999px; cursor: pointer;
@@ -520,11 +522,11 @@
       </div>
     </section>
 
-    <!-- كرت الفيديو السينمائي المعدل (رابط تشغيل مباشر + توهج فضي فخم) -->
+    <!-- كرت الفيديو مع التحميل المسبق والتوهج الفضي -->
     <section id="bundles" class="max-w-7xl mx-auto px-4 sm:px-6 py-12 reveal-on-scroll">
-      <div class="relative w-full h-[360px] sm:h-[460px] rounded-3xl overflow-hidden shadow-2xl border border-white/10 group transition-all duration-500 hover:shadow-[0_20px_50px_rgba(226,232,240,0.15)]">
+      <div class="relative w-full h-[360px] sm:h-[460px] rounded-3xl overflow-hidden shadow-2xl border border-white/10 group transition-all duration-500 hover:shadow-[0_20px_50px_rgba(226,232,240,0.2)]">
         
-        <!-- الفيديو برابط مباشر ومُحسّن للتشغيل الفوري بدون تعليق -->
+        <!-- تم تعديل الرابط وصيغة التحميل المسبق الفوري -->
         <video 
           src="https://res.cloudinary.com/eon6wcph/video/upload/v1/VORTX_4K_CLEAN_FULL_kd7uui.mp4" 
           autoplay 
@@ -536,10 +538,8 @@
           style="pointer-events: none;">
         </video>
 
-        <!-- تدرج أسود سينمائي خفيف من الأسفل لبروز الزر -->
         <div class="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black/80 via-black/40 to-transparent pointer-events-none"></div>
 
-        <!-- أزرار الـ CTA الفاخرة مع توهج فضي -->
         <div class="absolute inset-x-0 bottom-8 flex flex-col items-center justify-center gap-2 z-20 px-4">
           <span class="text-[10px] font-mono tracking-[0.3em] uppercase text-slate-300 opacity-90 drop-shadow-md">3 Tiers Available</span>
           <div onclick="window.openWebTiers()" class="vortx-explore-btn group/btn">
