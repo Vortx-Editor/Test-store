@@ -54,17 +54,19 @@
 
   html.light {
     --ink: #0f172a;
-    --bg-color: #f8fafc;
+    --bg-color: #fafafa; /* أبيض لؤلؤي فخم للوضع النهاري */
     --text-color: #0f172a;
     --subtext-color: #475569;
-    --star-bg: radial-gradient(circle at 50% 20%, rgba(200, 200, 200, 0.12) 0%, rgba(241, 245, 249, 1) 75%);
-    --star-opacity: 0.35;
+    /* خلفية نهارية فخمة مع إشعاع بنفسجي خفيف من فوق */
+    --star-bg: radial-gradient(120% 80% at 50% 12%, #f3e8ff 0%, #fafafa 55%, #f8fafc 100%);
+    --star-opacity: 0.4;
     --btn-text-color: #ffffff;
-    --card-bg: rgba(255, 255, 255, 0.88);
-    --card-border: rgba(168, 85, 247, 0.22);
-    --globe-line: 30, 30, 30;
-    --globe-ring: 50, 50, 50;
-    --globe-point: 10, 10, 10;
+    --card-bg: rgba(255, 255, 255, 0.7);
+    --card-border: rgba(168, 85, 247, 0.3);
+    /* ألوان الكرة الأرضية في النهار صارت بنفسجي ملكي بدال الأسود الكئيب */
+    --globe-line: 168, 85, 247;
+    --globe-ring: 216, 180, 254;
+    --globe-point: 126, 34, 206;
     --loader-bg: #f8fafc;
   }
 
@@ -133,7 +135,7 @@
   body > .stars-background-container { position: fixed; }
   
   #stars-canvas { position: absolute; inset: 0; z-index: 0; opacity: var(--star-opacity); transition: opacity .4s ease; }
-  html.light #stars-canvas { filter: invert(1); }
+  html.light #stars-canvas { filter: invert(0.8) sepia(1) hue-rotate(240deg) saturate(3) brightness(0.8); } /* نجوم تميل للبنفسجي بالنهار */
 
   #hero-section {
     position: relative;
@@ -146,16 +148,17 @@
   #globe {
     position: absolute;
     top: 55%; left: 50%;
-    transform: translate(-50%,-50%) scale(0.1);
+    transform: translate(-50%,-50%) scale(0);
     z-index: 1;
     opacity: 0;
     pointer-events: none;
-    animation: globeIn 3.5s cubic-bezier(0.2, 0.8, 0.2, 1) 0.2s forwards;
+    /* أنيميشن الظهور البطيء والارتداد زي الفديو بالضبط */
+    animation: globeBounce 2.8s cubic-bezier(0.25, 1, 0.5, 1) 0.5s forwards;
   }
   
-  @keyframes globeIn { 
-    0% { opacity: 0; transform: translate(-50%,-50%) scale(0.1); } 
-    50% { opacity: 1; transform: translate(-50%,-50%) scale(1.15); } 
+  @keyframes globeBounce { 
+    0% { opacity: 0; transform: translate(-50%,-50%) scale(0.2); } 
+    60% { opacity: 1; transform: translate(-50%,-50%) scale(1.15); } 
     100% { opacity: 1; transform: translate(-50%,-50%) scale(1); } 
   }
 
@@ -171,7 +174,8 @@
     pointer-events: none;
     animation: fadeGlow 3s ease 1.5s forwards;
   }
-  html.light .floor-glow { background: radial-gradient(ellipse at center, rgba(0,0,0,.08), rgba(0,0,0,0) 70%); }
+  /* وهج الأرضية في النهار بلون بنفسجي ملكي خفيف */
+  html.light .floor-glow { background: radial-gradient(ellipse at center, rgba(168, 85, 247, 0.25), rgba(255,255,255,0) 70%); }
   @keyframes fadeGlow { to { opacity: 1; } }
 
   .animated-title .line { display: block; overflow: hidden; }
