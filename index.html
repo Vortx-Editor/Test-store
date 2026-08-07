@@ -72,7 +72,6 @@
 
   html, body { 
       max-width: 100vw; 
-      /* clip يمنع الشاشة من اللف يمين ويسار وما يدمر الـ 3D زي الـ hidden */
       overflow-x: clip; 
       scroll-behavior: smooth; 
   }
@@ -426,14 +425,12 @@
       </div>
     </section>
 
-    <!-- قسم الكاروسيل: حطيت عليه z-30 قوي وشلت الكلاسات اللي تخفيه -->
     <section id="packs" class="py-16 w-full relative z-30 select-none bg-transparent block">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-40 text-center mb-6">
         <h2 data-i18n="packs-title" class="font-head font-bold text-3xl sm:text-5xl">Featured Packs</h2>
         <p data-i18n="packs-desc" class="font-bold opacity-60 text-sm sm:text-base mt-2 tracking-wide">Swipe horizontally for endless physical 3D cards interaction</p>
       </div>
 
-      <!-- البوكس الأساسي: شلت منه أي overflow-hidden يخفي الـ 3D -->
       <div id="carousel-stage" class="relative w-full h-[520px] flex items-center justify-center perspective-container">
         <div id="carousel-track" class="relative w-full h-full preserve-3d"></div>
       </div>
@@ -484,7 +481,6 @@
       </div>
     </footer>
   </main>
-
   <!-- WEB TIERS VIEW -->
   <section id="web-view" class="view view-hidden relative z-10 min-h-screen">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
@@ -895,4 +891,137 @@ document.addEventListener('DOMContentLoaded', function() {
               '<div class="w-6 h-6 rounded-full bg-white/40 border border-white/30 backdrop-blur-sm"></div>' +
             '</div>' +
           '</div>' +
-          '<div class="flex justify-bet
+          '<div class="flex justify-between items-end font-mono text-sm tracking-widest text-white/90">' +
+            '<span>' + data.number + '</span>' +
+            '<span class="font-head font-bold text-xs">PHYSICAL 3D</span>' +
+          '</div>' +
+        '</div>';
+
+      card.addEventListener('click', function () {
+        if (Math.abs(dragDeltaX) < 8) {
+          var normCurrent = ((Math.round(currentIndex) % N) + N) % N;
+          if (i === normCurrent) {
+            window.openPreview(data.title, data.tag);
+          } else {
+            var diff = (i - normCurrent + N) % N;
+            if (diff > N / 2) diff -= N;
+            targetIndex = currentIndex + diff;
+          }
+        }
+      });
+
+      track.appendChild(card);
+      cards.push(card);
+    });
+  }
+
+  function updateTransform() {
+    var spacing = 220;
+    
+    cards.forEach(function (card, i) {
+      var rawOffset = i - currentIndex;
+      var wrappedOffset = ((rawOffset % N) + N) % N;
+      if (wrappedOffset > N / 2) wrappedOffset -= N;
+
+      var absOffset = Math.abs(wrappedOffset);
+
+      var posX = wrappedOffset * spacing;
+      var posZ = -absOffset * 180;
+      var rotY = Math.max(-60, Math.min(60, wrappedOffset * -28));
+      var scale = Math.max(0.65, 1 - absOffset * 0.15);
+      var opacity = Math.max(0, 1 - absOffset * 0.35);
+
+      card.style.transform = 
+        'translateX(' + posX.toFixed(2) + 'px) ' +
+        'translateZ(' + posZ.toFixed(2) + 'px) ' +
+        'rotateY(' + rotY.toFixed(2) + 'deg) ' +
+        'scale(' + scale.toFixed(3) + ')';
+      
+      card.style.opacity = opacity.toFixed(3);
+      card.style.zIndex = Math.round(100 - absOffset * 10);
+      card.style.pointerEvents = absOffset < 2.5 ? 'auto' : 'none';
+    });
+  }
+
+  function animate() {
+    if (!isDragging) {
+      currentIndex += (targetIndex - currentIndex) * 0.12;
+    } else if (isHorizontalDrag) {
+      currentIndex += (targetIndex - currentIndex) * 0.35;
+    }
+    updateTransform();
+    requestAnimationFrame(animate);
+  }
+
+  function onPointerDown(e) {
+    isDragging = true;
+    isHorizontalDrag = false;
+    var touch = e.touches ? e.touches[0] : e;
+    startX = touch.clientX;
+    startY = touch.clientY;
+    lastX = startX;
+    dragDeltaX = 0;
+    velocityX = 0;
+    lastTime = performance.now();
+  }
+
+  function onPointerMove(e) {
+    if (!isDragging) return;
+    var touch = e.touches ? e.touches[0] : e;
+    currentX = touch.clientX;
+    currentY = touch.clientY;
+    var diffX = currentX - startX;
+    var diffY = currentY - startY;
+
+    if (!isHorizontalDrag) {
+      if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 6) {
+        isHorizontalDrag = true;
+      } else if (Math.abs(diffY) > Math.abs(diffX) && Math.abs(diffY) > 6) {
+        isDragging = false;
+        return;
+      }
+    }
+
+    if (isHorizontalDrag) {
+      var deltaX = currentX - lastX;
+      dragDeltaX += currentX - startX;
+      targetIndex -= deltaX / 220;
+      var now = performance.now();
+      var dt = now - lastTime;
+      if (dt > 0) velocityX = deltaX / dt;
+      lastX = currentX;
+      lastTime = now;
+    }
+  }
+
+  function onPointerUp() {
+    if (!isDragging) return;
+    isDragging = false;
+    if (isHorizontalDrag) {
+      targetIndex -= velocityX * 1.5;
+      targetIndex = Math.round(targetIndex);
+    }
+  }
+
+  stage.addEventListener('mousedown', onPointerDown);
+  stage.addEventListener('mousemove', onPointerMove);
+  stage.addEventListener('mouseup', onPointerUp);
+  stage.addEventListener('mouseleave', onPointerUp);
+  stage.addEventListener('touchstart', onPointerDown, { passive: true });
+  stage.addEventListener('touchmove', onPointerMove, { passive: true });
+  stage.addEventListener('touchend', onPointerUp);
+
+  stage.addEventListener('wheel', function (e) {
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
+      targetIndex += e.deltaX > 0 ? 0.35 : -0.35;
+      targetIndex = Math.round(targetIndex);
+    }
+  }, { passive: true });
+
+  buildCards();
+  animate();
+});
+</script>
+
+</body>
+</html>
