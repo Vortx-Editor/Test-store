@@ -52,20 +52,21 @@
     --loader-bg: #050505;
   }
 
+  /* الوضع النهاري الجديد (Luxury Cinematic Light Mode) */
   html.light {
-    --ink: #0f172a;
-    --bg-color: #fafafa;
-    --text-color: #0f172a;
-    --subtext-color: #475569;
-    --star-bg: radial-gradient(circle at 50% 50%, #ffffff 15%, #f1f5f9 60%, #94a3b8 100%);
+    --ink: #17131F;
+    --bg-color: #F4F2F7;
+    --text-color: #17131F;
+    --subtext-color: #625D6B;
+    --star-bg: #F4F2F7; /* تم تعويضها بتأثيرات الإضاءة السينمائية تحت */
     --star-opacity: 1;
     --btn-text-color: #ffffff;
-    --card-bg: rgba(255, 255, 255, 0.7);
-    --card-border: rgba(168, 85, 247, 0.3);
-    --globe-line: 168, 85, 247;
-    --globe-ring: 216, 180, 254;
-    --globe-point: 126, 34, 206;
-    --loader-bg: #f8fafc;
+    --card-bg: rgba(255, 255, 255, 0.75);
+    --card-border: rgba(124, 42, 232, 0.15);
+    --globe-line: 124, 42, 232;
+    --globe-ring: 76, 29, 149;
+    --globe-point: 124, 42, 232;
+    --loader-bg: #F4F2F7;
   }
 
   * , *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -84,6 +85,14 @@
     -webkit-font-smoothing: antialiased; position: relative;
   }
 
+  /* توهج سينمائي خافت في زوايا الموقع للنهار (Atmospheric Light) */
+  html.light body::before {
+    content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+    background: 
+      radial-gradient(circle at 15% 30%, rgba(124, 42, 232, 0.05), transparent 45%),
+      radial-gradient(circle at 85% 70%, rgba(124, 42, 232, 0.04), transparent 45%);
+  }
+
   html.vx-loading, html.vx-loading body { overflow: hidden !important; }
 
   .card-3d, .cat-card-glass, .tier-card, header { transform: translateZ(0); backface-visibility: hidden; }
@@ -92,32 +101,47 @@
   .reveal-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
 
   html.light p, html.light span, html.light h2, html.light h3, html.light h4 { color: var(--text-color); }
-  html.light .text-white { color: #0f172a !important; }
-  html.light .text-slate-300 { color: #334155 !important; }
-  html.light .text-purple-300, html.light .text-purple-400 { color: #7e22ce !important; }
+  html.light .text-white { color: #17131F !important; }
+  html.light .text-slate-300 { color: #625D6B !important; }
+  html.light .text-purple-300, html.light .text-purple-400 { color: #7C2AE8 !important; }
   
   html.light .vortx-wet-oil-title { 
-    background: linear-gradient(110deg, #111 0%, #555 30%, #222 55%, #777 80%, #000 100%); 
+    background: linear-gradient(110deg, #17131F 0%, #4C1D95 30%, #17131F 55%, #7C2AE8 80%, #17131F 100%); 
     background-size: 200% 100%; 
     -webkit-background-clip: text; 
     background-clip: text; 
     -webkit-text-fill-color: transparent; 
-    filter: drop-shadow(0 6px 18px rgba(0,0,0, 0.2)); 
+    filter: drop-shadow(0 4px 12px rgba(124, 42, 232, 0.15)); 
   }
   
   html.light .gold-heading { 
-    background: linear-gradient(100deg, #713f12 0%, #ca8a04 30%, #eab308 60%, #854d0e 100%); 
+    background: linear-gradient(100deg, #17131F 0%, #C49A3A 30%, #17131F 60%, #17131F 100%); 
     background-size: 220% 100%; 
     -webkit-background-clip: text; 
     background-clip: text; 
     -webkit-text-fill-color: transparent; 
-    filter: drop-shadow(0 4px 12px rgba(202, 138, 4, 0.25)); 
+    filter: drop-shadow(0 4px 12px rgba(196, 154, 58, 0.15)); 
   }
 
-  html.light .glass { background: rgba(255, 255, 255, 0.85) !important; border: 1px solid rgba(168, 85, 247, 0.22) !important; box-shadow: 0 15px 35px -10px rgba(126, 34, 206, 0.08), 0 0 25px rgba(168, 85, 247, 0.06) !important; backdrop-filter: blur(20px) !important; }
-  html.light .golden-bundle-card { background: linear-gradient(135deg, rgba(254, 240, 138, 0.35) 0%, rgba(255, 255, 255, 0.95) 100%) !important; border: 1px solid rgba(234, 179, 8, 0.4) !important; box-shadow: 0 25px 50px -12px rgba(234, 179, 8, 0.18), inset 0 0 35px rgba(254, 240, 138, 0.25) !important; }
-  html.light .cat-card-glass, html.light .tier-card { background: rgba(255, 255, 255, 0.88) !important; border: 1px solid rgba(126, 34, 206, 0.2) !important; box-shadow: 0 12px 30px rgba(126, 34, 206, 0.06), 0 0 20px rgba(168, 85, 247, 0.05) !important; }
-  html.light .btn-3d-style { background: linear-gradient(135deg, #7e22ce 0%, #9333ea 100%) !important; box-shadow: 0 10px 22px rgba(126, 34, 206, 0.3) !important; }
+  /* بطاقات زجاجية فاخرة */
+  html.light .glass, html.light .cat-card-glass, html.light .tier-card { 
+    background: rgba(255, 255, 255, 0.75) !important; 
+    border: 1px solid rgba(124, 42, 232, 0.15) !important; 
+    box-shadow: 0 15px 35px -10px rgba(124, 42, 232, 0.08), inset 0 0 20px rgba(255,255,255,0.6) !important; 
+    backdrop-filter: blur(24px) !important; 
+  }
+  
+  html.light .golden-bundle-card { 
+    background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(244,242,247,0.8) 100%) !important; 
+    border: 1px solid rgba(196, 154, 58, 0.2) !important; 
+    box-shadow: 0 25px 50px -12px rgba(124, 42, 232, 0.08), inset 0 0 35px rgba(255,255,255,0.8) !important; 
+  }
+
+  /* أزرار CTA للنهار */
+  html.light .btn-3d-style { 
+    background: linear-gradient(135deg, #6D28D9 0%, #8B2BE8 100%) !important; 
+    box-shadow: 0 8px 20px -4px rgba(124, 42, 232, 0.4), inset 0 1px 1px rgba(255,255,255,0.3) !important; 
+  }
   html.light .btn-3d-style span { color: #ffffff !important; text-shadow: none !important; }
 
   html[dir="rtl"] body { font-family: 'Cairo', sans-serif; }
@@ -132,9 +156,10 @@
   }
   body > .stars-background-container { position: fixed; }
   
+  /* نقاط خافتة جداً بالنهار بلون بنفسجي-رمادي (Subtle Dot Pattern) */
   html.light .stars-background-container::after {
     content: ''; position: absolute; inset: 0;
-    background-image: radial-gradient(rgba(0,0,0,0.12) 2.5px, transparent 2.5px);
+    background-image: radial-gradient(rgba(124, 42, 232, 0.06) 1.5px, transparent 1.5px);
     background-size: 32px 32px; z-index: 1;
   }
   
@@ -158,14 +183,13 @@
     pointer-events: none;
   }
   
-  /* هنا الحل: الأنيميشن ما يشتغل إلا إذا أخذ الكلاس revealed اللي يجي بعد شاشة التحميل */
   .revealed #globe {
-    animation: globeBounce 2.5s cubic-bezier(0.25, 1, 0.5, 1) 0.1s forwards;
+    animation: globeBounce 3.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.1s both;
   }
   
   @keyframes globeBounce { 
     0% { opacity: 0; transform: translate(-50%,-50%) scale(0); } 
-    60% { opacity: 1; transform: translate(-50%,-50%) scale(1.3); } 
+    50% { opacity: 1; transform: translate(-50%,-50%) scale(1.25); } 
     100% { opacity: 1; transform: translate(-50%,-50%) scale(1); } 
   }
 
@@ -181,7 +205,8 @@
     pointer-events: none;
     animation: fadeGlow 3s ease 1.5s forwards;
   }
-  html.light .floor-glow { background: radial-gradient(ellipse at center, rgba(168, 85, 247, 0.25), rgba(255,255,255,0) 70%); }
+  /* توهج الأرضية الناعم بالنهار */
+  html.light .floor-glow { background: radial-gradient(ellipse at center, rgba(124, 42, 232, 0.18), rgba(244,242,247,0) 70%); }
   @keyframes fadeGlow { to { opacity: 1; } }
 
   .animated-title .line { display: block; overflow: hidden; }
@@ -209,14 +234,19 @@
   }
   @keyframes goldShine { 0% { background-position: 220% 0; } 100% { background-position: -220% 0; } }
 
-  /* زر التبديل الجديد: مدمج مع الخلفية، وبأيقونات هلال وشمس */
+  /* زر التبديل المعدل بشكل فخم (Theme Switcher Fix) */
   .theme-switch-btn { 
     width: 60px; height: 32px; border-radius: 999px; 
     background: transparent; 
     border: 1px solid rgba(255,255,255,0.2); 
     position: relative; cursor: pointer; transition: all .4s ease; display: flex; align-items: center; 
   }
-  html.light .theme-switch-btn { border-color: rgba(0,0,0,0.2); }
+  html.light .theme-switch-btn { 
+    background: #ffffff;
+    border-color: rgba(124, 42, 232, 0.2);
+    box-shadow: inset 0 2px 10px rgba(124, 42, 232, 0.05), 0 4px 12px rgba(124, 42, 232, 0.1); 
+  }
+  
   .theme-switch-ball { 
     width: 24px; height: 24px; border-radius: 50%; position: absolute; left: 3px; 
     background: rgba(255,255,255,0.1); color: white;
@@ -225,7 +255,9 @@
   }
   html.light .theme-switch-ball { 
     transform: translateX(28px); 
-    background: rgba(0,0,0,0.05); color: black; 
+    background: linear-gradient(135deg, #7C2AE8, #4C1D95);
+    box-shadow: 0 2px 8px rgba(124, 42, 232, 0.5);
+    color: #ffffff; /* لون الشمس جوا الدائرة البنفسجية */
   }
   .icon-moon { display: block; width: 14px; height: 14px; }
   .icon-sun { display: none; width: 15px; height: 15px; }
@@ -235,7 +267,9 @@
   .button-wrap { position: relative; z-index: 10; border-radius: 999vw; background: transparent; cursor: pointer; display: inline-block; transition: all var(--anim--hover-time) var(--anim--hover-ease); }
   .button-shadow { --shadow-cuttoff-fix: 2em; position: absolute; width: calc(100% + var(--shadow-cuttoff-fix)); height: calc(100% + var(--shadow-cuttoff-fix)); top: calc(0% - var(--shadow-cuttoff-fix) / 2); left: calc(0% - var(--shadow-cuttoff-fix) / 2); filter: blur(clamp(2px,.125em,12px)); overflow: visible; pointer-events: none; }
   .button-shadow::after { content: ""; position: absolute; z-index: 0; inset: 0; border-radius: 999vw; background: linear-gradient(180deg, rgba(255,255,255,.3), rgba(0,0,0,.2)); width: calc(100% - var(--shadow-cuttoff-fix) - .25em); height: calc(100% - var(--shadow-cuttoff-fix) - .25em); top: calc(var(--shadow-cuttoff-fix) - .5em); left: calc(var(--shadow-cuttoff-fix) - .875em); padding: .125em; box-sizing: border-box; mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); mask-composite: exclude; opacity: 1; }
-  html.light .button-shadow::after { background: linear-gradient(180deg, rgba(0,0,0,.3), rgba(0,0,0,.1)); }
+  
+  html.light .button-shadow::after { background: linear-gradient(180deg, rgba(124, 42, 232, 0.25), rgba(124, 42, 232, 0.05)); }
+  
   .btn-3d-style { all: unset; cursor: pointer; position: relative; display: block; z-index: 3; background: linear-gradient(-75deg, rgba(255,255,255,.08), rgba(255,255,255,.28), rgba(255,255,255,.08)); border-radius: 999vw; box-shadow: inset 0 .125em .125em rgba(0,0,0,.05), inset 0 -.125em .125em rgba(255,255,255,.5), 0 .25em .125em -.125em rgba(0,0,0,.3); backdrop-filter: blur(6px); transition: all var(--anim--hover-time) var(--anim--hover-ease); width: 100%; text-align: center; }
   .btn-3d-style:hover { transform: scale(.975); }
   .btn-3d-style span { position: relative; display: block; user-select: none; font-weight: 800; font-size: .9em; color: var(--btn-text-color); text-shadow: 0 .15em .1em rgba(0,0,0,.2); padding-inline: 2em; padding-block: .9em; text-transform: uppercase; }
@@ -255,7 +289,7 @@
     pointer-events: none; z-index: 5;
   }
 
-  /* الرف الزجاجي الممدد والأزرار */
+  /* الرف الزجاجي الممدد والأزرار (Tab Buttons) */
   .glass-tab-container {
     background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%);
     border: 1px solid rgba(255,255,255,0.15);
@@ -265,8 +299,8 @@
     display: flex; width: 100%; gap: 0.5rem;
   }
   html.light .glass-tab-container {
-    background: linear-gradient(135deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.3) 100%);
-    border: 1px solid rgba(168, 85, 247, 0.3); box-shadow: 0 8px 32px 0 rgba(168, 85, 247, 0.15);
+    background: rgba(255,255,255,0.75);
+    border: 1px solid rgba(124, 42, 232, 0.15); box-shadow: 0 8px 32px 0 rgba(124, 42, 232, 0.08);
   }
   .tab-btn {
     flex: 1; padding: 1rem 0; border-radius: 0.875rem;
@@ -275,12 +309,21 @@
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); background: transparent; border: 1px solid transparent;
   }
   .tab-btn:hover { opacity: 1; background: rgba(255,255,255,0.05); }
-  html.light .tab-btn:hover { background: rgba(168, 85, 247, 0.1); }
+  
+  html.light .tab-btn:hover { background: rgba(124, 42, 232, 0.05); }
+  
   .tab-btn.active {
     background: linear-gradient(135deg, #eab308 0%, #ca8a04 100%); color: #050505 !important;
     opacity: 1; border-color: rgba(255,255,255,0.4);
     box-shadow: 0 4px 15px rgba(234, 179, 8, 0.4), inset 0 2px 4px rgba(255,255,255,0.5);
     transform: scale(1.02);
+  }
+  /* الزر النشط في النهار يصير بنفسجي VORTX */
+  html.light .tab-btn.active {
+    background: linear-gradient(135deg, #7C2AE8 0%, #4C1D95 100%);
+    color: #ffffff !important;
+    border-color: rgba(124, 42, 232, 0.3);
+    box-shadow: 0 4px 15px rgba(124, 42, 232, 0.3), inset 0 2px 4px rgba(255,255,255,0.2);
   }
 
   .tier-card { position: relative; display: flex; flex-direction: column; justify-content: space-between; gap: 1.25rem; padding: 2rem; width: 100%; background-color: var(--card-bg); backdrop-filter: blur(16px); border: 1px solid var(--card-border); border-radius: 1.75rem; box-shadow: 0 10px 30px rgba(0,0,0,0.2); overflow: hidden; transition: transform .4s ease; }
@@ -300,13 +343,16 @@
   #app-content.vx-revealed { opacity: 1; filter: blur(0); transform: scale(1); }
   
   .vx-ambient-glow { position: absolute; width: min(80vw,900px); height: min(80vw,900px); border-radius: 50%; background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 45%, transparent 70%); filter: blur(60px); animation: vxGlowPulse 4s ease-in-out infinite; }
-  html.light .vx-ambient-glow { background: radial-gradient(circle, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.02) 45%, transparent 70%); }
+  html.light .vx-ambient-glow { background: radial-gradient(circle, rgba(124, 42, 232, 0.08) 0%, rgba(76, 29, 149, 0.03) 45%, transparent 70%); }
   @keyframes vxGlowPulse { 0%,100% { transform: scale(0.9); opacity: 0.5; } 50% { transform: scale(1.1); opacity: 0.9; } }
 
   .vx-logo-word { display: flex; font-family: 'Cinzel', serif; font-weight: 900; font-size: clamp(3.5rem, 13vw, 7rem); letter-spacing: 0.25em; line-height: 1; position: relative; z-index: 2; perspective: 1000px; }
   
   .vx-letter { display: inline-block; background: linear-gradient(135deg, #fff 0%, #ccc 50%, #999 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; opacity: 0; transform: translateY(-70px) rotateX(45deg) scale(1.4); filter: blur(12px); animation: vxLetterDrop 0.9s cubic-bezier(0.19, 1, 0.22, 1) forwards; animation-delay: var(--ld, 0s); }
-  html.light .vx-letter { background: linear-gradient(135deg, #111 0%, #444 50%, #777 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 15px 30px rgba(0,0,0,0.2)); }
+  html.light .vx-letter { 
+    background: linear-gradient(135deg, #17131F 0%, #4C1D95 50%, #7C2AE8 100%); 
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 8px 20px rgba(124, 42, 232, 0.2)); 
+  }
   @keyframes vxLetterDrop { 
     0% { opacity: 0; transform: translateY(-70px) rotateX(45deg) scale(1.4); filter: blur(12px); } 
     60% { opacity: 0.9; transform: translateY(8px) rotateX(-10deg) scale(0.95); filter: blur(1px); } 
@@ -314,19 +360,19 @@
   }
 
   .vx-bar-track { width: min(80vw, 340px); height: 5px; border-radius: 999px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); margin-top: 2rem; position: relative; overflow: hidden; z-index: 2; }
-  html.light .vx-bar-track { background: rgba(0,0,0,0.1); border: 1px solid rgba(0,0,0,0.2); }
+  html.light .vx-bar-track { background: rgba(124, 42, 232, 0.1); border: 1px solid rgba(124, 42, 232, 0.2); }
   
   .vx-bar-fill { height: 100%; width: 0%; border-radius: 999px; background: linear-gradient(90deg, #555, #ccc, #fff); position: relative; }
-  html.light .vx-bar-fill { background: linear-gradient(90deg, #333, #666, #111); }
+  html.light .vx-bar-fill { background: linear-gradient(90deg, #4C1D95, #7C2AE8, #a855f7); }
   
   .loader-text { color: rgba(255,255,255,0.7); }
-  html.light .loader-text { color: rgba(0,0,0,0.7); }
+  html.light .loader-text { color: rgba(23, 19, 31, 0.7); }
   
   #vx-percent { color: #fff; }
-  html.light #vx-percent { color: #000; }
+  html.light #vx-percent { color: #17131F; }
   
   header .glass { border-bottom: 1px solid rgba(255,255,255,0.05); }
-  html.light header .glass { border-bottom: 1px solid rgba(0,0,0,0.1); background: rgba(255,255,255,0.7) !important; }
+  html.light header .glass { border-bottom: 1px solid rgba(124, 42, 232, 0.1); background: rgba(255,255,255,0.85) !important; }
 </style>
 </head>
 
@@ -379,7 +425,7 @@
       var appContent = document.getElementById('app-content');
       if (appContent) {
         appContent.classList.add('vx-revealed');
-        // هنا السر اللي يخلي الكورة والكلمات تبدأ متأخرة بعد التحميل
+        // هنا يتفعل الكلاس revealed اللي يشغل أنيميشن الكورة بعد التحميل
         setTimeout(function(){
             var heroSec = document.getElementById('hero-section');
             if(heroSec) heroSec.classList.add('revealed');
@@ -426,12 +472,10 @@
         <div class="flex items-center gap-3 relative z-50">
           <button type="button" onclick="window.toggleLanguage()" class="glass w-10 h-10 rounded-full flex items-center justify-center border-white/10 text-brandLight font-extrabold text-xs cursor-pointer hover:bg-white/10 transition">🌐</button>
           
-          <!-- زر التبديل المعدل (شفاف مع أيقونات) -->
+          <!-- زر التبديل المعدل -->
           <button type="button" onclick="window.toggleTheme()" class="theme-switch-btn" aria-label="Toggle theme">
             <div class="theme-switch-ball">
-              <!-- أيقونة الهلال (ليلي) -->
               <svg class="icon-moon" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
-              <!-- أيقونة الشمس (نهاري) -->
               <svg class="icon-sun" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path></svg>
             </div>
           </button>
@@ -489,7 +533,7 @@
       </div>
     </section>
 
-    <!-- الرف الزجاجي الممدد والأزرار -->
+    <!-- الرف الزجاجي -->
     <div class="w-full max-w-5xl mx-auto px-4 sm:px-6 relative z-40 mb-10 mt-6 reveal-on-scroll">
       <div class="glass-tab-container">
         <button onclick="window.activateTab(this, 'CC')" class="tab-btn">CC</button>
