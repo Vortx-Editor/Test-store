@@ -54,16 +54,15 @@
 
   html.light {
     --ink: #0f172a;
-    --bg-color: #fafafa; /* أبيض لؤلؤي فخم للوضع النهاري */
+    --bg-color: #fafafa;
     --text-color: #0f172a;
     --subtext-color: #475569;
-    /* خلفية نهارية فخمة مع إشعاع بنفسجي خفيف من فوق */
-    --star-bg: radial-gradient(120% 80% at 50% 12%, #f3e8ff 0%, #fafafa 55%, #f8fafc 100%);
-    --star-opacity: 0.4;
+    /* دمج فكرتينك: تظليل أسود/رمادي من الزوايا يخلي الأبيض بالنص */
+    --star-bg: radial-gradient(circle at 50% 50%, #ffffff 15%, #f1f5f9 60%, #94a3b8 100%);
+    --star-opacity: 1;
     --btn-text-color: #ffffff;
     --card-bg: rgba(255, 255, 255, 0.7);
     --card-border: rgba(168, 85, 247, 0.3);
-    /* ألوان الكرة الأرضية في النهار صارت بنفسجي ملكي بدال الأسود الكئيب */
     --globe-line: 168, 85, 247;
     --globe-ring: 216, 180, 254;
     --globe-point: 126, 34, 206;
@@ -134,8 +133,15 @@
   }
   body > .stars-background-container { position: fixed; }
   
+  /* إضافة النقاط بالنهار عشان يكمل الشكل الهندسي */
+  html.light .stars-background-container::after {
+    content: ''; position: absolute; inset: 0;
+    background-image: radial-gradient(rgba(0,0,0,0.06) 1.5px, transparent 1.5px);
+    background-size: 28px 28px; z-index: 1;
+  }
+  
   #stars-canvas { position: absolute; inset: 0; z-index: 0; opacity: var(--star-opacity); transition: opacity .4s ease; }
-  html.light #stars-canvas { filter: invert(0.8) sepia(1) hue-rotate(240deg) saturate(3) brightness(0.8); } /* نجوم تميل للبنفسجي بالنهار */
+  html.light #stars-canvas { opacity: 0; } /* نخفي النجوم بالنهار ونعتمد عالنقاط والتظليل */
 
   #hero-section {
     position: relative;
@@ -152,13 +158,13 @@
     z-index: 1;
     opacity: 0;
     pointer-events: none;
-    /* أنيميشن الظهور البطيء والارتداد زي الفديو بالضبط */
-    animation: globeBounce 2.8s cubic-bezier(0.25, 1, 0.5, 1) 0.5s forwards;
+    /* خليت الأنيميشن 4.5 ثواني وتأثير الباونس زي الفديو */
+    animation: globeBounce 4.5s cubic-bezier(0.25, 1, 0.3, 1) 0.2s forwards;
   }
   
   @keyframes globeBounce { 
-    0% { opacity: 0; transform: translate(-50%,-50%) scale(0.2); } 
-    60% { opacity: 1; transform: translate(-50%,-50%) scale(1.15); } 
+    0% { opacity: 0; transform: translate(-50%,-50%) scale(0); } 
+    40% { opacity: 1; transform: translate(-50%,-50%) scale(1.35); } 
     100% { opacity: 1; transform: translate(-50%,-50%) scale(1); } 
   }
 
@@ -174,7 +180,6 @@
     pointer-events: none;
     animation: fadeGlow 3s ease 1.5s forwards;
   }
-  /* وهج الأرضية في النهار بلون بنفسجي ملكي خفيف */
   html.light .floor-glow { background: radial-gradient(ellipse at center, rgba(168, 85, 247, 0.25), rgba(255,255,255,0) 70%); }
   @keyframes fadeGlow { to { opacity: 1; } }
 
@@ -234,9 +239,19 @@
 
   .tier-card { position: relative; display: flex; flex-direction: column; justify-content: space-between; gap: 1.25rem; padding: 2rem; width: 100%; background-color: var(--card-bg); backdrop-filter: blur(16px); border: 1px solid var(--card-border); border-radius: 1.75rem; box-shadow: 0 10px 30px rgba(0,0,0,0.2); overflow: hidden; transition: transform .4s ease; }
   .golden-bundle-card { position: relative; border-radius: 2.5rem; background: linear-gradient(135deg, rgba(234,179,8,.08) 0%, rgba(255,255,255,.01) 100%); backdrop-filter: blur(24px); border: 1px solid rgba(234,179,8,.25); box-shadow: 0 25px 50px -12px rgba(234,179,8,.08); overflow: hidden; }
+  
   .glass { background: var(--card-bg); backdrop-filter: blur(16px); border: 1px solid var(--card-border); }
-  .cat-card-glass { background: var(--card-bg); backdrop-filter: blur(16px); border: 1px solid var(--card-border); border-radius: 1.75rem; padding: 1.75rem 2rem; cursor: pointer; transition: transform .3s ease; }
+  .cat-card-glass { background: var(--card-bg); backdrop-filter: blur(16px); border: 1px solid var(--card-border); border-radius: 1.75rem; padding: 1.75rem 2rem; cursor: pointer; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
   .cat-card-glass:hover { transform: translateY(-5px); }
+
+  /* تنسيق أزرار الرف الزجاجي (Tabs) */
+  .tab-btn.active {
+    background-color: #eab308;
+    color: #050505 !important;
+    opacity: 1;
+    box-shadow: 0 0 20px rgba(234, 179, 8, 0.4);
+    transform: scale(1.05);
+  }
 
   .view { transition: opacity .4s ease; opacity: 1; display: block; }
   .view-hidden { display: none !important; opacity: 0; }
@@ -429,7 +444,16 @@
       </div>
     </section>
 
-    <section id="packs" class="py-16 w-full relative z-30 select-none bg-transparent block">
+    <!-- الرف الزجاجي حق الأقسام اللي طلبته -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-40 mb-8 flex justify-center reveal-on-scroll">
+      <div class="glass flex items-center gap-1 sm:gap-2 p-1.5 sm:p-2 rounded-full backdrop-blur-xl border border-white/10 shadow-2xl">
+        <button onclick="window.activateTab(this, 'CC')" class="tab-btn px-5 sm:px-8 py-2 sm:py-2.5 rounded-full font-mono font-bold text-xs sm:text-sm text-current opacity-70 hover:opacity-100 transition-all">CC</button>
+        <button onclick="window.activateTab(this, 'XML')" class="tab-btn px-5 sm:px-8 py-2 sm:py-2.5 rounded-full font-mono font-bold text-xs sm:text-sm text-current opacity-70 hover:opacity-100 transition-all">XML</button>
+        <button onclick="window.activateTab(this, 'SHAKE')" class="tab-btn px-5 sm:px-8 py-2 sm:py-2.5 rounded-full font-mono font-bold text-xs sm:text-sm text-current opacity-70 hover:opacity-100 transition-all">SHAKE</button>
+      </div>
+    </div>
+
+    <section id="packs" class="py-10 w-full relative z-30 select-none bg-transparent block">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-40 text-center mb-6">
         <h2 data-i18n="packs-title" class="font-head font-bold text-3xl sm:text-5xl">Featured Packs</h2>
         <p data-i18n="packs-desc" class="font-bold opacity-60 text-sm sm:text-base mt-2 tracking-wide">Swipe horizontally for endless physical 3D cards interaction</p>
@@ -541,6 +565,27 @@
 <script>
 (function () {
   "use strict";
+
+  // دالة الرف الزجاجي الجديد (تفعيل الزر والنزول للقسم)
+  window.activateTab = function(btn, category) {
+    document.querySelectorAll('.tab-btn').forEach(function(b) { 
+      b.classList.remove('active'); 
+    });
+    btn.classList.add('active');
+    
+    var target = document.getElementById('categories');
+    if (target) { target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    
+    setTimeout(function() {
+      var catCard = document.getElementById('cat-card-' + category);
+      if (catCard) {
+        catCard.classList.add('scale-105', 'border-yellow-500', 'shadow-2xl', 'shadow-yellow-500/20');
+        setTimeout(function() {
+           catCard.classList.remove('scale-105', 'border-yellow-500', 'shadow-2xl', 'shadow-yellow-500/20');
+        }, 1500);
+      }
+    }, 600);
+  };
 
   document.querySelectorAll('.animated-title .line').forEach(function(line, li) {
     var words = line.dataset.text.split(' ');
