@@ -61,7 +61,7 @@
     --star-opacity: 1;
     --btn-text-color: #ffffff;
     --card-bg: rgba(255, 255, 255, 0.75);
-    --card-border: rgba(124, 42, 232, 0.15);
+    --card-border: rgba(210, 215, 225, 0.3);
     --globe-line: 124, 42, 232;
     --globe-ring: 76, 29, 149;
     --globe-point: 124, 42, 232;
@@ -87,8 +87,8 @@
   html.light body::before {
     content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
     background: 
-      radial-gradient(circle at 15% 30%, rgba(124, 42, 232, 0.05), transparent 45%),
-      radial-gradient(circle at 85% 70%, rgba(124, 42, 232, 0.04), transparent 45%);
+      radial-gradient(circle at 15% 30%, rgba(200, 205, 220, 0.08), transparent 45%),
+      radial-gradient(circle at 85% 70%, rgba(200, 205, 220, 0.06), transparent 45%);
   }
 
   html.vx-loading, html.vx-loading body { overflow: hidden !important; }
@@ -101,15 +101,15 @@
   html.light p, html.light span, html.light h2, html.light h3, html.light h4 { color: var(--text-color); }
   html.light .text-white { color: #17131F !important; }
   html.light .text-slate-300 { color: #625D6B !important; }
-  html.light .text-purple-300, html.light .text-purple-400 { color: #7C2AE8 !important; }
+  html.light .text-purple-300, html.light .text-purple-400 { color: #94A3B8 !important; }
   
   html.light .vortx-wet-oil-title { 
-    background: linear-gradient(110deg, #17131F 0%, #4C1D95 30%, #17131F 55%, #7C2AE8 80%, #17131F 100%); 
+    background: linear-gradient(110deg, #17131F 0%, #64748B 30%, #17131F 55%, #94A3B8 80%, #17131F 100%); 
     background-size: 200% 100%; 
     -webkit-background-clip: text; 
     background-clip: text; 
     -webkit-text-fill-color: transparent; 
-    filter: drop-shadow(0 4px 12px rgba(124, 42, 232, 0.15)); 
+    filter: drop-shadow(0 4px 12px rgba(100, 116, 139, 0.15)); 
   }
   
   html.light .gold-heading { 
@@ -122,21 +122,21 @@
   }
 
   html.light .glass, html.light .cat-card-glass, html.light .tier-card { 
-    background: rgba(255, 255, 255, 0.75) !important; 
-    border: 1px solid rgba(124, 42, 232, 0.15) !important; 
-    box-shadow: 0 15px 35px -10px rgba(124, 42, 232, 0.08), inset 0 0 20px rgba(255,255,255,0.6) !important; 
+    background: rgba(255, 255, 255, 0.8) !important; 
+    border: 1px solid rgba(203, 213, 225, 0.4) !important; 
+    box-shadow: 0 15px 35px -10px rgba(100, 116, 139, 0.08), inset 0 0 20px rgba(255,255,255,0.8) !important; 
     backdrop-filter: blur(24px) !important; 
   }
   
-  html.light . golden-bundle-card { 
-    background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(244,242,247,0.8) 100%) !important; 
+  html.light .golden-bundle-card { 
+    background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(244,242,247,0.9) 100%) !important; 
     border: 1px solid rgba(196, 154, 58, 0.2) !important; 
-    box-shadow: 0 25px 50px -12px rgba(124, 42, 232, 0.08), inset 0 0 35px rgba(255,255,255,0.8) !important; 
+    box-shadow: 0 25px 50px -12px rgba(100, 116, 139, 0.08), inset 0 0 35px rgba(255,255,255,0.9) !important; 
   }
 
   html.light .btn-3d-style { 
-    background: linear-gradient(135deg, #6D28D9 0%, #8B2BE8 100%) !important; 
-    box-shadow: 0 8px 20px -4px rgba(124, 42, 232, 0.4), inset 0 1px 1px rgba(255,255,255,0.3) !important; 
+    background: linear-gradient(135deg, #475569 0%, #1e293b 100%) !important; 
+    box-shadow: 0 8px 20px -4px rgba(100, 116, 139, 0.3), inset 0 1px 1px rgba(255,255,255,0.3) !important; 
   }
   html.light .btn-3d-style span { color: #ffffff !important; text-shadow: none !important; }
 
@@ -154,7 +154,7 @@
   
   html.light .stars-background-container::after {
     content: ''; position: absolute; inset: 0;
-    background-image: radial-gradient(rgba(124, 42, 232, 0.06) 1.5px, transparent 1.5px);
+    background-image: radial-gradient(rgba(100, 116, 139, 0.08) 1.5px, transparent 1.5px);
     background-size: 32px 32px; z-index: 1;
   }
   
@@ -200,7 +200,7 @@
     pointer-events: none;
     animation: fadeGlow 3s ease 1.5s forwards;
   }
-  html.light .floor-glow { background: radial-gradient(ellipse at center, rgba(124, 42, 232, 0.18), rgba(244,242,247,0) 70%); }
+  html.light .floor-glow { background: radial-gradient(ellipse at center, rgba(148, 163, 184, 0.25), rgba(244,242,247,0) 70%); }
   @keyframes fadeGlow { to { opacity: 1; } }
 
   .animated-title .line { display: block; overflow: hidden; }
@@ -236,8 +236,8 @@
   }
   html.light .theme-switch-btn { 
     background: #ffffff;
-    border-color: rgba(124, 42, 232, 0.2);
-    box-shadow: inset 0 2px 10px rgba(124, 42, 232, 0.05), 0 4px 12px rgba(124, 42, 232, 0.1); 
+    border-color: rgba(203, 213, 225, 0.4);
+    box-shadow: inset 0 2px 10px rgba(100, 116, 139, 0.05), 0 4px 12px rgba(100, 116, 139, 0.1); 
   }
   
   .theme-switch-ball { 
@@ -248,8 +248,8 @@
   }
   html.light .theme-switch-ball { 
     transform: translateX(28px); 
-    background: linear-gradient(135deg, #7C2AE8, #4C1D95);
-    box-shadow: 0 2px 8px rgba(124, 42, 232, 0.5);
+    background: linear-gradient(135deg, #64748B, #334155);
+    box-shadow: 0 2px 8px rgba(100, 116, 139, 0.4);
     color: #ffffff;
   }
   .icon-moon { display: block; width: 14px; height: 14px; }
@@ -257,30 +257,30 @@
   html.light .icon-moon { display: none; }
   html.light .icon-sun { display: block; }
 
-  /* تصميم زر "EXPLORE PACKAGES" الفاخر للكرت السينمائي */
+  /* تصميم زر "EXPLORE PACKAGES" مع التوهج الفضي الفاخر بدل البنفسجي */
   .vortx-explore-btn {
     position: relative; display: inline-flex; flex-direction: column; align-items: center; justify-content: center;
     padding: 0.85rem 2.2rem; border-radius: 999px; cursor: pointer;
-    background: rgba(15, 15, 20, 0.55);
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: rgba(15, 15, 20, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(124, 42, 232, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 25px rgba(226, 232, 240, 0.18);
     transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
   }
   html.light .vortx-explore-btn {
-    background: rgba(255, 255, 255, 0.65);
-    border: 1px solid rgba(124, 42, 232, 0.25);
-    box-shadow: 0 10px 30px rgba(124, 42, 232, 0.1), 0 0 20px rgba(124, 42, 232, 0.15);
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(148, 163, 184, 0.3);
+    box-shadow: 0 10px 30px rgba(100, 116, 139, 0.1), 0 0 25px rgba(148, 163, 184, 0.2);
   }
   .vortx-explore-btn:hover {
     transform: scale(1.02);
-    background: rgba(124, 42, 232, 0.35);
-    border-color: rgba(168, 85, 247, 0.6);
-    box-shadow: 0 15px 40px rgba(124, 42, 232, 0.4), 0 0 30px rgba(168, 85, 247, 0.3);
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 35px rgba(241, 245, 249, 0.35);
   }
   html.light .vortx-explore-btn:hover {
-    background: rgba(124, 42, 232, 0.15);
-    border-color: rgba(124, 42, 232, 0.5);
+    background: rgba(241, 245, 249, 0.9);
+    border-color: rgba(100, 116, 139, 0.5);
   }
 
   .perspective-container { perspective: 1350px; }
@@ -307,7 +307,7 @@
   }
   html.light .glass-tab-container {
     background: rgba(255,255,255,0.75);
-    border: 1px solid rgba(124, 42, 232, 0.15); box-shadow: 0 8px 32px 0 rgba(124, 42, 232, 0.08);
+    border: 1px solid rgba(203, 213, 225, 0.4); box-shadow: 0 8px 32px 0 rgba(100, 116, 139, 0.08);
   }
   .tab-btn {
     flex: 1; padding: 1rem 0; border-radius: 0.875rem;
@@ -316,7 +316,7 @@
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); background: transparent; border: 1px solid transparent;
   }
   .tab-btn:hover { opacity: 1; background: rgba(255,255,255,0.05); }
-  html.light .tab-btn:hover { background: rgba(124, 42, 232, 0.05); }
+  html.light .tab-btn:hover { background: rgba(100, 116, 139, 0.05); }
   
   .tab-btn.active {
     background: linear-gradient(135deg, #eab308 0%, #ca8a04 100%); color: #050505 !important;
@@ -325,10 +325,10 @@
     transform: scale(1.02);
   }
   html.light .tab-btn.active {
-    background: linear-gradient(135deg, #7C2AE8 0%, #4C1D95 100%);
+    background: linear-gradient(135deg, #475569 0%, #1e293b 100%);
     color: #ffffff !important;
-    border-color: rgba(124, 42, 232, 0.3);
-    box-shadow: 0 4px 15px rgba(124, 42, 232, 0.3), inset 0 2px 4px rgba(255,255,255,0.2);
+    border-color: rgba(148, 163, 184, 0.4);
+    box-shadow: 0 4px 15px rgba(100, 116, 139, 0.3), inset 0 2px 4px rgba(255,255,255,0.2);
   }
 
   .tier-card { position: relative; display: flex; flex-direction: column; justify-content: space-between; gap: 1.25rem; padding: 2rem; width: 100%; background-color: var(--card-bg); backdrop-filter: blur(16px); border: 1px solid var(--card-border); border-radius: 1.75rem; box-shadow: 0 10px 30px rgba(0,0,0,0.2); overflow: hidden; transition: transform .4s ease; }
@@ -347,15 +347,15 @@
   #app-content.vx-revealed { opacity: 1; filter: blur(0); transform: scale(1); }
   
   .vx-ambient-glow { position: absolute; width: min(80vw,900px); height: min(80vw,900px); border-radius: 50%; background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 45%, transparent 70%); filter: blur(60px); animation: vxGlowPulse 4s ease-in-out infinite; }
-  html.light .vx-ambient-glow { background: radial-gradient(circle, rgba(124, 42, 232, 0.08) 0%, rgba(76, 29, 149, 0.03) 45%, transparent 70%); }
+  html.light .vx-ambient-glow { background: radial-gradient(circle, rgba(100, 116, 139, 0.08) 0%, rgba(71, 85, 105, 0.03) 45%, transparent 70%); }
   @keyframes vxGlowPulse { 0%,100% { transform: scale(0.9); opacity: 0.5; } 50% { transform: scale(1.1); opacity: 0.9; } }
 
   .vx-logo-word { display: flex; font-family: 'Cinzel', serif; font-weight: 900; font-size: clamp(3.5rem, 13vw, 7rem); letter-spacing: 0.25em; line-height: 1; position: relative; z-index: 2; perspective: 1000px; }
   
   .vx-letter { display: inline-block; background: linear-gradient(135deg, #fff 0%, #ccc 50%, #999 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; opacity: 0; transform: translateY(-70px) rotateX(45deg) scale(1.4); filter: blur(12px); animation: vxLetterDrop 0.9s cubic-bezier(0.19, 1, 0.22, 1) forwards; animation-delay: var(--ld, 0s); }
   html.light .vx-letter { 
-    background: linear-gradient(135deg, #17131F 0%, #4C1D95 50%, #7C2AE8 100%); 
-    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 8px 20px rgba(124, 42, 232, 0.2)); 
+    background: linear-gradient(135deg, #17131F 0%, #334155 50%, #64748B 100%); 
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 8px 20px rgba(100, 116, 139, 0.2)); 
   }
   @keyframes vxLetterDrop { 
     0% { opacity: 0; transform: translateY(-70px) rotateX(45deg) scale(1.4); filter: blur(12px); } 
@@ -364,10 +364,10 @@
   }
 
   .vx-bar-track { width: min(80vw, 340px); height: 5px; border-radius: 999px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); margin-top: 2rem; position: relative; overflow: hidden; z-index: 2; }
-  html.light .vx-bar-track { background: rgba(124, 42, 232, 0.1); border: 1px solid rgba(124, 42, 232, 0.2); }
+  html.light .vx-bar-track { background: rgba(100, 116, 139, 0.1); border: 1px solid rgba(100, 116, 139, 0.2); }
   
   .vx-bar-fill { height: 100%; width: 0%; border-radius: 999px; background: linear-gradient(90deg, #555, #ccc, #fff); position: relative; }
-  html.light .vx-bar-fill { background: linear-gradient(90deg, #4C1D95, #7C2AE8, #a855f7); }
+  html.light .vx-bar-fill { background: linear-gradient(90deg, #334155, #64748B, #94a3b8); }
   
   .loader-text { color: rgba(255,255,255,0.7); }
   html.light .loader-text { color: rgba(23, 19, 31, 0.7); }
@@ -376,7 +376,7 @@
   html.light #vx-percent { color: #17131F; }
   
   header .glass { border-bottom: 1px solid rgba(255,255,255,0.05); }
-  html.light header .glass { border-bottom: 1px solid rgba(124, 42, 232, 0.1); background: rgba(255,255,255,0.85) !important; }
+  html.light header .glass { border-bottom: 1px solid rgba(100, 116, 139, 0.1); background: rgba(255,255,255,0.85) !important; }
 </style>
 </head>
 
@@ -520,13 +520,13 @@
       </div>
     </section>
 
-    <!-- كرت الفيديو السينمائي المعدل بالزر الفاخر "EXPLORE PACKAGES" -->
+    <!-- كرت الفيديو السينمائي المعدل (رابط تشغيل مباشر + توهج فضي فخم) -->
     <section id="bundles" class="max-w-7xl mx-auto px-4 sm:px-6 py-12 reveal-on-scroll">
-      <div class="relative w-full h-[360px] sm:h-[460px] rounded-3xl overflow-hidden shadow-2xl border border-white/10 group transition-all duration-500 hover:shadow-[0_20px_50px_rgba(124,42,232,0.25)]">
+      <div class="relative w-full h-[360px] sm:h-[460px] rounded-3xl overflow-hidden shadow-2xl border border-white/10 group transition-all duration-500 hover:shadow-[0_20px_50px_rgba(226,232,240,0.15)]">
         
-        <!-- الفيديو المضغوط الذكي السريع -->
+        <!-- الفيديو برابط مباشر ومُحسّن للتشغيل الفوري بدون تعليق -->
         <video 
-          src="https://res.cloudinary.com/eon6wcph/video/upload/q_auto,f_auto,vc_h264/v1/VORTX_4K_CLEAN_FULL_kd7uui.mp4" 
+          src="https://res.cloudinary.com/eon6wcph/video/upload/v1/VORTX_4K_CLEAN_FULL_kd7uui.mp4" 
           autoplay 
           loop 
           muted 
@@ -539,9 +539,9 @@
         <!-- تدرج أسود سينمائي خفيف من الأسفل لبروز الزر -->
         <div class="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black/80 via-black/40 to-transparent pointer-events-none"></div>
 
-        <!-- أزرار الـ CTA الفاخرة تحت الفيديو -->
+        <!-- أزرار الـ CTA الفاخرة مع توهج فضي -->
         <div class="absolute inset-x-0 bottom-8 flex flex-col items-center justify-center gap-2 z-20 px-4">
-          <span class="text-[10px] font-mono tracking-[0.3em] uppercase text-purple-300 opacity-90 drop-shadow-md">3 Tiers Available</span>
+          <span class="text-[10px] font-mono tracking-[0.3em] uppercase text-slate-300 opacity-90 drop-shadow-md">3 Tiers Available</span>
           <div onclick="window.openWebTiers()" class="vortx-explore-btn group/btn">
             <div class="flex items-center gap-3">
               <span class="font-head font-extrabold text-xs sm:text-sm tracking-[0.2em] uppercase text-white drop-shadow">Explore Packages</span>
