@@ -7,6 +7,7 @@
 <meta name="theme-color" content="#09090c" />
 <link rel="preload" href="https://res.cloudinary.com/eon6wcph/video/upload/v1/VORTX_4K_CLEAN_FULL_kd7uui.mp4" as="video" type="video/mp4">
 <script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;800;900&family=Cinzel:wght@700;800;900&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@700;800;900&display=swap" rel="stylesheet">
@@ -156,6 +157,10 @@
   html.light #vx-percent { color: #17131F; }
   header .glass { border-bottom: 1px solid rgba(255,255,255,0.05); }
   html.light header .glass { border-bottom: 1px solid rgba(100, 116, 139, 0.1); background: rgba(255,255,255,0.85) !important; }
+
+  @keyframes marquee { 0% { transform: translateX(-50%); } 100% { transform: translateX(0%); } }
+  .animate-marquee { display: flex; width: max-content; animation: marquee 30s linear infinite; }
+  .animate-marquee:hover { animation-play-state: paused; }
 </style>
 </head>
 <body>
@@ -371,30 +376,35 @@
     </section>
 
     <section class="max-w-7xl mx-auto px-4 sm:px-6 py-12 border-t border-white/10 mt-12 reveal-on-scroll">
+      
+      <div id="reviews-marquee-container" class="w-full overflow-hidden mb-10 py-4 glass rounded-2xl hidden">
+        <div id="reviews-marquee-track" class="animate-marquee gap-6 items-center px-4"></div>
+      </div>
+
       <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
         <div class="glass p-6 rounded-2xl">
           <h4 class="font-mono font-black text-3xl sm:text-4xl text-current tracking-wider">
-            <span class="counter-num text-current" data-target="17000">0</span>+
+            <span class="counter-num text-current" id="live-reviews-count" data-target="0">0</span>
           </h4>
-          <p data-i18n="stat-subscribers" class="text-xs font-bold opacity-70 mt-2 uppercase tracking-widest">Telegram Subscribers</p>
+          <p data-i18n="stat-subscribers" class="text-xs font-bold opacity-70 mt-2 uppercase tracking-widest">Satisfied Clients</p>
         </div>
         <div class="glass p-6 rounded-2xl">
           <h4 class="font-mono font-black text-3xl sm:text-4xl text-current tracking-wider">
-            <span class="counter-num text-current" data-target="45000">0</span>+
+            <span class="counter-num text-current" id="live-views-count" data-target="0">0</span>
           </h4>
-          <p data-i18n="stat-views" class="text-xs font-bold opacity-70 mt-2 uppercase tracking-widest">Monthly Visitors</p>
+          <p data-i18n="stat-views" class="text-xs font-bold opacity-70 mt-2 uppercase tracking-widest">Total Visits</p>
         </div>
         <div class="glass p-6 rounded-2xl">
           <h4 class="font-mono font-black text-3xl sm:text-4xl text-current tracking-wider">
-            <span class="counter-num text-current" data-target="1250">0</span>+
+            100%
           </h4>
-          <p data-i18n="stat-orders" class="text-xs font-bold opacity-70 mt-2 uppercase tracking-widest">Completed Assets</p>
+          <p data-i18n="stat-orders" class="text-xs font-bold opacity-70 mt-2 uppercase tracking-widest">Quality Guarantee</p>
         </div>
-        <div class="glass p-6 rounded-2xl">
-          <h4 class="font-mono font-black text-3xl sm:text-4xl text-current tracking-wider">
-            ★ <span class="counter-num-decimal text-current" data-target="4.9">0.0</span>/5
+        <div class="glass p-6 rounded-2xl cursor-pointer hover:border-yellow-500/50 transition-all group" onclick="window.openRatingModal()">
+          <h4 class="font-mono font-black text-3xl sm:text-4xl text-yellow-400 tracking-wider">
+            ★ <span class="counter-num-decimal text-current" id="live-rating-avg" data-target="0.0">0.0</span>/5
           </h4>
-          <p data-i18n="stat-rating" class="text-xs font-bold opacity-70 mt-2 uppercase tracking-widest">Satisfaction Score</p>
+          <p class="text-xs font-extrabold text-yellow-400 mt-2 uppercase tracking-widest group-hover:underline">✦ Rate VORTX Now</p>
         </div>
       </div>
     </section>
@@ -450,7 +460,27 @@
       </div>
     </div>
   </div>
-  
+
+  <div id="rating-modal" class="fixed inset-0 z-[100] flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
+    <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="window.closeRatingModal()"></div>
+    <div class="glass rounded-3xl max-w-sm w-full relative z-10 p-6 text-center border-t border-yellow-500/30">
+      <h3 class="font-head font-bold text-2xl text-yellow-500 force-eng mb-1">Rate VORTX</h3>
+      <p class="text-xs opacity-70 mb-4 font-bold">Leave your review & score</p>
+      <div class="flex justify-center gap-2 mb-4 text-3xl text-yellow-400 cursor-pointer">
+        <span onclick="window.setRatingScore(1)" class="star-item opacity-40 hover:opacity-100 transition">★</span>
+        <span onclick="window.setRatingScore(2)" class="star-item opacity-40 hover:opacity-100 transition">★</span>
+        <span onclick="window.setRatingScore(3)" class="star-item opacity-40 hover:opacity-100 transition">★</span>
+        <span onclick="window.setRatingScore(4)" class="star-item opacity-40 hover:opacity-100 transition">★</span>
+        <span onclick="window.setRatingScore(5)" class="star-item opacity-40 hover:opacity-100 transition">★</span>
+      </div>
+      <textarea id="rating-comment" rows="3" class="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-xs text-white focus:outline-none mb-4 resize-none" placeholder="Your review or feedback (optional)..."></textarea>
+      <div class="button-wrap w-full" onclick="window.submitUserRating()">
+        <div class="btn-3d-style"><span class="text-yellow-400 font-bold">Submit Review</span></div>
+        <div class="button-shadow"></div>
+      </div>
+    </div>
+  </div>
+
   <div id="support-modal" class="fixed inset-0 z-[100] flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
     <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="window.closeSupportModal()"></div>
     <div class="glass rounded-3xl max-w-sm w-full relative z-10 p-6 text-center border-t border-yellow-500/30">
@@ -468,6 +498,113 @@
 <script>
 (function () {
   "use strict";
+
+  const SUPABASE_URL = 'https://bcystqufgckekgaqeujx.supabase.co';
+  const SUPABASE_KEY = 'Sb_publishable_SuB1uBSawTCoh8G9Z4M-Lw_lrwJ6RIE';
+  let supabase = null;
+
+  if (window.supabase) {
+    supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+  }
+
+  let selectedScore = 5;
+
+  window.setRatingScore = function(score) {
+    selectedScore = score;
+    const stars = document.querySelectorAll('.star-item');
+    stars.forEach((star, index) => {
+      if (index < score) {
+        star.classList.remove('opacity-40');
+        star.classList.add('opacity-100');
+      } else {
+        star.classList.remove('opacity-100');
+        star.classList.add('opacity-40');
+      }
+    });
+  };
+
+  window.openRatingModal = function() {
+    const modal = document.getElementById('rating-modal');
+    if (modal) modal.classList.remove('opacity-0', 'pointer-events-none');
+    window.setRatingScore(5);
+  };
+
+  window.closeRatingModal = function() {
+    const modal = document.getElementById('rating-modal');
+    if (modal) modal.classList.add('opacity-0', 'pointer-events-none');
+  };
+
+  window.submitUserRating = async function() {
+    const commentEl = document.getElementById('rating-comment');
+    const comment = commentEl ? commentEl.value.trim() : '';
+
+    if (supabase) {
+      const { error } = await supabase.from('reviews').insert([{ rating: selectedScore, comment: comment }]);
+      if (!error) {
+        window.showToast('THANK YOU FOR YOUR RATING!');
+        window.closeRatingModal();
+        if (commentEl) commentEl.value = '';
+        fetchLiveStats();
+      } else {
+        window.showToast('ERROR SUBMITTING RATING');
+      }
+    } else {
+      window.showToast('THANK YOU FOR YOUR RATING!');
+      window.closeRatingModal();
+    }
+  };
+
+  async function fetchLiveStats() {
+    if (!supabase) return;
+    try {
+      await supabase.from('page_views').insert([{}]);
+      const { count: viewsCount } = await supabase.from('page_views').select('*', { count: 'exact', head: true });
+      if (viewsCount !== null) {
+        const viewsEl = document.getElementById('live-views-count');
+        if (viewsEl) {
+          viewsEl.setAttribute('data-target', viewsCount);
+          viewsEl.textContent = viewsCount.toLocaleString();
+        }
+      }
+
+      const { data: reviews } = await supabase.from('reviews').select('*').order('created_at', { ascending: false });
+      if (reviews && reviews.length > 0) {
+        const totalScore = reviews.reduce((sum, r) => sum + r.rating, 0);
+        const avgScore = (totalScore / reviews.length).toFixed(1);
+        
+        const ratingEl = document.getElementById('live-rating-avg');
+        const countEl = document.getElementById('live-reviews-count');
+        
+        if (ratingEl) {
+          ratingEl.setAttribute('data-target', avgScore);
+          ratingEl.textContent = avgScore;
+        }
+        if (countEl) {
+          countEl.setAttribute('data-target', reviews.length);
+          countEl.textContent = reviews.length.toLocaleString();
+        }
+
+        const commentsWithText = reviews.filter(r => r.comment && r.comment.length > 0);
+        const marqueeContainer = document.getElementById('reviews-marquee-container');
+        const marqueeTrack = document.getElementById('reviews-marquee-track');
+
+        if (commentsWithText.length > 0 && marqueeContainer && marqueeTrack) {
+          let html = '';
+          const cardsHtml = commentsWithText.map(r => 
+            `<div class="px-5 py-2.5 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md flex items-center gap-3 shrink-0">
+               <span class="text-yellow-400 font-bold text-xs">★ ${r.rating}</span>
+               <span class="text-xs opacity-90 font-medium">"${r.comment}"</span>
+             </div>`
+          ).join('');
+
+          html = cardsHtml + cardsHtml;
+          marqueeTrack.innerHTML = html;
+          marqueeContainer.classList.remove('hidden');
+        }
+      }
+    } catch(e) {}
+  }
+
   window.activateTab = function(btn, category) {
     document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
     btn.classList.add('active');
@@ -481,6 +618,7 @@
       }
     }, 600);
   };
+
   document.querySelectorAll('.animated-title .line').forEach(function(line, li) {
     var words = line.dataset.text.split(' ');
     words.forEach(function(w, wi) {
@@ -491,6 +629,7 @@
       line.appendChild(span);
     });
   });
+
   (function(){
     var c = document.getElementById('stars-canvas');
     if(!c) return;
@@ -514,6 +653,7 @@
       requestAnimationFrame(loop);
     })();
   })();
+
   (function(){
     var canvas = document.getElementById('globe');
     if(!canvas) return;
@@ -589,9 +729,10 @@
     }
     draw();
   })();
+
   var translations = {
-    en: { "nav-bundles": "Bundles", "nav-packs": "Featured Packs", "nav-categories": "Categories", "hero-tag": "Digital Assets Hub", "hero-desc": "Explore custom websites reflecting your unique identity, plus premium video editing and design assets.", "hero-btn": "Explore Tiers", "tiers-available": "3 Tiers Available", "explore-packages": "Explore Packages", "packs-title": "Featured Packs", "packs-desc": "Swipe horizontally for endless physical 3D cards interaction", "cat-sec-title": "Categories", "cat-sec-desc": "Select a category to explore editing packs.", "cat-cc-desc": "Color Corrections", "cat-xml-desc": "Project Files", "cat-shake-desc": "Camera Shake Presets", "footer-right": "Crafted for the bold.", "tiers-sub": "Web Solutions", "tiers-title": "Development Tiers", "back-btn": "← Back", "tier-starter-desc": "Perfect for simple portfolios and personal landing pages.", "tier-pro-desc": "For creators needing advanced animations & custom design.", "tier-vip-desc": "The absolute premium experience with custom 3D elements.", "select-plan": "Select Plan", "cat-view-sub": "Collection", "add-cart": "Add to Cart", "try-demo": "Try Demo", "stat-subscribers": "Telegram Subscribers", "stat-views": "Monthly Visitors", "stat-orders": "Completed Assets", "stat-rating": "Satisfaction Score" },
-    ar: { "nav-bundles": "الحزم", "nav-packs": "حزم متميزة", "nav-categories": "الأقسام", "hero-tag": "مركز الأصول الرقمية", "hero-desc": "تصفّح لتستكشف مشاريع ومواقع ويب تجسّد هويتك، إلى جانب أحدث حزم ومستلزمات المونتاج وتصميم المقاطع.", "hero-btn": "استكشف الباقات", "tiers-available": "3 مستويات متاحة", "explore-packages": "استكشف الباقات", "packs-title": "الحزم المتميزة", "packs-desc": "اسحب يميناً ويساراً للتنقل بين البطاقات ثلاثية الأبعاد", "cat-sec-title": "الأقسام", "cat-sec-desc": "اختر قسماً لاستكشاف حزم التعديل المتاحة.", "cat-cc-desc": "تصحيح الألوان", "cat-xml-desc": "ملفات المشروع", "cat-shake-desc": "إعدادات اهتزاز الكاميرا", "footer-right": "صُنع للمبدعين والجرآء.", "tiers-sub": "حلول الويب", "tiers-title": "مستويات التطوير", "back-btn": "العودة ←", "tier-starter-desc": "مثالية للملفات الشخصية وصفحات الهبوط البسيطة.", "tier-pro-desc": "للمبدعين الذين يحتاجون تحريكات متقدمة وتصاميم خاصة.", "tier-vip-desc": "الخبرة المتميزة المطلقة مع عناصر ثلاثية الأبعاد.", "select-plan": "اختر الباقة", "cat-view-sub": "المجموعة", "add-cart": "إضافة للسلة", "try-demo": "تجربة العرض", "stat-subscribers": "مشتركي التليجرام", "stat-views": "زائر شهرياً", "stat-orders": "أصل مكتمل", "stat-rating": "معدل التقييم" }
+    en: { "nav-bundles": "Bundles", "nav-packs": "Featured Packs", "nav-categories": "Categories", "hero-tag": "Digital Assets Hub", "hero-desc": "Explore custom websites reflecting your unique identity, plus premium video editing and design assets.", "hero-btn": "Explore Tiers", "tiers-available": "3 Tiers Available", "explore-packages": "Explore Packages", "packs-title": "Featured Packs", "packs-desc": "Swipe horizontally for endless physical 3D cards interaction", "cat-sec-title": "Categories", "cat-sec-desc": "Select a category to explore editing packs.", "cat-cc-desc": "Color Corrections", "cat-xml-desc": "Project Files", "cat-shake-desc": "Camera Shake Presets", "footer-right": "Crafted for the bold.", "tiers-sub": "Web Solutions", "tiers-title": "Development Tiers", "back-btn": "← Back", "tier-starter-desc": "Perfect for simple portfolios and personal landing pages.", "tier-pro-desc": "For creators needing advanced animations & custom design.", "tier-vip-desc": "The absolute premium experience with custom 3D elements.", "select-plan": "Select Plan", "cat-view-sub": "Collection", "add-cart": "Add to Cart", "try-demo": "Try Demo", "stat-subscribers": "Satisfied Clients", "stat-views": "Total Visits", "stat-orders": "Quality Guarantee", "stat-rating": "Satisfaction Score" },
+    ar: { "nav-bundles": "الحزم", "nav-packs": "حزم متميزة", "nav-categories": "الأقسام", "hero-tag": "مركز الأصول الرقمية", "hero-desc": "تصفّح لتستكشف مشاريع ومواقع ويب تجسّد هويتك، إلى جانب أحدث حزم ومستلزمات المونتاج وتصميم المقاطع.", "hero-btn": "استكشف الباقات", "tiers-available": "3 مستويات متاحة", "explore-packages": "استكشف الباقات", "packs-title": "الحزم المتميزة", "packs-desc": "اسحب يميناً ويساراً للتنقل بين البطاقات ثلاثية الأبعاد", "cat-sec-title": "الأقسام", "cat-sec-desc": "اختر قسماً لاستكشاف حزم التعديل المتاحة.", "cat-cc-desc": "تصحيح الألوان", "cat-xml-desc": "ملفات المشروع", "cat-shake-desc": "إعدادات اهتزاز الكاميرا", "footer-right": "صُنع للمبدعين والجرآء.", "tiers-sub": "حلول الويب", "tiers-title": "مستويات التطوير", "back-btn": "العودة ←", "tier-starter-desc": "مثالية للملفات الشخصية وصفحات الهبوط البسيطة.", "tier-pro-desc": "للمبدعين الذين يحتاجون تحريكات متقدمة وتصاميم خاصة.", "tier-vip-desc": "الخبرة المتميزة المطلقة مع عناصر ثلاثية الأبعاد.", "select-plan": "اختر الباقة", "cat-view-sub": "المجموعة", "add-cart": "إضافة للسلة", "try-demo": "تجربة العرض", "stat-subscribers": "عملاء راضون", "stat-views": "إجمالي الزيارات", "stat-orders": "ضمان الجودة", "stat-rating": "معدل التقييم" }
   };
   var currentLang = 'en';
   window.toggleLanguage = function () {
@@ -662,7 +803,9 @@
   };
   var yr = document.getElementById('year');
   if (yr) yr.textContent = new Date().getFullYear();
+
   function initScrollAnimations() {
+    fetchLiveStats();
     var observer = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
@@ -671,7 +814,7 @@
           counters.forEach(function (counter) {
             if (counter.dataset.animated) return;
             counter.dataset.animated = "true";
-            var target = parseInt(counter.dataset.target, 10), count = 0, speed = target / 80;
+            var target = parseInt(counter.dataset.target, 10) || 0, count = 0, speed = Math.max(1, target / 80);
             function updateCount() {
               count += speed;
               if (count < target) { counter.textContent = Math.floor(count).toLocaleString(); requestAnimationFrame(updateCount); } else { counter.textContent = target.toLocaleString(); }
@@ -682,7 +825,7 @@
           decimalCounters.forEach(function (counter) {
             if (counter.dataset.animated) return;
             counter.dataset.animated = "true";
-            var target = parseFloat(counter.dataset.target), count = 0, speed = target / 60;
+            var target = parseFloat(counter.dataset.target) || 0, count = 0, speed = Math.max(0.1, target / 60);
             function updateDecimal() {
               count += speed;
               if (count < target) { counter.textContent = count.toFixed(1); requestAnimationFrame(updateDecimal); } else { counter.textContent = target.toFixed(1); }
