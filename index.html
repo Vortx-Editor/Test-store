@@ -273,15 +273,14 @@
       <canvas id="globe"></canvas>
       <div class="floor-glow"></div>
 
-      <div class="relative z-20 flex flex-col items-center justify-center">
-        
-        <div class="fade-up-item absolute top-6 sm:top-12 inline-flex items-center gap-4 px-8 py-3.5 rounded-full text-sm sm:text-base font-black tracking-[0.2em] uppercase glass backdrop-blur-xl shadow-2xl border border-white/20 text-white" style="animation-delay: 1.4s;">
-          <span class="w-2 h-2 rounded-full bg-white/70 animate-ping"></span>
-          <span data-i18n="hero-tag">Digital Assets Hub</span>
-          <span class="w-2 h-2 rounded-full bg-white/70 animate-ping"></span>
-        </div>
+      <div class="fade-up-item absolute top-4 sm:top-8 left-1/2 -translate-x-1/2 inline-flex items-center gap-4 px-8 py-3.5 rounded-full text-sm sm:text-base font-black tracking-[0.2em] uppercase glass backdrop-blur-xl shadow-2xl border border-white/20 text-white whitespace-nowrap z-30" style="animation-delay: 1.4s;">
+        <span class="w-2 h-2 rounded-full bg-white/70 animate-ping"></span>
+        <span data-i18n="hero-tag">Digital Assets Hub</span>
+        <span class="w-2 h-2 rounded-full bg-white/70 animate-ping"></span>
+      </div>
 
-        <h1 class="animated-title font-black text-4xl sm:text-6xl md:text-7xl leading-tight mb-6 mt-16 sm:mt-24">
+      <div class="relative z-20 flex flex-col items-center justify-center pt-24 sm:pt-32 pb-32">
+        <h1 class="animated-title font-black text-4xl sm:text-6xl md:text-7xl leading-tight mb-6">
           <span class="line force-eng vortx-wet-oil-title tracking-widest py-2" data-text="VORTX STUDIO"></span><br>
           <span class="line mt-2" data-text="Evolution of Digital Assets"></span>
         </h1>
@@ -291,26 +290,25 @@
         </p>
 
         <div class="fade-up-item flex flex-col items-center justify-center gap-6" style="animation-delay: 1.8s;">
-          <div class="button-wrap" onclick="window.scrollToId('bundles')">
-            <div class="btn-3d-style"><span data-i18n="hero-btn">Explore Tiers</span></div>
-            <div class="button-shadow"></div>
-          </div>
-          
-          <div class="flex items-center justify-between w-full max-w-[280px] sm:max-w-xs mt-10 opacity-70">
-            <a href="#" class="hover:scale-110 hover:opacity-100 hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.8)] transition-all duration-300 text-current">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
-            </a>
-            <a href="#" class="hover:scale-110 hover:opacity-100 hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.8)] transition-all duration-300 text-current">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="4"/><path d="m10 9 5 3-5 3z"/></svg>
-            </a>
-            <a href="#" class="hover:scale-110 hover:opacity-100 hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.8)] transition-all duration-300 text-current">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 10-4 4 6 6 4-16-18 7 4 2 2 6 3-4"/></svg>
-            </a>
-            <a href="#" class="hover:scale-110 hover:opacity-100 hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.8)] transition-all duration-300 text-current">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
-            </a>
+          <div class="cursor-pointer text-base sm:text-lg font-bold opacity-80 hover:opacity-100 transition-opacity" onclick="window.scrollToId('bundles')">
+            <span data-i18n="hero-btn">Explore Tiers</span>
           </div>
         </div>
+      </div>
+
+      <div class="absolute bottom-6 left-0 w-full px-6 sm:px-12 flex items-center justify-between opacity-70 z-30 pointer-events-none">
+        <a href="#" class="pointer-events-auto hover:scale-110 hover:opacity-100 hover:drop-shadow-[0_0_12px_rgba(255,255,255,0.8)] transition-all duration-300 text-current">
+          <svg class="w-8 h-8 sm:w-11 sm:h-11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
+        </a>
+        <a href="#" class="pointer-events-auto hover:scale-110 hover:opacity-100 hover:drop-shadow-[0_0_12px_rgba(255,255,255,0.8)] transition-all duration-300 text-current">
+          <svg class="w-8 h-8 sm:w-11 sm:h-11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="4"/><path d="m10 9 5 3-5 3z"/></svg>
+        </a>
+        <a href="#" class="pointer-events-auto hover:scale-110 hover:opacity-100 hover:drop-shadow-[0_0_12px_rgba(255,255,255,0.8)] transition-all duration-300 text-current">
+          <svg class="w-8 h-8 sm:w-11 sm:h-11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 10-4 4 6 6 4-16-18 7 4 2 2 6 3-4"/></svg>
+        </a>
+        <a href="#" class="pointer-events-auto hover:scale-110 hover:opacity-100 hover:drop-shadow-[0_0_12px_rgba(255,255,255,0.8)] transition-all duration-300 text-current">
+          <svg class="w-8 h-8 sm:w-11 sm:h-11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+        </a>
       </div>
     </section>
 
