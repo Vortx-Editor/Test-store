@@ -323,7 +323,8 @@
     <canvas id="stars-canvas"></canvas>
   </div>
   
-  <div id="toast-box" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[100] flex flex-col gap-3 pointer-events-none"></div>
+  <!-- إطار التنبيه والإشعار الواضح والمكبر في منتصف ونصف الشاشة تماماً -->
+  <div id="toast-box" class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[200] flex flex-col gap-3 pointer-events-none w-11/12 max-w-md text-center"></div>
 
   <header class="sticky top-0 z-50 w-full">
     <nav class="glass border-b-0 bg-black/40 backdrop-blur-md">
@@ -457,10 +458,10 @@
       </div>
     </section>
 
-    <!-- قسم التقييم والتعليق والمكان الأخضر فوقه بالضبط -->
+    <!-- قسم التقييم والتعليق -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 py-12 border-t border-white/10 mt-12 reveal-on-scroll">
       
-      <!-- الشريط المتحرك الجديد للتعليقات والنجوم (في المكان الأخضر المطلوب) -->
+      <!-- الشريط المتحرك الجديد للتعليقات والنجوم (في المكان الأخضر) -->
       <div id="reviews-marquee-container" class="w-full overflow-hidden mb-12 py-4 glass rounded-2xl hidden">
         <div id="reviews-marquee-track" class="animate-marquee gap-6 items-center px-4"></div>
       </div>
@@ -660,7 +661,6 @@
     </div>
   </div>
 
-<!-- دالة التحويل المباشر لـ @wot_5 -->
 <script>
   window.openTelegramOrder = function(planName, price) {
     const telegramUsername = 'wot_5'; 
@@ -684,7 +684,21 @@
     supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
   }
 
-  // إرسال التقييم والتأكد من تحديد النجوم أولاً
+  // دالة الإشعار التفاعلية الفخمة في سنتر الشاشة
+  window.showToast = function (msg) {
+    var box = document.getElementById('toast-box');
+    if (!box) return;
+    box.innerHTML = '';
+    var toast = document.createElement('div');
+    toast.className = 'glass bg-black/95 border border-yellow-500/40 text-white text-xs sm:text-sm uppercase font-black tracking-widest px-6 py-4 rounded-2xl flex items-center justify-center gap-3 shadow-2xl backdrop-blur-xl animate-pulse';
+    toast.innerHTML = '<span class="text-yellow-400 text-base">✦</span> ' + msg;
+    box.appendChild(toast);
+    setTimeout(function () { 
+      if (toast && toast.parentNode) toast.parentNode.removeChild(toast); 
+    }, 3000);
+  };
+
+  // إرسال التقييم مع الحفظ المحلي المتزامن وثبات البيانات
   window.submitUserRating = async function() {
     const ratingRadio = document.querySelector('input[name="rating"]:checked');
     if (!ratingRadio) {
@@ -696,72 +710,97 @@
     const commentEl = document.getElementById('chat_bot');
     const comment = commentEl ? commentEl.value.trim() : '';
 
-    if (supabase) {
-      window.showToast('SUBMITTING REVIEW...');
-      const { error } = await supabase.from('reviews').insert([{ rating: selectedScore, comment: comment }]);
-      if (!error) {
-        window.showToast('THANK YOU FOR YOUR REVIEW!');
-        if (commentEl) commentEl.value = '';
-        ratingRadio.checked = false;
-        fetchLiveStats();
-      } else {
-        window.showToast('ERROR SUBMITTING RATING');
-      }
-    } else {
-      window.showToast('THANK YOU FOR YOUR REVIEW!');
-      if (commentEl) commentEl.value = '';
-      ratingRadio.checked = false;
+    if (!comment) {
+      window.showToast('PLEASE WRITE A COMMENT FIRST!');
+      return;
     }
+
+    window.showToast('SUBMITTING YOUR REVIEW...');
+
+    const newReview = {
+      rating: selectedScore,
+      comment: comment,
+      created_at: new Date().toISOString()
+    };
+
+    // 1. الحفظ الفوري المحلي لمنع الاختفاء عند التحديث
+    let localReviews = JSON.parse(localStorage.getItem('vortx_reviews_data') || '[]');
+    localReviews.unshift(newReview);
+    localStorage.setItem('vortx_reviews_data', JSON.stringify(localReviews));
+
+    // 2. المحاولة مع Supabase
+    if (supabase) {
+      try {
+        await supabase.from('reviews').insert([{ rating: selectedScore, comment: comment }]);
+      } catch(e) {}
+    }
+
+    if (commentEl) commentEl.value = '';
+    ratingRadio.checked = false;
+
+    window.showToast('REVIEW SUBMITTED SUCCESSFULLY!');
+    fetchLiveStats();
   };
 
-  // جلب البيانات، حساب المتوسط الحسابي وتحديث الشريط واللوحة الإحصائية
+  // جلب البيانات، دمج التقييمات، حساب المتوسط، وتحديث اللوحة والشريط
   async function fetchLiveStats() {
-    if (!supabase) return;
-    try {
-      await supabase.from('page_views').insert([{}]);
-      const { count: viewsCount } = await supabase.from('page_views').select('*', { count: 'exact', head: true });
-      if (viewsCount !== null) {
-        const viewsEl = document.getElementById('live-views-count');
-        if (viewsEl) {
-          viewsEl.setAttribute('data-target', viewsCount);
-          viewsEl.textContent = viewsCount.toLocaleString();
+    let allReviews = JSON.parse(localStorage.getItem('vortx_reviews_data') || '[]');
+
+    if (supabase) {
+      try {
+        await supabase.from('page_views').insert([{}]);
+        const { count: viewsCount } = await supabase.from('page_views').select('*', { count: 'exact', head: true });
+        if (viewsCount !== null) {
+          const viewsEl = document.getElementById('live-views-count');
+          if (viewsEl) {
+            viewsEl.setAttribute('data-target', viewsCount);
+            viewsEl.textContent = viewsCount.toLocaleString();
+          }
         }
+
+        const { data: dbReviews } = await supabase.from('reviews').select('*').order('created_at', { ascending: false });
+        if (dbReviews && dbReviews.length > 0) {
+          dbReviews.forEach(dbr => {
+            if (!allReviews.some(lr => lr.comment === dbr.comment && Number(lr.rating) === Number(dbr.rating))) {
+              allReviews.push(dbr);
+            }
+          });
+        }
+      } catch(e) {}
+    }
+
+    if (allReviews.length > 0) {
+      const totalScore = allReviews.reduce((sum, r) => sum + Number(r.rating || 0), 0);
+      const avgScore = (totalScore / allReviews.length).toFixed(1);
+      
+      const ratingEl = document.getElementById('live-rating-avg');
+      const countEl = document.getElementById('live-reviews-count');
+      
+      if (ratingEl) {
+        ratingEl.setAttribute('data-target', avgScore);
+        ratingEl.textContent = avgScore;
+      }
+      if (countEl) {
+        countEl.setAttribute('data-target', allReviews.length);
+        countEl.textContent = allReviews.length.toLocaleString();
       }
 
-      const { data: reviews } = await supabase.from('reviews').select('*').order('created_at', { ascending: false });
-      if (reviews && reviews.length > 0) {
-        const totalScore = reviews.reduce((sum, r) => sum + Number(r.rating || 0), 0);
-        const avgScore = (totalScore / reviews.length).toFixed(1);
-        
-        const ratingEl = document.getElementById('live-rating-avg');
-        const countEl = document.getElementById('live-reviews-count');
-        
-        if (ratingEl) {
-          ratingEl.setAttribute('data-target', avgScore);
-          ratingEl.textContent = avgScore;
-        }
-        if (countEl) {
-          countEl.setAttribute('data-target', reviews.length);
-          countEl.textContent = reviews.length.toLocaleString();
-        }
+      const commentsWithText = allReviews.filter(r => r.comment && r.comment.length > 0);
+      const marqueeContainer = document.getElementById('reviews-marquee-container');
+      const marqueeTrack = document.getElementById('reviews-marquee-track');
 
-        const commentsWithText = reviews.filter(r => r.comment && r.comment.length > 0);
-        const marqueeContainer = document.getElementById('reviews-marquee-container');
-        const marqueeTrack = document.getElementById('reviews-marquee-track');
+      if (commentsWithText.length > 0 && marqueeContainer && marqueeTrack) {
+        const cardsHtml = commentsWithText.map(r => 
+          `<div class="px-5 py-3 rounded-2xl border border-yellow-500/30 bg-black/80 backdrop-blur-md flex items-center gap-3 shrink-0 shadow-lg">
+             <span class="text-yellow-400 font-bold text-sm">★ ${r.rating}</span>
+             <span class="text-xs text-white/90 font-medium">"${r.comment}"</span>
+           </div>`
+        ).join('');
 
-        if (commentsWithText.length > 0 && marqueeContainer && marqueeTrack) {
-          const cardsHtml = commentsWithText.map(r => 
-            `<div class="px-5 py-3 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md flex items-center gap-3 shrink-0 shadow-lg">
-               <span class="text-yellow-400 font-bold text-sm">★ ${r.rating}</span>
-               <span class="text-xs text-white/90 font-medium">"${r.comment}"</span>
-             </div>`
-          ).join('');
-
-          marqueeTrack.innerHTML = cardsHtml + cardsHtml;
-          marqueeContainer.classList.remove('hidden');
-        }
+        marqueeTrack.innerHTML = cardsHtml + cardsHtml;
+        marqueeContainer.classList.remove('hidden');
       }
-    } catch(e) {}
+    }
   }
 
   window.activateTab = function(btn, category) {
@@ -938,15 +977,6 @@
   window.toggleTheme = function () {
     var root = document.documentElement;
     root.classList.toggle('dark'); root.classList.toggle('light');
-  };
-  window.showToast = function (msg) {
-    var box = document.getElementById('toast-box');
-    if (!box) return;
-    var toast = document.createElement('div');
-    toast.className = 'glass bg-black/90 text-white text-[10px] uppercase font-bold tracking-widest px-6 py-3.5 rounded-full flex items-center gap-2';
-    toast.innerHTML = '<span class="text-purple-400">✦</span> ' + msg;
-    box.appendChild(toast);
-    setTimeout(function () { if (toast && toast.parentNode) toast.parentNode.removeChild(toast); }, 2500);
   };
   window.openPreview = function (title, tag) {
     var titleEl = document.getElementById('preview-title'), tagEl = document.getElementById('preview-tag'), modal = document.getElementById('preview-modal');
