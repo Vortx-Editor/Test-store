@@ -489,9 +489,11 @@
             <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-s-f6">1 Revision</span></li>
           </ul>
           <div class="delivery_text" data-i18n="plan-s-del">Delivery: 7 Days</div>
-          <div class="button-wrap w-full mt-4" onclick="window.showToast('PLAN ADDED')">
-            <div class="btn-3d-style"><span data-i18n="select-plan">Select Plan</span></div>
-            <div class="button-shadow"></div>
+          <div class="p-[2px] rounded-full bg-gradient-to-r from-yellow-500/50 via-purple-500/50 to-yellow-500/50 mt-4 shadow-lg hover:shadow-yellow-500/20 transition">
+            <div class="button-wrap w-full m-0" onclick="window.openOrderModal('STARTER', 150)">
+              <div class="btn-3d-style"><span data-i18n="select-plan">Select Plan</span></div>
+              <div class="button-shadow"></div>
+            </div>
           </div>
         </div>
 
@@ -511,9 +513,11 @@
             <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-p-f6">3 Revisions</span></li>
           </ul>
           <div class="delivery_text" data-i18n="plan-p-del">Delivery: 7–12 Days</div>
-          <div class="button-wrap w-full mt-4" onclick="window.showToast('PLAN ADDED')">
-            <div class="btn-3d-style"><span data-i18n="select-plan">Select Plan</span></div>
-            <div class="button-shadow"></div>
+          <div class="p-[2px] rounded-full bg-gradient-to-r from-yellow-500/50 via-purple-500/50 to-yellow-500/50 mt-4 shadow-lg hover:shadow-yellow-500/20 transition">
+            <div class="button-wrap w-full m-0" onclick="window.openOrderModal('PREMIUM', 300)">
+              <div class="btn-3d-style"><span data-i18n="select-plan">Select Plan</span></div>
+              <div class="button-shadow"></div>
+            </div>
           </div>
         </div>
 
@@ -534,9 +538,11 @@
             <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-v-f7">Priority Support</span></li>
           </ul>
           <div class="delivery_text" data-i18n="plan-v-del">Delivery: 15–20 Days</div>
-          <div class="button-wrap w-full mt-4" onclick="window.showToast('PLAN ADDED')">
-            <div class="btn-3d-style"><span data-i18n="select-plan">Select Plan</span></div>
-            <div class="button-shadow"></div>
+          <div class="p-[2px] rounded-full bg-gradient-to-r from-yellow-500/50 via-purple-500/50 to-yellow-500/50 mt-4 shadow-lg hover:shadow-yellow-500/20 transition">
+            <div class="button-wrap w-full m-0" onclick="window.openOrderModal('ELITE', 600)">
+              <div class="btn-3d-style"><span data-i18n="select-plan">Select Plan</span></div>
+              <div class="button-shadow"></div>
+            </div>
           </div>
         </div>
         
@@ -553,6 +559,39 @@
       <div id="cat-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
     </div>
   </section>
+
+  <div id="order-modal" class="fixed inset-0 z-[120] flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
+    <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="window.closeOrderModal()"></div>
+    <div class="glass rounded-3xl max-w-md w-full relative z-10 p-6 border border-white/10 shadow-2xl">
+      <div id="order-form-step">
+        <h3 class="font-head font-bold text-2xl text-yellow-400 mb-1">Complete Your Order</h3>
+        <p class="text-xs opacity-70 mb-4 font-bold">Selected Package: <span id="modal-pkg-name" class="text-white font-mono"></span> (<span id="modal-pkg-price" class="text-yellow-400 font-mono"></span>)</p>
+        <div class="space-y-3 mb-5">
+          <input type="text" id="order-name" placeholder="Full Name *" class="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-yellow-500/50">
+          <input type="email" id="order-email" placeholder="Email Address *" class="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-yellow-500/50">
+          <input type="tel" id="order-phone" placeholder="Phone Number (Optional)" class="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-yellow-500/50">
+        </div>
+        <div class="button-wrap w-full" onclick="window.processOrderCheckout()">
+          <div class="btn-3d-style"><span class="text-yellow-400 font-bold">Continue to Payment</span></div>
+          <div class="button-shadow"></div>
+        </div>
+      </div>
+      <div id="order-success-step" class="hidden text-center py-4">
+        <div class="text-4xl mb-3 text-emerald-400">✓</div>
+        <h3 class="font-head font-bold text-2xl text-emerald-400 mb-1">PAYMENT SUCCESSFUL</h3>
+        <p class="text-xs opacity-80 mb-4">Thank you, <span id="success-name" class="text-white font-bold"></span>! Your order has been received successfully.</p>
+        <div class="bg-white/5 border border-white/10 rounded-xl p-3 mb-5">
+          <span class="text-[10px] uppercase font-bold opacity-60 block mb-1">Your Unique Order ID</span>
+          <span id="success-order-id" class="text-xl font-mono font-black text-yellow-400 tracking-wider"></span>
+        </div>
+        <p class="text-[11px] opacity-70 mb-5 leading-relaxed">Please keep your Order ID and use it when contacting us to start your project.</p>
+        <div class="flex gap-3">
+          <a id="whatsapp-btn" href="#" target="_blank" class="flex-1 py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold text-center transition shadow-lg">WhatsApp</a>
+          <a id="telegram-btn" href="#" target="_blank" class="flex-1 py-3 px-4 rounded-xl bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold text-center transition shadow-lg">Telegram</a>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <div id="preview-modal" class="fixed inset-0 z-[80] flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
     <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="window.closePreview()"></div>
@@ -591,6 +630,70 @@
   if (window.supabase) {
     supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
   }
+
+  let currentSelectedPackage = { name: '', price: 0 };
+
+  window.openOrderModal = function(name, price) {
+    currentSelectedPackage = { name, price };
+    document.getElementById('modal-pkg-name').textContent = name;
+    document.getElementById('modal-pkg-price').textContent = '$' + price;
+    document.getElementById('order-form-step').classList.remove('hidden');
+    document.getElementById('order-success-step').classList.add('hidden');
+    document.getElementById('order-name').value = '';
+    document.getElementById('order-email').value = '';
+    document.getElementById('order-phone').value = '';
+    const modal = document.getElementById('order-modal');
+    if (modal) modal.classList.remove('opacity-0', 'pointer-events-none');
+  };
+
+  window.closeOrderModal = function() {
+    const modal = document.getElementById('order-modal');
+    if (modal) modal.classList.add('opacity-0', 'pointer-events-none');
+  };
+
+  window.processOrderCheckout = async function() {
+    const name = document.getElementById('order-name').value.trim();
+    const email = document.getElementById('order-email').value.trim();
+    const phone = document.getElementById('order-phone').value.trim();
+
+    if (!name || !email) {
+      window.showToast('PLEASE ENTER NAME & EMAIL');
+      return;
+    }
+
+    const randomNum = Math.floor(10000 + Math.random() * 90000);
+    const orderId = 'VORT-' + randomNum;
+
+    if (supabase) {
+      const { error } = await supabase.from('orders').insert([{
+        order_id: orderId,
+        customer_name: name,
+        customer_email: email,
+        customer_phone: phone,
+        package_name: currentSelectedPackage.name,
+        amount: currentSelectedPackage.price,
+        payment_status: 'PAID'
+      }]);
+
+      if (error) {
+        window.showToast('ORDER ERROR, TRY AGAIN');
+        return;
+      }
+    }
+
+    document.getElementById('success-name').textContent = name;
+    document.getElementById('success-order-id').textContent = orderId;
+
+    const msg = `Hi! My name is ${name}. I purchased the ${currentSelectedPackage.name} package. My Order ID is ${orderId}. I would like to start my project.`;
+    const encodedMsg = encodeURIComponent(msg);
+
+    document.getElementById('whatsapp-btn').href = `https://wa.me/?text=${encodedMsg}`;
+    document.getElementById('telegram-btn').href = `https://t.me/share/url?url=&text=${encodedMsg}`;
+
+    document.getElementById('order-form-step').classList.add('hidden');
+    document.getElementById('order-success-step').classList.remove('hidden');
+    fetchLiveStats();
+  };
 
   let selectedScore = 5;
 
