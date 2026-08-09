@@ -172,7 +172,6 @@
   .animate-marquee { display: flex; width: max-content; animation: marquee 30s linear infinite; }
   .animate-marquee:hover { animation-play-state: paused; }
 
-  /* تخصيص السحب اليدوي والتفاعلي للشريط المتحرك */
   #reviews-marquee-container { overflow-x: auto; scrollbar-width: none; cursor: grab; user-select: none; }
   #reviews-marquee-container::-webkit-scrollbar { display: none; }
   #reviews-marquee-container:active { cursor: grabbing; }
@@ -222,7 +221,6 @@
     text-shadow: 0 2px 4px rgba(0,0,0,0.5);
   }
 
-  /* النجوم المحدثة وتوافقها مع الثيمين */
   .radio { display: flex; justify-content: center; gap: 12px; margin-bottom: 1.5rem; direction: ltr; }
   .radio > input { position: absolute; appearance: none; opacity: 0; }
   .radio > label { cursor: pointer; font-size: 32px; position: relative; display: inline-block; transition: transform 0.3s ease; }
@@ -230,7 +228,7 @@
   html.light .radio > label > svg { fill: #94a3b8; }
   .radio > input:checked ~ label svg, .radio > label:hover svg, .radio > label:hover ~ label svg { fill: #ff9e0b !important; filter: drop-shadow(0 0 12px rgba(255, 158, 11, 0.8)); }
 
-  /* المربع المطور لكتابة التقييم والاسم والوضع النهاري */
+  /* المربع للوضع النهاري والداكن وزر الإرسال المعدل */
   .container_chat_bot { display: flex; flex-direction: column; max-width: 480px; width: 100%; margin: 0 auto; }
   .container_chat_bot .container-chat-options { position: relative; display: flex; background: linear-gradient(to bottom right, #555, #1f1f23, #121215); border-radius: 20px; padding: 2px; overflow: hidden; }
   html.light .container_chat_bot .container-chat-options { background: linear-gradient(to bottom right, #cbd5e1, #94a3b8, #cbd5e1); }
@@ -247,12 +245,16 @@
   html.light .container_chat_bot .chat .chat-bot textarea::placeholder { color: #64748B !important; }
   .container_chat_bot .chat .options { display: flex; justify-content: flex-end; align-items: center; padding: 8px 12px; border-top: 1px solid rgba(255, 255, 255, 0.05); }
   html.light .container_chat_bot .chat .options { border-top-color: rgba(148, 163, 184, 0.2); }
+  
+  /* تعديل زر الإرسال للوضع الداكن والنهاري ليصبح متناسقاً */
   .container_chat_bot .chat .options .btn-submit { display: flex; padding: 2px; background-image: linear-gradient(to top, #292929, #555555, #292929); border-radius: 10px; box-shadow: inset 0 6px 2px -4px rgba(255, 255, 255, 0.5); cursor: pointer; border: none; outline: none; transition: all 0.15s ease; }
+  html.light .container_chat_bot .chat .options .btn-submit { background-image: linear-gradient(to top, #cbd5e1, #64748b, #cbd5e1) !important; box-shadow: 0 4px 12px rgba(100, 116, 139, 0.2) !important; }
   .container_chat_bot .chat .options .btn-submit i { width: 34px; height: 32px; padding: 6px; background: rgba(0, 0, 0, 0.2); border-radius: 8px; color: #eab308; display: flex; align-items: center; justify-content: center; }
+  html.light .container_chat_bot .chat .options .btn-submit i { background: rgba(255, 255, 255, 0.8) !important; color: #475569 !important; }
   .container_chat_bot .chat .options .btn-submit:hover i { color: #fff; filter: drop-shadow(0 0 8px #eab308); }
+  html.light .container_chat_bot .chat .options .btn-submit:hover i { color: #1e293b !important; filter: none !important; }
   .container_chat_bot .chat .options .btn-submit:active { transform: scale(0.92); }
 
-  /* تنسيق كروت الشريط للوضع النهاري */
   html.light #reviews-marquee-track > div { background: rgba(255, 255, 255, 0.9) !important; border-color: rgba(203, 213, 225, 0.6) !important; color: #17131F !important; }
   html.light #reviews-marquee-track span.text-white\/90 { color: #334155 !important; }
 
@@ -377,6 +379,7 @@
     <div id="top"></div>
 
     <section id="hero-section" class="max-w-7xl mx-auto px-4 sm:px-6 text-center">
+      <!-- الكرة الشبكية 3D المعتمدة -->
       <canvas id="globe"></canvas>
       <div class="floor-glow"></div>
 
@@ -476,10 +479,10 @@
       </div>
     </section>
 
-    <!-- قسم التقييم والتعليق والشريط القابل للسحب باليد -->
+    <!-- قسم التقييم والتعليق بالشريط التفاعلي يمين ويسار -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 py-12 border-t border-white/10 mt-12 reveal-on-scroll">
       
-      <!-- الشريط المتحرك والقابل للتحريك باليد بالكامل -->
+      <!-- الشريط المتحرك والقابل للسحب يمين ويسار بكل سلاسة -->
       <div id="reviews-marquee-container" class="w-full overflow-hidden mb-12 py-4 glass rounded-2xl hidden">
         <div id="reviews-marquee-track" class="animate-marquee gap-6 items-center px-4"></div>
       </div>
@@ -512,7 +515,7 @@
           </label>
         </div>
 
-        <!-- المربع الشامل لاسم المستخدم والتعليق -->
+        <!-- المربع المحدث -->
         <div class="container_chat_bot">
           <div class="container-chat-options">
             <div class="chat">
@@ -535,7 +538,7 @@
 
       </div>
 
-      <!-- اللوحة الإحصائية أسفل التقييم -->
+      <!-- اللوحة الإحصائية -->
       <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
         <div class="glass p-6 rounded-2xl">
           <h4 class="font-mono font-black text-3xl sm:text-4xl text-current tracking-wider">
@@ -767,7 +770,6 @@
   async function fetchLiveStats() {
     let allReviews = JSON.parse(localStorage.getItem('vortx_reviews_data') || '[]');
 
-    // 1. زيادة عداد الزوار وحفظه فورياً محلياً وفي Supabase
     let localVisits = parseInt(localStorage.getItem('vortx_visit_count') || '0', 10) + 1;
     localStorage.setItem('vortx_visit_count', localVisits);
 
@@ -787,7 +789,6 @@
       viewsEl.textContent = localVisits.toLocaleString();
     }
 
-    // 2. دمج التقييمات وعرضها بالشكل الصحيح
     if (supabase) {
       try {
         const { data: dbReviews } = await supabase.from('reviews').select('*').order('created_at', { ascending: false });
@@ -805,7 +806,6 @@
       const totalScore = allReviews.reduce((sum, r) => sum + Number(r.rating || 0), 0);
       const rawAvg = totalScore / allReviews.length;
       
-      // معادلة الأرقام الصحيحة بدون أكسار (5/5 أو 4.8/5)
       const displayScore = (rawAvg % 1 === 0) ? rawAvg.toFixed(0) : rawAvg.toFixed(1);
       
       const ratingEl = document.getElementById('live-rating-avg');
@@ -820,7 +820,6 @@
         countEl.textContent = allReviews.length.toLocaleString();
       }
 
-      // إظهار التعليقات فقط في الشريط الماركي (تصفية التقييمات الخالية)
       const commentsOnly = allReviews.filter(r => r.comment && r.comment.trim().length > 0);
       const marqueeContainer = document.getElementById('reviews-marquee-container');
       const marqueeTrack = document.getElementById('reviews-marquee-track');
@@ -852,7 +851,7 @@
     }
   }
 
-  // إعداد التحكم باللمس والجر للشريط المتحرك والتوقف لمدة 5 ثواني
+  // تحكم مزدوج بالسحب يمين ويسار بالشريط وتثبيته 5 ثواني
   function setupMarqueeInteraction() {
     const marqueeContainer = document.getElementById('reviews-marquee-container');
     const marqueeTrack = document.getElementById('reviews-marquee-track');
@@ -887,8 +886,22 @@
       pauseAndReset();
     });
 
-    marqueeContainer.addEventListener('touchstart', () => { pauseAndReset(); }, { passive: true });
-    marqueeContainer.addEventListener('touchend', () => { pauseAndReset(); }, { passive: true });
+    marqueeContainer.addEventListener('touchstart', (e) => {
+      isDown = true;
+      startX = e.touches[0].pageX - marqueeContainer.offsetLeft;
+      scrollLeft = marqueeContainer.scrollLeft;
+      pauseAndReset();
+    }, { passive: true });
+
+    marqueeContainer.addEventListener('touchend', () => { isDown = false; pauseAndReset(); }, { passive: true });
+
+    marqueeContainer.addEventListener('touchmove', (e) => {
+      if (!isDown) return;
+      const x = e.touches[0].pageX - marqueeContainer.offsetLeft;
+      const walk = (x - startX) * 2;
+      marqueeContainer.scrollLeft = scrollLeft - walk;
+      pauseAndReset();
+    }, { passive: true });
   }
 
   var translations = {
