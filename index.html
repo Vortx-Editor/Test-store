@@ -217,25 +217,23 @@
     text-shadow: 0 2px 4px rgba(0,0,0,0.5);
   }
 
-  /* تصميم النجوم الجديدة Radio Rating */
-  .radio { display: flex; justify-content: center; gap: 10px; margin-bottom: 1.5rem; direction: ltr; }
+  /* النجوم الجديدة */
+  .radio { display: flex; justify-content: center; gap: 12px; margin-bottom: 1.5rem; direction: ltr; }
   .radio > input { position: absolute; appearance: none; opacity: 0; }
-  .radio > label { cursor: pointer; font-size: 28px; position: relative; display: inline-block; transition: transform 0.3s ease; }
-  .radio > label > svg { fill: #555; transition: fill 0.3s ease; }
-  .radio > input:checked ~ label svg { fill: #ff9e0b !important; filter: drop-shadow(0 0 12px rgba(255, 158, 11, 0.8)); }
-  .radio > label:hover, .radio > label:hover ~ label { fill: #ff9e0b; }
-  .radio > label:hover > svg { fill: #ff9e0b; filter: drop-shadow(0 0 15px rgba(255, 158, 11, 0.9)); }
+  .radio > label { cursor: pointer; font-size: 32px; position: relative; display: inline-block; transition: transform 0.3s ease; }
+  .radio > label > svg { fill: #444; transition: fill 0.3s ease; }
+  .radio > input:checked ~ label svg, .radio > label:hover svg, .radio > label:hover ~ label svg { fill: #ff9e0b !important; filter: drop-shadow(0 0 12px rgba(255, 158, 11, 0.8)); }
 
-  /* تصميم مربع التعليق والإرسال الجديد Chatbot UI */
-  .container_chat_bot { display: flex; flex-direction: column; max-width: 450px; width: 100%; margin: 0 auto; }
+  /* المربع الجديد للتعليقات والإرسال */
+  .container_chat_bot { display: flex; flex-direction: column; max-width: 480px; width: 100%; margin: 0 auto; }
   .container_chat_bot .container-chat-options { position: relative; display: flex; background: linear-gradient(to bottom right, #555, #1f1f23, #121215); border-radius: 20px; padding: 2px; overflow: hidden; }
   .container_chat_bot .chat { display: flex; flex-direction: column; background-color: rgba(10, 10, 15, 0.85); border-radius: 18px; width: 100%; overflow: hidden; backdrop-filter: blur(12px); }
   .container_chat_bot .chat .chat-bot { position: relative; display: flex; }
-  .container_chat_bot .chat .chat-bot textarea { background-color: transparent; border: none; width: 100%; height: 80px; color: #ffffff; font-family: 'Inter', 'Cairo', sans-serif; font-size: 13px; font-weight: 500; padding: 14px; resize: none; outline: none; }
+  .container_chat_bot .chat .chat-bot textarea { background-color: transparent; border: none; width: 100%; height: 85px; color: #ffffff; font-family: 'Inter', 'Cairo', sans-serif; font-size: 13px; font-weight: 500; padding: 14px; resize: none; outline: none; }
   .container_chat_bot .chat .chat-bot textarea::placeholder { color: rgba(255, 255, 255, 0.4); }
   .container_chat_bot .chat .options { display: flex; justify-content: flex-end; align-items: center; padding: 8px 12px; border-top: 1px solid rgba(255, 255, 255, 0.05); }
   .container_chat_bot .chat .options .btn-submit { display: flex; padding: 2px; background-image: linear-gradient(to top, #292929, #555555, #292929); border-radius: 10px; box-shadow: inset 0 6px 2px -4px rgba(255, 255, 255, 0.5); cursor: pointer; border: none; outline: none; transition: all 0.15s ease; }
-  .container_chat_bot .chat .options .btn-submit i { width: 32px; height: 32px; padding: 6px; background: rgba(0, 0, 0, 0.2); border-radius: 8px; color: #eab308; display: flex; align-items: center; justify-content: center; }
+  .container_chat_bot .chat .options .btn-submit i { width: 34px; height: 32px; padding: 6px; background: rgba(0, 0, 0, 0.2); border-radius: 8px; color: #eab308; display: flex; align-items: center; justify-content: center; }
   .container_chat_bot .chat .options .btn-submit:hover i { color: #fff; filter: drop-shadow(0 0 8px #eab308); }
   .container_chat_bot .chat .options .btn-submit:active { transform: scale(0.92); }
 
@@ -360,12 +358,10 @@
     <div id="top"></div>
 
     <section id="hero-section" class="max-w-7xl mx-auto px-4 sm:px-6 text-center">
-      
       <canvas id="globe"></canvas>
       <div class="floor-glow"></div>
 
       <div class="relative z-20 flex flex-col items-center justify-center -mt-12 sm:-mt-16 pt-0 pb-28">
-        
         <div class="fade-up-item inline-flex items-center gap-3 px-7 py-2.5 rounded-full text-xs sm:text-sm font-black tracking-widest uppercase glass backdrop-blur-xl shadow-lg border border-white/20 text-white z-30 mb-6" style="animation-delay: 1.4s;">
           <span class="w-2 h-2 rounded-full bg-white/70 animate-ping"></span>
           <span data-i18n="hero-tag">Digital Assets Hub</span>
@@ -461,14 +457,19 @@
       </div>
     </section>
 
-    <!-- قسم التقييم والتعليق الجديد والمربوط بالمكونات المطلوبة -->
+    <!-- قسم التقييم والتعليق والمكان الأخضر فوقه بالضبط -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 py-12 border-t border-white/10 mt-12 reveal-on-scroll">
       
+      <!-- الشريط المتحرك الجديد للتعليقات والنجوم (في المكان الأخضر المطلوب) -->
+      <div id="reviews-marquee-container" class="w-full overflow-hidden mb-12 py-4 glass rounded-2xl hidden">
+        <div id="reviews-marquee-track" class="animate-marquee gap-6 items-center px-4"></div>
+      </div>
+
       <div class="max-w-4xl mx-auto mb-10 p-6 rounded-3xl glass border border-white/10 text-center">
         <h3 class="font-head font-bold text-xl text-yellow-500 mb-2">Leave Your Review & Rating</h3>
         <p class="text-xs opacity-70 mb-6 font-bold">Share your experience with VORTX Studio</p>
 
-        <!-- مكون النجوم الجديدة (Radio Rating) -->
+        <!-- النجوم الجديدة -->
         <div class="radio">
           <input value="5" name="rating" type="radio" id="rating-5" />
           <label title="5 stars" for="rating-5">
@@ -492,7 +493,7 @@
           </label>
         </div>
 
-        <!-- مربع التعليق والإرسال الجديد (Container Chat Bot) بدون الأزرار الزايدة -->
+        <!-- مربع كتابة التعليق والإرسال -->
         <div class="container_chat_bot">
           <div class="container-chat-options">
             <div class="chat">
@@ -514,10 +515,7 @@
 
       </div>
 
-      <div id="reviews-marquee-container" class="w-full overflow-hidden mb-10 py-4 glass rounded-2xl hidden">
-        <div id="reviews-marquee-track" class="animate-marquee gap-6 items-center px-4"></div>
-      </div>
-
+      <!-- اللوحة الإحصائية أسفل التقييم -->
       <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
         <div class="glass p-6 rounded-2xl">
           <h4 class="font-mono font-black text-3xl sm:text-4xl text-current tracking-wider">
@@ -662,7 +660,7 @@
     </div>
   </div>
 
-<!-- دالة التحويل المباشر لـ @wot_5 مع النص الجاهز -->
+<!-- دالة التحويل المباشر لـ @wot_5 -->
 <script>
   window.openTelegramOrder = function(planName, price) {
     const telegramUsername = 'wot_5'; 
@@ -686,7 +684,7 @@
     supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
   }
 
-  // إرسال التقييم الجديد والتحقق من تحديد النجوم
+  // إرسال التقييم والتأكد من تحديد النجوم أولاً
   window.submitUserRating = async function() {
     const ratingRadio = document.querySelector('input[name="rating"]:checked');
     if (!ratingRadio) {
@@ -699,6 +697,7 @@
     const comment = commentEl ? commentEl.value.trim() : '';
 
     if (supabase) {
+      window.showToast('SUBMITTING REVIEW...');
       const { error } = await supabase.from('reviews').insert([{ rating: selectedScore, comment: comment }]);
       if (!error) {
         window.showToast('THANK YOU FOR YOUR REVIEW!');
@@ -715,6 +714,7 @@
     }
   };
 
+  // جلب البيانات، حساب المتوسط الحسابي وتحديث الشريط واللوحة الإحصائية
   async function fetchLiveStats() {
     if (!supabase) return;
     try {
@@ -730,7 +730,7 @@
 
       const { data: reviews } = await supabase.from('reviews').select('*').order('created_at', { ascending: false });
       if (reviews && reviews.length > 0) {
-        const totalScore = reviews.reduce((sum, r) => sum + r.rating, 0);
+        const totalScore = reviews.reduce((sum, r) => sum + Number(r.rating || 0), 0);
         const avgScore = (totalScore / reviews.length).toFixed(1);
         
         const ratingEl = document.getElementById('live-rating-avg');
@@ -750,16 +750,14 @@
         const marqueeTrack = document.getElementById('reviews-marquee-track');
 
         if (commentsWithText.length > 0 && marqueeContainer && marqueeTrack) {
-          let html = '';
           const cardsHtml = commentsWithText.map(r => 
-            `<div class="px-5 py-2.5 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md flex items-center gap-3 shrink-0">
-               <span class="text-yellow-400 font-bold text-xs">★ ${r.rating}</span>
-               <span class="text-xs opacity-90 font-medium">"${r.comment}"</span>
+            `<div class="px-5 py-3 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md flex items-center gap-3 shrink-0 shadow-lg">
+               <span class="text-yellow-400 font-bold text-sm">★ ${r.rating}</span>
+               <span class="text-xs text-white/90 font-medium">"${r.comment}"</span>
              </div>`
           ).join('');
 
-          html = cardsHtml + cardsHtml;
-          marqueeTrack.innerHTML = html;
+          marqueeTrack.innerHTML = cardsHtml + cardsHtml;
           marqueeContainer.classList.remove('hidden');
         }
       }
@@ -1019,7 +1017,7 @@
             var target = parseFloat(counter.dataset.target) || 0, count = 0, speed = Math.max(0.1, target / 60);
             function updateDecimal() {
               count += speed;
-              if (count < target) { counter.textContent = count.toFixed(1); requestAnimationFrame(updateDecimal); } else { counter.textContent = count.toFixed(1); }
+              if (count < target) { counter.textContent = count.toFixed(1); requestAnimationFrame(updateDecimal); } else { counter.textContent = target.toFixed(1); }
             }
             updateDecimal();
           });
