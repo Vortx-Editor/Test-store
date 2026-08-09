@@ -8,8 +8,6 @@
 <link rel="preload" href="https://res.cloudinary.com/eon6wcph/video/upload/v1/VORTX_4K_CLEAN_FULL_kd7uui.mp4" as="video" type="video/mp4">
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<!-- مكتبة بادل للدفع -->
-<script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;800;900&family=Cinzel:wght@700;800;900&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@700;800;900&display=swap" rel="stylesheet">
@@ -187,7 +185,6 @@
   .vx-price-card .list_text { font-size: 0.85rem; color: var(--text-color); font-weight: 600; opacity: 0.9; }
   .vx-price-card .delivery_text { font-size: 0.85rem; font-weight: 800; color: #a855f7; text-align: center; text-transform: uppercase; margin-top: auto; padding-top: 1rem; letter-spacing: 1px; }
   
-  /* تعديل الأزرار الزجاجية الفخمة والفورية */
   .vx-price-card .button-wrap {
     width: 100% !important;
     margin: 1rem 0 0 0 !important;
@@ -460,7 +457,6 @@
         <textarea id="inline-rating-comment" rows="2" class="w-full max-w-xl mx-auto bg-white/5 border border-white/10 rounded-xl p-3 text-xs text-white focus:outline-none mb-4 resize-none block" placeholder="Write your review or comment here..."></textarea>
         <div class="button-wrap max-w-xs mx-auto" onclick="window.submitUserRating()">
           <div class="btn-3d-style"><span class="text-yellow-400 font-bold">Submit Review</span></div>
-          <div class="button-shadow"></div>
         </div>
       </div>
 
@@ -511,69 +507,66 @@
       </div>
       
       <div class="grid lg:grid-cols-3 gap-8 items-stretch">
+        
+        <!-- باقة STARTER -->
         <div class="vx-price-card">
           <div class="card_title__container">
             <span class="card_title" data-i18n="plan-s-title">STARTER</span>
             <div class="card_price" data-i18n="plan-s-price">$150</div>
-            <p class="card_paragraph" data-i18n="tier-starter-desc">Perfect for a simple and professional online presence.</p>
+            <p class="card_paragraph" data-i18n="tier-starter-desc">Ideal for creators & small brands looking for a clean, fast, and high-converting landing page.</p>
           </div>
           <hr class="line" />
           <ul class="card__list">
-            <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-s-f1">1 Landing Page</span></li>
-            <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-s-f2">Up to 4 Sections</span></li>
-            <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-s-f3">Custom Design</span></li>
-            <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-s-f4">Responsive Layout</span></li>
-            <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-s-f5">Basic Animations</span></li>
-            <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-s-f6">1 Revision</span></li>
+            <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-s-f1">1 High-Converting Landing Page</span></li>
+            <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-s-f2">Up to 4 Custom Sections</span></li>
+            <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-s-f3">Fully Responsive & Mobile-Optimized</span></li>
+            <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-s-f4">Smooth Basic Animations</span></li>
+            <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-s-f5">1 Revision Included</span></li>
           </ul>
           <div class="delivery_text" data-i18n="plan-s-del">Delivery: 7 Days</div>
-          <!-- زر زجاجي فخم وواضح لباقة ستارتر -->
-          <div class="button-wrap" onclick="window.openPaddleCheckout('pro_01kzk7znybv12s3bpwbyy82dff', 'STARTER', 150)">
+          <div class="button-wrap" onclick="window.openTelegramOrder('STARTER', 150)">
             <div class="btn-3d-style"><span data-i18n="select-plan">Buy Now</span></div>
           </div>
         </div>
 
+        <!-- باقة PREMIUM -->
         <div class="vx-price-card">
           <div class="card_title__container">
             <span class="card_title" data-i18n="plan-p-title">PREMIUM</span>
             <div class="card_price" data-i18n="plan-p-price">$300</div>
-            <p class="card_paragraph" data-i18n="tier-pro-desc">A more complete and engaging web experience.</p>
+            <p class="card_paragraph" data-i18n="tier-pro-desc">A complete web solution designed to showcase your brand, drive engagement, and convert visitors.</p>
           </div>
           <hr class="line" />
           <ul class="card__list">
-            <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-p-f1">Up to 3 Pages</span></li>
-            <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-p-f2">Up to 8 Sections</span></li>
-            <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-p-f3">Custom Design</span></li>
-            <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-p-f4">Advanced Animations</span></li>
-            <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-p-f5">Social Media Integration</span></li>
-            <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-p-f6">3 Revisions</span></li>
+            <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-p-f1">Up to 3 Custom Web Pages</span></li>
+            <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-p-f2">Up to 8 Designed Sections</span></li>
+            <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-p-f3">Advanced UI/UX & Interactions</span></li>
+            <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-p-f4">Social Media & Channel Integration</span></li>
+            <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-p-f5">3 Revisions Included</span></li>
           </ul>
           <div class="delivery_text" data-i18n="plan-p-del">Delivery: 7–12 Days</div>
-          <!-- زر زجاجي فخم وواضح لباقة بريميوم -->
-          <div class="button-wrap" onclick="window.openPaddleCheckout('pro_01kzk85ccjgaqqh7z07g7vf8pc', 'PREMIUM', 300)">
+          <div class="button-wrap" onclick="window.openTelegramOrder('PREMIUM', 300)">
             <div class="btn-3d-style"><span data-i18n="select-plan">Buy Now</span></div>
           </div>
         </div>
 
+        <!-- باقة ELITE -->
         <div class="vx-price-card">
           <div class="card_title__container">
             <span class="card_title" data-i18n="plan-v-title">ELITE</span>
             <div class="card_price" data-i18n="plan-v-price">$600</div>
-            <p class="card_paragraph" data-i18n="tier-vip-desc">A premium, powerful, and fully customized experience.</p>
+            <p class="card_paragraph" data-i18n="tier-vip-desc">The ultimate bespoke digital experience. Advanced visual effects, tailored animations, and priority treatment.</p>
           </div>
           <hr class="line" />
           <ul class="card__list">
-            <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-v-f1">Up to 6 Pages</span></li>
-            <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-v-f2">Up to 15 Sections</span></li>
-            <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-v-f3">Fully Custom Design</span></li>
-            <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-v-f4">Premium Animations &amp; Effects</span></li>
-            <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-v-f5">Interactive Elements</span></li>
-            <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-v-f6">Social Media Integration</span></li>
-            <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-v-f7">Priority Support</span></li>
+            <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-v-f1">Up to 6 Custom Pages</span></li>
+            <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-v-f2">Up to 15 Dynamic Sections</span></li>
+            <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-v-f3">Bespoke 3D & Advanced VFX Effects</span></li>
+            <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-v-f4">Custom Interactive Elements</span></li>
+            <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-v-f5">Priority Support & Consultation</span></li>
           </ul>
           <div class="delivery_text" data-i18n="plan-v-del">Delivery: 15–20 Days</div>
-          <!-- زر زجاجي فخم وواضح لباقة إيليت -->
-          <div class="button-wrap" onclick="window.openPaddleCheckout('pro_01kzk868sxxh6paastkn08dqc7', 'ELITE', 600)">
+          <div class="button-wrap" onclick="window.openTelegramOrder('ELITE', 600)">
             <div class="btn-3d-style"><span data-i18n="select-plan">Buy Now</span></div>
           </div>
         </div>
@@ -591,47 +584,6 @@
       <div id="cat-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
     </div>
   </section>
-
-  <!-- نافذة إدخال البيانات بعد نجاح الدفع -->
-  <div id="order-modal" class="fixed inset-0 z-[120] flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
-    <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="window.closeOrderModal()"></div>
-    <div class="glass rounded-3xl max-w-md w-full relative z-10 p-6 border border-white/10 shadow-2xl">
-      
-      <div id="order-form-step">
-        <h3 class="font-head font-bold text-2xl text-yellow-400 mb-1">أكمل بيانات طلبك</h3>
-        <p class="text-xs opacity-70 mb-4 font-bold">الباقة المدفوعة: <span id="modal-pkg-name" class="text-white font-mono"></span> (<span id="modal-pkg-price" class="text-yellow-400 font-mono"></span>)</p>
-        <div class="space-y-3 mb-5">
-          <input type="text" id="order-name" placeholder="الاسم الكامل *" class="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-yellow-500/50">
-          <input type="email" id="order-email" placeholder="البريد الإلكتروني *" class="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-yellow-500/50">
-          <input type="tel" id="order-phone" placeholder="رقم الجوال (اختياري)" class="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-yellow-500/50">
-        </div>
-        <div class="button-wrap w-full" onclick="window.processOrderCheckout()" style="cursor: pointer;">
-          <div class="btn-3d-style" style="text-align: center;"><span class="text-yellow-400 font-bold">تأكيد وإرسال</span></div>
-        </div>
-      </div>
-
-      <div id="order-success-step" class="hidden text-center py-4">
-        <div class="text-4xl mb-3 text-emerald-400">✓</div>
-        <h3 class="font-head font-bold text-2xl text-emerald-400 mb-1">تم تأكيد الطلب</h3>
-        <p class="text-xs opacity-80 mb-4">شكراً لك يا <span id="success-name" class="text-white font-bold"></span>!</p>
-        
-        <div class="bg-white/5 border border-white/10 rounded-xl p-3 mb-5">
-          <span class="text-[10px] uppercase font-bold opacity-60 block mb-1">رقم الطلب الخاص بك (ID)</span>
-          <span id="success-order-id" class="text-xl font-mono font-black text-yellow-400 tracking-wider"></span>
-        </div>
-
-        <p class="text-sm text-yellow-400 font-bold mb-5 leading-relaxed bg-yellow-500/10 p-3 rounded-lg border border-yellow-500/20">
-          ⚠️ ضروري جداً: صوّر هذي الشاشة (فيها رقم الطلب) وراسلني على الواتساب أو التليجرام عشان أبدأ في مشروعك فوراً!
-        </p>
-
-        <div class="flex gap-3">
-          <a id="whatsapp-btn" href="#" target="_blank" class="flex-1 py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold text-center transition shadow-lg">واتساب</a>
-          <a id="telegram-btn" href="#" target="_blank" class="flex-1 py-3 px-4 rounded-xl bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold text-center transition shadow-lg">تليجرام</a>
-        </div>
-      </div>
-
-    </div>
-  </div>
 
   <div id="preview-modal" class="fixed inset-0 z-[80] flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
     <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="window.closePreview()"></div>
@@ -656,32 +608,15 @@
     </div>
   </div>
 
-<!-- تفعيل بادل وسكربتات التشغيل -->
+<!-- دالة التحويل المباشر لـ @wot_5 مع النص الإنجليزي الجاهز -->
 <script>
-  Paddle.Initialize({ 
-    token: 'live_2dbe9f64930dd6ded287e7aec21',
-    eventCallback: function(data) {
-      if (data.name === "checkout.completed") {
-        Paddle.Checkout.close();
-        document.getElementById('order-form-step').classList.remove('hidden');
-        document.getElementById('order-success-step').classList.add('hidden');
-        document.getElementById('order-name').value = '';
-        document.getElementById('order-email').value = '';
-        document.getElementById('order-phone').value = '';
-        const modal = document.getElementById('order-modal');
-        if (modal) modal.classList.remove('opacity-0', 'pointer-events-none');
-      }
-    }
-  });
-  
-  window.openPaddleCheckout = function(priceId, planName, planPrice) {
-      currentSelectedPackage = { name: planName, price: planPrice };
-      document.getElementById('modal-pkg-name').textContent = planName;
-      document.getElementById('modal-pkg-price').textContent = '$' + planPrice;
-      
-      Paddle.Checkout.open({
-          items: [{ priceId: priceId, quantity: 1 }]
-      });
+  window.openTelegramOrder = function(planName, price) {
+    const telegramUsername = 'wot_5'; 
+    const message = `Hey VORTX! I want to purchase the ${planName} package ($${price}).`;
+    const encodedMessage = encodeURIComponent(message);
+    const telegramUrl = `https://t.me/${telegramUsername}?text=${encodedMessage}`;
+    
+    window.open(telegramUrl, '_blank');
   };
 </script>
 
@@ -696,57 +631,6 @@
   if (window.supabase) {
     supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
   }
-
-  let currentSelectedPackage = { name: '', price: 0 };
-
-  window.closeOrderModal = function() {
-    const modal = document.getElementById('order-modal');
-    if (modal) modal.classList.add('opacity-0', 'pointer-events-none');
-  };
-
-  window.processOrderCheckout = async function() {
-    const name = document.getElementById('order-name').value.trim();
-    const email = document.getElementById('order-email').value.trim();
-    const phone = document.getElementById('order-phone').value.trim();
-
-    if (!name || !email) {
-      window.showToast('أدخل الاسم والإيميل لاهنت');
-      return;
-    }
-
-    const randomNum = Math.floor(10000 + Math.random() * 90000);
-    const orderId = 'VORT-' + randomNum;
-
-    if (supabase) {
-      const { error } = await supabase.from('orders').insert([{
-        order_id: orderId,
-        customer_name: name,
-        customer_email: email,
-        customer_phone: phone,
-        package_name: currentSelectedPackage.name,
-        amount: currentSelectedPackage.price,
-        payment_status: 'PAID'
-      }]);
-
-      if (error) {
-        window.showToast('خطأ في إرسال الطلب، حاول مرة ثانية');
-        return;
-      }
-    }
-
-    document.getElementById('success-name').textContent = name;
-    document.getElementById('success-order-id').textContent = orderId;
-
-    const msg = `أهلاً! اسمي ${name}، دفعت لباقة ${currentSelectedPackage.name}. رقم طلبي هو ${orderId}. وهذي صورة الإيصال.`;
-    const encodedMsg = encodeURIComponent(msg);
-
-    document.getElementById('whatsapp-btn').href = `https://wa.me/966000000000?text=${encodedMsg}`;
-    document.getElementById('telegram-btn').href = `https://t.me/YOUR_USERNAME?text=${encodedMsg}`;
-
-    document.getElementById('order-form-step').classList.add('hidden');
-    document.getElementById('order-success-step').classList.remove('hidden');
-    fetchLiveStats();
-  };
 
   let selectedScore = 5;
 
@@ -968,13 +852,13 @@
       "cat-sec-title": "Categories", "cat-sec-desc": "Select a category to explore editing packs.", 
       "cat-cc-desc": "Color Corrections", "cat-xml-desc": "Project Files", "cat-shake-desc": "Camera Shake Presets", 
       "footer-right": "Crafted for the bold.", "tiers-sub": "Web Solutions", "tiers-title": "Development Tiers", 
-      "back-btn": "← Back", "tier-starter-desc": "Perfect for a simple and professional online presence.", 
-      "tier-pro-desc": "A more complete and engaging web experience.", "tier-vip-desc": "A premium, powerful, and fully customized experience.", 
+      "back-btn": "← Back", "tier-starter-desc": "Ideal for creators & small brands looking for a clean, fast, and high-converting landing page.", 
+      "tier-pro-desc": "A complete web solution designed to showcase your brand, drive engagement, and convert visitors.", "tier-vip-desc": "The ultimate bespoke digital experience. Advanced visual effects, tailored animations, and priority treatment.", 
       "select-plan": "Buy Now", "cat-view-sub": "Collection", "add-cart": "Add to Cart", "try-demo": "Try Demo", 
       "stat-subscribers": "Satisfied Clients", "stat-views": "Total Visits", "stat-orders": "Quality Guarantee", "stat-rating": "Satisfaction Score",
-      "plan-s-title": "STARTER", "plan-s-price": "$150", "plan-s-f1": "1 Landing Page", "plan-s-f2": "Up to 4 Sections", "plan-s-f3": "Custom Design", "plan-s-f4": "Responsive Layout", "plan-s-f5": "Basic Animations", "plan-s-f6": "1 Revision", "plan-s-del": "Delivery: 7 Days",
-      "plan-p-title": "PREMIUM", "plan-p-price": "$300", "plan-p-f1": "Up to 3 Pages", "plan-p-f2": "Up to 8 Sections", "plan-p-f3": "Custom Design", "plan-p-f4": "Advanced Animations", "plan-p-f5": "Social Media Integration", "plan-p-f6": "3 Revisions", "plan-p-del": "Delivery: 7–12 Days",
-      "plan-v-title": "ELITE", "plan-v-price": "$600", "plan-v-f1": "Up to 6 Pages", "plan-v-f2": "Up to 15 Sections", "plan-v-f3": "Fully Custom Design", "plan-v-f4": "Premium Animations & Effects", "plan-v-f5": "Interactive Elements", "plan-v-f6": "Social Media Integration", "plan-v-f7": "Priority Support", "plan-v-del": "Delivery: 15–20 Days"
+      "plan-s-title": "STARTER", "plan-s-price": "$150", "plan-s-f1": "1 High-Converting Landing Page", "plan-s-f2": "Up to 4 Custom Sections", "plan-s-f3": "Fully Responsive & Mobile-Optimized", "plan-s-f4": "Smooth Basic Animations", "plan-s-f5": "1 Revision Included", "plan-s-del": "Delivery: 7 Days",
+      "plan-p-title": "PREMIUM", "plan-p-price": "$300", "plan-p-f1": "Up to 3 Custom Web Pages", "plan-p-f2": "Up to 8 Designed Sections", "plan-p-f3": "Advanced UI/UX & Interactions", "plan-p-f4": "Social Media & Channel Integration", "plan-p-f5": "3 Revisions Included", "plan-p-del": "Delivery: 7–12 Days",
+      "plan-v-title": "ELITE", "plan-v-price": "$600", "plan-v-f1": "Up to 6 Custom Pages", "plan-v-f2": "Up to 15 Dynamic Sections", "plan-v-f3": "Bespoke 3D & Advanced VFX Effects", "plan-v-f4": "Custom Interactive Elements", "plan-v-f5": "Priority Support & Consultation", "plan-v-del": "Delivery: 15–20 Days"
     },
     ar: { 
       "nav-bundles": "الحزم", "nav-packs": "حزم متميزة", "nav-categories": "الأقسام", 
@@ -984,13 +868,13 @@
       "cat-sec-title": "الأقسام", "cat-sec-desc": "اختر قسماً لاستكشاف حزم التعديل المتاحة.", 
       "cat-cc-desc": "تصحيح الألوان", "cat-xml-desc": "ملفات المشروع", "cat-shake-desc": "إعدادات اهتزاز الكاميرا", 
       "footer-right": "صُنع للمبدعين والجرآء.", "tiers-sub": "حلول الويب", "tiers-title": "مستويات التطوير", 
-      "back-btn": "العودة ←", "tier-starter-desc": "مثالي لحضور رقمي بسيط واحترافي على الإنترنت.", 
-      "tier-pro-desc": "تجربة ويب متكاملة وجذابة تعكس هويتك.", "tier-vip-desc": "تجربة حصرية، قوية، ومصممة خصيصاً بالكامل لك.", 
+      "back-btn": "العودة ←", "tier-starter-desc": "مثالي للمبدعين والعلامات التجارية الصغيرة للحصول على صفحة هبوط سريعة واحترافية.", 
+      "tier-pro-desc": "حل ويب متكامل لمستواك يعرض علامتك التجارية ويزيد التفاعل والعملاء.", "tier-vip-desc": "تجربة رقمية فريدة وخاصة بالكامل. مؤثرات بصرية متقدمة وأولوية في الدعم.", 
       "select-plan": "شراء الآن", "cat-view-sub": "المجموعة", "add-cart": "إضافة للسلة", "try-demo": "تجربة العرض", 
       "stat-subscribers": "عملاء راضون", "stat-views": "إجمالي الزيارات", "stat-orders": "ضمان الجودة", "stat-rating": "معدل التقييم",
-      "plan-s-title": "البداية", "plan-s-price": "150$", "plan-s-f1": "صفحة هبوط واحدة", "plan-s-f2": "حتى 4 أقسام", "plan-s-f3": "تصميم مخصص", "plan-s-f4": "متوافق مع الشاشات", "plan-s-f5": "تحريكات أساسية", "plan-s-f6": "تعديل واحد", "plan-s-del": "التسليم: 7 أيام",
-      "plan-p-title": "المميزة", "plan-p-price": "300$", "plan-p-f1": "حتى 3 صفحات", "plan-p-f2": "حتى 8 أقسام", "plan-p-f3": "تصميم مخصص", "plan-p-f4": "تحريكات متقدمة", "plan-p-f5": "ربط شبكات التواصل", "plan-p-f6": "3 تعديلات", "plan-p-del": "التسليم: 7-12 يوم",
-      "plan-v-title": "النخبة", "plan-v-price": "600$", "plan-v-f1": "حتى 6 صفحات", "plan-v-f2": "حتى 15 قسم", "plan-v-f3": "تصميم خاص بالكامل", "plan-v-f4": "مؤثرات وتحريكات احترافية", "plan-v-f5": "عناصر تفاعلية", "plan-v-f6": "ربط شبكات التواصل", "plan-v-f7": "أولوية الدعم الفني", "plan-v-del": "التسليم: 15-20 يوم"
+      "plan-s-title": "البداية", "plan-s-price": "150$", "plan-s-f1": "صفحة هبوط احترافية عالي التحويل", "plan-s-f2": "حتى 4 أقسام مخصصة", "plan-s-f3": "متوافق بالكامل مع الجوال والشاشات", "plan-s-f4": "تحريكات أساسية سلسة", "plan-s-f5": "تعديل واحد مشمول", "plan-s-del": "التسليم: 7 أيام",
+      "plan-p-title": "المميزة", "plan-p-price": "300$", "plan-p-f1": "حتى 3 صفحات ويب مخصصة", "plan-p-f2": "حتى 8 أقسام مصممة", "plan-p-f3": "واجهة وتفاعلات متقدمة", "plan-p-f4": "ربط شبكات التواصل والقنوات", "plan-p-f5": "3 تعديلات مشمولة", "plan-p-del": "التسليم: 7-12 يوم",
+      "plan-v-title": "النخبة", "plan-v-price": "600$", "plan-v-f1": "حتى 6 صفحات مخصصة", "plan-v-f2": "حتى 15 قسم تفاعلي", "plan-v-f3": "تصميم 3D ومؤثرات بصرية خاصة", "plan-v-f4": "عناصر تفاعلية مخصصة", "plan-v-f5": "أولوية الدعم والاستشارات", "plan-v-del": "التسليم: 15-20 يوم"
     }
   };
   var currentLang = 'en';
