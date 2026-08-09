@@ -228,7 +228,6 @@
   html.light .radio > label > svg { fill: #94a3b8; }
   .radio > input:checked ~ label svg, .radio > label:hover svg, .radio > label:hover ~ label svg { fill: #ff9e0b !important; filter: drop-shadow(0 0 12px rgba(255, 158, 11, 0.8)); }
 
-  /* المربع للوضع النهاري والداكن وزر الإرسال المعدل */
   .container_chat_bot { display: flex; flex-direction: column; max-width: 480px; width: 100%; margin: 0 auto; }
   .container_chat_bot .container-chat-options { position: relative; display: flex; background: linear-gradient(to bottom right, #555, #1f1f23, #121215); border-radius: 20px; padding: 2px; overflow: hidden; }
   html.light .container_chat_bot .container-chat-options { background: linear-gradient(to bottom right, #cbd5e1, #94a3b8, #cbd5e1); }
@@ -246,7 +245,6 @@
   .container_chat_bot .chat .options { display: flex; justify-content: flex-end; align-items: center; padding: 8px 12px; border-top: 1px solid rgba(255, 255, 255, 0.05); }
   html.light .container_chat_bot .chat .options { border-top-color: rgba(148, 163, 184, 0.2); }
   
-  /* تعديل زر الإرسال للوضع الداكن والنهاري ليصبح متناسقاً */
   .container_chat_bot .chat .options .btn-submit { display: flex; padding: 2px; background-image: linear-gradient(to top, #292929, #555555, #292929); border-radius: 10px; box-shadow: inset 0 6px 2px -4px rgba(255, 255, 255, 0.5); cursor: pointer; border: none; outline: none; transition: all 0.15s ease; }
   html.light .container_chat_bot .chat .options .btn-submit { background-image: linear-gradient(to top, #cbd5e1, #64748b, #cbd5e1) !important; box-shadow: 0 4px 12px rgba(100, 116, 139, 0.2) !important; }
   .container_chat_bot .chat .options .btn-submit i { width: 34px; height: 32px; padding: 6px; background: rgba(0, 0, 0, 0.2); border-radius: 8px; color: #eab308; display: flex; align-items: center; justify-content: center; }
@@ -379,11 +377,13 @@
     <div id="top"></div>
 
     <section id="hero-section" class="max-w-7xl mx-auto px-4 sm:px-6 text-center">
-      <!-- الكرة الشبكية 3D المعتمدة -->
+      
+      <!-- إرجاع الكرة الشبكية 3D بالهيدر بتمامها -->
       <canvas id="globe"></canvas>
       <div class="floor-glow"></div>
 
       <div class="relative z-20 flex flex-col items-center justify-center -mt-12 sm:-mt-16 pt-0 pb-28">
+        
         <div class="fade-up-item inline-flex items-center gap-3 px-7 py-2.5 rounded-full text-xs sm:text-sm font-black tracking-widest uppercase glass backdrop-blur-xl shadow-lg border border-white/20 text-white z-30 mb-6" style="animation-delay: 1.4s;">
           <span class="w-2 h-2 rounded-full bg-white/70 animate-ping"></span>
           <span data-i18n="hero-tag">Digital Assets Hub</span>
@@ -479,10 +479,10 @@
       </div>
     </section>
 
-    <!-- قسم التقييم والتعليق بالشريط التفاعلي يمين ويسار -->
+    <!-- قسم التقييم والتعليق -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 py-12 border-t border-white/10 mt-12 reveal-on-scroll">
       
-      <!-- الشريط المتحرك والقابل للسحب يمين ويسار بكل سلاسة -->
+      <!-- الشريط المتحرك القابل للسحب باليد يمين ويسار بحرية -->
       <div id="reviews-marquee-container" class="w-full overflow-hidden mb-12 py-4 glass rounded-2xl hidden">
         <div id="reviews-marquee-track" class="animate-marquee gap-6 items-center px-4"></div>
       </div>
@@ -515,7 +515,7 @@
           </label>
         </div>
 
-        <!-- المربع المحدث -->
+        <!-- المربع الشامل (الاسم في مكان فخم ومتناسق بالأعلى) -->
         <div class="container_chat_bot">
           <div class="container-chat-options">
             <div class="chat">
@@ -706,7 +706,6 @@
     supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
   }
 
-  // الإشعار الفخم المرتكز تماماً بنصف الشاشة
   window.showToast = function (msg) {
     var box = document.getElementById('toast-box');
     if (!box) return;
@@ -720,7 +719,7 @@
     }, 3000);
   };
 
-  // إرسال التقييم المحدث (التعليق والاسم اختياريان، ويتم قبول النجوم فقط)
+  // إرسال التقييم
   window.submitUserRating = async function() {
     const ratingRadio = document.querySelector('input[name="rating"]:checked');
     if (!ratingRadio) {
@@ -751,10 +750,7 @@
       try {
         let payload = { rating: selectedScore, comment: comment };
         if (name) payload.reviewer_name = name;
-        const { error } = await supabase.from('reviews').insert([payload]);
-        if (error && error.message && error.message.includes('reviewer_name')) {
-          await supabase.from('reviews').insert([{ rating: selectedScore, comment: name ? `${name}: ${comment}` : comment }]);
-        }
+        await supabase.from('reviews').insert([payload]);
       } catch(e) {}
     }
 
@@ -766,7 +762,7 @@
     fetchLiveStats();
   };
 
-  // جلب البيانات، دمج التقييمات، حساب متوسط بدون أكسار زائدة، وزيادة الزيارات التراكمية
+  // جلب البيانات، عداد الزوار، وتنسيق الاسم والنجوم فوق التعليق
   async function fetchLiveStats() {
     let allReviews = JSON.parse(localStorage.getItem('vortx_reviews_data') || '[]');
 
@@ -820,6 +816,7 @@
         countEl.textContent = allReviews.length.toLocaleString();
       }
 
+      // إظهار التعليقات فقط بالشريط مع ترتيب النجوم والاسم فوق التعليق بشكل أنيق
       const commentsOnly = allReviews.filter(r => r.comment && r.comment.trim().length > 0);
       const marqueeContainer = document.getElementById('reviews-marquee-container');
       const marqueeTrack = document.getElementById('reviews-marquee-track');
@@ -829,11 +826,11 @@
           const cardsHtml = commentsOnly.map(r => {
             const numStars = Number(r.rating || 5);
             const starsHtml = '★'.repeat(numStars);
-            const nameHtml = r.reviewer_name ? `<span class="text-[11px] text-yellow-400 font-bold block leading-tight">${r.reviewer_name}</span>` : '';
+            const nameHtml = r.reviewer_name ? `<span class="text-xs text-yellow-400 font-bold">${r.reviewer_name}</span>` : '';
             const commentHtml = `<span class="text-xs text-white/90 font-medium block mt-1">"${r.comment}"</span>`;
 
-            return `<div class="px-5 py-3 rounded-2xl border border-yellow-500/30 bg-black/80 backdrop-blur-md flex flex-col justify-center items-start gap-1 shrink-0 shadow-lg min-w-[160px]">
-               <div class="flex items-center gap-2">
+            return `<div class="px-5 py-3 rounded-2xl border border-yellow-500/30 bg-black/80 backdrop-blur-md flex flex-col justify-center items-start gap-1 shrink-0 shadow-lg min-w-[180px]">
+               <div class="flex items-center justify-between w-full gap-3">
                  <span class="text-yellow-400 font-bold text-sm tracking-widest">${starsHtml}</span>
                  ${nameHtml}
                </div>
@@ -851,7 +848,7 @@
     }
   }
 
-  // تحكم مزدوج بالسحب يمين ويسار بالشريط وتثبيته 5 ثواني
+  // دعم السحب والإفلات بكل الاتجاهات (يمين ويسار) والتوقف المؤقت 5 ثواني
   function setupMarqueeInteraction() {
     const marqueeContainer = document.getElementById('reviews-marquee-container');
     const marqueeTrack = document.getElementById('reviews-marquee-track');
@@ -903,6 +900,83 @@
       pauseAndReset();
     }, { passive: true });
   }
+
+  // كود الكرة الشبكية 3D للرسم في الهيدر
+  (function(){
+    var canvas = document.getElementById('globe');
+    if(!canvas) return;
+    var ctx = canvas.getContext('2d');
+    var W, H, R, DPR = Math.min(window.devicePixelRatio||1, 2);
+    function resize(){
+      var base = Math.min(window.innerWidth, window.innerHeight);
+      R = base * 0.42; 
+      var size = R * 2.4;
+      canvas.style.width = size + 'px'; canvas.style.height = size + 'px';
+      canvas.width = size * DPR; canvas.height = size * DPR;
+      W = canvas.width; H = canvas.height;
+    }
+    resize(); window.addEventListener('resize', resize);
+    var N = 620;
+    var pts = [];
+    for(var i=0;i<N;i++){
+      var phi = Math.acos(1 - 2*(i+0.5)/N);
+      var theta = Math.PI*(1+Math.sqrt(5))*i;
+      pts.push({ x:Math.sin(phi)*Math.cos(theta), y:Math.sin(phi)*Math.sin(theta), z:Math.cos(phi) });
+    }
+    var rings = [];
+    [1.0, 0.72, 0.46].forEach(function(rr, idx){
+      var rp = [];
+      var tilt = (idx*0.5 + 0.3);
+      for(var a=0;a<Math.PI*2;a+=0.13){ rp.push({ x:Math.cos(a)*rr, y:Math.sin(a)*Math.sin(tilt)*rr, z:Math.sin(a)*Math.cos(tilt)*rr }); }
+      rings.push(rp);
+    });
+    var rot = 0;
+    function rotY(p, s, c){ return {x:p.x*c + p.z*s, y:p.y, z:-p.x*s + p.z*c}; }
+    function rotX(p, s, c){ return {x:p.x, y:p.y*c - p.z*s, z:p.y*s + p.z*c}; }
+    var tiltS = Math.sin(-0.35), tiltC = Math.cos(-0.35);
+    function draw(){
+      rot += 0.0007; 
+      var s = Math.sin(rot), c = Math.cos(rot);
+      ctx.clearRect(0,0,W,H); ctx.save(); ctx.translate(W/2, H/2);
+      var scale = R * DPR;
+      var rootStyles = getComputedStyle(document.documentElement);
+      var rgbLine = rootStyles.getPropertyValue('--globe-line').trim() || '205,210,200';
+      var rgbRing = rootStyles.getPropertyValue('--globe-ring').trim() || '190,195,185';
+      var rgbPoint = rootStyles.getPropertyValue('--globe-point').trim() || '233,236,228';
+      function proj(p){
+        var q = rotY(p, s, c); q = rotX(q, tiltS, tiltC);
+        var persp = 1.6 / (1.6 - q.z*0.55);
+        return { X:q.x*scale*persp, Y:q.y*scale*persp, z:q.z, persp: persp };
+      }
+      var sp = pts.map(proj);
+      ctx.lineWidth = 0.65*DPR;
+      for(var i=0;i<sp.length;i++){
+        var a = sp[i];
+        for(var j=i+1;j<i+9 && j<sp.length;j++){
+          var b = sp[j];
+          var dx=a.X-b.X, dy=a.Y-b.Y; var d2 = dx*dx+dy*dy;
+          if(d2 < (scale*0.185)*(scale*0.185)){
+            var depth = (a.z+b.z)/2;
+            var alpha = Math.max(0, (depth+1)/2) * 0.42;
+            ctx.strokeStyle = 'rgba('+rgbLine+','+alpha+')';
+            ctx.beginPath(); ctx.moveTo(a.X,a.Y); ctx.lineTo(b.X,b.Y); ctx.stroke();
+          }
+        }
+      }
+      rings.forEach(function(rp){
+        var proj2 = rp.map(proj); ctx.beginPath();
+        proj2.forEach(function(p,i) { i?ctx.lineTo(p.X,p.Y):ctx.moveTo(p.X,p.Y) });
+        ctx.closePath(); ctx.strokeStyle='rgba('+rgbRing+',.2)'; ctx.lineWidth=0.9*DPR; ctx.stroke();
+      });
+      for(var k=0; k<sp.length; k++){
+        var p = sp[k]; var depth = (p.z+1)/2; var r = (0.7 + depth*1.7) * DPR;
+        ctx.beginPath(); ctx.arc(p.X, p.Y, r, 0, 7);
+        ctx.fillStyle = 'rgba('+rgbPoint+','+(0.32 + depth*0.65)+')'; ctx.fill();
+      }
+      ctx.restore(); requestAnimationFrame(draw);
+    }
+    draw();
+  })();
 
   var translations = {
     en: { 
