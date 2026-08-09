@@ -8,7 +8,7 @@
 <link rel="preload" href="https://res.cloudinary.com/eon6wcph/video/upload/v1/VORTX_4K_CLEAN_FULL_kd7uui.mp4" as="video" type="video/mp4">
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<!-- مكتبة بادل -->
+<!-- مكتبة بادل للدفع -->
 <script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -492,8 +492,8 @@
           </ul>
           <div class="delivery_text" data-i18n="plan-s-del">Delivery: 7 Days</div>
           <div class="p-[2px] rounded-full bg-gradient-to-r from-yellow-500/50 via-purple-500/50 to-yellow-500/50 mt-4 shadow-lg hover:shadow-yellow-500/20 transition">
-            <!-- ربط زر ستارتر ببادل -->
-            <div class="button-wrap w-full m-0" onclick="window.openPaddleCheckout('pro_01kzk7znybv12s3bpwbyy82dff')">
+            <!-- زر ستارتر مربوط ببادل -->
+            <div class="button-wrap w-full m-0" onclick="window.openPaddleCheckout('pro_01kzk7znybv12s3bpwbyy82dff', 'STARTER', 150)">
               <div class="btn-3d-style"><span data-i18n="select-plan">Buy Now</span></div>
               <div class="button-shadow"></div>
             </div>
@@ -517,8 +517,8 @@
           </ul>
           <div class="delivery_text" data-i18n="plan-p-del">Delivery: 7–12 Days</div>
           <div class="p-[2px] rounded-full bg-gradient-to-r from-yellow-500/50 via-purple-500/50 to-yellow-500/50 mt-4 shadow-lg hover:shadow-yellow-500/20 transition">
-            <!-- ربط زر بريميوم ببادل -->
-            <div class="button-wrap w-full m-0" onclick="window.openPaddleCheckout('pro_01kzk85ccjgaqqh7z07g7vf8pc')">
+            <!-- زر بريميوم مربوط ببادل -->
+            <div class="button-wrap w-full m-0" onclick="window.openPaddleCheckout('pro_01kzk85ccjgaqqh7z07g7vf8pc', 'PREMIUM', 300)">
               <div class="btn-3d-style"><span data-i18n="select-plan">Buy Now</span></div>
               <div class="button-shadow"></div>
             </div>
@@ -543,8 +543,8 @@
           </ul>
           <div class="delivery_text" data-i18n="plan-v-del">Delivery: 15–20 Days</div>
           <div class="p-[2px] rounded-full bg-gradient-to-r from-yellow-500/50 via-purple-500/50 to-yellow-500/50 mt-4 shadow-lg hover:shadow-yellow-500/20 transition">
-            <!-- ربط زر إيليت ببادل -->
-            <div class="button-wrap w-full m-0" onclick="window.openPaddleCheckout('pro_01kzk868sxxh6paastkn08dqc7')">
+            <!-- زر إيليت مربوط ببادل -->
+            <div class="button-wrap w-full m-0" onclick="window.openPaddleCheckout('pro_01kzk868sxxh6paastkn08dqc7', 'ELITE', 600)">
               <div class="btn-3d-style"><span data-i18n="select-plan">Buy Now</span></div>
               <div class="button-shadow"></div>
             </div>
@@ -565,36 +565,48 @@
     </div>
   </section>
 
+  <!-- المودال الجديد اللي يفتح بعد نجاح الدفع -->
   <div id="order-modal" class="fixed inset-0 z-[120] flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
     <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="window.closeOrderModal()"></div>
     <div class="glass rounded-3xl max-w-md w-full relative z-10 p-6 border border-white/10 shadow-2xl">
+      
+      <!-- خطوة إدخال البيانات -->
       <div id="order-form-step">
-        <h3 class="font-head font-bold text-2xl text-yellow-400 mb-1">Complete Your Order</h3>
-        <p class="text-xs opacity-70 mb-4 font-bold">Selected Package: <span id="modal-pkg-name" class="text-white font-mono"></span> (<span id="modal-pkg-price" class="text-yellow-400 font-mono"></span>)</p>
+        <h3 class="font-head font-bold text-2xl text-yellow-400 mb-1">أكمل بيانات طلبك</h3>
+        <p class="text-xs opacity-70 mb-4 font-bold">الباقة المدفوعة: <span id="modal-pkg-name" class="text-white font-mono"></span> (<span id="modal-pkg-price" class="text-yellow-400 font-mono"></span>)</p>
         <div class="space-y-3 mb-5">
-          <input type="text" id="order-name" placeholder="Full Name *" class="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-yellow-500/50">
-          <input type="email" id="order-email" placeholder="Email Address *" class="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-yellow-500/50">
-          <input type="tel" id="order-phone" placeholder="Phone Number (Optional)" class="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-yellow-500/50">
+          <input type="text" id="order-name" placeholder="الاسم الكامل *" class="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-yellow-500/50">
+          <input type="email" id="order-email" placeholder="البريد الإلكتروني *" class="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-yellow-500/50">
+          <input type="tel" id="order-phone" placeholder="رقم الجوال (اختياري)" class="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-yellow-500/50">
         </div>
         <div class="button-wrap w-full" onclick="window.processOrderCheckout()">
-          <div class="btn-3d-style"><span class="text-yellow-400 font-bold">Continue to Payment</span></div>
+          <div class="btn-3d-style"><span class="text-yellow-400 font-bold">تأكيد وإرسال</span></div>
           <div class="button-shadow"></div>
         </div>
       </div>
+
+      <!-- خطوة النجاح وتصوير الشاشة -->
       <div id="order-success-step" class="hidden text-center py-4">
         <div class="text-4xl mb-3 text-emerald-400">✓</div>
-        <h3 class="font-head font-bold text-2xl text-emerald-400 mb-1">PAYMENT SUCCESSFUL</h3>
-        <p class="text-xs opacity-80 mb-4">Thank you, <span id="success-name" class="text-white font-bold"></span>! Your order has been received successfully.</p>
+        <h3 class="font-head font-bold text-2xl text-emerald-400 mb-1">تم تأكيد الطلب</h3>
+        <p class="text-xs opacity-80 mb-4">شكراً لك يا <span id="success-name" class="text-white font-bold"></span>!</p>
+        
         <div class="bg-white/5 border border-white/10 rounded-xl p-3 mb-5">
-          <span class="text-[10px] uppercase font-bold opacity-60 block mb-1">Your Unique Order ID</span>
+          <span class="text-[10px] uppercase font-bold opacity-60 block mb-1">رقم الطلب الخاص بك (ID)</span>
           <span id="success-order-id" class="text-xl font-mono font-black text-yellow-400 tracking-wider"></span>
         </div>
-        <p class="text-[11px] opacity-70 mb-5 leading-relaxed">Please keep your Order ID and use it when contacting us to start your project.</p>
+
+        <p class="text-sm text-yellow-400 font-bold mb-5 leading-relaxed bg-yellow-500/10 p-3 rounded-lg border border-yellow-500/20">
+          ⚠️ ضروري جداً: صوّر هذي الشاشة (فيها رقم الطلب) وراسلني على الواتساب أو التليجرام عشان أبدأ في مشروعك فوراً!
+        </p>
+
         <div class="flex gap-3">
-          <a id="whatsapp-btn" href="#" target="_blank" class="flex-1 py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold text-center transition shadow-lg">WhatsApp</a>
-          <a id="telegram-btn" href="#" target="_blank" class="flex-1 py-3 px-4 rounded-xl bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold text-center transition shadow-lg">Telegram</a>
+          <!-- عدل الأصفار واليوزر هنا برقمك ويوزرك -->
+          <a id="whatsapp-btn" href="#" target="_blank" class="flex-1 py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold text-center transition shadow-lg">واتساب</a>
+          <a id="telegram-btn" href="#" target="_blank" class="flex-1 py-3 px-4 rounded-xl bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold text-center transition shadow-lg">تليجرام</a>
         </div>
       </div>
+
     </div>
   </div>
 
@@ -622,11 +634,29 @@
     </div>
   </div>
 
-<!-- كود بادل الأساسي -->
+<!-- كود بادل وتفعيل الطلبات -->
 <script>
-  Paddle.Initialize({ token: 'حط_توكن_بادل_حقك_هنا' });
+  Paddle.Initialize({ 
+    token: 'live_2dbe9f64930dd6ded287e7aec21',
+    eventCallback: function(data) {
+      if (data.name === "checkout.completed") {
+        Paddle.Checkout.close();
+        document.getElementById('order-form-step').classList.remove('hidden');
+        document.getElementById('order-success-step').classList.add('hidden');
+        document.getElementById('order-name').value = '';
+        document.getElementById('order-email').value = '';
+        document.getElementById('order-phone').value = '';
+        const modal = document.getElementById('order-modal');
+        if (modal) modal.classList.remove('opacity-0', 'pointer-events-none');
+      }
+    }
+  });
   
-  window.openPaddleCheckout = function(priceId) {
+  window.openPaddleCheckout = function(priceId, planName, planPrice) {
+      currentSelectedPackage = { name: planName, price: planPrice };
+      document.getElementById('modal-pkg-name').textContent = planName;
+      document.getElementById('modal-pkg-price').textContent = '$' + planPrice;
+      
       Paddle.Checkout.open({
           items: [{ priceId: priceId, quantity: 1 }]
       });
@@ -647,19 +677,6 @@
 
   let currentSelectedPackage = { name: '', price: 0 };
 
-  window.openOrderModal = function(name, price) {
-    currentSelectedPackage = { name, price };
-    document.getElementById('modal-pkg-name').textContent = name;
-    document.getElementById('modal-pkg-price').textContent = '$' + price;
-    document.getElementById('order-form-step').classList.remove('hidden');
-    document.getElementById('order-success-step').classList.add('hidden');
-    document.getElementById('order-name').value = '';
-    document.getElementById('order-email').value = '';
-    document.getElementById('order-phone').value = '';
-    const modal = document.getElementById('order-modal');
-    if (modal) modal.classList.remove('opacity-0', 'pointer-events-none');
-  };
-
   window.closeOrderModal = function() {
     const modal = document.getElementById('order-modal');
     if (modal) modal.classList.add('opacity-0', 'pointer-events-none');
@@ -671,7 +688,7 @@
     const phone = document.getElementById('order-phone').value.trim();
 
     if (!name || !email) {
-      window.showToast('PLEASE ENTER NAME & EMAIL');
+      window.showToast('أدخل الاسم والإيميل لاهنت');
       return;
     }
 
@@ -690,7 +707,7 @@
       }]);
 
       if (error) {
-        window.showToast('ORDER ERROR, TRY AGAIN');
+        window.showToast('خطأ في إرسال الطلب، حاول مرة ثانية');
         return;
       }
     }
@@ -698,11 +715,12 @@
     document.getElementById('success-name').textContent = name;
     document.getElementById('success-order-id').textContent = orderId;
 
-    const msg = `Hi! My name is ${name}. I purchased the ${currentSelectedPackage.name} package. My Order ID is ${orderId}. I would like to start my project.`;
+    const msg = `أهلاً! اسمي ${name}، دفعت لباقة ${currentSelectedPackage.name}. رقم طلبي هو ${orderId}. وهذي صورة الإيصال.`;
     const encodedMsg = encodeURIComponent(msg);
 
-    document.getElementById('whatsapp-btn').href = `https://wa.me/?text=${encodedMsg}`;
-    document.getElementById('telegram-btn').href = `https://t.me/share/url?url=&text=${encodedMsg}`;
+    // حط رقم الواتساب ويوزر التليجرام حقك هنا بدل الأصفار واليوزر
+    document.getElementById('whatsapp-btn').href = `https://wa.me/966000000000?text=${encodedMsg}`;
+    document.getElementById('telegram-btn').href = `https://t.me/YOUR_USERNAME?text=${encodedMsg}`;
 
     document.getElementById('order-form-step').classList.add('hidden');
     document.getElementById('order-success-step').classList.remove('hidden');
