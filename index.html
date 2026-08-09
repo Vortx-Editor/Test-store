@@ -187,6 +187,42 @@
   .vx-price-card .list_text { font-size: 0.85rem; color: var(--text-color); font-weight: 600; opacity: 0.9; }
   .vx-price-card .delivery_text { font-size: 0.85rem; font-weight: 800; color: #a855f7; text-align: center; text-transform: uppercase; margin-top: auto; padding-top: 1rem; letter-spacing: 1px; }
   
+  /* تعديل الأزرار الزجاجية الفخمة والفورية */
+  .vx-price-card .button-wrap {
+    width: 100% !important;
+    margin: 1rem 0 0 0 !important;
+    cursor: pointer;
+    transition: transform 0.1s ease !important;
+  }
+  .vx-price-card .button-wrap:active {
+    transform: scale(0.97);
+  }
+  .vx-price-card .btn-3d-style {
+    background: rgba(255, 255, 255, 0.08) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-radius: 999px !important;
+    padding: 0.85rem 1.5rem !important;
+    text-align: center;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.2) !important;
+    transition: all 0.2s ease !important;
+  }
+  .vx-price-card .btn-3d-style:hover {
+    background: rgba(255, 255, 255, 0.15) !important;
+    border-color: rgba(255, 255, 255, 0.4) !important;
+  }
+  .vx-price-card .btn-3d-style span {
+    color: #eab308 !important;
+    font-weight: 800 !important;
+    font-size: 0.95rem;
+    letter-spacing: 0.05em;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+  }
+  .vx-price-card .button-shadow {
+    display: none !important;
+  }
+
   html.light .vx-price-card { background: rgba(255, 255, 255, 0.8); border: 1px solid rgba(203, 213, 225, 0.4); box-shadow: 0 15px 35px -10px rgba(100, 116, 139, 0.08); }
   html.light .vx-price-card .card_title { color: #17131F; }
   html.light .vx-price-card .card_price { color: #d97706; }
@@ -471,7 +507,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
       <div class="flex items-center justify-between mb-12">
         <div class="text-left"><span data-i18n="tiers-sub" class="text-xs tracking-widest uppercase font-bold text-current opacity-70">Web Solutions</span><h2 data-i18n="tiers-title" class="font-head font-bold text-4xl mt-3">Development Tiers</h2></div>
-        <div class="button-wrap" onclick="window.backToHome()"><div class="btn-3d-style"><span data-i18n="back-btn">← Back</span></div><div class="button-shadow"></div></div>
+        <div class="button-wrap" onclick="window.backToHome()"><div class="btn-3d-style"><span data-i18n="back-btn">← Back</span></div></div>
       </div>
       
       <div class="grid lg:grid-cols-3 gap-8 items-stretch">
@@ -491,12 +527,9 @@
             <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-s-f6">1 Revision</span></li>
           </ul>
           <div class="delivery_text" data-i18n="plan-s-del">Delivery: 7 Days</div>
-          <div class="p-[2px] rounded-full bg-gradient-to-r from-yellow-500/50 via-purple-500/50 to-yellow-500/50 mt-4 shadow-lg hover:shadow-yellow-500/20 transition">
-            <!-- زر ستارتر مربوط ببادل -->
-            <div class="button-wrap w-full m-0" onclick="window.openPaddleCheckout('pro_01kzk7znybv12s3bpwbyy82dff', 'STARTER', 150)">
-              <div class="btn-3d-style"><span data-i18n="select-plan">Buy Now</span></div>
-              <div class="button-shadow"></div>
-            </div>
+          <!-- زر زجاجي فخم وواضح لباقة ستارتر -->
+          <div class="button-wrap" onclick="window.openPaddleCheckout('pro_01kzk7znybv12s3bpwbyy82dff', 'STARTER', 150)">
+            <div class="btn-3d-style"><span data-i18n="select-plan">Buy Now</span></div>
           </div>
         </div>
 
@@ -516,12 +549,9 @@
             <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-p-f6">3 Revisions</span></li>
           </ul>
           <div class="delivery_text" data-i18n="plan-p-del">Delivery: 7–12 Days</div>
-          <div class="p-[2px] rounded-full bg-gradient-to-r from-yellow-500/50 via-purple-500/50 to-yellow-500/50 mt-4 shadow-lg hover:shadow-yellow-500/20 transition">
-            <!-- زر بريميوم مربوط ببادل -->
-            <div class="button-wrap w-full m-0" onclick="window.openPaddleCheckout('pro_01kzk85ccjgaqqh7z07g7vf8pc', 'PREMIUM', 300)">
-              <div class="btn-3d-style"><span data-i18n="select-plan">Buy Now</span></div>
-              <div class="button-shadow"></div>
-            </div>
+          <!-- زر زجاجي فخم وواضح لباقة بريميوم -->
+          <div class="button-wrap" onclick="window.openPaddleCheckout('pro_01kzk85ccjgaqqh7z07g7vf8pc', 'PREMIUM', 300)">
+            <div class="btn-3d-style"><span data-i18n="select-plan">Buy Now</span></div>
           </div>
         </div>
 
@@ -542,12 +572,9 @@
             <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-v-f7">Priority Support</span></li>
           </ul>
           <div class="delivery_text" data-i18n="plan-v-del">Delivery: 15–20 Days</div>
-          <div class="p-[2px] rounded-full bg-gradient-to-r from-yellow-500/50 via-purple-500/50 to-yellow-500/50 mt-4 shadow-lg hover:shadow-yellow-500/20 transition">
-            <!-- زر إيليت مربوط ببادل -->
-            <div class="button-wrap w-full m-0" onclick="window.openPaddleCheckout('pro_01kzk868sxxh6paastkn08dqc7', 'ELITE', 600)">
-              <div class="btn-3d-style"><span data-i18n="select-plan">Buy Now</span></div>
-              <div class="button-shadow"></div>
-            </div>
+          <!-- زر زجاجي فخم وواضح لباقة إيليت -->
+          <div class="button-wrap" onclick="window.openPaddleCheckout('pro_01kzk868sxxh6paastkn08dqc7', 'ELITE', 600)">
+            <div class="btn-3d-style"><span data-i18n="select-plan">Buy Now</span></div>
           </div>
         </div>
         
@@ -559,18 +586,17 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
       <div class="flex items-center justify-between mb-12">
         <div><span data-i18n="cat-view-sub" class="text-xs tracking-widest uppercase font-bold text-current opacity-70" data-i18n-sub="collection">Collection</span><h2 id="cat-title" class="font-head font-bold text-4xl mt-3 force-eng">CC</h2></div>
-        <div class="button-wrap" onclick="window.backToHome()"><div class="btn-3d-style"><span data-i18n="back-btn">← Back</span></div><div class="button-shadow"></div></div>
+        <div class="button-wrap" onclick="window.backToHome()"><div class="btn-3d-style"><span data-i18n="back-btn">← Back</span></div></div>
       </div>
       <div id="cat-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
     </div>
   </section>
 
-  <!-- المودال الجديد اللي يفتح بعد نجاح الدفع -->
+  <!-- نافذة إدخال البيانات بعد نجاح الدفع -->
   <div id="order-modal" class="fixed inset-0 z-[120] flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
     <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="window.closeOrderModal()"></div>
     <div class="glass rounded-3xl max-w-md w-full relative z-10 p-6 border border-white/10 shadow-2xl">
       
-      <!-- خطوة إدخال البيانات -->
       <div id="order-form-step">
         <h3 class="font-head font-bold text-2xl text-yellow-400 mb-1">أكمل بيانات طلبك</h3>
         <p class="text-xs opacity-70 mb-4 font-bold">الباقة المدفوعة: <span id="modal-pkg-name" class="text-white font-mono"></span> (<span id="modal-pkg-price" class="text-yellow-400 font-mono"></span>)</p>
@@ -579,13 +605,11 @@
           <input type="email" id="order-email" placeholder="البريد الإلكتروني *" class="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-yellow-500/50">
           <input type="tel" id="order-phone" placeholder="رقم الجوال (اختياري)" class="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-yellow-500/50">
         </div>
-        <div class="button-wrap w-full" onclick="window.processOrderCheckout()">
-          <div class="btn-3d-style"><span class="text-yellow-400 font-bold">تأكيد وإرسال</span></div>
-          <div class="button-shadow"></div>
+        <div class="button-wrap w-full" onclick="window.processOrderCheckout()" style="cursor: pointer;">
+          <div class="btn-3d-style" style="text-align: center;"><span class="text-yellow-400 font-bold">تأكيد وإرسال</span></div>
         </div>
       </div>
 
-      <!-- خطوة النجاح وتصوير الشاشة -->
       <div id="order-success-step" class="hidden text-center py-4">
         <div class="text-4xl mb-3 text-emerald-400">✓</div>
         <h3 class="font-head font-bold text-2xl text-emerald-400 mb-1">تم تأكيد الطلب</h3>
@@ -601,7 +625,6 @@
         </p>
 
         <div class="flex gap-3">
-          <!-- عدل الأصفار واليوزر هنا برقمك ويوزرك -->
           <a id="whatsapp-btn" href="#" target="_blank" class="flex-1 py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold text-center transition shadow-lg">واتساب</a>
           <a id="telegram-btn" href="#" target="_blank" class="flex-1 py-3 px-4 rounded-xl bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold text-center transition shadow-lg">تليجرام</a>
         </div>
@@ -616,8 +639,8 @@
       <span id="preview-tag" class="text-[10px] font-bold uppercase text-current opacity-70 force-eng">TAG</span>
       <h3 id="preview-title" class="font-head font-bold text-2xl mt-1 mb-6 force-eng">TITLE</h3>
       <div class="flex gap-4">
-        <div class="button-wrap flex-1" onclick="window.showToast('ADDED TO CART'); window.closePreview();"><div class="btn-3d-style"><span data-i18n="add-cart">Add to Cart</span></div><div class="button-shadow"></div></div>
-        <div class="button-wrap flex-1" onclick="window.showToast('DOWNLOADING DEMO...')"><div class="btn-3d-style"><span data-i18n="try-demo">Try Demo</span></div><div class="button-shadow"></div></div>
+        <div class="button-wrap flex-1" onclick="window.showToast('ADDED TO CART'); window.closePreview();"><div class="btn-3d-style"><span data-i18n="add-cart">Add to Cart</span></div></div>
+        <div class="button-wrap flex-1" onclick="window.showToast('DOWNLOADING DEMO...')"><div class="btn-3d-style"><span data-i18n="try-demo">Try Demo</span></div></div>
       </div>
     </div>
   </div>
@@ -629,12 +652,11 @@
       <p class="text-sm opacity-70 mb-6 font-bold">Empower the evolution of digital assets.</p>
       <div class="button-wrap w-full" onclick="window.showToast('REDIRECTING TO PAYMENT...'); window.closeSupportModal();">
         <div class="btn-3d-style"><span class="text-yellow-400 font-bold">Contribute</span></div>
-        <div class="button-shadow"></div>
       </div>
     </div>
   </div>
 
-<!-- كود بادل وتفعيل الطلبات -->
+<!-- تفعيل بادل وسكربتات التشغيل -->
 <script>
   Paddle.Initialize({ 
     token: 'live_2dbe9f64930dd6ded287e7aec21',
@@ -718,7 +740,6 @@
     const msg = `أهلاً! اسمي ${name}، دفعت لباقة ${currentSelectedPackage.name}. رقم طلبي هو ${orderId}. وهذي صورة الإيصال.`;
     const encodedMsg = encodeURIComponent(msg);
 
-    // حط رقم الواتساب ويوزر التليجرام حقك هنا بدل الأصفار واليوزر
     document.getElementById('whatsapp-btn').href = `https://wa.me/966000000000?text=${encodedMsg}`;
     document.getElementById('telegram-btn').href = `https://t.me/YOUR_USERNAME?text=${encodedMsg}`;
 
