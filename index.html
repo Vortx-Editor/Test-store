@@ -136,9 +136,7 @@
   html.light .tab-btn:hover { background: rgba(100, 116, 139, 0.05); }
   .tab-btn.active { background: linear-gradient(135deg, #eab308 0%, #ca8a04 100%); color: #050505 !important; opacity: 1; border-color: rgba(255,255,255,0.4); box-shadow: 0 4px 15px rgba(234, 179, 8, 0.4), inset 0 2px 4px rgba(255,255,255,0.5); transform: scale(1.02); }
   html.light .tab-btn.active { background: linear-gradient(135deg, #475569 0%, #1e293b 100%); color: #ffffff !important; border-color: rgba(148, 163, 184, 0.4); box-shadow: 0 4px 15px rgba(100, 116, 139, 0.3), inset 0 2px 4px rgba(255,255,255,0.2); }
-  .tier-card { position: relative; display: flex; flex-direction: column; justify-content: space-between; gap: 1.25rem; padding: 2rem; width: 100%; background-color: var(--card-bg); backdrop-filter: blur(16px); border: 1px solid var(--card-border); border-radius: 1.75rem; box-shadow: 0 10px 30px rgba(0,0,0,0.2); overflow: hidden; transition: transform .4s ease; }
-  .golden-bundle-card { position: relative; border-radius: 2.5rem; background: linear-gradient(135deg, rgba(234,179,8,.08) 0%, rgba(255,255,255,.01) 100%); backdrop-filter: blur(24px); border: 1px solid rgba(234,179,8,.25); box-shadow: 0 25px 50px -12px rgba(234,179,8,.08); overflow: hidden; }
-  .glass { background: var(--card-bg); backdrop-filter: blur(16px); border: 1px solid var(--card-border); }
+  
   .cat-card-glass { background: var(--card-bg); backdrop-filter: blur(16px); border: 1px solid var(--card-border); border-radius: 1.75rem; padding: 1.75rem 2rem; cursor: pointer; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
   .cat-card-glass:hover { transform: translateY(-5px); }
   .view { transition: opacity .4s ease; opacity: 1; display: block; }
@@ -164,10 +162,31 @@
   html.light #vx-percent { color: #17131F; }
   header .glass { border-bottom: 1px solid rgba(255,255,255,0.05); }
   html.light header .glass { border-bottom: 1px solid rgba(100, 116, 139, 0.1); background: rgba(255,255,255,0.85) !important; }
-
   @keyframes marquee { 0% { transform: translateX(-50%); } 100% { transform: translateX(0%); } }
   .animate-marquee { display: flex; width: max-content; animation: marquee 30s linear infinite; }
   .animate-marquee:hover { animation-play-state: paused; }
+
+  .vx-price-card { position: relative; display: flex; flex-direction: column; gap: 1rem; padding: 2rem; width: 100%; height: 100%; background: var(--card-bg); backdrop-filter: blur(16px); border: 1px solid var(--card-border); border-radius: 1.75rem; box-shadow: 0 10px 30px rgba(0,0,0,0.2); z-index: 1; transition: transform .4s ease; }
+  .vx-price-card:hover { transform: translateY(-5px); }
+  .vx-price-card .card_title { font-size: 1.5rem; font-family: 'Cinzel', serif; font-weight: 800; color: var(--text-color); letter-spacing: 1px; }
+  .vx-price-card .card_price { font-size: 2.5rem; font-family: 'JetBrains Mono', monospace; font-weight: 900; color: #eab308; margin-top: 0.5rem; }
+  .vx-price-card .card_paragraph { margin-top: 0.5rem; width: 100%; font-size: 0.85rem; color: var(--subtext-color); line-height: 1.5; font-weight: 600; }
+  .vx-price-card .line { width: 100%; height: 1px; background-color: var(--card-border); border: none; margin: 0.5rem 0; }
+  .vx-price-card .card__list { display: flex; flex-direction: column; gap: 0.75rem; flex-grow: 1; }
+  .vx-price-card .card__list_item { display: flex; align-items: start; gap: 0.75rem; }
+  .vx-price-card .check { display: flex; justify-content: center; align-items: center; width: 1.25rem; height: 1.25rem; background-color: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 50%; flex-shrink: 0; margin-top: 0.15rem; }
+  .vx-price-card .check_svg { width: 0.75rem; height: 0.75rem; fill: #eab308; }
+  .vx-price-card .list_text { font-size: 0.85rem; color: var(--text-color); font-weight: 600; opacity: 0.9; }
+  .vx-price-card .delivery_text { font-size: 0.85rem; font-weight: 800; color: #a855f7; text-align: center; text-transform: uppercase; margin-top: auto; padding-top: 1rem; letter-spacing: 1px; }
+  
+  html.light .vx-price-card { background: rgba(255, 255, 255, 0.8); border: 1px solid rgba(203, 213, 225, 0.4); box-shadow: 0 15px 35px -10px rgba(100, 116, 139, 0.08); }
+  html.light .vx-price-card .card_title { color: #17131F; }
+  html.light .vx-price-card .card_price { color: #d97706; }
+  html.light .vx-price-card .card_paragraph { color: #64748B; }
+  html.light .vx-price-card .line { background-color: rgba(148, 163, 184, 0.3); }
+  html.light .vx-price-card .list_text { color: #334155; }
+  html.light .vx-price-card .check { background-color: rgba(148, 163, 184, 0.1); border-color: rgba(148, 163, 184, 0.3); }
+  html.light .vx-price-card .check_svg { fill: #d97706; }
 </style>
 </head>
 <body>
@@ -311,7 +330,7 @@
 
       <div class="absolute bottom-6 left-1/2 -translate-x-1/2 w-[420px] sm:w-[520px] flex items-center justify-around px-8 py-5 rounded-full border border-white/10 glass backdrop-blur-md opacity-80 z-30">
         <a href="#" class="hover:scale-110 hover:opacity-100 hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.8)] transition-all duration-300 text-current">
-          <svg class="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+          <svg class="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
         </a>
         <a href="#" class="hover:scale-110 hover:opacity-100 hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.8)] transition-all duration-300 text-current">
           <svg class="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="4"/><path d="m10 9 5 3-5 3z"/></svg>
@@ -320,7 +339,7 @@
           <svg class="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 10-4 4 6 6 4-16-18 7 4 2 2 6 3-4"/></svg>
         </a>
         <a href="#" class="hover:scale-110 hover:opacity-100 hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.8)] transition-all duration-300 text-current">
-          <svg class="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
+          <svg class="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
         </a>
       </div>
     </section>
@@ -446,19 +465,75 @@
         <div class="text-left"><span data-i18n="tiers-sub" class="text-xs tracking-widest uppercase font-bold text-current opacity-70">Web Solutions</span><h2 data-i18n="tiers-title" class="font-head font-bold text-4xl mt-3">Development Tiers</h2></div>
         <div class="button-wrap" onclick="window.backToHome()"><div class="btn-3d-style"><span data-i18n="back-btn">← Back</span></div><div class="button-shadow"></div></div>
       </div>
-      <div class="grid lg:grid-cols-3 gap-8">
-        <div class="tier-card">
-          <div class="card_title__container"><span class="card_title font-head font-bold text-2xl force-eng">STARTER</span><p data-i18n="tier-starter-desc" class="card_paragraph mt-2 opacity-80 text-sm">Perfect for simple portfolios and personal landing pages.</p></div>
-          <div class="button-wrap w-full mt-6" onclick="window.showToast('PLAN ADDED')"><div class="btn-3d-style"><span data-i18n="select-plan">Select Plan</span></div><div class="button-shadow"></div></div>
+      
+      <div class="grid lg:grid-cols-3 gap-8 items-stretch">
+        <div class="vx-price-card">
+          <div class="card_title__container">
+            <span class="card_title force-eng">STARTER</span>
+            <div class="card_price force-eng">$150</div>
+            <p class="card_paragraph" data-i18n="tier-starter-desc">Perfect for a simple and professional online presence.</p>
+          </div>
+          <hr class="line" />
+          <ul class="card__list">
+            <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text force-eng">1 Landing Page</span></li>
+            <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text force-eng">Up to 4 Sections</span></li>
+            <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text force-eng">Custom Design</span></li>
+            <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text force-eng">Responsive Layout</span></li>
+            <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text force-eng">Basic Animations</span></li>
+            <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text force-eng">1 Revision</span></li>
+          </ul>
+          <div class="delivery_text force-eng">Delivery: 7 Days</div>
+          <div class="button-wrap w-full mt-4" onclick="window.showToast('PLAN ADDED')">
+            <div class="btn-3d-style"><span data-i18n="select-plan">Select Plan</span></div>
+            <div class="button-shadow"></div>
+          </div>
         </div>
-        <div class="tier-card">
-          <div class="card_title__container"><span class="card_title font-head font-bold text-2xl force-eng">PRO</span><p data-i18n="tier-pro-desc" class="card_paragraph mt-2 opacity-80 text-sm">For creators needing advanced animations &amp; custom design.</p></div>
-          <div class="button-wrap w-full mt-6" onclick="window.showToast('PLAN ADDED')"><div class="btn-3d-style"><span data-i18n="select-plan">Select Plan</span></div><div class="button-shadow"></div></div>
+
+        <div class="vx-price-card">
+          <div class="card_title__container">
+            <span class="card_title force-eng">PREMIUM</span>
+            <div class="card_price force-eng">$300</div>
+            <p class="card_paragraph" data-i18n="tier-pro-desc">A more complete and engaging web experience.</p>
+          </div>
+          <hr class="line" />
+          <ul class="card__list">
+            <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text force-eng">Up to 3 Pages</span></li>
+            <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text force-eng">Up to 8 Sections</span></li>
+            <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text force-eng">Custom Design</span></li>
+            <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text force-eng">Advanced Animations</span></li>
+            <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text force-eng">Social Media Integration</span></li>
+            <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text force-eng">3 Revisions</span></li>
+          </ul>
+          <div class="delivery_text force-eng">Delivery: 7–12 Days</div>
+          <div class="button-wrap w-full mt-4" onclick="window.showToast('PLAN ADDED')">
+            <div class="btn-3d-style"><span data-i18n="select-plan">Select Plan</span></div>
+            <div class="button-shadow"></div>
+          </div>
         </div>
-        <div class="tier-card">
-          <div class="card_title__container"><span class="card_title font-head font-bold text-2xl force-eng">VIP</span><p data-i18n="tier-vip-desc" class="card_paragraph mt-2 opacity-80 text-sm">The absolute premium experience with custom 3D elements.</p></div>
-          <div class="button-wrap w-full mt-6" onclick="window.showToast('PLAN ADDED')"><div class="btn-3d-style"><span data-i18n="select-plan">Select Plan</span></div><div class="button-shadow"></div></div>
+
+        <div class="vx-price-card">
+          <div class="card_title__container">
+            <span class="card_title force-eng">ELITE</span>
+            <div class="card_price force-eng">$600</div>
+            <p class="card_paragraph" data-i18n="tier-vip-desc">A premium, powerful, and fully customized experience.</p>
+          </div>
+          <hr class="line" />
+          <ul class="card__list">
+            <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text force-eng">Up to 6 Pages</span></li>
+            <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text force-eng">Up to 15 Sections</span></li>
+            <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text force-eng">Fully Custom Design</span></li>
+            <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text force-eng">Premium Animations &amp; Effects</span></li>
+            <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text force-eng">Interactive Elements</span></li>
+            <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text force-eng">Social Media Integration</span></li>
+            <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text force-eng">Priority Support</span></li>
+          </ul>
+          <div class="delivery_text force-eng">Delivery: 15–20 Days</div>
+          <div class="button-wrap w-full mt-4" onclick="window.showToast('PLAN ADDED')">
+            <div class="btn-3d-style"><span data-i18n="select-plan">Select Plan</span></div>
+            <div class="button-shadow"></div>
+          </div>
         </div>
+        
       </div>
     </div>
   </section>
@@ -484,7 +559,7 @@
       </div>
     </div>
   </div>
-  
+
   <div id="support-modal" class="fixed inset-0 z-[100] flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
     <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="window.closeSupportModal()"></div>
     <div class="glass rounded-3xl max-w-sm w-full relative z-10 p-6 text-center border-t border-yellow-500/30">
@@ -723,8 +798,8 @@
   })();
 
   var translations = {
-    en: { "nav-bundles": "Bundles", "nav-packs": "Featured Packs", "nav-categories": "Categories", "hero-tag": "Digital Assets Hub", "hero-desc": "Explore custom websites reflecting your unique identity, plus premium video editing and design assets.", "hero-btn": "Explore Tiers", "tiers-available": "3 Tiers Available", "explore-packages": "Explore Packages", "packs-title": "Featured Packs", "packs-desc": "Swipe horizontally for endless physical 3D cards interaction", "cat-sec-title": "Categories", "cat-sec-desc": "Select a category to explore editing packs.", "cat-cc-desc": "Color Corrections", "cat-xml-desc": "Project Files", "cat-shake-desc": "Camera Shake Presets", "footer-right": "Crafted for the bold.", "tiers-sub": "Web Solutions", "tiers-title": "Development Tiers", "back-btn": "← Back", "tier-starter-desc": "Perfect for simple portfolios and personal landing pages.", "tier-pro-desc": "For creators needing advanced animations & custom design.", "tier-vip-desc": "The absolute premium experience with custom 3D elements.", "select-plan": "Select Plan", "cat-view-sub": "Collection", "add-cart": "Add to Cart", "try-demo": "Try Demo", "stat-subscribers": "Satisfied Clients", "stat-views": "Total Visits", "stat-orders": "Quality Guarantee", "stat-rating": "Satisfaction Score" },
-    ar: { "nav-bundles": "الحزم", "nav-packs": "حزم متميزة", "nav-categories": "الأقسام", "hero-tag": "مركز الأصول الرقمية", "hero-desc": "تصفّح لتستكشف مشاريع ومواقع ويب تجسّد هويتك، إلى جانب أحدث حزم ومستلزمات المونتاج وتصميم المقاطع.", "hero-btn": "استكشف الباقات", "tiers-available": "3 مستويات متاحة", "explore-packages": "استكشف الباقات", "packs-title": "الحزم المتميزة", "packs-desc": "اسحب يميناً ويساراً للتنقل بين البطاقات ثلاثية الأبعاد", "cat-sec-title": "الأقسام", "cat-sec-desc": "اختر قسماً لاستكشاف حزم التعديل المتاحة.", "cat-cc-desc": "تصحيح الألوان", "cat-xml-desc": "ملفات المشروع", "cat-shake-desc": "إعدادات اهتزاز الكاميرا", "footer-right": "صُنع للمبدعين والجرآء.", "tiers-sub": "حلول الويب", "tiers-title": "مستويات التطوير", "back-btn": "العودة ←", "tier-starter-desc": "مثالية للملفات الشخصية وصفحات الهبوط البسيطة.", "tier-pro-desc": "للمبدعين الذين يحتاجون تحريكات متقدمة وتصاميم خاصة.", "tier-vip-desc": "الخبرة المتميزة المطلقة مع عناصر ثلاثية الأبعاد.", "select-plan": "اختر الباقة", "cat-view-sub": "المجموعة", "add-cart": "إضافة للسلة", "try-demo": "تجربة العرض", "stat-subscribers": "عملاء راضون", "stat-views": "إجمالي الزيارات", "stat-orders": "ضمان الجودة", "stat-rating": "معدل التقييم" }
+    en: { "nav-bundles": "Bundles", "nav-packs": "Featured Packs", "nav-categories": "Categories", "hero-tag": "Digital Assets Hub", "hero-desc": "Explore custom websites reflecting your unique identity, plus premium video editing and design assets.", "hero-btn": "Explore Tiers", "tiers-available": "3 Tiers Available", "explore-packages": "Explore Packages", "packs-title": "Featured Packs", "packs-desc": "Swipe horizontally for endless physical 3D cards interaction", "cat-sec-title": "Categories", "cat-sec-desc": "Select a category to explore editing packs.", "cat-cc-desc": "Color Corrections", "cat-xml-desc": "Project Files", "cat-shake-desc": "Camera Shake Presets", "footer-right": "Crafted for the bold.", "tiers-sub": "Web Solutions", "tiers-title": "Development Tiers", "back-btn": "← Back", "tier-starter-desc": "Perfect for a simple and professional online presence.", "tier-pro-desc": "A more complete and engaging web experience.", "tier-vip-desc": "A premium, powerful, and fully customized experience.", "select-plan": "Select Plan", "cat-view-sub": "Collection", "add-cart": "Add to Cart", "try-demo": "Try Demo", "stat-subscribers": "Satisfied Clients", "stat-views": "Total Visits", "stat-orders": "Quality Guarantee", "stat-rating": "Satisfaction Score" },
+    ar: { "nav-bundles": "الحزم", "nav-packs": "حزم متميزة", "nav-categories": "الأقسام", "hero-tag": "مركز الأصول الرقمية", "hero-desc": "تصفّح لتستكشف مشاريع ومواقع ويب تجسّد هويتك، إلى جانب أحدث حزم ومستلزمات المونتاج وتصميم المقاطع.", "hero-btn": "استكشف الباقات", "tiers-available": "3 مستويات متاحة", "explore-packages": "استكشف الباقات", "packs-title": "الحزم المتميزة", "packs-desc": "اسحب يميناً ويساراً للتنقل بين البطاقات ثلاثية الأبعاد", "cat-sec-title": "الأقسام", "cat-sec-desc": "اختر قسماً لاستكشاف حزم التعديل المتاحة.", "cat-cc-desc": "تصحيح الألوان", "cat-xml-desc": "ملفات المشروع", "cat-shake-desc": "إعدادات اهتزاز الكاميرا", "footer-right": "صُنع للمبدعين والجرآء.", "tiers-sub": "حلول الويب", "tiers-title": "مستويات التطوير", "back-btn": "العودة ←", "tier-starter-desc": "مثالي لحضور رقمي بسيط واحترافي على الإنترنت.", "tier-pro-desc": "تجربة ويب متكاملة وجذابة تعكس هويتك.", "tier-vip-desc": "تجربة حصرية، قوية، ومصممة خصيصاً بالكامل لك.", "select-plan": "اختر الباقة", "cat-view-sub": "المجموعة", "add-cart": "إضافة للسلة", "try-demo": "تجربة العرض", "stat-subscribers": "عملاء راضون", "stat-views": "إجمالي الزيارات", "stat-orders": "ضمان الجودة", "stat-rating": "معدل التقييم" }
   };
   var currentLang = 'en';
   window.toggleLanguage = function () {
