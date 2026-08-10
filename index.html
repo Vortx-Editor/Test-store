@@ -481,10 +481,10 @@
       </div>
     </section>
 
-    <!-- قسم التقييم والتعليق -->
+    <!-- قسم التقييم والتعليق بالشريط التفاعلي وشريط توزيع النجوم الفخم -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 py-12 border-t border-white/10 mt-12 reveal-on-scroll">
       
-      <!-- الشريط المتحرك الثابت الاتجاه والمعالجة لسلاسة الحركة -->
+      <!-- الشريط المتحرك اللانهائي -->
       <div id="reviews-marquee-container" class="w-full overflow-hidden mb-12 py-4 glass rounded-2xl hidden" dir="ltr">
         <div id="reviews-marquee-track" class="animate-marquee gap-6 items-center px-4" dir="ltr"></div>
       </div>
@@ -540,6 +540,48 @@
 
       </div>
 
+      <!-- قائمة توزيع النجوم الفخمة (5 إلى 1 نجوم مع نسبة مئوية) -->
+      <div class="max-w-2xl mx-auto mb-10 p-6 rounded-3xl glass border border-yellow-500/20 text-left font-mono">
+        <h4 class="text-xs uppercase font-bold text-yellow-500 tracking-widest mb-4 text-center" data-i18n="rating-breakdown">RATING DISTRIBUTION</h4>
+        <div class="space-y-2.5 text-xs text-white">
+          <div class="flex items-center gap-3">
+            <span class="w-10 text-yellow-400 font-bold shrink-0">5 ★</span>
+            <div class="flex-grow bg-white/10 rounded-full h-2.5 overflow-hidden">
+              <div id="bar-5" class="bg-gradient-to-r from-yellow-600 to-amber-400 h-full rounded-full transition-all duration-700" style="width: 0%"></div>
+            </div>
+            <span id="pct-5" class="w-12 text-right font-bold opacity-80 shrink-0">0%</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="w-10 text-yellow-400 font-bold shrink-0">4 ★</span>
+            <div class="flex-grow bg-white/10 rounded-full h-2.5 overflow-hidden">
+              <div id="bar-4" class="bg-gradient-to-r from-yellow-600 to-amber-400 h-full rounded-full transition-all duration-700" style="width: 0%"></div>
+            </div>
+            <span id="pct-4" class="w-12 text-right font-bold opacity-80 shrink-0">0%</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="w-10 text-yellow-400 font-bold shrink-0">3 ★</span>
+            <div class="flex-grow bg-white/10 rounded-full h-2.5 overflow-hidden">
+              <div id="bar-3" class="bg-gradient-to-r from-yellow-600 to-amber-400 h-full rounded-full transition-all duration-700" style="width: 0%"></div>
+            </div>
+            <span id="pct-3" class="w-12 text-right font-bold opacity-80 shrink-0">0%</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="w-10 text-yellow-400 font-bold shrink-0">2 ★</span>
+            <div class="flex-grow bg-white/10 rounded-full h-2.5 overflow-hidden">
+              <div id="bar-2" class="bg-gradient-to-r from-yellow-600 to-amber-400 h-full rounded-full transition-all duration-700" style="width: 0%"></div>
+            </div>
+            <span id="pct-2" class="w-12 text-right font-bold opacity-80 shrink-0">0%</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="w-10 text-yellow-400 font-bold shrink-0">1 ★</span>
+            <div class="flex-grow bg-white/10 rounded-full h-2.5 overflow-hidden">
+              <div id="bar-1" class="bg-gradient-to-r from-yellow-600 to-amber-400 h-full rounded-full transition-all duration-700" style="width: 0%"></div>
+            </div>
+            <span id="pct-1" class="w-12 text-right font-bold opacity-80 shrink-0">0%</span>
+          </div>
+        </div>
+      </div>
+
       <!-- اللوحة الإحصائية -->
       <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
         <div class="glass p-6 rounded-2xl">
@@ -570,13 +612,7 @@
     </section>
 
     <footer class="border-t border-white/5 mt-6 reveal-on-scroll">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12 flex flex-col md:flex-row items-center justify-between gap-6">
-        <p class="font-head font-extrabold tracking-widest text-current text-xl force-eng">VORTX</p>
-        <p class="font-bold opacity-60 text-sm">© <span id="year"></span> <span class="force-eng">VORTX</span> Studio. <span data-i18n="footer-right">Crafted for the bold.</span></p>
-      </div>
-    </footer>
-  </main>
-  <section id="web-view" class="view view-hidden relative z-10 min-h-screen">
+    <section id="web-view" class="view view-hidden relative z-10 min-h-screen">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
       <div class="flex items-center justify-between mb-12">
         <div class="text-left"><span data-i18n="tiers-sub" class="text-xs tracking-widest uppercase font-bold text-current opacity-70">Web Solutions</span><h2 data-i18n="tiers-title" class="font-head font-bold text-4xl mt-3">Development Tiers</h2></div>
@@ -708,6 +744,12 @@
     supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
   }
 
+  // قائمة الكلمات السلبية المحظورة تلقائياً لتصفية التعليقات السلبية والسيئة
+  const BAD_WORDS = [
+    'bad', 'worst', 'scam', 'fake', 'terrible', 'trash', 'slow', 'horrible', 'cheat', 'crap',
+    'سيء', 'سيئ', 'فاشل', 'نصاب', 'احتيال', 'خايس', 'زبالة', 'بطيء', 'ضعيف', 'نصب', 'حرامي', 'احذر', 'سرقة'
+  ];
+
   window.showToast = function (msg) {
     var box = document.getElementById('toast-box');
     if (!box) return;
@@ -718,11 +760,17 @@
     box.appendChild(toast);
     setTimeout(function () { 
       if (toast && toast.parentNode) toast.parentNode.removeChild(toast); 
-    }, 3000);
+    }, 3500);
   };
 
-  // إرسال التقييم
+  // إرسال التقييم مع الحماية من التقييم المكرر وفحص الكلمات السلبية
   window.submitUserRating = async function() {
+    // 1. حماية التقييم المكرر في الجلسة الواحدة
+    if (sessionStorage.getItem('vortx_has_rated')) {
+      window.showToast('YOU HAVE ALREADY RATED THIS SESSION!');
+      return;
+    }
+
     const ratingRadio = document.querySelector('input[name="rating"]:checked');
     if (!ratingRadio) {
       window.showToast('PLEASE SELECT A STAR RATING FIRST!');
@@ -735,10 +783,20 @@
     const comment = commentEl ? commentEl.value.trim() : '';
     const name = nameEl ? nameEl.value.trim() : '';
 
+    // 2. فحص الكلام السلبي والمحتوى غير الملائم
+    if (comment) {
+      const lowerComment = comment.toLowerCase();
+      const hasBadWord = BAD_WORDS.some(word => lowerComment.includes(word));
+      if (hasBadWord) {
+        window.showToast('REVIEW REJECTED: INAPPROPRIATE CONTENT!');
+        return;
+      }
+    }
+
     window.showToast('SUBMITTING YOUR RATING...');
 
     const newReview = {
-      id: Date.now() + '_' + Math.random(),
+      id: Date.now() + '_' + Math.random().toString(36).substr(2, 9),
       rating: selectedScore,
       comment: comment,
       reviewer_name: name,
@@ -757,6 +815,9 @@
       } catch(e) {}
     }
 
+    // تسجيل أن المستخدم قام بالتقييم لمنع التكرار
+    sessionStorage.setItem('vortx_has_rated', 'true');
+
     if (commentEl) commentEl.value = '';
     if (nameEl) nameEl.value = '';
     ratingRadio.checked = false;
@@ -765,7 +826,7 @@
     fetchLiveStats();
   };
 
-  // جلب البيانات، دمج التقييمات بدون تكرار، ترتيب الاسم والنجوم على اليسار فوق التعليق
+  // جلب البيانات، دمج التقييمات وتحديث قائمة توزيع النجوم الذهبية
   async function fetchLiveStats() {
     let allReviews = JSON.parse(localStorage.getItem('vortx_reviews_data') || '[]');
 
@@ -802,8 +863,9 @@
     }
 
     if (allReviews.length > 0) {
+      const totalReviews = allReviews.length;
       const totalScore = allReviews.reduce((sum, r) => sum + Number(r.rating || 0), 0);
-      const rawAvg = totalScore / allReviews.length;
+      const rawAvg = totalScore / totalReviews;
       
       const displayScore = (rawAvg % 1 === 0) ? rawAvg.toFixed(0) : rawAvg.toFixed(1);
       
@@ -815,11 +877,26 @@
         ratingEl.textContent = displayScore;
       }
       if (countEl) {
-        countEl.setAttribute('data-target', allReviews.length);
-        countEl.textContent = allReviews.length.toLocaleString();
+        countEl.setAttribute('data-target', totalReviews);
+        countEl.textContent = totalReviews.toLocaleString();
       }
 
-      // تصفية التعليقات غير الخالية
+      // تحديث قائمة توزيع النجوم المئوية الأسود والذهبي
+      const counts = { 5: 0, 4: 0, 3: 0, 2: 0, 1: 0 };
+      allReviews.forEach(r => {
+        const score = Math.min(5, Math.max(1, Number(r.rating || 5)));
+        counts[score] = (counts[score] || 0) + 1;
+      });
+
+      [5, 4, 3, 2, 1].forEach(star => {
+        const pct = Math.round((counts[star] / totalReviews) * 100) || 0;
+        const barEl = document.getElementById(`bar-${star}`);
+        const pctEl = document.getElementById(`pct-${star}`);
+        if (barEl) barEl.style.width = pct + '%';
+        if (pctEl) pctEl.textContent = pct + '%';
+      });
+
+      // إظهار التعليقات بالشريط مع ضمان عدم التكرار اللانهائي السلس
       const commentsOnly = allReviews.filter(r => r.comment && r.comment.trim().length > 0);
       const marqueeContainer = document.getElementById('reviews-marquee-container');
       const marqueeTrack = document.getElementById('reviews-marquee-track');
@@ -839,10 +916,8 @@
              </div>`;
           });
 
-          // مضاعفة العناصر فقط إذا كانت قليلة لضمان الحركة الدائرية المستمرة بدون تكرار بصري مزعج
-          const finalCardsHtml = cardsHtmlArr.length > 3 ? cardsHtmlArr.join('') + cardsHtmlArr.join('') : cardsHtmlArr.join('');
-
-          marqueeTrack.innerHTML = finalCardsHtml;
+          // تكرار مضاعف ناعم يضمن الاستمرارية اللانهائية للـ CSS Marquee
+          marqueeTrack.innerHTML = cardsHtmlArr.join('') + cardsHtmlArr.join('') + cardsHtmlArr.join('');
           marqueeContainer.classList.remove('hidden');
           setupMarqueeInteraction();
         } else {
@@ -852,7 +927,7 @@
     }
   }
 
-  // تحكم بالسحب الحر يمين ويسار دون التعثر مع توقف مؤقت 5 ثواني
+  // تحكم حر بالسحب مع ضمان الاستمرارية السلسة
   function setupMarqueeInteraction() {
     const marqueeContainer = document.getElementById('reviews-marquee-container');
     const marqueeTrack = document.getElementById('reviews-marquee-track');
@@ -905,7 +980,7 @@
     }, { passive: true });
   }
 
-  // كود الرسم للكرة الشبكية 3D
+  // رسم الكرة الشبكية 3D الأساسية
   (function(){
     var canvas = document.getElementById('globe');
     if(!canvas) return;
@@ -995,7 +1070,7 @@
       "tier-pro-desc": "A complete web solution designed to showcase your brand, drive engagement, and convert visitors.", "tier-vip-desc": "The ultimate bespoke digital experience. Advanced visual effects, tailored animations, and priority treatment.", 
       "select-plan": "Buy Now", "cat-view-sub": "Collection", "add-cart": "Add to Cart", "try-demo": "Try Demo", 
       "stat-subscribers": "Satisfied Clients", "stat-views": "Total Visits", "stat-orders": "Quality Guarantee", "stat-rating": "Satisfaction Score",
-      "review-title": "Leave Your Review & Rating", "review-sub": "Share your experience with VORTX Studio",
+      "review-title": "Leave Your Review & Rating", "review-sub": "Share your experience with VORTX Studio", "rating-breakdown": "RATING DISTRIBUTION",
       "placeholder-name": "Your Name (Optional)...✦˚", "placeholder-comment": "Write your review here (Optional)...✦˚",
       "plan-s-title": "STARTER", "plan-s-price": "$150", "plan-s-f1": "1 High-Converting Landing Page", "plan-s-f2": "Up to 4 Custom Sections", "plan-s-f3": "Fully Responsive & Mobile-Optimized", "plan-s-f4": "Smooth Basic Animations", "plan-s-f5": "1 Revision Included", "plan-s-del": "Delivery: 7 Days",
       "plan-p-title": "PREMIUM", "plan-p-price": "$300", "plan-p-f1": "Up to 3 Custom Web Pages", "plan-p-f2": "Up to 8 Designed Sections", "plan-p-f3": "Advanced UI/UX & Interactions", "plan-p-f4": "Social Media & Channel Integration", "plan-p-f5": "3 Revisions Included", "plan-p-del": "Delivery: 7–12 Days",
@@ -1013,7 +1088,7 @@
       "tier-pro-desc": "حل ويب متكامل لمستواك يعرض علامتك التجارية ويزيد التفاعل والعملاء.", "tier-vip-desc": "تجربة رقمية فريدة وخاصة بالكامل. مؤثرات بصرية متقدمة وأولوية في الدعم.", 
       "select-plan": "شراء الآن", "cat-view-sub": "المجموعة", "add-cart": "إضافة للسلة", "try-demo": "تجربة العرض", 
       "stat-subscribers": "عملاء راضون", "stat-views": "إجمالي الزيارات", "stat-orders": "ضمان الجودة", "stat-rating": "معدل التقييم",
-      "review-title": "اترك تقييمك ورأيك", "review-sub": "شاركونا تجربتكم مع فورتكس ستوديو",
+      "review-title": "اترك تقييمك ورأيك", "review-sub": "شاركونا تجربتكم مع فورتكس ستوديو", "rating-breakdown": "توزيع التقييمات",
       "placeholder-name": "اسمك (اختياري)...✦˚", "placeholder-comment": "اكتب تعليقك هنا (اختياري)...✦˚",
       "plan-s-title": "البداية", "plan-s-price": "150$", "plan-s-f1": "صفحة هبوط احترافية عالي التحويل", "plan-s-f2": "حتى 4 أقسام مخصصة", "plan-s-f3": "متوافق بالكامل مع الجوال والشاشات", "plan-s-f4": "تحريكات أساسية سلسة", "plan-s-f5": "تعديل واحد مشمول", "plan-s-del": "التسليم: 7 أيام",
       "plan-p-title": "المميزة", "plan-p-price": "300$", "plan-p-f1": "حتى 3 صفحات ويب مخصصة", "plan-p-f2": "حتى 8 أقسام مصممة", "plan-p-f3": "واجهة وتفاعلات متقدمة", "plan-p-f4": "ربط شبكات التواصل والقنوات", "plan-p-f5": "3 تعديلات مشمولة", "plan-p-del": "التسليم: 7-12 يوم",
