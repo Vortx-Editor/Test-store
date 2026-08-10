@@ -172,7 +172,6 @@
   .animate-marquee { display: flex; width: max-content; animation: marquee 30s linear infinite; }
   .animate-marquee:hover { animation-play-state: paused; }
 
-  /* اتجاه ثابت وسلس للشريط بدون أن تتأثر بكرة الترجمة */
   #reviews-marquee-container { direction: ltr !important; overflow-x: auto; scrollbar-width: none; cursor: grab; user-select: none; }
   #reviews-marquee-container::-webkit-scrollbar { display: none; }
   #reviews-marquee-container:active { cursor: grabbing; }
@@ -230,7 +229,6 @@
   html.light .radio > label > svg { fill: #94a3b8; }
   .radio > input:checked ~ label svg, .radio > label:hover svg, .radio > label:hover ~ label svg { fill: #ff9e0b !important; filter: drop-shadow(0 0 12px rgba(255, 158, 11, 0.8)); }
 
-  /* المربع للوضع النهاري والداكن وزر الإرسال */
   .container_chat_bot { display: flex; flex-direction: column; max-width: 480px; width: 100%; margin: 0 auto; }
   .container_chat_bot .container-chat-options { position: relative; display: flex; background: linear-gradient(to bottom right, #555, #1f1f23, #121215); border-radius: 20px; padding: 2px; overflow: hidden; }
   html.light .container_chat_bot .container-chat-options { background: linear-gradient(to bottom right, #cbd5e1, #94a3b8, #cbd5e1); }
@@ -358,11 +356,33 @@
         </ul>
         <div class="flex items-center gap-3 relative z-50">
           
+          <!-- جرس التنبيهات -->
+          <button type="button" onclick="window.openNotificationsModal()" title="Notifications" class="glass w-10 h-10 rounded-full flex items-center justify-center border-white/10 text-current opacity-80 hover:opacity-100 hover:text-yellow-400 transition-all duration-300 relative">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+            <span class="absolute top-1 right-1 w-2.5 h-2.5 bg-yellow-400 rounded-full animate-ping"></span>
+          </button>
+
+          <!-- زر المفضلة -->
+          <button type="button" onclick="window.openFavoritesModal()" title="Favorites" class="glass w-10 h-10 rounded-full flex items-center justify-center border-white/10 text-current opacity-80 hover:opacity-100 hover:text-red-400 transition-all duration-300 relative">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+            <span id="fav-badge" class="absolute -top-1 -right-1 bg-red-500 text-white text-[9px] font-black w-4 h-4 rounded-full flex items-center justify-center hidden">0</span>
+          </button>
+
+          <!-- زر السلة -->
+          <button type="button" onclick="window.openCartModal()" title="Cart" class="glass w-10 h-10 rounded-full flex items-center justify-center border-white/10 text-current opacity-80 hover:opacity-100 hover:text-yellow-400 transition-all duration-300 relative">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+            <span id="cart-badge" class="absolute -top-1 -right-1 bg-yellow-500 text-black text-[9px] font-black w-4.5 h-4.5 rounded-full flex items-center justify-center hidden">0</span>
+          </button>
+
           <button type="button" onclick="window.openSupportModal()" title="Support VORTX" class="support-glow-btn glass w-10 h-10 rounded-full flex items-center justify-center border-white/10 text-current opacity-70 hover:opacity-100 hover:text-yellow-400 transition-all duration-300">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="relative z-10"><rect x="6" y="2" width="16" height="11" rx="2"/><circle cx="14" cy="7.5" r="2.5"/><path d="M14 4v7"/><path d="M2 14h3.5v5H2z"/><path d="M5.5 16.5c3 0 4.5 1 7.5 1l3.5-2.5 4.5 1.5-6.5 4.5h-9z"/></svg>
           </button>
 
-          <button type="button" onclick="window.toggleLanguage()" class="glass w-10 h-10 rounded-full flex items-center justify-center border-white/10 text-brandLight font-extrabold text-xs cursor-pointer hover:bg-white/10 transition">🌐</button>
+          <!-- زر اللغة التفاعلي مع شعار AR/EN بداخل الكورة -->
+          <button type="button" onclick="window.toggleLanguage()" class="glass px-3 h-10 rounded-full flex items-center gap-1.5 border-white/10 text-brandLight font-extrabold text-xs cursor-pointer hover:bg-white/10 transition">
+            <span>🌐</span>
+            <span id="lang-badge-text" class="font-mono text-[10px] text-yellow-400 font-bold tracking-wider">AR</span>
+          </button>
           
           <button type="button" onclick="window.toggleTheme()" class="theme-switch-btn" aria-label="Toggle theme">
             <div class="theme-switch-ball">
@@ -380,7 +400,6 @@
     <div id="top"></div>
 
     <section id="hero-section" class="max-w-7xl mx-auto px-4 sm:px-6 text-center">
-      <!-- الكرة الشبكية 3D الأساسية بتمامها -->
       <canvas id="globe"></canvas>
       <div class="floor-glow"></div>
 
@@ -481,10 +500,10 @@
       </div>
     </section>
 
-    <!-- قسم التقييم والتعليق بالشريط التفاعلي وشريط توزيع النجوم الفخم -->
+    <!-- قسم التقييم والتعليق بالشريط التفاعلي وشريط توزيع النجوم -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 py-12 border-t border-white/10 mt-12 reveal-on-scroll">
       
-      <!-- الشريط المتحرك اللانهائي -->
+      <!-- الشريط المتحرك -->
       <div id="reviews-marquee-container" class="w-full overflow-hidden mb-12 py-4 glass rounded-2xl hidden" dir="ltr">
         <div id="reviews-marquee-track" class="animate-marquee gap-6 items-center px-4" dir="ltr"></div>
       </div>
@@ -540,7 +559,7 @@
 
       </div>
 
-      <!-- قائمة توزيع النجوم الفخمة (5 إلى 1 نجوم مع نسبة مئوية) -->
+      <!-- قائمة توزيع النجوم الفخمة -->
       <div class="max-w-2xl mx-auto mb-10 p-6 rounded-3xl glass border border-yellow-500/20 text-left font-mono">
         <h4 class="text-xs uppercase font-bold text-yellow-500 tracking-widest mb-4 text-center" data-i18n="rating-breakdown">RATING DISTRIBUTION</h4>
         <div class="space-y-2.5 text-xs text-white">
@@ -569,50 +588,7 @@
             <span class="w-10 text-yellow-400 font-bold shrink-0">2 ★</span>
             <div class="flex-grow bg-white/10 rounded-full h-2.5 overflow-hidden">
               <div id="bar-2" class="bg-gradient-to-r from-yellow-600 to-amber-400 h-full rounded-full transition-all duration-700" style="width: 0%"></div>
-            </div>
-            <span id="pct-2" class="w-12 text-right font-bold opacity-80 shrink-0">0%</span>
-          </div>
-          <div class="flex items-center gap-3">
-            <span class="w-10 text-yellow-400 font-bold shrink-0">1 ★</span>
-            <div class="flex-grow bg-white/10 rounded-full h-2.5 overflow-hidden">
-              <div id="bar-1" class="bg-gradient-to-r from-yellow-600 to-amber-400 h-full rounded-full transition-all duration-700" style="width: 0%"></div>
-            </div>
-            <span id="pct-1" class="w-12 text-right font-bold opacity-80 shrink-0">0%</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- اللوحة الإحصائية -->
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-        <div class="glass p-6 rounded-2xl">
-          <h4 class="font-mono font-black text-3xl sm:text-4xl text-current tracking-wider">
-            <span class="counter-num text-current" id="live-reviews-count" data-target="0">0</span>
-          </h4>
-          <p data-i18n="stat-subscribers" class="text-xs font-bold opacity-70 mt-2 uppercase tracking-widest">Satisfied Clients</p>
-        </div>
-        <div class="glass p-6 rounded-2xl">
-          <h4 class="font-mono font-black text-3xl sm:text-4xl text-current tracking-wider">
-            <span class="counter-num text-current" id="live-views-count" data-target="0">0</span>
-          </h4>
-          <p data-i18n="stat-views" class="text-xs font-bold opacity-70 mt-2 uppercase tracking-widest">Total Visits</p>
-        </div>
-        <div class="glass p-6 rounded-2xl">
-          <h4 class="font-mono font-black text-3xl sm:text-4xl text-current tracking-wider">
-            100%
-          </h4>
-          <p data-i18n="stat-orders" class="text-xs font-bold opacity-70 mt-2 uppercase tracking-widest">Quality Guarantee</p>
-        </div>
-        <div class="glass p-6 rounded-2xl">
-          <h4 class="font-mono font-black text-3xl sm:text-4xl text-yellow-400 tracking-wider">
-            ★ <span class="counter-num-decimal text-current" id="live-rating-avg" data-target="0">0</span>/5
-          </h4>
-          <p data-i18n="stat-rating" class="text-xs font-extrabold text-yellow-400 mt-2 uppercase tracking-widest">Satisfaction Score</p>
-        </div>
-      </div>
-    </section>
-
-    <footer class="border-t border-white/5 mt-6 reveal-on-scroll">
-    <section id="web-view" class="view view-hidden relative z-10 min-h-screen">
+       <section id="web-view" class="view view-hidden relative z-10 min-h-screen">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
       <div class="flex items-center justify-between mb-12">
         <div class="text-left"><span data-i18n="tiers-sub" class="text-xs tracking-widest uppercase font-bold text-current opacity-70">Web Solutions</span><h2 data-i18n="tiers-title" class="font-head font-bold text-4xl mt-3">Development Tiers</h2></div>
@@ -698,6 +674,55 @@
     </div>
   </section>
 
+  <!-- مودال التنبيهات -->
+  <div id="notifications-modal" class="fixed inset-0 z-[120] flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
+    <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="window.closeNotificationsModal()"></div>
+    <div class="glass rounded-3xl max-w-sm w-full relative z-10 p-6 border border-white/10 shadow-2xl text-left">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="font-head font-bold text-xl text-yellow-400">Notifications</h3>
+        <button onclick="window.closeNotificationsModal()" class="text-white/60 hover:text-white">✕</button>
+      </div>
+      <div class="space-y-3">
+        <div class="p-3 bg-white/5 rounded-xl border border-white/10">
+          <span class="text-[10px] text-purple-400 font-bold uppercase tracking-wider block mb-1">New Drop ✦</span>
+          <h4 class="text-xs font-bold text-white mb-1">Cinematic VFX Pack V2 Released</h4>
+          <p class="text-[11px] text-white/70">Check out the new CC & Shake presets in the store now!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- مودال المفضلة -->
+  <div id="favorites-modal" class="fixed inset-0 z-[120] flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
+    <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="window.closeFavoritesModal()"></div>
+    <div class="glass rounded-3xl max-w-md w-full relative z-10 p-6 border border-white/10 shadow-2xl text-left">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="font-head font-bold text-xl text-red-400">Your Favorites</h3>
+        <button onclick="window.closeFavoritesModal()" class="text-white/60 hover:text-white">✕</button>
+      </div>
+      <div id="favorites-list" class="space-y-3 max-h-[300px] overflow-y-auto pr-1"></div>
+    </div>
+  </div>
+
+  <!-- مودال السلة -->
+  <div id="cart-modal" class="fixed inset-0 z-[120] flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
+    <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="window.closeCartModal()"></div>
+    <div class="glass rounded-3xl max-w-md w-full relative z-10 p-6 border border-white/10 shadow-2xl text-left">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="font-head font-bold text-xl text-yellow-400">Your Shopping Cart</h3>
+        <button onclick="window.closeCartModal()" class="text-white/60 hover:text-white">✕</button>
+      </div>
+      <div id="cart-items-list" class="space-y-3 max-h-[250px] overflow-y-auto pr-1 mb-4"></div>
+      <div class="border-t border-white/10 pt-3 flex items-center justify-between mb-5">
+        <span class="text-xs font-bold text-white uppercase">Total Amount:</span>
+        <span id="cart-total-price" class="text-lg font-mono font-black text-yellow-400">$0</span>
+      </div>
+      <div class="button-wrap w-full" onclick="window.checkoutCartItems()">
+        <div class="btn-3d-style"><span class="text-yellow-400 font-bold">Checkout All Items via Telegram</span></div>
+      </div>
+    </div>
+  </div>
+
   <div id="preview-modal" class="fixed inset-0 z-[80] flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
     <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="window.closePreview()"></div>
     <div class="glass rounded-3xl max-w-md w-full relative z-10 p-6" id="preview-card">
@@ -744,11 +769,155 @@
     supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
   }
 
-  // قائمة الكلمات السلبية المحظورة تلقائياً لتصفية التعليقات السلبية والسيئة
-  const BAD_WORDS = [
-    'bad', 'worst', 'scam', 'fake', 'terrible', 'trash', 'slow', 'horrible', 'cheat', 'crap',
-    'سيء', 'سيئ', 'فاشل', 'نصاب', 'احتيال', 'خايس', 'زبالة', 'بطيء', 'ضعيف', 'نصب', 'حرامي', 'احذر', 'سرقة'
-  ];
+  const BAD_WORDS = ['bad', 'worst', 'scam', 'fake', 'terrible', 'trash', 'slow', 'horrible', 'cheat', 'crap', 'سيء', 'سيئ', 'فاشل', 'نصاب', 'احتيال', 'خايس', 'زبالة', 'بطيء', 'ضعيف', 'نصب', 'حرامي', 'احذر', 'سرقة'];
+
+  // أنظمة المفضلة والسلة المحلية بدون تسجيل دخول
+  let cartItems = JSON.parse(localStorage.getItem('vortx_cart') || '[]');
+  let favItems = JSON.parse(localStorage.getItem('vortx_favorites') || '[]');
+
+  window.updateBadges = function() {
+    const cartBadge = document.getElementById('cart-badge');
+    const favBadge = document.getElementById('fav-badge');
+    
+    if (cartBadge) {
+      cartBadge.textContent = cartItems.length;
+      cartBadge.classList.toggle('hidden', cartItems.length === 0);
+    }
+    if (favBadge) {
+      favBadge.textContent = favItems.length;
+      favBadge.classList.toggle('hidden', favItems.length === 0);
+    }
+  };
+
+  window.toggleFavorite = function(id, title, tag, price, img) {
+    const idx = favItems.findIndex(item => item.id === id);
+    if (idx > -1) {
+      favItems.splice(idx, 1);
+      window.showToast('REMOVED FROM FAVORITES');
+    } else {
+      favItems.push({ id, title, tag, price, img });
+      window.showToast('ADDED TO FAVORITES ❤');
+    }
+    localStorage.setItem('vortx_favorites', JSON.stringify(favItems));
+    window.updateBadges();
+    renderFavoritesUI();
+  };
+
+  window.addToCart = function(id, title, price, img) {
+    cartItems.push({ id, title, price, img });
+    localStorage.setItem('vortx_cart', JSON.stringify(cartItems));
+    window.showToast('ADDED TO CART 🛒');
+    window.updateBadges();
+  };
+
+  window.removeFromCart = function(idx) {
+    cartItems.splice(idx, 1);
+    localStorage.setItem('vortx_cart', JSON.stringify(cartItems));
+    window.updateBadges();
+    renderCartUI();
+  };
+
+  window.openNotificationsModal = function() {
+    const modal = document.getElementById('notifications-modal');
+    if (modal) modal.classList.remove('opacity-0', 'pointer-events-none');
+  };
+  window.closeNotificationsModal = function() {
+    const modal = document.getElementById('notifications-modal');
+    if (modal) modal.classList.add('opacity-0', 'pointer-events-none');
+  };
+
+  window.openFavoritesModal = function() {
+    renderFavoritesUI();
+    const modal = document.getElementById('favorites-modal');
+    if (modal) modal.classList.remove('opacity-0', 'pointer-events-none');
+  };
+  window.closeFavoritesModal = function() {
+    const modal = document.getElementById('favorites-modal');
+    if (modal) modal.classList.add('opacity-0', 'pointer-events-none');
+  };
+
+  window.openCartModal = function() {
+    renderCartUI();
+    const modal = document.getElementById('cart-modal');
+    if (modal) modal.classList.remove('opacity-0', 'pointer-events-none');
+  };
+  window.closeCartModal = function() {
+    const modal = document.getElementById('cart-modal');
+    if (modal) modal.classList.add('opacity-0', 'pointer-events-none');
+  };
+
+  function renderFavoritesUI() {
+    const list = document.getElementById('favorites-list');
+    if (!list) return;
+    if (favItems.length === 0) {
+      list.innerHTML = `<p class="text-xs text-white/50 text-center py-6">No favorite items saved yet.</p>`;
+      return;
+    }
+    list.innerHTML = favItems.map(item => `
+      <div class="p-3 bg-white/5 rounded-xl border border-white/10 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <img src="${item.img}" class="w-10 h-10 rounded-lg object-cover" />
+          <div>
+            <h4 class="text-xs font-bold text-white">${item.title}</h4>
+            <span class="text-[10px] text-yellow-400 font-mono font-bold">$${item.price}</span>
+          </div>
+        </div>
+        <button onclick="window.toggleFavorite('${item.id}', '${item.title}', '${item.tag}', ${item.price}, '${item.img}')" class="text-red-400 text-xs hover:text-red-300 font-bold">Remove</button>
+      </div>
+    `).join('');
+  }
+
+  function renderCartUI() {
+    const list = document.getElementById('cart-items-list');
+    const totalEl = document.getElementById('cart-total-price');
+    if (!list) return;
+    
+    let total = 0;
+    if (cartItems.length === 0) {
+      list.innerHTML = `<p class="text-xs text-white/50 text-center py-6">Your shopping cart is empty.</p>`;
+      if (totalEl) totalEl.textContent = '$0';
+      return;
+    }
+
+    list.innerHTML = cartItems.map((item, idx) => {
+      total += Number(item.price);
+      return `
+        <div class="p-3 bg-white/5 rounded-xl border border-white/10 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <img src="${item.img}" class="w-10 h-10 rounded-lg object-cover" />
+            <div>
+              <h4 class="text-xs font-bold text-white">${item.title}</h4>
+              <span class="text-[10px] text-yellow-400 font-mono font-bold">$${item.price}</span>
+            </div>
+          </div>
+          <button onclick="window.removeFromCart(${idx})" class="text-white/40 hover:text-red-400 text-xs font-bold">✕</button>
+        </div>
+      `;
+    }).join('');
+
+    if (totalEl) totalEl.textContent = '$' + total;
+  }
+
+  window.checkoutCartItems = function() {
+    if (cartItems.length === 0) {
+      window.showToast('YOUR CART IS EMPTY');
+      return;
+    }
+    const names = cartItems.map(i => i.title).join(', ');
+    const total = cartItems.reduce((s, i) => s + Number(i.price), 0);
+    const msg = `Hey VORTX! I want to purchase these cart items: (${names}) for Total: $${total}.`;
+    const url = `https://t.me/wot_5?text=${encodeURIComponent(msg)}`;
+    window.open(url, '_blank');
+  };
+
+  window.shareProduct = function(title, tag) {
+    if (navigator.share) {
+      navigator.share({ title: title, text: `Check out ${title} on VORTX!`, url: window.location.href });
+    } else {
+      navigator.clipboard.writeText(window.location.href);
+      window.showToast('PRODUCT LINK COPIED TO CLIPBOARD');
+    }
+  };
 
   window.showToast = function (msg) {
     var box = document.getElementById('toast-box');
@@ -760,12 +929,11 @@
     box.appendChild(toast);
     setTimeout(function () { 
       if (toast && toast.parentNode) toast.parentNode.removeChild(toast); 
-    }, 3500);
+    }, 3000);
   };
 
-  // إرسال التقييم مع الحماية من التقييم المكرر وفحص الكلمات السلبية
+  // إرسال التقييم
   window.submitUserRating = async function() {
-    // 1. حماية التقييم المكرر في الجلسة الواحدة
     if (sessionStorage.getItem('vortx_has_rated')) {
       window.showToast('YOU HAVE ALREADY RATED THIS SESSION!');
       return;
@@ -783,7 +951,6 @@
     const comment = commentEl ? commentEl.value.trim() : '';
     const name = nameEl ? nameEl.value.trim() : '';
 
-    // 2. فحص الكلام السلبي والمحتوى غير الملائم
     if (comment) {
       const lowerComment = comment.toLowerCase();
       const hasBadWord = BAD_WORDS.some(word => lowerComment.includes(word));
@@ -815,7 +982,6 @@
       } catch(e) {}
     }
 
-    // تسجيل أن المستخدم قام بالتقييم لمنع التكرار
     sessionStorage.setItem('vortx_has_rated', 'true');
 
     if (commentEl) commentEl.value = '';
@@ -826,7 +992,6 @@
     fetchLiveStats();
   };
 
-  // جلب البيانات، دمج التقييمات وتحديث قائمة توزيع النجوم الذهبية
   async function fetchLiveStats() {
     let allReviews = JSON.parse(localStorage.getItem('vortx_reviews_data') || '[]');
 
@@ -881,7 +1046,6 @@
         countEl.textContent = totalReviews.toLocaleString();
       }
 
-      // تحديث قائمة توزيع النجوم المئوية الأسود والذهبي
       const counts = { 5: 0, 4: 0, 3: 0, 2: 0, 1: 0 };
       allReviews.forEach(r => {
         const score = Math.min(5, Math.max(1, Number(r.rating || 5)));
@@ -896,7 +1060,6 @@
         if (pctEl) pctEl.textContent = pct + '%';
       });
 
-      // إظهار التعليقات بالشريط مع ضمان عدم التكرار اللانهائي السلس
       const commentsOnly = allReviews.filter(r => r.comment && r.comment.trim().length > 0);
       const marqueeContainer = document.getElementById('reviews-marquee-container');
       const marqueeTrack = document.getElementById('reviews-marquee-track');
@@ -916,7 +1079,6 @@
              </div>`;
           });
 
-          // تكرار مضاعف ناعم يضمن الاستمرارية اللانهائية للـ CSS Marquee
           marqueeTrack.innerHTML = cardsHtmlArr.join('') + cardsHtmlArr.join('') + cardsHtmlArr.join('');
           marqueeContainer.classList.remove('hidden');
           setupMarqueeInteraction();
@@ -927,7 +1089,6 @@
     }
   }
 
-  // تحكم حر بالسحب مع ضمان الاستمرارية السلسة
   function setupMarqueeInteraction() {
     const marqueeContainer = document.getElementById('reviews-marquee-container');
     const marqueeTrack = document.getElementById('reviews-marquee-track');
@@ -980,7 +1141,7 @@
     }, { passive: true });
   }
 
-  // رسم الكرة الشبكية 3D الأساسية
+  // الكرة الشبكية 3D
   (function(){
     var canvas = document.getElementById('globe');
     if(!canvas) return;
@@ -1057,6 +1218,7 @@
     draw();
   })();
 
+  // لغة الموقع وزر الكورة الشكبي AR / EN
   var translations = {
     en: { 
       "nav-bundles": "Bundles", "nav-packs": "Featured Packs", "nav-categories": "Categories", 
@@ -1100,6 +1262,13 @@
     currentLang = currentLang === 'en' ? 'ar' : 'en';
     document.documentElement.setAttribute('dir', currentLang === 'ar' ? 'rtl' : 'ltr');
     document.documentElement.setAttribute('lang', currentLang);
+    
+    // تحديث الشعار AR / EN بداخل زر الكورة الشبكيه
+    const badgeText = document.getElementById('lang-badge-text');
+    if (badgeText) {
+      badgeText.textContent = currentLang === 'en' ? 'AR' : 'EN';
+    }
+
     var dict = translations[currentLang] || {};
     var els = document.querySelectorAll('[data-i18n]');
     for (var i = 0; i < els.length; i++) {
@@ -1112,29 +1281,31 @@
       if (dict[phKey]) phEls[j].setAttribute('placeholder', dict[phKey]);
     }
   };
+
   window.toggleTheme = function () {
     var root = document.documentElement;
     root.classList.toggle('dark'); root.classList.toggle('light');
   };
-  window.openPreview = function (title, tag) {
-    var titleEl = document.getElementById('preview-title'), tagEl = document.getElementById('preview-tag'), modal = document.getElementById('preview-modal');
-    if (titleEl) titleEl.textContent = title;
-    if (tagEl) tagEl.textContent = tag;
-    if (modal) modal.classList.remove('opacity-0', 'pointer-events-none');
+
+  // منتجات افتراضية داخل الأقسام مع صور احترافية
+  var CATEGORY_DATA = { 
+    CC: [
+      { id: 'cc_1', title: 'Teal & Orange Grade', tag: 'CC Pack', price: 25, img: 'https://images.unsplash.com/photo-1534447677768-be436bb09401?w=600&auto=format&fit=crop' },
+      { id: 'cc_2', title: 'Cinematic Film Base', tag: 'CC Pack', price: 30, img: 'https://images.unsplash.com/photo-1518173946687-a4c8a383392e?w=600&auto=format&fit=crop' },
+      { id: 'cc_3', title: 'Dark Knight Grade', tag: 'CC Pack', price: 20, img: 'https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=600&auto=format&fit=crop' }
+    ], 
+    SHAKE: [
+      { id: 'sh_1', title: 'Hard Impact Shake', tag: 'Shake Presets', price: 15, img: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=600&auto=format&fit=crop' },
+      { id: 'sh_2', title: 'Bass Drop Bounce', tag: 'Shake Presets', price: 20, img: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?w=600&auto=format&fit=crop' },
+      { id: 'sh_3', title: 'Smooth Whip Pan', tag: 'Shake Presets', price: 18, img: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=600&auto=format&fit=crop' }
+    ], 
+    XML: [
+      { id: 'xml_1', title: 'Pro Intro Template', tag: 'XML Project', price: 40, img: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600&auto=format&fit=crop' },
+      { id: 'xml_2', title: 'Velocity Edit XML', tag: 'XML Project', price: 35, img: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=600&auto=format&fit=crop' },
+      { id: 'xml_3', title: 'Glow Shake Timeline', tag: 'XML Project', price: 45, img: 'https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?w=600&auto=format&fit=crop' }
+    ] 
   };
-  window.closePreview = function () {
-    var modal = document.getElementById('preview-modal');
-    if (modal) modal.classList.add('opacity-0', 'pointer-events-none');
-  };
-  window.openSupportModal = function () {
-    var modal = document.getElementById('support-modal');
-    if (modal) modal.classList.remove('opacity-0', 'pointer-events-none');
-  };
-  window.closeSupportModal = function () {
-    var modal = document.getElementById('support-modal');
-    if (modal) modal.classList.add('opacity-0', 'pointer-events-none');
-  };
-  var CATEGORY_DATA = { CC: ['Teal & Orange Grade', 'Cinematic Film Base', 'Dark Knight Grade'], SHAKE: ['Hard Impact Shake', 'Bass Drop Bounce', 'Smooth Whip Pan'], XML: ['Pro Intro Template', 'Velocity Edit XML', 'Glow Shake Timeline'] };
+
   window.showView = function (viewId) {
     var views = document.querySelectorAll('.view');
     for (var i = 0; i < views.length; i++) views[i].classList.add('view-hidden');
@@ -1142,16 +1313,35 @@
     if (target) target.classList.remove('view-hidden');
     window.scrollTo({ top: 0, behavior: 'instant' });
   };
+
   window.openCategory = function (key) {
     var titleEl = document.getElementById('cat-title'), gridEl = document.getElementById('cat-grid');
     if (titleEl) titleEl.textContent = key;
     var items = CATEGORY_DATA[key] || [], html = '';
     for (var i = 0; i < items.length; i++) {
-      html += '<div onclick="window.openPreview(\'' + items[i] + '\', \'' + key + '\')" class="cat-card-glass flex flex-col justify-between min-h-[140px] text-left border-l-4 border-purple-500"><span class="text-[10px] font-bold uppercase opacity-70">' + key + ' Pack</span><h3 class="font-head font-bold text-xl mt-4">' + items[i] + '</h3></div>';
+      var item = items[i];
+      html += `
+        <div class="cat-card-glass flex flex-col justify-between overflow-hidden border border-white/10 group rounded-3xl p-4 backdrop-blur-xl">
+          <div class="relative w-full h-44 rounded-2xl overflow-hidden mb-4">
+            <img src="${item.img}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+            <span class="absolute top-2 left-2 text-[10px] font-bold uppercase bg-black/80 px-2.5 py-1 rounded-full text-yellow-400 border border-yellow-500/30">${item.tag}</span>
+            <button onclick="window.toggleFavorite('${item.id}', '${item.title}', '${item.tag}', ${item.price}, '${item.img}')" class="absolute top-2 right-2 w-8 h-8 rounded-full bg-black/60 backdrop-blur-md border border-white/20 flex items-center justify-center text-red-400 hover:scale-110 transition">❤</button>
+          </div>
+          <div class="text-left flex-grow">
+            <h3 class="font-head font-bold text-lg text-white mb-1">${item.title}</h3>
+            <span class="font-mono text-yellow-400 font-extrabold text-sm">$${item.price}</span>
+          </div>
+          <div class="flex gap-2 mt-4">
+            <button onclick="window.addToCart('${item.id}', '${item.title}', ${item.price}, '${item.img}')" class="flex-1 py-2 px-3 rounded-xl bg-yellow-500/20 hover:bg-yellow-500/30 border border-yellow-500/40 text-yellow-400 font-bold text-xs transition">Add to Cart</button>
+            <button onclick="window.shareProduct('${item.title}', '${item.tag}')" class="py-2 px-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-white font-bold text-xs transition">🔗 Share</button>
+          </div>
+        </div>
+      `;
     }
     if (gridEl) gridEl.innerHTML = html;
     window.showView('category-view');
   };
+
   window.openWebTiers = function () { window.showView('web-view'); };
   window.backToHome  = function () { window.showView('main-view'); };
   window.scrollToId = function (id) {
@@ -1162,6 +1352,7 @@
   if (yr) yr.textContent = new Date().getFullYear();
 
   function initScrollAnimations() {
+    window.updateBadges();
     fetchLiveStats();
     var observer = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
