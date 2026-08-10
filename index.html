@@ -172,9 +172,11 @@
   .animate-marquee { display: flex; width: max-content; animation: marquee 30s linear infinite; }
   .animate-marquee:hover { animation-play-state: paused; }
 
-  #reviews-marquee-container { overflow-x: auto; scrollbar-width: none; cursor: grab; user-select: none; }
+  /* اتجاه ثابت وسلس للشريط بدون أن تتأثر بكرة الترجمة */
+  #reviews-marquee-container { direction: ltr !important; overflow-x: auto; scrollbar-width: none; cursor: grab; user-select: none; }
   #reviews-marquee-container::-webkit-scrollbar { display: none; }
   #reviews-marquee-container:active { cursor: grabbing; }
+  #reviews-marquee-track { direction: ltr !important; }
 
   .vx-price-card { position: relative; display: flex; flex-direction: column; gap: 1rem; padding: 2rem; width: 100%; height: 100%; background: var(--card-bg); backdrop-filter: blur(16px); border: 1px solid var(--card-border); border-radius: 1.75rem; box-shadow: 0 10px 30px rgba(0,0,0,0.2); z-index: 1; transition: transform .4s ease; }
   .vx-price-card:hover { transform: translateY(-5px); }
@@ -228,17 +230,18 @@
   html.light .radio > label > svg { fill: #94a3b8; }
   .radio > input:checked ~ label svg, .radio > label:hover svg, .radio > label:hover ~ label svg { fill: #ff9e0b !important; filter: drop-shadow(0 0 12px rgba(255, 158, 11, 0.8)); }
 
+  /* المربع للوضع النهاري والداكن وزر الإرسال */
   .container_chat_bot { display: flex; flex-direction: column; max-width: 480px; width: 100%; margin: 0 auto; }
   .container_chat_bot .container-chat-options { position: relative; display: flex; background: linear-gradient(to bottom right, #555, #1f1f23, #121215); border-radius: 20px; padding: 2px; overflow: hidden; }
   html.light .container_chat_bot .container-chat-options { background: linear-gradient(to bottom right, #cbd5e1, #94a3b8, #cbd5e1); }
   .container_chat_bot .chat { display: flex; flex-direction: column; background-color: rgba(10, 10, 15, 0.85); border-radius: 18px; width: 100%; overflow: hidden; backdrop-filter: blur(12px); }
   html.light .container_chat_bot .chat { background-color: rgba(255, 255, 255, 0.9); }
-  .container_chat_bot .chat input { background-color: transparent; border: none; border-bottom: 1px solid rgba(255, 255, 255, 0.08); width: 100%; color: #ffffff; font-family: 'Inter', 'Cairo', sans-serif; font-size: 12px; font-weight: 600; padding: 12px 14px; outline: none; }
+  .container_chat_bot .chat input { background-color: transparent; border: none; border-bottom: 1px solid rgba(255, 255, 255, 0.08); width: 100%; color: #ffffff; font-family: 'Inter', 'Cairo', sans-serif; font-size: 12px; font-weight: 600; padding: 12px 14px; outline: none; text-align: left; }
   html.light .container_chat_bot .chat input { color: #17131F !important; border-bottom-color: rgba(148, 163, 184, 0.2); }
   .container_chat_bot .chat input::placeholder { color: rgba(255, 255, 255, 0.35); }
   html.light .container_chat_bot .chat input::placeholder { color: #64748B !important; }
   .container_chat_bot .chat .chat-bot { position: relative; display: flex; }
-  .container_chat_bot .chat .chat-bot textarea { background-color: transparent; border: none; width: 100%; height: 75px; color: #ffffff; font-family: 'Inter', 'Cairo', sans-serif; font-size: 13px; font-weight: 500; padding: 12px 14px; resize: none; outline: none; }
+  .container_chat_bot .chat .chat-bot textarea { background-color: transparent; border: none; width: 100%; height: 75px; color: #ffffff; font-family: 'Inter', 'Cairo', sans-serif; font-size: 13px; font-weight: 500; padding: 12px 14px; resize: none; outline: none; text-align: left; }
   html.light .container_chat_bot .chat .chat-bot textarea { color: #17131F !important; }
   .container_chat_bot .chat .chat-bot textarea::placeholder { color: rgba(255, 255, 255, 0.35); }
   html.light .container_chat_bot .chat .chat-bot textarea::placeholder { color: #64748B !important; }
@@ -377,8 +380,7 @@
     <div id="top"></div>
 
     <section id="hero-section" class="max-w-7xl mx-auto px-4 sm:px-6 text-center">
-      
-      <!-- إرجاع الكرة الشبكية 3D بالهيدر بتمامها -->
+      <!-- الكرة الشبكية 3D الأساسية بتمامها -->
       <canvas id="globe"></canvas>
       <div class="floor-glow"></div>
 
@@ -482,9 +484,9 @@
     <!-- قسم التقييم والتعليق -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 py-12 border-t border-white/10 mt-12 reveal-on-scroll">
       
-      <!-- الشريط المتحرك القابل للسحب باليد يمين ويسار بحرية -->
-      <div id="reviews-marquee-container" class="w-full overflow-hidden mb-12 py-4 glass rounded-2xl hidden">
-        <div id="reviews-marquee-track" class="animate-marquee gap-6 items-center px-4"></div>
+      <!-- الشريط المتحرك الثابت الاتجاه والمعالجة لسلاسة الحركة -->
+      <div id="reviews-marquee-container" class="w-full overflow-hidden mb-12 py-4 glass rounded-2xl hidden" dir="ltr">
+        <div id="reviews-marquee-track" class="animate-marquee gap-6 items-center px-4" dir="ltr"></div>
       </div>
 
       <div class="max-w-4xl mx-auto mb-10 p-6 rounded-3xl glass border border-white/10 text-center">
@@ -515,7 +517,7 @@
           </label>
         </div>
 
-        <!-- المربع الشامل (الاسم في مكان فخم ومتناسق بالأعلى) -->
+        <!-- المربع الشامل لاسم المستخدم والتعليق -->
         <div class="container_chat_bot">
           <div class="container-chat-options">
             <div class="chat">
@@ -736,6 +738,7 @@
     window.showToast('SUBMITTING YOUR RATING...');
 
     const newReview = {
+      id: Date.now() + '_' + Math.random(),
       rating: selectedScore,
       comment: comment,
       reviewer_name: name,
@@ -762,7 +765,7 @@
     fetchLiveStats();
   };
 
-  // جلب البيانات، عداد الزوار، وتنسيق الاسم والنجوم فوق التعليق
+  // جلب البيانات، دمج التقييمات بدون تكرار، ترتيب الاسم والنجوم على اليسار فوق التعليق
   async function fetchLiveStats() {
     let allReviews = JSON.parse(localStorage.getItem('vortx_reviews_data') || '[]');
 
@@ -790,7 +793,7 @@
         const { data: dbReviews } = await supabase.from('reviews').select('*').order('created_at', { ascending: false });
         if (dbReviews && dbReviews.length > 0) {
           dbReviews.forEach(dbr => {
-            if (!allReviews.some(lr => lr.comment === dbr.comment && Number(lr.rating) === Number(dbr.rating))) {
+            if (!allReviews.some(lr => (lr.id && lr.id === dbr.id) || (lr.comment === dbr.comment && Number(lr.rating) === Number(dbr.rating) && lr.created_at === dbr.created_at))) {
               allReviews.push(dbr);
             }
           });
@@ -816,29 +819,30 @@
         countEl.textContent = allReviews.length.toLocaleString();
       }
 
-      // إظهار التعليقات فقط بالشريط مع ترتيب النجوم والاسم فوق التعليق بشكل أنيق
+      // تصفية التعليقات غير الخالية
       const commentsOnly = allReviews.filter(r => r.comment && r.comment.trim().length > 0);
       const marqueeContainer = document.getElementById('reviews-marquee-container');
       const marqueeTrack = document.getElementById('reviews-marquee-track');
 
       if (marqueeContainer && marqueeTrack) {
         if (commentsOnly.length > 0) {
-          const cardsHtml = commentsOnly.map(r => {
+          const cardsHtmlArr = commentsOnly.map(r => {
             const numStars = Number(r.rating || 5);
             const starsHtml = '★'.repeat(numStars);
-            const nameHtml = r.reviewer_name ? `<span class="text-xs text-yellow-400 font-bold">${r.reviewer_name}</span>` : '';
-            const commentHtml = `<span class="text-xs text-white/90 font-medium block mt-1">"${r.comment}"</span>`;
+            const nameText = r.reviewer_name ? r.reviewer_name : 'Anonymous';
+            const commentText = r.comment;
 
-            return `<div class="px-5 py-3 rounded-2xl border border-yellow-500/30 bg-black/80 backdrop-blur-md flex flex-col justify-center items-start gap-1 shrink-0 shadow-lg min-w-[180px]">
-               <div class="flex items-center justify-between w-full gap-3">
-                 <span class="text-yellow-400 font-bold text-sm tracking-widest">${starsHtml}</span>
-                 ${nameHtml}
-               </div>
-               ${commentHtml}
+            return `<div class="px-5 py-3 rounded-2xl border border-yellow-500/30 bg-black/80 backdrop-blur-md flex flex-col justify-center items-start gap-1 shrink-0 shadow-lg min-w-[200px] text-left">
+               <span class="text-xs text-yellow-400 font-bold block text-left">${nameText}</span>
+               <span class="text-yellow-400 font-bold text-xs tracking-widest block text-left">${starsHtml}</span>
+               <span class="text-xs text-white/90 font-medium block mt-1 text-left">"${commentText}"</span>
              </div>`;
-          }).join('');
+          });
 
-          marqueeTrack.innerHTML = cardsHtml + cardsHtml;
+          // مضاعفة العناصر فقط إذا كانت قليلة لضمان الحركة الدائرية المستمرة بدون تكرار بصري مزعج
+          const finalCardsHtml = cardsHtmlArr.length > 3 ? cardsHtmlArr.join('') + cardsHtmlArr.join('') : cardsHtmlArr.join('');
+
+          marqueeTrack.innerHTML = finalCardsHtml;
           marqueeContainer.classList.remove('hidden');
           setupMarqueeInteraction();
         } else {
@@ -848,7 +852,7 @@
     }
   }
 
-  // دعم السحب والإفلات بكل الاتجاهات (يمين ويسار) والتوقف المؤقت 5 ثواني
+  // تحكم بالسحب الحر يمين ويسار دون التعثر مع توقف مؤقت 5 ثواني
   function setupMarqueeInteraction() {
     const marqueeContainer = document.getElementById('reviews-marquee-container');
     const marqueeTrack = document.getElementById('reviews-marquee-track');
@@ -901,7 +905,7 @@
     }, { passive: true });
   }
 
-  // كود الكرة الشبكية 3D للرسم في الهيدر
+  // كود الرسم للكرة الشبكية 3D
   (function(){
     var canvas = document.getElementById('globe');
     if(!canvas) return;
