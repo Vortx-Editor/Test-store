@@ -103,6 +103,8 @@
   @keyframes upFade { to { opacity: 1; transform: translateY(0); } }
   .vortx-wet-oil-title { display: inline-block; font-weight: 900; background: linear-gradient(110deg, #ffffff 0%, #e0e0e0 20%, #ffffff 35%, #a0a0a0 50%, #ffffff 65%, #606060 80%, #ffffff 100%); background-size: 200% 100%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; animation: oilShineSweep 4s linear infinite; filter: drop-shadow(0 10px 25px rgba(0,0,0,.8)) drop-shadow(0 0 20px rgba(255,255,255,.1)); }
   @keyframes oilShineSweep { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+  .gold-heading { font-family: 'Inter', sans-serif; font-weight: 900; letter-spacing: 0.04em; background: linear-gradient(100deg, #fff7d6 0%, #f5d489 18%, #eab308 38%, #fff3c4 55%, #ca8a04 72%, #fef9c3 88%, #eab308 100%); background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; animation: goldShine 5s linear infinite; filter: drop-shadow(0 6px 18px rgba(234,179,8,.25)); }
+  @keyframes goldShine { 0% { background-position: 220% 0; } 100% { background-position: -220% 0; } }
   
   .nav-btn-item { width: 38px; height: 38px; border-radius: 999px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.05); transition: all 0.3s ease; flex-shrink: 0; }
   @media (min-width: 640px) { .nav-btn-item { width: 42px; height: 42px; } }
@@ -171,9 +173,9 @@
   header .glass { border-bottom: 1px solid rgba(255,255,255,0.05); }
   html.light header .glass { border-bottom: 1px solid rgba(100, 116, 139, 0.1); background: rgba(255,255,255,0.85) !important; }
   
-  /* انيميشن تحريك التعليقات لجهة اليمين بحركة عكسية رائعة */
+  /* حركة سريعة وسلسة للتعليقات لجهة اليمين */
   @keyframes marqueeRight { 0% { transform: translateX(-50%); } 100% { transform: translateX(0%); } }
-  .animate-marquee { display: flex; width: max-content; animation: marqueeRight 30s linear infinite; }
+  .animate-marquee { display: flex; width: max-content; animation: marqueeRight 18s linear infinite; }
   .animate-marquee:hover { animation-play-state: paused; }
 
   #reviews-marquee-container { direction: ltr !important; overflow-x: auto; scrollbar-width: none; cursor: grab; user-select: none; }
@@ -226,7 +228,6 @@
     text-shadow: 0 2px 4px rgba(0,0,0,0.5);
   }
 
-  /* تصميم زجاجي كبسولي فخم لزر العودة Back */
   .back-btn-pill {
     display: inline-flex;
     align-items: center;
@@ -501,7 +502,6 @@
       </div>
     </section>
 
-    <!-- أزرار الأقسام CC / XML / SHAKE - تغيير 5 كروت مباشرة بدون نزول الشاشة -->
     <div class="w-full max-w-5xl mx-auto px-4 sm:px-6 relative z-40 mb-10 mt-6 reveal-on-scroll">
       <div class="glass-tab-container">
         <button onclick="window.activateCategoryCards('CC', this)" class="tab-btn force-eng">CC</button>
@@ -510,7 +510,6 @@
       </div>
     </div>
 
-    <!-- كروت المنتجات ثلاثية الأبعاد الـ 5 المعتمدة مع دوران لا نهائي -->
     <section id="packs" class="py-10 w-full relative z-30 select-none bg-transparent block">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-40 text-center mb-6">
         <h2 data-i18n="packs-title" class="font-head font-bold text-3xl sm:text-5xl">Featured Packs</h2>
@@ -541,6 +540,7 @@
         <h3 data-i18n="review-title" class="font-head font-bold text-xl text-yellow-500 mb-2">Leave Your Review & Rating</h3>
         <p data-i18n="review-sub" class="text-xs opacity-70 mb-6 font-bold">Share your experience with VORTX Studio</p>
 
+        <!-- النجوم -->
         <div class="radio">
           <input value="5" name="rating" type="radio" id="rating-5" />
           <label title="5 stars" for="rating-5"><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512"><path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"></path></svg></label>
@@ -571,9 +571,10 @@
             </div>
           </div>
         </div>
+
       </div>
 
-      <!-- قائمة توزيع النجوم المئوية (من 5 إلى 1 كاملة) -->
+      <!-- قائمة توزيع النجوم الفخمة من 5 إلى 1 ★ مصلحة بدون انقصاص -->
       <div class="max-w-2xl mx-auto mb-10 p-6 rounded-3xl glass border border-yellow-500/20 text-left font-mono">
         <h4 class="text-xs uppercase font-bold text-yellow-500 tracking-widest mb-4 text-center" data-i18n="rating-breakdown">RATING DISTRIBUTION</h4>
         <div class="space-y-3.5 text-xs text-white">
@@ -702,7 +703,7 @@
     </div>
   </section>
 
-  <!-- مودال المنتجات في السنتر بوجه المستخدم فوراً عند فتح القسم أو الكروت -->
+  <!-- مودال المنتجات بوسط الشاشة مباشرة بوجه المستخدم -->
   <div id="category-modal" class="fixed inset-0 z-[130] flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
     <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="window.closeCategoryModal()"></div>
     <div class="glass rounded-3xl max-w-2xl w-full relative z-10 p-6 border border-white/10 shadow-2xl max-h-[85vh] overflow-y-auto">
@@ -735,7 +736,7 @@
     </div>
   </div>
 
-  <!-- مودال المفضلة -->
+  <!-- مودال المفضلة بالسنتر -->
   <div id="favorites-modal" class="fixed inset-0 z-[120] flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
     <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="window.closeFavoritesModal()"></div>
     <div class="glass rounded-3xl max-w-md w-full relative z-10 p-6 border border-white/10 shadow-2xl text-left">
@@ -747,7 +748,7 @@
     </div>
   </div>
 
-  <!-- مودال السلة -->
+  <!-- مودال السلة بالسنتر بوجه المستخدم مباشرة بدون نزول الشاشة -->
   <div id="cart-modal" class="fixed inset-0 z-[120] flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
     <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="window.closeCartModal()"></div>
     <div class="glass rounded-3xl max-w-md w-full relative z-10 p-6 border border-white/10 shadow-2xl text-left">
@@ -984,7 +985,7 @@
     }, 3000);
   };
 
-  // إرسال التقييم ومنع التكرار والتأكد من الحفظ الدائم
+  // إرسال التقييم
   window.submitUserRating = async function() {
     if (sessionStorage.getItem('vortx_has_rated')) {
       window.showToast('YOU HAVE ALREADY RATED THIS SESSION!');
@@ -1044,7 +1045,7 @@
     fetchLiveStats();
   };
 
-  // جلب البيانات والإحصائيات دون تكرارات مضاعفة
+  // جلب البيانات مع دمج التقييمات بدون تكرار في القائمة
   async function fetchLiveStats() {
     let allReviews = JSON.parse(localStorage.getItem('vortx_reviews_data') || '[]');
 
@@ -1132,8 +1133,8 @@
              </div>`;
           });
 
-          // عرض التعليقات بدون تكرار ثلاثي مزعج
-          marqueeTrack.innerHTML = cardsHtmlArr.join('') + cardsHtmlArr.join('');
+          // منع التكرار الثلاثي المزعج
+          marqueeTrack.innerHTML = cardsHtmlArr.join('');
           marqueeContainer.classList.remove('hidden');
           setupMarqueeInteraction();
         } else {
@@ -1143,6 +1144,7 @@
     }
   }
 
+  // تحكم حر بالسحب مع ضمان الاستمرارية السلسة جهة اليمين
   function setupMarqueeInteraction() {
     const marqueeContainer = document.getElementById('reviews-marquee-container');
     const marqueeTrack = document.getElementById('reviews-marquee-track');
@@ -1195,7 +1197,7 @@
     }, { passive: true });
   }
 
-  // رسم الكرة الشبكية 3D بالهيدر
+  // الكرة الشبكية 3D
   (function(){
     var canvas = document.getElementById('globe');
     if(!canvas) return;
@@ -1361,7 +1363,6 @@
     ] 
   };
 
-  // تفعيل فتح مودال المنتجات بوسط الشاشة مباشرة بوجه المستخدم
   window.openCategoryModal = function(key) {
     const titleEl = document.getElementById('cat-modal-title');
     const tagEl = document.getElementById('cat-modal-tag');
@@ -1400,7 +1401,6 @@
     if (modal) modal.classList.add('opacity-0', 'pointer-events-none');
   };
 
-  // دالة تغيير الـ 5 كروت ثلاثية الأبعاد فوراً حسب زر القسم بدون نزول الصفحة
   window.activateCategoryCards = function(categoryKey, btn) {
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
     if (btn) btn.classList.add('active');
@@ -1484,7 +1484,6 @@
 <script>
 document.addEventListener('DOMContentLoaded', function() {
   "use strict";
-  // 5 كروت معتمدة وثابتة للتنقل اللانهائي
   window.CARDS_DATA_CURRENT = [
     { title: "BLACK VIP", tag: "VFX PACK", number: "•••• 8829", bg: "linear-gradient(135deg, #09090b 0%, #18181b 50%, #27272a 100%)", border: "rgba(255, 255, 255, 0.2)", chip: "linear-gradient(135deg, #e2e8f0, #94a3b8)" },
     { title: "ROYAL GOLD", tag: "COLOR GRADE", number: "•••• 4021", bg: "linear-gradient(135deg, #451a03 0%, #78350f 50%, #b45309 100%)", border: "rgba(251, 191, 36, 0.4)", chip: "linear-gradient(135deg, #fef08a, #ca8a04)" },
