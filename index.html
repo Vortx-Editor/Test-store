@@ -199,9 +199,6 @@
   html.light .container_chat_bot .chat .options .btn-submit:hover i { color: #1e293b !important; filter: none !important; }
   .container_chat_bot .chat .options .btn-submit:active { transform: scale(0.92); }
 
-  html.light #reviews-marquee-track > div { background: rgba(255, 255, 255, 0.9) !important; border-color: rgba(203, 213, 225, 0.6) !important; color: #17131F !important; }
-  html.light #reviews-marquee-track span.text-white\/90 { color: #334155 !important; }
-
   html.light .vx-price-card { background: rgba(255, 255, 255, 0.8); border: 1px solid rgba(203, 213, 225, 0.4); box-shadow: 0 15px 35px -10px rgba(100, 116, 139, 0.08); }
   html.light .vx-price-card .card_title { color: #17131F; }
   html.light .vx-price-card .card_price { color: #d97706; }
@@ -223,7 +220,7 @@
   </p>
 </div>
 
-<!-- المودالات المباشرة تحت body لمنع نزول الشاشة وتثبيتها بالسنتر -->
+<!-- المودالات المباشرة تحت body لمنع نزول الشاشة وتثبيتها بالسنتر 100% -->
 <div id="category-modal" class="fixed inset-0 z-[10000] flex items-center justify-center p-4 h-[100dvh] w-screen opacity-0 pointer-events-none transition-opacity duration-300">
   <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="window.closeCategoryModal()"></div>
   <div class="glass rounded-3xl max-w-2xl w-full relative z-10 p-6 border border-white/10 shadow-2xl max-h-[85vh] overflow-y-auto">
@@ -307,6 +304,7 @@
   </div>
 </div>
 
+<!-- المحتوى الرئيسي -->
 <div id="app-content">
 
   <header class="sticky top-0 z-50 w-full">
@@ -625,7 +623,17 @@
     </div>
   </section>
 
+</div> <!-- نهاية app-content -->
+
 <script>
+  window.openTelegramOrder = function(planName, price) {
+    const telegramUsername = 'wot_5'; 
+    const message = `Hey VORTX! I want to purchase the ${planName} package ($${price}).`;
+    const encodedMessage = encodeURIComponent(message);
+    const telegramUrl = `https://t.me/${telegramUsername}?text=${encodedMessage}`;
+    window.open(telegramUrl, '_blank');
+  };
+
   (function () {
     "use strict";
 
@@ -732,7 +740,6 @@
       setTimeout(function () { if (toast && toast.parentNode) toast.parentNode.removeChild(toast); }, 3000);
     };
 
-    // إرسال التقييم مع التأكد من الحفظ الفوري
     window.submitUserRating = async function() {
       const ratingRadio = document.querySelector('input[name="rating"]:checked');
       if (!ratingRadio) { window.showToast('PLEASE SELECT A STAR RATING FIRST!'); return; }
@@ -746,7 +753,7 @@
       if (comment && BAD_WORDS.some(word => comment.toLowerCase().includes(word))) { window.showToast('REVIEW REJECTED: INAPPROPRIATE CONTENT!'); return; }
 
       window.showToast('SUBMITTING YOUR RATING...');
-      const newId = 'rev_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+      const newId = 'rev_' + Date.now() + '_' + Math.random().toString(36).substr(2, 7);
       const newReview = { id: newId, rating: selectedScore, comment: comment, reviewer_name: name, created_at: new Date().toISOString() };
 
       let localReviews = JSON.parse(localStorage.getItem('vortx_reviews_data') || '[]');
@@ -767,7 +774,6 @@
       fetchLiveStats();
     };
 
-    // جلب الإحصائيات مع تصفية التكرارات بدقة
     async function fetchLiveStats() {
       let localReviews = JSON.parse(localStorage.getItem('vortx_reviews_data') || '[]');
       let localVisits = parseInt(localStorage.getItem('vortx_visit_count') || '0', 10) + 1;
@@ -836,7 +842,6 @@
               return `<div class="px-5 py-3 rounded-2xl border border-yellow-500/30 bg-black/80 backdrop-blur-md flex flex-col justify-center items-start gap-1 shrink-0 shadow-lg min-w-[200px] text-left"><span class="text-xs text-yellow-400 font-bold block text-left">${nameText}</span><span class="text-yellow-400 font-bold text-xs tracking-widest block text-left">${starsHtml}</span><span class="text-xs text-white/90 font-medium block mt-1 text-left">"${r.comment}"</span></div>`;
             });
 
-            // عرض نظيف وسلس بدون تكرار
             marqueeTrack.innerHTML = cardsHtmlArr.join('') + cardsHtmlArr.join('');
             marqueeContainer.classList.remove('hidden');
             setupMarqueeInteraction();
@@ -847,7 +852,6 @@
       }
     }
 
-    // محرك حركة التعليقات لليمين بسرعة ممتازة وسلسة وسحب بدون تعليق
     function setupMarqueeInteraction() {
       const container = document.getElementById('reviews-marquee-container');
       if (!container) return;
