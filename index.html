@@ -29,38 +29,19 @@
 </script>
 <style>
   :root {
-    --ink: #050505;
-    --brand: #7e22ce;
-    --brandLight: #a855f7;
-    --bg-color: #050505; 
-    --text-color: #e8e8ef;
-    --subtext-color: rgba(255, 255, 255, 0.75);
+    --ink: #050505; --brand: #7e22ce; --brandLight: #a855f7; --bg-color: #050505; 
+    --text-color: #e8e8ef; --subtext-color: rgba(255, 255, 255, 0.75);
     --star-bg: radial-gradient(120% 80% at 50% 12%, #131314 0%, #0a0a0b 55%, #050505 100%);
-    --star-opacity: 0.6;
-    --anim--hover-time: 400ms;
-    --anim--hover-ease: cubic-bezier(0.25, 1, 0.5, 1);
-    --btn-text-color: rgba(255, 255, 255, 0.95);
-    --card-bg: rgba(255, 255, 255, 0.04);
-    --card-border: rgba(255, 255, 255, 0.1);
-    --globe-line: 205, 210, 200; 
-    --globe-ring: 190, 195, 185;
-    --globe-point: 233, 236, 228;
-    --loader-bg: #050505;
+    --star-opacity: 0.6; --anim--hover-time: 400ms; --anim--hover-ease: cubic-bezier(0.25, 1, 0.5, 1);
+    --btn-text-color: rgba(255, 255, 255, 0.95); --card-bg: rgba(255, 255, 255, 0.04);
+    --card-border: rgba(255, 255, 255, 0.1); --globe-line: 205, 210, 200; 
+    --globe-ring: 190, 195, 185; --globe-point: 233, 236, 228; --loader-bg: #050505;
   }
   html.light {
-    --ink: #17131F;
-    --bg-color: #F4F2F7;
-    --text-color: #17131F;
-    --subtext-color: #625D6B;
-    --star-bg: #F4F2F7;
-    --star-opacity: 1;
-    --btn-text-color: #ffffff;
-    --card-bg: rgba(255, 255, 255, 0.75);
-    --card-border: rgba(210, 215, 225, 0.3);
-    --globe-line: 124, 42, 232;
-    --globe-ring: 76, 29, 149;
-    --globe-point: 124, 42, 232;
-    --loader-bg: #F4F2F7;
+    --ink: #17131F; --bg-color: #F4F2F7; --text-color: #17131F; --subtext-color: #625D6B;
+    --star-bg: #F4F2F7; --star-opacity: 1; --btn-text-color: #ffffff;
+    --card-bg: rgba(255, 255, 255, 0.75); --card-border: rgba(210, 215, 225, 0.3);
+    --globe-line: 124, 42, 232; --globe-ring: 76, 29, 149; --globe-point: 124, 42, 232; --loader-bg: #F4F2F7;
   }
   * , *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { max-width: 100vw; overflow-x: clip; scroll-behavior: smooth; }
@@ -80,7 +61,6 @@
   html.light .golden-bundle-card { background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(244,242,247,0.9) 100%) !important; border: 1px solid rgba(196, 154, 58, 0.2) !important; box-shadow: 0 25px 50px -12px rgba(100, 116, 139, 0.08), inset 0 0 35px rgba(255,255,255,0.9) !important; }
   html.light .btn-3d-style { background: linear-gradient(135deg, #475569 0%, #1e293b 100%) !important; box-shadow: 0 8px 20px -4px rgba(100, 116, 139, 0.3), inset 0 1px 1px rgba(255,255,255,0.3) !important; }
   html.light .btn-3d-style span { color: #ffffff !important; text-shadow: none !important; }
-  
   h1, h2, h3, .font-head { font-family: 'Cinzel', serif; letter-spacing: 1.5px; }
   .force-eng { font-family: 'Cinzel', serif !important; letter-spacing: 0.25em !important; direction: ltr !important; unicode-bidi: isolate-override !important; display: inline-block; }
   .stars-background-container { position: absolute; inset: 0; width: 100%; height: 100%; background: var(--star-bg); overflow: hidden; z-index: 0; pointer-events: none; transition: background .4s ease; }
@@ -105,11 +85,9 @@
   @keyframes oilShineSweep { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
   .gold-heading { font-family: 'Inter', sans-serif; font-weight: 900; letter-spacing: 0.04em; background: linear-gradient(100deg, #fff7d6 0%, #f5d489 18%, #eab308 38%, #fff3c4 55%, #ca8a04 72%, #fef9c3 88%, #eab308 100%); background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; animation: goldShine 5s linear infinite; filter: drop-shadow(0 6px 18px rgba(234,179,8,.25)); }
   @keyframes goldShine { 0% { background-position: 220% 0; } 100% { background-position: -220% 0; } }
-  
   .nav-btn-item { width: 38px; height: 38px; border-radius: 999px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.05); transition: all 0.3s ease; flex-shrink: 0; }
   @media (min-width: 640px) { .nav-btn-item { width: 42px; height: 42px; } }
   .nav-btn-item:hover { background: rgba(255,255,255,0.12); transform: scale(1.05); }
-
   .theme-switch-btn { width: 56px; height: 30px; border-radius: 999px; background: transparent; border: 1px solid rgba(255,255,255,0.2); position: relative; cursor: pointer; transition: all .4s ease; display: flex; align-items: center; flex-shrink: 0; }
   html.light .theme-switch-btn { background: #ffffff; border-color: rgba(203, 213, 225, 0.4); box-shadow: inset 0 2px 10px rgba(100, 116, 139, 0.05), 0 4px 12px rgba(100, 116, 139, 0.1); }
   .theme-switch-ball { width: 22px; height: 22px; border-radius: 50%; position: absolute; left: 3px; background: rgba(255,255,255,0.15); color: white; transition: transform .4s cubic-bezier(0.25, 1, 0.5, 1), background .4s ease, color .4s ease; display: flex; align-items: center; justify-content: center; }
@@ -118,19 +96,10 @@
   .icon-sun { display: none; width: 13px; height: 13px; }
   html.light .icon-moon { display: none; }
   html.light .icon-sun { display: block; }
-
-  @keyframes supportGlint {
-    0%, 100% { box-shadow: 0 0 0 rgba(234, 179, 8, 0); border-color: rgba(255,255,255,0.1); }
-    50% { box-shadow: 0 0 15px rgba(234, 179, 8, 0.6); border-color: rgba(234, 179, 8, 0.8); }
-  }
-  @keyframes sweepShine {
-    0% { left: -150%; }
-    20% { left: 150%; }
-    100% { left: 150%; }
-  }
+  @keyframes supportGlint { 0%, 100% { box-shadow: 0 0 0 rgba(234, 179, 8, 0); border-color: rgba(255,255,255,0.1); } 50% { box-shadow: 0 0 15px rgba(234, 179, 8, 0.6); border-color: rgba(234, 179, 8, 0.8); } }
+  @keyframes sweepShine { 0% { left: -150%; } 20% { left: 150%; } 100% { left: 150%; } }
   .support-glow-btn { position: relative; overflow: hidden; animation: supportGlint 3s ease-in-out infinite; }
   .support-glow-btn::before { content: ''; position: absolute; top: 0; left: -150%; width: 50%; height: 100%; background: linear-gradient(90deg, transparent, rgba(234,179,8,0.8), transparent); transform: skewX(-25deg); animation: sweepShine 3s infinite; }
-
   .vortx-explore-btn { position: relative; display: inline-flex; flex-direction: column; align-items: center; justify-content: center; padding: 0.85rem 2.2rem; border-radius: 999px; cursor: pointer; background: rgba(15, 15, 20, 0.6); border: 1px solid rgba(255, 255, 255, 0.2); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 25px rgba(226, 232, 240, 0.18); transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); min-width: 220px; text-align: center; }
   html.light .vortx-explore-btn { background: rgba(255, 255, 255, 0.8); border: 1px solid rgba(148, 163, 184, 0.3); box-shadow: 0 10px 30px rgba(100, 116, 139, 0.1), 0 0 25px rgba(148, 163, 184, 0.2); }
   .vortx-explore-btn:hover { transform: scale(1.02); background: rgba(255, 255, 255, 0.15); border-color: rgba(255, 255, 255, 0.5); box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 35px rgba(241, 245, 249, 0.35); }
@@ -146,7 +115,6 @@
   html.light .tab-btn:hover { background: rgba(100, 116, 139, 0.05); }
   .tab-btn.active { background: linear-gradient(135deg, #eab308 0%, #ca8a04 100%); color: #050505 !important; opacity: 1; border-color: rgba(255,255,255,0.4); box-shadow: 0 4px 15px rgba(234, 179, 8, 0.4), inset 0 2px 4px rgba(255,255,255,0.5); transform: scale(1.02); }
   html.light .tab-btn.active { background: linear-gradient(135deg, #475569 0%, #1e293b 100%); color: #ffffff !important; border-color: rgba(148, 163, 184, 0.4); box-shadow: 0 4px 15px rgba(100, 116, 139, 0.3), inset 0 2px 4px rgba(255,255,255,0.2); }
-  
   .cat-card-glass { background: var(--card-bg); backdrop-filter: blur(16px); border: 1px solid var(--card-border); border-radius: 1.75rem; padding: 1.75rem 2rem; cursor: pointer; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
   .cat-card-glass:hover { transform: translateY(-5px); }
   .view { transition: opacity .4s ease; opacity: 1; display: block; }
@@ -173,15 +141,10 @@
   header .glass { border-bottom: 1px solid rgba(255,255,255,0.05); }
   html.light header .glass { border-bottom: 1px solid rgba(100, 116, 139, 0.1); background: rgba(255,255,255,0.85) !important; }
   
-  /* حركة سريعة وسلسة للتعليقات لجهة اليمين */
-  @keyframes marqueeRight { 0% { transform: translateX(-50%); } 100% { transform: translateX(0%); } }
-  .animate-marquee { display: flex; width: max-content; animation: marqueeRight 18s linear infinite; }
-  .animate-marquee:hover { animation-play-state: paused; }
-
-  #reviews-marquee-container { direction: ltr !important; overflow-x: auto; scrollbar-width: none; cursor: grab; user-select: none; }
-  #reviews-marquee-container::-webkit-scrollbar { display: none; }
-  #reviews-marquee-container:active { cursor: grabbing; }
-  #reviews-marquee-track { direction: ltr !important; }
+  /* اعدادات شريط التعليقات للتحكم بواسطة JS والسحب */
+  .hide-scrollbar::-webkit-scrollbar { display: none; }
+  .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; overflow-x: auto; cursor: grab; user-select: none; }
+  .hide-scrollbar:active { cursor: grabbing; }
 
   .vx-price-card { position: relative; display: flex; flex-direction: column; gap: 1rem; padding: 2rem; width: 100%; height: 100%; background: var(--card-bg); backdrop-filter: blur(16px); border: 1px solid var(--card-border); border-radius: 1.75rem; box-shadow: 0 10px 30px rgba(0,0,0,0.2); z-index: 1; transition: transform .4s ease; }
   .vx-price-card:hover { transform: translateY(-5px); }
@@ -195,63 +158,14 @@
   .vx-price-card .check_svg { width: 0.75rem; height: 0.75rem; fill: #eab308; }
   .vx-price-card .list_text { font-size: 0.85rem; color: var(--text-color); font-weight: 600; opacity: 0.9; }
   .vx-price-card .delivery_text { font-size: 0.85rem; font-weight: 800; color: #a855f7; text-align: center; text-transform: uppercase; margin-top: auto; padding-top: 1rem; letter-spacing: 1px; }
-  
-  .vx-price-card .button-wrap {
-    width: 100% !important;
-    margin: 1rem 0 0 0 !important;
-    cursor: pointer;
-    transition: transform 0.1s ease !important;
-  }
-  .vx-price-card .button-wrap:active {
-    transform: scale(0.97);
-  }
-  .vx-price-card .btn-3d-style {
-    background: rgba(255, 255, 255, 0.08) !important;
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border-radius: 999px !important;
-    padding: 0.85rem 1.5rem !important;
-    text-align: center;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.2) !important;
-    transition: all 0.2s ease !important;
-  }
-  .vx-price-card .btn-3d-style:hover {
-    background: rgba(255, 255, 255, 0.15) !important;
-    border-color: rgba(255, 255, 255, 0.4) !important;
-  }
-  .vx-price-card .btn-3d-style span {
-    color: #eab308 !important;
-    font-weight: 800 !important;
-    font-size: 0.95rem;
-    letter-spacing: 0.05em;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-  }
+  .vx-price-card .button-wrap { width: 100% !important; margin: 1rem 0 0 0 !important; cursor: pointer; transition: transform 0.1s ease !important; }
+  .vx-price-card .button-wrap:active { transform: scale(0.97); }
+  .vx-price-card .btn-3d-style { background: rgba(255, 255, 255, 0.08) !important; border: 1px solid rgba(255, 255, 255, 0.2) !important; backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-radius: 999px !important; padding: 0.85rem 1.5rem !important; text-align: center; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.2) !important; transition: all 0.2s ease !important; }
+  .vx-price-card .btn-3d-style:hover { background: rgba(255, 255, 255, 0.15) !important; border-color: rgba(255, 255, 255, 0.4) !important; }
+  .vx-price-card .btn-3d-style span { color: #eab308 !important; font-weight: 800 !important; font-size: 0.95rem; letter-spacing: 0.05em; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
 
-  .back-btn-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.6rem 1.4rem;
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    color: #eab308;
-    font-weight: 800;
-    font-size: 0.9rem;
-    letter-spacing: 0.05em;
-    cursor: pointer;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.3), inset 0 1px 1px rgba(255,255,255,0.2);
-    transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1);
-  }
-  .back-btn-pill:hover {
-    background: rgba(255, 255, 255, 0.18);
-    border-color: rgba(234, 179, 8, 0.5);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(234, 179, 8, 0.25);
-  }
+  .back-btn-pill { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.6rem 1.4rem; border-radius: 999px; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.2); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); color: #eab308; font-weight: 800; font-size: 0.9rem; letter-spacing: 0.05em; cursor: pointer; box-shadow: 0 6px 20px rgba(0,0,0,0.3), inset 0 1px 1px rgba(255,255,255,0.2); transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1); }
+  .back-btn-pill:hover { background: rgba(255, 255, 255, 0.18); border-color: rgba(234, 179, 8, 0.5); transform: translateY(-2px); box-shadow: 0 8px 25px rgba(234, 179, 8, 0.25); }
   .back-btn-pill:active { transform: scale(0.95); }
 
   .radio { display: flex; justify-content: center; gap: 12px; margin-bottom: 1.5rem; direction: ltr; }
@@ -285,9 +199,6 @@
   .container_chat_bot .chat .options .btn-submit:hover i { color: #fff; filter: drop-shadow(0 0 8px #eab308); }
   html.light .container_chat_bot .chat .options .btn-submit:hover i { color: #1e293b !important; filter: none !important; }
   .container_chat_bot .chat .options .btn-submit:active { transform: scale(0.92); }
-
-  html.light #reviews-marquee-track > div { background: rgba(255, 255, 255, 0.9) !important; border-color: rgba(203, 213, 225, 0.6) !important; color: #17131F !important; }
-  html.light #reviews-marquee-track span.text-white\/90 { color: #334155 !important; }
 
   html.light .vx-price-card { background: rgba(255, 255, 255, 0.8); border: 1px solid rgba(203, 213, 225, 0.4); box-shadow: 0 15px 35px -10px rgba(100, 116, 139, 0.08); }
   html.light .vx-price-card .card_title { color: #17131F; }
@@ -529,18 +440,18 @@
       </div>
     </section>
 
-    <!-- قسم التقييم والتعليق بالشريط التفاعلي جهة اليمين -->
+    <!-- قسم التقييم والتعليق -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 py-12 border-t border-white/10 mt-12 reveal-on-scroll">
       
-      <div id="reviews-marquee-container" class="w-full overflow-hidden mb-12 py-4 glass rounded-2xl hidden" dir="ltr">
-        <div id="reviews-marquee-track" class="animate-marquee gap-6 items-center px-4" dir="ltr"></div>
+      <!-- الشريط المتحرك (أسرع، يتحرك لليمين، وقابل للسحب باليد بسلاسة) -->
+      <div id="reviews-marquee-container" class="w-full mb-12 py-4 glass rounded-2xl hidden hide-scrollbar" dir="ltr">
+        <div id="reviews-marquee-track" class="flex gap-6 items-center px-4 w-max" dir="ltr"></div>
       </div>
 
       <div class="max-w-4xl mx-auto mb-10 p-6 rounded-3xl glass border border-white/10 text-center">
         <h3 data-i18n="review-title" class="font-head font-bold text-xl text-yellow-500 mb-2">Leave Your Review & Rating</h3>
         <p data-i18n="review-sub" class="text-xs opacity-70 mb-6 font-bold">Share your experience with VORTX Studio</p>
 
-        <!-- النجوم -->
         <div class="radio">
           <input value="5" name="rating" type="radio" id="rating-5" />
           <label title="5 stars" for="rating-5"><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512"><path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"></path></svg></label>
@@ -571,10 +482,8 @@
             </div>
           </div>
         </div>
-
       </div>
 
-      <!-- قائمة توزيع النجوم الفخمة من 5 إلى 1 ★ مصلحة بدون انقصاص -->
       <div class="max-w-2xl mx-auto mb-10 p-6 rounded-3xl glass border border-yellow-500/20 text-left font-mono">
         <h4 class="text-xs uppercase font-bold text-yellow-500 tracking-widest mb-4 text-center" data-i18n="rating-breakdown">RATING DISTRIBUTION</h4>
         <div class="space-y-3.5 text-xs text-white">
@@ -586,7 +495,6 @@
         </div>
       </div>
 
-      <!-- لوحة الإحصائيات الأربعة بأسفل الصفحة بأرقام إنجليزية أصلية -->
       <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center mt-8">
         <div class="glass p-6 rounded-2xl border border-white/10">
           <h4 class="font-mono font-black text-3xl sm:text-4xl text-current tracking-wider"><span class="counter-num text-current" id="live-reviews-count" data-target="0">0</span></h4>
@@ -614,18 +522,14 @@
       </div>
     </footer>
   </main>
-
   <section id="web-view" class="view view-hidden relative z-10 min-h-screen">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
       <div class="flex items-center justify-between mb-12">
         <div class="text-left"><span data-i18n="tiers-sub" class="text-xs tracking-widest uppercase font-bold text-current opacity-70">Web Solutions</span><h2 data-i18n="tiers-title" class="font-head font-bold text-4xl mt-3">Development Tiers</h2></div>
-        <!-- زر Back الزجاجي المطور -->
         <button onclick="window.backToHome()" class="back-btn-pill"><span>←</span> <span data-i18n="back-btn">Back</span></button>
       </div>
       
       <div class="grid lg:grid-cols-3 gap-8 items-stretch">
-        
-        <!-- باقة STARTER ($150) -->
         <div class="vx-price-card">
           <div class="card_title__container">
             <span class="card_title" data-i18n="plan-s-title">STARTER</span>
@@ -646,7 +550,6 @@
           </div>
         </div>
 
-        <!-- باقة PREMIUM ($300) -->
         <div class="vx-price-card">
           <div class="card_title__container">
             <span class="card_title" data-i18n="plan-p-title">PREMIUM</span>
@@ -667,7 +570,6 @@
           </div>
         </div>
 
-        <!-- باقة ELITE ($600) -->
         <div class="vx-price-card">
           <div class="card_title__container">
             <span class="card_title" data-i18n="plan-v-title">ELITE</span>
@@ -687,24 +589,12 @@
             <div class="btn-3d-style"><span data-i18n="select-plan">Buy Now</span></div>
           </div>
         </div>
-        
       </div>
     </div>
   </section>
 
-  <section id="category-view" class="view view-hidden relative z-10 min-h-screen">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
-      <div class="flex items-center justify-between mb-12">
-        <div><span data-i18n="cat-view-sub" class="text-xs tracking-widest uppercase font-bold text-current opacity-70" data-i18n-sub="collection">Collection</span><h2 id="cat-title" class="font-head font-bold text-4xl mt-3 force-eng">CC</h2></div>
-        <!-- زر Back الزجاجي المطور -->
-        <button onclick="window.backToHome()" class="back-btn-pill"><span>←</span> <span data-i18n="back-btn">Back</span></button>
-      </div>
-      <div id="cat-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
-    </div>
-  </section>
-
-  <!-- مودال المنتجات بوسط الشاشة مباشرة بوجه المستخدم -->
-  <div id="category-modal" class="fixed inset-0 z-[130] flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
+  <!-- المودالات مثبتة بسنتر الشاشة وما تخلي الصفحة تتحرك -->
+  <div id="category-modal" class="fixed inset-0 z-[130] flex items-center justify-center p-4 h-[100dvh] w-screen opacity-0 pointer-events-none transition-opacity duration-300">
     <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="window.closeCategoryModal()"></div>
     <div class="glass rounded-3xl max-w-2xl w-full relative z-10 p-6 border border-white/10 shadow-2xl max-h-[85vh] overflow-y-auto">
       <div class="flex items-center justify-between mb-6 sticky top-0 bg-black/60 backdrop-blur-md p-2 rounded-2xl z-20 border border-white/10">
@@ -718,8 +608,7 @@
     </div>
   </div>
 
-  <!-- مودال التنبيهات المطور -->
-  <div id="notifications-modal" class="fixed inset-0 z-[120] flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
+  <div id="notifications-modal" class="fixed inset-0 z-[120] flex items-center justify-center p-4 h-[100dvh] w-screen opacity-0 pointer-events-none transition-opacity duration-300">
     <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="window.closeNotificationsModal()"></div>
     <div class="glass rounded-3xl max-w-sm w-full relative z-10 p-6 border border-white/10 shadow-2xl text-left">
       <div class="flex items-center justify-between mb-4">
@@ -736,8 +625,7 @@
     </div>
   </div>
 
-  <!-- مودال المفضلة بالسنتر -->
-  <div id="favorites-modal" class="fixed inset-0 z-[120] flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
+  <div id="favorites-modal" class="fixed inset-0 z-[120] flex items-center justify-center p-4 h-[100dvh] w-screen opacity-0 pointer-events-none transition-opacity duration-300">
     <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="window.closeFavoritesModal()"></div>
     <div class="glass rounded-3xl max-w-md w-full relative z-10 p-6 border border-white/10 shadow-2xl text-left">
       <div class="flex items-center justify-between mb-4">
@@ -748,8 +636,7 @@
     </div>
   </div>
 
-  <!-- مودال السلة بالسنتر بوجه المستخدم مباشرة بدون نزول الشاشة -->
-  <div id="cart-modal" class="fixed inset-0 z-[120] flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
+  <div id="cart-modal" class="fixed inset-0 z-[120] flex items-center justify-center p-4 h-[100dvh] w-screen opacity-0 pointer-events-none transition-opacity duration-300">
     <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="window.closeCartModal()"></div>
     <div class="glass rounded-3xl max-w-md w-full relative z-10 p-6 border border-white/10 shadow-2xl text-left">
       <div class="flex items-center justify-between mb-4">
@@ -767,19 +654,7 @@
     </div>
   </div>
 
-  <div id="preview-modal" class="fixed inset-0 z-[80] flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
-    <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="window.closePreview()"></div>
-    <div class="glass rounded-3xl max-w-md w-full relative z-10 p-6" id="preview-card">
-      <span id="preview-tag" class="text-[10px] font-bold uppercase text-current opacity-70 force-eng">TAG</span>
-      <h3 id="preview-title" class="font-head font-bold text-2xl mt-1 mb-6 force-eng">TITLE</h3>
-      <div class="flex gap-4">
-        <div class="button-wrap flex-1" onclick="window.showToast('ADDED TO CART'); window.closePreview();"><div class="btn-3d-style"><span data-i18n="add-cart">Add to Cart</span></div></div>
-        <div class="button-wrap flex-1" onclick="window.showToast('DOWNLOADING DEMO...')"><div class="btn-3d-style"><span data-i18n="try-demo">Try Demo</span></div></div>
-      </div>
-    </div>
-  </div>
-
-  <div id="support-modal" class="fixed inset-0 z-[100] flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
+  <div id="support-modal" class="fixed inset-0 z-[100] flex items-center justify-center p-4 h-[100dvh] w-screen opacity-0 pointer-events-none transition-opacity duration-300">
     <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="window.closeSupportModal()"></div>
     <div class="glass rounded-3xl max-w-sm w-full relative z-10 p-6 text-center border-t border-yellow-500/30">
       <h3 class="font-head font-bold text-2xl text-yellow-500 force-eng mb-2">Support VORTX</h3>
@@ -789,696 +664,330 @@
       </div>
     </div>
   </div>
-
-<script>
+  <script>
   window.openTelegramOrder = function(planName, price) {
     const telegramUsername = 'wot_5'; 
     const message = `Hey VORTX! I want to purchase the ${planName} package ($${price}).`;
     const encodedMessage = encodeURIComponent(message);
     const telegramUrl = `https://t.me/${telegramUsername}?text=${encodedMessage}`;
-    
     window.open(telegramUrl, '_blank');
   };
-</script>
 
-<script>
-(function () {
-  "use strict";
+  (function () {
+    "use strict";
 
-  const SUPABASE_URL = 'https://bcystqufgckekgaqeujx.supabase.co';
-  const SUPABASE_KEY = 'Sb_publishable_SuB1uBSawTCoh8G9Z4M-Lw_lrwJ6RIE';
-  let supabase = null;
+    const SUPABASE_URL = 'https://bcystqufgckekgaqeujx.supabase.co';
+    const SUPABASE_KEY = 'Sb_publishable_SuB1uBSawTCoh8G9Z4M-Lw_lrwJ6RIE';
+    let supabase = null;
 
-  if (window.supabase) {
-    supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-  }
-
-  const BAD_WORDS = ['bad', 'worst', 'scam', 'fake', 'terrible', 'trash', 'slow', 'horrible', 'cheat', 'crap', 'سيء', 'سيئ', 'فاشل', 'نصاب', 'احتيال', 'خايس', 'زبالة', 'بطيء', 'ضعيف', 'نصب', 'حرامي', 'احذر', 'سرقة'];
-
-  let cartItems = JSON.parse(localStorage.getItem('vortx_cart') || '[]');
-  let favItems = JSON.parse(localStorage.getItem('vortx_favorites') || '[]');
-
-  window.updateBadges = function() {
-    const cartBadge = document.getElementById('cart-badge');
-    const favBadge = document.getElementById('fav-badge');
-    
-    if (cartBadge) {
-      cartBadge.textContent = cartItems.length;
-      cartBadge.classList.toggle('hidden', cartItems.length === 0);
-    }
-    if (favBadge) {
-      favBadge.textContent = favItems.length;
-      favBadge.classList.toggle('hidden', favItems.length === 0);
-    }
-  };
-
-  window.toggleFavorite = function(id, title, tag, price, img) {
-    const idx = favItems.findIndex(item => item.id === id);
-    if (idx > -1) {
-      favItems.splice(idx, 1);
-      window.showToast('REMOVED FROM FAVORITES');
-    } else {
-      favItems.push({ id, title, tag, price, img });
-      window.showToast('ADDED TO FAVORITES ❤');
-    }
-    localStorage.setItem('vortx_favorites', JSON.stringify(favItems));
-    window.updateBadges();
-    renderFavoritesUI();
-  };
-
-  window.addToCart = function(id, title, price, img) {
-    cartItems.push({ id, title, price, img });
-    localStorage.setItem('vortx_cart', JSON.stringify(cartItems));
-    window.showToast('ADDED TO CART 🛒');
-    window.updateBadges();
-  };
-
-  window.removeFromCart = function(idx) {
-    cartItems.splice(idx, 1);
-    localStorage.setItem('vortx_cart', JSON.stringify(cartItems));
-    window.updateBadges();
-    renderCartUI();
-  };
-
-  let notificationsOpen = false;
-  window.toggleNotificationsModal = function() {
-    if (notificationsOpen) {
-      window.closeNotificationsModal();
-    } else {
-      window.openNotificationsModal();
-    }
-  };
-  window.openNotificationsModal = function() {
-    notificationsOpen = true;
-    const modal = document.getElementById('notifications-modal');
-    if (modal) modal.classList.remove('opacity-0', 'pointer-events-none');
-  };
-  window.closeNotificationsModal = function() {
-    notificationsOpen = false;
-    const modal = document.getElementById('notifications-modal');
-    if (modal) modal.classList.add('opacity-0', 'pointer-events-none');
-  };
-
-  window.openFavoritesModal = function() {
-    renderFavoritesUI();
-    const modal = document.getElementById('favorites-modal');
-    if (modal) modal.classList.remove('opacity-0', 'pointer-events-none');
-  };
-  window.closeFavoritesModal = function() {
-    const modal = document.getElementById('favorites-modal');
-    if (modal) modal.classList.add('opacity-0', 'pointer-events-none');
-  };
-
-  window.openCartModal = function() {
-    renderCartUI();
-    const modal = document.getElementById('cart-modal');
-    if (modal) modal.classList.remove('opacity-0', 'pointer-events-none');
-  };
-  window.closeCartModal = function() {
-    const modal = document.getElementById('cart-modal');
-    if (modal) modal.classList.add('opacity-0', 'pointer-events-none');
-  };
-
-  function renderFavoritesUI() {
-    const list = document.getElementById('favorites-list');
-    if (!list) return;
-    if (favItems.length === 0) {
-      list.innerHTML = `<p class="text-xs text-white/50 text-center py-6">No favorite items saved yet.</p>`;
-      return;
-    }
-    list.innerHTML = favItems.map(item => `
-      <div class="p-3 bg-white/5 rounded-xl border border-white/10 flex items-center justify-between">
-        <div class="flex items-center gap-3">
-          <img src="${item.img}" class="w-10 h-10 rounded-lg object-cover" />
-          <div>
-            <h4 class="text-xs font-bold text-white">${item.title}</h4>
-            <span class="text-[10px] text-yellow-400 font-mono font-bold">$${item.price}</span>
-          </div>
-        </div>
-        <button onclick="window.toggleFavorite('${item.id}', '${item.title}', '${item.tag}', ${item.price}, '${item.img}')" class="text-red-400 text-xs hover:text-red-300 font-bold">Remove</button>
-      </div>
-    `).join('');
-  }
-
-  function renderCartUI() {
-    const list = document.getElementById('cart-items-list');
-    const totalEl = document.getElementById('cart-total-price');
-    if (!list) return;
-    
-    let total = 0;
-    if (cartItems.length === 0) {
-      list.innerHTML = `<p class="text-xs text-white/50 text-center py-6">Your shopping cart is empty.</p>`;
-      if (totalEl) totalEl.textContent = '$0';
-      return;
+    if (window.supabase) {
+      supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
     }
 
-    list.innerHTML = cartItems.map((item, idx) => {
-      total += Number(item.price);
-      return `
-        <div class="p-3 bg-white/5 rounded-xl border border-white/10 flex items-center justify-between">
-          <div class="flex items-center gap-3">
-            <img src="${item.img}" class="w-10 h-10 rounded-lg object-cover" />
-            <div>
-              <h4 class="text-xs font-bold text-white">${item.title}</h4>
-              <span class="text-[10px] text-yellow-400 font-mono font-bold">$${item.price}</span>
-            </div>
-          </div>
-          <button onclick="window.removeFromCart(${idx})" class="text-white/40 hover:text-red-400 text-xs font-bold">✕</button>
-        </div>
-      `;
-    }).join('');
+    const BAD_WORDS = ['bad', 'worst', 'scam', 'fake', 'terrible', 'trash', 'slow', 'horrible', 'cheat', 'crap', 'سيء', 'سيئ', 'فاشل', 'نصاب', 'احتيال', 'خايس', 'زبالة', 'بطيء', 'ضعيف', 'نصب', 'حرامي', 'احذر', 'سرقة'];
 
-    if (totalEl) totalEl.textContent = '$' + total;
-  }
+    let cartItems = JSON.parse(localStorage.getItem('vortx_cart') || '[]');
+    let favItems = JSON.parse(localStorage.getItem('vortx_favorites') || '[]');
 
-  window.checkoutCartItems = function() {
-    if (cartItems.length === 0) {
-      window.showToast('YOUR CART IS EMPTY');
-      return;
-    }
-    const names = cartItems.map(i => i.title).join(', ');
-    const total = cartItems.reduce((s, i) => s + Number(i.price), 0);
-    const msg = `Hey VORTX! I want to purchase these cart items: (${names}) for Total: $${total}.`;
-    const url = `https://t.me/wot_5?text=${encodeURIComponent(msg)}`;
-    window.open(url, '_blank');
-  };
-
-  window.shareProduct = function(title, tag) {
-    if (navigator.share) {
-      navigator.share({ title: title, text: `Check out ${title} on VORTX!`, url: window.location.href });
-    } else {
-      navigator.clipboard.writeText(window.location.href);
-      window.showToast('PRODUCT LINK COPIED TO CLIPBOARD');
-    }
-  };
-
-  window.showToast = function (msg) {
-    var box = document.getElementById('toast-box');
-    if (!box) return;
-    box.innerHTML = '';
-    var toast = document.createElement('div');
-    toast.className = 'glass bg-black/95 border border-yellow-500/40 text-white text-xs sm:text-sm uppercase font-black tracking-widest px-6 py-4 rounded-2xl flex items-center justify-center gap-3 shadow-2xl backdrop-blur-xl animate-pulse';
-    toast.innerHTML = '<span class="text-yellow-400 text-base">✦</span> ' + msg;
-    box.appendChild(toast);
-    setTimeout(function () { 
-      if (toast && toast.parentNode) toast.parentNode.removeChild(toast); 
-    }, 3000);
-  };
-
-  // إرسال التقييم
-  window.submitUserRating = async function() {
-    if (sessionStorage.getItem('vortx_has_rated')) {
-      window.showToast('YOU HAVE ALREADY RATED THIS SESSION!');
-      return;
-    }
-
-    const ratingRadio = document.querySelector('input[name="rating"]:checked');
-    if (!ratingRadio) {
-      window.showToast('PLEASE SELECT A STAR RATING FIRST!');
-      return;
-    }
-
-    const selectedScore = parseInt(ratingRadio.value, 10);
-    const commentEl = document.getElementById('chat_bot');
-    const nameEl = document.getElementById('reviewer_name');
-    const comment = commentEl ? commentEl.value.trim() : '';
-    const name = nameEl ? nameEl.value.trim() : '';
-
-    if (comment) {
-      const lowerComment = comment.toLowerCase();
-      const hasBadWord = BAD_WORDS.some(word => lowerComment.includes(word));
-      if (hasBadWord) {
-        window.showToast('REVIEW REJECTED: INAPPROPRIATE CONTENT!');
-        return;
-      }
-    }
-
-    window.showToast('SUBMITTING YOUR RATING...');
-
-    const newReview = {
-      id: Date.now() + '_' + Math.random().toString(36).substr(2, 9),
-      rating: selectedScore,
-      comment: comment,
-      reviewer_name: name,
-      created_at: new Date().toISOString()
+    window.updateBadges = function() {
+      const cartBadge = document.getElementById('cart-badge');
+      const favBadge = document.getElementById('fav-badge');
+      if (cartBadge) { cartBadge.textContent = cartItems.length; cartBadge.classList.toggle('hidden', cartItems.length === 0); }
+      if (favBadge) { favBadge.textContent = favItems.length; favBadge.classList.toggle('hidden', favItems.length === 0); }
     };
 
-    let localReviews = JSON.parse(localStorage.getItem('vortx_reviews_data') || '[]');
-    localReviews.unshift(newReview);
-    localStorage.setItem('vortx_reviews_data', JSON.stringify(localReviews));
-
-    if (supabase) {
-      try {
-        let payload = { rating: selectedScore, comment: comment };
-        if (name) payload.reviewer_name = name;
-        await supabase.from('reviews').insert([payload]);
-      } catch(e) {}
-    }
-
-    sessionStorage.setItem('vortx_has_rated', 'true');
-
-    if (commentEl) commentEl.value = '';
-    if (nameEl) nameEl.value = '';
-    ratingRadio.checked = false;
-
-    window.showToast('RATING SUBMITTED SUCCESSFULLY!');
-    fetchLiveStats();
-  };
-
-  // جلب البيانات مع دمج التقييمات بدون تكرار في القائمة
-  async function fetchLiveStats() {
-    let allReviews = JSON.parse(localStorage.getItem('vortx_reviews_data') || '[]');
-
-    let localVisits = parseInt(localStorage.getItem('vortx_visit_count') || '0', 10) + 1;
-    localStorage.setItem('vortx_visit_count', localVisits);
-
-    if (supabase) {
-      try {
-        await supabase.from('page_views').insert([{}]);
-        const { count: viewsCount } = await supabase.from('page_views').select('*', { count: 'exact', head: true });
-        if (viewsCount !== null && viewsCount > 0) {
-          localVisits = Math.max(localVisits, viewsCount);
-        }
-      } catch(e) {}
-    }
-
-    const viewsEl = document.getElementById('live-views-count');
-    if (viewsEl) {
-      viewsEl.setAttribute('data-target', localVisits);
-      viewsEl.textContent = localVisits.toLocaleString('en-US');
-    }
-
-    if (supabase) {
-      try {
-        const { data: dbReviews } = await supabase.from('reviews').select('*').order('created_at', { ascending: false });
-        if (dbReviews && dbReviews.length > 0) {
-          dbReviews.forEach(dbr => {
-            if (!allReviews.some(lr => (lr.id && lr.id === dbr.id) || (lr.comment === dbr.comment && Number(lr.rating) === Number(dbr.rating) && lr.created_at === dbr.created_at))) {
-              allReviews.push(dbr);
-            }
-          });
-        }
-      } catch(e) {}
-    }
-
-    if (allReviews.length > 0) {
-      const totalReviews = allReviews.length;
-      const totalScore = allReviews.reduce((sum, r) => sum + Number(r.rating || 0), 0);
-      const rawAvg = totalScore / totalReviews;
-      
-      const displayScore = (rawAvg % 1 === 0) ? rawAvg.toFixed(0) : rawAvg.toFixed(1);
-      
-      const ratingEl = document.getElementById('live-rating-avg');
-      const countEl = document.getElementById('live-reviews-count');
-      
-      if (ratingEl) {
-        ratingEl.setAttribute('data-target', displayScore);
-        ratingEl.textContent = displayScore;
+    window.toggleFavorite = function(id, title, tag, price, img) {
+      const idx = favItems.findIndex(item => item.id === id);
+      if (idx > -1) {
+        favItems.splice(idx, 1);
+        window.showToast('REMOVED FROM FAVORITES');
+      } else {
+        favItems.push({ id, title, tag, price, img });
+        window.showToast('ADDED TO FAVORITES ❤');
       }
-      if (countEl) {
-        countEl.setAttribute('data-target', totalReviews);
-        countEl.textContent = totalReviews.toLocaleString('en-US');
-      }
-
-      const counts = { 5: 0, 4: 0, 3: 0, 2: 0, 1: 0 };
-      allReviews.forEach(r => {
-        const score = Math.min(5, Math.max(1, Number(r.rating || 5)));
-        counts[score] = (counts[score] || 0) + 1;
-      });
-
-      [5, 4, 3, 2, 1].forEach(star => {
-        const pct = Math.round((counts[star] / totalReviews) * 100) || 0;
-        const barEl = document.getElementById(`bar-${star}`);
-        const pctEl = document.getElementById(`pct-${star}`);
-        if (barEl) barEl.style.width = pct + '%';
-        if (pctEl) pctEl.textContent = pct + '%';
-      });
-
-      const commentsOnly = allReviews.filter(r => r.comment && r.comment.trim().length > 0);
-      const marqueeContainer = document.getElementById('reviews-marquee-container');
-      const marqueeTrack = document.getElementById('reviews-marquee-track');
-
-      if (marqueeContainer && marqueeTrack) {
-        if (commentsOnly.length > 0) {
-          const cardsHtmlArr = commentsOnly.map(r => {
-            const numStars = Number(r.rating || 5);
-            const starsHtml = '★'.repeat(numStars);
-            const nameText = r.reviewer_name ? r.reviewer_name : 'Anonymous';
-            const commentText = r.comment;
-
-            return `<div class="px-5 py-3 rounded-2xl border border-yellow-500/30 bg-black/80 backdrop-blur-md flex flex-col justify-center items-start gap-1 shrink-0 shadow-lg min-w-[200px] text-left">
-               <span class="text-xs text-yellow-400 font-bold block text-left">${nameText}</span>
-               <span class="text-yellow-400 font-bold text-xs tracking-widest block text-left">${starsHtml}</span>
-               <span class="text-xs text-white/90 font-medium block mt-1 text-left">"${commentText}"</span>
-             </div>`;
-          });
-
-          // منع التكرار الثلاثي المزعج
-          marqueeTrack.innerHTML = cardsHtmlArr.join('');
-          marqueeContainer.classList.remove('hidden');
-          setupMarqueeInteraction();
-        } else {
-          marqueeContainer.classList.add('hidden');
-        }
-      }
-    }
-  }
-
-  // تحكم حر بالسحب مع ضمان الاستمرارية السلسة جهة اليمين
-  function setupMarqueeInteraction() {
-    const marqueeContainer = document.getElementById('reviews-marquee-container');
-    const marqueeTrack = document.getElementById('reviews-marquee-track');
-    if (!marqueeContainer || !marqueeTrack) return;
-
-    let isDown = false, startX, scrollLeft, timer = null;
-
-    const pauseAndReset = () => {
-      marqueeTrack.style.animationPlayState = 'paused';
-      clearTimeout(timer);
-      timer = setTimeout(() => {
-        marqueeTrack.style.animationPlayState = 'running';
-      }, 5000);
+      localStorage.setItem('vortx_favorites', JSON.stringify(favItems));
+      window.updateBadges(); renderFavoritesUI();
     };
 
-    marqueeContainer.addEventListener('mousedown', (e) => {
-      isDown = true;
-      startX = e.pageX - marqueeContainer.offsetLeft;
-      scrollLeft = marqueeContainer.scrollLeft;
-      pauseAndReset();
-    });
+    window.addToCart = function(id, title, price, img) {
+      cartItems.push({ id, title, price, img });
+      localStorage.setItem('vortx_cart', JSON.stringify(cartItems));
+      window.showToast('ADDED TO CART 🛒');
+      window.updateBadges();
+    };
 
-    marqueeContainer.addEventListener('mouseleave', () => { isDown = false; });
-    marqueeContainer.addEventListener('mouseup', () => { isDown = false; pauseAndReset(); });
+    window.removeFromCart = function(idx) {
+      cartItems.splice(idx, 1);
+      localStorage.setItem('vortx_cart', JSON.stringify(cartItems));
+      window.updateBadges(); renderCartUI();
+    };
 
-    marqueeContainer.addEventListener('mousemove', (e) => {
-      if (!isDown) return;
-      e.preventDefault();
-      const x = e.pageX - marqueeContainer.offsetLeft;
-      const walk = (x - startX) * 2;
-      marqueeContainer.scrollLeft = scrollLeft - walk;
-      pauseAndReset();
-    });
+    function lockBody() { document.body.style.overflow = 'hidden'; }
+    function unlockBody() { document.body.style.overflow = ''; }
 
-    marqueeContainer.addEventListener('touchstart', (e) => {
-      isDown = true;
-      startX = e.touches[0].pageX - marqueeContainer.offsetLeft;
-      scrollLeft = marqueeContainer.scrollLeft;
-      pauseAndReset();
-    }, { passive: true });
+    let notificationsOpen = false;
+    window.toggleNotificationsModal = function() { notificationsOpen ? window.closeNotificationsModal() : window.openNotificationsModal(); };
+    window.openNotificationsModal = function() { notificationsOpen = true; const m = document.getElementById('notifications-modal'); if(m) { m.classList.remove('opacity-0', 'pointer-events-none'); lockBody(); } };
+    window.closeNotificationsModal = function() { notificationsOpen = false; const m = document.getElementById('notifications-modal'); if(m) { m.classList.add('opacity-0', 'pointer-events-none'); unlockBody(); } };
 
-    marqueeContainer.addEventListener('touchend', () => { isDown = false; pauseAndReset(); }, { passive: true });
+    window.openFavoritesModal = function() { renderFavoritesUI(); const m = document.getElementById('favorites-modal'); if(m) { m.classList.remove('opacity-0', 'pointer-events-none'); lockBody(); } };
+    window.closeFavoritesModal = function() { const m = document.getElementById('favorites-modal'); if(m) { m.classList.add('opacity-0', 'pointer-events-none'); unlockBody(); } };
 
-    marqueeContainer.addEventListener('touchmove', (e) => {
-      if (!isDown) return;
-      const x = e.touches[0].pageX - marqueeContainer.offsetLeft;
-      const walk = (x - startX) * 2;
-      marqueeContainer.scrollLeft = scrollLeft - walk;
-      pauseAndReset();
-    }, { passive: true });
-  }
+    window.openCartModal = function() { renderCartUI(); const m = document.getElementById('cart-modal'); if(m) { m.classList.remove('opacity-0', 'pointer-events-none'); lockBody(); } };
+    window.closeCartModal = function() { const m = document.getElementById('cart-modal'); if(m) { m.classList.add('opacity-0', 'pointer-events-none'); unlockBody(); } };
+    
+    window.openSupportModal = function() { const m = document.getElementById('support-modal'); if(m) { m.classList.remove('opacity-0', 'pointer-events-none'); lockBody(); } };
+    window.closeSupportModal = function() { const m = document.getElementById('support-modal'); if(m) { m.classList.add('opacity-0', 'pointer-events-none'); unlockBody(); } };
 
-  // الكرة الشبكية 3D
-  (function(){
-    var canvas = document.getElementById('globe');
-    if(!canvas) return;
-    var ctx = canvas.getContext('2d');
-    var W, H, R, DPR = Math.min(window.devicePixelRatio||1, 2);
-    function resize(){
-      var base = Math.min(window.innerWidth, window.innerHeight);
-      R = base * 0.42; 
-      var size = R * 2.4;
-      canvas.style.width = size + 'px'; canvas.style.height = size + 'px';
-      canvas.width = size * DPR; canvas.height = size * DPR;
-      W = canvas.width; H = canvas.height;
+    function renderFavoritesUI() {
+      const list = document.getElementById('favorites-list');
+      if (!list) return;
+      if (favItems.length === 0) { list.innerHTML = `<p class="text-xs text-white/50 text-center py-6">No favorite items saved yet.</p>`; return; }
+      list.innerHTML = favItems.map(item => `<div class="p-3 bg-white/5 rounded-xl border border-white/10 flex items-center justify-between"><div class="flex items-center gap-3"><img src="${item.img}" class="w-10 h-10 rounded-lg object-cover" /><div><h4 class="text-xs font-bold text-white">${item.title}</h4><span class="text-[10px] text-yellow-400 font-mono font-bold">$${item.price}</span></div></div><button onclick="window.toggleFavorite('${item.id}', '${item.title}', '${item.tag}', ${item.price}, '${item.img}')" class="text-red-400 text-xs hover:text-red-300 font-bold">Remove</button></div>`).join('');
     }
-    resize(); window.addEventListener('resize', resize);
-    var N = 620;
-    var pts = [];
-    for(var i=0;i<N;i++){
-      var phi = Math.acos(1 - 2*(i+0.5)/N);
-      var theta = Math.PI*(1+Math.sqrt(5))*i;
-      pts.push({ x:Math.sin(phi)*Math.cos(theta), y:Math.sin(phi)*Math.sin(theta), z:Math.cos(phi) });
+
+    function renderCartUI() {
+      const list = document.getElementById('cart-items-list');
+      const totalEl = document.getElementById('cart-total-price');
+      if (!list) return;
+      let total = 0;
+      if (cartItems.length === 0) { list.innerHTML = `<p class="text-xs text-white/50 text-center py-6">Your shopping cart is empty.</p>`; if (totalEl) totalEl.textContent = '$0'; return; }
+      list.innerHTML = cartItems.map((item, idx) => { total += Number(item.price); return `<div class="p-3 bg-white/5 rounded-xl border border-white/10 flex items-center justify-between"><div class="flex items-center gap-3"><img src="${item.img}" class="w-10 h-10 rounded-lg object-cover" /><div><h4 class="text-xs font-bold text-white">${item.title}</h4><span class="text-[10px] text-yellow-400 font-mono font-bold">$${item.price}</span></div></div><button onclick="window.removeFromCart(${idx})" class="text-white/40 hover:text-red-400 text-xs font-bold">✕</button></div>`; }).join('');
+      if (totalEl) totalEl.textContent = '$' + total;
     }
-    var rings = [];
-    [1.0, 0.72, 0.46].forEach(function(rr, idx){
-      var rp = [];
-      var tilt = (idx*0.5 + 0.3);
-      for(var a=0;a<Math.PI*2;a+=0.13){ rp.push({ x:Math.cos(a)*rr, y:Math.sin(a)*Math.sin(tilt)*rr, z:Math.sin(a)*Math.cos(tilt)*rr }); }
-      rings.push(rp);
-    });
-    var rot = 0;
-    function rotY(p, s, c){ return {x:p.x*c + p.z*s, y:p.y, z:-p.x*s + p.z*c}; }
-    function rotX(p, s, c){ return {x:p.x, y:p.y*c - p.z*s, z:p.y*s + p.z*c}; }
-    var tiltS = Math.sin(-0.35), tiltC = Math.cos(-0.35);
-    function draw(){
-      rot += 0.0007; 
-      var s = Math.sin(rot), c = Math.cos(rot);
-      ctx.clearRect(0,0,W,H); ctx.save(); ctx.translate(W/2, H/2);
-      var scale = R * DPR;
-      var rootStyles = getComputedStyle(document.documentElement);
-      var rgbLine = rootStyles.getPropertyValue('--globe-line').trim() || '205,210,200';
-      var rgbRing = rootStyles.getPropertyValue('--globe-ring').trim() || '190,195,185';
-      var rgbPoint = rootStyles.getPropertyValue('--globe-point').trim() || '233,236,228';
-      function proj(p){
-        var q = rotY(p, s, c); q = rotX(q, tiltS, tiltC);
-        var persp = 1.6 / (1.6 - q.z*0.55);
-        return { X:q.x*scale*persp, Y:q.y*scale*persp, z:q.z, persp: persp };
+
+    window.checkoutCartItems = function() {
+      if (cartItems.length === 0) { window.showToast('YOUR CART IS EMPTY'); return; }
+      const names = cartItems.map(i => i.title).join(', ');
+      const total = cartItems.reduce((s, i) => s + Number(i.price), 0);
+      const msg = `Hey VORTX! I want to purchase these cart items: (${names}) for Total: $${total}.`;
+      window.open(`https://t.me/wot_5?text=${encodeURIComponent(msg)}`, '_blank');
+    };
+
+    window.shareProduct = function(title, tag) {
+      if (navigator.share) { navigator.share({ title: title, text: `Check out ${title} on VORTX!`, url: window.location.href }); } 
+      else { navigator.clipboard.writeText(window.location.href); window.showToast('PRODUCT LINK COPIED TO CLIPBOARD'); }
+    };
+
+    window.showToast = function (msg) {
+      var box = document.getElementById('toast-box');
+      if (!box) return; box.innerHTML = '';
+      var toast = document.createElement('div');
+      toast.className = 'glass bg-black/95 border border-yellow-500/40 text-white text-xs sm:text-sm uppercase font-black tracking-widest px-6 py-4 rounded-2xl flex items-center justify-center gap-3 shadow-2xl backdrop-blur-xl animate-pulse';
+      toast.innerHTML = '<span class="text-yellow-400 text-base">✦</span> ' + msg;
+      box.appendChild(toast);
+      setTimeout(function () { if (toast && toast.parentNode) toast.parentNode.removeChild(toast); }, 3000);
+    };
+
+    window.submitUserRating = async function() {
+      if (sessionStorage.getItem('vortx_has_rated')) { window.showToast('YOU HAVE ALREADY RATED THIS SESSION!'); return; }
+      const ratingRadio = document.querySelector('input[name="rating"]:checked');
+      if (!ratingRadio) { window.showToast('PLEASE SELECT A STAR RATING FIRST!'); return; }
+      
+      const selectedScore = parseInt(ratingRadio.value, 10);
+      const commentEl = document.getElementById('chat_bot');
+      const nameEl = document.getElementById('reviewer_name');
+      const comment = commentEl ? commentEl.value.trim() : '';
+      const name = nameEl ? nameEl.value.trim() : '';
+
+      if (comment && BAD_WORDS.some(word => comment.toLowerCase().includes(word))) { window.showToast('REVIEW REJECTED: INAPPROPRIATE CONTENT!'); return; }
+
+      window.showToast('SUBMITTING YOUR RATING...');
+      const newId = Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+      const newReview = { id: newId, rating: selectedScore, comment: comment, reviewer_name: name, created_at: new Date().toISOString() };
+
+      let localReviews = JSON.parse(localStorage.getItem('vortx_reviews_data') || '[]');
+      localReviews.unshift(newReview);
+      localStorage.setItem('vortx_reviews_data', JSON.stringify(localReviews));
+
+      if (supabase) {
+        try {
+          let payload = { id: newId, rating: selectedScore, comment: comment };
+          if (name) payload.reviewer_name = name;
+          await supabase.from('reviews').insert([payload]);
+        } catch(e) {}
       }
-      var sp = pts.map(proj);
-      ctx.lineWidth = 0.65*DPR;
-      for(var i=0;i<sp.length;i++){
-        var a = sp[i];
-        for(var j=i+1;j<i+9 && j<sp.length;j++){
-          var b = sp[j];
-          var dx=a.X-b.X, dy=a.Y-b.Y; var d2 = dx*dx+dy*dy;
-          if(d2 < (scale*0.185)*(scale*0.185)){
-            var depth = (a.z+b.z)/2;
-            var alpha = Math.max(0, (depth+1)/2) * 0.42;
-            ctx.strokeStyle = 'rgba('+rgbLine+','+alpha+')';
-            ctx.beginPath(); ctx.moveTo(a.X,a.Y); ctx.lineTo(b.X,b.Y); ctx.stroke();
+
+      sessionStorage.setItem('vortx_has_rated', 'true');
+      if (commentEl) commentEl.value = ''; if (nameEl) nameEl.value = '';
+      ratingRadio.checked = false;
+      window.showToast('RATING SUBMITTED SUCCESSFULLY!');
+      fetchLiveStats();
+    };
+
+    async function fetchLiveStats() {
+      let localReviews = JSON.parse(localStorage.getItem('vortx_reviews_data') || '[]');
+      let localVisits = parseInt(localStorage.getItem('vortx_visit_count') || '0', 10) + 1;
+      localStorage.setItem('vortx_visit_count', localVisits);
+
+      if (supabase) {
+        try {
+          await supabase.from('page_views').insert([{}]);
+          const { count } = await supabase.from('page_views').select('*', { count: 'exact', head: true });
+          if (count !== null && count > 0) localVisits = Math.max(localVisits, count);
+        } catch(e) {}
+      }
+
+      const viewsEl = document.getElementById('live-views-count');
+      if (viewsEl) { viewsEl.setAttribute('data-target', localVisits); viewsEl.textContent = localVisits.toLocaleString('en-US'); }
+
+      let uniqueMap = new Map();
+      localReviews.forEach(r => { uniqueMap.set(`${r.comment}_${r.rating}_${r.reviewer_name}`, r); });
+
+      if (supabase) {
+        try {
+          const { data } = await supabase.from('reviews').select('*').order('created_at', { ascending: false });
+          if (data && data.length > 0) {
+            data.forEach(dbr => { uniqueMap.set(`${dbr.comment}_${dbr.rating}_${dbr.reviewer_name}`, dbr); });
+          }
+        } catch(e) {}
+      }
+
+      let allReviews = Array.from(uniqueMap.values());
+      allReviews.sort((a,b) => new Date(b.created_at) - new Date(a.created_at));
+
+      if (allReviews.length > 0) {
+        const totalReviews = allReviews.length;
+        const totalScore = allReviews.reduce((sum, r) => sum + Number(r.rating || 0), 0);
+        const rawAvg = totalScore / totalReviews;
+        const displayScore = (rawAvg % 1 === 0) ? rawAvg.toFixed(0) : rawAvg.toFixed(1);
+        
+        const ratingEl = document.getElementById('live-rating-avg');
+        const countEl = document.getElementById('live-reviews-count');
+        if (ratingEl) { ratingEl.setAttribute('data-target', displayScore); ratingEl.textContent = displayScore; }
+        if (countEl) { countEl.setAttribute('data-target', totalReviews); countEl.textContent = totalReviews.toLocaleString('en-US'); }
+
+        const counts = { 5: 0, 4: 0, 3: 0, 2: 0, 1: 0 };
+        allReviews.forEach(r => { const score = Math.min(5, Math.max(1, Number(r.rating || 5))); counts[score] = (counts[score] || 0) + 1; });
+        [5, 4, 3, 2, 1].forEach(star => {
+          const pct = Math.round((counts[star] / totalReviews) * 100) || 0;
+          const barEl = document.getElementById(`bar-${star}`); const pctEl = document.getElementById(`pct-${star}`);
+          if (barEl) barEl.style.width = pct + '%'; if (pctEl) pctEl.textContent = pct + '%';
+        });
+
+        const commentsOnly = allReviews.filter(r => r.comment && r.comment.trim().length > 0);
+        const marqueeContainer = document.getElementById('reviews-marquee-container');
+        const marqueeTrack = document.getElementById('reviews-marquee-track');
+
+        if (marqueeContainer && marqueeTrack) {
+          if (commentsOnly.length > 0) {
+            const cardsHtmlArr = commentsOnly.map(r => {
+              const starsHtml = '★'.repeat(Number(r.rating || 5));
+              const nameText = r.reviewer_name ? r.reviewer_name : 'Anonymous';
+              return `<div class="px-5 py-3 rounded-2xl border border-yellow-500/30 bg-black/80 backdrop-blur-md flex flex-col justify-center items-start gap-1 shrink-0 shadow-lg min-w-[200px] text-left"><span class="text-xs text-yellow-400 font-bold block text-left">${nameText}</span><span class="text-yellow-400 font-bold text-xs tracking-widest block text-left">${starsHtml}</span><span class="text-xs text-white/90 font-medium block mt-1 text-left">"${r.comment}"</span></div>`;
+            });
+            marqueeTrack.innerHTML = cardsHtmlArr.join('') + cardsHtmlArr.join('') + cardsHtmlArr.join('');
+            marqueeContainer.classList.remove('hidden');
+            setupMarqueeInteraction();
+          } else {
+            marqueeContainer.classList.add('hidden');
           }
         }
       }
-      rings.forEach(function(rp){
-        var proj2 = rp.map(proj); ctx.beginPath();
-        proj2.forEach(function(p,i) { i?ctx.lineTo(p.X,p.Y):ctx.moveTo(p.X,p.Y) });
-        ctx.closePath(); ctx.strokeStyle='rgba('+rgbRing+',.2)'; ctx.lineWidth=0.9*DPR; ctx.stroke();
-      });
-      for(var k=0; k<sp.length; k++){
-        var p = sp[k]; var depth = (p.z+1)/2; var r = (0.7 + depth*1.7) * DPR;
-        ctx.beginPath(); ctx.arc(p.X, p.Y, r, 0, 7);
-        ctx.fillStyle = 'rgba('+rgbPoint+','+(0.32 + depth*0.65)+')'; ctx.fill();
+    }
+
+    function setupMarqueeInteraction() {
+      const container = document.getElementById('reviews-marquee-container');
+      if (!container) return;
+      
+      let isPaused = false;
+      let pauseTimer = null;
+      let isDragging = false, startX, scrollLeft;
+
+      function triggerPause() {
+        isPaused = true;
+        clearTimeout(pauseTimer);
+        pauseTimer = setTimeout(() => { isPaused = false; }, 5000);
       }
-      ctx.restore(); requestAnimationFrame(draw);
-    }
-    draw();
-  })();
 
-  var translations = {
-    en: { 
-      "nav-bundles": "Bundles", "nav-packs": "Featured Packs", "nav-categories": "Categories", 
-      "hero-tag": "Digital Assets Hub", "hero-desc": "Explore custom websites reflecting your unique identity, plus premium video editing and design assets.", 
-      "hero-btn": "Explore Tiers", "tiers-available": "3 Tiers Available", "explore-packages": "Explore Packages", 
-      "packs-title": "Featured Packs", "packs-desc": "Swipe horizontally for endless physical 3D cards interaction", 
-      "cat-sec-title": "Categories", "cat-sec-desc": "Select a category to explore editing packs.", 
-      "cat-cc-desc": "Color Corrections", "cat-xml-desc": "Project Files", "cat-shake-desc": "Camera Shake Presets", 
-      "footer-right": "Crafted for the bold.", "tiers-sub": "Web Solutions", "tiers-title": "Development Tiers", 
-      "back-btn": "Back", "tier-starter-desc": "Ideal for creators & small brands looking for a clean, fast, and high-converting landing page.", 
-      "tier-pro-desc": "A complete web solution designed to showcase your brand, drive engagement, and convert visitors.", "tier-vip-desc": "The ultimate bespoke digital experience. Advanced visual effects, tailored animations, and priority treatment.", 
-      "select-plan": "Buy Now", "cat-view-sub": "Collection", "add-cart": "Add to Cart", "try-demo": "Try Demo", 
-      "stat-subscribers": "Satisfied Clients", "stat-views": "Total Visits", "stat-orders": "Quality Guarantee", "stat-rating": "Satisfaction Score",
-      "review-title": "Leave Your Review & Rating", "review-sub": "Share your experience with VORTX Studio", "rating-breakdown": "RATING DISTRIBUTION",
-      "placeholder-name": "Your Name (Optional)...✦˚", "placeholder-comment": "Write your review here (Optional)...✦˚",
-      "plan-s-title": "STARTER", "plan-s-price": "$150", "plan-s-f1": "1 High-Converting Landing Page", "plan-s-f2": "Up to 4 Custom Sections", "plan-s-f3": "Fully Responsive & Mobile-Optimized", "plan-s-f4": "Smooth Basic Animations", "plan-s-f5": "1 Revision Included", "plan-s-del": "Delivery: 7 Days",
-      "plan-p-title": "PREMIUM", "plan-p-price": "$300", "plan-p-f1": "Up to 3 Custom Web Pages", "plan-p-f2": "Up to 8 Designed Sections", "plan-p-f3": "Advanced UI/UX & Interactions", "plan-p-f4": "Social Media & Channel Integration", "plan-p-f5": "3 Revisions Included", "plan-p-del": "Delivery: 7–12 Days",
-      "plan-v-title": "ELITE", "plan-v-price": "$600", "plan-v-f1": "Up to 6 Custom Pages", "plan-v-f2": "Up to 15 Dynamic Sections", "plan-v-f3": "Bespoke 3D & Advanced VFX Effects", "plan-v-f4": "Custom Interactive Elements", "plan-v-f5": "Priority Support & Consultation", "plan-v-del": "Delivery: 15–20 Days"
-    },
-    ar: { 
-      "nav-bundles": "الحزم", "nav-packs": "حزم متميزة", "nav-categories": "الأقسام", 
-      "hero-tag": "مركز الأصول الرقمية", "hero-desc": "تصفّح لتستكشف مشاريع ومواقع ويب تجسّد هويتك، إلى جانب أحدث حزم ومستلزمات المونتاج وتصميم المقاطع.", 
-      "hero-btn": "استكشف الباقات", "tiers-available": "3 مستويات متاحة", "explore-packages": "استكشف الباقات", 
-      "packs-title": "الحزم المتميزة", "packs-desc": "اسحب يميناً ويساراً للتنقل بين البطاقات ثلاثية الأبعاد", 
-      "cat-sec-title": "الأقسام", "cat-sec-desc": "اختر قسماً لاستكشاف حزم التعديل المتاحة.", 
-      "cat-cc-desc": "تصحيح الألوان", "cat-xml-desc": "ملفات المشروع", "cat-shake-desc": "إعدادات اهتزاز الكاميرا", 
-      "footer-right": "صُنع للمبدعين والجرآء.", "tiers-sub": "حلول الويب", "tiers-title": "مستويات التطوير", 
-      "back-btn": "العودة", "tier-starter-desc": "مثالي للمبدعين والعلامات التجارية الصغيرة للحصول على صفحة هبوط سريعة واحترافية.", 
-      "tier-pro-desc": "حل ويب متكامل لمستواك يعرض علامتك التجارية ويزيد التفاعل والعملاء.", "tier-vip-desc": "تجربة رقمية فريدة وخاصة بالكامل. مؤثرات بصرية متقدمة وأولوية في الدعم.", 
-      "select-plan": "شراء الآن", "cat-view-sub": "المجموعة", "add-cart": "إضافة للسلة", "try-demo": "تجربة العرض", 
-      "stat-subscribers": "عملاء راضون", "stat-views": "إجمالي الزيارات", "stat-orders": "ضمان الجودة", "stat-rating": "معدل التقييم",
-      "review-title": "اترك تقييمك ورأيك", "review-sub": "شاركونا تجربتكم مع فورتكس ستوديو", "rating-breakdown": "توزيع التقييمات",
-      "placeholder-name": "اسمك (اختياري)...✦˚", "placeholder-comment": "اكتب تعليقك هنا (اختياري)...✦˚",
-      "plan-s-title": "البداية", "plan-s-price": "150$", "plan-s-f1": "صفحة هبوط احترافية عالي التحويل", "plan-s-f2": "حتى 4 أقسام مخصصة", "plan-s-f3": "متوافق بالكامل مع الجوال والشاشات", "plan-s-f4": "تحريكات أساسية سلسة", "plan-s-f5": "تعديل واحد مشمول", "plan-s-del": "التسليم: 7 أيام",
-      "plan-p-title": "المميزة", "plan-p-price": "300$", "plan-p-f1": "حتى 3 صفحات ويب مخصصة", "plan-p-f2": "حتى 8 أقسام مصممة", "plan-p-f3": "واجهة وتفاعلات متقدمة", "plan-p-f4": "ربط شبكات التواصل والقنوات", "plan-p-f5": "3 تعديلات مشمولة", "plan-p-del": "التسليم: 7-12 يوم",
-      "plan-v-title": "النخبة", "plan-v-price": "600$", "plan-v-f1": "حتى 6 صفحات مخصصة", "plan-v-f2": "حتى 15 قسم تفاعلي", "plan-v-f3": "تصميم 3D ومؤثرات بصرية خاصة", "plan-v-f4": "عناصر تفاعلية مخصصة", "plan-v-f5": "أولوية الدعم والاستشارات", "plan-v-del": "التسليم: 15-20 يوم"
-    }
-  };
-  var currentLang = 'en';
-  window.toggleLanguage = function () {
-    currentLang = currentLang === 'en' ? 'ar' : 'en';
-    
-    const badgeText = document.getElementById('lang-badge-text');
-    if (badgeText) {
-      badgeText.textContent = currentLang === 'en' ? 'AR' : 'EN';
-    }
+      container.addEventListener('mousedown', (e) => { isDragging = true; startX = e.pageX - container.offsetLeft; scrollLeft = container.scrollLeft; triggerPause(); });
+      container.addEventListener('mouseleave', () => { isDragging = false; });
+      container.addEventListener('mouseup', () => { isDragging = false; triggerPause(); });
+      container.addEventListener('mousemove', (e) => { if (!isDragging) return; e.preventDefault(); const x = e.pageX - container.offsetLeft; const walk = (x - startX) * 2; container.scrollLeft = scrollLeft - walk; triggerPause(); });
+      container.addEventListener('touchstart', (e) => { isDragging = true; startX = e.touches[0].pageX - container.offsetLeft; scrollLeft = container.scrollLeft; triggerPause(); }, { passive: true });
+      container.addEventListener('touchend', () => { isDragging = false; triggerPause(); }, { passive: true });
+      container.addEventListener('touchmove', (e) => { if (!isDragging) return; const x = e.touches[0].pageX - container.offsetLeft; const walk = (x - startX) * 2; container.scrollLeft = scrollLeft - walk; triggerPause(); }, { passive: true });
 
-    var dict = translations[currentLang] || {};
-    var els = document.querySelectorAll('[data-i18n]');
-    for (var i = 0; i < els.length; i++) {
-      var key = els[i].getAttribute('data-i18n');
-      if (dict[key]) els[i].textContent = dict[key];
-    }
-    var phEls = document.querySelectorAll('[data-i18n-ph]');
-    for (var j = 0; j < phEls.length; j++) {
-      var phKey = phEls[j].getAttribute('data-i18n-ph');
-      if (dict[phKey]) phEls[j].setAttribute('placeholder', dict[phKey]);
-    }
-  };
-
-  window.toggleTheme = function () {
-    var root = document.documentElement;
-    root.classList.toggle('dark'); root.classList.toggle('light');
-  };
-
-  var CATEGORY_DATA = { 
-    CC: [
-      { id: 'cc_1', title: 'Teal & Orange Grade', tag: 'CC Pack', price: 25, img: 'https://images.unsplash.com/photo-1534447677768-be436bb09401?w=600&auto=format&fit=crop' },
-      { id: 'cc_2', title: 'Cinematic Film Base', tag: 'CC Pack', price: 30, img: 'https://images.unsplash.com/photo-1518173946687-a4c8a383392e?w=600&auto=format&fit=crop' },
-      { id: 'cc_3', title: 'Dark Knight Grade', tag: 'CC Pack', price: 20, img: 'https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=600&auto=format&fit=crop' },
-      { id: 'cc_4', title: 'Cyberpunk Neon LUT', tag: 'CC Pack', price: 28, img: 'https://images.unsplash.com/photo-1508739773434-c26b3d09e071?w=600&auto=format&fit=crop' },
-      { id: 'cc_5', title: 'Golden Hour Preset', tag: 'CC Pack', price: 22, img: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?w=600&auto=format&fit=crop' }
-    ], 
-    SHAKE: [
-      { id: 'sh_1', title: 'Hard Impact Shake', tag: 'Shake Presets', price: 15, img: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=600&auto=format&fit=crop' },
-      { id: 'sh_2', title: 'Bass Drop Bounce', tag: 'Shake Presets', price: 20, img: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?w=600&auto=format&fit=crop' },
-      { id: 'sh_3', title: 'Smooth Whip Pan', tag: 'Shake Presets', price: 18, img: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=600&auto=format&fit=crop' },
-      { id: 'sh_4', title: 'Fast Zoom Blur Shake', tag: 'Shake Presets', price: 22, img: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=600&auto=format&fit=crop' },
-      { id: 'sh_5', title: 'Soft Warp Wave Shake', tag: 'Shake Presets', price: 16, img: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600&auto=format&fit=crop' }
-    ], 
-    XML: [
-      { id: 'xml_1', title: 'Pro Intro Template', tag: 'XML Project', price: 40, img: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600&auto=format&fit=crop' },
-      { id: 'xml_2', title: 'Velocity Edit XML', tag: 'XML Project', price: 35, img: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=600&auto=format&fit=crop' },
-      { id: 'xml_3', title: 'Glow Shake Timeline', tag: 'XML Project', price: 45, img: 'https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?w=600&auto=format&fit=crop' },
-      { id: 'xml_4', title: 'Glitch Outro XML', tag: 'XML Project', price: 38, img: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=600&auto=format&fit=crop' },
-      { id: 'xml_5', title: '3D Text Anim XML', tag: 'XML Project', price: 50, img: 'https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=600&auto=format&fit=crop' }
-    ] 
-  };
-
-  window.openCategoryModal = function(key) {
-    const titleEl = document.getElementById('cat-modal-title');
-    const tagEl = document.getElementById('cat-modal-tag');
-    const gridEl = document.getElementById('cat-modal-grid');
-    
-    if (titleEl) titleEl.textContent = `${key} PREMIUM PACKS`;
-    if (tagEl) tagEl.textContent = `${key} COLLECTION`;
-
-    const items = CATEGORY_DATA[key] || [];
-    if (gridEl) {
-      gridEl.innerHTML = items.map(item => `
-        <div class="cat-card-glass flex flex-col justify-between overflow-hidden border border-white/10 group rounded-3xl p-4 backdrop-blur-xl bg-black/60">
-          <div class="relative w-full h-36 rounded-2xl overflow-hidden mb-3">
-            <img src="${item.img}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-            <span class="absolute top-2 left-2 text-[9px] font-bold uppercase bg-black/80 px-2.5 py-1 rounded-full text-yellow-400 border border-yellow-500/30">${item.tag}</span>
-            <button onclick="window.toggleFavorite('${item.id}', '${item.title}', '${item.tag}', ${item.price}, '${item.img}')" class="absolute top-2 right-2 w-7 h-7 rounded-full bg-black/60 backdrop-blur-md border border-white/20 flex items-center justify-center text-red-400 hover:scale-110 transition text-xs">❤</button>
-          </div>
-          <div class="text-left flex-grow">
-            <h3 class="font-head font-bold text-sm text-white mb-1">${item.title}</h3>
-            <span class="font-mono text-yellow-400 font-extrabold text-xs">$${item.price}</span>
-          </div>
-          <div class="flex gap-2 mt-3">
-            <button onclick="window.addToCart('${item.id}', '${item.title}', ${item.price}, '${item.img}')" class="flex-1 py-1.5 px-2.5 rounded-xl bg-yellow-500/20 hover:bg-yellow-500/30 border border-yellow-500/40 text-yellow-400 font-bold text-[11px] transition">Add to Cart</button>
-            <button onclick="window.shareProduct('${item.title}', '${item.tag}')" class="py-1.5 px-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-white font-bold text-[11px] transition">🔗 Share</button>
-          </div>
-        </div>
-      `).join('');
-    }
-
-    const modal = document.getElementById('category-modal');
-    if (modal) modal.classList.remove('opacity-0', 'pointer-events-none');
-  };
-
-  window.closeCategoryModal = function() {
-    const modal = document.getElementById('category-modal');
-    if (modal) modal.classList.add('opacity-0', 'pointer-events-none');
-  };
-
-  window.activateCategoryCards = function(categoryKey, btn) {
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    if (btn) btn.classList.add('active');
-
-    const catItems = CATEGORY_DATA[categoryKey];
-    if (catItems && window.CARDS_DATA_CURRENT) {
-      window.CARDS_DATA_CURRENT = catItems.map((item, idx) => ({
-        title: item.title,
-        tag: item.tag,
-        number: "•••• " + (8000 + idx * 111),
-        bg: idx === 0 ? "linear-gradient(135deg, #09090b 0%, #18181b 50%, #27272a 100%)" : (idx === 1 ? "linear-gradient(135deg, #451a03 0%, #78350f 50%, #b45309 100%)" : (idx === 2 ? "linear-gradient(135deg, #083344 0%, #0e7490 50%, #06b6d4 100%)" : (idx === 3 ? "linear-gradient(135deg, #3b0764 0%, #6b21a8 50%, #9333ea 100%)" : "linear-gradient(135deg, #022c22 0%, #065f46 50%, #059669 100%)"))),
-        border: "rgba(255, 255, 255, 0.2)",
-        chip: "linear-gradient(135deg, #e2e8f0, #94a3b8)"
-      }));
-
-      if (window.rebuild3DCards) {
-        window.rebuild3DCards();
-        window.showToast(`LOADED ${categoryKey} PACKS`);
-      }
-    }
-  };
-
-  window.showView = function (viewId) {
-    var views = document.querySelectorAll('.view');
-    for (var i = 0; i < views.length; i++) views[i].classList.add('view-hidden');
-    var target = document.getElementById(viewId);
-    if (target) target.classList.remove('view-hidden');
-    window.scrollTo({ top: 0, behavior: 'instant' });
-  };
-
-  window.openCategory = function (key) {
-    window.openCategoryModal(key);
-  };
-
-  window.openWebTiers = function () { window.showView('web-view'); };
-  window.backToHome  = function () { window.showView('main-view'); };
-  window.scrollToId = function (id) {
-    var el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
-  };
-  var yr = document.getElementById('year');
-  if (yr) yr.textContent = new Date().getFullYear();
-
-  function initScrollAnimations() {
-    window.updateBadges();
-    fetchLiveStats();
-    var observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          var counters = entry.target.querySelectorAll('.counter-num');
-          counters.forEach(function (counter) {
-            if (counter.dataset.animated) return;
-            counter.dataset.animated = "true";
-            var target = parseInt(counter.dataset.target, 10) || 0, count = 0, speed = Math.max(1, target / 80);
-            function updateCount() {
-              count += speed;
-              if (count < target) { counter.textContent = Math.floor(count).toLocaleString('en-US'); requestAnimationFrame(updateCount); } else { counter.textContent = target.toLocaleString('en-US'); }
-            }
-            updateCount();
-          });
-          var decimalCounters = entry.target.querySelectorAll('.counter-num-decimal');
-          decimalCounters.forEach(function (counter) {
-            if (counter.dataset.animated) return;
-            counter.dataset.animated = "true";
-            var target = parseFloat(counter.dataset.target) || 0, count = 0, speed = Math.max(0.1, target / 60);
-            function updateDecimal() {
-              count += speed;
-              if (count < target) { counter.textContent = count.toString(); requestAnimationFrame(updateDecimal); } else { counter.textContent = target.toString(); }
-            }
-            updateDecimal();
-          });
+      // محرك الأنيميشن الذكي جهة اليمين بسرعة متوسطة
+      function autoScroll() {
+        if (!isPaused && container.scrollWidth > container.clientWidth) {
+          container.scrollLeft -= 1.2; 
+          if (container.scrollLeft <= 0) {
+            container.scrollLeft = container.scrollWidth / 2;
+          }
         }
-      });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.reveal-on-scroll').forEach(function (el) { observer.observe(el); });
-  }
-  window.addEventListener('DOMContentLoaded', initScrollAnimations);
+        requestAnimationFrame(autoScroll);
+      }
+      container.scrollLeft = container.scrollWidth / 2; // تهيئة بداية لليمين
+      requestAnimationFrame(autoScroll);
+    }
+
+    (function(){
+      var canvas = document.getElementById('globe');
+      if(!canvas) return;
+      var ctx = canvas.getContext('2d');
+      var W, H, R, DPR = Math.min(window.devicePixelRatio||1, 2);
+      function resize(){ var base = Math.min(window.innerWidth, window.innerHeight); R = base * 0.42; var size = R * 2.4; canvas.style.width = size + 'px'; canvas.style.height = size + 'px'; canvas.width = size * DPR; canvas.height = size * DPR; W = canvas.width; H = canvas.height; }
+      resize(); window.addEventListener('resize', resize);
+      var N = 620, pts = [], rings = [];
+      for(var i=0;i<N;i++){ var phi = Math.acos(1 - 2*(i+0.5)/N), theta = Math.PI*(1+Math.sqrt(5))*i; pts.push({ x:Math.sin(phi)*Math.cos(theta), y:Math.sin(phi)*Math.sin(theta), z:Math.cos(phi) }); }
+      [1.0, 0.72, 0.46].forEach(function(rr, idx){ var rp = [], tilt = (idx*0.5 + 0.3); for(var a=0;a<Math.PI*2;a+=0.13){ rp.push({ x:Math.cos(a)*rr, y:Math.sin(a)*Math.sin(tilt)*rr, z:Math.sin(a)*Math.cos(tilt)*rr }); } rings.push(rp); });
+      var rot = 0, tiltS = Math.sin(-0.35), tiltC = Math.cos(-0.35);
+      function rotY(p, s, c){ return {x:p.x*c + p.z*s, y:p.y, z:-p.x*s + p.z*c}; }
+      function rotX(p, s, c){ return {x:p.x, y:p.y*c - p.z*s, z:p.y*s + p.z*c}; }
+      function draw(){
+        rot += 0.0007; var s = Math.sin(rot), c = Math.cos(rot); ctx.clearRect(0,0,W,H); ctx.save(); ctx.translate(W/2, H/2);
+        var scale = R * DPR, rootStyles = getComputedStyle(document.documentElement), rgbLine = rootStyles.getPropertyValue('--globe-line').trim() || '205,210,200', rgbRing = rootStyles.getPropertyValue('--globe-ring').trim() || '190,195,185', rgbPoint = rootStyles.getPropertyValue('--globe-point').trim() || '233,236,228';
+        function proj(p){ var q = rotY(p, s, c); q = rotX(q, tiltS, tiltC); var persp = 1.6 / (1.6 - q.z*0.55); return { X:q.x*scale*persp, Y:q.y*scale*persp, z:q.z, persp: persp }; }
+        var sp = pts.map(proj); ctx.lineWidth = 0.65*DPR;
+        for(var i=0;i<sp.length;i++){ var a = sp[i]; for(var j=i+1;j<i+9 && j<sp.length;j++){ var b = sp[j], dx=a.X-b.X, dy=a.Y-b.Y, d2 = dx*dx+dy*dy; if(d2 < (scale*0.185)*(scale*0.185)){ var depth = (a.z+b.z)/2, alpha = Math.max(0, (depth+1)/2) * 0.42; ctx.strokeStyle = 'rgba('+rgbLine+','+alpha+')'; ctx.beginPath(); ctx.moveTo(a.X,a.Y); ctx.lineTo(b.X,b.Y); ctx.stroke(); } } }
+        rings.forEach(function(rp){ var proj2 = rp.map(proj); ctx.beginPath(); proj2.forEach(function(p,i) { i?ctx.lineTo(p.X,p.Y):ctx.moveTo(p.X,p.Y) }); ctx.closePath(); ctx.strokeStyle='rgba('+rgbRing+',.2)'; ctx.lineWidth=0.9*DPR; ctx.stroke(); });
+        for(var k=0; k<sp.length; k++){ var p = sp[k], depth = (p.z+1)/2, r = (0.7 + depth*1.7) * DPR; ctx.beginPath(); ctx.arc(p.X, p.Y, r, 0, 7); ctx.fillStyle = 'rgba('+rgbPoint+','+(0.32 + depth*0.65)+')'; ctx.fill(); }
+        ctx.restore(); requestAnimationFrame(draw);
+      }
+      draw();
+    })();
+
+    var translations = {
+      en: { "nav-bundles": "Bundles", "nav-packs": "Featured Packs", "nav-categories": "Categories", "hero-tag": "Digital Assets Hub", "hero-desc": "Explore custom websites reflecting your unique identity, plus premium video editing and design assets.", "hero-btn": "Explore Tiers", "tiers-available": "3 Tiers Available", "explore-packages": "Explore Packages", "packs-title": "Featured Packs", "packs-desc": "Swipe horizontally for endless physical 3D cards interaction", "cat-sec-title": "Categories", "cat-sec-desc": "Select a category to explore editing packs.", "cat-cc-desc": "Color Corrections", "cat-xml-desc": "Project Files", "cat-shake-desc": "Camera Shake Presets", "footer-right": "Crafted for the bold.", "tiers-sub": "Web Solutions", "tiers-title": "Development Tiers", "back-btn": "Back", "tier-starter-desc": "Ideal for creators & small brands looking for a clean, fast, and high-converting landing page.", "tier-pro-desc": "A complete web solution designed to showcase your brand, drive engagement, and convert visitors.", "tier-vip-desc": "The ultimate bespoke digital experience. Advanced visual effects, tailored animations, and priority treatment.", "select-plan": "Buy Now", "cat-view-sub": "Collection", "add-cart": "Add to Cart", "try-demo": "Try Demo", "stat-subscribers": "Satisfied Clients", "stat-views": "Total Visits", "stat-orders": "Quality Guarantee", "stat-rating": "Satisfaction Score", "review-title": "Leave Your Review & Rating", "review-sub": "Share your experience with VORTX Studio", "rating-breakdown": "RATING DISTRIBUTION", "placeholder-name": "Your Name (Optional)...✦˚", "placeholder-comment": "Write your review here (Optional)...✦˚", "plan-s-title": "STARTER", "plan-s-price": "$150", "plan-s-f1": "1 High-Converting Landing Page", "plan-s-f2": "Up to 4 Custom Sections", "plan-s-f3": "Fully Responsive & Mobile-Optimized", "plan-s-f4": "Smooth Basic Animations", "plan-s-f5": "1 Revision Included", "plan-s-del": "Delivery: 7 Days", "plan-p-title": "PREMIUM", "plan-p-price": "$300", "plan-p-f1": "Up to 3 Custom Web Pages", "plan-p-f2": "Up to 8 Designed Sections", "plan-p-f3": "Advanced UI/UX & Interactions", "plan-p-f4": "Social Media & Channel Integration", "plan-p-f5": "3 Revisions Included", "plan-p-del": "Delivery: 7–12 Days", "plan-v-title": "ELITE", "plan-v-price": "$600", "plan-v-f1": "Up to 6 Custom Pages", "plan-v-f2": "Up to 15 Dynamic Sections", "plan-v-f3": "Bespoke 3D & Advanced VFX Effects", "plan-v-f4": "Custom Interactive Elements", "plan-v-f5": "Priority Support & Consultation", "plan-v-del": "Delivery: 15–20 Days" },
+      ar: { "nav-bundles": "الحزم", "nav-packs": "حزم متميزة", "nav-categories": "الأقسام", "hero-tag": "مركز الأصول الرقمية", "hero-desc": "تصفّح لتستكشف مشاريع ومواقع ويب تجسّد هويتك، إلى جانب أحدث حزم ومستلزمات المونتاج وتصميم المقاطع.", "hero-btn": "استكشف الباقات", "tiers-available": "3 مستويات متاحة", "explore-packages": "استكشف الباقات", "packs-title": "الحزم المتميزة", "packs-desc": "اسحب يميناً ويساراً للتنقل بين البطاقات ثلاثية الأبعاد", "cat-sec-title": "الأقسام", "cat-sec-desc": "اختر قسماً لاستكشاف حزم التعديل المتاحة.", "cat-cc-desc": "تصحيح الألوان", "cat-xml-desc": "ملفات المشروع", "cat-shake-desc": "إعدادات اهتزاز الكاميرا", "footer-right": "صُنع للمبدعين والجرآء.", "tiers-sub": "حلول الويب", "tiers-title": "مستويات التطوير", "back-btn": "العودة", "tier-starter-desc": "مثالي للمبدعين والعلامات التجارية الصغيرة للحصول على صفحة هبوط سريعة واحترافية.", "tier-pro-desc": "حل ويب متكامل لمستواك يعرض علامتك التجارية ويزيد التفاعل والعملاء.", "tier-vip-desc": "تجربة رقمية فريدة وخاصة بالكامل. مؤثرات بصرية متقدمة وأولوية في الدعم.", "select-plan": "شراء الآن", "cat-view-sub": "المجموعة", "add-cart": "إضافة للسلة", "try-demo": "تجربة العرض", "stat-subscribers": "عملاء راضون", "stat-views": "إجمالي الزيارات", "stat-orders": "ضمان الجودة", "stat-rating": "معدل التقييم", "review-title": "اترك تقييمك ورأيك", "review-sub": "شاركونا تجربتكم مع فورتكس ستوديو", "rating-breakdown": "توزيع التقييمات", "placeholder-name": "اسمك (اختياري)...✦˚", "placeholder-comment": "اكتب تعليقك هنا (اختياري)...✦˚", "plan-s-title": "البداية", "plan-s-price": "150$", "plan-s-f1": "صفحة هبوط احترافية عالي التحويل", "plan-s-f2": "حتى 4 أقسام مخصصة", "plan-s-f3": "متوافق بالكامل مع الجوال والشاشات", "plan-s-f4": "تحريكات أساسية سلسة", "plan-s-f5": "تعديل واحد مشمول", "plan-s-del": "التسليم: 7 أيام", "plan-p-title": "المميزة", "plan-p-price": "300$", "plan-p-f1": "حتى 3 صفحات ويب مخصصة", "plan-p-f2": "حتى 8 أقسام مصممة", "plan-p-f3": "واجهة وتفاعلات متقدمة", "plan-p-f4": "ربط شبكات التواصل والقنوات", "plan-p-f5": "3 تعديلات مشمولة", "plan-p-del": "التسليم: 7-12 يوم", "plan-v-title": "النخبة", "plan-v-price": "600$", "plan-v-f1": "حتى 6 صفحات مخصصة", "plan-v-f2": "حتى 15 قسم تفاعلي", "plan-v-f3": "تصميم 3D ومؤثرات بصرية خاصة", "plan-v-f4": "عناصر تفاعلية مخصصة", "plan-v-f5": "أولوية الدعم والاستشارات", "plan-v-del": "التسليم: 15-20 يوم" }
+    };
+    
+    window.toggleLanguage = function () {
+      currentLang = currentLang === 'en' ? 'ar' : 'en';
+      const badgeText = document.getElementById('lang-badge-text');
+      if (badgeText) badgeText.textContent = currentLang === 'en' ? 'AR' : 'EN';
+      var dict = translations[currentLang] || {};
+      document.querySelectorAll('[data-i18n]').forEach(el => { if (dict[el.getAttribute('data-i18n')]) el.textContent = dict[el.getAttribute('data-i18n')]; });
+      document.querySelectorAll('[data-i18n-ph]').forEach(el => { if (dict[el.getAttribute('data-i18n-ph')]) el.setAttribute('placeholder', dict[el.getAttribute('data-i18n-ph')]); });
+    };
+
+    window.toggleTheme = function () { document.documentElement.classList.toggle('dark'); document.documentElement.classList.toggle('light'); };
+
+    function initScrollAnimations() {
+      window.updateBadges(); fetchLiveStats();
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            entry.target.querySelectorAll('.counter-num').forEach(function (counter) {
+              if (counter.dataset.animated) return; counter.dataset.animated = "true";
+              var target = parseInt(counter.dataset.target, 10) || 0, count = 0, speed = Math.max(1, target / 80);
+              function updateCount() { count += speed; if (count < target) { counter.textContent = Math.floor(count).toLocaleString('en-US'); requestAnimationFrame(updateCount); } else { counter.textContent = target.toLocaleString('en-US'); } }
+              updateCount();
+            });
+            entry.target.querySelectorAll('.counter-num-decimal').forEach(function (counter) {
+              if (counter.dataset.animated) return; counter.dataset.animated = "true";
+              var target = parseFloat(counter.dataset.target) || 0, count = 0, speed = Math.max(0.1, target / 60);
+              function updateDecimal() { count += speed; if (count < target) { counter.textContent = count.toString(); requestAnimationFrame(updateDecimal); } else { counter.textContent = target.toString(); } }
+              updateDecimal();
+            });
+          }
+        });
+      }, { threshold: 0.1 });
+      document.querySelectorAll('.reveal-on-scroll').forEach(function (el) { observer.observe(el); });
+    }
+    window.addEventListener('DOMContentLoaded', initScrollAnimations);
 })();
 </script>
 <script>
