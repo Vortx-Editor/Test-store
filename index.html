@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <title>VORTX — Premium Digital Assets</title>
 <meta name="theme-color" content="#09090c" />
+<link rel="preload" href="https://res.cloudinary.com/eon6wcph/video/upload/v1/VORTX_4K_CLEAN_FULL_kd7uui.mp4" as="video" type="video/mp4">
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -140,6 +141,7 @@
   header .glass { border-bottom: 1px solid rgba(255,255,255,0.05); }
   html.light header .glass { border-bottom: 1px solid rgba(100, 116, 139, 0.1); background: rgba(255,255,255,0.85) !important; }
   
+  /* اعدادات شريط التعليقات للتحكم بواسطة JS والسحب */
   .hide-scrollbar::-webkit-scrollbar { display: none; }
   .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; overflow-x: auto; cursor: grab; user-select: none; }
   .hide-scrollbar:active { cursor: grabbing; }
@@ -219,90 +221,72 @@
   </p>
 </div>
 
-<!-- المودالات المباشرة تحت body بحجم ثابت في السنتر بوجه المستخدم مباشرة -->
-<div id="category-modal" class="fixed inset-0 z-[10000] flex items-center justify-center p-4 h-[100dvh] w-screen opacity-0 pointer-events-none transition-opacity duration-300">
-  <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="window.closeCategoryModal()"></div>
-  <div class="glass rounded-3xl max-w-2xl w-full relative z-10 p-6 border border-white/10 shadow-2xl max-h-[85vh] overflow-y-auto">
-    <div class="flex items-center justify-between mb-6 sticky top-0 bg-black/60 backdrop-blur-md p-2 rounded-2xl z-20 border border-white/10">
-      <div>
-        <span id="cat-modal-tag" class="text-[10px] font-bold uppercase text-yellow-400">COLLECTION</span>
-        <h3 id="cat-modal-title" class="font-head font-bold text-2xl text-white">CATEGORY PACKS</h3>
-      </div>
-      <button onclick="window.closeCategoryModal()" class="text-white/60 hover:text-white font-bold p-2 text-lg">✕</button>
-    </div>
-    <div id="cat-modal-grid" class="grid sm:grid-cols-2 gap-4"></div>
-  </div>
-</div>
+<script>
+(function () {
+  "use strict";
+  var wordEl = document.getElementById('vx-logo-word');
+  if (wordEl) {
+    ['V', 'O', 'R', 'T', 'X'].forEach(function (ch, i) {
+      var span = document.createElement('span');
+      span.className = 'vx-letter';
+      span.textContent = ch;
+      span.style.setProperty('--ld', (0.2 + i * 0.14).toFixed(2) + 's');
+      wordEl.appendChild(span);
+    });
+  }
+  var barFill = document.getElementById('vx-bar-fill');
+  var percentEl = document.getElementById('vx-percent');
+  var loaderEl = document.getElementById('vx-loader');
+  var progress = 0, duration = 2100, startTime = null, finished = false, rafId = null;
+  function paint(p) {
+    var pct = Math.round(p);
+    if (barFill) barFill.style.width = pct + '%';
+    if (percentEl) percentEl.textContent = pct;
+  }
+  function finishLoader() {
+    if (finished) return;
+    finished = true;
+    if (rafId) cancelAnimationFrame(rafId);
+    paint(100);
+    setTimeout(function () {
+      if (loaderEl) {
+        loaderEl.classList.add('vx-hide');
+        setTimeout(function () { loaderEl.style.display = 'none'; }, 850);
+      }
+      var appContent = document.getElementById('app-content');
+      if (appContent) {
+        appContent.classList.add('vx-revealed');
+        setTimeout(function(){
+            var heroSec = document.getElementById('hero-section');
+            if(heroSec) heroSec.classList.add('revealed');
+        }, 300);
+      }
+      document.documentElement.classList.remove('vx-loading');
+      document.body.classList.remove('vx-loading');
+    }, 250);
+  }
+  function tick(now) {
+    if (finished) return;
+    if (startTime === null) startTime = now;
+    var elapsed = now - startTime;
+    progress = Math.min(100, (elapsed / duration) * 100);
+    paint(progress);
+    if (progress >= 100) { finishLoader(); return; }
+    rafId = requestAnimationFrame(tick);
+  }
+  rafId = requestAnimationFrame(tick);
+  setTimeout(finishLoader, 4500);
+  if (loaderEl) loaderEl.addEventListener('click', finishLoader);
+})();
+</script>
 
-<div id="notifications-modal" class="fixed inset-0 z-[10000] flex items-center justify-center p-4 h-[100dvh] w-screen opacity-0 pointer-events-none transition-opacity duration-300">
-  <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="window.closeNotificationsModal()"></div>
-  <div class="glass rounded-3xl max-w-sm w-full relative z-10 p-6 border border-white/10 shadow-2xl text-left">
-    <div class="flex items-center justify-between mb-4">
-      <h3 class="font-head font-bold text-xl text-yellow-400">Notifications</h3>
-      <button onclick="window.closeNotificationsModal()" class="text-white/60 hover:text-white font-bold p-1">✕</button>
-    </div>
-    <div class="space-y-3">
-      <div class="p-3 bg-white/5 rounded-xl border border-white/10">
-        <span class="text-[10px] text-purple-400 font-bold uppercase tracking-wider block mb-1">New Drop ✦</span>
-        <h4 class="text-xs font-bold text-white mb-1">Cinematic VFX Pack V2 Released</h4>
-        <p class="text-[11px] text-white/70">Check out the new CC & Shake presets in the store now!</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div id="favorites-modal" class="fixed inset-0 z-[10000] flex items-center justify-center p-4 h-[100dvh] w-screen opacity-0 pointer-events-none transition-opacity duration-300">
-  <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="window.closeFavoritesModal()"></div>
-  <div class="glass rounded-3xl max-w-md w-full relative z-10 p-6 border border-white/10 shadow-2xl text-left">
-    <div class="flex items-center justify-between mb-4">
-      <h3 class="font-head font-bold text-xl text-red-400">Your Favorites</h3>
-      <button onclick="window.closeFavoritesModal()" class="text-white/60 hover:text-white font-bold p-1">✕</button>
-    </div>
-    <div id="favorites-list" class="space-y-3 max-h-[300px] overflow-y-auto pr-1"></div>
-  </div>
-</div>
-
-<div id="cart-modal" class="fixed inset-0 z-[10000] flex items-center justify-center p-4 h-[100dvh] w-screen opacity-0 pointer-events-none transition-opacity duration-300">
-  <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="window.closeCartModal()"></div>
-  <div class="glass rounded-3xl max-w-md w-full relative z-10 p-6 border border-white/10 shadow-2xl text-left">
-    <div class="flex items-center justify-between mb-4">
-      <h3 class="font-head font-bold text-xl text-yellow-400">Your Shopping Cart</h3>
-      <button onclick="window.closeCartModal()" class="text-white/60 hover:text-white font-bold p-1">✕</button>
-    </div>
-    <div id="cart-items-list" class="space-y-3 max-h-[250px] overflow-y-auto pr-1 mb-4"></div>
-    <div class="border-t border-white/10 pt-3 flex items-center justify-between mb-5">
-      <span class="text-xs font-bold text-white uppercase">Total Amount:</span>
-      <span id="cart-total-price" class="text-lg font-mono font-black text-yellow-400">$0</span>
-    </div>
-    <div class="button-wrap w-full" onclick="window.checkoutCartItems()">
-      <div class="btn-3d-style"><span class="text-yellow-400 font-bold">Checkout All Items via Telegram</span></div>
-    </div>
-  </div>
-</div>
-
-<div id="preview-modal" class="fixed inset-0 z-[10000] flex items-center justify-center p-4 h-[100dvh] w-screen opacity-0 pointer-events-none transition-opacity duration-300">
-  <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="window.closePreview()"></div>
-  <div class="glass rounded-3xl max-w-md w-full relative z-10 p-6" id="preview-card">
-    <span id="preview-tag" class="text-[10px] font-bold uppercase text-current opacity-70 force-eng">TAG</span>
-    <h3 id="preview-title" class="font-head font-bold text-2xl mt-1 mb-6 force-eng">TITLE</h3>
-    <div class="flex gap-4">
-      <div class="button-wrap flex-1" onclick="window.showToast('ADDED TO CART'); window.closePreview();"><div class="btn-3d-style"><span data-i18n="add-cart">Add to Cart</span></div></div>
-      <div class="button-wrap flex-1" onclick="window.showToast('DOWNLOADING DEMO...')"><div class="btn-3d-style"><span data-i18n="try-demo">Try Demo</span></div></div>
-    </div>
-  </div>
-</div>
-
-<div id="support-modal" class="fixed inset-0 z-[10000] flex items-center justify-center p-4 h-[100dvh] w-screen opacity-0 pointer-events-none transition-opacity duration-300">
-  <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="window.closeSupportModal()"></div>
-  <div class="glass rounded-3xl max-w-sm w-full relative z-10 p-6 text-center border-t border-yellow-500/30">
-    <h3 class="font-head font-bold text-2xl text-yellow-500 force-eng mb-2">Support VORTX</h3>
-    <p class="text-sm opacity-70 mb-6 font-bold">Empower the evolution of digital assets.</p>
-    <div class="button-wrap w-full" onclick="window.showToast('REDIRECTING TO PAYMENT...'); window.closeSupportModal();">
-      <div class="btn-3d-style"><span class="text-yellow-400 font-bold">Contribute</span></div>
-    </div>
-  </div>
-</div>
 <div id="app-content">
+
+  <div class="stars-background-container">
+    <canvas id="stars-canvas"></canvas>
+  </div>
+  
+  <div id="toast-box" class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[200] flex flex-col gap-3 pointer-events-none w-11/12 max-w-md text-center"></div>
 
   <header class="sticky top-0 z-50 w-full">
     <nav class="glass border-b-0 bg-black/40 backdrop-blur-md px-2 sm:px-6">
@@ -447,7 +431,6 @@
         <div id="carousel-track" class="relative w-full h-full preserve-3d"></div>
       </div>
     </section>
-
     <section id="categories" class="max-w-7xl mx-auto px-4 sm:px-6 py-16 reveal-on-scroll">
       <div class="mb-10 text-left"><h2 data-i18n="cat-sec-title" class="font-head font-bold text-3xl sm:text-4xl">Categories</h2><p data-i18n="cat-sec-desc" class="font-bold opacity-50 mt-2 text-sm tracking-wide">Select a category to explore editing packs.</p></div>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -460,7 +443,7 @@
     <!-- قسم التقييم والتعليق -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 py-12 border-t border-white/10 mt-12 reveal-on-scroll">
       
-      <!-- الشريط المتحرك (أسرع، يتحرك لليمين، وقابل للسحب بسلاسة تامة) -->
+      <!-- الشريط المتحرك (أسرع، يتحرك لليمين، وقابل للسحب باليد بسلاسة) -->
       <div id="reviews-marquee-container" class="w-full mb-12 py-4 glass rounded-2xl hidden hide-scrollbar" dir="ltr">
         <div id="reviews-marquee-track" class="flex gap-6 items-center px-4 w-max" dir="ltr"></div>
       </div>
@@ -539,7 +522,6 @@
       </div>
     </footer>
   </main>
-
   <section id="web-view" class="view view-hidden relative z-10 min-h-screen">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
       <div class="flex items-center justify-between mb-12">
@@ -611,19 +593,78 @@
     </div>
   </section>
 
-  <section id="category-view" class="view view-hidden relative z-10 min-h-screen">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
-      <div class="flex items-center justify-between mb-12">
-        <div><span data-i18n="cat-view-sub" class="text-xs tracking-widest uppercase font-bold text-current opacity-70" data-i18n-sub="collection">Collection</span><h2 id="cat-title" class="font-head font-bold text-4xl mt-3 force-eng">CC</h2></div>
-        <button onclick="window.backToHome()" class="back-btn-pill"><span>←</span> <span data-i18n="back-btn">Back</span></button>
+  <!-- المودالات مثبتة بسنتر الشاشة وما تخلي الصفحة تتحرك -->
+  <div id="category-modal" class="fixed inset-0 z-[130] flex items-center justify-center p-4 h-[100dvh] w-screen opacity-0 pointer-events-none transition-opacity duration-300">
+    <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="window.closeCategoryModal()"></div>
+    <div class="glass rounded-3xl max-w-2xl w-full relative z-10 p-6 border border-white/10 shadow-2xl max-h-[85vh] overflow-y-auto">
+      <div class="flex items-center justify-between mb-6 sticky top-0 bg-black/60 backdrop-blur-md p-2 rounded-2xl z-20 border border-white/10">
+        <div>
+          <span id="cat-modal-tag" class="text-[10px] font-bold uppercase text-yellow-400">COLLECTION</span>
+          <h3 id="cat-modal-title" class="font-head font-bold text-2xl text-white">CATEGORY PACKS</h3>
+        </div>
+        <button onclick="window.closeCategoryModal()" class="text-white/60 hover:text-white font-bold p-2 text-lg">✕</button>
       </div>
-      <div id="cat-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+      <div id="cat-modal-grid" class="grid sm:grid-cols-2 gap-4"></div>
     </div>
-  </section>
+  </div>
 
-</div> <!-- نهاية app-content -->
+  <div id="notifications-modal" class="fixed inset-0 z-[120] flex items-center justify-center p-4 h-[100dvh] w-screen opacity-0 pointer-events-none transition-opacity duration-300">
+    <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="window.closeNotificationsModal()"></div>
+    <div class="glass rounded-3xl max-w-sm w-full relative z-10 p-6 border border-white/10 shadow-2xl text-left">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="font-head font-bold text-xl text-yellow-400">Notifications</h3>
+        <button onclick="window.closeNotificationsModal()" class="text-white/60 hover:text-white font-bold p-1">✕</button>
+      </div>
+      <div class="space-y-3">
+        <div class="p-3 bg-white/5 rounded-xl border border-white/10">
+          <span class="text-[10px] text-purple-400 font-bold uppercase tracking-wider block mb-1">New Drop ✦</span>
+          <h4 class="text-xs font-bold text-white mb-1">Cinematic VFX Pack V2 Released</h4>
+          <p class="text-[11px] text-white/70">Check out the new CC & Shake presets in the store now!</p>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<script>
+  <div id="favorites-modal" class="fixed inset-0 z-[120] flex items-center justify-center p-4 h-[100dvh] w-screen opacity-0 pointer-events-none transition-opacity duration-300">
+    <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="window.closeFavoritesModal()"></div>
+    <div class="glass rounded-3xl max-w-md w-full relative z-10 p-6 border border-white/10 shadow-2xl text-left">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="font-head font-bold text-xl text-red-400">Your Favorites</h3>
+        <button onclick="window.closeFavoritesModal()" class="text-white/60 hover:text-white font-bold p-1">✕</button>
+      </div>
+      <div id="favorites-list" class="space-y-3 max-h-[300px] overflow-y-auto pr-1"></div>
+    </div>
+  </div>
+
+  <div id="cart-modal" class="fixed inset-0 z-[120] flex items-center justify-center p-4 h-[100dvh] w-screen opacity-0 pointer-events-none transition-opacity duration-300">
+    <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="window.closeCartModal()"></div>
+    <div class="glass rounded-3xl max-w-md w-full relative z-10 p-6 border border-white/10 shadow-2xl text-left">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="font-head font-bold text-xl text-yellow-400">Your Shopping Cart</h3>
+        <button onclick="window.closeCartModal()" class="text-white/60 hover:text-white font-bold p-1">✕</button>
+      </div>
+      <div id="cart-items-list" class="space-y-3 max-h-[250px] overflow-y-auto pr-1 mb-4"></div>
+      <div class="border-t border-white/10 pt-3 flex items-center justify-between mb-5">
+        <span class="text-xs font-bold text-white uppercase">Total Amount:</span>
+        <span id="cart-total-price" class="text-lg font-mono font-black text-yellow-400">$0</span>
+      </div>
+      <div class="button-wrap w-full" onclick="window.checkoutCartItems()">
+        <div class="btn-3d-style"><span class="text-yellow-400 font-bold">Checkout All Items via Telegram</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="support-modal" class="fixed inset-0 z-[100] flex items-center justify-center p-4 h-[100dvh] w-screen opacity-0 pointer-events-none transition-opacity duration-300">
+    <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="window.closeSupportModal()"></div>
+    <div class="glass rounded-3xl max-w-sm w-full relative z-10 p-6 text-center border-t border-yellow-500/30">
+      <h3 class="font-head font-bold text-2xl text-yellow-500 force-eng mb-2">Support VORTX</h3>
+      <p class="text-sm opacity-70 mb-6 font-bold">Empower the evolution of digital assets.</p>
+      <div class="button-wrap w-full" onclick="window.showToast('REDIRECTING TO PAYMENT...'); window.closeSupportModal();">
+        <div class="btn-3d-style"><span class="text-yellow-400 font-bold">Contribute</span></div>
+      </div>
+    </div>
+  </div>
+  <script>
   window.openTelegramOrder = function(planName, price) {
     const telegramUsername = 'wot_5'; 
     const message = `Hey VORTX! I want to purchase the ${planName} package ($${price}).`;
@@ -738,8 +779,8 @@
       setTimeout(function () { if (toast && toast.parentNode) toast.parentNode.removeChild(toast); }, 3000);
     };
 
-    // حماية تامة من التكرار عند الإرسال وضمان الظهور الفوري
     window.submitUserRating = async function() {
+      if (sessionStorage.getItem('vortx_has_rated')) { window.showToast('YOU HAVE ALREADY RATED THIS SESSION!'); return; }
       const ratingRadio = document.querySelector('input[name="rating"]:checked');
       if (!ratingRadio) { window.showToast('PLEASE SELECT A STAR RATING FIRST!'); return; }
       
@@ -752,24 +793,22 @@
       if (comment && BAD_WORDS.some(word => comment.toLowerCase().includes(word))) { window.showToast('REVIEW REJECTED: INAPPROPRIATE CONTENT!'); return; }
 
       window.showToast('SUBMITTING YOUR RATING...');
-      const newId = 'rev_' + Date.now() + '_' + Math.random().toString(36).substr(2, 7);
+      const newId = Date.now() + '_' + Math.random().toString(36).substr(2, 9);
       const newReview = { id: newId, rating: selectedScore, comment: comment, reviewer_name: name, created_at: new Date().toISOString() };
 
       let localReviews = JSON.parse(localStorage.getItem('vortx_reviews_data') || '[]');
-      // التأكد من عدم وجود نفس النص والاسم مسبقاً محلياً لمنع أي تكرار
-      if (!localReviews.some(r => r.comment === comment && r.reviewer_name === name)) {
-        localReviews.unshift(newReview);
-        localStorage.setItem('vortx_reviews_data', JSON.stringify(localReviews));
-      }
+      localReviews.unshift(newReview);
+      localStorage.setItem('vortx_reviews_data', JSON.stringify(localReviews));
 
       if (supabase) {
         try {
-          let payload = { rating: selectedScore, comment: comment };
+          let payload = { id: newId, rating: selectedScore, comment: comment };
           if (name) payload.reviewer_name = name;
           await supabase.from('reviews').insert([payload]);
         } catch(e) {}
       }
 
+      sessionStorage.setItem('vortx_has_rated', 'true');
       if (commentEl) commentEl.value = ''; if (nameEl) nameEl.value = '';
       ratingRadio.checked = false;
       window.showToast('RATING SUBMITTED SUCCESSFULLY!');
@@ -793,19 +832,13 @@
       if (viewsEl) { viewsEl.setAttribute('data-target', localVisits); viewsEl.textContent = localVisits.toLocaleString('en-US'); }
 
       let uniqueMap = new Map();
-      localReviews.forEach(r => { 
-        const key = `${r.comment}_${r.rating}_${r.reviewer_name}`;
-        if (!uniqueMap.has(key)) uniqueMap.set(key, r); 
-      });
+      localReviews.forEach(r => { uniqueMap.set(`${r.comment}_${r.rating}_${r.reviewer_name}`, r); });
 
       if (supabase) {
         try {
           const { data } = await supabase.from('reviews').select('*').order('created_at', { ascending: false });
           if (data && data.length > 0) {
-            data.forEach(dbr => {
-              const key = `${dbr.comment}_${dbr.rating}_${dbr.reviewer_name}`;
-              if (!uniqueMap.has(key)) uniqueMap.set(key, dbr);
-            });
+            data.forEach(dbr => { uniqueMap.set(`${dbr.comment}_${dbr.rating}_${dbr.reviewer_name}`, dbr); });
           }
         } catch(e) {}
       }
@@ -843,9 +876,7 @@
               const nameText = r.reviewer_name ? r.reviewer_name : 'Anonymous';
               return `<div class="px-5 py-3 rounded-2xl border border-yellow-500/30 bg-black/80 backdrop-blur-md flex flex-col justify-center items-start gap-1 shrink-0 shadow-lg min-w-[200px] text-left"><span class="text-xs text-yellow-400 font-bold block text-left">${nameText}</span><span class="text-yellow-400 font-bold text-xs tracking-widest block text-left">${starsHtml}</span><span class="text-xs text-white/90 font-medium block mt-1 text-left">"${r.comment}"</span></div>`;
             });
-
-            // تكرار ثنائي آمن يضمن عدم تضاعف التعليقات وظهورها مرة واحدة فقط مع حركة لا نهائية
-            marqueeTrack.innerHTML = cardsHtmlArr.join('') + cardsHtmlArr.join('');
+            marqueeTrack.innerHTML = cardsHtmlArr.join('') + cardsHtmlArr.join('') + cardsHtmlArr.join('');
             marqueeContainer.classList.remove('hidden');
             setupMarqueeInteraction();
           } else {
@@ -855,7 +886,6 @@
       }
     }
 
-    // محرك السحب والتحريك لليمين بسلاسة مع توقف 5 ثواني
     function setupMarqueeInteraction() {
       const container = document.getElementById('reviews-marquee-container');
       if (!container) return;
@@ -870,27 +900,178 @@
         pauseTimer = setTimeout(() => { isPaused = false; }, 5000);
       }
 
-      container.onmousedown = (e) => { isDragging = true; startX = e.pageX - container.offsetLeft; scrollLeft = container.scrollLeft; triggerPause(); };
-      container.onmouseleave = () => { isDragging = false; };
-      container.onmouseup = () => { isDragging = false; triggerPause(); };
-      container.onmousemove = (e) => { if (!isDragging) return; e.preventDefault(); const x = e.pageX - container.offsetLeft; const walk = (x - startX) * 2; container.scrollLeft = scrollLeft - walk; triggerPause(); };
-      container.ontouchstart = (e) => { isDragging = true; startX = e.touches[0].pageX - container.offsetLeft; scrollLeft = container.scrollLeft; triggerPause(); };
-      container.ontouchend = () => { isDragging = false; triggerPause(); };
-      container.ontouchmove = (e) => { if (!isDragging) return; const x = e.touches[0].pageX - container.offsetLeft; const walk = (x - startX) * 2; container.scrollLeft = scrollLeft - walk; triggerPause(); };
+      container.addEventListener('mousedown', (e) => { isDragging = true; startX = e.pageX - container.offsetLeft; scrollLeft = container.scrollLeft; triggerPause(); });
+      container.addEventListener('mouseleave', () => { isDragging = false; });
+      container.addEventListener('mouseup', () => { isDragging = false; triggerPause(); });
+      container.addEventListener('mousemove', (e) => { if (!isDragging) return; e.preventDefault(); const x = e.pageX - container.offsetLeft; const walk = (x - startX) * 2; container.scrollLeft = scrollLeft - walk; triggerPause(); });
+      container.addEventListener('touchstart', (e) => { isDragging = true; startX = e.touches[0].pageX - container.offsetLeft; scrollLeft = container.scrollLeft; triggerPause(); }, { passive: true });
+      container.addEventListener('touchend', () => { isDragging = false; triggerPause(); }, { passive: true });
+      container.addEventListener('touchmove', (e) => { if (!isDragging) return; const x = e.touches[0].pageX - container.offsetLeft; const walk = (x - startX) * 2; container.scrollLeft = scrollLeft - walk; triggerPause(); }, { passive: true });
 
+      // محرك الأنيميشن الذكي جهة اليمين بسرعة متوسطة
       function autoScroll() {
         if (!isPaused && container.scrollWidth > container.clientWidth) {
-          container.scrollLeft -= 1.5; // الحركة لليمين بسرعة متوسطة وسلسة
+          container.scrollLeft -= 1.2; 
           if (container.scrollLeft <= 0) {
             container.scrollLeft = container.scrollWidth / 2;
           }
         }
         requestAnimationFrame(autoScroll);
       }
-      container.scrollLeft = container.scrollWidth / 2;
+      container.scrollLeft = container.scrollWidth / 2; // تهيئة بداية لليمين
       requestAnimationFrame(autoScroll);
     }
-  })();
+
+    (function(){
+      var canvas = document.getElementById('globe');
+      if(!canvas) return;
+      var ctx = canvas.getContext('2d');
+      var W, H, R, DPR = Math.min(window.devicePixelRatio||1, 2);
+      function resize(){ var base = Math.min(window.innerWidth, window.innerHeight); R = base * 0.42; var size = R * 2.4; canvas.style.width = size + 'px'; canvas.style.height = size + 'px'; canvas.width = size * DPR; canvas.height = size * DPR; W = canvas.width; H = canvas.height; }
+      resize(); window.addEventListener('resize', resize);
+      var N = 620, pts = [], rings = [];
+      for(var i=0;i<N;i++){ var phi = Math.acos(1 - 2*(i+0.5)/N), theta = Math.PI*(1+Math.sqrt(5))*i; pts.push({ x:Math.sin(phi)*Math.cos(theta), y:Math.sin(phi)*Math.sin(theta), z:Math.cos(phi) }); }
+      [1.0, 0.72, 0.46].forEach(function(rr, idx){ var rp = [], tilt = (idx*0.5 + 0.3); for(var a=0;a<Math.PI*2;a+=0.13){ rp.push({ x:Math.cos(a)*rr, y:Math.sin(a)*Math.sin(tilt)*rr, z:Math.sin(a)*Math.cos(tilt)*rr }); } rings.push(rp); });
+      var rot = 0, tiltS = Math.sin(-0.35), tiltC = Math.cos(-0.35);
+      function rotY(p, s, c){ return {x:p.x*c + p.z*s, y:p.y, z:-p.x*s + p.z*c}; }
+      function rotX(p, s, c){ return {x:p.x, y:p.y*c - p.z*s, z:p.y*s + p.z*c}; }
+      function draw(){
+        rot += 0.0007; var s = Math.sin(rot), c = Math.cos(rot); ctx.clearRect(0,0,W,H); ctx.save(); ctx.translate(W/2, H/2);
+        var scale = R * DPR, rootStyles = getComputedStyle(document.documentElement), rgbLine = rootStyles.getPropertyValue('--globe-line').trim() || '205,210,200', rgbRing = rootStyles.getPropertyValue('--globe-ring').trim() || '190,195,185', rgbPoint = rootStyles.getPropertyValue('--globe-point').trim() || '233,236,228';
+        function proj(p){ var q = rotY(p, s, c); q = rotX(q, tiltS, tiltC); var persp = 1.6 / (1.6 - q.z*0.55); return { X:q.x*scale*persp, Y:q.y*scale*persp, z:q.z, persp: persp }; }
+        var sp = pts.map(proj); ctx.lineWidth = 0.65*DPR;
+        for(var i=0;i<sp.length;i++){ var a = sp[i]; for(var j=i+1;j<i+9 && j<sp.length;j++){ var b = sp[j], dx=a.X-b.X, dy=a.Y-b.Y, d2 = dx*dx+dy*dy; if(d2 < (scale*0.185)*(scale*0.185)){ var depth = (a.z+b.z)/2, alpha = Math.max(0, (depth+1)/2) * 0.42; ctx.strokeStyle = 'rgba('+rgbLine+','+alpha+')'; ctx.beginPath(); ctx.moveTo(a.X,a.Y); ctx.lineTo(b.X,b.Y); ctx.stroke(); } } }
+        rings.forEach(function(rp){ var proj2 = rp.map(proj); ctx.beginPath(); proj2.forEach(function(p,i) { i?ctx.lineTo(p.X,p.Y):ctx.moveTo(p.X,p.Y) }); ctx.closePath(); ctx.strokeStyle='rgba('+rgbRing+',.2)'; ctx.lineWidth=0.9*DPR; ctx.stroke(); });
+        for(var k=0; k<sp.length; k++){ var p = sp[k], depth = (p.z+1)/2, r = (0.7 + depth*1.7) * DPR; ctx.beginPath(); ctx.arc(p.X, p.Y, r, 0, 7); ctx.fillStyle = 'rgba('+rgbPoint+','+(0.32 + depth*0.65)+')'; ctx.fill(); }
+        ctx.restore(); requestAnimationFrame(draw);
+      }
+      draw();
+    })();
+
+    var translations = {
+      en: { "nav-bundles": "Bundles", "nav-packs": "Featured Packs", "nav-categories": "Categories", "hero-tag": "Digital Assets Hub", "hero-desc": "Explore custom websites reflecting your unique identity, plus premium video editing and design assets.", "hero-btn": "Explore Tiers", "tiers-available": "3 Tiers Available", "explore-packages": "Explore Packages", "packs-title": "Featured Packs", "packs-desc": "Swipe horizontally for endless physical 3D cards interaction", "cat-sec-title": "Categories", "cat-sec-desc": "Select a category to explore editing packs.", "cat-cc-desc": "Color Corrections", "cat-xml-desc": "Project Files", "cat-shake-desc": "Camera Shake Presets", "footer-right": "Crafted for the bold.", "tiers-sub": "Web Solutions", "tiers-title": "Development Tiers", "back-btn": "Back", "tier-starter-desc": "Ideal for creators & small brands looking for a clean, fast, and high-converting landing page.", "tier-pro-desc": "A complete web solution designed to showcase your brand, drive engagement, and convert visitors.", "tier-vip-desc": "The ultimate bespoke digital experience. Advanced visual effects, tailored animations, and priority treatment.", "select-plan": "Buy Now", "cat-view-sub": "Collection", "add-cart": "Add to Cart", "try-demo": "Try Demo", "stat-subscribers": "Satisfied Clients", "stat-views": "Total Visits", "stat-orders": "Quality Guarantee", "stat-rating": "Satisfaction Score", "review-title": "Leave Your Review & Rating", "review-sub": "Share your experience with VORTX Studio", "rating-breakdown": "RATING DISTRIBUTION", "placeholder-name": "Your Name (Optional)...✦˚", "placeholder-comment": "Write your review here (Optional)...✦˚", "plan-s-title": "STARTER", "plan-s-price": "$150", "plan-s-f1": "1 High-Converting Landing Page", "plan-s-f2": "Up to 4 Custom Sections", "plan-s-f3": "Fully Responsive & Mobile-Optimized", "plan-s-f4": "Smooth Basic Animations", "plan-s-f5": "1 Revision Included", "plan-s-del": "Delivery: 7 Days", "plan-p-title": "PREMIUM", "plan-p-price": "$300", "plan-p-f1": "Up to 3 Custom Web Pages", "plan-p-f2": "Up to 8 Designed Sections", "plan-p-f3": "Advanced UI/UX & Interactions", "plan-p-f4": "Social Media & Channel Integration", "plan-p-f5": "3 Revisions Included", "plan-p-del": "Delivery: 7–12 Days", "plan-v-title": "ELITE", "plan-v-price": "$600", "plan-v-f1": "Up to 6 Custom Pages", "plan-v-f2": "Up to 15 Dynamic Sections", "plan-v-f3": "Bespoke 3D & Advanced VFX Effects", "plan-v-f4": "Custom Interactive Elements", "plan-v-f5": "Priority Support & Consultation", "plan-v-del": "Delivery: 15–20 Days" },
+      ar: { "nav-bundles": "الحزم", "nav-packs": "حزم متميزة", "nav-categories": "الأقسام", "hero-tag": "مركز الأصول الرقمية", "hero-desc": "تصفّح لتستكشف مشاريع ومواقع ويب تجسّد هويتك، إلى جانب أحدث حزم ومستلزمات المونتاج وتصميم المقاطع.", "hero-btn": "استكشف الباقات", "tiers-available": "3 مستويات متاحة", "explore-packages": "استكشف الباقات", "packs-title": "الحزم المتميزة", "packs-desc": "اسحب يميناً ويساراً للتنقل بين البطاقات ثلاثية الأبعاد", "cat-sec-title": "الأقسام", "cat-sec-desc": "اختر قسماً لاستكشاف حزم التعديل المتاحة.", "cat-cc-desc": "تصحيح الألوان", "cat-xml-desc": "ملفات المشروع", "cat-shake-desc": "إعدادات اهتزاز الكاميرا", "footer-right": "صُنع للمبدعين والجرآء.", "tiers-sub": "حلول الويب", "tiers-title": "مستويات التطوير", "back-btn": "العودة", "tier-starter-desc": "مثالي للمبدعين والعلامات التجارية الصغيرة للحصول على صفحة هبوط سريعة واحترافية.", "tier-pro-desc": "حل ويب متكامل لمستواك يعرض علامتك التجارية ويزيد التفاعل والعملاء.", "tier-vip-desc": "تجربة رقمية فريدة وخاصة بالكامل. مؤثرات بصرية متقدمة وأولوية في الدعم.", "select-plan": "شراء الآن", "cat-view-sub": "المجموعة", "add-cart": "إضافة للسلة", "try-demo": "تجربة العرض", "stat-subscribers": "عملاء راضون", "stat-views": "إجمالي الزيارات", "stat-orders": "ضمان الجودة", "stat-rating": "معدل التقييم", "review-title": "اترك تقييمك ورأيك", "review-sub": "شاركونا تجربتكم مع فورتكس ستوديو", "rating-breakdown": "توزيع التقييمات", "placeholder-name": "اسمك (اختياري)...✦˚", "placeholder-comment": "اكتب تعليقك هنا (اختياري)...✦˚", "plan-s-title": "البداية", "plan-s-price": "150$", "plan-s-f1": "صفحة هبوط احترافية عالي التحويل", "plan-s-f2": "حتى 4 أقسام مخصصة", "plan-s-f3": "متوافق بالكامل مع الجوال والشاشات", "plan-s-f4": "تحريكات أساسية سلسة", "plan-s-f5": "تعديل واحد مشمول", "plan-s-del": "التسليم: 7 أيام", "plan-p-title": "المميزة", "plan-p-price": "300$", "plan-p-f1": "حتى 3 صفحات ويب مخصصة", "plan-p-f2": "حتى 8 أقسام مصممة", "plan-p-f3": "واجهة وتفاعلات متقدمة", "plan-p-f4": "ربط شبكات التواصل والقنوات", "plan-p-f5": "3 تعديلات مشمولة", "plan-p-del": "التسليم: 7-12 يوم", "plan-v-title": "النخبة", "plan-v-price": "600$", "plan-v-f1": "حتى 6 صفحات مخصصة", "plan-v-f2": "حتى 15 قسم تفاعلي", "plan-v-f3": "تصميم 3D ومؤثرات بصرية خاصة", "plan-v-f4": "عناصر تفاعلية مخصصة", "plan-v-f5": "أولوية الدعم والاستشارات", "plan-v-del": "التسليم: 15-20 يوم" }
+    };
+    
+    window.toggleLanguage = function () {
+      currentLang = currentLang === 'en' ? 'ar' : 'en';
+      const badgeText = document.getElementById('lang-badge-text');
+      if (badgeText) badgeText.textContent = currentLang === 'en' ? 'AR' : 'EN';
+      var dict = translations[currentLang] || {};
+      document.querySelectorAll('[data-i18n]').forEach(el => { if (dict[el.getAttribute('data-i18n')]) el.textContent = dict[el.getAttribute('data-i18n')]; });
+      document.querySelectorAll('[data-i18n-ph]').forEach(el => { if (dict[el.getAttribute('data-i18n-ph')]) el.setAttribute('placeholder', dict[el.getAttribute('data-i18n-ph')]); });
+    };
+
+    window.toggleTheme = function () { document.documentElement.classList.toggle('dark'); document.documentElement.classList.toggle('light'); };
+
+    function initScrollAnimations() {
+      window.updateBadges(); fetchLiveStats();
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            entry.target.querySelectorAll('.counter-num').forEach(function (counter) {
+              if (counter.dataset.animated) return; counter.dataset.animated = "true";
+              var target = parseInt(counter.dataset.target, 10) || 0, count = 0, speed = Math.max(1, target / 80);
+              function updateCount() { count += speed; if (count < target) { counter.textContent = Math.floor(count).toLocaleString('en-US'); requestAnimationFrame(updateCount); } else { counter.textContent = target.toLocaleString('en-US'); } }
+              updateCount();
+            });
+            entry.target.querySelectorAll('.counter-num-decimal').forEach(function (counter) {
+              if (counter.dataset.animated) return; counter.dataset.animated = "true";
+              var target = parseFloat(counter.dataset.target) || 0, count = 0, speed = Math.max(0.1, target / 60);
+              function updateDecimal() { count += speed; if (count < target) { counter.textContent = count.toString(); requestAnimationFrame(updateDecimal); } else { counter.textContent = target.toString(); } }
+              updateDecimal();
+            });
+          }
+        });
+      }, { threshold: 0.1 });
+      document.querySelectorAll('.reveal-on-scroll').forEach(function (el) { observer.observe(el); });
+    }
+    window.addEventListener('DOMContentLoaded', initScrollAnimations);
+})();
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  "use strict";
+  window.CARDS_DATA_CURRENT = [
+    { title: "BLACK VIP", tag: "VFX PACK", number: "•••• 8829", bg: "linear-gradient(135deg, #09090b 0%, #18181b 50%, #27272a 100%)", border: "rgba(255, 255, 255, 0.2)", chip: "linear-gradient(135deg, #e2e8f0, #94a3b8)" },
+    { title: "ROYAL GOLD", tag: "COLOR GRADE", number: "•••• 4021", bg: "linear-gradient(135deg, #451a03 0%, #78350f 50%, #b45309 100%)", border: "rgba(251, 191, 36, 0.4)", chip: "linear-gradient(135deg, #fef08a, #ca8a04)" },
+    { title: "CYBER CYAN", tag: "PRESET FILE", number: "•••• 9102", bg: "linear-gradient(135deg, #083344 0%, #0e7490 50%, #06b6d4 100%)", border: "rgba(34, 211, 238, 0.4)", chip: "linear-gradient(135deg, #cffafe, #0891b2)" },
+    { title: "NEON PURPLE", tag: "VELOCITY XML", number: "•••• 7731", bg: "linear-gradient(135deg, #3b0764 0%, #6b21a8 50%, #9333ea 100%)", border: "rgba(192, 132, 252, 0.4)", chip: "linear-gradient(135deg, #f3e8ff, #7e22ce)" },
+    { title: "EMERALD 3D", tag: "CAMERA SHAKE", number: "•••• 5510", bg: "linear-gradient(135deg, #022c22 0%, #065f46 50%, #059669 100%)", border: "rgba(52, 211, 153, 0.4)", chip: "linear-gradient(135deg, #d1fae5, #059669)" }
+  ];
+  var stage = document.getElementById('carousel-stage'), track = document.getElementById('carousel-track');
+  if (!stage || !track) return;
+  var cards = [], N = window.CARDS_DATA_CURRENT.length, currentIndex = 0, targetIndex = 0;
+  var isDragging = false, isHorizontalDrag = false, startX = 0, startY = 0, currentX = 0, currentY = 0, dragDeltaX = 0, velocityX = 0, lastX = 0, lastTime = 0;
+
+  window.rebuild3DCards = function() {
+    track.innerHTML = ''; cards = []; N = window.CARDS_DATA_CURRENT.length; currentIndex = 0; targetIndex = 0;
+    window.CARDS_DATA_CURRENT.forEach(function (data, i) {
+      var card = document.createElement('div');
+      card.className = 'card-3d'; card.style.background = data.bg; card.style.border = '1px solid ' + data.border;
+      card.innerHTML = '<div class="glass-sheen"></div><div class="p-6 h-full flex flex-col justify-between text-white relative z-10 pointer-events-none"><div class="flex justify-between items-start"><div><p class="text-[10px] font-bold tracking-widest uppercase opacity-80 text-white">' + data.tag + '</p><h3 class="font-head font-extrabold text-xl tracking-wider force-eng mt-1 text-white">' + data.title + '</h3></div><span class="font-head font-bold text-xs opacity-70 text-white">VORTX</span></div><div class="my-auto flex items-center justify-between"><div class="w-10 h-7 rounded-md" style="background:' + data.chip + '"></div><div class="flex -space-x-2 opacity-80"><div class="w-6 h-6 rounded-full bg-white/20 border border-white/30 backdrop-blur-sm"></div><div class="w-6 h-6 rounded-full bg-white/40 border border-white/30 backdrop-blur-sm"></div></div></div><div class="flex justify-between items-end font-mono text-sm tracking-widest text-white/90"><span>' + data.number + '</span><span class="font-head font-bold text-xs">PHYSICAL 3D</span></div></div>';
+      card.addEventListener('click', function () {
+        if (Math.abs(dragDeltaX) < 8) {
+          var normCurrent = ((Math.round(currentIndex) % N) + N) % N;
+          if (i === normCurrent) { window.openPreview(data.title, data.tag); } else {
+            var diff = (i - normCurrent + N) % N;
+            if (diff > N / 2) diff -= N;
+            targetIndex = currentIndex + diff;
+          }
+        }
+      });
+      track.appendChild(card); cards.push(card);
+    });
+  };
+
+  function updateTransform() {
+    var spacing = 220;
+    cards.forEach(function (card, i) {
+      var rawOffset = i - currentIndex, wrappedOffset = ((rawOffset % N) + N) % N;
+      if (wrappedOffset > N / 2) wrappedOffset -= N;
+      var absOffset = Math.abs(wrappedOffset), posX = wrappedOffset * spacing, posZ = -absOffset * 180, rotY = Math.max(-60, Math.min(60, wrappedOffset * -28)), scale = Math.max(0.65, 1 - absOffset * 0.15), opacity = Math.max(0, 1 - absOffset * 0.35);
+      card.style.transform = 'translateX(' + posX.toFixed(2) + 'px) translateZ(' + posZ.toFixed(2) + 'px) rotateY(' + rotY.toFixed(2) + 'deg) scale(' + scale.toFixed(3) + ')';
+      card.style.opacity = opacity.toFixed(3);
+      card.style.zIndex = Math.round(100 - absOffset * 10);
+      card.style.pointerEvents = absOffset < 2.5 ? 'auto' : 'none';
+    });
+  }
+  function animate() {
+    if (!isDragging) { currentIndex += (targetIndex - currentIndex) * 0.12; } else if (isHorizontalDrag) { currentIndex += (targetIndex - currentIndex) * 0.35; }
+    updateTransform(); requestAnimationFrame(animate);
+  }
+  function onPointerDown(e) {
+    isDragging = true; isHorizontalDrag = false;
+    var touch = e.touches ? e.touches[0] : e;
+    startX = touch.clientX; startY = touch.clientY; lastX = startX; dragDeltaX = 0; velocityX = 0; lastTime = performance.now();
+  }
+  function onPointerMove(e) {
+    if (!isDragging) return;
+    var touch = e.touches ? e.touches[0] : e;
+    currentX = touch.clientX; currentY = touch.clientY;
+    var diffX = currentX - startX, diffY = currentY - startY;
+    if (!isHorizontalDrag) {
+      if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 6) { isHorizontalDrag = true; } else if (Math.abs(diffY) > Math.abs(diffX) && Math.abs(diffY) > 6) { isDragging = false; return; }
+    }
+    if (isHorizontalDrag) {
+      var deltaX = currentX - lastX; dragDeltaX += currentX - startX; targetIndex -= deltaX / 220;
+      var now = performance.now(), dt = now - lastTime;
+      if (dt > 0) velocityX = deltaX / dt;
+      lastX = currentX; lastTime = now;
+    }
+  }
+  function onPointerUp() {
+    if (!isDragging) return;
+    isDragging = false;
+    if (isHorizontalDrag) { targetIndex -= velocityX * 1.5; targetIndex = Math.round(targetIndex); }
+  }
+  stage.addEventListener('mousedown', onPointerDown); stage.addEventListener('mousemove', onPointerMove); stage.addEventListener('mouseup', onPointerUp); stage.addEventListener('mouseleave', onPointerUp); stage.addEventListener('touchstart', onPointerDown, { passive: true }); stage.addEventListener('touchmove', onPointerMove, { passive: true }); stage.addEventListener('touchend', onPointerUp);
+  stage.addEventListener('wheel', function (e) {
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) { targetIndex += e.deltaX > 0 ? 0.35 : -0.35; targetIndex = Math.round(targetIndex); }
+  }, { passive: true });
+  window.rebuild3DCards(); animate();
+});
 </script>
 
 </body>
