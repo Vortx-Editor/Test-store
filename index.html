@@ -37,11 +37,15 @@
     --card-border: rgba(255, 255, 255, 0.1); --globe-line: 205, 210, 200; 
     --globe-ring: 190, 195, 185; --globe-point: 233, 236, 228; --loader-bg: #050505;
   }
+  /* لون الكرة الشبكية فضي ميتاليك متناسق في الوضع النهاري بدلاً من البنفسجي */
   html.light {
     --ink: #17131F; --bg-color: #F4F2F7; --text-color: #17131F; --subtext-color: #625D6B;
     --star-bg: #F4F2F7; --star-opacity: 1; --btn-text-color: #ffffff;
     --card-bg: rgba(255, 255, 255, 0.75); --card-border: rgba(210, 215, 225, 0.3);
-    --globe-line: 124, 42, 232; --globe-ring: 76, 29, 149; --globe-point: 124, 42, 232; --loader-bg: #F4F2F7;
+    --globe-line: 160, 170, 185; 
+    --globe-ring: 120, 130, 145;
+    --globe-point: 180, 190, 205; 
+    --loader-bg: #F4F2F7;
   }
   * , *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { max-width: 100vw; overflow-x: clip; scroll-behavior: smooth; }
@@ -110,7 +114,7 @@
   .glass-sheen { position: absolute; inset: 0; border-radius: 20px; background: linear-gradient(135deg, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0.05) 40%, transparent 60%); pointer-events: none; z-index: 5; }
   .glass-tab-container { background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%); border: 1px solid rgba(255,255,255,0.15); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3); border-radius: 1.25rem; padding: 0.5rem; display: flex; width: 100%; gap: 0.5rem; }
   html.light .glass-tab-container { background: rgba(255,255,255,0.75); border: 1px solid rgba(203, 213, 225, 0.4); box-shadow: 0 8px 32px 0 rgba(100, 116, 139, 0.08); }
-  .tab-btn { flex: 1; padding: 1rem 0; border-radius: 0.875rem; font-family: 'JetBrains Mono', monospace; font-weight: 800; font-size: 1.1rem; color: var(--text-color); opacity: 0.6; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); background: transparent; border: 1px solid transparent; }
+  .tab-btn { flex: 1; padding: 1rem 0; border-radius: 0.875rem; font-family: 'JetBrains Mono', monospace; font-weight: 800; font-size: 1.1rem; color: var(--text-color); opacity: 0.6; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); background: transparent; border: 1px solid transparent; cursor: pointer; }
   .tab-btn:hover { opacity: 1; background: rgba(255,255,255,0.05); }
   html.light .tab-btn:hover { background: rgba(100, 116, 139, 0.05); }
   .tab-btn.active { background: linear-gradient(135deg, #eab308 0%, #ca8a04 100%); color: #050505 !important; opacity: 1; border-color: rgba(255,255,255,0.4); box-shadow: 0 4px 15px rgba(234, 179, 8, 0.4), inset 0 2px 4px rgba(255,255,255,0.5); transform: scale(1.02); }
@@ -199,9 +203,6 @@
   html.light .container_chat_bot .chat .options .btn-submit:hover i { color: #1e293b !important; filter: none !important; }
   .container_chat_bot .chat .options .btn-submit:active { transform: scale(0.92); }
 
-  html.light #reviews-marquee-track > div { background: rgba(255, 255, 255, 0.9) !important; border-color: rgba(203, 213, 225, 0.6) !important; color: #17131F !important; }
-  html.light #reviews-marquee-track span.text-white\/90 { color: #334155 !important; }
-
   html.light .vx-price-card { background: rgba(255, 255, 255, 0.8); border: 1px solid rgba(203, 213, 225, 0.4); box-shadow: 0 15px 35px -10px rgba(100, 116, 139, 0.08); }
   html.light .vx-price-card .card_title { color: #17131F; }
   html.light .vx-price-card .card_price { color: #d97706; }
@@ -212,6 +213,14 @@
   html.light .vx-price-card .check_svg { fill: #d97706; }
 </style>
 </head>
+<script>
+  // تحصين ومنع التنزيل التلقائي أو التمرير للأسفل فور بداية تشغيل الصفحة
+  if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
+  window.addEventListener('load', function() {
+    window.scrollTo(0, 0);
+    if (window.location.hash) { history.replaceState(null, null, ' '); }
+  });
+</script>
 <body>
 
 <div id="vx-loader">
@@ -223,55 +232,7 @@
   </p>
 </div>
 
-<script>
-(function () {
-  "use strict";
-  function unlockSite() {
-    var loaderEl = document.getElementById('vx-loader');
-    var appContent = document.getElementById('app-content');
-    if (loaderEl) { 
-      loaderEl.style.opacity = '0'; 
-      loaderEl.style.pointerEvents = 'none'; 
-      setTimeout(function(){ loaderEl.style.display = 'none'; }, 400); 
-    }
-    if (appContent) { appContent.classList.add('vx-revealed'); }
-    var heroSec = document.getElementById('hero-section');
-    if (heroSec) { heroSec.classList.add('revealed'); }
-    document.documentElement.classList.remove('vx-loading');
-    document.body.classList.remove('vx-loading');
-  }
-
-  var wordEl = document.getElementById('vx-logo-word');
-  if (wordEl && wordEl.children.length === 0) {
-    ['V', 'O', 'R', 'T', 'X'].forEach(function (ch, i) {
-      var span = document.createElement('span');
-      span.className = 'vx-letter';
-      span.textContent = ch;
-      span.style.setProperty('--ld', (0.1 + i * 0.1).toFixed(2) + 's');
-      wordEl.appendChild(span);
-    });
-  }
-
-  var barFill = document.getElementById('vx-bar-fill');
-  var percentEl = document.getElementById('vx-percent');
-  var pct = 0;
-
-  var interval = setInterval(function() {
-    pct += 5;
-    if (pct > 100) pct = 100;
-    if (barFill) barFill.style.width = pct + '%';
-    if (percentEl) percentEl.textContent = pct;
-    if (pct >= 100) {
-      clearInterval(interval);
-      setTimeout(unlockSite, 100);
-    }
-  }, 20);
-
-  setTimeout(unlockSite, 800);
-})();
-</script>
-
-<!-- المودالات المباشرة مثبتة بوسط الشاشة زاوية رؤية الزبون 100% -->
+<!-- المودالات المباشرة تحت body بحجم ثابت في السنتر بوجه المستخدم مباشرة -->
 <div id="category-modal" class="fixed inset-0 z-[10000] flex items-center justify-center p-4 h-[100dvh] w-screen opacity-0 pointer-events-none transition-opacity duration-300">
   <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="window.closeCategoryModal()"></div>
   <div class="glass rounded-3xl max-w-2xl w-full relative z-10 p-6 border border-white/10 shadow-2xl max-h-[85vh] overflow-y-auto">
@@ -389,7 +350,8 @@
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="relative z-10"><rect x="6" y="2" width="16" height="11" rx="2"/><circle cx="14" cy="7.5" r="2.5"/><path d="M14 4v7"/><path d="M2 14h3.5v5H2z"/><path d="M5.5 16.5c3 0 4.5 1 7.5 1l3.5-2.5 4.5 1.5-6.5 4.5h-9z"/></svg>
           </button>
 
-          <button type="button" onclick="window.toggleLanguage()" class="nav-btn-item px-2.5 !w-auto h-9 sm:h-10 text-brandLight font-extrabold text-xs cursor-pointer hover:bg-white/10 flex items-center gap-1">
+          <!-- زر الترجمة مع أقصى درجة استجابة ورفع الـ z-index -->
+          <button type="button" onclick="window.toggleLanguage()" class="nav-btn-item px-2.5 !w-auto h-9 sm:h-10 text-brandLight font-extrabold text-xs cursor-pointer hover:bg-white/10 flex items-center gap-1 relative z-50">
             <span>🌐</span>
             <span id="lang-badge-text" class="font-mono text-[10px] text-yellow-400 font-bold tracking-wider">AR</span>
           </button>
@@ -437,7 +399,7 @@
         </div>
       </div>
 
-      <!-- تعديل مسافة أزرار السوشيال ميديا: مرفوعة بالجوال ومصروفة للأسفل في الـ PC بروقان -->
+      <!-- موقع أزرار السوشيال ميديا: مرتفع وممتاز بالجوال، ومصروف للأسفل بروقان بالـ PC -->
       <div class="absolute bottom-2 sm:-bottom-8 md:-bottom-16 lg:-bottom-20 left-1/2 -translate-x-1/2 w-[90%] max-w-[520px] flex items-center justify-around px-6 sm:px-8 py-4 sm:py-5 rounded-full border border-white/10 glass backdrop-blur-md opacity-80 z-30">
         <a href="#" class="hover:scale-110 hover:opacity-100 hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.8)] transition-all duration-300 text-current">
           <svg class="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
@@ -454,7 +416,7 @@
       </div>
     </section>
 
-    <!-- تنزيل خانة باقة الويب بمساحة ممتازة تحت الكرة الشبكية لشاشات البي سي -->
+    <!-- موقع باقة الويب بمساحة فاخرة وتحسين العرض -->
     <section id="bundles" class="max-w-7xl mx-auto px-4 sm:px-6 pt-20 sm:pt-28 md:pt-36 pb-12 reveal-on-scroll">
       <div class="relative w-full h-[360px] sm:h-[460px] rounded-3xl overflow-hidden shadow-2xl border border-white/10 group transition-all duration-500 hover:shadow-[0_20px_50px_rgba(226,232,240,0.15)]">
         
@@ -484,11 +446,12 @@
       </div>
     </section>
 
+    <!-- أزرار التصفح (CC / XML / SHAKE) تعمل فورياً وبدون أي ظهور لكلام أو Toast -->
     <div class="w-full max-w-5xl mx-auto px-4 sm:px-6 relative z-40 mb-10 mt-6 reveal-on-scroll">
       <div class="glass-tab-container">
-        <button onclick="window.activateCategoryCards('CC', this)" class="tab-btn force-eng">CC</button>
-        <button onclick="window.activateCategoryCards('XML', this)" class="tab-btn active force-eng">XML</button>
-        <button onclick="window.activateCategoryCards('SHAKE', this)" class="tab-btn force-eng">SHAKE</button>
+        <button type="button" onclick="window.activateCategoryCards('CC', this)" class="tab-btn force-eng">CC</button>
+        <button type="button" onclick="window.activateCategoryCards('XML', this)" class="tab-btn active force-eng">XML</button>
+        <button type="button" onclick="window.activateCategoryCards('SHAKE', this)" class="tab-btn force-eng">SHAKE</button>
       </div>
     </div>
 
@@ -896,7 +859,7 @@
               return `<div class="px-5 py-3 rounded-2xl border border-yellow-500/30 bg-black/80 backdrop-blur-md flex flex-col justify-center items-start gap-1 shrink-0 shadow-lg min-w-[200px] text-left"><span class="text-xs text-yellow-400 font-bold block text-left">${nameText}</span><span class="text-yellow-400 font-bold text-xs tracking-widest block text-left">${starsHtml}</span><span class="text-xs text-white/90 font-medium block mt-1 text-left">"${r.comment}"</span></div>`;
             });
 
-            // تكرار مضاعف ذكي يضمن الاستمرارية حتى في شاشات الـ PC الشاسعة
+            // تكرار الحزم لتشغيل الشريط على أجهزة الـ PC الشاسعة بدون انقطاع
             let fullCards = cardsHtmlArr.join('');
             if (cardsHtmlArr.length < 10) {
               fullCards = cardsHtmlArr.join('') + cardsHtmlArr.join('') + cardsHtmlArr.join('') + cardsHtmlArr.join('');
@@ -996,11 +959,13 @@
       draw();
     })();
 
+    // قاموس الترجمة الكامل الموثق للتنقل الفوري
     var translations = {
       en: { "nav-bundles": "Bundles", "nav-packs": "Featured Packs", "nav-categories": "Categories", "hero-tag": "Digital Assets Hub", "hero-desc": "Explore custom websites reflecting your unique identity, plus premium video editing and design assets.", "hero-btn": "Explore Tiers", "tiers-available": "3 Tiers Available", "explore-packages": "Explore Packages", "packs-title": "Featured Packs", "packs-desc": "Swipe horizontally for endless physical 3D cards interaction", "cat-sec-title": "Categories", "cat-sec-desc": "Select a category to explore editing packs.", "cat-cc-desc": "Color Corrections", "cat-xml-desc": "Project Files", "cat-shake-desc": "Camera Shake Presets", "footer-right": "Crafted for the bold.", "tiers-sub": "Web Solutions", "tiers-title": "Development Tiers", "back-btn": "Back", "tier-starter-desc": "Ideal for creators & small brands looking for a clean, fast, and high-converting landing page.", "tier-pro-desc": "A complete web solution designed to showcase your brand, drive engagement, and convert visitors.", "tier-vip-desc": "The ultimate bespoke digital experience. Advanced visual effects, tailored animations, and priority treatment.", "select-plan": "Buy Now", "cat-view-sub": "Collection", "add-cart": "Add to Cart", "try-demo": "Try Demo", "stat-subscribers": "Satisfied Clients", "stat-views": "Total Visits", "stat-orders": "Quality Guarantee", "stat-rating": "Satisfaction Score", "review-title": "Leave Your Review & Rating", "review-sub": "Share your experience with VORTX Studio", "rating-breakdown": "RATING DISTRIBUTION", "placeholder-name": "Your Name (Optional)...✦˚", "placeholder-comment": "Write your review here (Optional)...✦˚", "plan-s-title": "STARTER", "plan-s-price": "$150", "plan-s-f1": "1 High-Converting Landing Page", "plan-s-f2": "Up to 4 Custom Sections", "plan-s-f3": "Fully Responsive & Mobile-Optimized", "plan-s-f4": "Smooth Basic Animations", "plan-s-f5": "1 Revision Included", "plan-s-del": "Delivery: 7 Days", "plan-p-title": "PREMIUM", "plan-p-price": "$300", "plan-p-f1": "Up to 3 Custom Web Pages", "plan-p-f2": "Up to 8 Designed Sections", "plan-p-f3": "Advanced UI/UX & Interactions", "plan-p-f4": "Social Media & Channel Integration", "plan-p-f5": "3 Revisions Included", "plan-p-del": "Delivery: 7–12 Days", "plan-v-title": "ELITE", "plan-v-price": "$600", "plan-v-f1": "Up to 6 Custom Pages", "plan-v-f2": "Up to 15 Dynamic Sections", "plan-v-f3": "Bespoke 3D & Advanced VFX Effects", "plan-v-f4": "Custom Interactive Elements", "plan-v-f5": "Priority Support & Consultation", "plan-v-del": "Delivery: 15–20 Days" },
-      ar: { "nav-bundles": "الحزم", "nav-packs": "حزم متميزة", "nav-categories": "الأقسام", "hero-tag": "مركز الأصول الرقمية", "hero-desc": "تصفّح لتستكشف مشاريع ومواقع ويب تجسّد هويتك، إلى جانب أحدث حزم ومستلزمات المونتاج وتصميم المقاطع.", "hero-btn": "استكشف الباقات", "tiers-available": "3 مستويات متاحة", "explore-packages": "استكشف الباقات", "packs-title": "الحزم المتميزة", "packs-desc": "اسحب يميناً ويساراً للتنقل بين البطاقات ثلاثية الأبعاد", "cat-sec-title": "الأقسام", "cat-sec-desc": "اختر قسماً لاستكشاف حزم التعديل المتاحة.", "cat-cc-desc": "تصحيح الألوان", "cat-xml-desc": "ملفات المشروع", "cat-shake-desc": "إعدادات اهتزاز الكاميرا", "footer-right": "صُنع للمبدعين والجرآء.", "tiers-sub": "حلول الويب", "tiers-title": "مستويات التطوير", "back-btn": "العودة", "tier-starter-desc": "مثالي للمبدعين والعلامات التجارية الصغيرة للحصول على صفحة هبوط سريعة واحترافية.", "tier-pro-desc": "حل ويب متكامل لمستواك يعرض علامتك التجارية ويزيد التفاعل والعملاء.", "tier-vip-desc": "تجربة رقمية فريدة وخاصة بالكامل. مؤثرات بصرية متقدمة وأولوية في الدعم.", "select-plan": "شراء الآن", "cat-view-sub": "المجموعة", "add-cart": "إضافة للسلة", "try-demo": "تجربة العرض", "stat-subscribers": "عملاء راضون", "stat-views": "إجمالي الزيارات", "stat-orders": "ضمان الجودة", "stat-rating": "معدل التقييم", "review-title": "اترك تقييمك ورأيك", "review-sub": "شاركونا تجربتكم مع فورتكس ستوديو", "rating-breakdown": "توزيع التقييمات", "placeholder-name": "اسمك (اختياري)...✦˚", "placeholder-comment": "اكتب تعليقك هنا (اختياري)...✦˚", "plan-s-title": "البداية", "plan-s-price": "150$", "plan-s-f1": "صفحة هبوط احترافية عالي التحويل", "plan-s-f2": "حتى 4 أقسام مخصصة", "plan-s-f3": "متوافق بالكامل مع الجوال والشاشات", "plan-s-f4": "تحريكات أساسية سلسة", "plan-s-f5": "تعديل واحد مشمول", "plan-s-del": "التسليم: 7 أيام", "plan-p-title": "المميزة", "plan-p-price": "300$", "plan-p-f1": "حتى 3 صفحات ويب مخصصة", "plan-p-f2": "حتى 8 أقسام مصممة", "plan-p-f3": "واجهة وتفاعلات متقدمة", "plan-p-f4": "ربط شبكات التواصل والقنوات", "plan-p-f5": "3 تعديلات مشمولة", "plan-p-del": "التسليم: 7-12 يوم", "plan-v-title": "النخبة", "plan-v-price": "600$", "plan-v-f1": "حتى 6 صفحات مخصصة", "plan-v-f2": "حتى 15 قسم تفاعلي", "plan-v-f3": "تصميم 3D ومؤثرات بصرية خاصة", "plan-v-f4": "عناصر تفاعلية مخصصة", "plan-v-f5": "أولوية الدعم واستشارات", "plan-v-del": "التسليم: 15-20 يوم" }
+      ar: { "nav-bundles": "الحزم", "nav-packs": "حزم متميزة", "nav-categories": "الأقسام", "hero-tag": "مركز الأصول الرقمية", "hero-desc": "تصفّح لتستكشف مشاريع ومواقع ويب تجسّد هويتك، إلى جانب أحدث حزم ومستلزمات المونتاج وتصميم المقاطع.", "hero-btn": "استكشف الباقات", "tiers-available": "3 مستويات متاحة", "explore-packages": "استكشف الباقات", "packs-title": "الحزم المتميزة", "packs-desc": "اسحب يميناً ويساراً للتنقل بين البطاقات ثلاثية الأبعاد", "cat-sec-title": "الأقسام", "cat-sec-desc": "اختر قسماً لاستكشاف حزم التعديل المتاحة.", "cat-cc-desc": "تصحيح الألوان", "cat-xml-desc": "ملفات المشروع", "cat-shake-desc": "إعدادات اهتزاز الكاميرا", "footer-right": "صُنع للمبدعين والجرآء.", "tiers-sub": "حلول الويب", "tiers-title": "مستويات التطوير", "back-btn": "العودة", "tier-starter-desc": "مثالي للمبدعين والعلامات التجارية الصغيرة للحصول على صفحة هبوط سريعة واحترافية.", "tier-pro-desc": "حل ويب متكامل لمستواك يعرض علامتك التجارية ويزيد التفاعل والعملاء.", "tier-vip-desc": "تجربة رقمية فريدة وخاصة بالكامل. مؤثرات بصرية متقدمة وأولوية في الدعم.", "select-plan": "شراء الآن", "cat-view-sub": "المجموعة", "add-cart": "إضافة للسلة", "try-demo": "تجربة العرض", "stat-subscribers": "عملاء راضون", "stat-views": "إجمالي الزيارات", "stat-orders": "ضمان الجودة", "stat-rating": "معدل التقييم", "review-title": "اترك تقييمك ورأيك", "review-sub": "شاركونا تجربتكم مع فورتكس ستوديو", "rating-breakdown": "توزيع التقييمات", "placeholder-name": "اسمك (اختياري)...✦˚", "placeholder-comment": "اكتب تعليقك هنا (اختياري)...✦˚", "plan-s-title": "البداية", "plan-s-price": "150$", "plan-s-f1": "صفحة هبوط احترافية عالي التحويل", "plan-s-f2": "حتى 4 أقسام مخصصة", "plan-s-f3": "متوافق بالكامل مع الجوال والشاشات", "plan-s-f4": "تحريكات أساسية سلسة", "plan-s-f5": "تعديل واحد مشمول", "plan-s-del": "التسليم: 7 أيام", "plan-p-title": "المميزة", "plan-p-price": "300$", "plan-p-f1": "حتى 3 صفحات ويب مخصصة", "plan-p-f2": "حتى 8 أقسام مصممة", "plan-p-f3": "واجهة وتفاعلات متقدمة", "plan-p-f4": "ربط شبكات التواصل والقنوات", "plan-p-f5": "3 تعديلات مشمولة", "plan-p-del": "التسليم: 7-12 يوم", "plan-v-title": "النخبة", "plan-v-price": "600$", "plan-v-f1": "حتى 6 صفحات مخصصة", "plan-v-f2": "حتى 15 قسم تفاعلي", "plan-v-f3": "تصميم 3D ومؤثرات بصرية خاصة", "plan-v-f4": "عناصر تفاعلية مخصصة", "plan-v-f5": "أولوية الدعم والاستشارات", "plan-v-del": "التسليم: 15-20 يوم" }
     };
     
+    var currentLang = 'en';
     window.toggleLanguage = function () {
       currentLang = currentLang === 'en' ? 'ar' : 'en';
       const badgeText = document.getElementById('lang-badge-text');
