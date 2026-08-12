@@ -165,9 +165,61 @@
   .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; overflow-x: auto; cursor: grab; user-select: none; }
   .hide-scrollbar:active { cursor: grabbing; }
 
-  /* تنسيقات باقات الويب الأساسية المحدثة بالألوان الجديدة */
-  .vx-price-card { position: relative; display: flex; flex-direction: column; gap: 1rem; padding: 2rem; width: 100%; height: 100%; border-radius: 1.75rem; box-shadow: 0 10px 30px rgba(0,0,0,0.2); z-index: 1; transition: transform .4s ease, box-shadow .4s ease; }
-  .vx-price-card:hover { transform: translateY(-6px); }
+  /* تنسيقات باقات الويب المتناسقة مع الصور والأزرار الشفافة */
+  .vx-price-card { position: relative; display: flex; flex-direction: column; justify-content: space-between; padding: 1.5rem; width: 100%; border-radius: 1.5rem; box-shadow: 0 10px 30px rgba(0,0,0,0.2); z-index: 1; transition: transform .4s ease, box-shadow .4s ease; }
+  .vx-price-card:hover { transform: translateY(-5px); }
+
+  /* تصغير علامات الصح وتقليل المساحات لمنع الاستطالة */
+  .card__list { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.75rem; margin-bottom: 0.75rem; list-style: none; }
+  .card__list_item { display: flex; items-center: center; gap: 0.5rem; }
+  .check { width: 1.1rem; height: 1.1rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .check_svg { width: 0.75rem; height: 0.75rem; }
+  .list_text { font-size: 0.8rem; font-weight: 600; line-height: 1.25; }
+
+  /* زر Buy Now الزجاجي التفاعلي بالمنتصف مع اللمعة */
+  .glass-btn-center {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    min-width: 140px;
+    padding: 0.5rem 1.5rem;
+    margin: 0.5rem auto 0 auto;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: #ffffff;
+    font-weight: 800;
+    font-size: 0.85rem;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2), inset 0 1px 1px rgba(255,255,255,0.3);
+  }
+  .glass-btn-center::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 60%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transform: skewX(-20deg);
+    transition: left 0.6s ease;
+  }
+  .glass-btn-center:hover::before {
+    left: 150%;
+  }
+  .glass-btn-center:hover {
+    transform: translateY(-2px) scale(1.03);
+    background: rgba(255, 255, 255, 0.22);
+    border-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3), inset 0 1px 2px rgba(255,255,255,0.5);
+  }
+  .glass-btn-center:active {
+    transform: scale(0.95);
+  }
 
   /* باقة STARTER: أبيض + بنفسجي هادئ */
   .card-theme-starter {
@@ -176,16 +228,16 @@
     box-shadow: 0 15px 35px rgba(168, 85, 247, 0.15) !important;
     color: #1e1b4b !important;
   }
-  .card-theme-starter .card_title { color: #581c87 !important; }
-  .card-theme-starter .card_price { color: #7e22ce !important; }
-  .card-theme-starter .card_paragraph { color: #4c1d95 !important; }
-  .card-theme-starter .line { background-color: rgba(168, 85, 247, 0.2) !important; }
+  .card-theme-starter .card_title { color: #581c87 !important; font-weight: 900; font-size: 1.25rem; }
+  .card-theme-starter .card_price { color: #7e22ce !important; font-weight: 900; font-size: 1.75rem; }
+  .card-theme-starter .card_paragraph { color: #4c1d95 !important; font-size: 0.8rem; font-weight: 500; }
+  .card-theme-starter .line { background-color: rgba(168, 85, 247, 0.2) !important; margin: 0.5rem 0; }
   .card-theme-starter .list_text { color: #2e1065 !important; }
-  .card-theme-starter .check { background-color: rgba(168, 85, 247, 0.15) !important; border-color: rgba(168, 85, 247, 0.3) !important; }
+  .card-theme-starter .check { background-color: rgba(168, 85, 247, 0.15) !important; border: 1px solid rgba(168, 85, 247, 0.3) !important; }
   .card-theme-starter .check_svg { fill: #7e22ce !important; }
-  .card-theme-starter .delivery_text { color: #7e22ce !important; }
-  .card-theme-starter .btn-3d-style { background: linear-gradient(135deg, #7e22ce 0%, #581c87 100%) !important; border: 1px solid rgba(168, 85, 247, 0.5) !important; }
-  .card-theme-starter .btn-3d-style span { color: #ffffff !important; }
+  .card-theme-starter .delivery_text { color: #7e22ce !important; font-weight: 800; font-size: 0.75rem; text-align: center; }
+  .card-theme-starter .glass-btn-center { background: rgba(126, 34, 206, 0.12) !important; border-color: rgba(126, 34, 206, 0.35) !important; color: #581c87 !important; }
+  .card-theme-starter .glass-btn-center:hover { background: rgba(126, 34, 206, 0.25) !important; color: #3b0764 !important; }
 
   /* باقة PREMIUM: أبيض وأسود مع بني فاتح برونزي */
   .card-theme-premium {
@@ -194,16 +246,16 @@
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6) !important;
     color: #ffffff !important;
   }
-  .card-theme-premium .card_title { color: #ffffff !important; }
-  .card-theme-premium .card_price { color: #d97706 !important; }
-  .card-theme-premium .card_paragraph { color: rgba(255, 255, 255, 0.8) !important; }
-  .card-theme-premium .line { background-color: rgba(217, 119, 6, 0.25) !important; }
+  .card-theme-premium .card_title { color: #ffffff !important; font-weight: 900; font-size: 1.25rem; }
+  .card-theme-premium .card_price { color: #d97706 !important; font-weight: 900; font-size: 1.75rem; }
+  .card-theme-premium .card_paragraph { color: rgba(255, 255, 255, 0.8) !important; font-size: 0.8rem; font-weight: 500; }
+  .card-theme-premium .line { background-color: rgba(217, 119, 6, 0.25) !important; margin: 0.5rem 0; }
   .card-theme-premium .list_text { color: #f4f4f5 !important; }
-  .card-theme-premium .check { background-color: rgba(217, 119, 6, 0.15) !important; border-color: rgba(217, 119, 6, 0.4) !important; }
+  .card-theme-premium .check { background-color: rgba(217, 119, 6, 0.15) !important; border: 1px solid rgba(217, 119, 6, 0.4) !important; }
   .card-theme-premium .check_svg { fill: #d97706 !important; }
-  .card-theme-premium .delivery_text { color: #d97706 !important; }
-  .card-theme-premium .btn-3d-style { background: linear-gradient(135deg, #d97706 0%, #b45309 100%) !important; border: 1px solid rgba(251, 191, 36, 0.5) !important; }
-  .card-theme-premium .btn-3d-style span { color: #ffffff !important; }
+  .card-theme-premium .delivery_text { color: #d97706 !important; font-weight: 800; font-size: 0.75rem; text-align: center; }
+  .card-theme-premium .glass-btn-center { background: rgba(217, 119, 6, 0.15) !important; border-color: rgba(217, 119, 6, 0.4) !important; color: #fbbf24 !important; }
+  .card-theme-premium .glass-btn-center:hover { background: rgba(217, 119, 6, 0.3) !important; color: #ffffff !important; }
 
   /* باقة ELITE: كحلي غامق مع ذهبي وفضي */
   .card-theme-elite {
@@ -212,25 +264,25 @@
     box-shadow: 0 15px 35px rgba(15, 23, 42, 0.7) !important;
     color: #f8fafc !important;
   }
-  .card-theme-elite .card_title { color: #e2e8f0 !important; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
-  .card-theme-elite .card_price { color: #eab308 !important; }
-  .card-theme-elite .card_paragraph { color: #cbd5e1 !important; }
-  .card-theme-elite .line { background-color: rgba(234, 179, 8, 0.25) !important; }
+  .card-theme-elite .card_title { color: #e2e8f0 !important; font-weight: 900; font-size: 1.25rem; }
+  .card-theme-elite .card_price { color: #eab308 !important; font-weight: 900; font-size: 1.75rem; }
+  .card-theme-elite .card_paragraph { color: #cbd5e1 !important; font-size: 0.8rem; font-weight: 500; }
+  .card-theme-elite .line { background-color: rgba(234, 179, 8, 0.25) !important; margin: 0.5rem 0; }
   .card-theme-elite .list_text { color: #f1f5f9 !important; }
-  .card-theme-elite .check { background-color: rgba(234, 179, 8, 0.15) !important; border-color: rgba(234, 179, 8, 0.4) !important; }
+  .card-theme-elite .check { background-color: rgba(234, 179, 8, 0.15) !important; border: 1px solid rgba(234, 179, 8, 0.4) !important; }
   .card-theme-elite .check_svg { fill: #eab308 !important; }
-  .card-theme-elite .delivery_text { color: #eab308 !important; }
-  .card-theme-elite .btn-3d-style { background: linear-gradient(135deg, #eab308 0%, #ca8a04 100%) !important; border: 1px solid rgba(254, 240, 138, 0.5) !important; }
-  .card-theme-elite .btn-3d-style span { color: #000000 !important; font-weight: 900 !important; }
+  .card-theme-elite .delivery_text { color: #eab308 !important; font-weight: 800; font-size: 0.75rem; text-align: center; }
+  .card-theme-elite .glass-btn-center { background: rgba(234, 179, 8, 0.15) !important; border-color: rgba(234, 179, 8, 0.4) !important; color: #fef08a !important; }
+  .card-theme-elite .glass-btn-center:hover { background: rgba(234, 179, 8, 0.3) !important; color: #ffffff !important; }
 
-  /* إطار ومقاس موحد للصور داخل باقات الويب */
+  /* إطار ومقاس الصور الثابت داخل الكرت */
   .tier-img-box {
     width: 100%;
-    height: 190px;
+    height: 160px;
     object-fit: cover;
-    border-radius: 1.25rem;
-    margin-bottom: 1.25rem;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    border-radius: 1rem;
+    margin-bottom: 0.75rem;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
     border: 1px solid rgba(255, 255, 255, 0.2);
     transition: transform 0.3s ease;
   }
@@ -616,79 +668,91 @@
     </footer>
   </main>
 
-  <!-- صفحة باقات الويب المتضمنة الصور الثلاث بمقاس موحد والألوان المطلوبة -->
+  <!-- صفحة باقات الويب - مع تصغير الصحوت وتوسيط زر Buy Now الشفاف -->
   <section id="web-view" class="view view-hidden relative z-10 min-h-screen">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
-      <div class="flex items-center justify-between mb-12">
-        <div class="text-left"><span data-i18n="tiers-sub" class="text-xs tracking-widest uppercase font-bold text-current opacity-70">Web Solutions</span><h2 data-i18n="tiers-title" class="font-head font-bold text-4xl mt-3">Development Tiers</h2></div>
+      <div class="flex items-center justify-between mb-10">
+        <div class="text-left"><span data-i18n="tiers-sub" class="text-xs tracking-widest uppercase font-bold text-current opacity-70">Web Solutions</span><h2 data-i18n="tiers-title" class="font-head font-bold text-3xl sm:text-4xl mt-2">Development Tiers</h2></div>
         <button onclick="window.backToHome()" class="back-btn-pill"><span>←</span> <span data-i18n="back-btn">Back</span></button>
       </div>
       
-      <div class="grid lg:grid-cols-3 gap-8 items-stretch">
+      <div class="grid lg:grid-cols-3 gap-6 items-stretch">
         
-        <!-- 1. باقة STARTER: صورة Page 1.png - أبيض مع بنفسجي -->
+        <!-- 1. باقة STARTER -->
         <div class="vx-price-card card-theme-starter">
-          <img src="Page 1.png" alt="Starter Tier" class="tier-img-box" />
-          <div class="card_title__container">
-            <span class="card_title" data-i18n="plan-s-title">STARTER</span>
-            <div class="card_price" data-i18n="plan-s-price">$150</div>
-            <p class="card_paragraph" data-i18n="tier-starter-desc">Ideal for creators & small brands looking for a clean, fast, and high-converting landing page.</p>
+          <div>
+            <img src="Page 1.png" alt="Starter Tier" class="tier-img-box" />
+            <div class="card_title__container">
+              <span class="card_title" data-i18n="plan-s-title">STARTER</span>
+              <div class="card_price" data-i18n="plan-s-price">$150</div>
+              <p class="card_paragraph" data-i18n="tier-starter-desc">Ideal for creators & small brands looking for a clean, fast, and high-converting landing page.</p>
+            </div>
+            <hr class="line" />
+            <ul class="card__list">
+              <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-s-f1">1 High-Converting Landing Page</span></li>
+              <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-s-f2">Up to 4 Custom Sections</span></li>
+              <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-s-f3">Fully Responsive & Mobile-Optimized</span></li>
+              <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-s-f4">Smooth Basic Animations</span></li>
+              <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-s-f5">1 Revision Included</span></li>
+            </ul>
           </div>
-          <hr class="line" />
-          <ul class="card__list">
-            <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-s-f1">1 High-Converting Landing Page</span></li>
-            <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-s-f2">Up to 4 Custom Sections</span></li>
-            <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-s-f3">Fully Responsive & Mobile-Optimized</span></li>
-            <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-s-f4">Smooth Basic Animations</span></li>
-            <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-s-f5">1 Revision Included</span></li>
-          </ul>
-          <div class="delivery_text" data-i18n="plan-s-del">Delivery: 7 Days</div>
-          <div class="button-wrap" onclick="window.openTelegramOrder('STARTER', 150)">
-            <div class="btn-3d-style"><span data-i18n="select-plan">Buy Now</span></div>
+          <div class="mt-2 text-center">
+            <div class="delivery_text" data-i18n="plan-s-del">Delivery: 7 Days</div>
+            <button type="button" onclick="window.openTelegramOrder('STARTER', 150)" class="glass-btn-center">
+              <span data-i18n="select-plan">Buy Now</span>
+            </button>
           </div>
         </div>
 
-        <!-- 2. باقة PREMIUM: صورة Page 2.png - أبيض وأسود مع بني فاتح برونزي -->
+        <!-- 2. باقة PREMIUM -->
         <div class="vx-price-card card-theme-premium">
-          <img src="Page 2.png" alt="Premium Tier" class="tier-img-box" />
-          <div class="card_title__container">
-            <span class="card_title" data-i18n="plan-p-title">PREMIUM</span>
-            <div class="card_price" data-i18n="plan-p-price">$300</div>
-            <p class="card_paragraph" data-i18n="tier-pro-desc">A complete web solution designed to showcase your brand, drive engagement, and convert visitors.</p>
+          <div>
+            <img src="Page 2.png" alt="Premium Tier" class="tier-img-box" />
+            <div class="card_title__container">
+              <span class="card_title" data-i18n="plan-p-title">PREMIUM</span>
+              <div class="card_price" data-i18n="plan-p-price">$300</div>
+              <p class="card_paragraph" data-i18n="tier-pro-desc">A complete web solution designed to showcase your brand, drive engagement, and convert visitors.</p>
+            </div>
+            <hr class="line" />
+            <ul class="card__list">
+              <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-p-f1">Up to 3 Custom Web Pages</span></li>
+              <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-p-f2">Up to 8 Designed Sections</span></li>
+              <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-p-f3">Advanced UI/UX & Interactions</span></li>
+              <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-p-f4">Social Media & Channel Integration</span></li>
+              <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-p-f5">3 Revisions Included</span></li>
+            </ul>
           </div>
-          <hr class="line" />
-          <ul class="card__list">
-            <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-p-f1">Up to 3 Custom Web Pages</span></li>
-            <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-p-f2">Up to 8 Designed Sections</span></li>
-            <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-p-f3">Advanced UI/UX & Interactions</span></li>
-            <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-p-f4">Social Media & Channel Integration</span></li>
-            <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-p-f5">3 Revisions Included</span></li>
-          </ul>
-          <div class="delivery_text" data-i18n="plan-p-del">Delivery: 7–12 Days</div>
-          <div class="button-wrap" onclick="window.openTelegramOrder('PREMIUM', 300)">
-            <div class="btn-3d-style"><span data-i18n="select-plan">Buy Now</span></div>
+          <div class="mt-2 text-center">
+            <div class="delivery_text" data-i18n="plan-p-del">Delivery: 7–12 Days</div>
+            <button type="button" onclick="window.openTelegramOrder('PREMIUM', 300)" class="glass-btn-center">
+              <span data-i18n="select-plan">Buy Now</span>
+            </button>
           </div>
         </div>
 
-        <!-- 3. باقة ELITE: صورة Page 3.png - كحلي غامق مع ذهبي وفضي -->
+        <!-- 3. باقة ELITE -->
         <div class="vx-price-card card-theme-elite">
-          <img src="Page 3.png" alt="Elite Tier" class="tier-img-box" />
-          <div class="card_title__container">
-            <span class="card_title" data-i18n="plan-v-title">ELITE</span>
-            <div class="card_price" data-i18n="plan-v-price">$600</div>
-            <p class="card_paragraph" data-i18n="tier-vip-desc">The ultimate bespoke digital experience. Advanced visual effects, tailored animations, and priority treatment.</p>
+          <div>
+            <img src="Page 3.png" alt="Elite Tier" class="tier-img-box" />
+            <div class="card_title__container">
+              <span class="card_title" data-i18n="plan-v-title">ELITE</span>
+              <div class="card_price" data-i18n="plan-v-price">$600</div>
+              <p class="card_paragraph" data-i18n="tier-vip-desc">The ultimate bespoke digital experience. Advanced visual effects, tailored animations, and priority treatment.</p>
+            </div>
+            <hr class="line" />
+            <ul class="card__list">
+              <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-v-f1">Up to 6 Custom Pages</span></li>
+              <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-v-f2">Up to 15 Dynamic Sections</span></li>
+              <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-v-f3">Bespoke 3D & Advanced VFX Effects</span></li>
+              <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-v-f4">Custom Interactive Elements</span></li>
+              <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-v-f5">Priority Support & Consultation</span></li>
+            </ul>
           </div>
-          <hr class="line" />
-          <ul class="card__list">
-            <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-v-f1">Up to 6 Custom Pages</span></li>
-            <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-v-f2">Up to 15 Dynamic Sections</span></li>
-            <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-v-f3">Bespoke 3D & Advanced VFX Effects</span></li>
-            <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-v-f4">Custom Interactive Elements</span></li>
-            <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-v-f5">Priority Support & Consultation</span></li>
-          </ul>
-          <div class="delivery_text" data-i18n="plan-v-del">Delivery: 15–20 Days</div>
-          <div class="button-wrap" onclick="window.openTelegramOrder('ELITE', 600)">
-            <div class="btn-3d-style"><span data-i18n="select-plan">Buy Now</span></div>
+          <div class="mt-2 text-center">
+            <div class="delivery_text" data-i18n="plan-v-del">Delivery: 15–20 Days</div>
+            <button type="button" onclick="window.openTelegramOrder('ELITE', 600)" class="glass-btn-center">
+              <span data-i18n="select-plan">Buy Now</span>
+            </button>
           </div>
         </div>
 
