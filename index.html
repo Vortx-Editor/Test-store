@@ -5,9 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <title>VORTX — Premium Digital Assets</title>
 <meta name="theme-color" content="#09090c" />
-<link rel="preload" href="https://res.cloudinary.com/eon6wcph/video/upload/q_auto,w_1080/v1/VORTX_4K_CLEAN_FULL_kd7uui.mp4" as="video" type="video/mp4">
+<link rel="preload" href="https://res.cloudinary.com/eon6wcph/video/upload/v1/VORTX_4K_CLEAN_FULL_kd7uui.mp4" as="video" type="video/mp4">
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<!-- سكربت Payhip الرسمي للسلة الشاملة والشراء التلقائي -->
+<script src="https://payhip.com/payhip.js" class="payhip-btn"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;800;900&family=Cinzel:wght@700;800;900&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@700;800;900&display=swap" rel="stylesheet">
@@ -37,39 +39,33 @@
     --card-border: rgba(255, 255, 255, 0.1); --globe-line: 205, 210, 200; 
     --globe-ring: 190, 195, 185; --globe-point: 233, 236, 228; --loader-bg: #050505;
   }
-
   html.light {
-    --ink: #475569; --bg-color: #F8FAFC; --text-color: #475569; --subtext-color: #64748B;
-    --star-bg: #F8FAFC; --star-opacity: 1; --btn-text-color: #ffffff;
-    --card-bg: rgba(255, 255, 255, 0.85); --card-border: rgba(203, 213, 225, 0.5);
-    --globe-line: 148, 163, 184; 
-    --globe-ring: 100, 116, 139;
-    --globe-point: 71, 85, 105; 
-    --loader-bg: #F8FAFC;
+    --ink: #17131F; --bg-color: #F4F2F7; --text-color: #17131F; --subtext-color: #625D6B;
+    --star-bg: #F4F2F7; --star-opacity: 1; --btn-text-color: #ffffff;
+    --card-bg: rgba(255, 255, 255, 0.75); --card-border: rgba(210, 215, 225, 0.3);
+    --globe-line: 100, 116, 139; 
+    --globe-ring: 71, 85, 105;
+    --globe-point: 30, 41, 59; 
+    --loader-bg: #F4F2F7;
   }
   * , *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { max-width: 100vw; overflow-x: clip; scroll-behavior: smooth; }
   body { width: 100%; min-height: 100vh; background-color: var(--bg-color); color: var(--text-color); font-family: 'Inter', sans-serif; transition: background-color .4s ease, color .4s ease; -webkit-font-smoothing: antialiased; position: relative; }
-  html.light body::before { content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none; background: radial-gradient(circle at 15% 30%, rgba(200, 205, 220, 0.12), transparent 45%), radial-gradient(circle at 85% 70%, rgba(200, 205, 220, 0.08), transparent 45%); }
+  html.light body::before { content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none; background: radial-gradient(circle at 15% 30%, rgba(200, 205, 220, 0.08), transparent 45%), radial-gradient(circle at 85% 70%, rgba(200, 205, 220, 0.06), transparent 45%); }
   html.vx-loading, html.vx-loading body { overflow: hidden !important; }
   .card-3d, .cat-card-glass, .tier-card, header { transform: translateZ(0); backface-visibility: hidden; }
   .reveal-on-scroll { opacity: 0; transform: translateY(40px); transition: opacity 1.8s cubic-bezier(0.16, 1, 0.3, 1), transform 1.8s cubic-bezier(0.16, 1, 0.3, 1); will-change: opacity, transform; }
   .reveal-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
-  
-  html.light p, html.light span, html.light h2, html.light h3, html.light h4, html.light button { color: #475569 !important; }
-  html.light .text-white { color: #475569 !important; }
-  html.light .text-slate-300 { color: #64748B !important; }
+  html.light p, html.light span, html.light h2, html.light h3, html.light h4 { color: var(--text-color); }
+  html.light .text-white { color: #17131F !important; }
+  html.light .text-slate-300 { color: #625D6B !important; }
   html.light .text-purple-300, html.light .text-purple-400 { color: #94A3B8 !important; }
-  html.light .vortx-wet-oil-title { background: linear-gradient(110deg, #334155 0%, #64748B 30%, #475569 55%, #94A3B8 80%, #334155 100%); background-size: 200% 100%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 4px 12px rgba(100, 116, 139, 0.15)); }
-  html.light .gold-heading { background: linear-gradient(100deg, #475569 0%, #C49A3A 30%, #475569 60%, #475569 100%); background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 4px 12px rgba(196, 154, 58, 0.15)); }
-  html.light .glass, html.light .cat-card-glass, html.light .tier-card { background: rgba(255, 255, 255, 0.85) !important; border: 1px solid rgba(203, 213, 225, 0.5) !important; box-shadow: 0 15px 35px -10px rgba(100, 116, 139, 0.08), inset 0 0 20px rgba(255,255,255,0.9) !important; backdrop-filter: blur(24px) !important; }
+  html.light .vortx-wet-oil-title { background: linear-gradient(110deg, #17131F 0%, #64748B 30%, #17131F 55%, #94A3B8 80%, #17131F 100%); background-size: 200% 100%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 4px 12px rgba(100, 116, 139, 0.15)); }
+  html.light .gold-heading { background: linear-gradient(100deg, #17131F 0%, #C49A3A 30%, #17131F 60%, #17131F 100%); background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 4px 12px rgba(196, 154, 58, 0.15)); }
+  html.light .glass, html.light .cat-card-glass, html.light .tier-card { background: rgba(255, 255, 255, 0.8) !important; border: 1px solid rgba(203, 213, 225, 0.4) !important; box-shadow: 0 15px 35px -10px rgba(100, 116, 139, 0.08), inset 0 0 20px rgba(255,255,255,0.8) !important; backdrop-filter: blur(24px) !important; }
   html.light .golden-bundle-card { background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(244,242,247,0.9) 100%) !important; border: 1px solid rgba(196, 154, 58, 0.2) !important; box-shadow: 0 25px 50px -12px rgba(100, 116, 139, 0.08), inset 0 0 35px rgba(255,255,255,0.9) !important; }
-  html.light .btn-3d-style { background: linear-gradient(135deg, #64748B 0%, #334155 100%) !important; box-shadow: 0 8px 20px -4px rgba(100, 116, 139, 0.3), inset 0 1px 1px rgba(255,255,255,0.3) !important; }
+  html.light .btn-3d-style { background: linear-gradient(135deg, #475569 0%, #1e293b 100%) !important; box-shadow: 0 8px 20px -4px rgba(100, 116, 139, 0.3), inset 0 1px 1px rgba(255,255,255,0.3) !important; }
   html.light .btn-3d-style span { color: #ffffff !important; text-shadow: none !important; }
-  
-  html.light #reviews-marquee-track > div { background: rgba(255, 255, 255, 0.9) !important; border-color: rgba(148, 163, 184, 0.4) !important; box-shadow: 0 4px 15px rgba(100, 116, 139, 0.1) !important; }
-  html.light #reviews-marquee-track span { color: #475569 !important; }
-
   h1, h2, h3, .font-head { font-family: 'Cinzel', serif; letter-spacing: 1.5px; }
   .force-eng { font-family: 'Cinzel', serif !important; letter-spacing: 0.25em !important; direction: ltr !important; unicode-bidi: isolate-override !important; display: inline-block; }
   .stars-background-container { position: absolute; inset: 0; width: 100%; height: 100%; background: var(--star-bg); overflow: hidden; z-index: 0; pointer-events: none; transition: background .4s ease; }
@@ -80,14 +76,21 @@
   #hero-section { position: relative; min-height: 85vh; display: flex; flex-direction: column; justify-content: center; }
   
   html.light #hero-section::before {
-    content: ''; position: absolute; top: 46%; left: 50%; transform: translate(-50%, -50%);
-    width: min(85vw, 580px); height: min(85vw, 580px); border-radius: 50%;
+    content: '';
+    position: absolute;
+    top: 46%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: min(85vw, 580px);
+    height: min(85vw, 580px);
+    border-radius: 50%;
     background: radial-gradient(circle, rgba(30, 41, 59, 0.18) 0%, rgba(100, 116, 139, 0.12) 45%, rgba(226, 232, 240, 0) 72%);
-    filter: blur(40px); z-index: 0; pointer-events: none;
+    filter: blur(40px);
+    z-index: 0;
+    pointer-events: none;
   }
   
   #globe { position: absolute; top: 48%; left: 50%; transform: translate(-50%,-50%) scale(0); z-index: 1; opacity: 0; pointer-events: none; }
-  @media (max-width: 640px) { #globe { top: 56%; } }
+  @media (max-width: 640px) { #globe { top: 52%; } }
   .revealed #globe { animation: globeBounce 2.8s ease-in-out 0.1s both; }
   @keyframes globeBounce { 0% { opacity: 0; transform: translate(-50%,-50%) scale(0); } 45% { opacity: 1; transform: translate(-50%,-50%) scale(1.25); } 100% { opacity: 1; transform: translate(-50%,-50%) scale(1); } }
   .floor-glow { position: absolute; left: 50%; bottom: 6%; width: 60%; height: 220px; transform: translateX(-50%); background: radial-gradient(ellipse at center, rgba(255,255,255,.10), rgba(255,255,255,0) 70%); filter: blur(8px); z-index: 1; opacity: 0; pointer-events: none; animation: fadeGlow 3s ease 1.5s forwards; }
@@ -132,7 +135,7 @@
   .tab-btn:hover { opacity: 1; background: rgba(255,255,255,0.05); }
   html.light .tab-btn:hover { background: rgba(100, 116, 139, 0.05); }
   .tab-btn.active { background: linear-gradient(135deg, #eab308 0%, #ca8a04 100%); color: #050505 !important; opacity: 1; border-color: rgba(255,255,255,0.4); box-shadow: 0 4px 15px rgba(234, 179, 8, 0.4), inset 0 2px 4px rgba(255,255,255,0.5); transform: scale(1.02); }
-  html.light .tab-btn.active { background: linear-gradient(135deg, #64748B 0%, #334155 100%); color: #ffffff !important; border-color: rgba(148, 163, 184, 0.4); box-shadow: 0 4px 15px rgba(100, 116, 139, 0.3), inset 0 2px 4px rgba(255,255,255,0.2); }
+  html.light .tab-btn.active { background: linear-gradient(135deg, #475569 0%, #1e293b 100%); color: #ffffff !important; border-color: rgba(148, 163, 184, 0.4); box-shadow: 0 4px 15px rgba(100, 116, 139, 0.3), inset 0 2px 4px rgba(255,255,255,0.2); }
   .cat-card-glass { background: var(--card-bg); backdrop-filter: blur(16px); border: 1px solid var(--card-border); border-radius: 1.75rem; padding: 1.75rem 2rem; cursor: pointer; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
   .cat-card-glass:hover { transform: translateY(-5px); }
   .view { transition: opacity .4s ease; opacity: 1; display: block; }
@@ -146,38 +149,95 @@
   @keyframes vxGlowPulse { 0%,100% { transform: scale(0.9); opacity: 0.5; } 50% { transform: scale(1.1); opacity: 0.9; } }
   .vx-logo-word { display: flex; font-family: 'Cinzel', serif; font-weight: 900; font-size: clamp(3.5rem, 13vw, 7rem); letter-spacing: 0.25em; line-height: 1; position: relative; z-index: 2; perspective: 1000px; }
   .vx-letter { display: inline-block; background: linear-gradient(135deg, #fff 0%, #ccc 50%, #999 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; opacity: 0; transform: translateY(-70px) rotateX(45deg) scale(1.4); filter: blur(12px); animation: vxLetterDrop 0.9s cubic-bezier(0.19, 1, 0.22, 1) forwards; animation-delay: var(--ld, 0s); }
-  html.light .vx-letter { background: linear-gradient(135deg, #334155 0%, #64748B 50%, #94A3B8 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 8px 20px rgba(100, 116, 139, 0.2)); }
+  html.light .vx-letter { background: linear-gradient(135deg, #17131F 0%, #334155 50%, #64748B 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 8px 20px rgba(100, 116, 139, 0.2)); }
   @keyframes vxLetterDrop { 0% { opacity: 0; transform: translateY(-70px) rotateX(45deg) scale(1.4); filter: blur(12px); } 60% { opacity: 0.9; transform: translateY(8px) rotateX(-10deg) scale(0.95); filter: blur(1px); } 100% { opacity: 1; transform: translateY(0) rotateX(0) scale(1); filter: drop-shadow(0 15px 30px rgba(255,255,255,0.1)); } }
   .vx-bar-track { width: min(80vw, 340px); height: 5px; border-radius: 999px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); margin-top: 2rem; position: relative; overflow: hidden; z-index: 2; }
   html.light .vx-bar-track { background: rgba(100, 116, 139, 0.1); border: 1px solid rgba(100, 116, 139, 0.2); }
   .vx-bar-fill { height: 100%; width: 0%; border-radius: 999px; background: linear-gradient(90deg, #555, #ccc, #fff); position: relative; transition: width 0.1s linear; }
   html.light .vx-bar-fill { background: linear-gradient(90deg, #334155, #64748B, #94a3b8); }
   .loader-text { color: rgba(255,255,255,0.7); }
-  html.light .loader-text { color: rgba(71, 85, 105, 0.8); }
+  html.light .loader-text { color: rgba(23, 19, 31, 0.7); }
   #vx-percent { color: #fff; }
-  html.light #vx-percent { color: #334155; }
+  html.light #vx-percent { color: #17131F; }
   header .glass { border-bottom: 1px solid rgba(255,255,255,0.05); }
   html.light header .glass { border-bottom: 1px solid rgba(100, 116, 139, 0.1); background: rgba(255,255,255,0.85) !important; }
   .hide-scrollbar::-webkit-scrollbar { display: none; }
   .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; overflow-x: auto; cursor: grab; user-select: none; }
   .hide-scrollbar:active { cursor: grabbing; }
-  .vx-price-card { position: relative; display: flex; flex-direction: column; gap: 1rem; padding: 2rem; width: 100%; height: 100%; background: var(--card-bg); backdrop-filter: blur(16px); border: 1px solid var(--card-border); border-radius: 1.75rem; box-shadow: 0 10px 30px rgba(0,0,0,0.2); z-index: 1; transition: transform .4s ease; }
-  .vx-price-card:hover { transform: translateY(-5px); }
-  .vx-price-card .card_title { font-size: 1.5rem; font-weight: 800; color: var(--text-color); letter-spacing: 1px; }
-  .vx-price-card .card_price { font-size: 2.5rem; font-weight: 900; color: #eab308; margin-top: 0.5rem; }
-  .vx-price-card .card_paragraph { margin-top: 0.5rem; width: 100%; font-size: 0.85rem; color: var(--subtext-color); line-height: 1.5; font-weight: 600; }
-  .vx-price-card .line { width: 100%; height: 1px; background-color: var(--card-border); border: none; margin: 0.5rem 0; }
-  .vx-price-card .card__list { display: flex; flex-direction: column; gap: 0.75rem; flex-grow: 1; }
-  .vx-price-card .card__list_item { display: flex; align-items: start; gap: 0.75rem; }
-  .vx-price-card .check { display: flex; justify-content: center; align-items: center; width: 1.25rem; height: 1.25rem; background-color: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 50%; flex-shrink: 0; margin-top: 0.15rem; }
-  .vx-price-card .check_svg { width: 0.75rem; height: 0.75rem; fill: #eab308; }
-  .vx-price-card .list_text { font-size: 0.85rem; color: var(--text-color); font-weight: 600; opacity: 0.9; }
-  .vx-price-card .delivery_text { font-size: 0.85rem; font-weight: 800; color: #a855f7; text-align: center; text-transform: uppercase; margin-top: auto; padding-top: 1rem; letter-spacing: 1px; }
-  .vx-price-card .button-wrap { width: 100% !important; margin: 1rem 0 0 0 !important; cursor: pointer; transition: transform 0.1s ease !important; }
-  .vx-price-card .button-wrap:active { transform: scale(0.97); }
-  .vx-price-card .btn-3d-style { background: rgba(255, 255, 255, 0.08) !important; border: 1px solid rgba(255, 255, 255, 0.2) !important; backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-radius: 999px !important; padding: 0.85rem 1.5rem !important; text-align: center; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.2) !important; transition: all 0.2s ease !important; }
-  .vx-price-card .btn-3d-style:hover { background: rgba(255, 255, 255, 0.15) !important; border-color: rgba(255, 255, 255, 0.4) !important; }
-  .vx-price-card .btn-3d-style span { color: #eab308 !important; font-weight: 800 !important; font-size: 0.95rem; letter-spacing: 0.05em; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+
+  /* تنسيقات باقات الويب الأساسية المحدثة بالألوان الجديدة */
+  .vx-price-card { position: relative; display: flex; flex-direction: column; gap: 1rem; padding: 2rem; width: 100%; height: 100%; border-radius: 1.75rem; box-shadow: 0 10px 30px rgba(0,0,0,0.2); z-index: 1; transition: transform .4s ease, box-shadow .4s ease; }
+  .vx-price-card:hover { transform: translateY(-6px); }
+
+  /* باقة STARTER: أبيض + بنفسجي هادئ */
+  .card-theme-starter {
+    background: linear-gradient(135deg, #ffffff 0%, #f7f3ff 60%, #ede9fe 100%) !important;
+    border: 1px solid rgba(168, 85, 247, 0.4) !important;
+    box-shadow: 0 15px 35px rgba(168, 85, 247, 0.15) !important;
+    color: #1e1b4b !important;
+  }
+  .card-theme-starter .card_title { color: #581c87 !important; }
+  .card-theme-starter .card_price { color: #7e22ce !important; }
+  .card-theme-starter .card_paragraph { color: #4c1d95 !important; }
+  .card-theme-starter .line { background-color: rgba(168, 85, 247, 0.2) !important; }
+  .card-theme-starter .list_text { color: #2e1065 !important; }
+  .card-theme-starter .check { background-color: rgba(168, 85, 247, 0.15) !important; border-color: rgba(168, 85, 247, 0.3) !important; }
+  .card-theme-starter .check_svg { fill: #7e22ce !important; }
+  .card-theme-starter .delivery_text { color: #7e22ce !important; }
+  .card-theme-starter .btn-3d-style { background: linear-gradient(135deg, #7e22ce 0%, #581c87 100%) !important; border: 1px solid rgba(168, 85, 247, 0.5) !important; }
+  .card-theme-starter .btn-3d-style span { color: #ffffff !important; }
+
+  /* باقة PREMIUM: أبيض وأسود مع بني فاتح برونزي */
+  .card-theme-premium {
+    background: linear-gradient(135deg, #09090b 0%, #18181b 50%, #27272a 100%) !important;
+    border: 1px solid rgba(217, 119, 6, 0.4) !important;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6) !important;
+    color: #ffffff !important;
+  }
+  .card-theme-premium .card_title { color: #ffffff !important; }
+  .card-theme-premium .card_price { color: #d97706 !important; }
+  .card-theme-premium .card_paragraph { color: rgba(255, 255, 255, 0.8) !important; }
+  .card-theme-premium .line { background-color: rgba(217, 119, 6, 0.25) !important; }
+  .card-theme-premium .list_text { color: #f4f4f5 !important; }
+  .card-theme-premium .check { background-color: rgba(217, 119, 6, 0.15) !important; border-color: rgba(217, 119, 6, 0.4) !important; }
+  .card-theme-premium .check_svg { fill: #d97706 !important; }
+  .card-theme-premium .delivery_text { color: #d97706 !important; }
+  .card-theme-premium .btn-3d-style { background: linear-gradient(135deg, #d97706 0%, #b45309 100%) !important; border: 1px solid rgba(251, 191, 36, 0.5) !important; }
+  .card-theme-premium .btn-3d-style span { color: #ffffff !important; }
+
+  /* باقة ELITE: كحلي غامق مع ذهبي وفضي */
+  .card-theme-elite {
+    background: linear-gradient(135deg, #020617 0%, #0f172a 50%, #1e293b 100%) !important;
+    border: 1px solid rgba(234, 179, 8, 0.45) !important;
+    box-shadow: 0 15px 35px rgba(15, 23, 42, 0.7) !important;
+    color: #f8fafc !important;
+  }
+  .card-theme-elite .card_title { color: #e2e8f0 !important; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+  .card-theme-elite .card_price { color: #eab308 !important; }
+  .card-theme-elite .card_paragraph { color: #cbd5e1 !important; }
+  .card-theme-elite .line { background-color: rgba(234, 179, 8, 0.25) !important; }
+  .card-theme-elite .list_text { color: #f1f5f9 !important; }
+  .card-theme-elite .check { background-color: rgba(234, 179, 8, 0.15) !important; border-color: rgba(234, 179, 8, 0.4) !important; }
+  .card-theme-elite .check_svg { fill: #eab308 !important; }
+  .card-theme-elite .delivery_text { color: #eab308 !important; }
+  .card-theme-elite .btn-3d-style { background: linear-gradient(135deg, #eab308 0%, #ca8a04 100%) !important; border: 1px solid rgba(254, 240, 138, 0.5) !important; }
+  .card-theme-elite .btn-3d-style span { color: #000000 !important; font-weight: 900 !important; }
+
+  /* إطار ومقاس موحد للصور داخل باقات الويب */
+  .tier-img-box {
+    width: 100%;
+    height: 190px;
+    object-fit: cover;
+    border-radius: 1.25rem;
+    margin-bottom: 1.25rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: transform 0.3s ease;
+  }
+  .vx-price-card:hover .tier-img-box {
+    transform: scale(1.02);
+  }
+
   .back-btn-pill { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.6rem 1.4rem; border-radius: 999px; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.2); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); color: #eab308; font-weight: 800; font-size: 0.9rem; letter-spacing: 0.05em; cursor: pointer; box-shadow: 0 6px 20px rgba(0,0,0,0.3), inset 0 1px 1px rgba(255,255,255,0.2); transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1); }
   .back-btn-pill:hover { background: rgba(255, 255, 255, 0.18); border-color: rgba(234, 179, 8, 0.5); transform: translateY(-2px); box-shadow: 0 8px 25px rgba(234, 179, 8, 0.25); }
   .back-btn-pill:active { transform: scale(0.95); }
@@ -193,12 +253,12 @@
   .container_chat_bot .chat { display: flex; flex-direction: column; background-color: rgba(10, 10, 15, 0.85); border-radius: 18px; width: 100%; overflow: hidden; backdrop-filter: blur(12px); }
   html.light .container_chat_bot .chat { background-color: rgba(255, 255, 255, 0.9); }
   .container_chat_bot .chat input { background-color: transparent; border: none; border-bottom: 1px solid rgba(255, 255, 255, 0.08); width: 100%; color: #ffffff; font-family: 'Inter', 'Cairo', sans-serif; font-size: 12px; font-weight: 600; padding: 12px 14px; outline: none; text-align: left; }
-  html.light .container_chat_bot .chat input { color: #334155 !important; border-bottom-color: rgba(148, 163, 184, 0.3); }
+  html.light .container_chat_bot .chat input { color: #17131F !important; border-bottom-color: rgba(148, 163, 184, 0.2); }
   .container_chat_bot .chat input::placeholder { color: rgba(255, 255, 255, 0.35); }
   html.light .container_chat_bot .chat input::placeholder { color: #64748B !important; }
   .container_chat_bot .chat .chat-bot { position: relative; display: flex; }
   .container_chat_bot .chat .chat-bot textarea { background-color: transparent; border: none; width: 100%; height: 75px; color: #ffffff; font-family: 'Inter', 'Cairo', sans-serif; font-size: 13px; font-weight: 500; padding: 12px 14px; resize: none; outline: none; text-align: left; }
-  html.light .container_chat_bot .chat .chat-bot textarea { color: #334155 !important; }
+  html.light .container_chat_bot .chat .chat-bot textarea { color: #17131F !important; }
   .container_chat_bot .chat .chat-bot textarea::placeholder { color: rgba(255, 255, 255, 0.35); }
   html.light .container_chat_bot .chat .chat-bot textarea::placeholder { color: #64748B !important; }
   .container_chat_bot .chat .options { display: flex; justify-content: flex-end; align-items: center; padding: 8px 12px; border-top: 1px solid rgba(255, 255, 255, 0.05); }
@@ -210,14 +270,6 @@
   .container_chat_bot .chat .options .btn-submit:hover i { color: #fff; filter: drop-shadow(0 0 8px #eab308); }
   html.light .container_chat_bot .chat .options .btn-submit:hover i { color: #1e293b !important; filter: none !important; }
   .container_chat_bot .chat .options .btn-submit:active { transform: scale(0.92); }
-  html.light .vx-price-card { background: rgba(255, 255, 255, 0.85); border: 1px solid rgba(203, 213, 225, 0.5); box-shadow: 0 15px 35px -10px rgba(100, 116, 139, 0.08); }
-  html.light .vx-price-card .card_title { color: #334155; }
-  html.light .vx-price-card .card_price { color: #d97706; }
-  html.light .vx-price-card .card_paragraph { color: #64748B; }
-  html.light .vx-price-card .line { background-color: rgba(148, 163, 184, 0.3); }
-  html.light .vx-price-card .list_text { color: #475569; }
-  html.light .vx-price-card .check { background-color: rgba(148, 163, 184, 0.1); border-color: rgba(148, 163, 184, 0.3); }
-  html.light .vx-price-card .check_svg { fill: #d97706; }
 </style>
 </head>
 <script>
@@ -238,6 +290,7 @@
   </p>
 </div>
 
+<!-- مودال العرض المكبّر للكرت -->
 <div id="preview-modal" class="fixed inset-0 z-[10000] flex items-center justify-center p-3 sm:p-6 h-[100dvh] w-screen opacity-0 pointer-events-none transition-all duration-300">
   <div class="absolute inset-0 bg-black/90 backdrop-blur-xl" onclick="window.closePreview()"></div>
   <div class="glass rounded-3xl max-w-lg w-full relative z-10 p-6 sm:p-8 border border-white/20 shadow-2xl flex flex-col justify-between max-h-[92vh] overflow-y-auto" id="preview-card">
@@ -339,6 +392,7 @@
         </ul>
         
         <div class="flex items-center gap-1.5 sm:gap-2 relative z-50 shrink-0 ml-auto sm:ml-0">
+          
           <button type="button" onclick="window.toggleNotificationsModal()" title="Notifications" class="nav-btn-item text-current opacity-80 hover:opacity-100 hover:text-yellow-400 relative">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
             <span class="absolute top-1 right-1 w-2 h-2 bg-yellow-400 rounded-full animate-ping"></span>
@@ -369,6 +423,7 @@
               <svg class="icon-sun" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path></svg>
             </div>
           </button>
+
         </div>
       </div>
     </nav>
@@ -381,13 +436,12 @@
       <canvas id="globe"></canvas>
       <div class="floor-glow"></div>
 
-      <div class="relative z-20 flex flex-col items-center justify-center -mt-44 sm:-mt-16 pt-0 sm:pt-0 pb-28">
+      <div class="relative z-20 flex flex-col items-center justify-center -mt-28 sm:-mt-16 pt-2 sm:pt-0 pb-28">
         
-        <!-- تكبير خانة Digital Assets Hub لجعل شكلها أكبر وأكثر وضوحاً -->
-        <div class="fade-up-item inline-flex items-center gap-3.5 px-8 sm:px-10 py-3.5 sm:py-4 rounded-full text-sm sm:text-base md:text-lg font-black tracking-widest uppercase glass backdrop-blur-xl shadow-2xl border border-white/25 text-white z-30 mb-8 sm:mb-6 mt-1 sm:mt-0 transform hover:scale-105 transition-transform" style="animation-delay: 1.4s;">
-          <span class="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-yellow-400 animate-ping"></span>
+        <div class="fade-up-item inline-flex items-center gap-3 px-7 py-2.5 rounded-full text-xs sm:text-sm font-black tracking-widest uppercase glass backdrop-blur-xl shadow-lg border border-white/20 text-white z-30 mb-6 sm:mb-6 mt-4 sm:mt-0" style="animation-delay: 1.4s;">
+          <span class="w-2 h-2 rounded-full bg-white/70 animate-ping"></span>
           <span data-i18n="hero-tag">Digital Assets Hub</span>
-          <span class="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-yellow-400 animate-ping"></span>
+          <span class="w-2 h-2 rounded-full bg-white/70 animate-ping"></span>
         </div>
 
         <h1 class="animated-title font-black text-4xl sm:text-6xl md:text-7xl leading-tight mb-6">
@@ -406,28 +460,27 @@
         </div>
       </div>
 
-      <!-- مط مستطيل السوشيال ميديا لليمين ولليسار (عرض أكبر وتمطيط فخم) -->
-      <div class="absolute bottom-2 sm:-bottom-8 md:-bottom-16 lg:-bottom-20 left-1/2 -translate-x-1/2 w-[96%] max-w-[750px] flex items-center justify-between px-8 sm:px-14 py-4 sm:py-5 rounded-full border border-white/10 glass backdrop-blur-md opacity-90 z-30" dir="rtl">
+      <div class="absolute bottom-2 sm:-bottom-8 md:-bottom-16 lg:-bottom-20 left-1/2 -translate-x-1/2 w-[90%] max-w-[520px] flex items-center justify-around px-6 sm:px-8 py-4 sm:py-5 rounded-full border border-white/10 glass backdrop-blur-md opacity-80 z-30" dir="rtl">
         <a href="https://www.tiktok.com/@v_ortx?_r=1&_t=ZS-98pGOR9h9Ca" target="_blank" rel="noopener noreferrer" title="TikTok" class="hover:scale-110 hover:opacity-100 hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.8)] transition-all duration-300 text-current">
-          <svg class="w-6 h-6 sm:w-8 sm:h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
+          <svg class="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
         </a>
         <a href="https://youtube.com/@v_ort_x?si=I0yNjdp3twt2Y32U" target="_blank" rel="noopener noreferrer" title="YouTube" class="hover:scale-110 hover:opacity-100 hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.8)] transition-all duration-300 text-current">
-          <svg class="w-6 h-6 sm:w-8 sm:h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="4"/><path d="m10 9 5 3-5 3z"/></svg>
+          <svg class="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="4"/><path d="m10 9 5 3-5 3z"/></svg>
         </a>
         <a href="https://t.me/v_ortx" target="_blank" rel="noopener noreferrer" title="Telegram" class="hover:scale-110 hover:opacity-100 hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.8)] transition-all duration-300 text-current">
-          <svg class="w-6 h-6 sm:w-8 sm:h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 10-4 4 6 6 4-16-18 7 4 2 2 6 3-4"/></svg>
+          <svg class="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 10-4 4 6 6 4-16-18 7 4 2 2 6 3-4"/></svg>
         </a>
         <a href="https://www.instagram.com/toix.8i?igsh=Z3B1eWdwNGJocW9q" target="_blank" rel="noopener noreferrer" title="Instagram" class="hover:scale-110 hover:opacity-100 hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.8)] transition-all duration-300 text-current">
-          <svg class="w-6 h-6 sm:w-8 sm:h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+          <svg class="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
         </a>
       </div>
     </section>
 
     <section id="bundles" class="max-w-7xl mx-auto px-4 sm:px-6 pt-20 sm:pt-28 md:pt-36 pb-12 reveal-on-scroll">
       <div class="relative w-full h-[360px] sm:h-[460px] rounded-3xl overflow-hidden shadow-2xl border border-white/10 group transition-all duration-500 hover:shadow-[0_20px_50px_rgba(226,232,240,0.15)]">
+        
         <video 
-          id="bundle-video"
-          src="https://res.cloudinary.com/eon6wcph/video/upload/q_auto,w_1080/v1/VORTX_4K_CLEAN_FULL_kd7uui.mp4" 
+          src="https://res.cloudinary.com/eon6wcph/video/upload/v1/VORTX_4K_CLEAN_FULL_kd7uui.mp4" 
           autoplay 
           loop 
           muted 
@@ -448,6 +501,7 @@
             </div>
           </div>
         </div>
+
       </div>
     </section>
 
@@ -480,7 +534,7 @@
         <div id="cat-card-FREE" onclick="window.openCategoryView('FREE')" class="cat-card-glass flex items-center justify-between group"><div class="flex items-center gap-5"><div class="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-current font-extrabold text-sm">04</div><div><h3 class="font-head font-black text-2xl tracking-wider force-eng">FREE</h3><p class="text-xs font-semibold opacity-60 mt-1" data-i18n="cat-free-desc">Free Sample Assets</p></div></div><div class="opacity-60 text-xl font-bold">→</div></div>
       </div>
     </section>
-    <!-- قسم التقييم والتعليق والمؤشرات -->
+    <!-- قسم التقييم والتعليق -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 py-12 border-t border-white/10 mt-12 reveal-on-scroll">
       
       <div id="reviews-marquee-container" class="w-full mb-12 py-4 glass rounded-2xl hidden hide-scrollbar" dir="ltr" style="touch-action: pan-y;">
@@ -535,12 +589,10 @@
       </div>
 
       <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center mt-8">
-        <!-- عداد التقييمات (يزداد +1 عند وضع تقييم) -->
         <div class="glass p-6 rounded-2xl border border-white/10">
           <h4 class="font-mono font-black text-3xl sm:text-4xl text-current tracking-wider"><span class="counter-num text-current" id="live-reviews-count" data-target="0">0</span></h4>
           <p data-i18n="stat-subscribers" class="text-xs font-bold opacity-70 mt-2 uppercase tracking-widest">Satisfied Clients</p>
         </div>
-        <!-- عداد الزيارات (يزداد +1 فقط عند تحديث الصفحة ولا يزداد عند التقييم) -->
         <div class="glass p-6 rounded-2xl border border-white/10">
           <h4 class="font-mono font-black text-3xl sm:text-4xl text-current tracking-wider"><span class="counter-num text-current" id="live-views-count" data-target="0">0</span></h4>
           <p data-i18n="stat-views" class="text-xs font-bold opacity-70 mt-2 uppercase tracking-widest">Total Visits</p>
@@ -564,6 +616,7 @@
     </footer>
   </main>
 
+  <!-- صفحة باقات الويب المتضمنة الصور الثلاث بمقاس موحد والألوان المطلوبة -->
   <section id="web-view" class="view view-hidden relative z-10 min-h-screen">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
       <div class="flex items-center justify-between mb-12">
@@ -572,7 +625,10 @@
       </div>
       
       <div class="grid lg:grid-cols-3 gap-8 items-stretch">
-        <div class="vx-price-card">
+        
+        <!-- 1. باقة STARTER: صورة Page 1.png - أبيض مع بنفسجي -->
+        <div class="vx-price-card card-theme-starter">
+          <img src="Page 1.png" alt="Starter Tier" class="tier-img-box" />
           <div class="card_title__container">
             <span class="card_title" data-i18n="plan-s-title">STARTER</span>
             <div class="card_price" data-i18n="plan-s-price">$150</div>
@@ -592,7 +648,9 @@
           </div>
         </div>
 
-        <div class="vx-price-card">
+        <!-- 2. باقة PREMIUM: صورة Page 2.png - أبيض وأسود مع بني فاتح برونزي -->
+        <div class="vx-price-card card-theme-premium">
+          <img src="Page 2.png" alt="Premium Tier" class="tier-img-box" />
           <div class="card_title__container">
             <span class="card_title" data-i18n="plan-p-title">PREMIUM</span>
             <div class="card_price" data-i18n="plan-p-price">$300</div>
@@ -612,7 +670,9 @@
           </div>
         </div>
 
-        <div class="vx-price-card">
+        <!-- 3. باقة ELITE: صورة Page 3.png - كحلي غامق مع ذهبي وفضي -->
+        <div class="vx-price-card card-theme-elite">
+          <img src="Page 3.png" alt="Elite Tier" class="tier-img-box" />
           <div class="card_title__container">
             <span class="card_title" data-i18n="plan-v-title">ELITE</span>
             <div class="card_price" data-i18n="plan-v-price">$600</div>
@@ -631,10 +691,12 @@
             <div class="btn-3d-style"><span data-i18n="select-plan">Buy Now</span></div>
           </div>
         </div>
+
       </div>
     </div>
   </section>
 
+  <!-- صفحة الأقسام الكاملة (CC / XML / SHAKE / FREE) -->
   <section id="category-view" class="view view-hidden relative z-10 min-h-screen">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
       <div class="flex items-center justify-between mb-12 pb-6 border-b border-white/10">
@@ -660,12 +722,6 @@
     const loader = document.getElementById('vx-loader');
     const appContent = document.getElementById('app-content');
     const heroSection = document.getElementById('hero-section');
-    const vid = document.getElementById('bundle-video');
-
-    if (vid) {
-      vid.load();
-      vid.play().catch(()=>{});
-    }
 
     if (logoWord && logoWord.children.length === 0) {
       const letters = ['V', 'O', 'R', 'T', 'X'];
@@ -674,7 +730,7 @@
       ).join('');
     }
 
-    const duration = 3000;
+    const duration = 3800;
     const startTime = performance.now();
 
     function animateLoader(now) {
@@ -698,7 +754,7 @@
           if (appContent) appContent.classList.add('vx-revealed');
           if (heroSection) heroSection.classList.add('revealed');
           document.body.classList.add('revealed');
-        }, 200);
+        }, 250);
       }
     }
 
@@ -921,30 +977,6 @@
       setTimeout(function () { if (toast && toast.parentNode) toast.parentNode.removeChild(toast); }, 3000);
     };
 
-    // تسجيل زيادة الزيارة مرة واحدة فقط لكل فتحة/تحديث شاشة
-    let hasCountedVisit = false;
-    async function recordVisitOnce() {
-      if (hasCountedVisit) return;
-      hasCountedVisit = true;
-
-      let localVisits = parseInt(localStorage.getItem('vortx_visit_count') || '0', 10) + 1;
-      localStorage.setItem('vortx_visit_count', localVisits);
-
-      if (supabase) {
-        try {
-          await supabase.from('page_views').insert([{}]);
-          const { count } = await supabase.from('page_views').select('*', { count: 'exact', head: true });
-          if (count !== null && count > 0) localVisits = Math.max(localVisits, count);
-        } catch(e) {}
-      }
-
-      const viewsEl = document.getElementById('live-views-count');
-      if (viewsEl) { 
-        viewsEl.setAttribute('data-target', localVisits); 
-        viewsEl.textContent = localVisits.toLocaleString('en-US'); 
-      }
-    }
-
     window.submitUserRating = async function() {
       const ratingRadio = document.querySelector('input[name="rating"]:checked');
       if (!ratingRadio) { window.showToast('PLEASE SELECT A STAR RATING FIRST!'); return; }
@@ -962,8 +994,10 @@
       const newReview = { id: newId, rating: selectedScore, comment: comment, reviewer_name: name, created_at: new Date().toISOString() };
 
       let localReviews = JSON.parse(localStorage.getItem('vortx_reviews_data') || '[]');
-      localReviews.unshift(newReview);
-      localStorage.setItem('vortx_reviews_data', JSON.stringify(localReviews));
+      if (!localReviews.some(r => r.comment === comment && r.reviewer_name === name)) {
+        localReviews.unshift(newReview);
+        localStorage.setItem('vortx_reviews_data', JSON.stringify(localReviews));
+      }
 
       if (supabase) {
         try {
@@ -973,17 +1007,28 @@
         } catch(e) {}
       }
 
-      if (commentEl) commentEl.value = ''; 
-      if (nameEl) nameEl.value = '';
+      if (commentEl) commentEl.value = ''; if (nameEl) nameEl.value = '';
       ratingRadio.checked = false;
-      
       window.showToast('RATING SUBMITTED SUCCESSFULLY!');
-      fetchLiveStats(); // إتاحة تحديث التعليقات فورياً بدون زيادة الزيارات
+      fetchLiveStats();
     };
 
     async function fetchLiveStats() {
       let localReviews = JSON.parse(localStorage.getItem('vortx_reviews_data') || '[]');
-      
+      let localVisits = parseInt(localStorage.getItem('vortx_visit_count') || '0', 10) + 1;
+      localStorage.setItem('vortx_visit_count', localVisits);
+
+      if (supabase) {
+        try {
+          await supabase.from('page_views').insert([{}]);
+          const { count } = await supabase.from('page_views').select('*', { count: 'exact', head: true });
+          if (count !== null && count > 0) localVisits = Math.max(localVisits, count);
+        } catch(e) {}
+      }
+
+      const viewsEl = document.getElementById('live-views-count');
+      if (viewsEl) { viewsEl.setAttribute('data-target', localVisits); viewsEl.textContent = localVisits.toLocaleString('en-US'); }
+
       let uniqueMap = new Map();
       localReviews.forEach(r => { 
         const key = `${r.comment}_${r.rating}_${r.reviewer_name}`;
@@ -1012,7 +1057,7 @@
         const displayScore = (rawAvg % 1 === 0) ? rawAvg.toFixed(0) : rawAvg.toFixed(1);
         
         const ratingEl = document.getElementById('live-rating-avg');
-        const countEl = document.getElementById('live-reviews-count'); // Satisfied Clients (يزداد +1 عند التقييم)
+        const countEl = document.getElementById('live-reviews-count');
         if (ratingEl) { ratingEl.setAttribute('data-target', displayScore); ratingEl.textContent = displayScore; }
         if (countEl) { countEl.setAttribute('data-target', totalReviews); countEl.textContent = totalReviews.toLocaleString('en-US'); }
 
@@ -1024,28 +1069,31 @@
           if (barEl) barEl.style.width = pct + '%'; if (pctEl) pctEl.textContent = pct + '%';
         });
 
-        // إظهار الشريط فور تشغيل الصفحة
+        const commentsOnly = allReviews.filter(r => r.comment && r.comment.trim().length > 0);
         const marqueeContainer = document.getElementById('reviews-marquee-container');
         const marqueeTrack = document.getElementById('reviews-marquee-track');
 
         if (marqueeContainer && marqueeTrack) {
-          const cardsHtmlArr = allReviews.map(r => {
-            const starsHtml = '★'.repeat(Number(r.rating || 5));
-            const nameText = r.reviewer_name ? r.reviewer_name : 'Anonymous User';
-            const commentText = r.comment ? `"${r.comment}"` : 'Rating Submitted';
-            return `<div class="px-5 py-3 rounded-2xl border border-yellow-500/30 bg-black/80 backdrop-blur-md flex flex-col justify-center items-start gap-1 shrink-0 shadow-lg min-w-[200px] text-left"><span class="text-xs text-yellow-400 font-bold block text-left">${nameText}</span><span class="text-yellow-400 font-bold text-xs tracking-widest block text-left">${starsHtml}</span><span class="text-xs text-white/90 font-medium block mt-1 text-left">${commentText}</span></div>`;
-          });
+          if (commentsOnly.length > 0) {
+            const cardsHtmlArr = commentsOnly.map(r => {
+              const starsHtml = '★'.repeat(Number(r.rating || 5));
+              const nameText = r.reviewer_name ? r.reviewer_name : 'Anonymous';
+              return `<div class="px-5 py-3 rounded-2xl border border-yellow-500/30 bg-black/80 backdrop-blur-md flex flex-col justify-center items-start gap-1 shrink-0 shadow-lg min-w-[200px] text-left"><span class="text-xs text-yellow-400 font-bold block text-left">${nameText}</span><span class="text-yellow-400 font-bold text-xs tracking-widest block text-left">${starsHtml}</span><span class="text-xs text-white/90 font-medium block mt-1 text-left">"${r.comment}"</span></div>`;
+            });
 
-          let fullCards = cardsHtmlArr.join('');
-          if (cardsHtmlArr.length < 10) {
-            fullCards = cardsHtmlArr.join('') + cardsHtmlArr.join('') + cardsHtmlArr.join('') + cardsHtmlArr.join('');
+            let fullCards = cardsHtmlArr.join('');
+            if (cardsHtmlArr.length < 10) {
+              fullCards = cardsHtmlArr.join('') + cardsHtmlArr.join('') + cardsHtmlArr.join('') + cardsHtmlArr.join('');
+            } else {
+              fullCards = cardsHtmlArr.join('') + cardsHtmlArr.join('');
+            }
+
+            marqueeTrack.innerHTML = fullCards;
+            marqueeContainer.classList.remove('hidden');
+            setupMarqueeInteraction();
           } else {
-            fullCards = cardsHtmlArr.join('') + cardsHtmlArr.join('');
+            marqueeContainer.classList.add('hidden');
           }
-
-          marqueeTrack.innerHTML = fullCards;
-          marqueeContainer.classList.remove('hidden');
-          setupMarqueeInteraction();
         }
       }
     }
@@ -1120,7 +1168,7 @@
       function rotX(p, s, c){ return {x:p.x, y:p.y*c - p.z*s, z:p.y*s + p.z*c}; }
       function draw(){
         rot += 0.0007; var s = Math.sin(rot), c = Math.cos(rot); ctx.clearRect(0,0,W,H); ctx.save(); ctx.translate(W/2, H/2);
-        var scale = R * DPR, rootStyles = getComputedStyle(document.documentElement), rgbLine = rootStyles.getPropertyValue('--globe-line').trim() || '148,163,184', rgbRing = rootStyles.getPropertyValue('--globe-ring').trim() || '100,116,139', rgbPoint = rootStyles.getPropertyValue('--globe-point').trim() || '71,85,105';
+        var scale = R * DPR, rootStyles = getComputedStyle(document.documentElement), rgbLine = rootStyles.getPropertyValue('--globe-line').trim() || '100,116,139', rgbRing = rootStyles.getPropertyValue('--globe-ring').trim() || '71,85,105', rgbPoint = rootStyles.getPropertyValue('--globe-point').trim() || '30,41,59';
         function proj(p){ var q = rotY(p, s, c); q = rotX(q, tiltS, tiltC); var persp = 1.6 / (1.6 - q.z*0.55); return { X:q.x*scale*persp, Y:q.y*scale*persp, z:q.z, persp: persp }; }
         var sp = pts.map(proj); ctx.lineWidth = 0.65*DPR;
         for(var i=0;i<sp.length;i++){ var a = sp[i]; for(var j=i+1;j<i+9 && j<sp.length;j++){ var b = sp[j], dx=a.X-b.X, dy=a.Y-b.Y, d2 = dx*dx+dy*dy; if(d2 < (scale*0.185)*(scale*0.185)){ var depth = (a.z+b.z)/2, alpha = Math.max(0, (depth+1)/2) * 0.42; ctx.strokeStyle = 'rgba('+rgbLine+','+alpha+')'; ctx.beginPath(); ctx.moveTo(a.X,a.Y); ctx.lineTo(b.X,b.Y); ctx.stroke(); } } }
@@ -1149,10 +1197,7 @@
     window.toggleTheme = function () { document.documentElement.classList.toggle('dark'); document.documentElement.classList.toggle('light'); };
 
     function initScrollAnimations() {
-      window.updateBadges(); 
-      recordVisitOnce(); // زيادة الزيارة (+1) مرة واحدة فقط لكل تحديث
-      fetchLiveStats(); // تحميل وتحديث التعليقات والتقييمات من السيرفر فورياً
-      
+      window.updateBadges(); fetchLiveStats();
       const yr = document.getElementById('year'); if (yr) yr.textContent = new Date().getFullYear();
       var observer = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
