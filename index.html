@@ -41,9 +41,9 @@
     --ink: #17131F; --bg-color: #F4F2F7; --text-color: #17131F; --subtext-color: #625D6B;
     --star-bg: #F4F2F7; --star-opacity: 1; --btn-text-color: #ffffff;
     --card-bg: rgba(255, 255, 255, 0.75); --card-border: rgba(210, 215, 225, 0.3);
-    --globe-line: 160, 170, 185; 
-    --globe-ring: 120, 130, 145;
-    --globe-point: 180, 190, 205; 
+    --globe-line: 100, 116, 139; 
+    --globe-ring: 71, 85, 105;
+    --globe-point: 30, 41, 59; 
     --loader-bg: #F4F2F7;
   }
   * , *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -72,11 +72,27 @@
   #stars-canvas { position: absolute; inset: 0; z-index: 0; opacity: var(--star-opacity); transition: opacity .4s ease; }
   html.light #stars-canvas { opacity: 0; } 
   #hero-section { position: relative; min-height: 85vh; display: flex; flex-direction: column; justify-content: center; }
+  
+  /* خلفية هالة مجسّمة وظل فخم خلف الكرة الكرة في الوضع النهاري */
+  html.light #hero-section::before {
+    content: '';
+    position: absolute;
+    top: 46%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: min(85vw, 580px);
+    height: min(85vw, 580px);
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(30, 41, 59, 0.18) 0%, rgba(100, 116, 139, 0.12) 45%, rgba(226, 232, 240, 0) 72%);
+    filter: blur(40px);
+    z-index: 0;
+    pointer-events: none;
+  }
+  
   #globe { position: absolute; top: 46%; left: 50%; transform: translate(-50%,-50%) scale(0); z-index: 1; opacity: 0; pointer-events: none; }
   .revealed #globe { animation: globeBounce 2.8s ease-in-out 0.1s both; }
   @keyframes globeBounce { 0% { opacity: 0; transform: translate(-50%,-50%) scale(0); } 45% { opacity: 1; transform: translate(-50%,-50%) scale(1.25); } 100% { opacity: 1; transform: translate(-50%,-50%) scale(1); } }
   .floor-glow { position: absolute; left: 50%; bottom: 6%; width: 60%; height: 220px; transform: translateX(-50%); background: radial-gradient(ellipse at center, rgba(255,255,255,.10), rgba(255,255,255,0) 70%); filter: blur(8px); z-index: 1; opacity: 0; pointer-events: none; animation: fadeGlow 3s ease 1.5s forwards; }
-  html.light .floor-glow { background: radial-gradient(ellipse at center, rgba(148, 163, 184, 0.25), rgba(244,242,247,0) 70%); }
+  html.light .floor-glow { background: radial-gradient(ellipse at center, rgba(71, 85, 105, 0.22), rgba(244,242,247,0) 70%); }
   @keyframes fadeGlow { to { opacity: 1; } }
   .animated-title .line { display: block; overflow: hidden; }
   .animated-title .word { display: inline-block; margin-right: 0.22em; transform: translateY(110%); opacity: 0; }
@@ -223,17 +239,45 @@
   </p>
 </div>
 
-<div id="category-modal" class="fixed inset-0 z-[10000] flex items-center justify-center p-4 h-[100dvh] w-screen opacity-0 pointer-events-none transition-opacity duration-300">
-  <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="window.closeCategoryModal()"></div>
-  <div class="glass rounded-3xl max-w-2xl w-full relative z-10 p-6 border border-white/10 shadow-2xl max-h-[85vh] overflow-y-auto">
-    <div class="flex items-center justify-between mb-6 sticky top-0 bg-black/60 backdrop-blur-md p-2 rounded-2xl z-20 border border-white/10">
-      <div>
-        <span id="cat-modal-tag" class="text-[10px] font-bold uppercase text-yellow-400">COLLECTION</span>
-        <h3 id="cat-modal-title" class="font-head font-bold text-2xl text-white">CATEGORY PACKS</h3>
+<!-- مودال العرض المكبّر للكرت (Zoomed Full Image Card Preview) -->
+<div id="preview-modal" class="fixed inset-0 z-[10000] flex items-center justify-center p-3 sm:p-6 h-[100dvh] w-screen opacity-0 pointer-events-none transition-all duration-300">
+  <div class="absolute inset-0 bg-black/90 backdrop-blur-xl" onclick="window.closePreview()"></div>
+  <div class="glass rounded-3xl max-w-lg w-full relative z-10 p-6 sm:p-8 border border-white/20 shadow-2xl flex flex-col justify-between max-h-[92vh] overflow-y-auto" id="preview-card">
+    <button onclick="window.closePreview()" class="absolute top-4 right-4 text-white/60 hover:text-white font-black text-xl z-20">✕</button>
+    
+    <div>
+      <div id="preview-chip-bg" class="w-full h-48 sm:h-60 rounded-2xl p-6 flex flex-col justify-between text-white relative overflow-hidden shadow-2xl border border-white/20 mb-6">
+        <div class="glass-sheen"></div>
+        <div class="flex justify-between items-start relative z-10">
+          <div>
+            <span id="preview-tag" class="text-[11px] font-extrabold tracking-widest uppercase text-yellow-300 bg-black/40 px-3 py-1 rounded-full backdrop-blur-md">VFX PACK</span>
+            <h3 id="preview-title" class="font-head font-black text-2xl sm:text-3xl tracking-wider force-eng mt-3 text-white">BLACK VIP</h3>
+          </div>
+          <span class="font-head font-black text-sm text-yellow-400 tracking-widest">VORTX</span>
+        </div>
+        <div class="flex items-center justify-between relative z-10">
+          <div id="preview-chip" class="w-12 h-8 rounded-lg shadow-inner" style="background: linear-gradient(135deg, #e2e8f0, #94a3b8);"></div>
+          <div class="text-right">
+            <span class="text-[10px] uppercase font-bold text-white/70 block">Price</span>
+            <span id="preview-price-display" class="font-mono text-2xl font-black text-yellow-400">$29</span>
+          </div>
+        </div>
       </div>
-      <button onclick="window.closeCategoryModal()" class="text-white/60 hover:text-white font-bold p-2 text-lg">✕</button>
+      
+      <div class="space-y-2 mb-6 text-left">
+        <h4 class="text-sm font-bold text-white uppercase tracking-wider">Asset Highlights:</h4>
+        <p class="text-xs text-white/70 leading-relaxed font-semibold">Includes full 4K render assets, velocity curve keyframes, custom color adjustment presets, and drag-and-drop support for Premiere Pro & After Effects.</p>
+      </div>
     </div>
-    <div id="cat-modal-grid" class="grid sm:grid-cols-2 gap-4"></div>
+
+    <div class="flex flex-col sm:flex-row gap-3">
+      <div class="button-wrap flex-1" onclick="window.orderCurrentPreviewTelegram()">
+        <div class="btn-3d-style !bg-yellow-500 !border-yellow-400"><span class="!text-black font-extrabold">Buy Now Via Telegram</span></div>
+      </div>
+      <div class="button-wrap flex-1" onclick="window.addPreviewToCart()">
+        <div class="btn-3d-style"><span class="text-yellow-400 font-bold">Add to Cart</span></div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -283,18 +327,6 @@
   </div>
 </div>
 
-<div id="preview-modal" class="fixed inset-0 z-[10000] flex items-center justify-center p-4 h-[100dvh] w-screen opacity-0 pointer-events-none transition-opacity duration-300">
-  <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="window.closePreview()"></div>
-  <div class="glass rounded-3xl max-w-md w-full relative z-10 p-6" id="preview-card">
-    <span id="preview-tag" class="text-[10px] font-bold uppercase text-current opacity-70 force-eng">TAG</span>
-    <h3 id="preview-title" class="font-head font-bold text-2xl mt-1 mb-6 force-eng">TITLE</h3>
-    <div class="flex gap-4">
-      <div class="button-wrap flex-1" onclick="window.showToast('ADDED TO CART'); window.closePreview();"><div class="btn-3d-style"><span data-i18n="add-cart">Add to Cart</span></div></div>
-      <div class="button-wrap flex-1" onclick="window.showToast('DOWNLOADING DEMO...')"><div class="btn-3d-style"><span data-i18n="try-demo">Try Demo</span></div></div>
-    </div>
-  </div>
-</div>
-
 <div id="support-modal" class="fixed inset-0 z-[10000] flex items-center justify-center p-4 h-[100dvh] w-screen opacity-0 pointer-events-none transition-opacity duration-300">
   <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="window.closeSupportModal()"></div>
   <div class="glass rounded-3xl max-w-sm w-full relative z-10 p-6 text-center border-t border-yellow-500/30">
@@ -311,12 +343,12 @@
   <header class="sticky top-0 z-50 w-full">
     <nav class="glass border-b-0 bg-black/40 backdrop-blur-md px-2 sm:px-6">
       <div class="max-w-7xl mx-auto h-20 flex items-center justify-between gap-2">
-        <a href="#top" class="flex items-center gap-2 shrink-0"><span class="text-xl sm:text-2xl vortx-wet-oil-title force-eng">VORTX</span></a>
+        <a href="#top" onclick="window.backToHome()" class="flex items-center gap-2 shrink-0"><span class="text-xl sm:text-2xl vortx-wet-oil-title force-eng">VORTX</span></a>
         
         <ul class="hidden lg:flex items-center gap-10 text-sm font-bold opacity-80 mx-auto">
-          <li><a href="#bundles" data-i18n="nav-bundles" class="hover:text-brandLight transition">Bundles</a></li>
-          <li><a href="#packs" data-i18n="nav-packs" class="hover:text-brandLight transition">Featured Packs</a></li>
-          <li><a href="#categories" data-i18n="nav-categories" class="hover:text-brandLight transition">Categories</a></li>
+          <li><a href="#bundles" onclick="window.backToHome()" data-i18n="nav-bundles" class="hover:text-brandLight transition">Bundles</a></li>
+          <li><a href="#packs" onclick="window.backToHome()" data-i18n="nav-packs" class="hover:text-brandLight transition">Featured Packs</a></li>
+          <li><a href="#categories" onclick="window.backToHome()" data-i18n="nav-categories" class="hover:text-brandLight transition">Categories</a></li>
         </ul>
         
         <div class="flex items-center gap-1.5 sm:gap-2 relative z-50 shrink-0 ml-auto sm:ml-0">
@@ -453,11 +485,11 @@
     </section>
 
     <section id="categories" class="max-w-7xl mx-auto px-4 sm:px-6 py-16 reveal-on-scroll">
-      <div class="mb-10 text-left"><h2 data-i18n="cat-sec-title" class="font-head font-bold text-3xl sm:text-4xl">Categories</h2><p data-i18n="cat-sec-desc" class="font-bold opacity-50 mt-2 text-sm tracking-wide">Select a category to explore editing packs.</p></div>
+      <div class="mb-10 text-left"><h2 data-i18n="cat-sec-title" class="font-head font-bold text-3xl sm:text-4xl">Categories</h2><p data-i18n="cat-sec-desc" class="font-bold opacity-50 mt-2 text-sm tracking-wide">Select a category to explore editing packs in full page view.</p></div>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div id="cat-card-CC" onclick="window.openCategoryModal('CC')" class="cat-card-glass flex items-center justify-between group"><div class="flex items-center gap-5"><div class="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-current font-extrabold text-sm">01</div><div><h3 class="font-head font-black text-2xl tracking-wider force-eng">CC</h3><p class="text-xs font-semibold opacity-60 mt-1" data-i18n="cat-cc-desc">Color Corrections</p></div></div><div class="opacity-60 text-xl font-bold">→</div></div>
-        <div id="cat-card-XML" onclick="window.openCategoryModal('XML')" class="cat-card-glass flex items-center justify-between group"><div class="flex items-center gap-5"><div class="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-current font-extrabold text-sm">02</div><div><h3 class="font-head font-black text-2xl tracking-wider force-eng">XML</h3><p class="text-xs font-semibold opacity-60 mt-1" data-i18n="cat-xml-desc">Project Files</p></div></div><div class="opacity-60 text-xl font-bold">→</div></div>
-        <div id="cat-card-SHAKE" onclick="window.openCategoryModal('SHAKE')" class="cat-card-glass flex items-center justify-between group"><div class="flex items-center gap-5"><div class="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-current font-extrabold text-sm">03</div><div><h3 class="font-head font-black text-2xl tracking-wider force-eng">SHAKE</h3><p class="text-xs font-semibold opacity-60 mt-1" data-i18n="cat-shake-desc">Camera Shake Presets</p></div></div><div class="opacity-60 text-xl font-bold">→</div></div>
+        <div id="cat-card-CC" onclick="window.openCategoryView('CC')" class="cat-card-glass flex items-center justify-between group"><div class="flex items-center gap-5"><div class="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-current font-extrabold text-sm">01</div><div><h3 class="font-head font-black text-2xl tracking-wider force-eng">CC</h3><p class="text-xs font-semibold opacity-60 mt-1" data-i18n="cat-cc-desc">Color Corrections</p></div></div><div class="opacity-60 text-xl font-bold">→</div></div>
+        <div id="cat-card-XML" onclick="window.openCategoryView('XML')" class="cat-card-glass flex items-center justify-between group"><div class="flex items-center gap-5"><div class="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-current font-extrabold text-sm">02</div><div><h3 class="font-head font-black text-2xl tracking-wider force-eng">XML</h3><p class="text-xs font-semibold opacity-60 mt-1" data-i18n="cat-xml-desc">Project Files</p></div></div><div class="opacity-60 text-xl font-bold">→</div></div>
+        <div id="cat-card-SHAKE" onclick="window.openCategoryView('SHAKE')" class="cat-card-glass flex items-center justify-between group"><div class="flex items-center gap-5"><div class="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-current font-extrabold text-sm">03</div><div><h3 class="font-head font-black text-2xl tracking-wider force-eng">SHAKE</h3><p class="text-xs font-semibold opacity-60 mt-1" data-i18n="cat-shake-desc">Camera Shake Presets</p></div></div><div class="opacity-60 text-xl font-bold">→</div></div>
       </div>
     </section>
     <!-- قسم التقييم والتعليق -->
@@ -613,22 +645,25 @@
     </div>
   </section>
 
+  <!-- صفحة مستقلة كاملة تتسع لأكثر من 20 منتج للأقسام (Full Category Products View) -->
   <section id="category-view" class="view view-hidden relative z-10 min-h-screen">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
-      <div class="flex items-center justify-between mb-12">
-        <div><span data-i18n="cat-view-sub" class="text-xs tracking-widest uppercase font-bold text-current opacity-70">Collection</span><h2 id="cat-title" class="font-head font-bold text-4xl mt-3 force-eng">CC</h2></div>
-        <button onclick="window.backToHome()" class="back-btn-pill"><span>←</span> <span data-i18n="back-btn">Back</span></button>
+      <div class="flex items-center justify-between mb-12 pb-6 border-b border-white/10">
+        <div>
+          <span data-i18n="cat-view-sub" class="text-xs tracking-widest uppercase font-bold text-yellow-400">CATEGORY STORE</span>
+          <h2 id="cat-title" class="font-head font-bold text-3xl sm:text-5xl mt-2 force-eng text-white">CC COLLECTION</h2>
+          <p class="text-xs text-white/60 font-semibold mt-1">Explore all premium editing assets and bundles in this collection.</p>
+        </div>
+        <button onclick="window.backToHome()" class="back-btn-pill"><span>←</span> <span data-i18n="back-btn">Back to Home</span></button>
       </div>
-      <div id="cat-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+
+      <div id="cat-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div>
     </div>
   </section>
 
 </div>
 
 <script>
-  // ===============================================
-  // 1. محرك العداد الفاخر (Root Fix For Loader)
-  // ===============================================
   function runVxLoader() {
     const logoWord = document.getElementById('vx-logo-word');
     const barFill = document.getElementById('vx-bar-fill');
@@ -644,13 +679,12 @@
       ).join('');
     }
 
-    const duration = 3800; // 3.8 ثوانٍ متناسقة وسلسة
+    const duration = 3800;
     const startTime = performance.now();
 
     function animateLoader(now) {
       const elapsed = now - startTime;
       const progress = Math.min(elapsed / duration, 1);
-      
       const easeProgress = Math.pow(progress, 0.85); 
       const currentPercent = Math.floor(easeProgress * 100);
 
@@ -678,14 +712,44 @@
 
   window.addEventListener('DOMContentLoaded', runVxLoader);
 
-  // ===============================================
-  // 2. وظائف النظام والتصفح والمودالات
-  // ===============================================
   window.openTelegramOrder = function(planName, price) {
     const telegramUsername = 'wot_5'; 
     const message = `Hey VORTX! I want to purchase the ${planName} package ($${price}).`;
-    const encodedMessage = encodeURIComponent(message);
-    window.open(`https://t.me/${telegramUsername}?text=${encodedMessage}`, '_blank');
+    window.open(`https://t.me/${telegramUsername}?text=${encodeURIComponent(message)}`, '_blank');
+  };
+
+  let currentPreviewItem = { title: "BLACK VIP", tag: "VFX PACK", price: 29 };
+
+  window.openPreview = function(title, tag, price, bg, chip) {
+    currentPreviewItem = { title: title || 'BLACK VIP', tag: tag || 'VFX PACK', price: price || 29 };
+    const modal = document.getElementById('preview-modal');
+    const titleEl = document.getElementById('preview-title');
+    const tagEl = document.getElementById('preview-tag');
+    const priceEl = document.getElementById('preview-price-display');
+    const bgEl = document.getElementById('preview-chip-bg');
+    const chipEl = document.getElementById('preview-chip');
+
+    if (titleEl) titleEl.textContent = currentPreviewItem.title;
+    if (tagEl) tagEl.textContent = currentPreviewItem.tag;
+    if (priceEl) priceEl.textContent = '$' + currentPreviewItem.price;
+    if (bgEl && bg) bgEl.style.background = bg;
+    if (chipEl && chip) chipEl.style.background = chip;
+
+    if (modal) { modal.classList.remove('opacity-0', 'pointer-events-none'); document.body.style.overflow = 'hidden'; }
+  };
+
+  window.closePreview = function() { 
+    const modal = document.getElementById('preview-modal'); 
+    if (modal) { modal.classList.add('opacity-0', 'pointer-events-none'); document.body.style.overflow = ''; } 
+  };
+
+  window.orderCurrentPreviewTelegram = function() {
+    window.openTelegramOrder(currentPreviewItem.title, currentPreviewItem.price);
+  };
+
+  window.addPreviewToCart = function() {
+    window.addToCart(currentPreviewItem.title, currentPreviewItem.title, currentPreviewItem.price, 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=100');
+    window.closePreview();
   };
 
   window.scrollToId = function(id) {
@@ -701,6 +765,50 @@
     const webView = document.getElementById('web-view');
     if (webView) {
       webView.classList.remove('view-hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
+  // فتح صفحة كاملة للأقسام بها أكثر من 15-20 منتج
+  window.openCategoryView = function(catKey) {
+    document.querySelectorAll('.view').forEach(v => v.classList.add('view-hidden'));
+    const catView = document.getElementById('category-view');
+    const catTitle = document.getElementById('cat-title');
+    const catGrid = document.getElementById('cat-grid');
+
+    if (catTitle) catTitle.textContent = catKey + ' COLLECTION';
+
+    const sampleProducts = Array.from({ length: 16 }).map((_, i) => ({
+      id: `${catKey}_item_${i+1}`,
+      title: `${catKey} Asset Vol.${i+1}`,
+      tag: catKey,
+      price: 15 + (i * 3),
+      desc: `High-end 4K ready ${catKey} preset pack tailored for seamless video editing workflows.`
+    }));
+
+    if (catGrid) {
+      catGrid.innerHTML = sampleProducts.map(p => `
+        <div class="glass p-5 rounded-2xl border border-white/10 flex flex-col justify-between hover:border-yellow-500/40 transition-all duration-300 group">
+          <div>
+            <div class="w-full h-36 rounded-xl bg-gradient-to-br from-purple-900/40 to-black border border-white/10 p-4 flex flex-col justify-between mb-4 relative overflow-hidden">
+              <span class="text-[9px] font-bold uppercase tracking-widest text-yellow-400 bg-black/60 px-2 py-0.5 rounded-full w-max">${p.tag}</span>
+              <h4 class="font-head font-black text-lg text-white group-hover:text-yellow-400 transition">${p.title}</h4>
+            </div>
+            <p class="text-xs text-white/60 font-medium mb-4 leading-relaxed">${p.desc}</p>
+          </div>
+          <div class="pt-3 border-t border-white/10 flex items-center justify-between">
+            <span class="font-mono text-lg font-black text-yellow-400">$${p.price}</span>
+            <div class="flex gap-2">
+              <button onclick="window.addToCart('${p.id}', '${p.title}', ${p.price}, 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=100')" class="px-3 py-1.5 rounded-xl bg-white/10 hover:bg-yellow-500 hover:text-black font-bold text-xs transition">Cart</button>
+              <button onclick="window.openTelegramOrder('${p.title}', ${p.price})" class="px-3 py-1.5 rounded-xl bg-yellow-500/20 text-yellow-400 border border-yellow-500/30 font-extrabold text-xs hover:bg-yellow-500 hover:text-black transition">Buy</button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    if (catView) {
+      catView.classList.remove('view-hidden');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
@@ -779,50 +887,6 @@
     
     window.openSupportModal = function() { const m = document.getElementById('support-modal'); if(m) { m.classList.remove('opacity-0', 'pointer-events-none'); lockBody(); } };
     window.closeSupportModal = function() { const m = document.getElementById('support-modal'); if(m) { m.classList.add('opacity-0', 'pointer-events-none'); unlockBody(); } };
-
-    window.openCategoryModal = function(cat) {
-      const modal = document.getElementById('category-modal');
-      const title = document.getElementById('cat-modal-title');
-      const tag = document.getElementById('cat-modal-tag');
-      const grid = document.getElementById('cat-modal-grid');
-      if (title) title.textContent = cat + ' COLLECTION';
-      if (tag) tag.textContent = cat;
-      if (grid) {
-        const packs = [
-          { title: cat + " Master Pack V1", price: "25", desc: "Complete ultimate preset bundle" },
-          { title: cat + " Pro Edits Pack", price: "18", desc: "Top tier professional effects" },
-          { title: cat + " Cinematic Vol. 2", price: "30", desc: "High quality cinematic assets" },
-          { title: cat + " Essential Bundle", price: "15", desc: "Starter essential presets" }
-        ];
-        grid.innerHTML = packs.map(p => `
-          <div class="p-4 bg-white/5 rounded-2xl border border-white/10 flex flex-col justify-between">
-            <div>
-              <span class="text-[10px] text-yellow-400 font-bold uppercase tracking-wider">${cat}</span>
-              <h4 class="text-sm font-bold text-white mt-1">${p.title}</h4>
-              <p class="text-xs text-white/60 mt-1">${p.desc}</p>
-            </div>
-            <div class="flex items-center justify-between mt-4">
-              <span class="text-sm font-mono font-bold text-yellow-400">$${p.price}</span>
-              <button onclick="window.addToCart('${p.title}', '${p.title}', ${p.price}, 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=100')" class="px-3 py-1.5 rounded-lg bg-yellow-500/20 text-yellow-400 border border-yellow-500/30 text-xs font-bold hover:bg-yellow-500 hover:text-black transition">Add to Cart</button>
-            </div>
-          </div>
-        `).join('');
-      }
-      if (modal) { modal.classList.remove('opacity-0', 'pointer-events-none'); lockBody(); }
-    };
-
-    window.closeCategoryModal = function() { const modal = document.getElementById('category-modal'); if (modal) { modal.classList.add('opacity-0', 'pointer-events-none'); unlockBody(); } };
-
-    window.openPreview = function(title, tag) {
-      const modal = document.getElementById('preview-modal');
-      const titleEl = document.getElementById('preview-title');
-      const tagEl = document.getElementById('preview-tag');
-      if (titleEl) titleEl.textContent = title || 'VORTX ASSET';
-      if (tagEl) tagEl.textContent = tag || 'PREMIUM';
-      if (modal) { modal.classList.remove('opacity-0', 'pointer-events-none'); lockBody(); }
-    };
-
-    window.closePreview = function() { const modal = document.getElementById('preview-modal'); if (modal) { modal.classList.add('opacity-0', 'pointer-events-none'); unlockBody(); } };
 
     function renderFavoritesUI() {
       const list = document.getElementById('favorites-list');
@@ -1056,7 +1120,7 @@
       function rotX(p, s, c){ return {x:p.x, y:p.y*c - p.z*s, z:p.y*s + p.z*c}; }
       function draw(){
         rot += 0.0007; var s = Math.sin(rot), c = Math.cos(rot); ctx.clearRect(0,0,W,H); ctx.save(); ctx.translate(W/2, H/2);
-        var scale = R * DPR, rootStyles = getComputedStyle(document.documentElement), rgbLine = rootStyles.getPropertyValue('--globe-line').trim() || '205,210,200', rgbRing = rootStyles.getPropertyValue('--globe-ring').trim() || '190,195,185', rgbPoint = rootStyles.getPropertyValue('--globe-point').trim() || '233,236,228';
+        var scale = R * DPR, rootStyles = getComputedStyle(document.documentElement), rgbLine = rootStyles.getPropertyValue('--globe-line').trim() || '100,116,139', rgbRing = rootStyles.getPropertyValue('--globe-ring').trim() || '71,85,105', rgbPoint = rootStyles.getPropertyValue('--globe-point').trim() || '30,41,59';
         function proj(p){ var q = rotY(p, s, c); q = rotX(q, tiltS, tiltC); var persp = 1.6 / (1.6 - q.z*0.55); return { X:q.x*scale*persp, Y:q.y*scale*persp, z:q.z, persp: persp }; }
         var sp = pts.map(proj); ctx.lineWidth = 0.65*DPR;
         for(var i=0;i<sp.length;i++){ var a = sp[i]; for(var j=i+1;j<i+9 && j<sp.length;j++){ var b = sp[j], dx=a.X-b.X, dy=a.Y-b.Y, d2 = dx*dx+dy*dy; if(d2 < (scale*0.185)*(scale*0.185)){ var depth = (a.z+b.z)/2, alpha = Math.max(0, (depth+1)/2) * 0.42; ctx.strokeStyle = 'rgba('+rgbLine+','+alpha+')'; ctx.beginPath(); ctx.moveTo(a.X,a.Y); ctx.lineTo(b.X,b.Y); ctx.stroke(); } } }
@@ -1068,8 +1132,8 @@
     })();
 
     var translations = {
-      en: { "nav-bundles": "Bundles", "nav-packs": "Featured Packs", "nav-categories": "Categories", "hero-tag": "Digital Assets Hub", "hero-desc": "Explore custom websites reflecting your unique identity, plus premium video editing and design assets.", "hero-btn": "Explore Tiers", "tiers-available": "3 Tiers Available", "explore-packages": "Explore Packages", "packs-title": "Featured Packs", "packs-desc": "Swipe horizontally for endless physical 3D cards interaction", "cat-sec-title": "Categories", "cat-sec-desc": "Select a category to explore editing packs.", "cat-cc-desc": "Color Corrections", "cat-xml-desc": "Project Files", "cat-shake-desc": "Camera Shake Presets", "footer-right": "Crafted for the bold.", "tiers-sub": "Web Solutions", "tiers-title": "Development Tiers", "back-btn": "Back", "tier-starter-desc": "Ideal for creators & small brands looking for a clean, fast, and high-converting landing page.", "tier-pro-desc": "A complete web solution designed to showcase your brand, drive engagement, and convert visitors.", "tier-vip-desc": "The ultimate bespoke digital experience. Advanced visual effects, tailored animations, and priority treatment.", "select-plan": "Buy Now", "cat-view-sub": "Collection", "add-cart": "Add to Cart", "try-demo": "Try Demo", "stat-subscribers": "Satisfied Clients", "stat-views": "Total Visits", "stat-orders": "Quality Guarantee", "stat-rating": "Satisfaction Score", "review-title": "Leave Your Review & Rating", "review-sub": "Share your experience with VORTX Studio", "rating-breakdown": "RATING DISTRIBUTION", "placeholder-name": "Your Name (Optional)...✦˚", "placeholder-comment": "Write your review here (Optional)...✦˚", "plan-s-title": "STARTER", "plan-s-price": "$150", "plan-s-f1": "1 High-Converting Landing Page", "plan-s-f2": "Up to 4 Custom Sections", "plan-s-f3": "Fully Responsive & Mobile-Optimized", "plan-s-f4": "Smooth Basic Animations", "plan-s-f5": "1 Revision Included", "plan-s-del": "Delivery: 7 Days", "plan-p-title": "PREMIUM", "plan-p-price": "$300", "plan-p-f1": "Up to 3 Custom Web Pages", "plan-p-f2": "Up to 8 Designed Sections", "plan-p-f3": "Advanced UI/UX & Interactions", "plan-p-f4": "Social Media & Channel Integration", "plan-p-f5": "3 Revisions Included", "plan-p-del": "Delivery: 7–12 Days", "plan-v-title": "ELITE", "plan-v-price": "$600", "plan-v-f1": "Up to 6 Custom Pages", "plan-v-f2": "Up to 15 Dynamic Sections", "plan-v-f3": "Bespoke 3D & Advanced VFX Effects", "plan-v-f4": "Custom Interactive Elements", "plan-v-f5": "Priority Support & Consultation", "plan-v-del": "Delivery: 15–20 Days" },
-      ar: { "nav-bundles": "الحزم", "nav-packs": "حزم متميزة", "nav-categories": "الأقسام", "hero-tag": "مركز الأصول الرقمية", "hero-desc": "تصفّح لتستكشف مشاريع ومواقع ويب تجسّد هويتك، إلى جانب أحدث حزم ومستلزمات المونتاج وتصميم المقاطع.", "hero-btn": "استكشف الباقات", "tiers-available": "3 مستويات متاحة", "explore-packages": "استكشف الباقات", "packs-title": "الحزم المتميزة", "packs-desc": "اسحب يميناً ويساراً للتنقل بين البطاقات ثلاثية الأبعاد", "cat-sec-title": "الأقسام", "cat-sec-desc": "اختر قسماً لاستكشاف حزم التعديل المتاحة.", "cat-cc-desc": "تصحيح الألوان", "cat-xml-desc": "ملفات المشروع", "cat-shake-desc": "إعدادات اهتزاز الكاميرا", "footer-right": "صُنع للمبدعين والجرآء.", "tiers-sub": "حلول الويب", "tiers-title": "مستويات التطوير", "back-btn": "العودة", "tier-starter-desc": "مثالي للمبدعين والعلامات التجارية الصغيرة للحصول على صفحة هبوط سريعة واحترافية.", "tier-pro-desc": "حل ويب متكامل لمستواك يعرض علامتك التجارية ويزيد التفاعل والعملاء.", "tier-vip-desc": "تجربة رقمية فريدة وخاصة بالكامل. مؤثرات بصرية متقدمة وأولوية في الدعم.", "select-plan": "شراء الآن", "cat-view-sub": "المجموعة", "add-cart": "إضافة للسلة", "try-demo": "تجربة العرض", "stat-subscribers": "عملاء راضون", "stat-views": "إجمالي الزيارات", "stat-orders": "ضمان الجودة", "stat-rating": "معدل التقييم", "review-title": "اترك تقييمك ورأيك", "review-sub": "شاركونا تجربتكم مع فورتكس ستوديو", "rating-breakdown": "توزيع التقييمات", "placeholder-name": "اسمك (اختياري)...✦˚", "placeholder-comment": "اكتب تعليقك هنا (اختياري)...✦˚", "plan-s-title": "البداية", "plan-s-price": "150$", "plan-s-f1": "صفحة هبوط احترافية عالي التحويل", "plan-s-f2": "حتى 4 أقسام مخصصة", "plan-s-f3": "متوافق بالكامل مع الجوال والشاشات", "plan-s-f4": "تحريكات أساسية سلسة", "plan-s-f5": "تعديل واحد مشمول", "plan-s-del": "التسليم: 7 أيام", "plan-p-title": "المميزة", "plan-p-price": "300$", "plan-p-f1": "حتى 3 صفحات ويب مخصصة", "plan-p-f2": "حتى 8 أقسام مصممة", "plan-p-f3": "واجهة وتفاعلات متقدمة", "plan-p-f4": "ربط شبكات التواصل والقنوات", "plan-p-f5": "3 تعديلات مشمولة", "plan-p-del": "التسليم: 7-12 يوم", "plan-v-title": "النخبة", "plan-v-price": "600$", "plan-v-f1": "حتى 6 صفحات مخصصة", "plan-v-f2": "حتى 15 قسم تفاعلي", "plan-v-f3": "تصميم 3D ومؤثرات بصرية خاصة", "plan-v-f4": "عناصر تفاعلية مخصصة", "plan-v-f5": "أولوية الدعم والاستشارات", "plan-v-del": "التسليم: 15-20 يوم" }
+      en: { "nav-bundles": "Bundles", "nav-packs": "Featured Packs", "nav-categories": "Categories", "hero-tag": "Digital Assets Hub", "hero-desc": "Explore custom websites reflecting your unique identity, plus premium video editing and design assets.", "hero-btn": "Explore Tiers", "tiers-available": "3 Tiers Available", "explore-packages": "Explore Packages", "packs-title": "Featured Packs", "packs-desc": "Swipe horizontally for endless physical 3D cards interaction", "cat-sec-title": "Categories", "cat-sec-desc": "Select a category to explore editing packs in full page view.", "cat-cc-desc": "Color Corrections", "cat-xml-desc": "Project Files", "cat-shake-desc": "Camera Shake Presets", "footer-right": "Crafted for the bold.", "tiers-sub": "Web Solutions", "tiers-title": "Development Tiers", "back-btn": "Back", "tier-starter-desc": "Ideal for creators & small brands looking for a clean, fast, and high-converting landing page.", "tier-pro-desc": "A complete web solution designed to showcase your brand, drive engagement, and convert visitors.", "tier-vip-desc": "The ultimate bespoke digital experience. Advanced visual effects, tailored animations, and priority treatment.", "select-plan": "Buy Now", "cat-view-sub": "CATEGORY STORE", "add-cart": "Add to Cart", "try-demo": "Try Demo", "stat-subscribers": "Satisfied Clients", "stat-views": "Total Visits", "stat-orders": "Quality Guarantee", "stat-rating": "Satisfaction Score", "review-title": "Leave Your Review & Rating", "review-sub": "Share your experience with VORTX Studio", "rating-breakdown": "RATING DISTRIBUTION", "placeholder-name": "Your Name (Optional)...✦˚", "placeholder-comment": "Write your review here (Optional)...✦˚", "plan-s-title": "STARTER", "plan-s-price": "$150", "plan-s-f1": "1 High-Converting Landing Page", "plan-s-f2": "Up to 4 Custom Sections", "plan-s-f3": "Fully Responsive & Mobile-Optimized", "plan-s-f4": "Smooth Basic Animations", "plan-s-f5": "1 Revision Included", "plan-s-del": "Delivery: 7 Days", "plan-p-title": "PREMIUM", "plan-p-price": "$300", "plan-p-f1": "Up to 3 Custom Web Pages", "plan-p-f2": "Up to 8 Designed Sections", "plan-p-f3": "Advanced UI/UX & Interactions", "plan-p-f4": "Social Media & Channel Integration", "plan-p-f5": "3 Revisions Included", "plan-p-del": "Delivery: 7–12 Days", "plan-v-title": "ELITE", "plan-v-price": "$600", "plan-v-f1": "Up to 6 Custom Pages", "plan-v-f2": "Up to 15 Dynamic Sections", "plan-v-f3": "Bespoke 3D & Advanced VFX Effects", "plan-v-f4": "Custom Interactive Elements", "plan-v-f5": "Priority Support & Consultation", "plan-v-del": "Delivery: 15–20 Days" },
+      ar: { "nav-bundles": "الحزم", "nav-packs": "حزم متميزة", "nav-categories": "الأقسام", "hero-tag": "مركز الأصول الرقمية", "hero-desc": "تصفّح لتستكشف مشاريع ومواقع ويب تجسّد هويتك، إلى جانب أحدث حزم ومستلزمات المونتاج وتصميم المقاطع.", "hero-btn": "استكشف الباقات", "tiers-available": "3 مستويات متاحة", "explore-packages": "استكشف الباقات", "packs-title": "الحزم المتميزة", "packs-desc": "اسحب يميناً ويساراً للتنقل بين البطاقات ثلاثية الأبعاد", "cat-sec-title": "الأقسام", "cat-sec-desc": "اختر قسماً لاستكشاف حزم التعديل المتاحة في صفحة كاملة.", "cat-cc-desc": "تصحيح الألوان", "cat-xml-desc": "ملفات المشروع", "cat-shake-desc": "إعدادات اهتزاز الكاميرا", "footer-right": "صُنع للمبدعين والجرآء.", "tiers-sub": "حلول الويب", "tiers-title": "مستويات التطوير", "back-btn": "العودة", "tier-starter-desc": "مثالي للمبدعين والعلامات التجارية الصغيرة للحصول على صفحة هبوط سريعة واحترافية.", "tier-pro-desc": "حل ويب متكامل لمستواك يعرض علامتك التجارية ويزيد التفاعل والعملاء.", "tier-vip-desc": "تجربة رقمية فريدة وخاصة بالكامل. مؤثرات بصرية متقدمة وأولوية في الدعم.", "select-plan": "شراء الآن", "cat-view-sub": "متجر الأقسام", "add-cart": "إضافة للسلة", "try-demo": "تجربة العرض", "stat-subscribers": "عملاء راضون", "stat-views": "إجمالي الزيارات", "stat-orders": "ضمان الجودة", "stat-rating": "معدل التقييم", "review-title": "اترك تقييمك ورأيك", "review-sub": "شاركونا تجربتكم مع فورتكس ستوديو", "rating-breakdown": "توزيع التقييمات", "placeholder-name": "اسمك (اختياري)...✦˚", "placeholder-comment": "اكتب تعليقك هنا (اختياري)...✦˚", "plan-s-title": "البداية", "plan-s-price": "150$", "plan-s-f1": "صفحة هبوط احترافية عالي التحويل", "plan-s-f2": "حتى 4 أقسام مخصصة", "plan-s-f3": "متوافق بالكامل مع الجوال والشاشات", "plan-s-f4": "تحريكات أساسية سلسة", "plan-s-f5": "تعديل واحد مشمول", "plan-s-del": "التسليم: 7 أيام", "plan-p-title": "المميزة", "plan-p-price": "300$", "plan-p-f1": "حتى 3 صفحات ويب مخصصة", "plan-p-f2": "حتى 8 أقسام مصممة", "plan-p-f3": "واجهة وتفاعلات متقدمة", "plan-p-f4": "ربط شبكات التواصل والقنوات", "plan-p-f5": "3 تعديلات مشمولة", "plan-p-del": "التسليم: 7-12 يوم", "plan-v-title": "النخبة", "plan-v-price": "600$", "plan-v-f1": "حتى 6 صفحات مخصصة", "plan-v-f2": "حتى 15 قسم تفاعلي", "plan-v-f3": "تصميم 3D ومؤثرات بصرية خاصة", "plan-v-f4": "عناصر تفاعلية مخصصة", "plan-v-f5": "أولوية الدعم والاستشارات", "plan-v-del": "التسليم: 15-20 يوم" }
     };
     
     var currentLang = 'en';
@@ -1115,11 +1179,11 @@
 document.addEventListener('DOMContentLoaded', function() {
   "use strict";
   window.CARDS_DATA_CURRENT = [
-    { title: "BLACK VIP", tag: "VFX PACK", number: "•••• 8829", bg: "linear-gradient(135deg, #09090b 0%, #18181b 50%, #27272a 100%)", border: "rgba(255, 255, 255, 0.2)", chip: "linear-gradient(135deg, #e2e8f0, #94a3b8)" },
-    { title: "ROYAL GOLD", tag: "COLOR GRADE", number: "•••• 4021", bg: "linear-gradient(135deg, #451a03 0%, #78350f 50%, #b45309 100%)", border: "rgba(251, 191, 36, 0.4)", chip: "linear-gradient(135deg, #fef08a, #ca8a04)" },
-    { title: "CYBER CYAN", tag: "PRESET FILE", number: "•••• 9102", bg: "linear-gradient(135deg, #083344 0%, #0e7490 50%, #06b6d4 100%)", border: "rgba(34, 211, 238, 0.4)", chip: "linear-gradient(135deg, #cffafe, #0891b2)" },
-    { title: "NEON PURPLE", tag: "VELOCITY XML", number: "•••• 7731", bg: "linear-gradient(135deg, #3b0764 0%, #6b21a8 50%, #9333ea 100%)", border: "rgba(192, 132, 252, 0.4)", chip: "linear-gradient(135deg, #f3e8ff, #7e22ce)" },
-    { title: "EMERALD 3D", tag: "CAMERA SHAKE", number: "•••• 5510", bg: "linear-gradient(135deg, #022c22 0%, #065f46 50%, #059669 100%)", border: "rgba(52, 211, 153, 0.4)", chip: "linear-gradient(135deg, #d1fae5, #059669)" }
+    { title: "BLACK VIP", tag: "VFX PACK", number: "•••• 8829", price: 29, bg: "linear-gradient(135deg, #09090b 0%, #18181b 50%, #27272a 100%)", border: "rgba(255, 255, 255, 0.2)", chip: "linear-gradient(135deg, #e2e8f0, #94a3b8)" },
+    { title: "ROYAL GOLD", tag: "COLOR GRADE", number: "•••• 4021", price: 35, bg: "linear-gradient(135deg, #451a03 0%, #78350f 50%, #b45309 100%)", border: "rgba(251, 191, 36, 0.4)", chip: "linear-gradient(135deg, #fef08a, #ca8a04)" },
+    { title: "CYBER CYAN", tag: "PRESET FILE", number: "•••• 9102", price: 25, bg: "linear-gradient(135deg, #083344 0%, #0e7490 50%, #06b6d4 100%)", border: "rgba(34, 211, 238, 0.4)", chip: "linear-gradient(135deg, #cffafe, #0891b2)" },
+    { title: "NEON PURPLE", tag: "VELOCITY XML", number: "•••• 7731", price: 19, bg: "linear-gradient(135deg, #3b0764 0%, #6b21a8 50%, #9333ea 100%)", border: "rgba(192, 132, 252, 0.4)", chip: "linear-gradient(135deg, #f3e8ff, #7e22ce)" },
+    { title: "EMERALD 3D", tag: "CAMERA SHAKE", number: "•••• 5510", price: 22, bg: "linear-gradient(135deg, #022c22 0%, #065f46 50%, #059669 100%)", border: "rgba(52, 211, 153, 0.4)", chip: "linear-gradient(135deg, #d1fae5, #059669)" }
   ];
   var stage = document.getElementById('carousel-stage'), track = document.getElementById('carousel-track');
   if (!stage || !track) return;
@@ -1131,11 +1195,11 @@ document.addEventListener('DOMContentLoaded', function() {
     window.CARDS_DATA_CURRENT.forEach(function (data, i) {
       var card = document.createElement('div');
       card.className = 'card-3d'; card.style.background = data.bg; card.style.border = '1px solid ' + data.border;
-      card.innerHTML = '<div class="glass-sheen"></div><div class="p-6 h-full flex flex-col justify-between text-white relative z-10 pointer-events-none"><div class="flex justify-between items-start"><div><p class="text-[10px] font-bold tracking-widest uppercase opacity-80 text-white">' + data.tag + '</p><h3 class="font-head font-extrabold text-xl tracking-wider force-eng mt-1 text-white">' + data.title + '</h3></div><span class="font-head font-bold text-xs opacity-70 text-white">VORTX</span></div><div class="my-auto flex items-center justify-between"><div class="w-10 h-7 rounded-md" style="background:' + data.chip + '"></div><div class="flex -space-x-2 opacity-80"><div class="w-6 h-6 rounded-full bg-white/20 border border-white/30 backdrop-blur-sm"></div><div class="w-6 h-6 rounded-full bg-white/40 border border-white/30 backdrop-blur-sm"></div></div></div><div class="flex justify-between items-end font-mono text-sm tracking-widest text-white/90"><span>' + data.number + '</span><span class="font-head font-bold text-xs">PHYSICAL 3D</span></div></div>';
+      card.innerHTML = '<div class="glass-sheen"></div><div class="p-6 h-full flex flex-col justify-between text-white relative z-10 pointer-events-none"><div class="flex justify-between items-start"><div><p class="text-[10px] font-bold tracking-widest uppercase opacity-80 text-white">' + data.tag + '</p><h3 class="font-head font-extrabold text-xl tracking-wider force-eng mt-1 text-white">' + data.title + '</h3></div><span class="font-head font-bold text-xs opacity-70 text-white">VORTX</span></div><div class="my-auto flex items-center justify-between"><div class="w-10 h-7 rounded-md" style="background:' + data.chip + '"></div><div class="flex -space-x-2 opacity-80"><div class="w-6 h-6 rounded-full bg-white/20 border border-white/30 backdrop-blur-sm"></div><div class="w-6 h-6 rounded-full bg-white/40 border border-white/30 backdrop-blur-sm"></div></div></div><div class="flex justify-between items-end font-mono text-sm tracking-widest text-white/90"><span>' + data.number + '</span><span class="font-head font-bold text-xs">$'+ (data.price||29) +'</span></div></div>';
       card.addEventListener('click', function () {
         if (Math.abs(dragDeltaX) < 8) {
           var normCurrent = ((Math.round(currentIndex) % N) + N) % N;
-          if (i === normCurrent) { window.openPreview(data.title, data.tag); } else {
+          if (i === normCurrent) { window.openPreview(data.title, data.tag, data.price, data.bg, data.chip); } else {
             var diff = (i - normCurrent + N) % N;
             if (diff > N / 2) diff -= N;
             targetIndex = currentIndex + diff;
@@ -1154,25 +1218,25 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     const catDataMap = {
       'CC': [
-        { title: "BLACK VIP", tag: "CC PACK", number: "•••• 8829", bg: "linear-gradient(135deg, #09090b 0%, #18181b 50%, #27272a 100%)", border: "rgba(255, 255, 255, 0.2)", chip: "linear-gradient(135deg, #e2e8f0, #94a3b8)" },
-        { title: "ROYAL GOLD", tag: "COLOR GRADE", number: "•••• 4021", bg: "linear-gradient(135deg, #451a03 0%, #78350f 50%, #b45309 100%)", border: "rgba(251, 191, 36, 0.4)", chip: "linear-gradient(135deg, #fef08a, #ca8a04)" },
-        { title: "SOFT VINTAGE", tag: "FILM CC", number: "•••• 3319", bg: "linear-gradient(135deg, #291d18 0%, #432818 50%, #99582a 100%)", border: "rgba(245, 158, 11, 0.4)", chip: "linear-gradient(135deg, #ffe6a7, #bb9457)" },
-        { title: "CYBER CYAN", tag: "NEON CC", number: "•••• 9102", bg: "linear-gradient(135deg, #083344 0%, #0e7490 50%, #06b6d4 100%)", border: "rgba(34, 211, 238, 0.4)", chip: "linear-gradient(135deg, #cffafe, #0891b2)" },
-        { title: "DARK MOOD", tag: "CINEMATIC CC", number: "•••• 1042", bg: "linear-gradient(135deg, #111827 0%, #1f2937 50%, #374151 100%)", border: "rgba(156, 163, 175, 0.4)", chip: "linear-gradient(135deg, #f3f4f6, #6b7280)" }
+        { title: "BLACK VIP", tag: "CC PACK", number: "•••• 8829", price: 29, bg: "linear-gradient(135deg, #09090b 0%, #18181b 50%, #27272a 100%)", border: "rgba(255, 255, 255, 0.2)", chip: "linear-gradient(135deg, #e2e8f0, #94a3b8)" },
+        { title: "ROYAL GOLD", tag: "COLOR GRADE", number: "•••• 4021", price: 35, bg: "linear-gradient(135deg, #451a03 0%, #78350f 50%, #b45309 100%)", border: "rgba(251, 191, 36, 0.4)", chip: "linear-gradient(135deg, #fef08a, #ca8a04)" },
+        { title: "SOFT VINTAGE", tag: "FILM CC", number: "•••• 3319", price: 20, bg: "linear-gradient(135deg, #291d18 0%, #432818 50%, #99582a 100%)", border: "rgba(245, 158, 11, 0.4)", chip: "linear-gradient(135deg, #ffe6a7, #bb9457)" },
+        { title: "CYBER CYAN", tag: "NEON CC", number: "•••• 9102", price: 25, bg: "linear-gradient(135deg, #083344 0%, #0e7490 50%, #06b6d4 100%)", border: "rgba(34, 211, 238, 0.4)", chip: "linear-gradient(135deg, #cffafe, #0891b2)" },
+        { title: "DARK MOOD", tag: "CINEMATIC CC", number: "•••• 1042", price: 22, bg: "linear-gradient(135deg, #111827 0%, #1f2937 50%, #374151 100%)", border: "rgba(156, 163, 175, 0.4)", chip: "linear-gradient(135deg, #f3f4f6, #6b7280)" }
       ],
       'XML': [
-        { title: "BLACK VIP", tag: "VFX PACK", number: "•••• 8829", bg: "linear-gradient(135deg, #09090b 0%, #18181b 50%, #27272a 100%)", border: "rgba(255, 255, 255, 0.2)", chip: "linear-gradient(135deg, #e2e8f0, #94a3b8)" },
-        { title: "ROYAL GOLD", tag: "COLOR GRADE", number: "•••• 4021", bg: "linear-gradient(135deg, #451a03 0%, #78350f 50%, #b45309 100%)", border: "rgba(251, 191, 36, 0.4)", chip: "linear-gradient(135deg, #fef08a, #ca8a04)" },
-        { title: "CYBER CYAN", tag: "PRESET FILE", number: "•••• 9102", bg: "linear-gradient(135deg, #083344 0%, #0e7490 50%, #06b6d4 100%)", border: "rgba(34, 211, 238, 0.4)", chip: "linear-gradient(135deg, #cffafe, #0891b2)" },
-        { title: "NEON PURPLE", tag: "VELOCITY XML", number: "•••• 7731", bg: "linear-gradient(135deg, #3b0764 0%, #6b21a8 50%, #9333ea 100%)", border: "rgba(192, 132, 252, 0.4)", chip: "linear-gradient(135deg, #f3e8ff, #7e22ce)" },
-        { title: "EMERALD 3D", tag: "CAMERA SHAKE", number: "•••• 5510", bg: "linear-gradient(135deg, #022c22 0%, #065f46 50%, #059669 100%)", border: "rgba(52, 211, 153, 0.4)", chip: "linear-gradient(135deg, #d1fae5, #059669)" }
+        { title: "BLACK VIP", tag: "VFX PACK", number: "•••• 8829", price: 29, bg: "linear-gradient(135deg, #09090b 0%, #18181b 50%, #27272a 100%)", border: "rgba(255, 255, 255, 0.2)", chip: "linear-gradient(135deg, #e2e8f0, #94a3b8)" },
+        { title: "ROYAL GOLD", tag: "COLOR GRADE", number: "•••• 4021", price: 35, bg: "linear-gradient(135deg, #451a03 0%, #78350f 50%, #b45309 100%)", border: "rgba(251, 191, 36, 0.4)", chip: "linear-gradient(135deg, #fef08a, #ca8a04)" },
+        { title: "CYBER CYAN", tag: "PRESET FILE", number: "•••• 9102", price: 25, bg: "linear-gradient(135deg, #083344 0%, #0e7490 50%, #06b6d4 100%)", border: "rgba(34, 211, 238, 0.4)", chip: "linear-gradient(135deg, #cffafe, #0891b2)" },
+        { title: "NEON PURPLE", tag: "VELOCITY XML", number: "•••• 7731", price: 19, bg: "linear-gradient(135deg, #3b0764 0%, #6b21a8 50%, #9333ea 100%)", border: "rgba(192, 132, 252, 0.4)", chip: "linear-gradient(135deg, #f3e8ff, #7e22ce)" },
+        { title: "EMERALD 3D", tag: "CAMERA SHAKE", number: "•••• 5510", price: 22, bg: "linear-gradient(135deg, #022c22 0%, #065f46 50%, #059669 100%)", border: "rgba(52, 211, 153, 0.4)", chip: "linear-gradient(135deg, #d1fae5, #059669)" }
       ],
       'SHAKE': [
-        { title: "WARP SHAKE", tag: "MOTION PRESET", number: "•••• 6620", bg: "linear-gradient(135deg, #450a0a 0%, #7f1d1d 50%, #dc2626 100%)", border: "rgba(248, 113, 113, 0.4)", chip: "linear-gradient(135deg, #fee2e2, #b91c1c)" },
-        { title: "3D TILT SHAKE", tag: "CAMERA PRESET", number: "•••• 4412", bg: "linear-gradient(135deg, #14532d 0%, #166534 50%, #15803d 100%)", border: "rgba(74, 222, 128, 0.4)", chip: "linear-gradient(135deg, #dcfce7, #15803d)" },
-        { title: "SMOOTH DRIFT", tag: "SHAKE PACK", number: "•••• 8821", bg: "linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4338ca 100%)", border: "rgba(129, 140, 248, 0.4)", chip: "linear-gradient(135deg, #e0e7ff, #4338ca)" },
-        { title: "IMPACT HIT", tag: "VFX SHAKE", number: "•••• 9901", bg: "linear-gradient(135deg, #701a75 0%, #86198f 50%, #a21caf 100%)", border: "rgba(240, 171, 252, 0.4)", chip: "linear-gradient(135deg, #fae8ff, #a21caf)" },
-        { title: "QUAKE 3D", tag: "HEAVY SHAKE", number: "•••• 1109", bg: "linear-gradient(135deg, #2e1065 0%, #4c1d95 50%, #6d28d9 100%)", border: "rgba(167, 139, 250, 0.4)", chip: "linear-gradient(135deg, #ede9fe, #6d28d9)" }
+        { title: "WARP SHAKE", tag: "MOTION PRESET", number: "•••• 6620", price: 24, bg: "linear-gradient(135deg, #450a0a 0%, #7f1d1d 50%, #dc2626 100%)", border: "rgba(248, 113, 113, 0.4)", chip: "linear-gradient(135deg, #fee2e2, #b91c1c)" },
+        { title: "3D TILT SHAKE", tag: "CAMERA PRESET", number: "•••• 4412", price: 28, bg: "linear-gradient(135deg, #14532d 0%, #166534 50%, #15803d 100%)", border: "rgba(74, 222, 128, 0.4)", chip: "linear-gradient(135deg, #dcfce7, #15803d)" },
+        { title: "SMOOTH DRIFT", tag: "SHAKE PACK", number: "•••• 8821", price: 18, bg: "linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4338ca 100%)", border: "rgba(129, 140, 248, 0.4)", chip: "linear-gradient(135deg, #e0e7ff, #4338ca)" },
+        { title: "IMPACT HIT", tag: "VFX SHAKE", number: "•••• 9901", price: 26, bg: "linear-gradient(135deg, #701a75 0%, #86198f 50%, #a21caf 100%)", border: "rgba(240, 171, 252, 0.4)", chip: "linear-gradient(135deg, #fae8ff, #a21caf)" },
+        { title: "QUAKE 3D", tag: "HEAVY SHAKE", number: "•••• 1109", price: 30, bg: "linear-gradient(135deg, #2e1065 0%, #4c1d95 50%, #6d28d9 100%)", border: "rgba(167, 139, 250, 0.4)", chip: "linear-gradient(135deg, #ede9fe, #6d28d9)" }
       ]
     };
     if (catDataMap[cat]) {
