@@ -63,14 +63,14 @@
   html.light .gold-heading { background: linear-gradient(100deg, #17131F 0%, #C49A3A 30%, #17131F 60%, #17131F 100%); background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 4px 12px rgba(196, 154, 58, 0.15)); }
   html.light .glass, html.light .cat-card-glass, html.light .tier-card { background: rgba(255, 255, 255, 0.8) !important; border: 1px solid rgba(203, 213, 225, 0.4) !important; box-shadow: 0 15px 35px -10px rgba(100, 116, 139, 0.08), inset 0 0 20px rgba(255,255,255,0.8) !important; backdrop-filter: blur(24px) !important; }
   
-  /* إصلاح نصوص الكروت في الوضع النهاري لتظل واضحة وحادة على خلفية الكرت الداكنة */
+  /* نصوص الكروت ناصعة وتظهر بوضوح فوق الصورة مباشرة */
   .card-3d .card-info-box h3, .card-3d .card-info-box span, .card-3d .card-tag-badge { color: #ffffff !important; }
-  html.light .card-3d .card-info-box { background: rgba(0, 0, 0, 0.75) !important; border-color: rgba(255,255,255,0.2) !important; }
+  html.light .card-3d .card-info-box { background: rgba(0, 0, 0, 0.8) !important; border-color: rgba(255,255,255,0.2) !important; }
   html.light .card-3d .card-info-box h3 { color: #ffffff !important; text-shadow: 0 2px 4px rgba(0,0,0,0.8); }
   html.light .card-3d .card-info-box span { color: #facc15 !important; text-shadow: 0 2px 4px rgba(0,0,0,0.8); }
-  html.light .card-3d .card-tag-badge { color: #fef08a !important; background: rgba(0,0,0,0.8) !important; }
+  html.light .card-3d .card-tag-badge { color: #fef08a !important; background: rgba(0,0,0,0.85) !important; }
 
-  /* إصلاح شكل التعليقات في الوضع النهاري لتصبح بلون فضي أنيق */
+  /* شكل التعليقات في الوضع النهاري بلون فضي أنيق */
   html.light .container_chat_bot .chat { background-color: #e2e8f0 !important; border: 1px solid #cbd5e1 !important; color: #0f172a !important; }
   html.light .container_chat_bot .container-chat-options { background: linear-gradient(to bottom right, #94a3b8, #cbd5e1, #94a3b8) !important; }
   html.light .container_chat_bot .chat input, html.light .container_chat_bot .chat textarea { color: #0f172a !important; background: rgba(255,255,255,0.6) !important; }
@@ -120,9 +120,11 @@
   .vortx-explore-btn { position: relative; display: inline-flex; flex-direction: column; align-items: center; justify-content: center; padding: 0.85rem 2.2rem; border-radius: 999px; cursor: pointer; background: rgba(15, 15, 20, 0.6); border: 1px solid rgba(255, 255, 255, 0.2); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 25px rgba(226, 232, 240, 0.18); transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); min-width: 220px; text-align: center; }
   .perspective-container { perspective: 1350px; }
   .preserve-3d { transform-style: preserve-3d; }
-  .card-3d { position: absolute; top: 50%; left: 50%; width: 280px; height: 440px; margin-top: -220px; margin-left: -140px; border-radius: 20px; transform-style: preserve-3d; will-change: transform, opacity; cursor: pointer; box-shadow: 0 30px 60px -12px rgba(0,0,0,0.85); overflow: hidden; background-size: cover !important; background-position: center !important; }
-  .card-3d::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0.85) 100%); pointer-events: none; }
-  .glass-sheen { position: absolute; inset: 0; border-radius: 20px; background: linear-gradient(135deg, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0.05) 40%, transparent 60%); pointer-events: none; z-index: 5; }
+
+  /* الكروت ثلاثية الأبعاد بدون أي ضبابية أو غباشة */
+  .card-3d { position: absolute; top: 50%; left: 50%; width: 280px; height: 440px; margin-top: -220px; margin-left: -140px; border-radius: 20px; transform-style: preserve-3d; will-change: transform, opacity; cursor: pointer; box-shadow: 0 30px 60px -12px rgba(0,0,0,0.85); overflow: hidden; background-size: cover !important; background-position: center !important; filter: none !important; }
+  .card-3d::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 60%, rgba(0,0,0,0.85) 100%); pointer-events: none; }
+  .glass-sheen { display: none !important; }
   
   .glass-tab-container { background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%); border: 1px solid rgba(255,255,255,0.15); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3); border-radius: 1.25rem; padding: 0.5rem; display: flex; width: 100%; gap: 0.5rem; }
   .tab-btn { flex: 1; padding: 0.85rem 0; border-radius: 0.875rem; font-family: 'JetBrains Mono', monospace; font-weight: 800; font-size: 1rem; color: var(--text-color); opacity: 0.6; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); background: transparent; border: 1px solid transparent; cursor: pointer; }
@@ -193,13 +195,6 @@
   .container_chat_bot .chat .options .btn-submit i { width: 34px; height: 32px; padding: 6px; background: rgba(0, 0, 0, 0.2); border-radius: 8px; color: #eab308; display: flex; align-items: center; justify-content: center; }
 </style>
 </head>
-<script>
-  if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
-  window.addEventListener('load', function() {
-    window.scrollTo(0, 0);
-    if (window.location.hash) { history.replaceState(null, null, ' '); }
-  });
-</script>
 <body>
 
 <div id="vx-loader">
@@ -211,16 +206,14 @@
   </p>
 </div>
 
-<!-- مودال العرض المكبّر للكرت - احتواء كامل للمكونات داخل إطار الكرت 9:16 -->
+<!-- مودال العرض المكبّر للكرت مع إتاحة الترجمة -->
 <div id="preview-modal" class="fixed inset-0 z-[10000] flex items-center justify-center p-3 sm:p-6 h-[100dvh] w-screen opacity-0 pointer-events-none transition-all duration-300">
   <div class="absolute inset-0 bg-black/90 backdrop-blur-xl" onclick="window.closePreview()"></div>
   <div class="glass rounded-3xl max-w-xs sm:max-w-sm w-full relative z-10 p-4 sm:p-5 border border-white/20 shadow-2xl flex flex-col justify-between max-h-[92vh] overflow-y-auto" id="preview-card">
     <button onclick="window.closePreview()" class="absolute top-3 right-3 text-white/80 hover:text-white font-black text-lg z-30 bg-black/70 w-8 h-8 rounded-full flex items-center justify-center border border-white/20">✕</button>
     
     <div>
-      <!-- إطار الكرت بنسبة 9:16 بداخل الحدود تماماً -->
       <div id="preview-chip-bg" class="aspect-[9/16] w-full max-w-[270px] mx-auto rounded-2xl p-4 flex flex-col justify-between text-white relative overflow-hidden shadow-2xl border border-white/20 mb-4 bg-cover bg-center bg-black">
-        <div class="glass-sheen"></div>
         
         <div class="flex justify-between items-start relative z-10 w-full">
           <span id="preview-tag" class="text-[9px] font-black tracking-widest uppercase text-yellow-300 bg-black/80 px-2.5 py-1 rounded-full backdrop-blur-md border border-white/10 card-tag-badge">CC PACK</span>
@@ -238,17 +231,16 @@
       </div>
       
       <div class="space-y-1 mb-4 text-center">
-        <p class="text-[11px] text-white/70 leading-relaxed font-semibold">Includes full 4K vertical preset assets, color grade curves, and instant Payhip download integration.</p>
+        <p class="text-[11px] text-white/70 leading-relaxed font-semibold" data-i18n="preview-desc">Includes full 4K vertical preset assets, color grade curves, and instant Payhip download integration.</p>
       </div>
     </div>
 
-    <!-- أزرار الشراء والمفضلة دون وجود سلة -->
     <div class="flex items-center justify-center gap-3">
       <button type="button" onclick="window.orderCurrentPreviewPayhip()" class="glass-btn-center !m-0 !py-2 !px-6">
-        <span>Buy Now</span>
+        <span data-i18n="buy-now">Buy Now</span>
       </button>
       <button type="button" onclick="window.togglePreviewFavorite()" class="glass-btn-center !bg-white/10 !m-0 !py-2 !px-4">
-        <span id="preview-fav-btn-text" class="text-red-400 font-extrabold">♥ Favorite</span>
+        <span id="preview-fav-btn-text" class="text-red-400 font-extrabold" data-i18n="fav">♥ Favorite</span>
       </button>
     </div>
   </div>
@@ -258,7 +250,7 @@
   <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="window.closeNotificationsModal()"></div>
   <div class="glass rounded-3xl max-w-sm w-full relative z-10 p-6 border border-white/10 shadow-2xl text-left">
     <div class="flex items-center justify-between mb-4">
-      <h3 class="font-head font-bold text-xl text-yellow-400">Notifications</h3>
+      <h3 class="font-head font-bold text-xl text-yellow-400" data-i18n="notifications-title">Notifications</h3>
       <button onclick="window.closeNotificationsModal()" class="text-white/60 hover:text-white font-bold p-1">✕</button>
     </div>
     <div class="space-y-3">
@@ -271,12 +263,11 @@
   </div>
 </div>
 
-<!-- مودال المفضلة - يتيح الشراء الفردي مباشرة -->
 <div id="favorites-modal" class="fixed inset-0 z-[10000] flex items-center justify-center p-4 h-[100dvh] w-screen opacity-0 pointer-events-none transition-opacity duration-300">
   <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="window.closeFavoritesModal()"></div>
   <div class="glass rounded-3xl max-w-md w-full relative z-10 p-6 border border-white/10 shadow-2xl text-left">
     <div class="flex items-center justify-between mb-4">
-      <h3 class="font-head font-bold text-xl text-red-400">Your Favorites</h3>
+      <h3 class="font-head font-bold text-xl text-red-400" data-i18n="favorites-title">Your Favorites</h3>
       <button onclick="window.closeFavoritesModal()" class="text-white/60 hover:text-white font-bold p-1">✕</button>
     </div>
     <div id="favorites-list" class="space-y-3 max-h-[350px] overflow-y-auto pr-1"></div>
@@ -303,7 +294,6 @@
             <span class="absolute top-1 right-1 w-2 h-2 bg-yellow-400 rounded-full animate-ping"></span>
           </button>
 
-          <!-- زر المفضلة بدون سلة الشراء -->
           <button type="button" onclick="window.openFavoritesModal()" title="Favorites" class="nav-btn-item text-current opacity-80 hover:opacity-100 hover:text-red-400 relative">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
             <span id="fav-badge" class="absolute -top-1 -right-1 bg-red-500 text-white text-[9px] font-black w-4 h-4 rounded-full flex items-center justify-center hidden">0</span>
@@ -406,7 +396,6 @@
       </div>
     </section>
 
-    <!-- شريط أزرار الأقسام - تفعيل CC افتراضياً -->
     <div class="w-full max-w-5xl mx-auto px-4 sm:px-6 relative z-40 mb-10 mt-6 reveal-on-scroll">
       <div class="glass-tab-container">
         <button type="button" onclick="window.activateCategoryCards('CC', this)" class="tab-btn active force-eng">CC</button>
@@ -436,7 +425,6 @@
         <div id="cat-card-FREE" onclick="window.openCategoryView('FREE')" class="cat-card-glass flex items-center justify-between group"><div class="flex items-center gap-5"><div class="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-current font-extrabold text-sm">04</div><div><h3 class="font-head font-black text-2xl tracking-wider force-eng">FREE</h3><p class="text-xs font-semibold opacity-60 mt-1" data-i18n="cat-free-desc">Free Sample Assets</p></div></div><div class="opacity-60 text-xl font-bold">→</div></div>
       </div>
     </section>
-    <!-- قسم التقييم والتعليق المعدل للألوان الفضية في النهار -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 py-12 border-t border-white/10 mt-12 reveal-on-scroll">
       
       <div id="reviews-marquee-container" class="w-full mb-12 py-4 glass rounded-2xl hidden hide-scrollbar" dir="ltr" style="touch-action: pan-y;">
@@ -518,7 +506,6 @@
     </footer>
   </main>
 
-  <!-- صفحة باقات الويب -->
   <section id="web-view" class="view view-hidden relative z-10 min-h-screen">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
       <div class="flex items-center justify-between mb-10">
@@ -527,8 +514,6 @@
       </div>
       
       <div class="grid lg:grid-cols-3 gap-6 items-stretch">
-        
-        <!-- STARTER -->
         <div class="vx-price-card card-theme-starter">
           <div>
             <img src="Page 1.png" alt="Starter Tier" class="tier-img-box" />
@@ -546,12 +531,11 @@
           <div class="mt-2 text-center flex flex-col items-center">
             <div class="delivery_text mb-2" data-i18n="plan-s-del">Delivery: 7 Days</div>
             <button type="button" onclick="window.openTelegramOrder('STARTER', 150)" class="glass-btn-center">
-              <span data-i18n="select-plan">Buy Now</span>
+              <span data-i18n="buy-now">Buy Now</span>
             </button>
           </div>
         </div>
 
-        <!-- PREMIUM -->
         <div class="vx-price-card card-theme-premium">
           <div>
             <img src="Page 2.png" alt="Premium Tier" class="tier-img-box" />
@@ -568,12 +552,11 @@
           <div class="mt-2 text-center flex flex-col items-center">
             <div class="delivery_text mb-2" data-i18n="plan-p-del">Delivery: 10–15 Days</div>
             <button type="button" onclick="window.openTelegramOrder('PREMIUM', 300)" class="glass-btn-center">
-              <span data-i18n="select-plan">Buy Now</span>
+              <span data-i18n="buy-now">Buy Now</span>
             </button>
           </div>
         </div>
 
-        <!-- ELITE -->
         <div class="vx-price-card card-theme-elite">
           <div>
             <img src="Page 3.png" alt="Elite Tier" class="tier-img-box" />
@@ -590,7 +573,7 @@
           <div class="mt-2 text-center flex flex-col items-center">
             <div class="delivery_text mb-2" data-i18n="plan-v-del">Delivery: 21–30 Days</div>
             <button type="button" onclick="window.openTelegramOrder('ELITE', 600)" class="glass-btn-center">
-              <span data-i18n="select-plan">Buy Now</span>
+              <span data-i18n="buy-now">Buy Now</span>
             </button>
           </div>
         </div>
@@ -599,14 +582,13 @@
     </div>
   </section>
 
-  <!-- صفحة الأقسام الكاملة (CC / XML / SHAKE / FREE) -->
   <section id="category-view" class="view view-hidden relative z-10 min-h-screen">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
       <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-10 pb-6 border-b border-white/10">
         <div>
           <span data-i18n="cat-view-sub" class="text-xs tracking-widest uppercase font-bold text-yellow-400">CATEGORY STORE</span>
           <h2 id="cat-title" class="font-head font-bold text-2xl sm:text-4xl md:text-5xl mt-1 force-eng text-white tracking-wider leading-tight">CC COLLECTION</h2>
-          <p class="text-xs text-white/60 font-semibold mt-1">Explore all premium editing assets and bundles in this collection.</p>
+          <p class="text-xs text-white/60 font-semibold mt-1" data-i18n="cat-view-desc">Explore all premium editing assets and bundles in this collection.</p>
         </div>
         <button onclick="window.backToHome()" class="back-btn-pill shrink-0"><span>←</span> <span data-i18n="back-btn">Back</span></button>
       </div>
@@ -744,7 +726,7 @@
     }
   };
 
-  // ربط جميع منتجات CC بروابطها المباشرة وصورها بالطول واستعمال اسم Cc1-10.png بصرامة
+  // استخدام صيغة .jpg لملف Cc1-10.jpg المرفوع على جيت هاب
   window.openCategoryView = function(catKey) {
     document.querySelectorAll('.view').forEach(v => v.classList.add('view-hidden'));
     const catView = document.getElementById('category-view');
@@ -762,7 +744,7 @@
         { id: "Cc4", title: "Cc4💜", tag: "CC PACK", price: 5, img: "Cc4.jpg", link: "https://payhip.com/b/lDrPF" },
         { id: "Cc5", title: "Cc5🧡", tag: "CC PACK", price: 5, img: "Cc5.png", link: "https://payhip.com/b/whxGQ" },
         { id: "Cc6", title: "Cc6🤎", tag: "CC PACK", price: 5, img: "Cc6.png", link: "https://payhip.com/b/XjdfY" },
-        { id: "Cc1-10", title: "Cc1-10🏅🔥", tag: "CC BUNDLE", price: 20, img: "Cc1-10.png", link: "https://payhip.com/b/tvErl" }
+        { id: "Cc1-10", title: "Cc1-10🏅🔥", tag: "CC BUNDLE", price: 20, img: "Cc1-10.jpg", link: "https://payhip.com/b/tvErl" }
       ];
     } else {
       const isFree = catKey === 'FREE';
@@ -775,6 +757,9 @@
         link: "https://payhip.com/b/gBzm3"
       }));
     }
+
+    const buyText = (window.translations && window.translations[window.currentLang] && window.translations[window.currentLang]["buy-now"]) || "Buy Now";
+    const favText = (window.translations && window.translations[window.currentLang] && window.translations[window.currentLang]["fav"]) || "♥ Fav";
 
     if (catGrid) {
       catGrid.innerHTML = products.map(p => `
@@ -789,9 +774,9 @@
           <div class="pt-3 border-t border-white/10 flex items-center justify-between">
             <span class="font-mono text-xl font-black text-yellow-400">${p.price === 0 ? 'FREE' : '$' + p.price}</span>
             <div class="flex gap-2">
-              <button onclick="window.toggleFavorite('${p.id}', '${p.title}', '${p.tag}', ${p.price}, '${p.img}', '${p.link}')" class="px-3 py-1.5 rounded-xl bg-white/10 hover:bg-red-500/80 text-red-400 hover:text-white font-bold text-xs transition">♥ Fav</button>
+              <button onclick="window.toggleFavorite('${p.id}', '${p.title}', '${p.tag}', ${p.price}, '${p.img}', '${p.link}')" class="px-3 py-1.5 rounded-xl bg-white/10 hover:bg-red-500/80 text-red-400 hover:text-white font-bold text-xs transition">${favText}</button>
               <button type="button" onclick="window.openPayhipOrder('${p.link}')" class="glass-btn-center !px-4 !py-1.5 !min-w-0">
-                <span>Buy Now</span>
+                <span>${buyText}</span>
               </button>
             </div>
           </div>
@@ -858,11 +843,13 @@
     window.openFavoritesModal = function() { renderFavoritesUI(); const m = document.getElementById('favorites-modal'); if(m) { m.classList.remove('opacity-0', 'pointer-events-none'); lockBody(); } };
     window.closeFavoritesModal = function() { const m = document.getElementById('favorites-modal'); if(m) { m.classList.add('opacity-0', 'pointer-events-none'); unlockBody(); } };
 
-    // عرض عناصر المفضلة مع إتاحة الشراء الفردي مباشرة لكل عنصر
     function renderFavoritesUI() {
       const list = document.getElementById('favorites-list');
       if (!list) return;
       if (favItems.length === 0) { list.innerHTML = `<p class="text-xs text-white/50 text-center py-6">No favorite items saved yet.</p>`; return; }
+      
+      const buyText = (window.translations && window.translations[window.currentLang] && window.translations[window.currentLang]["buy-now"]) || "Buy Now";
+
       list.innerHTML = favItems.map(item => `
         <div class="p-3 bg-white/5 rounded-xl border border-white/10 flex items-center justify-between gap-2">
           <div class="flex items-center gap-3">
@@ -874,7 +861,7 @@
           </div>
           <div class="flex items-center gap-2">
             <button onclick="window.openPayhipOrder('${item.link}')" class="glass-btn-center !px-3 !py-1 !min-w-0 !text-xs">
-              <span>Buy Now</span>
+              <span>${buyText}</span>
             </button>
             <button onclick="window.toggleFavorite('${item.id}', '${item.title}', '${item.tag}', ${item.price}, '${item.img}', '${item.link}')" class="text-red-400 text-xs hover:text-red-300 font-bold p-1">✕</button>
           </div>
@@ -1044,19 +1031,55 @@
       draw();
     })();
 
-    var translations = {
-      en: { "nav-bundles": "Bundles", "nav-packs": "Featured Packs", "nav-categories": "Categories", "hero-tag": "Digital Assets Hub", "hero-desc": "Explore custom websites reflecting your unique identity, plus premium video editing and design assets.", "hero-btn": "Explore Tiers", "tiers-available": "3 Tiers Available", "explore-packages": "Explore Packages", "packs-title": "Featured Packs", "packs-desc": "Swipe horizontally for endless physical 3D cards interaction", "cat-sec-title": "Categories", "cat-sec-desc": "Select a category to explore editing packs in full page view.", "cat-cc-desc": "Color Corrections", "cat-xml-desc": "Project Files", "cat-shake-desc": "Camera Shake Presets", "cat-free-desc": "Free Sample Assets", "footer-right": "Crafted for the bold.", "tiers-sub": "Web Solutions", "tiers-title": "Development Tiers", "back-btn": "Back", "tier-starter-desc": "Ideal for creators & small brands looking for a clean, fast, and high-converting landing page.", "tier-pro-desc": "A complete web solution designed to showcase your brand, drive engagement, and convert visitors.", "tier-vip-desc": "The ultimate bespoke digital experience. Advanced visual effects, tailored animations, and priority treatment.", "select-plan": "Buy Now", "cat-view-sub": "CATEGORY STORE", "try-demo": "Try Demo", "stat-subscribers": "Satisfied Clients", "stat-views": "Total Visits", "stat-orders": "Quality Guarantee", "stat-rating": "Satisfaction Score", "review-title": "Leave Your Review & Rating", "review-sub": "Share your experience with VORTX Studio", "rating-breakdown": "RATING DISTRIBUTION", "placeholder-name": "Your Name (Optional)...✦˚", "placeholder-comment": "Write your review here (Optional)...✦˚" },
-      ar: { "nav-bundles": "الحزم", "nav-packs": "حزم متميزة", "nav-categories": "الأقسام", "hero-tag": "مركز الأصول الرقمية", "hero-desc": "تصفّح لتستكشف مشاريع ومواقع ويب تجسّد هويتك، إلى جانب أحدث حزم ومستلزمات المونتاج وتصميم المقاطع.", "hero-btn": "استكشف الباقات", "tiers-available": "3 مستويات متاحة", "explore-packages": "استكشف الباقات", "packs-title": "الحزم المتميزة", "packs-desc": "اسحب يميناً ويساراً للتنقل بين البطاقات ثلاثية الأبعاد", "cat-sec-title": "الأقسام", "cat-sec-desc": "اختر قسماً لاستكشاف حزم التعديل المتاحة في صفحة كاملة.", "cat-cc-desc": "تصحيح الألوان", "cat-xml-desc": "ملفات المشروع", "cat-shake-desc": "إعدادات اهتزاز الكاميرا", "cat-free-desc": "عينات وأصول مجانية", "footer-right": "صُنع للمبدعين والجرآء.", "tiers-sub": "حلول الويب", "tiers-title": "مستويات التطوير", "back-btn": "العودة", "tier-starter-desc": "مثالي للمبدعين والعلامات التجارية الصغيرة للحصول على صفحة هبوط سريعة واحترافية.", "tier-pro-desc": "حل ويب متكامل لمستواك يعرض علامتك التجارية ويزيد التفاعل والعملاء.", "tier-vip-desc": "تجربة رقمية فريدة وخاصة بالكامل. مؤثرات بصرية متقدمة وأولوية في الدعم.", "select-plan": "شراء الآن", "cat-view-sub": "متجر الأقسام", "try-demo": "تجربة العرض", "stat-subscribers": "عملاء راضون", "stat-views": "إجمالي الزيارات", "stat-orders": "ضمان الجودة", "stat-rating": "معدل التقييم", "review-title": "اترك تقييمك ورأيك", "review-sub": "شاركونا تجربتكم مع فورتكس ستوديو", "rating-breakdown": "توزيع التقييمات", "placeholder-name": "اسمك (اختياري)...✦˚", "placeholder-comment": "اكتب تعليقك هنا (اختياري)...✦˚" }
+    // إتاحة قاموس الترجمة الشامل لكافة أجزاء الموقع
+    window.translations = {
+      en: { 
+        "nav-bundles": "Bundles", "nav-packs": "Featured Packs", "nav-categories": "Categories", 
+        "hero-tag": "Digital Assets Hub", "hero-desc": "Explore custom websites reflecting your unique identity, plus premium video editing and design assets.", 
+        "hero-btn": "Explore Tiers", "tiers-available": "3 Tiers Available", "explore-packages": "Explore Packages", 
+        "packs-title": "Featured Packs", "packs-desc": "Swipe horizontally for endless physical 3D cards interaction", 
+        "cat-sec-title": "Categories", "cat-sec-desc": "Select a category to explore editing packs in full page view.", 
+        "cat-cc-desc": "Color Corrections", "cat-xml-desc": "Project Files", "cat-shake-desc": "Camera Shake Presets", "cat-free-desc": "Free Sample Assets", 
+        "footer-right": "Crafted for the bold.", "tiers-sub": "Web Solutions", "tiers-title": "Development Tiers", "back-btn": "Back", 
+        "tier-starter-desc": "Ideal for creators & small brands looking for a clean, fast, and high-converting landing page.", 
+        "tier-pro-desc": "A complete web solution designed to showcase your brand, drive engagement, and convert visitors.", 
+        "tier-vip-desc": "The ultimate bespoke digital experience. Advanced visual effects, tailored animations, and priority treatment.", 
+        "buy-now": "Buy Now", "fav": "♥ Favorite", "notifications-title": "Notifications", "favorites-title": "Your Favorites",
+        "cat-view-sub": "CATEGORY STORE", "cat-view-desc": "Explore all premium editing assets and bundles in this collection.", "preview-desc": "Includes full 4K vertical preset assets, color grade curves, and instant Payhip download integration.",
+        "stat-subscribers": "Satisfied Clients", "stat-views": "Total Visits", "stat-orders": "Quality Guarantee", "stat-rating": "Satisfaction Score", 
+        "review-title": "Leave Your Review & Rating", "review-sub": "Share your experience with VORTX Studio", "rating-breakdown": "RATING DISTRIBUTION", 
+        "placeholder-name": "Your Name (Optional)...✦˚", "placeholder-comment": "Write your review here (Optional)...✦˚" 
+      },
+      ar: { 
+        "nav-bundles": "الحزم", "nav-packs": "حزم متميزة", "nav-categories": "الأقسام", 
+        "hero-tag": "مركز الأصول الرقمية", "hero-desc": "تصفّح لتستكشف مشاريع ومواقع ويب تجسّد هويتك، إلى جانب أحدث حزم ومستلزمات المونتاج وتصميم المقاطع.", 
+        "hero-btn": "استكشف الباقات", "tiers-available": "3 مستويات متاحة", "explore-packages": "استكشف الباقات", 
+        "packs-title": "الحزم المتميزة", "packs-desc": "اسحب يميناً ويساراً للتنقل بين البطاقات ثلاثية الأبعاد", 
+        "cat-sec-title": "الأقسام", "cat-sec-desc": "اختر قسماً لاستكشاف حزم التعديل المتاحة في صفحة كاملة.", 
+        "cat-cc-desc": "تصحيح الألوان", "cat-xml-desc": "ملفات المشروع", "cat-shake-desc": "إعدادات اهتزاز الكاميرا", "cat-free-desc": "عينات وأصول مجانية", 
+        "footer-right": "صُنع للمبدعين والجرآء.", "tiers-sub": "حلول الويب", "tiers-title": "مستويات التطوير", "back-btn": "العودة", 
+        "tier-starter-desc": "مثالي للمبدعين والعلامات التجارية الصغيرة للحصول على صفحة هبوط سريعة واحترافية.", 
+        "tier-pro-desc": "حل ويب متكامل لمستواك يعرض علامتك التجارية ويزيد التفاعل والعملاء.", 
+        "tier-vip-desc": "تجربة رقمية فريدة وخاصة بالكامل. مؤثرات بصرية متقدمة وأولوية في الدعم.", 
+        "buy-now": "شراء الآن", "fav": "♥ المفضلة", "notifications-title": "الإشعارات", "favorites-title": "المفضلة لديك",
+        "cat-view-sub": "متجر الأقسام", "cat-view-desc": "استكشف جميع حزم وأصول التعديل الاحترافية في هذه المجموعة.", "preview-desc": "يشمل ملفات 4K عمودية، منحنيات الألوان، وتحميل مباشر عبر Payhip.",
+        "stat-subscribers": "عملاء راضون", "stat-views": "إجمالي الزيارات", "stat-orders": "ضمان الجودة", "stat-rating": "معدل التقييم", 
+        "review-title": "اترك تقييمك ورأيك", "review-sub": "شاركونا تجربتكم مع فورتكس ستوديو", "rating-breakdown": "توزيع التقييمات", 
+        "placeholder-name": "اسمك (اختياري)...✦˚", "placeholder-comment": "اكتب تعليقك هنا (اختياري)...✦˚" 
+      }
     };
     
-    var currentLang = 'en';
+    window.currentLang = 'en';
     window.toggleLanguage = function () {
-      currentLang = currentLang === 'en' ? 'ar' : 'en';
+      window.currentLang = window.currentLang === 'en' ? 'ar' : 'en';
       const badgeText = document.getElementById('lang-badge-text');
-      if (badgeText) badgeText.textContent = currentLang === 'en' ? 'AR' : 'EN';
-      var dict = translations[currentLang] || {};
+      if (badgeText) badgeText.textContent = window.currentLang === 'en' ? 'AR' : 'EN';
+      var dict = window.translations[window.currentLang] || {};
       document.querySelectorAll('[data-i18n]').forEach(el => { if (dict[el.getAttribute('data-i18n')]) el.textContent = dict[el.getAttribute('data-i18n')]; });
       document.querySelectorAll('[data-i18n-ph]').forEach(el => { if (dict[el.getAttribute('data-i18n-ph')]) el.setAttribute('placeholder', dict[el.getAttribute('data-i18n-ph')]); });
+      
+      // إعادة تحديث عناصر المفضلة والمستودع باللغة الجديدة
+      renderFavoritesUI();
     };
 
     window.toggleTheme = function () { document.documentElement.classList.toggle('dark'); document.documentElement.classList.toggle('light'); };
@@ -1092,7 +1115,7 @@
 document.addEventListener('DOMContentLoaded', function() {
   "use strict";
 
-  // استخدام اسم الصورة المحدث لملف الجيت هاب Cc1-10.png بوضوح
+  // استخدام الصيغة الصحيحة بالضبط Cc1-10.jpg
   window.CARDS_DATA_CURRENT = [
     { title: "Cc1💛", tag: "CC PACK", price: 5, bg: "url('Cc1.jpg')", border: "rgba(251, 191, 36, 0.4)", chip: "linear-gradient(135deg, #fef08a, #ca8a04)", link: "https://payhip.com/b/gBzm3" },
     { title: "Cc2💙", tag: "CC PACK", price: 5, bg: "url('Cc2.jpg')", border: "rgba(34, 211, 238, 0.4)", chip: "linear-gradient(135deg, #cffafe, #0891b2)", link: "https://payhip.com/b/IB15F" },
@@ -1100,7 +1123,7 @@ document.addEventListener('DOMContentLoaded', function() {
     { title: "Cc4💜", tag: "CC PACK", price: 5, bg: "url('Cc4.jpg')", border: "rgba(192, 132, 252, 0.4)", chip: "linear-gradient(135deg, #f3e8ff, #7e22ce)", link: "https://payhip.com/b/lDrPF" },
     { title: "Cc5🧡", tag: "CC PACK", price: 5, bg: "url('Cc5.png')", border: "rgba(251, 146, 60, 0.4)", chip: "linear-gradient(135deg, #ffedd5, #ea580c)", link: "https://payhip.com/b/whxGQ" },
     { title: "Cc6🤎", tag: "CC PACK", price: 5, bg: "url('Cc6.png')", border: "rgba(217, 119, 6, 0.4)", chip: "linear-gradient(135deg, #fef3c7, #b45309)", link: "https://payhip.com/b/XjdfY" },
-    { title: "Cc1-10🏅🔥", tag: "CC BUNDLE", price: 20, bg: "url('Cc1-10.png')", border: "rgba(234, 179, 8, 0.5)", chip: "linear-gradient(135deg, #fef08a, #ca8a04)", link: "https://payhip.com/b/tvErl" }
+    { title: "Cc1-10🏅🔥", tag: "CC BUNDLE", price: 20, bg: "url('Cc1-10.jpg')", border: "rgba(234, 179, 8, 0.5)", chip: "linear-gradient(135deg, #fef08a, #ca8a04)", link: "https://payhip.com/b/tvErl" }
   ];
 
   var stage = document.getElementById('carousel-stage'), track = document.getElementById('carousel-track');
@@ -1114,8 +1137,7 @@ document.addEventListener('DOMContentLoaded', function() {
       var card = document.createElement('div');
       card.className = 'card-3d'; card.style.background = data.bg; card.style.border = '1px solid ' + data.border;
       
-      // الكرت ثابت وممتاز مع الحفاظ على التباين والنصوص في الأسفل
-      card.innerHTML = '<div class="glass-sheen"></div><div class="p-6 h-full flex flex-col justify-between text-white relative z-10 pointer-events-none"><div class="flex justify-between items-start"><div><p class="text-[10px] font-extrabold tracking-widest uppercase text-yellow-300 bg-black/80 px-2.5 py-1 rounded-full backdrop-blur-md border border-white/10 card-tag-badge">' + data.tag + '</p></div><span class="font-head font-black text-xs text-yellow-400 drop-shadow-md">VORTX</span></div><div class="my-auto flex items-center justify-between"><div class="w-10 h-7 rounded-md shadow-inner border border-white/20" style="background:' + data.chip + '"></div></div><div class="flex justify-between items-end font-mono text-sm tracking-widest bg-black/80 p-3 rounded-xl backdrop-blur-md border border-white/15 card-info-box"><h3 class="font-head font-black text-xl sm:text-2xl text-white drop-shadow-md leading-none">' + data.title + '</h3><span class="font-head font-bold text-sm text-yellow-400 shrink-0">' + (data.price === 0 ? 'FREE' : '$'+data.price) +'</span></div></div>';
+      card.innerHTML = '<div class="p-6 h-full flex flex-col justify-between text-white relative z-10 pointer-events-none"><div class="flex justify-between items-start"><div><p class="text-[10px] font-extrabold tracking-widest uppercase text-yellow-300 bg-black/80 px-2.5 py-1 rounded-full backdrop-blur-md border border-white/10 card-tag-badge">' + data.tag + '</p></div><span class="font-head font-black text-xs text-yellow-400 drop-shadow-md">VORTX</span></div><div class="my-auto flex items-center justify-between"><div class="w-10 h-7 rounded-md shadow-inner border border-white/20" style="background:' + data.chip + '"></div></div><div class="flex justify-between items-end font-mono text-sm tracking-widest bg-black/80 p-3 rounded-xl backdrop-blur-md border border-white/15 card-info-box"><h3 class="font-head font-black text-xl sm:text-2xl text-white drop-shadow-md leading-none">' + data.title + '</h3><span class="font-head font-bold text-sm text-yellow-400 shrink-0">' + (data.price === 0 ? 'FREE' : '$'+data.price) +'</span></div></div>';
       
       card.addEventListener('click', function () {
         if (Math.abs(dragDeltaX) < 8) {
@@ -1145,7 +1167,7 @@ document.addEventListener('DOMContentLoaded', function() {
         { title: "Cc4💜", tag: "CC PACK", price: 5, bg: "url('Cc4.jpg')", border: "rgba(192, 132, 252, 0.4)", chip: "linear-gradient(135deg, #f3e8ff, #7e22ce)", link: "https://payhip.com/b/lDrPF" },
         { title: "Cc5🧡", tag: "CC PACK", price: 5, bg: "url('Cc5.png')", border: "rgba(251, 146, 60, 0.4)", chip: "linear-gradient(135deg, #ffedd5, #ea580c)", link: "https://payhip.com/b/whxGQ" },
         { title: "Cc6🤎", tag: "CC PACK", price: 5, bg: "url('Cc6.png')", border: "rgba(217, 119, 6, 0.4)", chip: "linear-gradient(135deg, #fef3c7, #b45309)", link: "https://payhip.com/b/XjdfY" },
-        { title: "Cc1-10🏅🔥", tag: "CC BUNDLE", price: 20, bg: "url('Cc1-10.png')", border: "rgba(234, 179, 8, 0.5)", chip: "linear-gradient(135deg, #fef08a, #ca8a04)", link: "https://payhip.com/b/tvErl" }
+        { title: "Cc1-10🏅🔥", tag: "CC BUNDLE", price: 20, bg: "url('Cc1-10.jpg')", border: "rgba(234, 179, 8, 0.5)", chip: "linear-gradient(135deg, #fef08a, #ca8a04)", link: "https://payhip.com/b/tvErl" }
       ],
       'XML': [
         { title: "BLACK VIP", tag: "VFX PACK", price: 29, bg: "linear-gradient(135deg, #09090b, #27272a)", border: "rgba(255, 255, 255, 0.2)", chip: "linear-gradient(135deg, #e2e8f0, #94a3b8)", link: "https://payhip.com/b/gBzm3" },
