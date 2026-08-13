@@ -174,22 +174,23 @@
   .check_svg { width: 0.75rem; height: 0.75rem; }
   .list_text { font-size: 0.8rem; font-weight: 600; line-height: 1.25; }
 
+  /* زر الشراء المحسّن - صغير ومحاذى للمنتصف مع لمعة خفيفة */
   .glass-btn-center {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     width: auto;
-    min-width: 140px;
-    padding: 0.5rem 1.5rem;
-    margin: 0.5rem auto 0 auto;
+    min-width: 120px;
+    padding: 0.45rem 1.25rem;
+    margin: 0 auto;
     border-radius: 999px;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.12);
     border: 1px solid rgba(255, 255, 255, 0.25);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     color: #ffffff;
     font-weight: 800;
-    font-size: 0.85rem;
+    font-size: 0.82rem;
     cursor: pointer;
     position: relative;
     overflow: hidden;
@@ -201,7 +202,7 @@
     position: absolute;
     top: 0; left: -100%;
     width: 60%; height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.45), transparent);
     transform: skewX(-20deg);
     transition: left 0.6s ease;
   }
@@ -209,10 +210,10 @@
     left: 150%;
   }
   .glass-btn-center:hover {
-    transform: translateY(-2px) scale(1.03);
-    background: rgba(255, 255, 255, 0.22);
-    border-color: rgba(255, 255, 255, 0.5);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3), inset 0 1px 2px rgba(255,255,255,0.5);
+    transform: translateY(-2px) scale(1.04);
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.6);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35), inset 0 1px 2px rgba(255,255,255,0.5);
   }
   .glass-btn-center:active {
     transform: scale(0.95);
@@ -335,44 +336,44 @@
   </p>
 </div>
 
-<!-- مودال العرض المكبّر للكرت -->
+<!-- مودال العرض المكبّر للكرت - عرض الصورة بالطول بالكامل 1080x1920 -->
 <div id="preview-modal" class="fixed inset-0 z-[10000] flex items-center justify-center p-3 sm:p-6 h-[100dvh] w-screen opacity-0 pointer-events-none transition-all duration-300">
   <div class="absolute inset-0 bg-black/90 backdrop-blur-xl" onclick="window.closePreview()"></div>
-  <div class="glass rounded-3xl max-w-lg w-full relative z-10 p-6 sm:p-8 border border-white/20 shadow-2xl flex flex-col justify-between max-h-[92vh] overflow-y-auto" id="preview-card">
-    <button onclick="window.closePreview()" class="absolute top-4 right-4 text-white/60 hover:text-white font-black text-xl z-20">✕</button>
+  <div class="glass rounded-3xl max-w-sm sm:max-w-md w-full relative z-10 p-5 sm:p-6 border border-white/20 shadow-2xl flex flex-col justify-between max-h-[92vh] overflow-y-auto" id="preview-card">
+    <button onclick="window.closePreview()" class="absolute top-4 right-4 text-white/60 hover:text-white font-black text-xl z-20 bg-black/50 w-8 h-8 rounded-full flex items-center justify-center">✕</button>
     
     <div>
-      <div id="preview-chip-bg" class="w-full h-80 sm:h-96 rounded-2xl p-6 flex flex-col justify-between text-white relative overflow-hidden shadow-2xl border border-white/20 mb-6 bg-cover bg-center">
+      <div id="preview-chip-bg" class="w-full h-[380px] sm:h-[420px] rounded-2xl p-5 flex flex-col justify-between text-white relative overflow-hidden shadow-2xl border border-white/20 mb-5 bg-contain bg-no-repeat bg-center bg-black/40">
         <div class="glass-sheen"></div>
         <div class="flex justify-between items-start relative z-10">
           <div>
-            <span id="preview-tag" class="text-[11px] font-extrabold tracking-widest uppercase text-yellow-300 bg-black/60 px-3 py-1 rounded-full backdrop-blur-md">CC PACK</span>
-            <h3 id="preview-title" class="font-head font-black text-2xl sm:text-3xl tracking-wider force-eng mt-3 text-white drop-shadow-md">Cc1💛</h3>
+            <span id="preview-tag" class="text-[10px] font-extrabold tracking-widest uppercase text-yellow-300 bg-black/70 px-3 py-1 rounded-full backdrop-blur-md">CC PACK</span>
+            <h3 id="preview-title" class="font-head font-black text-xl sm:text-2xl tracking-wider force-eng mt-2 text-white drop-shadow-md">Cc1💛</h3>
           </div>
-          <span class="font-head font-black text-sm text-yellow-400 tracking-widest drop-shadow-md">VORTX</span>
+          <span class="font-head font-black text-xs text-yellow-400 tracking-widest drop-shadow-md">VORTX</span>
         </div>
         <div class="flex items-center justify-between relative z-10">
-          <div id="preview-chip" class="w-12 h-8 rounded-lg shadow-inner" style="background: linear-gradient(135deg, #e2e8f0, #94a3b8);"></div>
-          <div class="text-right bg-black/50 px-3 py-1 rounded-xl backdrop-blur-md">
-            <span class="text-[10px] uppercase font-bold text-white/80 block">Price</span>
-            <span id="preview-price-display" class="font-mono text-2xl font-black text-yellow-400">$5</span>
+          <div id="preview-chip" class="w-10 h-7 rounded-lg shadow-inner" style="background: linear-gradient(135deg, #e2e8f0, #94a3b8);"></div>
+          <div class="text-right bg-black/70 px-3 py-1 rounded-xl backdrop-blur-md border border-white/10">
+            <span class="text-[9px] uppercase font-bold text-white/80 block">Price</span>
+            <span id="preview-price-display" class="font-mono text-xl font-black text-yellow-400">$5</span>
           </div>
         </div>
       </div>
       
-      <div class="space-y-2 mb-6 text-left">
-        <h4 class="text-sm font-bold text-white uppercase tracking-wider">Asset Highlights:</h4>
-        <p class="text-xs text-white/70 leading-relaxed font-semibold">Includes full 4K vertical preset assets, color grade curves, and instant download integration.</p>
+      <div class="space-y-1 mb-5 text-left">
+        <h4 class="text-xs font-bold text-white uppercase tracking-wider">Asset Highlights:</h4>
+        <p class="text-[11px] text-white/70 leading-relaxed font-semibold">Includes full 4K vertical preset assets, color grade curves, and instant Payhip download integration.</p>
       </div>
     </div>
 
-    <div class="flex flex-col sm:flex-row gap-3">
-      <div class="button-wrap flex-1" onclick="window.orderCurrentPreviewTelegram()">
-        <div class="btn-3d-style !bg-yellow-500 !border-yellow-400"><span class="!text-black font-extrabold">Buy Now Via Telegram</span></div>
-      </div>
-      <div class="button-wrap flex-1" onclick="window.addPreviewToCart()">
-        <div class="btn-3d-style"><span class="text-yellow-400 font-bold">Add to Cart</span></div>
-      </div>
+    <div class="flex items-center justify-center gap-3">
+      <button type="button" onclick="window.orderCurrentPreviewPayhip()" class="glass-btn-center !m-0">
+        <span>Buy Now</span>
+      </button>
+      <button type="button" onclick="window.addPreviewToCart()" class="glass-btn-center !bg-white/10 !m-0">
+        <span class="text-yellow-400">Add to Cart</span>
+      </button>
     </div>
   </div>
 </div>
@@ -387,8 +388,8 @@
     <div class="space-y-3">
       <div class="p-3 bg-white/5 rounded-xl border border-white/10">
         <span class="text-[10px] text-purple-400 font-bold uppercase tracking-wider block mb-1">New Drop ✦</span>
-        <h4 class="text-xs font-bold text-white mb-1">Cinematic CC Presets Live</h4>
-        <p class="text-[11px] text-white/70">Check out the full CC collection with vertical preview cards in store!</p>
+        <h4 class="text-xs font-bold text-white mb-1">CC1-10 Bundle Released ($20)</h4>
+        <p class="text-[11px] text-white/70">Check out the full CC bundle on BuyHub now!</p>
       </div>
     </div>
   </div>
@@ -417,8 +418,10 @@
       <span class="text-xs font-bold text-white uppercase">Total Amount:</span>
       <span id="cart-total-price" class="text-lg font-mono font-black text-yellow-400">$0</span>
     </div>
-    <div class="button-wrap w-full" onclick="window.checkoutCartItems()">
-      <div class="btn-3d-style"><span class="text-yellow-400 font-bold">Checkout All Items via Telegram</span></div>
+    <div class="button-wrap w-full flex justify-center" onclick="window.checkoutCartItems()">
+      <button type="button" class="glass-btn-center !min-w-[180px]">
+        <span class="text-yellow-400 font-bold">Checkout All Items</span>
+      </button>
     </div>
   </div>
 </div>
@@ -690,8 +693,8 @@
               <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-s-f5">1 Revision Included</span></li>
             </ul>
           </div>
-          <div class="mt-2 text-center">
-            <div class="delivery_text" data-i18n="plan-s-del">Delivery: 7 Days</div>
+          <div class="mt-2 text-center flex flex-col items-center">
+            <div class="delivery_text mb-2" data-i18n="plan-s-del">Delivery: 7 Days</div>
             <button type="button" onclick="window.openTelegramOrder('STARTER', 150)" class="glass-btn-center">
               <span data-i18n="select-plan">Buy Now</span>
             </button>
@@ -716,8 +719,8 @@
               <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-p-f5">3 Revisions Included</span></li>
             </ul>
           </div>
-          <div class="mt-2 text-center">
-            <div class="delivery_text" data-i18n="plan-p-del">Delivery: 10–15 Days</div>
+          <div class="mt-2 text-center flex flex-col items-center">
+            <div class="delivery_text mb-2" data-i18n="plan-p-del">Delivery: 10–15 Days</div>
             <button type="button" onclick="window.openTelegramOrder('PREMIUM', 300)" class="glass-btn-center">
               <span data-i18n="select-plan">Buy Now</span>
             </button>
@@ -742,8 +745,8 @@
               <li class="card__list_item"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="check_svg"><path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path></svg></span><span class="list_text" data-i18n="plan-v-f5">Priority Support & Consultation</span></li>
             </ul>
           </div>
-          <div class="mt-2 text-center">
-            <div class="delivery_text" data-i18n="plan-v-del">Delivery: 21–30 Days</div>
+          <div class="mt-2 text-center flex flex-col items-center">
+            <div class="delivery_text mb-2" data-i18n="plan-v-del">Delivery: 21–30 Days</div>
             <button type="button" onclick="window.openTelegramOrder('ELITE', 600)" class="glass-btn-center">
               <span data-i18n="select-plan">Buy Now</span>
             </button>
@@ -821,22 +824,39 @@
 
   window.addEventListener('DOMContentLoaded', runVxLoader);
 
+  // طلب باقات الويب عبر التيليجرام الشخصي
   window.openTelegramOrder = function(planName, price) {
     const telegramUsername = 'wot_5'; 
     const message = `Hey VORTX! I want to purchase ${planName} ($${price}).`;
     window.open(`https://t.me/${telegramUsername}?text=${encodeURIComponent(message)}`, '_blank');
   };
 
-  let currentPreviewItem = { title: "Cc1💛", tag: "CC PACK", price: 5, bgUrl: "Cc1.jpg" };
+  // فتح رابط Payhip للشراء المباشر للـ CC
+  window.openPayhipOrder = function(payhipUrl) {
+    if (payhipUrl) {
+      window.open(payhipUrl, '_blank');
+    } else {
+      window.open('https://payhip.com/b/gBzm3', '_blank');
+    }
+  };
 
-  window.openPreview = function(title, tag, price, bg, chip) {
+  let currentPreviewItem = { title: "Cc1💛", tag: "CC PACK", price: 5, bgUrl: "Cc1.jpg", payhipUrl: "https://payhip.com/b/gBzm3" };
+
+  window.openPreview = function(title, tag, price, bg, chip, payhipUrl) {
     let imgFile = 'Cc1.jpg';
     if (bg && bg.includes('url(')) {
       const match = bg.match(/url\(['"]?([^'"]+)['"]?\)/);
       if (match && match[1]) imgFile = match[1];
     }
     
-    currentPreviewItem = { title: title || 'Cc1💛', tag: tag || 'CC PACK', price: price || 5, bgUrl: imgFile };
+    currentPreviewItem = { 
+      title: title || 'Cc1💛', 
+      tag: tag || 'CC PACK', 
+      price: price || 5, 
+      bgUrl: imgFile,
+      payhipUrl: payhipUrl || 'https://payhip.com/b/gBzm3'
+    };
+
     const modal = document.getElementById('preview-modal');
     const titleEl = document.getElementById('preview-title');
     const tagEl = document.getElementById('preview-tag');
@@ -858,12 +878,12 @@
     if (modal) { modal.classList.add('opacity-0', 'pointer-events-none'); document.body.style.overflow = ''; } 
   };
 
-  window.orderCurrentPreviewTelegram = function() {
-    window.openTelegramOrder(currentPreviewItem.title, currentPreviewItem.price);
+  window.orderCurrentPreviewPayhip = function() {
+    window.openPayhipOrder(currentPreviewItem.payhipUrl);
   };
 
   window.addPreviewToCart = function() {
-    window.addToCart(currentPreviewItem.title, currentPreviewItem.title, currentPreviewItem.price, currentPreviewItem.bgUrl);
+    window.addToCart(currentPreviewItem.title, currentPreviewItem.title, currentPreviewItem.price, currentPreviewItem.bgUrl, currentPreviewItem.payhipUrl);
     window.closePreview();
   };
 
@@ -884,7 +904,7 @@
     }
   };
 
-  // ربط قسم الـ CC تحت بالصور الحقيقية والقلوب
+  // ربط جميع منتجات CC بروابطها المباشرة وصورها في قسم المتجر بالأسفل
   window.openCategoryView = function(catKey) {
     document.querySelectorAll('.view').forEach(v => v.classList.add('view-hidden'));
     const catView = document.getElementById('category-view');
@@ -896,12 +916,13 @@
     let products = [];
     if (catKey === 'CC') {
       products = [
-        { id: "Cc1", title: "Cc1💛", tag: "CC PACK", price: 5, img: "Cc1.jpg" },
-        { id: "Cc2", title: "Cc2💙", tag: "CC PACK", price: 5, img: "Cc2.jpg" },
-        { id: "Cc3", title: "Cc3🩵", tag: "CC PACK", price: 5, img: "Cc3.png" },
-        { id: "Cc4", title: "Cc4💜", tag: "CC PACK", price: 5, img: "Cc4.jpg" },
-        { id: "Cc5", title: "Cc5🧡", tag: "CC PACK", price: 5, img: "Cc5.png" },
-        { id: "Cc6", title: "Cc6🤎", tag: "CC PACK", price: 5, img: "Cc6.png" }
+        { id: "Cc1", title: "Cc1💛", tag: "CC PACK", price: 5, img: "Cc1.jpg", link: "https://payhip.com/b/gBzm3" },
+        { id: "Cc2", title: "Cc2💙", tag: "CC PACK", price: 5, img: "Cc2.jpg", link: "https://payhip.com/b/IB15F" },
+        { id: "Cc3", title: "Cc3🩵", tag: "CC PACK", price: 5, img: "Cc3.png", link: "https://payhip.com/b/0jcBW" },
+        { id: "Cc4", title: "Cc4💜", tag: "CC PACK", price: 5, img: "Cc4.jpg", link: "https://payhip.com/b/lDrPF" },
+        { id: "Cc5", title: "Cc5🧡", tag: "CC PACK", price: 5, img: "Cc5.png", link: "https://payhip.com/b/whxGQ" },
+        { id: "Cc6", title: "Cc6🤎", tag: "CC PACK", price: 5, img: "Cc6.png", link: "https://payhip.com/b/XjdfY" },
+        { id: "Cc1-10", title: "Cc1-10🏅🔥", tag: "CC BUNDLE", price: 20, img: "Cc1.jpg", link: "https://payhip.com/b/tvErl" }
       ];
     } else {
       const isFree = catKey === 'FREE';
@@ -910,7 +931,8 @@
         title: `${catKey} ${isFree ? 'Free Asset' : 'Pack'} Vol.${i+1}`,
         tag: catKey,
         price: isFree ? 0 : 15 + (i * 3),
-        img: "Cc1.jpg"
+        img: "Cc1.jpg",
+        link: "https://payhip.com/b/gBzm3"
       }));
     }
 
@@ -918,17 +940,19 @@
       catGrid.innerHTML = products.map(p => `
         <div class="glass p-4 rounded-2xl border border-white/10 flex flex-col justify-between hover:border-yellow-500/40 transition-all duration-300 group">
           <div>
-            <div class="w-full h-72 sm:h-80 rounded-xl border border-white/10 p-4 flex flex-col justify-between mb-4 relative overflow-hidden bg-cover bg-center shadow-lg" style="background-image: url('${p.img}');">
-              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30"></div>
-              <span class="text-[9px] font-bold uppercase tracking-widest text-yellow-400 bg-black/60 px-2 py-0.5 rounded-full w-max relative z-10 backdrop-blur-md">${p.tag}</span>
-              <h4 class="font-head font-black text-2xl text-white group-hover:text-yellow-400 transition relative z-10 drop-shadow-md">${p.title}</h4>
+            <div class="w-full h-80 sm:h-96 rounded-xl border border-white/10 p-4 flex flex-col justify-between mb-4 relative overflow-hidden bg-contain bg-no-repeat bg-center bg-black/40 shadow-lg" style="background-image: url('${p.img}');">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30 pointer-events-none"></div>
+              <span class="text-[9px] font-bold uppercase tracking-widest text-yellow-400 bg-black/70 px-2 py-0.5 rounded-full w-max relative z-10 backdrop-blur-md">${p.tag}</span>
+              <h4 class="font-head font-black text-xl text-white group-hover:text-yellow-400 transition relative z-10 drop-shadow-md">${p.title}</h4>
             </div>
           </div>
           <div class="pt-3 border-t border-white/10 flex items-center justify-between">
             <span class="font-mono text-xl font-black text-yellow-400">${p.price === 0 ? 'FREE' : '$' + p.price}</span>
             <div class="flex gap-2">
-              <button onclick="window.addToCart('${p.id}', '${p.title}', ${p.price}, '${p.img}')" class="px-3 py-1.5 rounded-xl bg-white/10 hover:bg-yellow-500 hover:text-black font-bold text-xs transition">Cart</button>
-              <button onclick="window.openTelegramOrder('${p.title}', ${p.price})" class="px-3.5 py-1.5 rounded-xl bg-yellow-500 text-black font-extrabold text-xs hover:bg-yellow-400 transition">Buy Now</button>
+              <button onclick="window.addToCart('${p.id}', '${p.title}', ${p.price}, '${p.img}', '${p.link}')" class="px-3 py-1.5 rounded-xl bg-white/10 hover:bg-yellow-500 hover:text-black font-bold text-xs transition">Cart</button>
+              <button type="button" onclick="window.openPayhipOrder('${p.link}')" class="glass-btn-center !px-4 !py-1.5 !min-w-0">
+                <span>Buy Now</span>
+              </button>
             </div>
           </div>
         </div>
@@ -973,21 +997,21 @@
       if (favBadge) { favBadge.textContent = favItems.length; favBadge.classList.toggle('hidden', favItems.length === 0); }
     };
 
-    window.toggleFavorite = function(id, title, tag, price, img) {
+    window.toggleFavorite = function(id, title, tag, price, img, link) {
       const idx = favItems.findIndex(item => item.id === id);
       if (idx > -1) {
         favItems.splice(idx, 1);
         window.showToast('REMOVED FROM FAVORITES');
       } else {
-        favItems.push({ id, title, tag, price, img });
+        favItems.push({ id, title, tag, price, img, link });
         window.showToast('ADDED TO FAVORITES ❤');
       }
       localStorage.setItem('vortx_favorites', JSON.stringify(favItems));
       window.updateBadges(); renderFavoritesUI();
     };
 
-    window.addToCart = function(id, title, price, img) {
-      cartItems.push({ id, title, price, img });
+    window.addToCart = function(id, title, price, img, link) {
+      cartItems.push({ id, title, price, img, link });
       localStorage.setItem('vortx_cart', JSON.stringify(cartItems));
       window.showToast('ADDED TO CART 🛒');
       window.updateBadges();
@@ -1017,7 +1041,7 @@
       const list = document.getElementById('favorites-list');
       if (!list) return;
       if (favItems.length === 0) { list.innerHTML = `<p class="text-xs text-white/50 text-center py-6">No favorite items saved yet.</p>`; return; }
-      list.innerHTML = favItems.map(item => `<div class="p-3 bg-white/5 rounded-xl border border-white/10 flex items-center justify-between"><div class="flex items-center gap-3"><img src="${item.img}" class="w-10 h-10 rounded-lg object-cover" /><div><h4 class="text-xs font-bold text-white">${item.title}</h4><span class="text-[10px] text-yellow-400 font-mono font-bold">${item.price === 0 ? 'FREE' : '$' + item.price}</span></div></div><button onclick="window.toggleFavorite('${item.id}', '${item.title}', '${item.tag}', ${item.price}, '${item.img}')" class="text-red-400 text-xs hover:text-red-300 font-bold">Remove</button></div>`).join('');
+      list.innerHTML = favItems.map(item => `<div class="p-3 bg-white/5 rounded-xl border border-white/10 flex items-center justify-between"><div class="flex items-center gap-3"><img src="${item.img}" class="w-10 h-10 rounded-lg object-cover" /><div><h4 class="text-xs font-bold text-white">${item.title}</h4><span class="text-[10px] text-yellow-400 font-mono font-bold">${item.price === 0 ? 'FREE' : '$' + item.price}</span></div></div><button onclick="window.toggleFavorite('${item.id}', '${item.title}', '${item.tag}', ${item.price}, '${item.img}', '${item.link}')" class="text-red-400 text-xs hover:text-red-300 font-bold">Remove</button></div>`).join('');
     }
 
     function renderCartUI() {
@@ -1030,12 +1054,15 @@
       if (totalEl) totalEl.textContent = '$' + total;
     }
 
+    // شراء عناصر السلة يحوّل لروابط Payhip المباشرة
     window.checkoutCartItems = function() {
       if (cartItems.length === 0) { window.showToast('YOUR CART IS EMPTY'); return; }
-      const names = cartItems.map(i => i.title).join(', ');
-      const total = cartItems.reduce((s, i) => s + Number(i.price), 0);
-      const msg = `Hey VORTX! I want to purchase these cart items: (${names}) for Total: $${total}.`;
-      window.open(`https://t.me/wot_5?text=${encodeURIComponent(msg)}`, '_blank');
+      cartItems.forEach(item => {
+        if (item.link) {
+          window.open(item.link, '_blank');
+        }
+      });
+      window.showToast('REDIRECTING TO PAYHIP STORE...');
     };
 
     window.showToast = function (msg) {
@@ -1304,14 +1331,15 @@
 document.addEventListener('DOMContentLoaded', function() {
   "use strict";
 
-  // البيانات الخاصة بـ CC كـ افتراضي عند تحميل الصفحة بالصور الدقيقة من GitHub والقلوب من BuyHub
+  // البيانات الخاصة بـ CC بجميع المنتجات المربوطة بـ Payhip بدون أرقام كروت وبأسعارها الحقيقية
   window.CARDS_DATA_CURRENT = [
-    { title: "Cc1💛", tag: "CC PACK", number: "•••• 0001", price: 5, bg: "url('Cc1.jpg')", border: "rgba(251, 191, 36, 0.4)", chip: "linear-gradient(135deg, #fef08a, #ca8a04)" },
-    { title: "Cc2💙", tag: "CC PACK", number: "•••• 0002", price: 5, bg: "url('Cc2.jpg')", border: "rgba(34, 211, 238, 0.4)", chip: "linear-gradient(135deg, #cffafe, #0891b2)" },
-    { title: "Cc3🩵", tag: "CC PACK", number: "•••• 0003", price: 5, bg: "url('Cc3.png')", border: "rgba(56, 189, 248, 0.4)", chip: "linear-gradient(135deg, #e0f2fe, #0284c7)" },
-    { title: "Cc4💜", tag: "CC PACK", number: "•••• 0004", price: 5, bg: "url('Cc4.jpg')", border: "rgba(192, 132, 252, 0.4)", chip: "linear-gradient(135deg, #f3e8ff, #7e22ce)" },
-    { title: "Cc5🧡", tag: "CC PACK", number: "•••• 0005", price: 5, bg: "url('Cc5.png')", border: "rgba(251, 146, 60, 0.4)", chip: "linear-gradient(135deg, #ffedd5, #ea580c)" },
-    { title: "Cc6🤎", tag: "CC PACK", number: "•••• 0006", price: 5, bg: "url('Cc6.png')", border: "rgba(217, 119, 6, 0.4)", chip: "linear-gradient(135deg, #fef3c7, #b45309)" }
+    { title: "Cc1💛", tag: "CC PACK", price: 5, bg: "url('Cc1.jpg')", border: "rgba(251, 191, 36, 0.4)", chip: "linear-gradient(135deg, #fef08a, #ca8a04)", link: "https://payhip.com/b/gBzm3" },
+    { title: "Cc2💙", tag: "CC PACK", price: 5, bg: "url('Cc2.jpg')", border: "rgba(34, 211, 238, 0.4)", chip: "linear-gradient(135deg, #cffafe, #0891b2)", link: "https://payhip.com/b/IB15F" },
+    { title: "Cc3🩵", tag: "CC PACK", price: 5, bg: "url('Cc3.png')", border: "rgba(56, 189, 248, 0.4)", chip: "linear-gradient(135deg, #e0f2fe, #0284c7)", link: "https://payhip.com/b/0jcBW" },
+    { title: "Cc4💜", tag: "CC PACK", price: 5, bg: "url('Cc4.jpg')", border: "rgba(192, 132, 252, 0.4)", chip: "linear-gradient(135deg, #f3e8ff, #7e22ce)", link: "https://payhip.com/b/lDrPF" },
+    { title: "Cc5🧡", tag: "CC PACK", price: 5, bg: "url('Cc5.png')", border: "rgba(251, 146, 60, 0.4)", chip: "linear-gradient(135deg, #ffedd5, #ea580c)", link: "https://payhip.com/b/whxGQ" },
+    { title: "Cc6🤎", tag: "CC PACK", price: 5, bg: "url('Cc6.png')", border: "rgba(217, 119, 6, 0.4)", chip: "linear-gradient(135deg, #fef3c7, #b45309)", link: "https://payhip.com/b/XjdfY" },
+    { title: "Cc1-10🏅🔥", tag: "CC BUNDLE", price: 20, bg: "url('Cc1.jpg')", border: "rgba(234, 179, 8, 0.5)", chip: "linear-gradient(135deg, #fef08a, #ca8a04)", link: "https://payhip.com/b/tvErl" }
   ];
 
   var stage = document.getElementById('carousel-stage'), track = document.getElementById('carousel-track');
@@ -1324,11 +1352,11 @@ document.addEventListener('DOMContentLoaded', function() {
     window.CARDS_DATA_CURRENT.forEach(function (data, i) {
       var card = document.createElement('div');
       card.className = 'card-3d'; card.style.background = data.bg; card.style.border = '1px solid ' + data.border;
-      card.innerHTML = '<div class="glass-sheen"></div><div class="p-6 h-full flex flex-col justify-between text-white relative z-10 pointer-events-none"><div class="flex justify-between items-start"><div><p class="text-[10px] font-bold tracking-widest uppercase opacity-90 text-yellow-300 bg-black/60 px-2.5 py-0.5 rounded-full backdrop-blur-md w-max">' + data.tag + '</p><h3 class="font-head font-extrabold text-2xl tracking-wider force-eng mt-2 text-white drop-shadow-md">' + data.title + '</h3></div><span class="font-head font-bold text-xs opacity-90 text-yellow-400 drop-shadow-md">VORTX</span></div><div class="my-auto flex items-center justify-between"><div class="w-10 h-7 rounded-md" style="background:' + data.chip + '"></div><div class="flex -space-x-2 opacity-80"><div class="w-6 h-6 rounded-full bg-white/20 border border-white/30 backdrop-blur-sm"></div><div class="w-6 h-6 rounded-full bg-white/40 border border-white/30 backdrop-blur-sm"></div></div></div><div class="flex justify-between items-end font-mono text-sm tracking-widest text-white/90 bg-black/50 p-2 rounded-xl backdrop-blur-md"><span>' + data.number + '</span><span class="font-head font-bold text-sm text-yellow-400">' + (data.price === 0 ? 'FREE' : '$'+data.price) +'</span></div></div>';
+      card.innerHTML = '<div class="glass-sheen"></div><div class="p-6 h-full flex flex-col justify-between text-white relative z-10 pointer-events-none"><div class="flex justify-between items-start"><div><p class="text-[10px] font-bold tracking-widest uppercase opacity-90 text-yellow-300 bg-black/60 px-2.5 py-0.5 rounded-full backdrop-blur-md w-max">' + data.tag + '</p><h3 class="font-head font-extrabold text-2xl tracking-wider force-eng mt-2 text-white drop-shadow-md">' + data.title + '</h3></div><span class="font-head font-bold text-xs opacity-90 text-yellow-400 drop-shadow-md">VORTX</span></div><div class="my-auto flex items-center justify-between"><div class="w-10 h-7 rounded-md" style="background:' + data.chip + '"></div><div class="flex -space-x-2 opacity-80"><div class="w-6 h-6 rounded-full bg-white/20 border border-white/30 backdrop-blur-sm"></div><div class="w-6 h-6 rounded-full bg-white/40 border border-white/30 backdrop-blur-sm"></div></div></div><div class="flex justify-between items-end font-mono text-sm tracking-widest text-white/90 bg-black/50 p-2 rounded-xl backdrop-blur-md"><span></span><span class="font-head font-bold text-sm text-yellow-400">' + (data.price === 0 ? 'FREE' : '$'+data.price) +'</span></div></div>';
       card.addEventListener('click', function () {
         if (Math.abs(dragDeltaX) < 8) {
           var normCurrent = ((Math.round(currentIndex) % N) + N) % N;
-          if (i === normCurrent) { window.openPreview(data.title, data.tag, data.price, data.bg, data.chip); } else {
+          if (i === normCurrent) { window.openPreview(data.title, data.tag, data.price, data.bg, data.chip, data.link); } else {
             var diff = (i - normCurrent + N) % N;
             if (diff > N / 2) diff -= N;
             targetIndex = currentIndex + diff;
@@ -1347,33 +1375,34 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     const catDataMap = {
       'CC': [
-        { title: "Cc1💛", tag: "CC PACK", number: "•••• 0001", price: 5, bg: "url('Cc1.jpg')", border: "rgba(251, 191, 36, 0.4)", chip: "linear-gradient(135deg, #fef08a, #ca8a04)" },
-        { title: "Cc2💙", tag: "CC PACK", number: "•••• 0002", price: 5, bg: "url('Cc2.jpg')", border: "rgba(34, 211, 238, 0.4)", chip: "linear-gradient(135deg, #cffafe, #0891b2)" },
-        { title: "Cc3🩵", tag: "CC PACK", number: "•••• 0003", price: 5, bg: "url('Cc3.png')", border: "rgba(56, 189, 248, 0.4)", chip: "linear-gradient(135deg, #e0f2fe, #0284c7)" },
-        { title: "Cc4💜", tag: "CC PACK", number: "•••• 0004", price: 5, bg: "url('Cc4.jpg')", border: "rgba(192, 132, 252, 0.4)", chip: "linear-gradient(135deg, #f3e8ff, #7e22ce)" },
-        { title: "Cc5🧡", tag: "CC PACK", number: "•••• 0005", price: 5, bg: "url('Cc5.png')", border: "rgba(251, 146, 60, 0.4)", chip: "linear-gradient(135deg, #ffedd5, #ea580c)" },
-        { title: "Cc6🤎", tag: "CC PACK", number: "•••• 0006", price: 5, bg: "url('Cc6.png')", border: "rgba(217, 119, 6, 0.4)", chip: "linear-gradient(135deg, #fef3c7, #b45309)" }
+        { title: "Cc1💛", tag: "CC PACK", price: 5, bg: "url('Cc1.jpg')", border: "rgba(251, 191, 36, 0.4)", chip: "linear-gradient(135deg, #fef08a, #ca8a04)", link: "https://payhip.com/b/gBzm3" },
+        { title: "Cc2💙", tag: "CC PACK", price: 5, bg: "url('Cc2.jpg')", border: "rgba(34, 211, 238, 0.4)", chip: "linear-gradient(135deg, #cffafe, #0891b2)", link: "https://payhip.com/b/IB15F" },
+        { title: "Cc3🩵", tag: "CC PACK", price: 5, bg: "url('Cc3.png')", border: "rgba(56, 189, 248, 0.4)", chip: "linear-gradient(135deg, #e0f2fe, #0284c7)", link: "https://payhip.com/b/0jcBW" },
+        { title: "Cc4💜", tag: "CC PACK", price: 5, bg: "url('Cc4.jpg')", border: "rgba(192, 132, 252, 0.4)", chip: "linear-gradient(135deg, #f3e8ff, #7e22ce)", link: "https://payhip.com/b/lDrPF" },
+        { title: "Cc5🧡", tag: "CC PACK", price: 5, bg: "url('Cc5.png')", border: "rgba(251, 146, 60, 0.4)", chip: "linear-gradient(135deg, #ffedd5, #ea580c)", link: "https://payhip.com/b/whxGQ" },
+        { title: "Cc6🤎", tag: "CC PACK", price: 5, bg: "url('Cc6.png')", border: "rgba(217, 119, 6, 0.4)", chip: "linear-gradient(135deg, #fef3c7, #b45309)", link: "https://payhip.com/b/XjdfY" },
+        { title: "Cc1-10🏅🔥", tag: "CC BUNDLE", price: 20, bg: "url('Cc1.jpg')", border: "rgba(234, 179, 8, 0.5)", chip: "linear-gradient(135deg, #fef08a, #ca8a04)", link: "https://payhip.com/b/tvErl" }
       ],
       'XML': [
-        { title: "BLACK VIP", tag: "VFX PACK", number: "•••• 8829", price: 29, bg: "linear-gradient(135deg, #09090b 0%, #18181b 50%, #27272a 100%)", border: "rgba(255, 255, 255, 0.2)", chip: "linear-gradient(135deg, #e2e8f0, #94a3b8)" },
-        { title: "ROYAL GOLD", tag: "COLOR GRADE", number: "•••• 4021", price: 35, bg: "linear-gradient(135deg, #451a03 0%, #78350f 50%, #b45309 100%)", border: "rgba(251, 191, 36, 0.4)", chip: "linear-gradient(135deg, #fef08a, #ca8a04)" },
-        { title: "CYBER CYAN", tag: "PRESET FILE", number: "•••• 9102", price: 25, bg: "linear-gradient(135deg, #083344 0%, #0e7490 50%, #06b6d4 100%)", border: "rgba(34, 211, 238, 0.4)", chip: "linear-gradient(135deg, #cffafe, #0891b2)" },
-        { title: "NEON PURPLE", tag: "VELOCITY XML", number: "•••• 7731", price: 19, bg: "linear-gradient(135deg, #3b0764 0%, #6b21a8 50%, #9333ea 100%)", border: "rgba(192, 132, 252, 0.4)", chip: "linear-gradient(135deg, #f3e8ff, #7e22ce)" },
-        { title: "EMERALD 3D", tag: "CAMERA SHAKE", number: "•••• 5510", price: 22, bg: "linear-gradient(135deg, #022c22 0%, #065f46 50%, #059669 100%)", border: "rgba(52, 211, 153, 0.4)", chip: "linear-gradient(135deg, #d1fae5, #059669)" }
+        { title: "BLACK VIP", tag: "VFX PACK", price: 29, bg: "linear-gradient(135deg, #09090b 0%, #18181b 50%, #27272a 100%)", border: "rgba(255, 255, 255, 0.2)", chip: "linear-gradient(135deg, #e2e8f0, #94a3b8)", link: "https://payhip.com/b/gBzm3" },
+        { title: "ROYAL GOLD", tag: "COLOR GRADE", price: 35, bg: "linear-gradient(135deg, #451a03 0%, #78350f 50%, #b45309 100%)", border: "rgba(251, 191, 36, 0.4)", chip: "linear-gradient(135deg, #fef08a, #ca8a04)", link: "https://payhip.com/b/gBzm3" },
+        { title: "CYBER CYAN", tag: "PRESET FILE", price: 25, bg: "linear-gradient(135deg, #083344 0%, #0e7490 50%, #06b6d4 100%)", border: "rgba(34, 211, 238, 0.4)", chip: "linear-gradient(135deg, #cffafe, #0891b2)", link: "https://payhip.com/b/gBzm3" },
+        { title: "NEON PURPLE", tag: "VELOCITY XML", price: 19, bg: "linear-gradient(135deg, #3b0764 0%, #6b21a8 50%, #9333ea 100%)", border: "rgba(192, 132, 252, 0.4)", chip: "linear-gradient(135deg, #f3e8ff, #7e22ce)", link: "https://payhip.com/b/gBzm3" },
+        { title: "EMERALD 3D", tag: "CAMERA SHAKE", price: 22, bg: "linear-gradient(135deg, #022c22 0%, #065f46 50%, #059669 100%)", border: "rgba(52, 211, 153, 0.4)", chip: "linear-gradient(135deg, #d1fae5, #059669)", link: "https://payhip.com/b/gBzm3" }
       ],
       'SHAKE': [
-        { title: "WARP SHAKE", tag: "MOTION PRESET", number: "•••• 6620", price: 24, bg: "linear-gradient(135deg, #450a0a 0%, #7f1d1d 50%, #dc2626 100%)", border: "rgba(248, 113, 113, 0.4)", chip: "linear-gradient(135deg, #fee2e2, #b91c1c)" },
-        { title: "3D TILT SHAKE", tag: "CAMERA PRESET", number: "•••• 4412", price: 28, bg: "linear-gradient(135deg, #14532d 0%, #166534 50%, #15803d 100%)", border: "rgba(74, 222, 128, 0.4)", chip: "linear-gradient(135deg, #dcfce7, #15803d)" },
-        { title: "SMOOTH DRIFT", tag: "SHAKE PACK", number: "•••• 8821", price: 18, bg: "linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4338ca 100%)", border: "rgba(129, 140, 248, 0.4)", chip: "linear-gradient(135deg, #e0e7ff, #4338ca)" },
-        { title: "IMPACT HIT", tag: "VFX SHAKE", number: "•••• 9901", price: 26, bg: "linear-gradient(135deg, #701a75 0%, #86198f 50%, #a21caf 100%)", border: "rgba(240, 171, 252, 0.4)", chip: "linear-gradient(135deg, #fae8ff, #a21caf)" },
-        { title: "QUAKE 3D", tag: "HEAVY SHAKE", number: "•••• 1109", price: 30, bg: "linear-gradient(135deg, #2e1065 0%, #4c1d95 50%, #6d28d9 100%)", border: "rgba(167, 139, 250, 0.4)", chip: "linear-gradient(135deg, #ede9fe, #6d28d9)" }
+        { title: "WARP SHAKE", tag: "MOTION PRESET", price: 24, bg: "linear-gradient(135deg, #450a0a 0%, #7f1d1d 50%, #dc2626 100%)", border: "rgba(248, 113, 113, 0.4)", chip: "linear-gradient(135deg, #fee2e2, #b91c1c)", link: "https://payhip.com/b/gBzm3" },
+        { title: "3D TILT SHAKE", tag: "CAMERA PRESET", price: 28, bg: "linear-gradient(135deg, #14532d 0%, #166534 50%, #15803d 100%)", border: "rgba(74, 222, 128, 0.4)", chip: "linear-gradient(135deg, #dcfce7, #15803d)", link: "https://payhip.com/b/gBzm3" },
+        { title: "SMOOTH DRIFT", tag: "SHAKE PACK", price: 18, bg: "linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4338ca 100%)", border: "rgba(129, 140, 248, 0.4)", chip: "linear-gradient(135deg, #e0e7ff, #4338ca)", link: "https://payhip.com/b/gBzm3" },
+        { title: "IMPACT HIT", tag: "VFX SHAKE", price: 26, bg: "linear-gradient(135deg, #701a75 0%, #86198f 50%, #a21caf 100%)", border: "rgba(240, 171, 252, 0.4)", chip: "linear-gradient(135deg, #fae8ff, #a21caf)", link: "https://payhip.com/b/gBzm3" },
+        { title: "QUAKE 3D", tag: "HEAVY SHAKE", price: 30, bg: "linear-gradient(135deg, #2e1065 0%, #4c1d95 50%, #6d28d9 100%)", border: "rgba(167, 139, 250, 0.4)", chip: "linear-gradient(135deg, #ede9fe, #6d28d9)", link: "https://payhip.com/b/gBzm3" }
       ],
       'FREE': [
-        { title: "FREE STARTER", tag: "FREE PACK", number: "•••• 0001", price: 0, bg: "linear-gradient(135deg, #18181b 0%, #27272a 50%, #3f3f46 100%)", border: "rgba(255, 255, 255, 0.2)", chip: "linear-gradient(135deg, #a1a1aa, #52525b)" },
-        { title: "FREE CC GLOW", tag: "FREE CC", number: "•••• 0002", price: 0, bg: "linear-gradient(135deg, #064e3b 0%, #047857 50%, #10b981 100%)", border: "rgba(52, 211, 153, 0.4)", chip: "linear-gradient(135deg, #a7f3d0, #059669)" },
-        { title: "FREE SHAKE V1", tag: "FREE SHAKE", number: "•••• 0003", price: 0, bg: "linear-gradient(135deg, #312e81 0%, #4338ca 50%, #6366f1 100%)", border: "rgba(129, 140, 248, 0.4)", chip: "linear-gradient(135deg, #c7d2fe, #4338ca)" },
-        { title: "FREE OVERLAY", tag: "FREE ASSET", number: "•••• 0004", price: 0, bg: "linear-gradient(135deg, #701a75 0%, #a21caf 50%, #c026d3 100%)", border: "rgba(240, 171, 252, 0.4)", chip: "linear-gradient(135deg, #f5d0fe, #a21caf)" },
-        { title: "FREE LUT PACK", tag: "FREE LUT", number: "•••• 0005", price: 0, bg: "linear-gradient(135deg, #78350f 0%, #b45309 50%, #f59e0b 100%)", border: "rgba(251, 191, 36, 0.4)", chip: "linear-gradient(135deg, #fef3c7, #d97706)" }
+        { title: "FREE STARTER", tag: "FREE PACK", price: 0, bg: "linear-gradient(135deg, #18181b 0%, #27272a 50%, #3f3f46 100%)", border: "rgba(255, 255, 255, 0.2)", chip: "linear-gradient(135deg, #a1a1aa, #52525b)", link: "https://payhip.com/b/gBzm3" },
+        { title: "FREE CC GLOW", tag: "FREE CC", price: 0, bg: "linear-gradient(135deg, #064e3b 0%, #047857 50%, #10b981 100%)", border: "rgba(52, 211, 153, 0.4)", chip: "linear-gradient(135deg, #a7f3d0, #059669)", link: "https://payhip.com/b/gBzm3" },
+        { title: "FREE SHAKE V1", tag: "FREE SHAKE", price: 0, bg: "linear-gradient(135deg, #312e81 0%, #4338ca 50%, #6366f1 100%)", border: "rgba(129, 140, 248, 0.4)", chip: "linear-gradient(135deg, #c7d2fe, #4338ca)", link: "https://payhip.com/b/gBzm3" },
+        { title: "FREE OVERLAY", tag: "FREE ASSET", price: 0, bg: "linear-gradient(135deg, #701a75 0%, #a21caf 50%, #c026d3 100%)", border: "rgba(240, 171, 252, 0.4)", chip: "linear-gradient(135deg, #f5d0fe, #a21caf)", link: "https://payhip.com/b/gBzm3" },
+        { title: "FREE LUT PACK", tag: "FREE LUT", price: 0, bg: "linear-gradient(135deg, #78350f 0%, #b45309 50%, #f59e0b 100%)", border: "rgba(251, 191, 36, 0.4)", chip: "linear-gradient(135deg, #fef3c7, #d97706)", link: "https://payhip.com/b/gBzm3" }
       ]
     };
     if (catDataMap[cat]) {
