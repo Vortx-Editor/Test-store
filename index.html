@@ -343,12 +343,11 @@
     <button onclick="window.closePreview()" class="absolute top-4 right-4 text-white/60 hover:text-white font-black text-xl z-20 bg-black/50 w-8 h-8 rounded-full flex items-center justify-center">✕</button>
     
     <div>
-      <div id="preview-chip-bg" class="w-full h-[380px] sm:h-[420px] rounded-2xl p-5 flex flex-col justify-between text-white relative overflow-hidden shadow-2xl border border-white/20 mb-5 bg-contain bg-no-repeat bg-center bg-black/40">
+      <div id="preview-chip-bg" class="w-full h-[380px] sm:h-[440px] rounded-2xl p-5 flex flex-col justify-between text-white relative overflow-hidden shadow-2xl border border-white/20 mb-5 bg-contain bg-no-repeat bg-center bg-black/40">
         <div class="glass-sheen"></div>
         <div class="flex justify-between items-start relative z-10">
           <div>
             <span id="preview-tag" class="text-[10px] font-extrabold tracking-widest uppercase text-yellow-300 bg-black/70 px-3 py-1 rounded-full backdrop-blur-md">CC PACK</span>
-            <h3 id="preview-title" class="font-head font-black text-xl sm:text-2xl tracking-wider force-eng mt-2 text-white drop-shadow-md">Cc1💛</h3>
           </div>
           <span class="font-head font-black text-xs text-yellow-400 tracking-widest drop-shadow-md">VORTX</span>
         </div>
@@ -362,7 +361,7 @@
       </div>
       
       <div class="space-y-1 mb-5 text-left">
-        <h4 class="text-xs font-bold text-white uppercase tracking-wider">Asset Highlights:</h4>
+        <h3 id="preview-title" class="font-head font-black text-xl sm:text-2xl tracking-wider force-eng text-white drop-shadow-md mb-2">Cc1💛</h3>
         <p class="text-[11px] text-white/70 leading-relaxed font-semibold">Includes full 4K vertical preset assets, color grade curves, and instant Payhip download integration.</p>
       </div>
     </div>
@@ -760,13 +759,13 @@
   <!-- صفحة الأقسام الكاملة (CC / XML / SHAKE / FREE) -->
   <section id="category-view" class="view view-hidden relative z-10 min-h-screen">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
-      <div class="flex items-center justify-between mb-12 pb-6 border-b border-white/10">
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-10 pb-6 border-b border-white/10">
         <div>
           <span data-i18n="cat-view-sub" class="text-xs tracking-widest uppercase font-bold text-yellow-400">CATEGORY STORE</span>
-          <h2 id="cat-title" class="font-head font-bold text-3xl sm:text-5xl mt-2 force-eng text-white">CC COLLECTION</h2>
+          <h2 id="cat-title" class="font-head font-bold text-2xl sm:text-4xl md:text-5xl mt-1 force-eng text-white tracking-wider leading-tight whitespace-normal sm:whitespace-nowrap">CC COLLECTION</h2>
           <p class="text-xs text-white/60 font-semibold mt-1">Explore all premium editing assets and bundles in this collection.</p>
         </div>
-        <button onclick="window.backToHome()" class="back-btn-pill"><span>←</span> <span data-i18n="back-btn">Back to Home</span></button>
+        <button onclick="window.backToHome()" class="back-btn-pill shrink-0"><span>←</span> <span data-i18n="back-btn">Back</span></button>
       </div>
 
       <div id="cat-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div>
@@ -787,11 +786,12 @@
     if (logoWord && logoWord.children.length === 0) {
       const letters = ['V', 'O', 'R', 'T', 'X'];
       logoWord.innerHTML = letters.map((char, index) => 
-        `<span class="vx-letter" style="--ld: ${index * 0.12}s">${char}</span>`
+        `<span class="vx-letter" style="--ld: ${index * 0.1}s">${char}</span>`
       ).join('');
     }
 
-    const duration = 3800;
+    // تقليل مدة المقدمة إلى 2.5 ثانية (2500ms)
+    const duration = 2500;
     const startTime = performance.now();
 
     function animateLoader(now) {
@@ -815,7 +815,7 @@
           if (appContent) appContent.classList.add('vx-revealed');
           if (heroSection) heroSection.classList.add('revealed');
           document.body.classList.add('revealed');
-        }, 250);
+        }, 200);
       }
     }
 
@@ -824,14 +824,12 @@
 
   window.addEventListener('DOMContentLoaded', runVxLoader);
 
-  // طلب باقات الويب عبر التيليجرام الشخصي
   window.openTelegramOrder = function(planName, price) {
     const telegramUsername = 'wot_5'; 
     const message = `Hey VORTX! I want to purchase ${planName} ($${price}).`;
     window.open(`https://t.me/${telegramUsername}?text=${encodeURIComponent(message)}`, '_blank');
   };
 
-  // فتح رابط Payhip للشراء المباشر للـ CC
   window.openPayhipOrder = function(payhipUrl) {
     if (payhipUrl) {
       window.open(payhipUrl, '_blank');
@@ -904,7 +902,7 @@
     }
   };
 
-  // ربط جميع منتجات CC بروابطها المباشرة وصورها في قسم المتجر بالأسفل
+  // ربط جميع منتجات CC بروابطها المباشرة وصورها بالطول في متجر الأقسام أسفل
   window.openCategoryView = function(catKey) {
     document.querySelectorAll('.view').forEach(v => v.classList.add('view-hidden'));
     const catView = document.getElementById('category-view');
@@ -922,7 +920,7 @@
         { id: "Cc4", title: "Cc4💜", tag: "CC PACK", price: 5, img: "Cc4.jpg", link: "https://payhip.com/b/lDrPF" },
         { id: "Cc5", title: "Cc5🧡", tag: "CC PACK", price: 5, img: "Cc5.png", link: "https://payhip.com/b/whxGQ" },
         { id: "Cc6", title: "Cc6🤎", tag: "CC PACK", price: 5, img: "Cc6.png", link: "https://payhip.com/b/XjdfY" },
-        { id: "Cc1-10", title: "Cc1-10🏅🔥", tag: "CC BUNDLE", price: 20, img: "Cc1.jpg", link: "https://payhip.com/b/tvErl" }
+        { id: "Cc1-10", title: "Cc1-10🏅🔥", tag: "CC BUNDLE", price: 20, img: "Cc1-10.png", link: "https://payhip.com/b/tvErl" }
       ];
     } else {
       const isFree = catKey === 'FREE';
@@ -940,8 +938,8 @@
       catGrid.innerHTML = products.map(p => `
         <div class="glass p-4 rounded-2xl border border-white/10 flex flex-col justify-between hover:border-yellow-500/40 transition-all duration-300 group">
           <div>
-            <div class="w-full h-80 sm:h-96 rounded-xl border border-white/10 p-4 flex flex-col justify-between mb-4 relative overflow-hidden bg-contain bg-no-repeat bg-center bg-black/40 shadow-lg" style="background-image: url('${p.img}');">
-              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30 pointer-events-none"></div>
+            <div onclick="window.openPreview('${p.title}', '${p.tag}', ${p.price}, 'url(\\'${p.img}\\')', '', '${p.link}')" class="aspect-[9/16] w-full rounded-xl border border-white/10 p-4 flex flex-col justify-between mb-4 relative overflow-hidden bg-cover bg-center shadow-lg cursor-pointer" style="background-image: url('${p.img}');">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20 pointer-events-none"></div>
               <span class="text-[9px] font-bold uppercase tracking-widest text-yellow-400 bg-black/70 px-2 py-0.5 rounded-full w-max relative z-10 backdrop-blur-md">${p.tag}</span>
               <h4 class="font-head font-black text-xl text-white group-hover:text-yellow-400 transition relative z-10 drop-shadow-md">${p.title}</h4>
             </div>
@@ -1054,15 +1052,21 @@
       if (totalEl) totalEl.textContent = '$' + total;
     }
 
-    // شراء عناصر السلة يحوّل لروابط Payhip المباشرة
+    // الشراء الشامل لجميع عناصر العربة
     window.checkoutCartItems = function() {
       if (cartItems.length === 0) { window.showToast('YOUR CART IS EMPTY'); return; }
-      cartItems.forEach(item => {
-        if (item.link) {
-          window.open(item.link, '_blank');
-        }
-      });
-      window.showToast('REDIRECTING TO PAYHIP STORE...');
+      
+      const uniqueLinks = [...new Set(cartItems.map(i => i.link).filter(Boolean))];
+      if (uniqueLinks.length > 0) {
+        uniqueLinks.forEach((link, idx) => {
+          setTimeout(() => {
+            window.open(link, '_blank');
+          }, idx * 350);
+        });
+        window.showToast('OPENING PAYHIP CHECKOUT PAGES...');
+      } else {
+        window.open('https://payhip.com/b/gBzm3', '_blank');
+      }
     };
 
     window.showToast = function (msg) {
@@ -1331,7 +1335,7 @@
 document.addEventListener('DOMContentLoaded', function() {
   "use strict";
 
-  // البيانات الخاصة بـ CC بجميع المنتجات المربوطة بـ Payhip بدون أرقام كروت وبأسعارها الحقيقية
+  // إظهار اسم الكرت في الأسفل يساراً بروابط Payhip المباشرة وصورة Cc1-10.png
   window.CARDS_DATA_CURRENT = [
     { title: "Cc1💛", tag: "CC PACK", price: 5, bg: "url('Cc1.jpg')", border: "rgba(251, 191, 36, 0.4)", chip: "linear-gradient(135deg, #fef08a, #ca8a04)", link: "https://payhip.com/b/gBzm3" },
     { title: "Cc2💙", tag: "CC PACK", price: 5, bg: "url('Cc2.jpg')", border: "rgba(34, 211, 238, 0.4)", chip: "linear-gradient(135deg, #cffafe, #0891b2)", link: "https://payhip.com/b/IB15F" },
@@ -1339,7 +1343,7 @@ document.addEventListener('DOMContentLoaded', function() {
     { title: "Cc4💜", tag: "CC PACK", price: 5, bg: "url('Cc4.jpg')", border: "rgba(192, 132, 252, 0.4)", chip: "linear-gradient(135deg, #f3e8ff, #7e22ce)", link: "https://payhip.com/b/lDrPF" },
     { title: "Cc5🧡", tag: "CC PACK", price: 5, bg: "url('Cc5.png')", border: "rgba(251, 146, 60, 0.4)", chip: "linear-gradient(135deg, #ffedd5, #ea580c)", link: "https://payhip.com/b/whxGQ" },
     { title: "Cc6🤎", tag: "CC PACK", price: 5, bg: "url('Cc6.png')", border: "rgba(217, 119, 6, 0.4)", chip: "linear-gradient(135deg, #fef3c7, #b45309)", link: "https://payhip.com/b/XjdfY" },
-    { title: "Cc1-10🏅🔥", tag: "CC BUNDLE", price: 20, bg: "url('Cc1.jpg')", border: "rgba(234, 179, 8, 0.5)", chip: "linear-gradient(135deg, #fef08a, #ca8a04)", link: "https://payhip.com/b/tvErl" }
+    { title: "Cc1-10🏅🔥", tag: "CC BUNDLE", price: 20, bg: "url('Cc1-10.png')", border: "rgba(234, 179, 8, 0.5)", chip: "linear-gradient(135deg, #fef08a, #ca8a04)", link: "https://payhip.com/b/tvErl" }
   ];
 
   var stage = document.getElementById('carousel-stage'), track = document.getElementById('carousel-track');
@@ -1352,7 +1356,10 @@ document.addEventListener('DOMContentLoaded', function() {
     window.CARDS_DATA_CURRENT.forEach(function (data, i) {
       var card = document.createElement('div');
       card.className = 'card-3d'; card.style.background = data.bg; card.style.border = '1px solid ' + data.border;
-      card.innerHTML = '<div class="glass-sheen"></div><div class="p-6 h-full flex flex-col justify-between text-white relative z-10 pointer-events-none"><div class="flex justify-between items-start"><div><p class="text-[10px] font-bold tracking-widest uppercase opacity-90 text-yellow-300 bg-black/60 px-2.5 py-0.5 rounded-full backdrop-blur-md w-max">' + data.tag + '</p><h3 class="font-head font-extrabold text-2xl tracking-wider force-eng mt-2 text-white drop-shadow-md">' + data.title + '</h3></div><span class="font-head font-bold text-xs opacity-90 text-yellow-400 drop-shadow-md">VORTX</span></div><div class="my-auto flex items-center justify-between"><div class="w-10 h-7 rounded-md" style="background:' + data.chip + '"></div><div class="flex -space-x-2 opacity-80"><div class="w-6 h-6 rounded-full bg-white/20 border border-white/30 backdrop-blur-sm"></div><div class="w-6 h-6 rounded-full bg-white/40 border border-white/30 backdrop-blur-sm"></div></div></div><div class="flex justify-between items-end font-mono text-sm tracking-widest text-white/90 bg-black/50 p-2 rounded-xl backdrop-blur-md"><span></span><span class="font-head font-bold text-sm text-yellow-400">' + (data.price === 0 ? 'FREE' : '$'+data.price) +'</span></div></div>';
+      
+      // اسم الكرت نازل بالكامل في الأسفل على اليسار في جميع الكروت
+      card.innerHTML = '<div class="glass-sheen"></div><div class="p-6 h-full flex flex-col justify-between text-white relative z-10 pointer-events-none"><div class="flex justify-between items-start"><div><p class="text-[10px] font-bold tracking-widest uppercase opacity-90 text-yellow-300 bg-black/60 px-2.5 py-0.5 rounded-full backdrop-blur-md w-max">' + data.tag + '</p></div><span class="font-head font-bold text-xs opacity-90 text-yellow-400 drop-shadow-md">VORTX</span></div><div class="my-auto flex items-center justify-between"><div class="w-10 h-7 rounded-md" style="background:' + data.chip + '"></div><div class="flex -space-x-2 opacity-80"><div class="w-6 h-6 rounded-full bg-white/20 border border-white/30 backdrop-blur-sm"></div><div class="w-6 h-6 rounded-full bg-white/40 border border-white/30 backdrop-blur-sm"></div></div></div><div class="flex justify-between items-end font-mono text-sm tracking-widest text-white/90 bg-black/60 p-3 rounded-xl backdrop-blur-md border border-white/10"><h3 class="font-head font-black text-xl sm:text-2xl text-white drop-shadow-md leading-none">' + data.title + '</h3><span class="font-head font-bold text-sm text-yellow-400 shrink-0">' + (data.price === 0 ? 'FREE' : '$'+data.price) +'</span></div></div>';
+      
       card.addEventListener('click', function () {
         if (Math.abs(dragDeltaX) < 8) {
           var normCurrent = ((Math.round(currentIndex) % N) + N) % N;
@@ -1381,7 +1388,7 @@ document.addEventListener('DOMContentLoaded', function() {
         { title: "Cc4💜", tag: "CC PACK", price: 5, bg: "url('Cc4.jpg')", border: "rgba(192, 132, 252, 0.4)", chip: "linear-gradient(135deg, #f3e8ff, #7e22ce)", link: "https://payhip.com/b/lDrPF" },
         { title: "Cc5🧡", tag: "CC PACK", price: 5, bg: "url('Cc5.png')", border: "rgba(251, 146, 60, 0.4)", chip: "linear-gradient(135deg, #ffedd5, #ea580c)", link: "https://payhip.com/b/whxGQ" },
         { title: "Cc6🤎", tag: "CC PACK", price: 5, bg: "url('Cc6.png')", border: "rgba(217, 119, 6, 0.4)", chip: "linear-gradient(135deg, #fef3c7, #b45309)", link: "https://payhip.com/b/XjdfY" },
-        { title: "Cc1-10🏅🔥", tag: "CC BUNDLE", price: 20, bg: "url('Cc1.jpg')", border: "rgba(234, 179, 8, 0.5)", chip: "linear-gradient(135deg, #fef08a, #ca8a04)", link: "https://payhip.com/b/tvErl" }
+        { title: "Cc1-10🏅🔥", tag: "CC BUNDLE", price: 20, bg: "url('Cc1-10.png')", border: "rgba(234, 179, 8, 0.5)", chip: "linear-gradient(135deg, #fef08a, #ca8a04)", link: "https://payhip.com/b/tvErl" }
       ],
       'XML': [
         { title: "BLACK VIP", tag: "VFX PACK", price: 29, bg: "linear-gradient(135deg, #09090b 0%, #18181b 50%, #27272a 100%)", border: "rgba(255, 255, 255, 0.2)", chip: "linear-gradient(135deg, #e2e8f0, #94a3b8)", link: "https://payhip.com/b/gBzm3" },
