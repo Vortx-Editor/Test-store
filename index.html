@@ -59,7 +59,7 @@
   html.light .text-white { color: #17131F !important; }
   html.light .text-slate-300 { color: #625D6B !important; }
 
-  /* تخصيص نصوص المودال والبطاقات لتظل دائماً واضحة وناصعة باللون الأبيض والذهبي */
+  /* تخصيص نصوص المودال والبطاقات لتظل دائماً واضحة وناصعة */
   #preview-card {
     background: rgba(15, 15, 22, 0.96) !important;
     border: 1px solid rgba(255, 255, 255, 0.25) !important;
@@ -121,20 +121,17 @@
   .radio { display: flex; justify-content: center; gap: 12px; margin-bottom: 1.5rem; direction: ltr; }
   .radio > input { position: absolute; appearance: none; opacity: 0; }
   .radio > label { cursor: pointer; font-size: 32px; position: relative; display: inline-block; transition: transform 0.3s ease; }
-  /* النجوم غير المحددة في الوضع الليلي: رصاصي */
   .radio > label > svg { fill: #4b5563; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5)); transition: fill 0.3s ease; }
-  /* النجوم غير المحددة في الوضع النهاري: أبيض */
   html.light .radio > label > svg { fill: #ffffff; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.15)); }
-  /* النجوم المحددة أو عند التأشير: أصفر ذهبي */
   .radio > input:checked ~ label svg, .radio > label:hover svg, .radio > label:hover ~ label svg { fill: #ff9e0b !important; filter: drop-shadow(0 0 12px rgba(255, 158, 11, 0.8)) !important; }
 
-  /* تنسيق شريط التعليقات ورأيها في الوضع النهاري والليلي */
+  /* تنسيق التعليقات للنهاري والليلي */
   #reviews-marquee-track .review-card-item { background: rgba(18, 18, 24, 0.85); border: 1px solid rgba(234, 179, 8, 0.3); }
   html.light #reviews-marquee-track .review-card-item { background: #ffffff !important; border-color: rgba(203, 213, 225, 0.8) !important; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
   html.light #reviews-marquee-track span.review-author { color: #1e293b !important; }
-  html.light #reviews-marquee-track span.review-comment-text { color: #475569 !important; } /* لون التعليق في النهاري رصاصي */
+  html.light #reviews-marquee-track span.review-comment-text { color: #475569 !important; }
 
-  /* تنسيق خانات الإدخال في الوضع الليلي والنهاري */
+  /* تنسيق خانات الإدخال للنهاري والليلي */
   .container_chat_bot { display: flex; flex-direction: column; max-width: 480px; width: 100%; margin: 0 auto; }
   .container_chat_bot .container-chat-options { position: relative; display: flex; background: linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,255,255,0.05)); border-radius: 20px; padding: 2px; overflow: hidden; }
   .container_chat_bot .chat { display: flex; flex-direction: column; background-color: rgba(18, 18, 24, 0.95) !important; border: 1px solid rgba(255, 255, 255, 0.12) !important; border-radius: 18px; width: 100%; overflow: hidden; backdrop-filter: blur(12px); }
@@ -156,7 +153,7 @@
   html.light .glass, html.light .cat-card-glass, html.light .tier-card { background: rgba(255, 255, 255, 0.85) !important; border: 1px solid rgba(203, 213, 225, 0.4) !important; box-shadow: 0 15px 35px -10px rgba(100, 116, 139, 0.08) !important; backdrop-filter: blur(24px) !important; }
 
   h1, h2, h3, .font-head { font-family: 'Cinzel', serif; letter-spacing: 1.5px; }
-  .force-eng { font-family: 'Cinzel', serif !important; letter-spacing: 0.2em !important; direction: ltr !important; unicode-bidi: isolate-override !important; display: inline-block; }
+  .force-eng { font-family: 'Cinzel', serif !important; letter-spacing: 0.15em !important; direction: ltr !important; unicode-bidi: isolate-override !important; display: inline-block; }
   .stars-background-container { position: absolute; inset: 0; width: 100%; height: 100%; background: var(--star-bg); overflow: hidden; z-index: 0; pointer-events: none; transition: background .4s ease; }
   body > .stars-background-container { position: fixed; }
   #hero-section { position: relative; min-height: 85vh; display: flex; flex-direction: column; justify-content: center; }
@@ -193,6 +190,11 @@
   .tab-btn { flex: 1; padding: 0.85rem 0; border-radius: 0.875rem; font-family: 'JetBrains Mono', monospace; font-weight: 800; font-size: 1rem; color: var(--text-color); opacity: 0.6; transition: all 0.4s ease; background: transparent; border: 1px solid transparent; cursor: pointer; }
   .tab-btn.active { background: linear-gradient(135deg, #eab308 0%, #ca8a04 100%); color: #050505 !important; opacity: 1; border-color: rgba(255,255,255,0.4); box-shadow: 0 4px 15px rgba(234, 179, 8, 0.4); transform: scale(1.02); }
   
+  /* الشريحة الفرعية للبرامج Alight Motion & After Effects */
+  .glass-sub-tab-container { background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%); border: 1px solid rgba(255,255,255,0.12); backdrop-filter: blur(16px); }
+  .sub-tab-btn { color: var(--text-color); background: transparent; border: 1px solid transparent; cursor: pointer; opacity: 0.6; transition: all 0.3s ease; }
+  .sub-tab-btn.active { background: linear-gradient(135deg, #7e22ce 0%, #a855f7 100%); color: #ffffff !important; opacity: 1 !important; border-color: rgba(255, 255, 255, 0.3); box-shadow: 0 4px 15px rgba(126, 34, 204, 0.4); transform: scale(1.02); }
+
   .cat-card-glass { background: var(--card-bg); backdrop-filter: blur(16px); border: 1px solid var(--card-border); border-radius: 1.75rem; padding: 1.75rem 2rem; cursor: pointer; transition: all 0.4s ease; }
   .cat-card-glass:hover { transform: translateY(-4px) scale(1.02); }
   .view { transition: opacity .4s ease; opacity: 1; display: block; }
@@ -239,7 +241,7 @@
         
         <div class="flex justify-between items-start relative z-10 w-full">
           <span id="preview-tag" class="text-[10px] font-black tracking-widest uppercase text-yellow-400 bg-black/90 px-3 py-1 rounded-full border border-white/20 card-tag-badge shadow-md">CC PACK</span>
-          <span class="font-head font-black text-sm text-yellow-400 tracking-widest drop-shadow-md card-gold-brand">VORTX</span>
+          <span id="preview-sw-badge" class="text-[10px] font-black tracking-widest uppercase text-purple-300 bg-purple-950/80 px-2.5 py-1 rounded-full border border-purple-500/30">📱 MOBILE</span>
         </div>
 
         <div class="relative z-10 bg-black/90 p-3.5 rounded-xl border border-white/20 flex items-center justify-between w-full shadow-2xl mt-auto">
@@ -281,7 +283,6 @@
   </div>
 </div>
 
-<!-- واجهة المفضلة المكبرة والمحدثة بالكامل -->
 <div id="favorites-modal" class="fixed inset-0 z-[10000] flex items-center justify-center p-3 sm:p-6 h-[100dvh] w-screen opacity-0 pointer-events-none transition-opacity duration-300">
   <div class="absolute inset-0 bg-black/85 backdrop-blur-md" onclick="window.closeFavoritesModal()"></div>
   <div class="glass rounded-3xl max-w-xl w-full relative z-10 p-5 sm:p-6 border border-white/15 shadow-2xl text-left max-h-[88vh] flex flex-col justify-between">
@@ -407,12 +408,23 @@
       </div>
     </section>
 
-    <div class="w-full max-w-5xl mx-auto px-4 sm:px-6 relative z-40 mb-10 mt-6 reveal-on-scroll">
+    <!-- تبويبات الأقسام الرئيسية ومحدد البرامج الفرعي -->
+    <div class="w-full max-w-5xl mx-auto px-4 sm:px-6 relative z-40 mb-8 mt-6 reveal-on-scroll">
       <div class="glass-tab-container">
         <button type="button" onclick="window.activateCategoryCards('CC', this)" class="tab-btn active force-eng">CC</button>
         <button type="button" onclick="window.activateCategoryCards('XML', this)" class="tab-btn force-eng">XML</button>
         <button type="button" onclick="window.activateCategoryCards('SHAKE', this)" class="tab-btn force-eng">SHAKE</button>
         <button type="button" onclick="window.activateCategoryCards('FREE', this)" class="tab-btn force-eng">FREE</button>
+      </div>
+
+      <!-- الشريحة الفرعية للبرامج: Alight Motion و After Effects -->
+      <div class="glass-sub-tab-container max-w-xs sm:max-w-md mx-auto mt-3.5 p-1 flex gap-2 rounded-xl">
+        <button type="button" onclick="window.activateSoftwareSubTab('AM', this)" class="sub-tab-btn active flex-1 py-1.5 px-3 rounded-lg text-xs font-extrabold tracking-wider flex items-center justify-center gap-1.5">
+          <span class="text-sm">📱</span> <span class="force-eng">Light Motion</span>
+        </button>
+        <button type="button" onclick="window.activateSoftwareSubTab('AE', this)" class="sub-tab-btn flex-1 py-1.5 px-3 rounded-lg text-xs font-extrabold tracking-wider flex items-center justify-center gap-1.5">
+          <span class="text-sm">💻</span> <span class="force-eng">After Effect</span>
+        </button>
       </div>
     </div>
 
@@ -593,15 +605,26 @@
     </div>
   </section>
 
+  <!-- صفحة المعرض لكل قسم وبها الشريحة الفرعية للبرامج -->
   <section id="category-view" class="view view-hidden relative z-10 min-h-screen">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
-      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-10 pb-6 border-b border-white/10">
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6 pb-6 border-b border-white/10">
         <div class="flex flex-col items-start text-left">
           <span data-i18n="cat-view-sub" class="inline-block px-3.5 py-1 rounded-full bg-yellow-500/10 border border-yellow-500/30 text-[10px] sm:text-xs font-mono font-black tracking-[0.25em] text-yellow-400 uppercase mb-2">CATEGORY STORE</span>
           <h2 id="cat-title" class="font-head font-black text-3xl sm:text-5xl force-eng text-current tracking-wider leading-none">CC COLLECTION</h2>
           <p class="text-xs sm:text-sm text-current opacity-70 font-semibold mt-2" data-i18n="cat-view-desc">Explore all premium editing assets and bundles in this collection.</p>
         </div>
         <button onclick="window.backToHome()" class="back-btn-pill shrink-0"><span>←</span> <span data-i18n="back-btn">Back</span></button>
+      </div>
+
+      <!-- محدد البرامج داخل صفحة المعرض الشاملة -->
+      <div class="glass-sub-tab-container max-w-xs sm:max-w-md mb-8 p-1 flex gap-2 rounded-xl">
+        <button type="button" onclick="window.activateSoftwareSubTab('AM', this)" class="sub-tab-btn active flex-1 py-1.5 px-3 rounded-lg text-xs font-extrabold tracking-wider flex items-center justify-center gap-1.5">
+          <span class="text-sm">📱</span> <span class="force-eng">Light Motion</span>
+        </button>
+        <button type="button" onclick="window.activateSoftwareSubTab('AE', this)" class="sub-tab-btn flex-1 py-1.5 px-3 rounded-lg text-xs font-extrabold tracking-wider flex items-center justify-center gap-1.5">
+          <span class="text-sm">💻</span> <span class="force-eng">After Effect</span>
+        </button>
       </div>
 
       <div id="cat-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div>
@@ -675,13 +698,15 @@
     }
   };
 
-  let currentPreviewItem = { title: "Cc1💛", tag: "CC PACK", price: 5, bgUrl: "Cc1.jpg", payhipUrl: "https://payhip.com/b/gBzm3" };
+  let currentPreviewItem = { title: "Cc1💛", tag: "CC PACK", price: 5, bgUrl: "Cc1.jpg", payhipUrl: "https://payhip.com/b/gBzm3", sw: "AM" };
 
-  window.openPreview = function(title, tag, price, bg, chip, payhipUrl) {
+  window.openPreview = function(title, tag, price, bg, chip, payhipUrl, sw) {
     let imgFile = 'Cc1.jpg';
     if (bg && bg.includes('url(')) {
       const match = bg.match(/url\(['"]?([^'"]+)['"]?\)/);
       if (match && match[1]) imgFile = match[1];
+    } else {
+      imgFile = '';
     }
     
     currentPreviewItem = { 
@@ -690,19 +715,36 @@
       tag: tag || 'CC PACK', 
       price: price || 5, 
       bgUrl: imgFile,
-      payhipUrl: payhipUrl || 'https://payhip.com/b/gBzm3'
+      payhipUrl: payhipUrl || 'https://payhip.com/b/gBzm3',
+      sw: sw || (window.CURRENT_SW || 'AM')
     };
 
     const modal = document.getElementById('preview-modal');
     const titleEl = document.getElementById('preview-title');
     const tagEl = document.getElementById('preview-tag');
+    const swBadgeEl = document.getElementById('preview-sw-badge');
     const priceEl = document.getElementById('preview-price-display');
     const bgEl = document.getElementById('preview-chip-bg');
 
     if (titleEl) titleEl.textContent = currentPreviewItem.title;
     if (tagEl) tagEl.textContent = currentPreviewItem.tag;
+    if (swBadgeEl) {
+      if (currentPreviewItem.sw === 'AE') {
+        swBadgeEl.textContent = '💻 AFTER EFFECTS';
+        swBadgeEl.className = 'text-[10px] font-black tracking-widest uppercase text-blue-300 bg-blue-950/90 px-2.5 py-1 rounded-full border border-blue-500/40';
+      } else {
+        swBadgeEl.textContent = '📱 LIGHT MOTION';
+        swBadgeEl.className = 'text-[10px] font-black tracking-widest uppercase text-purple-300 bg-purple-950/90 px-2.5 py-1 rounded-full border border-purple-500/40';
+      }
+    }
     if (priceEl) priceEl.textContent = '$' + currentPreviewItem.price;
-    if (bgEl) { bgEl.style.backgroundImage = `url('${currentPreviewItem.bgUrl}')`; }
+    if (bgEl) { 
+      if (currentPreviewItem.bgUrl) {
+        bgEl.style.backgroundImage = `url('${currentPreviewItem.bgUrl}')`; 
+      } else {
+        bgEl.style.backgroundImage = 'linear-gradient(135deg, #181824, #09090d)';
+      }
+    }
 
     if (modal) { modal.classList.remove('opacity-0', 'pointer-events-none'); document.body.style.overflow = 'hidden'; }
   };
@@ -717,7 +759,7 @@
   };
 
   window.togglePreviewFavorite = function() {
-    window.toggleFavorite(currentPreviewItem.id, currentPreviewItem.title, currentPreviewItem.tag, currentPreviewItem.price, currentPreviewItem.bgUrl, currentPreviewItem.payhipUrl);
+    window.toggleFavorite(currentPreviewItem.id, currentPreviewItem.title, currentPreviewItem.tag, currentPreviewItem.price, currentPreviewItem.bgUrl, currentPreviewItem.payhipUrl, currentPreviewItem.sw);
   };
 
   window.scrollToId = function(id) {
@@ -738,58 +780,54 @@
   };
 
   window.openCategoryView = function(catKey) {
+    window.CURRENT_CAT = catKey || 'CC';
     document.querySelectorAll('.view').forEach(v => v.classList.add('view-hidden'));
     const catView = document.getElementById('category-view');
     const catTitle = document.getElementById('cat-title');
-    const catGrid = document.getElementById('cat-grid');
 
-    if (catTitle) catTitle.textContent = catKey + ' COLLECTION';
+    if (catTitle) catTitle.textContent = window.CURRENT_CAT + ' COLLECTION';
 
-    let products = [];
-    if (catKey === 'CC') {
-      products = [
-        { id: "Cc1", title: "Cc1💛", tag: "CC PACK", price: 5, img: "Cc1.jpg", link: "https://payhip.com/b/gBzm3" },
-        { id: "Cc2", title: "Cc2💙", tag: "CC PACK", price: 5, img: "Cc2.jpg", link: "https://payhip.com/b/IB15F" },
-        { id: "Cc3", title: "Cc3🩵", tag: "CC PACK", price: 5, img: "Cc3.png", link: "https://payhip.com/b/0jcBW" },
-        { id: "Cc4", title: "Cc4💜", tag: "CC PACK", price: 5, img: "Cc4.jpg", link: "https://payhip.com/b/lDrPF" },
-        { id: "Cc5", title: "Cc5🧡", tag: "CC PACK", price: 5, img: "Cc5.png", link: "https://payhip.com/b/whxGQ" },
-        { id: "Cc6", title: "Cc6🤎", tag: "CC PACK", price: 5, img: "Cc6.png", link: "https://payhip.com/b/XjdfY" },
-        { id: "Cc7", title: "Cc7🩵", tag: "CC PACK", price: 5, img: "Cc7.png", link: "https://payhip.com/b/TpJqx" },
-        { id: "Cc8", title: "Cc8🧡", tag: "CC PACK", price: 5, img: "Cc8.png", link: "https://payhip.com/b/CdGQr" },
-        { id: "Cc9", title: "Cc9🤎", tag: "CC PACK", price: 5, img: "Cc9.png", link: "https://payhip.com/b/TSvAh" },
-        { id: "Cc10", title: "Cc10🤍", tag: "CC PACK", price: 5, img: "Cc10.png", link: "https://payhip.com/b/82gk1" },
-        { id: "Cc11", title: "Cc11🩵", tag: "CC PACK", price: 5, img: "Cc11.png", link: "https://payhip.com/b/CGIdB" },
-        { id: "Cc12", title: "Cc12💜", tag: "CC PACK", price: 5, img: "Cc12.png", link: "https://payhip.com/b/9YDA7" },
-        { id: "Cc1-10", title: "Cc1-10🏅🔥", tag: "CC BUNDLE", price: 15, img: "Cc1-10.jpg", link: "https://payhip.com/b/fQ9Sa" }
-      ];
-    } else {
-      products = Array.from({ length: 4 }).map((_, i) => ({
-        id: `${catKey}_item_${i+1}`,
-        title: `${catKey} Asset Pack Vol.${i+1}`,
-        tag: catKey,
-        price: 15 + (i * 5),
-        img: "", 
-        link: "https://payhip.com/b/gBzm3"
-      }));
+    window.renderCategoryGrid();
+
+    if (catView) {
+      catView.classList.remove('view-hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
+  };
+
+  window.renderCategoryGrid = function() {
+    const catGrid = document.getElementById('cat-grid');
+    if (!catGrid) return;
+
+    const catData = window.DATA_STORE[window.CURRENT_CAT] || window.DATA_STORE['CC'];
+    const products = catData[window.CURRENT_SW] || catData['AM'];
 
     const buyText = (window.translations && window.translations[window.currentLang] && window.translations[window.currentLang]["buy-now"]) || "Buy Now";
     const favText = (window.translations && window.translations[window.currentLang] && window.translations[window.currentLang]["fav"]) || "♥ Fav";
 
-    if (catGrid) {
-      catGrid.innerHTML = products.map(p => `
+    catGrid.innerHTML = products.map(p => {
+      const swLabel = (p.sw === 'AE') ? '💻 PC' : '📱 MOBILE';
+      return `
         <div class="glass p-5 rounded-2xl border border-white/10 flex flex-col justify-between hover:border-yellow-500/40 transition-all duration-300 group">
           <div>
             ${p.img ? `
-              <div onclick="window.openPreview('${p.title}', '${p.tag}', ${p.price}, 'url(\\'${p.img}\\')', '', '${p.link}')" class="aspect-[9/16] w-full rounded-xl border border-white/10 p-4 flex flex-col justify-between mb-4 relative overflow-hidden bg-cover bg-center shadow-lg cursor-pointer transform transition-transform duration-300 hover:scale-[1.03]" style="background-image: url('${p.img}');">
+              <div onclick="window.openPreview('${p.title}', '${p.tag}', ${p.price}, 'url(\\'${p.img}\\')', '', '${p.link}', '${p.sw}')" class="aspect-[9/16] w-full rounded-xl border border-white/10 p-4 flex flex-col justify-between mb-4 relative overflow-hidden bg-cover bg-center shadow-lg cursor-pointer transform transition-transform duration-300 hover:scale-[1.03]" style="background-image: url('${p.img}');">
                 <div class="flex justify-between items-center relative z-10 w-full">
                   <span class="text-[9px] font-black uppercase tracking-widest text-yellow-300 bg-black/90 px-2.5 py-1 rounded-full border border-white/10 card-tag-badge">${p.tag}</span>
-                  <span class="font-head font-black text-xs text-yellow-400 tracking-widest drop-shadow-md card-gold-brand">VORTX</span>
+                  <span class="text-[9px] font-black uppercase tracking-widest text-purple-300 bg-purple-950/90 px-2.5 py-1 rounded-full border border-purple-500/30">${swLabel}</span>
                 </div>
               </div>
             ` : `
-              <div class="aspect-video w-full rounded-xl bg-gradient-to-br from-white/10 to-white/5 border border-white/10 flex items-center justify-center mb-4 p-4 text-center">
-                <span class="font-head font-bold text-lg text-yellow-400 tracking-wider">${p.tag} ASSET</span>
+              <div onclick="window.openPreview('${p.title}', '${p.tag}', ${p.price}, '', '', '${p.link}', '${p.sw}')" class="aspect-[9/16] w-full rounded-xl bg-gradient-to-br from-indigo-950/80 via-purple-950/50 to-black border border-white/10 flex flex-col justify-between mb-4 p-4 text-center cursor-pointer transform transition-transform duration-300 hover:scale-[1.03]">
+                <div class="flex justify-between items-center relative z-10 w-full">
+                  <span class="text-[9px] font-black uppercase tracking-widest text-yellow-300 bg-black/90 px-2.5 py-1 rounded-full border border-white/10 card-tag-badge">${p.tag}</span>
+                  <span class="text-[9px] font-black uppercase tracking-widest text-blue-300 bg-blue-950/90 px-2.5 py-1 rounded-full border border-blue-500/30">${swLabel}</span>
+                </div>
+                <div class="my-auto py-6">
+                  <span class="text-3xl block mb-2">${p.sw === 'AE' ? '💻' : '📱'}</span>
+                  <span class="font-head font-black text-sm text-yellow-400 tracking-wider uppercase block">${p.title}</span>
+                  <span class="text-[10px] text-white/60 font-mono block mt-1">Ready for custom preview</span>
+                </div>
               </div>
             `}
             <h4 class="font-head font-black text-xl text-white group-hover:text-yellow-400 transition drop-shadow-md mb-2">${p.title}</h4>
@@ -797,20 +835,15 @@
           <div class="pt-3 border-t border-white/10 flex items-center justify-between mt-4">
             <span class="font-mono text-xl font-black text-yellow-400 font-bold">${p.price === 0 ? 'FREE' : '$' + p.price}</span>
             <div class="flex gap-2">
-              <button onclick="window.toggleFavorite('${p.id}', '${p.title}', '${p.tag}', ${p.price}, '${p.img}', '${p.link}')" class="px-3 py-1.5 rounded-xl bg-white/10 hover:bg-red-500/80 text-red-400 hover:text-white font-bold text-xs transition">${favText}</button>
+              <button onclick="window.toggleFavorite('${p.id}', '${p.title}', '${p.tag}', ${p.price}, '${p.img}', '${p.link}', '${p.sw}')" class="px-3 py-1.5 rounded-xl bg-white/10 hover:bg-red-500/80 text-red-400 hover:text-white font-bold text-xs transition">${favText}</button>
               <button type="button" onclick="window.openPayhipOrder('${p.link}')" class="glass-btn-center !px-4 !py-1.5 !min-w-0">
                 <span>${buyText}</span>
               </button>
             </div>
           </div>
         </div>
-      `).join('');
-    }
-
-    if (catView) {
-      catView.classList.remove('view-hidden');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+      `;
+    }).join('');
   };
 
   window.backToHome = function() {
@@ -842,13 +875,13 @@
       if (favBadge) { favBadge.textContent = favItems.length; favBadge.classList.toggle('hidden', favItems.length === 0); }
     };
 
-    window.toggleFavorite = function(id, title, tag, price, img, link) {
+    window.toggleFavorite = function(id, title, tag, price, img, link, sw) {
       const idx = favItems.findIndex(item => item.id === id);
       if (idx > -1) {
         favItems.splice(idx, 1);
         window.showToast('REMOVED FROM FAVORITES');
       } else {
-        favItems.push({ id, title, tag, price, img, link });
+        favItems.push({ id, title, tag, price, img, link, sw: sw || 'AM' });
         window.showToast('ADDED TO FAVORITES ❤');
       }
       localStorage.setItem('vortx_favorites', JSON.stringify(favItems));
@@ -866,7 +899,6 @@
     window.openFavoritesModal = function() { renderFavoritesUI(); const m = document.getElementById('favorites-modal'); if(m) { m.classList.remove('opacity-0', 'pointer-events-none'); lockBody(); } };
     window.closeFavoritesModal = function() { const m = document.getElementById('favorites-modal'); if(m) { m.classList.add('opacity-0', 'pointer-events-none'); unlockBody(); } };
 
-    /* إخراج المنتجات المفضلة بشكل كبير وواضح وبأبعاد احترافية */
     function renderFavoritesUI() {
       const list = document.getElementById('favorites-list');
       if (!list) return;
@@ -876,10 +908,10 @@
 
       list.innerHTML = favItems.map(item => `
         <div class="p-3 bg-white/5 rounded-2xl border border-white/10 flex flex-col justify-between gap-3 shadow-lg hover:border-yellow-500/40 transition group">
-          <div class="relative w-full aspect-[9/12] rounded-xl overflow-hidden bg-cover bg-center border border-white/10" style="background-image: url('${item.img || 'Cc1.jpg'}');">
+          <div class="relative w-full aspect-[9/12] rounded-xl overflow-hidden bg-cover bg-center border border-white/10" style="${item.img ? `background-image: url('${item.img}');` : 'background: linear-gradient(135deg, #1e1b4b, #09090d);'}">
             <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30"></div>
             <span class="absolute top-2 left-2 text-[9px] font-black uppercase tracking-widest text-yellow-300 bg-black/80 px-2.5 py-0.5 rounded-full border border-white/10">${item.tag || 'CC PACK'}</span>
-            <span class="absolute top-2 right-2 font-head font-black text-[10px] text-yellow-400">VORTX</span>
+            <span class="absolute top-2 right-2 text-[9px] font-black uppercase text-purple-300 bg-purple-950/80 px-2 py-0.5 rounded-full">${item.sw === 'AE' ? '💻 PC' : '📱 Mobile'}</span>
             <div class="absolute bottom-2 left-2 right-2">
               <h4 class="text-sm font-black text-white truncate drop-shadow-md">${item.title}</h4>
               <span class="text-xs text-yellow-400 font-mono font-black">${item.price === 0 ? 'FREE' : '$' + item.price}</span>
@@ -889,7 +921,7 @@
             <button onclick="window.openPayhipOrder('${item.link}')" class="glass-btn-center !w-full !py-2 !min-w-0 text-xs">
               <span>${buyText}</span>
             </button>
-            <button onclick="window.toggleFavorite('${item.id}', '${item.title}', '${item.tag}', ${item.price}, '${item.img}', '${item.link}')" class="text-red-400 hover:text-red-300 font-extrabold p-2 bg-red-500/10 rounded-xl border border-red-500/20 text-xs shrink-0">✕</button>
+            <button onclick="window.toggleFavorite('${item.id}', '${item.title}', '${item.tag}', ${item.price}, '${item.img}', '${item.link}', '${item.sw}')" class="text-red-400 hover:text-red-300 font-extrabold p-2 bg-red-500/10 rounded-xl border border-red-500/20 text-xs shrink-0">✕</button>
           </div>
         </div>
       `).join('');
@@ -1106,9 +1138,7 @@
       renderFavoritesUI();
       const catView = document.getElementById('category-view');
       if (catView && !catView.classList.contains('view-hidden')) {
-        const catTitle = document.getElementById('cat-title');
-        const currentCat = catTitle ? catTitle.textContent.split(' ')[0] : 'CC';
-        window.openCategoryView(currentCat);
+        window.renderCategoryGrid();
       }
     };
 
@@ -1145,35 +1175,79 @@
 document.addEventListener('DOMContentLoaded', function() {
   "use strict";
 
-  window.CARDS_DATA_CURRENT = [
-    { title: "Cc1💛", tag: "CC PACK", price: 5, bg: "url('Cc1.jpg')", border: "rgba(251, 191, 36, 0.4)", link: "https://payhip.com/b/gBzm3" },
-    { title: "Cc2💙", tag: "CC PACK", price: 5, bg: "url('Cc2.jpg')", border: "rgba(34, 211, 238, 0.4)", link: "https://payhip.com/b/IB15F" },
-    { title: "Cc3🩵", tag: "CC PACK", price: 5, bg: "url('Cc3.png')", border: "rgba(56, 189, 248, 0.4)", link: "https://payhip.com/b/0jcBW" },
-    { title: "Cc4💜", tag: "CC PACK", price: 5, bg: "url('Cc4.jpg')", border: "rgba(192, 132, 252, 0.4)", link: "https://payhip.com/b/lDrPF" },
-    { title: "Cc5🧡", tag: "CC PACK", price: 5, bg: "url('Cc5.png')", border: "rgba(251, 146, 60, 0.4)", link: "https://payhip.com/b/whxGQ" },
-    { title: "Cc6🤎", tag: "CC PACK", price: 5, bg: "url('Cc6.png')", border: "rgba(217, 119, 6, 0.4)", link: "https://payhip.com/b/XjdfY" },
-    { title: "Cc7🩵", tag: "CC PACK", price: 5, bg: "url('Cc7.png')", border: "rgba(34, 211, 238, 0.4)", link: "https://payhip.com/b/TpJqx" },
-    { title: "Cc8🧡", tag: "CC PACK", price: 5, bg: "url('Cc8.png')", border: "rgba(251, 146, 60, 0.4)", link: "https://payhip.com/b/CdGQr" },
-    { title: "Cc9🤎", tag: "CC PACK", price: 5, bg: "url('Cc9.png')", border: "rgba(217, 119, 6, 0.4)", link: "https://payhip.com/b/TSvAh" },
-    { title: "Cc10🤍", tag: "CC PACK", price: 5, bg: "url('Cc10.png')", border: "rgba(255, 255, 255, 0.4)", link: "https://payhip.com/b/82gk1" },
-    { title: "Cc11🩵", tag: "CC PACK", price: 5, bg: "url('Cc11.png')", border: "rgba(56, 189, 248, 0.4)", link: "https://payhip.com/b/CGIdB" },
-    { title: "Cc12💜", tag: "CC PACK", price: 5, bg: "url('Cc12.png')", border: "rgba(192, 132, 252, 0.4)", link: "https://payhip.com/b/9YDA7" },
-    { title: "Cc1-10🏅🔥", tag: "CC BUNDLE", price: 15, bg: "url('Cc1-10.jpg')", border: "rgba(234, 179, 8, 0.5)", link: "https://payhip.com/b/fQ9Sa" }
-  ];
+  /* قاعدة البيانات المقسمة حسب القسم وحسب البرنامج المختص */
+  window.CURRENT_CAT = 'CC';
+  window.CURRENT_SW = 'AM';
+
+  window.DATA_STORE = {
+    'CC': {
+      'AM': [
+        { id: "Cc1", title: "Cc1💛", tag: "CC PACK", price: 5, bg: "url('Cc1.jpg')", img: "Cc1.jpg", border: "rgba(251, 191, 36, 0.4)", link: "https://payhip.com/b/gBzm3", sw: "AM" },
+        { id: "Cc2", title: "Cc2💙", tag: "CC PACK", price: 5, bg: "url('Cc2.jpg')", img: "Cc2.jpg", border: "rgba(34, 211, 238, 0.4)", link: "https://payhip.com/b/IB15F", sw: "AM" },
+        { id: "Cc3", title: "Cc3🩵", tag: "CC PACK", price: 5, bg: "url('Cc3.png')", img: "Cc3.png", border: "rgba(56, 189, 248, 0.4)", link: "https://payhip.com/b/0jcBW", sw: "AM" },
+        { id: "Cc4", title: "Cc4💜", tag: "CC PACK", price: 5, bg: "url('Cc4.jpg')", img: "Cc4.jpg", border: "rgba(192, 132, 252, 0.4)", link: "https://payhip.com/b/lDrPF", sw: "AM" },
+        { id: "Cc5", title: "Cc5🧡", tag: "CC PACK", price: 5, bg: "url('Cc5.png')", img: "Cc5.png", border: "rgba(251, 146, 60, 0.4)", link: "https://payhip.com/b/whxGQ", sw: "AM" },
+        { id: "Cc6", title: "Cc6🤎", tag: "CC PACK", price: 5, bg: "url('Cc6.png')", img: "Cc6.png", border: "rgba(217, 119, 6, 0.4)", link: "https://payhip.com/b/XjdfY", sw: "AM" },
+        { id: "Cc7", title: "Cc7🩵", tag: "CC PACK", price: 5, bg: "url('Cc7.png')", img: "Cc7.png", border: "rgba(34, 211, 238, 0.4)", link: "https://payhip.com/b/TpJqx", sw: "AM" },
+        { id: "Cc8", title: "Cc8🧡", tag: "CC PACK", price: 5, bg: "url('Cc8.png')", img: "Cc8.png", border: "rgba(251, 146, 60, 0.4)", link: "https://payhip.com/b/CdGQr", sw: "AM" },
+        { id: "Cc9", title: "Cc9🤎", tag: "CC PACK", price: 5, bg: "url('Cc9.png')", img: "Cc9.png", border: "rgba(217, 119, 6, 0.4)", link: "https://payhip.com/b/TSvAh", sw: "AM" },
+        { id: "Cc10", title: "Cc10🤍", tag: "CC PACK", price: 5, bg: "url('Cc10.png')", img: "Cc10.png", border: "rgba(255, 255, 255, 0.4)", link: "https://payhip.com/b/82gk1", sw: "AM" },
+        { id: "Cc11", title: "Cc11🩵", tag: "CC PACK", price: 5, bg: "url('Cc11.png')", img: "Cc11.png", border: "rgba(56, 189, 248, 0.4)", link: "https://payhip.com/b/CGIdB", sw: "AM" },
+        { id: "Cc12", title: "Cc12💜", tag: "CC PACK", price: 5, bg: "url('Cc12.png')", img: "Cc12.png", border: "rgba(192, 132, 252, 0.4)", link: "https://payhip.com/b/9YDA7", sw: "AM" },
+        { id: "Cc1-10", title: "Cc1-10🏅🔥", tag: "CC BUNDLE", price: 15, bg: "url('Cc1-10.jpg')", img: "Cc1-10.jpg", border: "rgba(234, 179, 8, 0.5)", link: "https://payhip.com/b/fQ9Sa", sw: "AM" }
+      ],
+      'AE': [
+        { id: "AE_CC_1", title: "AE CC Vol.1 💻", tag: "AE CC PACK", price: 5, bg: "linear-gradient(135deg, #1e1b4b, #312e81)", img: "", border: "rgba(168, 85, 247, 0.5)", link: "https://payhip.com/b/gBzm3", sw: "AE" },
+        { id: "AE_CC_2", title: "AE CC Vol.2 💻", tag: "AE CC PACK", price: 5, bg: "linear-gradient(135deg, #311b92, #4a148c)", img: "", border: "rgba(168, 85, 247, 0.5)", link: "https://payhip.com/b/gBzm3", sw: "AE" },
+        { id: "AE_CC_3", title: "AE CC Vol.3 💻", tag: "AE CC PACK", price: 5, bg: "linear-gradient(135deg, #0f172a, #1e293b)", img: "", border: "rgba(168, 85, 247, 0.5)", link: "https://payhip.com/b/gBzm3", sw: "AE" },
+        { id: "AE_CC_4", title: "AE CC Vol.4 💻", tag: "AE CC PACK", price: 5, bg: "linear-gradient(135deg, #172554, #1e3a8a)", img: "", border: "rgba(168, 85, 247, 0.5)", link: "https://payhip.com/b/gBzm3", sw: "AE" },
+        { id: "AE_CC_5", title: "AE CC Bundle 💻🔥", tag: "AE BUNDLE", price: 15, bg: "linear-gradient(135deg, #581c87, #3b0764)", img: "", border: "rgba(234, 179, 8, 0.5)", link: "https://payhip.com/b/gBzm3", sw: "AE" }
+      ]
+    },
+    'XML': {
+      'AM': [
+        { id: "XML_AM_1", title: "XML Pack Vol.1 📱", tag: "XML", price: 10, bg: "linear-gradient(135deg, #18181b, #27272a)", img: "", border: "rgba(255, 255, 255, 0.2)", link: "https://payhip.com/b/gBzm3", sw: "AM" }
+      ],
+      'AE': [
+        { id: "XML_AE_1", title: "AE Project Vol.1 💻", tag: "AEP", price: 15, bg: "linear-gradient(135deg, #2e1065, #3b0764)", img: "", border: "rgba(168, 85, 247, 0.5)", link: "https://payhip.com/b/gBzm3", sw: "AE" }
+      ]
+    },
+    'SHAKE': {
+      'AM': [
+        { id: "SHK_AM_1", title: "Shake Pack Vol.1 📱", tag: "SHAKE", price: 10, bg: "linear-gradient(135deg, #450a0a, #7f1d1d)", img: "", border: "rgba(248, 113, 113, 0.4)", link: "https://payhip.com/b/gBzm3", sw: "AM" }
+      ],
+      'AE': [
+        { id: "SHK_AE_1", title: "AE Shake Pack 💻", tag: "AE SHAKE", price: 15, bg: "linear-gradient(135deg, #881337, #4c0519)", img: "", border: "rgba(244, 63, 94, 0.5)", link: "https://payhip.com/b/gBzm3", sw: "AE" }
+      ]
+    },
+    'FREE': {
+      'AM': [
+        { id: "FRE_AM_1", title: "Free AM Assets 📱", tag: "FREE", price: 0, bg: "linear-gradient(135deg, #09090b, #18181b)", img: "", border: "rgba(255, 255, 255, 0.2)", link: "https://payhip.com/b/gBzm3", sw: "AM" }
+      ],
+      'AE': [
+        { id: "FRE_AE_1", title: "Free AE Assets 💻", tag: "FREE", price: 0, bg: "linear-gradient(135deg, #022c22, #064e3b)", img: "", border: "rgba(52, 211, 153, 0.5)", link: "https://payhip.com/b/gBzm3", sw: "AE" }
+      ]
+    }
+  };
+
+  window.CARDS_DATA_CURRENT = window.DATA_STORE['CC']['AM'];
 
   var stage = document.getElementById('carousel-stage'), track = document.getElementById('carousel-track');
   if (!stage || !track) return;
   var cards = [], N = window.CARDS_DATA_CURRENT.length, currentIndex = 0, targetIndex = 0;
   var isDragging = false, isHorizontalDrag = false, startX = 0, startY = 0, currentX = 0, currentY = 0, dragDeltaX = 0, velocityX = 0, lastX = 0, lastTime = 0;
 
-  /* تحسين اللمس والضغط المباشر بضغطة واحدة بالجوال */
   window.rebuild3DCards = function() {
     track.innerHTML = ''; cards = []; N = window.CARDS_DATA_CURRENT.length; currentIndex = 0; targetIndex = 0;
     window.CARDS_DATA_CURRENT.forEach(function (data, i) {
       var card = document.createElement('div');
-      card.className = 'card-3d'; card.style.background = data.bg; card.style.border = '1px solid ' + data.border;
+      card.className = 'card-3d'; 
+      card.style.background = data.bg || 'linear-gradient(135deg, #181824, #09090d)'; 
+      card.style.border = '1px solid ' + data.border;
       
-      card.innerHTML = '<div class="p-6 h-full flex flex-col justify-between text-white relative z-10 pointer-events-none"><div class="flex justify-between items-start"><p class="text-[10px] font-extrabold tracking-widest uppercase text-yellow-300 bg-black/80 px-2.5 py-1 rounded-full border border-white/10 card-tag-badge">' + data.tag + '</p><span class="font-head font-black text-xs text-yellow-400 drop-shadow-md card-gold-brand">VORTX</span></div><div class="flex justify-between items-end font-mono text-sm tracking-widest bg-black/80 p-3 rounded-xl border border-white/15 card-info-box mt-auto"><h3 class="font-head font-black text-xl sm:text-2xl text-white drop-shadow-md leading-none">' + data.title + '</h3><span class="font-head font-bold text-sm text-yellow-400 shrink-0">' + (data.price === 0 ? 'FREE' : '$'+data.price) +'</span></div></div>';
+      var swBadge = (data.sw === 'AE') ? '💻 PC' : '📱 MOBILE';
+
+      card.innerHTML = '<div class="p-6 h-full flex flex-col justify-between text-white relative z-10 pointer-events-none"><div class="flex justify-between items-start"><p class="text-[10px] font-extrabold tracking-widest uppercase text-yellow-300 bg-black/80 px-2.5 py-1 rounded-full border border-white/10 card-tag-badge">' + data.tag + '</p><span class="text-[10px] font-extrabold tracking-widest uppercase text-purple-300 bg-purple-950/80 px-2 py-0.5 rounded-full border border-purple-500/30">' + swBadge + '</span></div><div class="flex justify-between items-end font-mono text-sm tracking-widest bg-black/80 p-3 rounded-xl border border-white/15 card-info-box mt-auto"><h3 class="font-head font-black text-xl sm:text-2xl text-white drop-shadow-md leading-none">' + data.title + '</h3><span class="font-head font-bold text-sm text-yellow-400 shrink-0">' + (data.price === 0 ? 'FREE' : '$'+data.price) +'</span></div></div>';
       
       var pStartX = 0, pStartY = 0, pStartTime = 0;
 
@@ -1186,7 +1260,7 @@ document.addEventListener('DOMContentLoaded', function() {
         var timeDiff = Date.now() - pStartTime;
         if (dist < 12 && timeDiff < 300) {
           e.preventDefault();
-          window.openPreview(data.title, data.tag, data.price, data.bg, '', data.link);
+          window.openPreview(data.title, data.tag, data.price, data.bg, '', data.link, data.sw);
         }
       });
 
@@ -1194,41 +1268,44 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   };
 
+  /* التبديل بين البرامج (Alight Motion & After Effects) */
+  window.activateSoftwareSubTab = function(sw, btn) {
+    window.CURRENT_SW = sw;
+    
+    document.querySelectorAll('.sub-tab-btn').forEach(b => {
+      if ((sw === 'AM' && b.innerText.includes('Light')) || (sw === 'AE' && b.innerText.includes('After'))) {
+        b.classList.add('active');
+      } else {
+        b.classList.remove('active');
+      }
+    });
+
+    window.reloadCurrentCards();
+  };
+
+  /* التبديل بين الأقسام الرئيسية (CC, XML, SHAKE, FREE) */
   window.activateCategoryCards = function(cat, btn) {
+    window.CURRENT_CAT = cat;
     if (btn) {
       const container = btn.parentElement;
       if (container) { container.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active')); }
       btn.classList.add('active');
     }
-    const catDataMap = {
-      'CC': [
-        { title: "Cc1💛", tag: "CC PACK", price: 5, bg: "url('Cc1.jpg')", border: "rgba(251, 191, 36, 0.4)", link: "https://payhip.com/b/gBzm3" },
-        { title: "Cc2💙", tag: "CC PACK", price: 5, bg: "url('Cc2.jpg')", border: "rgba(34, 211, 238, 0.4)", link: "https://payhip.com/b/IB15F" },
-        { title: "Cc3🩵", tag: "CC PACK", price: 5, bg: "url('Cc3.png')", border: "rgba(56, 189, 248, 0.4)", link: "https://payhip.com/b/0jcBW" },
-        { title: "Cc4💜", tag: "CC PACK", price: 5, bg: "url('Cc4.jpg')", border: "rgba(192, 132, 252, 0.4)", link: "https://payhip.com/b/lDrPF" },
-        { title: "Cc5🧡", tag: "CC PACK", price: 5, bg: "url('Cc5.png')", border: "rgba(251, 146, 60, 0.4)", link: "https://payhip.com/b/whxGQ" },
-        { title: "Cc6🤎", tag: "CC PACK", price: 5, bg: "url('Cc6.png')", border: "rgba(217, 119, 6, 0.4)", link: "https://payhip.com/b/XjdfY" },
-        { title: "Cc7🩵", tag: "CC PACK", price: 5, bg: "url('Cc7.png')", border: "rgba(34, 211, 238, 0.4)", link: "https://payhip.com/b/TpJqx" },
-        { title: "Cc8🧡", tag: "CC PACK", price: 5, bg: "url('Cc8.png')", border: "rgba(251, 146, 60, 0.4)", link: "https://payhip.com/b/CdGQr" },
-        { title: "Cc9🤎", tag: "CC PACK", price: 5, bg: "url('Cc9.png')", border: "rgba(217, 119, 6, 0.4)", link: "https://payhip.com/b/TSvAh" },
-        { title: "Cc10🤍", tag: "CC PACK", price: 5, bg: "url('Cc10.png')", border: "rgba(255, 255, 255, 0.4)", link: "https://payhip.com/b/82gk1" },
-        { title: "Cc11🩵", tag: "CC PACK", price: 5, bg: "url('Cc11.png')", border: "rgba(56, 189, 248, 0.4)", link: "https://payhip.com/b/CGIdB" },
-        { title: "Cc12💜", tag: "CC PACK", price: 5, bg: "url('Cc12.png')", border: "rgba(192, 132, 252, 0.4)", link: "https://payhip.com/b/9YDA7" },
-        { title: "Cc1-10🏅🔥", tag: "CC BUNDLE", price: 15, bg: "url('Cc1-10.jpg')", border: "rgba(234, 179, 8, 0.5)", link: "https://payhip.com/b/fQ9Sa" }
-      ],
-      'XML': [
-        { title: "XML PACK Vol.1", tag: "XML", price: 20, bg: "linear-gradient(135deg, #18181b, #27272a)", border: "rgba(255, 255, 255, 0.2)", link: "https://payhip.com/b/gBzm3" }
-      ],
-      'SHAKE': [
-        { title: "SHAKE PACK Vol.1", tag: "SHAKE", price: 15, bg: "linear-gradient(135deg, #450a0a, #7f1d1d)", border: "rgba(248, 113, 113, 0.4)", link: "https://payhip.com/b/gBzm3" }
-      ],
-      'FREE': [
-        { title: "FREE PACK Vol.1", tag: "FREE", price: 0, bg: "linear-gradient(135deg, #09090b, #18181b)", border: "rgba(255, 255, 255, 0.2)", link: "https://payhip.com/b/gBzm3" }
-      ]
-    };
-    if (catDataMap[cat]) {
-      window.CARDS_DATA_CURRENT = catDataMap[cat];
-      if (typeof window.rebuild3DCards === 'function') { window.rebuild3DCards(); }
+    window.reloadCurrentCards();
+  };
+
+  window.reloadCurrentCards = function() {
+    const catData = window.DATA_STORE[window.CURRENT_CAT] || window.DATA_STORE['CC'];
+    const swData = catData[window.CURRENT_SW] || catData['AM'];
+    
+    window.CARDS_DATA_CURRENT = swData;
+    if (typeof window.rebuild3DCards === 'function') {
+      window.rebuild3DCards();
+    }
+
+    const catView = document.getElementById('category-view');
+    if (catView && !catView.classList.contains('view-hidden')) {
+      window.renderCategoryGrid();
     }
   };
 
