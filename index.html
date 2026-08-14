@@ -63,14 +63,12 @@
   html.light .gold-heading { background: linear-gradient(100deg, #17131F 0%, #C49A3A 30%, #17131F 60%, #17131F 100%); background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 4px 12px rgba(196, 154, 58, 0.15)); }
   html.light .glass, html.light .cat-card-glass, html.light .tier-card { background: rgba(255, 255, 255, 0.8) !important; border: 1px solid rgba(203, 213, 225, 0.4) !important; box-shadow: 0 15px 35px -10px rgba(100, 116, 139, 0.08), inset 0 0 20px rgba(255,255,255,0.8) !important; backdrop-filter: blur(24px) !important; }
   
-  /* نصوص الكروت ناصعة وتظهر بوضوح فوق الصورة مباشرة */
   .card-3d .card-info-box h3, .card-3d .card-info-box span, .card-3d .card-tag-badge { color: #ffffff !important; }
   html.light .card-3d .card-info-box { background: rgba(0, 0, 0, 0.8) !important; border-color: rgba(255,255,255,0.2) !important; }
   html.light .card-3d .card-info-box h3 { color: #ffffff !important; text-shadow: 0 2px 4px rgba(0,0,0,0.8); }
   html.light .card-3d .card-info-box span { color: #facc15 !important; text-shadow: 0 2px 4px rgba(0,0,0,0.8); }
   html.light .card-3d .card-tag-badge { color: #fef08a !important; background: rgba(0,0,0,0.85) !important; }
 
-  /* شكل التعليقات في الوضع النهاري بلون فضي أنيق */
   html.light .container_chat_bot .chat { background-color: #e2e8f0 !important; border: 1px solid #cbd5e1 !important; color: #0f172a !important; }
   html.light .container_chat_bot .container-chat-options { background: linear-gradient(to bottom right, #94a3b8, #cbd5e1, #94a3b8) !important; }
   html.light .container_chat_bot .chat input, html.light .container_chat_bot .chat textarea { color: #0f172a !important; background: rgba(255,255,255,0.6) !important; }
@@ -121,7 +119,6 @@
   .perspective-container { perspective: 1350px; }
   .preserve-3d { transform-style: preserve-3d; }
 
-  /* الكروت ثلاثية الأبعاد بدون أي ضبابية أو غباشة */
   .card-3d { position: absolute; top: 50%; left: 50%; width: 280px; height: 440px; margin-top: -220px; margin-left: -140px; border-radius: 20px; transform-style: preserve-3d; will-change: transform, opacity; cursor: pointer; box-shadow: 0 30px 60px -12px rgba(0,0,0,0.85); overflow: hidden; background-size: cover !important; background-position: center !important; filter: none !important; }
   .card-3d::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 60%, rgba(0,0,0,0.85) 100%); pointer-events: none; }
   .glass-sheen { display: none !important; }
@@ -140,8 +137,24 @@
   #app-content.vx-revealed { opacity: 1; filter: blur(0); transform: scale(1); }
   .vx-ambient-glow { position: absolute; width: min(80vw,900px); height: min(80vw,900px); border-radius: 50%; background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 45%, transparent 70%); filter: blur(60px); }
   .vx-logo-word { display: flex; font-family: 'Cinzel', serif; font-weight: 900; font-size: clamp(3.5rem, 13vw, 7rem); letter-spacing: 0.25em; line-height: 1; position: relative; z-index: 2; perspective: 1000px; }
-  .vx-letter { display: inline-block; background: linear-gradient(135deg, #fff 0%, #ccc 50%, #999 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; opacity: 0; transform: translateY(-70px) rotateX(45deg) scale(1.4); filter: blur(12px); animation: vxLetterDrop 0.9s cubic-bezier(0.19, 1, 0.22, 1) forwards; animation-delay: var(--ld, 0s); }
-  @keyframes vxLetterDrop { 0% { opacity: 0; transform: translateY(-70px) rotateX(45deg) scale(1.4); filter: blur(12px); } 100% { opacity: 1; transform: translateY(0) rotateX(0) scale(1); filter: drop-shadow(0 15px 30px rgba(255,255,255,0.1)); } }
+  
+  /* اللمعة السريعة والأنيقة لشعار VORTX في شاشة التحميل */
+  .vx-letter { 
+    display: inline-block; 
+    background: linear-gradient(110deg, #888 0%, #fff 40%, #ffffff 60%, #888 100%);
+    background-size: 200% 100%;
+    -webkit-background-clip: text; 
+    background-clip: text; 
+    -webkit-text-fill-color: transparent; 
+    opacity: 0; 
+    transform: translateY(-70px) rotateX(45deg) scale(1.4); 
+    filter: blur(12px); 
+    animation: vxLetterDrop 0.9s cubic-bezier(0.19, 1, 0.22, 1) forwards, vxLogoShine 2.2s infinite linear; 
+    animation-delay: var(--ld, 0s), 1s; 
+  }
+  @keyframes vxLetterDrop { 0% { opacity: 0; transform: translateY(-70px) rotateX(45deg) scale(1.4); filter: blur(12px); } 100% { opacity: 1; transform: translateY(0) rotateX(0) scale(1); filter: drop-shadow(0 15px 30px rgba(255,255,255,0.15)); } }
+  @keyframes vxLogoShine { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
   .vx-bar-track { width: min(80vw, 340px); height: 5px; border-radius: 999px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); margin-top: 2rem; position: relative; overflow: hidden; z-index: 2; }
   .vx-bar-fill { height: 100%; width: 0%; border-radius: 999px; background: linear-gradient(90deg, #555, #ccc, #fff); position: relative; transition: width 0.1s linear; }
   
@@ -206,7 +219,7 @@
   </p>
 </div>
 
-<!-- مودال العرض المكبّر للكرت مع إتاحة الترجمة -->
+<!-- مودال معاينة الكرت بدون أي مربع ملصق بالمنتصف -->
 <div id="preview-modal" class="fixed inset-0 z-[10000] flex items-center justify-center p-3 sm:p-6 h-[100dvh] w-screen opacity-0 pointer-events-none transition-all duration-300">
   <div class="absolute inset-0 bg-black/90 backdrop-blur-xl" onclick="window.closePreview()"></div>
   <div class="glass rounded-3xl max-w-xs sm:max-w-sm w-full relative z-10 p-4 sm:p-5 border border-white/20 shadow-2xl flex flex-col justify-between max-h-[92vh] overflow-y-auto" id="preview-card">
@@ -220,11 +233,7 @@
           <span class="font-head font-black text-xs text-yellow-400 tracking-widest drop-shadow-md">VORTX</span>
         </div>
 
-        <div class="flex items-center justify-between relative z-10 my-auto w-full">
-          <div id="preview-chip" class="w-9 h-6 rounded-md shadow-inner border border-white/20" style="background: linear-gradient(135deg, #e2e8f0, #94a3b8);"></div>
-        </div>
-
-        <div class="relative z-10 bg-black/80 p-3 rounded-xl backdrop-blur-md border border-white/15 flex items-center justify-between w-full card-info-box">
+        <div class="relative z-10 bg-black/80 p-3 rounded-xl backdrop-blur-md border border-white/15 flex items-center justify-between w-full card-info-box mt-auto">
           <h3 id="preview-title" class="font-head font-black text-lg text-white drop-shadow truncate pr-2">Cc1💛</h3>
           <span id="preview-price-display" class="font-mono text-base font-black text-yellow-400 shrink-0">$5</span>
         </div>
@@ -685,13 +694,11 @@
     const tagEl = document.getElementById('preview-tag');
     const priceEl = document.getElementById('preview-price-display');
     const bgEl = document.getElementById('preview-chip-bg');
-    const chipEl = document.getElementById('preview-chip');
 
     if (titleEl) titleEl.textContent = currentPreviewItem.title;
     if (tagEl) tagEl.textContent = currentPreviewItem.tag;
     if (priceEl) priceEl.textContent = '$' + currentPreviewItem.price;
     if (bgEl) { bgEl.style.backgroundImage = `url('${currentPreviewItem.bgUrl}')`; }
-    if (chipEl && chip) chipEl.style.background = chip;
 
     if (modal) { modal.classList.remove('opacity-0', 'pointer-events-none'); document.body.style.overflow = 'hidden'; }
   };
@@ -726,7 +733,7 @@
     }
   };
 
-  // استخدام صيغة .jpg لملف Cc1-10.jpg المرفوع على جيت هاب
+  // ربط جميع منتجات CC بالروابط والصور الجديدة الـ 13 كاملاً
   window.openCategoryView = function(catKey) {
     document.querySelectorAll('.view').forEach(v => v.classList.add('view-hidden'));
     const catView = document.getElementById('category-view');
@@ -744,7 +751,13 @@
         { id: "Cc4", title: "Cc4💜", tag: "CC PACK", price: 5, img: "Cc4.jpg", link: "https://payhip.com/b/lDrPF" },
         { id: "Cc5", title: "Cc5🧡", tag: "CC PACK", price: 5, img: "Cc5.png", link: "https://payhip.com/b/whxGQ" },
         { id: "Cc6", title: "Cc6🤎", tag: "CC PACK", price: 5, img: "Cc6.png", link: "https://payhip.com/b/XjdfY" },
-        { id: "Cc1-10", title: "Cc1-10🏅🔥", tag: "CC BUNDLE", price: 20, img: "Cc1-10.jpg", link: "https://payhip.com/b/tvErl" }
+        { id: "Cc7", title: "Cc7🩵", tag: "CC PACK", price: 5, img: "Cc7.png", link: "https://payhip.com/b/TpJqx" },
+        { id: "Cc8", title: "Cc8🧡", tag: "CC PACK", price: 5, img: "Cc8.png", link: "https://payhip.com/b/CdGQr" },
+        { id: "Cc9", title: "Cc9🤎", tag: "CC PACK", price: 5, img: "Cc9.png", link: "https://payhip.com/b/TSvAh" },
+        { id: "Cc10", title: "Cc10🤍", tag: "CC PACK", price: 5, img: "Cc10.png", link: "https://payhip.com/b/82gk1" },
+        { id: "Cc11", title: "Cc11🩵", tag: "CC PACK", price: 5, img: "Cc11.png", link: "https://payhip.com/b/CGIdB" },
+        { id: "Cc12", title: "Cc12💜", tag: "CC PACK", price: 5, img: "Cc12.png", link: "https://payhip.com/b/9YDA7" },
+        { id: "Cc1-10", title: "Cc1-10🏅🔥", tag: "CC BUNDLE", price: 20, img: "Cc1-10.jpg", link: "https://payhip.com/b/fQ9Sa" }
       ];
     } else {
       const isFree = catKey === 'FREE';
@@ -1031,7 +1044,7 @@
       draw();
     })();
 
-    // إتاحة قاموس الترجمة الشامل لكافة أجزاء الموقع
+    // قاموس الترجمة المطور والشامل
     window.translations = {
       en: { 
         "nav-bundles": "Bundles", "nav-packs": "Featured Packs", "nav-categories": "Categories", 
@@ -1078,8 +1091,14 @@
       document.querySelectorAll('[data-i18n]').forEach(el => { if (dict[el.getAttribute('data-i18n')]) el.textContent = dict[el.getAttribute('data-i18n')]; });
       document.querySelectorAll('[data-i18n-ph]').forEach(el => { if (dict[el.getAttribute('data-i18n-ph')]) el.setAttribute('placeholder', dict[el.getAttribute('data-i18n-ph')]); });
       
-      // إعادة تحديث عناصر المفضلة والمستودع باللغة الجديدة
+      // التحديث اللحظي لجميع الأزرار داخل الأقسام والمفضلة
       renderFavoritesUI();
+      const catView = document.getElementById('category-view');
+      if (catView && !catView.classList.contains('view-hidden')) {
+        const catTitle = document.getElementById('cat-title');
+        const currentCat = catTitle ? catTitle.textContent.split(' ')[0] : 'CC';
+        window.openCategoryView(currentCat);
+      }
     };
 
     window.toggleTheme = function () { document.documentElement.classList.toggle('dark'); document.documentElement.classList.toggle('light'); };
@@ -1115,15 +1134,21 @@
 document.addEventListener('DOMContentLoaded', function() {
   "use strict";
 
-  // استخدام الصيغة الصحيحة بالضبط Cc1-10.jpg
+  // إدراج كافة أصل الـ 13 منتج بدون مربع الصغير ملصق مع جميع الروابط المطلوبة
   window.CARDS_DATA_CURRENT = [
-    { title: "Cc1💛", tag: "CC PACK", price: 5, bg: "url('Cc1.jpg')", border: "rgba(251, 191, 36, 0.4)", chip: "linear-gradient(135deg, #fef08a, #ca8a04)", link: "https://payhip.com/b/gBzm3" },
-    { title: "Cc2💙", tag: "CC PACK", price: 5, bg: "url('Cc2.jpg')", border: "rgba(34, 211, 238, 0.4)", chip: "linear-gradient(135deg, #cffafe, #0891b2)", link: "https://payhip.com/b/IB15F" },
-    { title: "Cc3🩵", tag: "CC PACK", price: 5, bg: "url('Cc3.png')", border: "rgba(56, 189, 248, 0.4)", chip: "linear-gradient(135deg, #e0f2fe, #0284c7)", link: "https://payhip.com/b/0jcBW" },
-    { title: "Cc4💜", tag: "CC PACK", price: 5, bg: "url('Cc4.jpg')", border: "rgba(192, 132, 252, 0.4)", chip: "linear-gradient(135deg, #f3e8ff, #7e22ce)", link: "https://payhip.com/b/lDrPF" },
-    { title: "Cc5🧡", tag: "CC PACK", price: 5, bg: "url('Cc5.png')", border: "rgba(251, 146, 60, 0.4)", chip: "linear-gradient(135deg, #ffedd5, #ea580c)", link: "https://payhip.com/b/whxGQ" },
-    { title: "Cc6🤎", tag: "CC PACK", price: 5, bg: "url('Cc6.png')", border: "rgba(217, 119, 6, 0.4)", chip: "linear-gradient(135deg, #fef3c7, #b45309)", link: "https://payhip.com/b/XjdfY" },
-    { title: "Cc1-10🏅🔥", tag: "CC BUNDLE", price: 20, bg: "url('Cc1-10.jpg')", border: "rgba(234, 179, 8, 0.5)", chip: "linear-gradient(135deg, #fef08a, #ca8a04)", link: "https://payhip.com/b/tvErl" }
+    { title: "Cc1💛", tag: "CC PACK", price: 5, bg: "url('Cc1.jpg')", border: "rgba(251, 191, 36, 0.4)", link: "https://payhip.com/b/gBzm3" },
+    { title: "Cc2💙", tag: "CC PACK", price: 5, bg: "url('Cc2.jpg')", border: "rgba(34, 211, 238, 0.4)", link: "https://payhip.com/b/IB15F" },
+    { title: "Cc3🩵", tag: "CC PACK", price: 5, bg: "url('Cc3.png')", border: "rgba(56, 189, 248, 0.4)", link: "https://payhip.com/b/0jcBW" },
+    { title: "Cc4💜", tag: "CC PACK", price: 5, bg: "url('Cc4.jpg')", border: "rgba(192, 132, 252, 0.4)", link: "https://payhip.com/b/lDrPF" },
+    { title: "Cc5🧡", tag: "CC PACK", price: 5, bg: "url('Cc5.png')", border: "rgba(251, 146, 60, 0.4)", link: "https://payhip.com/b/whxGQ" },
+    { title: "Cc6🤎", tag: "CC PACK", price: 5, bg: "url('Cc6.png')", border: "rgba(217, 119, 6, 0.4)", link: "https://payhip.com/b/XjdfY" },
+    { title: "Cc7🩵", tag: "CC PACK", price: 5, bg: "url('Cc7.png')", border: "rgba(34, 211, 238, 0.4)", link: "https://payhip.com/b/TpJqx" },
+    { title: "Cc8🧡", tag: "CC PACK", price: 5, bg: "url('Cc8.png')", border: "rgba(251, 146, 60, 0.4)", link: "https://payhip.com/b/CdGQr" },
+    { title: "Cc9🤎", tag: "CC PACK", price: 5, bg: "url('Cc9.png')", border: "rgba(217, 119, 6, 0.4)", link: "https://payhip.com/b/TSvAh" },
+    { title: "Cc10🤍", tag: "CC PACK", price: 5, bg: "url('Cc10.png')", border: "rgba(255, 255, 255, 0.4)", link: "https://payhip.com/b/82gk1" },
+    { title: "Cc11🩵", tag: "CC PACK", price: 5, bg: "url('Cc11.png')", border: "rgba(56, 189, 248, 0.4)", link: "https://payhip.com/b/CGIdB" },
+    { title: "Cc12💜", tag: "CC PACK", price: 5, bg: "url('Cc12.png')", border: "rgba(192, 132, 252, 0.4)", link: "https://payhip.com/b/9YDA7" },
+    { title: "Cc1-10🏅🔥", tag: "CC BUNDLE", price: 20, bg: "url('Cc1-10.jpg')", border: "rgba(234, 179, 8, 0.5)", link: "https://payhip.com/b/fQ9Sa" }
   ];
 
   var stage = document.getElementById('carousel-stage'), track = document.getElementById('carousel-track');
@@ -1137,12 +1162,13 @@ document.addEventListener('DOMContentLoaded', function() {
       var card = document.createElement('div');
       card.className = 'card-3d'; card.style.background = data.bg; card.style.border = '1px solid ' + data.border;
       
-      card.innerHTML = '<div class="p-6 h-full flex flex-col justify-between text-white relative z-10 pointer-events-none"><div class="flex justify-between items-start"><div><p class="text-[10px] font-extrabold tracking-widest uppercase text-yellow-300 bg-black/80 px-2.5 py-1 rounded-full backdrop-blur-md border border-white/10 card-tag-badge">' + data.tag + '</p></div><span class="font-head font-black text-xs text-yellow-400 drop-shadow-md">VORTX</span></div><div class="my-auto flex items-center justify-between"><div class="w-10 h-7 rounded-md shadow-inner border border-white/20" style="background:' + data.chip + '"></div></div><div class="flex justify-between items-end font-mono text-sm tracking-widest bg-black/80 p-3 rounded-xl backdrop-blur-md border border-white/15 card-info-box"><h3 class="font-head font-black text-xl sm:text-2xl text-white drop-shadow-md leading-none">' + data.title + '</h3><span class="font-head font-bold text-sm text-yellow-400 shrink-0">' + (data.price === 0 ? 'FREE' : '$'+data.price) +'</span></div></div>';
+      // تصميم الكرت النقي بدون أي مربع برتقالي أو أزرق داخلي
+      card.innerHTML = '<div class="p-6 h-full flex flex-col justify-between text-white relative z-10 pointer-events-none"><div class="flex justify-between items-start"><div><p class="text-[10px] font-extrabold tracking-widest uppercase text-yellow-300 bg-black/80 px-2.5 py-1 rounded-full backdrop-blur-md border border-white/10 card-tag-badge">' + data.tag + '</p></div><span class="font-head font-black text-xs text-yellow-400 drop-shadow-md">VORTX</span></div><div class="flex justify-between items-end font-mono text-sm tracking-widest bg-black/80 p-3 rounded-xl backdrop-blur-md border border-white/15 card-info-box mt-auto"><h3 class="font-head font-black text-xl sm:text-2xl text-white drop-shadow-md leading-none">' + data.title + '</h3><span class="font-head font-bold text-sm text-yellow-400 shrink-0">' + (data.price === 0 ? 'FREE' : '$'+data.price) +'</span></div></div>';
       
       card.addEventListener('click', function () {
         if (Math.abs(dragDeltaX) < 8) {
           var normCurrent = ((Math.round(currentIndex) % N) + N) % N;
-          if (i === normCurrent) { window.openPreview(data.title, data.tag, data.price, data.bg, data.chip, data.link); } else {
+          if (i === normCurrent) { window.openPreview(data.title, data.tag, data.price, data.bg, '', data.link); } else {
             var diff = (i - normCurrent + N) % N;
             if (diff > N / 2) diff -= N;
             targetIndex = currentIndex + diff;
@@ -1161,23 +1187,29 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     const catDataMap = {
       'CC': [
-        { title: "Cc1💛", tag: "CC PACK", price: 5, bg: "url('Cc1.jpg')", border: "rgba(251, 191, 36, 0.4)", chip: "linear-gradient(135deg, #fef08a, #ca8a04)", link: "https://payhip.com/b/gBzm3" },
-        { title: "Cc2💙", tag: "CC PACK", price: 5, bg: "url('Cc2.jpg')", border: "rgba(34, 211, 238, 0.4)", chip: "linear-gradient(135deg, #cffafe, #0891b2)", link: "https://payhip.com/b/IB15F" },
-        { title: "Cc3🩵", tag: "CC PACK", price: 5, bg: "url('Cc3.png')", border: "rgba(56, 189, 248, 0.4)", chip: "linear-gradient(135deg, #e0f2fe, #0284c7)", link: "https://payhip.com/b/0jcBW" },
-        { title: "Cc4💜", tag: "CC PACK", price: 5, bg: "url('Cc4.jpg')", border: "rgba(192, 132, 252, 0.4)", chip: "linear-gradient(135deg, #f3e8ff, #7e22ce)", link: "https://payhip.com/b/lDrPF" },
-        { title: "Cc5🧡", tag: "CC PACK", price: 5, bg: "url('Cc5.png')", border: "rgba(251, 146, 60, 0.4)", chip: "linear-gradient(135deg, #ffedd5, #ea580c)", link: "https://payhip.com/b/whxGQ" },
-        { title: "Cc6🤎", tag: "CC PACK", price: 5, bg: "url('Cc6.png')", border: "rgba(217, 119, 6, 0.4)", chip: "linear-gradient(135deg, #fef3c7, #b45309)", link: "https://payhip.com/b/XjdfY" },
-        { title: "Cc1-10🏅🔥", tag: "CC BUNDLE", price: 20, bg: "url('Cc1-10.jpg')", border: "rgba(234, 179, 8, 0.5)", chip: "linear-gradient(135deg, #fef08a, #ca8a04)", link: "https://payhip.com/b/tvErl" }
+        { title: "Cc1💛", tag: "CC PACK", price: 5, bg: "url('Cc1.jpg')", border: "rgba(251, 191, 36, 0.4)", link: "https://payhip.com/b/gBzm3" },
+        { title: "Cc2💙", tag: "CC PACK", price: 5, bg: "url('Cc2.jpg')", border: "rgba(34, 211, 238, 0.4)", link: "https://payhip.com/b/IB15F" },
+        { title: "Cc3🩵", tag: "CC PACK", price: 5, bg: "url('Cc3.png')", border: "rgba(56, 189, 248, 0.4)", link: "https://payhip.com/b/0jcBW" },
+        { title: "Cc4💜", tag: "CC PACK", price: 5, bg: "url('Cc4.jpg')", border: "rgba(192, 132, 252, 0.4)", link: "https://payhip.com/b/lDrPF" },
+        { title: "Cc5🧡", tag: "CC PACK", price: 5, bg: "url('Cc5.png')", border: "rgba(251, 146, 60, 0.4)", link: "https://payhip.com/b/whxGQ" },
+        { title: "Cc6🤎", tag: "CC PACK", price: 5, bg: "url('Cc6.png')", border: "rgba(217, 119, 6, 0.4)", link: "https://payhip.com/b/XjdfY" },
+        { title: "Cc7🩵", tag: "CC PACK", price: 5, bg: "url('Cc7.png')", border: "rgba(34, 211, 238, 0.4)", link: "https://payhip.com/b/TpJqx" },
+        { title: "Cc8🧡", tag: "CC PACK", price: 5, bg: "url('Cc8.png')", border: "rgba(251, 146, 60, 0.4)", link: "https://payhip.com/b/CdGQr" },
+        { title: "Cc9🤎", tag: "CC PACK", price: 5, bg: "url('Cc9.png')", border: "rgba(217, 119, 6, 0.4)", link: "https://payhip.com/b/TSvAh" },
+        { title: "Cc10🤍", tag: "CC PACK", price: 5, bg: "url('Cc10.png')", border: "rgba(255, 255, 255, 0.4)", link: "https://payhip.com/b/82gk1" },
+        { title: "Cc11🩵", tag: "CC PACK", price: 5, bg: "url('Cc11.png')", border: "rgba(56, 189, 248, 0.4)", link: "https://payhip.com/b/CGIdB" },
+        { title: "Cc12💜", tag: "CC PACK", price: 5, bg: "url('Cc12.png')", border: "rgba(192, 132, 252, 0.4)", link: "https://payhip.com/b/9YDA7" },
+        { title: "Cc1-10🏅🔥", tag: "CC BUNDLE", price: 20, bg: "url('Cc1-10.jpg')", border: "rgba(234, 179, 8, 0.5)", link: "https://payhip.com/b/fQ9Sa" }
       ],
       'XML': [
-        { title: "BLACK VIP", tag: "VFX PACK", price: 29, bg: "linear-gradient(135deg, #09090b, #27272a)", border: "rgba(255, 255, 255, 0.2)", chip: "linear-gradient(135deg, #e2e8f0, #94a3b8)", link: "https://payhip.com/b/gBzm3" },
-        { title: "ROYAL GOLD", tag: "COLOR GRADE", price: 35, bg: "linear-gradient(135deg, #451a03, #b45309)", border: "rgba(251, 191, 36, 0.4)", chip: "linear-gradient(135deg, #fef08a, #ca8a04)", link: "https://payhip.com/b/gBzm3" }
+        { title: "BLACK VIP", tag: "VFX PACK", price: 29, bg: "linear-gradient(135deg, #09090b, #27272a)", border: "rgba(255, 255, 255, 0.2)", link: "https://payhip.com/b/gBzm3" },
+        { title: "ROYAL GOLD", tag: "COLOR GRADE", price: 35, bg: "linear-gradient(135deg, #451a03, #b45309)", border: "rgba(251, 191, 36, 0.4)", link: "https://payhip.com/b/gBzm3" }
       ],
       'SHAKE': [
-        { title: "WARP SHAKE", tag: "MOTION PRESET", price: 24, bg: "linear-gradient(135deg, #450a0a, #dc2626)", border: "rgba(248, 113, 113, 0.4)", chip: "linear-gradient(135deg, #fee2e2, #b91c1c)", link: "https://payhip.com/b/gBzm3" }
+        { title: "WARP SHAKE", tag: "MOTION PRESET", price: 24, bg: "linear-gradient(135deg, #450a0a, #dc2626)", border: "rgba(248, 113, 113, 0.4)", link: "https://payhip.com/b/gBzm3" }
       ],
       'FREE': [
-        { title: "FREE STARTER", tag: "FREE PACK", price: 0, bg: "linear-gradient(135deg, #18181b, #3f3f46)", border: "rgba(255, 255, 255, 0.2)", chip: "linear-gradient(135deg, #a1a1aa, #52525b)", link: "https://payhip.com/b/gBzm3" }
+        { title: "FREE STARTER", tag: "FREE PACK", price: 0, bg: "linear-gradient(135deg, #18181b, #3f3f46)", border: "rgba(255, 255, 255, 0.2)", link: "https://payhip.com/b/gBzm3" }
       ]
     };
     if (catDataMap[cat]) {
