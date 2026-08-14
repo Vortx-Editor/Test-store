@@ -59,7 +59,6 @@
   html.light .text-white { color: #17131F !important; }
   html.light .text-slate-300 { color: #625D6B !important; }
 
-  /* تخصيص نصوص المودال والبطاقات لتظل دائماً واضحة وناصعة */
   #preview-card {
     background: rgba(15, 15, 22, 0.96) !important;
     border: 1px solid rgba(255, 255, 255, 0.25) !important;
@@ -117,7 +116,6 @@
     font-weight: 800 !important;
   }
 
-  /* تنسيق النجوم في الوضع الليلي والنهاري */
   .radio { display: flex; justify-content: center; gap: 12px; margin-bottom: 1.5rem; direction: ltr; }
   .radio > input { position: absolute; appearance: none; opacity: 0; }
   .radio > label { cursor: pointer; font-size: 32px; position: relative; display: inline-block; transition: transform 0.3s ease; }
@@ -125,13 +123,11 @@
   html.light .radio > label > svg { fill: #ffffff; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.15)); }
   .radio > input:checked ~ label svg, .radio > label:hover svg, .radio > label:hover ~ label svg { fill: #ff9e0b !important; filter: drop-shadow(0 0 12px rgba(255, 158, 11, 0.8)) !important; }
 
-  /* تنسيق التعليقات للنهاري والليلي */
   #reviews-marquee-track .review-card-item { background: rgba(18, 18, 24, 0.85); border: 1px solid rgba(234, 179, 8, 0.3); }
   html.light #reviews-marquee-track .review-card-item { background: #ffffff !important; border-color: rgba(203, 213, 225, 0.8) !important; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
   html.light #reviews-marquee-track span.review-author { color: #1e293b !important; }
   html.light #reviews-marquee-track span.review-comment-text { color: #475569 !important; }
 
-  /* تنسيق خانات الإدخال للنهاري والليلي */
   .container_chat_bot { display: flex; flex-direction: column; max-width: 480px; width: 100%; margin: 0 auto; }
   .container_chat_bot .container-chat-options { position: relative; display: flex; background: linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,255,255,0.05)); border-radius: 20px; padding: 2px; overflow: hidden; }
   .container_chat_bot .chat { display: flex; flex-direction: column; background-color: rgba(18, 18, 24, 0.95) !important; border: 1px solid rgba(255, 255, 255, 0.12) !important; border-radius: 18px; width: 100%; overflow: hidden; backdrop-filter: blur(12px); }
@@ -182,15 +178,14 @@
   .perspective-container { perspective: 1350px; }
   .preserve-3d { transform-style: preserve-3d; }
 
-  /* الكروت وتأثير التكبير والتفاعل */
-  .card-3d { position: absolute; top: 50%; left: 50%; width: 280px; height: 440px; margin-top: -220px; margin-left: -140px; border-radius: 20px; transform-style: preserve-3d; will-change: transform, opacity; cursor: pointer; box-shadow: 0 30px 60px -12px rgba(0,0,0,0.85); overflow: hidden; background-size: cover !important; background-position: center !important; transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1); touch-action: manipulation; }
+  /* الكروت مع تسريع العتاد للجوال */
+  .card-3d { position: absolute; top: 50%; left: 50%; width: 280px; height: 440px; margin-top: -220px; margin-left: -140px; border-radius: 20px; transform-style: preserve-3d; will-change: transform, opacity; cursor: pointer; box-shadow: 0 30px 60px -12px rgba(0,0,0,0.85); overflow: hidden; background-size: cover !important; background-position: center !important; transition: transform 0.25s cubic-bezier(0.2, 0.9, 0.3, 1); touch-action: pan-y; }
   .card-3d:hover { box-shadow: 0 40px 80px -10px rgba(234, 179, 8, 0.3); }
   
   .glass-tab-container { background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%); border: 1px solid rgba(255,255,255,0.15); backdrop-filter: blur(20px); border-radius: 1.25rem; padding: 0.5rem; display: flex; width: 100%; gap: 0.5rem; }
   .tab-btn { flex: 1; padding: 0.85rem 0; border-radius: 0.875rem; font-family: 'JetBrains Mono', monospace; font-weight: 800; font-size: 1rem; color: var(--text-color); opacity: 0.6; transition: all 0.4s ease; background: transparent; border: 1px solid transparent; cursor: pointer; }
   .tab-btn.active { background: linear-gradient(135deg, #eab308 0%, #ca8a04 100%); color: #050505 !important; opacity: 1; border-color: rgba(255,255,255,0.4); box-shadow: 0 4px 15px rgba(234, 179, 8, 0.4); transform: scale(1.02); }
   
-  /* الشريحة الفرعية للبرامج Alight Motion & After Effects */
   .glass-sub-tab-container { background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%); border: 1px solid rgba(255,255,255,0.12); backdrop-filter: blur(16px); }
   .sub-tab-btn { color: var(--text-color); background: transparent; border: 1px solid transparent; cursor: pointer; opacity: 0.6; transition: all 0.3s ease; }
   .sub-tab-btn.active { background: linear-gradient(135deg, #7e22ce 0%, #a855f7 100%); color: #ffffff !important; opacity: 1 !important; border-color: rgba(255, 255, 255, 0.3); box-shadow: 0 4px 15px rgba(126, 34, 204, 0.4); transform: scale(1.02); }
@@ -276,8 +271,8 @@
     <div class="space-y-3">
       <div class="p-3 bg-white/5 rounded-xl border border-white/10">
         <span class="text-[10px] text-purple-400 font-bold uppercase tracking-wider block mb-1">New Drop ✦</span>
-        <h4 class="text-xs font-bold text-white mb-1">CC1-10 Bundle Released ($15)</h4>
-        <p class="text-[11px] text-white/70">Check out the full CC bundle on BuyHub now!</p>
+        <h4 class="text-xs font-bold text-white mb-1">AE CC 1-5 Packs Released ($10)</h4>
+        <p class="text-[11px] text-white/70">Check out the newly added After Effects CC packs now!</p>
       </div>
     </div>
   </div>
@@ -408,7 +403,7 @@
       </div>
     </section>
 
-    <!-- تبويبات الأقسام الرئيسية ومحدد البرامج الفرعي -->
+    <!-- الأزرار الرئيسية + الشريحة الفرعية للبرامج AM و AE -->
     <div class="w-full max-w-5xl mx-auto px-4 sm:px-6 relative z-40 mb-8 mt-6 reveal-on-scroll">
       <div class="glass-tab-container">
         <button type="button" onclick="window.activateCategoryCards('CC', this)" class="tab-btn active force-eng">CC</button>
@@ -417,7 +412,6 @@
         <button type="button" onclick="window.activateCategoryCards('FREE', this)" class="tab-btn force-eng">FREE</button>
       </div>
 
-      <!-- الشريحة الفرعية للبرامج: Alight Motion و After Effects -->
       <div class="glass-sub-tab-container max-w-xs sm:max-w-md mx-auto mt-3.5 p-1 flex gap-2 rounded-xl">
         <button type="button" onclick="window.activateSoftwareSubTab('AM', this)" class="sub-tab-btn active flex-1 py-1.5 px-3 rounded-lg text-xs font-extrabold tracking-wider flex items-center justify-center gap-1.5">
           <span class="text-sm">📱</span> <span class="force-eng">Light Motion</span>
@@ -605,7 +599,7 @@
     </div>
   </section>
 
-  <!-- صفحة المعرض لكل قسم وبها الشريحة الفرعية للبرامج -->
+  <!-- المعرض السفلي باللفتة الكاملة لحزم After Effects المضافة -->
   <section id="category-view" class="view view-hidden relative z-10 min-h-screen">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
       <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6 pb-6 border-b border-white/10">
@@ -617,7 +611,6 @@
         <button onclick="window.backToHome()" class="back-btn-pill shrink-0"><span>←</span> <span data-i18n="back-btn">Back</span></button>
       </div>
 
-      <!-- محدد البرامج داخل صفحة المعرض الشاملة -->
       <div class="glass-sub-tab-container max-w-xs sm:max-w-md mb-8 p-1 flex gap-2 rounded-xl">
         <button type="button" onclick="window.activateSoftwareSubTab('AM', this)" class="sub-tab-btn active flex-1 py-1.5 px-3 rounded-lg text-xs font-extrabold tracking-wider flex items-center justify-center gap-1.5">
           <span class="text-sm">📱</span> <span class="force-eng">Light Motion</span>
@@ -706,7 +699,7 @@
       const match = bg.match(/url\(['"]?([^'"]+)['"]?\)/);
       if (match && match[1]) imgFile = match[1];
     } else {
-      imgFile = '';
+      imgFile = bg || '';
     }
     
     currentPreviewItem = { 
@@ -826,7 +819,6 @@
                 <div class="my-auto py-6">
                   <span class="text-3xl block mb-2">${p.sw === 'AE' ? '💻' : '📱'}</span>
                   <span class="font-head font-black text-sm text-yellow-400 tracking-wider uppercase block">${p.title}</span>
-                  <span class="text-[10px] text-white/60 font-mono block mt-1">Ready for custom preview</span>
                 </div>
               </div>
             `}
@@ -1175,10 +1167,10 @@
 document.addEventListener('DOMContentLoaded', function() {
   "use strict";
 
-  /* قاعدة البيانات المقسمة حسب القسم وحسب البرنامج المختص */
   window.CURRENT_CAT = 'CC';
   window.CURRENT_SW = 'AM';
 
+  /* قاعدة البيانات الكاملة لحزم After Effects مع القلوب والروابط المحددة */
   window.DATA_STORE = {
     'CC': {
       'AM': [
@@ -1197,11 +1189,11 @@ document.addEventListener('DOMContentLoaded', function() {
         { id: "Cc1-10", title: "Cc1-10🏅🔥", tag: "CC BUNDLE", price: 15, bg: "url('Cc1-10.jpg')", img: "Cc1-10.jpg", border: "rgba(234, 179, 8, 0.5)", link: "https://payhip.com/b/fQ9Sa", sw: "AM" }
       ],
       'AE': [
-        { id: "AE_CC_1", title: "AE CC Vol.1 💻", tag: "AE CC PACK", price: 5, bg: "linear-gradient(135deg, #1e1b4b, #312e81)", img: "", border: "rgba(168, 85, 247, 0.5)", link: "https://payhip.com/b/gBzm3", sw: "AE" },
-        { id: "AE_CC_2", title: "AE CC Vol.2 💻", tag: "AE CC PACK", price: 5, bg: "linear-gradient(135deg, #311b92, #4a148c)", img: "", border: "rgba(168, 85, 247, 0.5)", link: "https://payhip.com/b/gBzm3", sw: "AE" },
-        { id: "AE_CC_3", title: "AE CC Vol.3 💻", tag: "AE CC PACK", price: 5, bg: "linear-gradient(135deg, #0f172a, #1e293b)", img: "", border: "rgba(168, 85, 247, 0.5)", link: "https://payhip.com/b/gBzm3", sw: "AE" },
-        { id: "AE_CC_4", title: "AE CC Vol.4 💻", tag: "AE CC PACK", price: 5, bg: "linear-gradient(135deg, #172554, #1e3a8a)", img: "", border: "rgba(168, 85, 247, 0.5)", link: "https://payhip.com/b/gBzm3", sw: "AE" },
-        { id: "AE_CC_5", title: "AE CC Bundle 💻🔥", tag: "AE BUNDLE", price: 15, bg: "linear-gradient(135deg, #581c87, #3b0764)", img: "", border: "rgba(234, 179, 8, 0.5)", link: "https://payhip.com/b/gBzm3", sw: "AE" }
+        { id: "Cc1ae", title: "Cc 1 AE💜", tag: "AE CC PACK", price: 10, bg: "url('Cc1ae.png')", img: "Cc1ae.png", border: "rgba(192, 132, 252, 0.5)", link: "https://payhip.com/b/WYhpt", sw: "AE" },
+        { id: "Cc2ae", title: "Cc 2 AE🤍", tag: "AE CC PACK", price: 10, bg: "url('Cc2ae.png')", img: "Cc2ae.png", border: "rgba(255, 255, 255, 0.5)", link: "https://payhip.com/b/BaSP2", sw: "AE" },
+        { id: "Cc3ae", title: "Cc 3 AE🩵", tag: "AE CC PACK", price: 10, bg: "url('Cc3ae.png')", img: "Cc3ae.png", border: "rgba(56, 189, 248, 0.5)", link: "https://payhip.com/b/9GaDM", sw: "AE" },
+        { id: "Cc4ae", title: "Cc 4 AE💛", tag: "AE CC PACK", price: 10, bg: "url('Cc4ae.png')", img: "Cc4ae.png", border: "rgba(251, 191, 36, 0.5)", link: "https://payhip.com/b/f3Fxu", sw: "AE" },
+        { id: "Cc5ae", title: "Cc 5 AE🩶", tag: "AE CC PACK", price: 10, bg: "url('Cc5ae.png')", img: "Cc5ae.png", border: "rgba(156, 163, 175, 0.5)", link: "https://payhip.com/b/O7ADQ", sw: "AE" }
       ]
     },
     'XML': {
@@ -1237,6 +1229,7 @@ document.addEventListener('DOMContentLoaded', function() {
   var cards = [], N = window.CARDS_DATA_CURRENT.length, currentIndex = 0, targetIndex = 0;
   var isDragging = false, isHorizontalDrag = false, startX = 0, startY = 0, currentX = 0, currentY = 0, dragDeltaX = 0, velocityX = 0, lastX = 0, lastTime = 0;
 
+  /* تقنية اللمس المباشر والسريع جداً للجوال بضغطة واحدة */
   window.rebuild3DCards = function() {
     track.innerHTML = ''; cards = []; N = window.CARDS_DATA_CURRENT.length; currentIndex = 0; targetIndex = 0;
     window.CARDS_DATA_CURRENT.forEach(function (data, i) {
@@ -1253,13 +1246,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
       card.addEventListener('pointerdown', function(e) {
         pStartX = e.clientX; pStartY = e.clientY; pStartTime = Date.now();
-      });
+      }, { passive: true });
 
       card.addEventListener('pointerup', function(e) {
         var dist = Math.hypot(e.clientX - pStartX, e.clientY - pStartY);
         var timeDiff = Date.now() - pStartTime;
-        if (dist < 12 && timeDiff < 300) {
-          e.preventDefault();
+        if (dist < 15 && timeDiff < 350) {
           window.openPreview(data.title, data.tag, data.price, data.bg, '', data.link, data.sw);
         }
       });
@@ -1268,7 +1260,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   };
 
-  /* التبديل بين البرامج (Alight Motion & After Effects) */
   window.activateSoftwareSubTab = function(sw, btn) {
     window.CURRENT_SW = sw;
     
@@ -1283,7 +1274,6 @@ document.addEventListener('DOMContentLoaded', function() {
     window.reloadCurrentCards();
   };
 
-  /* التبديل بين الأقسام الرئيسية (CC, XML, SHAKE, FREE) */
   window.activateCategoryCards = function(cat, btn) {
     window.CURRENT_CAT = cat;
     if (btn) {
@@ -1309,51 +1299,70 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   };
 
+  /* تسريع تحريك العرض ثلاثي الأبعاد لجعل اللف خفيفاً وبدون لاق */
   function updateTransform() {
-    var spacing = 220;
+    var spacing = 210;
     cards.forEach(function (card, i) {
       var rawOffset = i - currentIndex, wrappedOffset = ((rawOffset % N) + N) % N;
       if (wrappedOffset > N / 2) wrappedOffset -= N;
-      var absOffset = Math.abs(wrappedOffset), posX = wrappedOffset * spacing, posZ = -absOffset * 180, rotY = Math.max(-60, Math.min(60, wrappedOffset * -28)), scale = Math.max(0.65, 1 - absOffset * 0.15), opacity = Math.max(0, 1 - absOffset * 0.35);
-      card.style.transform = 'translateX(' + posX.toFixed(2) + 'px) translateZ(' + posZ.toFixed(2) + 'px) rotateY(' + rotY.toFixed(2) + 'deg) scale(' + scale.toFixed(3) + ')';
+      var absOffset = Math.abs(wrappedOffset);
+      var posX = wrappedOffset * spacing;
+      var posZ = -absOffset * 170;
+      var rotY = Math.max(-55, Math.min(55, wrappedOffset * -26));
+      var scale = Math.max(0.68, 1 - absOffset * 0.14);
+      var opacity = Math.max(0, 1 - absOffset * 0.32);
+      
+      card.style.transform = 'translate3d(' + posX.toFixed(1) + 'px, 0, ' + posZ.toFixed(1) + 'px) rotateY(' + rotY.toFixed(1) + 'deg) scale(' + scale.toFixed(3) + ')';
       card.style.opacity = opacity.toFixed(3);
       card.style.zIndex = Math.round(100 - absOffset * 10);
-      card.style.pointerEvents = absOffset < 2.5 ? 'auto' : 'none';
+      card.style.pointerEvents = absOffset < 2.2 ? 'auto' : 'none';
     });
   }
+
   function animate() {
-    if (!isDragging) { currentIndex += (targetIndex - currentIndex) * 0.12; } else if (isHorizontalDrag) { currentIndex += (targetIndex - currentIndex) * 0.35; }
-    updateTransform(); requestAnimationFrame(animate);
+    if (!isDragging) { 
+      currentIndex += (targetIndex - currentIndex) * 0.18; 
+    } else if (isHorizontalDrag) { 
+      currentIndex += (targetIndex - currentIndex) * 0.45; 
+    }
+    updateTransform(); 
+    requestAnimationFrame(animate);
   }
+
   function onPointerDown(e) {
     isDragging = true; isHorizontalDrag = false;
     var touch = e.touches ? e.touches[0] : e;
     startX = touch.clientX; startY = touch.clientY; lastX = startX; dragDeltaX = 0; velocityX = 0; lastTime = performance.now();
   }
+
   function onPointerMove(e) {
     if (!isDragging) return;
     var touch = e.touches ? e.touches[0] : e;
     currentX = touch.clientX; currentY = touch.clientY;
     var diffX = currentX - startX, diffY = currentY - startY;
     if (!isHorizontalDrag) {
-      if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 6) { isHorizontalDrag = true; } else if (Math.abs(diffY) > Math.abs(diffX) && Math.abs(diffY) > 6) { isDragging = false; return; }
+      if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 5) { isHorizontalDrag = true; } else if (Math.abs(diffY) > Math.abs(diffX) && Math.abs(diffY) > 5) { isDragging = false; return; }
     }
     if (isHorizontalDrag) {
-      var deltaX = currentX - lastX; dragDeltaX += currentX - startX; targetIndex -= deltaX / 220;
+      var deltaX = currentX - lastX; dragDeltaX += currentX - startX; targetIndex -= deltaX / 210;
       var now = performance.now(), dt = now - lastTime;
       if (dt > 0) velocityX = deltaX / dt;
       lastX = currentX; lastTime = now;
     }
   }
+
   function onPointerUp() {
     if (!isDragging) return;
     isDragging = false;
-    if (isHorizontalDrag) { targetIndex -= velocityX * 1.5; targetIndex = Math.round(targetIndex); }
+    if (isHorizontalDrag) { targetIndex -= velocityX * 1.2; targetIndex = Math.round(targetIndex); }
   }
-  stage.addEventListener('mousedown', onPointerDown); stage.addEventListener('mousemove', onPointerMove); stage.addEventListener('mouseup', onPointerUp); stage.addEventListener('mouseleave', onPointerUp); stage.addEventListener('touchstart', onPointerDown, { passive: true }); stage.addEventListener('touchmove', onPointerMove, { passive: true }); stage.addEventListener('touchend', onPointerUp);
+
+  stage.addEventListener('mousedown', onPointerDown); stage.addEventListener('mousemove', onPointerMove); stage.addEventListener('mouseup', onPointerUp); stage.addEventListener('mouseleave', onPointerUp);
+  stage.addEventListener('touchstart', onPointerDown, { passive: true }); stage.addEventListener('touchmove', onPointerMove, { passive: true }); stage.addEventListener('touchend', onPointerUp);
   stage.addEventListener('wheel', function (e) {
     if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) { targetIndex += e.deltaX > 0 ? 0.35 : -0.35; targetIndex = Math.round(targetIndex); }
   }, { passive: true });
+
   window.rebuild3DCards(); animate();
 });
 </script>
