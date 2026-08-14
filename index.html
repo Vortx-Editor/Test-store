@@ -13,6 +13,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;800;900&family=Cinzel:wght@700;800;900&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@700;800;900&display=swap" rel="stylesheet">
 <script>
+  if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
+  window.scrollTo(0, 0);
+
   window.tailwind && (tailwind.config = {
     darkMode: 'class',
     theme: {
@@ -55,19 +58,30 @@
   .card-3d, .cat-card-glass, .tier-card, header { transform: translateZ(0); backface-visibility: hidden; }
   .reveal-on-scroll { opacity: 0; transform: translateY(40px); transition: opacity 1.8s cubic-bezier(0.16, 1, 0.3, 1), transform 1.8s cubic-bezier(0.16, 1, 0.3, 1); will-change: opacity, transform; }
   .reveal-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
+  
   html.light p, html.light span, html.light h2, html.light h3, html.light h4 { color: var(--text-color); }
   html.light .text-white { color: #17131F !important; }
   html.light .text-slate-300 { color: #625D6B !important; }
   html.light .text-purple-300, html.light .text-purple-400 { color: #94A3B8 !important; }
+
+  /* استثناء الكروت والـ Preview من نصوص الوضع النهاري لتبقى باللون الأبيض والذهبي الناصع دائماً */
+  .card-3d *, #preview-modal *, .card-img-box * { color: initial; }
+  html.light .card-3d .text-yellow-400, 
+  html.light #preview-modal .text-yellow-400, 
+  html.light .card-img-box .text-yellow-400,
+  html.light .card-gold-brand { color: #facc15 !important; display: inline-block !important; visibility: visible !important; opacity: 1 !important; text-shadow: 0 2px 4px rgba(0,0,0,0.8); }
+  
+  html.light .card-3d .text-white, 
+  html.light #preview-modal .text-white, 
+  html.light .card-img-box .text-white { color: #ffffff !important; text-shadow: 0 2px 4px rgba(0,0,0,0.8); }
+  
+  html.light .card-3d .card-info-box,
+  html.light #preview-card .card-info-box,
+  html.light .card-img-box .card-info-box { background: rgba(0, 0, 0, 0.82) !important; border-color: rgba(255,255,255,0.2) !important; }
+
   html.light .vortx-wet-oil-title { background: linear-gradient(110deg, #17131F 0%, #64748B 30%, #17131F 55%, #94A3B8 80%, #17131F 100%); background-size: 200% 100%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 4px 12px rgba(100, 116, 139, 0.15)); }
   html.light .gold-heading { background: linear-gradient(100deg, #17131F 0%, #C49A3A 30%, #17131F 60%, #17131F 100%); background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 4px 12px rgba(196, 154, 58, 0.15)); }
   html.light .glass, html.light .cat-card-glass, html.light .tier-card { background: rgba(255, 255, 255, 0.8) !important; border: 1px solid rgba(203, 213, 225, 0.4) !important; box-shadow: 0 15px 35px -10px rgba(100, 116, 139, 0.08), inset 0 0 20px rgba(255,255,255,0.8) !important; backdrop-filter: blur(24px) !important; }
-  
-  .card-3d .card-info-box h3, .card-3d .card-info-box span, .card-3d .card-tag-badge { color: #ffffff !important; }
-  html.light .card-3d .card-info-box { background: rgba(0, 0, 0, 0.8) !important; border-color: rgba(255,255,255,0.2) !important; }
-  html.light .card-3d .card-info-box h3 { color: #ffffff !important; text-shadow: 0 2px 4px rgba(0,0,0,0.8); }
-  html.light .card-3d .card-info-box span { color: #facc15 !important; text-shadow: 0 2px 4px rgba(0,0,0,0.8); }
-  html.light .card-3d .card-tag-badge { color: #fef08a !important; background: rgba(0,0,0,0.85) !important; }
 
   html.light .container_chat_bot .chat { background-color: #e2e8f0 !important; border: 1px solid #cbd5e1 !important; color: #0f172a !important; }
   html.light .container_chat_bot .container-chat-options { background: linear-gradient(to bottom right, #94a3b8, #cbd5e1, #94a3b8) !important; }
@@ -79,7 +93,7 @@
   html.light #reviews-marquee-track span.text-yellow-400 { color: #d97706 !important; }
 
   h1, h2, h3, .font-head { font-family: 'Cinzel', serif; letter-spacing: 1.5px; }
-  .force-eng { font-family: 'Cinzel', serif !important; letter-spacing: 0.25em !important; direction: ltr !important; unicode-bidi: isolate-override !important; display: inline-block; }
+  .force-eng { font-family: 'Cinzel', serif !important; letter-spacing: 0.2em !important; direction: ltr !important; unicode-bidi: isolate-override !important; display: inline-block; }
   .stars-background-container { position: absolute; inset: 0; width: 100%; height: 100%; background: var(--star-bg); overflow: hidden; z-index: 0; pointer-events: none; transition: background .4s ease; }
   body > .stars-background-container { position: fixed; }
   html.light .stars-background-container::after { content: ''; position: absolute; inset: 0; background-image: radial-gradient(rgba(100, 116, 139, 0.08) 1.5px, transparent 1.5px); background-size: 32px 32px; z-index: 1; }
@@ -119,7 +133,9 @@
   .perspective-container { perspective: 1350px; }
   .preserve-3d { transform-style: preserve-3d; }
 
-  .card-3d { position: absolute; top: 50%; left: 50%; width: 280px; height: 440px; margin-top: -220px; margin-left: -140px; border-radius: 20px; transform-style: preserve-3d; will-change: transform, opacity; cursor: pointer; box-shadow: 0 30px 60px -12px rgba(0,0,0,0.85); overflow: hidden; background-size: cover !important; background-position: center !important; filter: none !important; }
+  /* الكروت وتأثير التكبير التفاعلي */
+  .card-3d { position: absolute; top: 50%; left: 50%; width: 280px; height: 440px; margin-top: -220px; margin-left: -140px; border-radius: 20px; transform-style: preserve-3d; will-change: transform, opacity; cursor: pointer; box-shadow: 0 30px 60px -12px rgba(0,0,0,0.85); overflow: hidden; background-size: cover !important; background-position: center !important; filter: none !important; transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.35s ease; }
+  .card-3d:hover { box-shadow: 0 40px 80px -10px rgba(234, 179, 8, 0.25); }
   .card-3d::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 60%, rgba(0,0,0,0.85) 100%); pointer-events: none; }
   .glass-sheen { display: none !important; }
   
@@ -128,6 +144,7 @@
   .tab-btn.active { background: linear-gradient(135deg, #eab308 0%, #ca8a04 100%); color: #050505 !important; opacity: 1; border-color: rgba(255,255,255,0.4); box-shadow: 0 4px 15px rgba(234, 179, 8, 0.4), inset 0 2px 4px rgba(255,255,255,0.5); transform: scale(1.02); }
   
   .cat-card-glass { background: var(--card-bg); backdrop-filter: blur(16px); border: 1px solid var(--card-border); border-radius: 1.75rem; padding: 1.75rem 2rem; cursor: pointer; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+  .cat-card-glass:hover { transform: translateY(-4px) scale(1.02); }
   .view { transition: opacity .4s ease; opacity: 1; display: block; }
   .view-hidden { display: none !important; opacity: 0; }
   
@@ -138,7 +155,6 @@
   .vx-ambient-glow { position: absolute; width: min(80vw,900px); height: min(80vw,900px); border-radius: 50%; background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 45%, transparent 70%); filter: blur(60px); }
   .vx-logo-word { display: flex; font-family: 'Cinzel', serif; font-weight: 900; font-size: clamp(3.5rem, 13vw, 7rem); letter-spacing: 0.25em; line-height: 1; position: relative; z-index: 2; perspective: 1000px; }
   
-  /* اللمعة السريعة والأنيقة لشعار VORTX في شاشة التحميل */
   .vx-letter { 
     display: inline-block; 
     background: linear-gradient(110deg, #888 0%, #fff 40%, #ffffff 60%, #888 100%);
@@ -184,13 +200,14 @@
     box-shadow: 0 4px 15px rgba(0,0,0,0.2), inset 0 1px 1px rgba(255,255,255,0.3);
   }
   .glass-btn-center:hover {
-    transform: translateY(-2px) scale(1.04);
-    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px) scale(1.06);
+    background: rgba(255, 255, 255, 0.28);
     border-color: rgba(255, 255, 255, 0.6);
   }
 
   .back-btn-pill { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.6rem 1.4rem; border-radius: 999px; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.2); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); color: #eab308; font-weight: 800; font-size: 0.9rem; cursor: pointer; transition: all 0.2s ease; }
-  
+  .back-btn-pill:hover { transform: scale(1.05); }
+
   .radio { display: flex; justify-content: center; gap: 12px; margin-bottom: 1.5rem; direction: ltr; }
   .radio > input { position: absolute; appearance: none; opacity: 0; }
   .radio > label { cursor: pointer; font-size: 32px; position: relative; display: inline-block; transition: transform 0.3s ease; }
@@ -219,18 +236,17 @@
   </p>
 </div>
 
-<!-- مودال معاينة الكرت بدون أي مربع ملصق بالمنتصف -->
 <div id="preview-modal" class="fixed inset-0 z-[10000] flex items-center justify-center p-3 sm:p-6 h-[100dvh] w-screen opacity-0 pointer-events-none transition-all duration-300">
   <div class="absolute inset-0 bg-black/90 backdrop-blur-xl" onclick="window.closePreview()"></div>
   <div class="glass rounded-3xl max-w-xs sm:max-w-sm w-full relative z-10 p-4 sm:p-5 border border-white/20 shadow-2xl flex flex-col justify-between max-h-[92vh] overflow-y-auto" id="preview-card">
     <button onclick="window.closePreview()" class="absolute top-3 right-3 text-white/80 hover:text-white font-black text-lg z-30 bg-black/70 w-8 h-8 rounded-full flex items-center justify-center border border-white/20">✕</button>
     
     <div>
-      <div id="preview-chip-bg" class="aspect-[9/16] w-full max-w-[270px] mx-auto rounded-2xl p-4 flex flex-col justify-between text-white relative overflow-hidden shadow-2xl border border-white/20 mb-4 bg-cover bg-center bg-black">
+      <div id="preview-chip-bg" class="aspect-[9/16] w-full max-w-[270px] mx-auto rounded-2xl p-4 flex flex-col justify-between text-white relative overflow-hidden shadow-2xl border border-white/20 mb-4 bg-cover bg-center bg-black transition-transform duration-300 hover:scale-[1.03]">
         
         <div class="flex justify-between items-start relative z-10 w-full">
           <span id="preview-tag" class="text-[9px] font-black tracking-widest uppercase text-yellow-300 bg-black/80 px-2.5 py-1 rounded-full backdrop-blur-md border border-white/10 card-tag-badge">CC PACK</span>
-          <span class="font-head font-black text-xs text-yellow-400 tracking-widest drop-shadow-md">VORTX</span>
+          <span class="font-head font-black text-xs text-yellow-400 tracking-widest drop-shadow-md card-gold-brand">VORTX</span>
         </div>
 
         <div class="relative z-10 bg-black/80 p-3 rounded-xl backdrop-blur-md border border-white/15 flex items-center justify-between w-full card-info-box mt-auto">
@@ -265,7 +281,7 @@
     <div class="space-y-3">
       <div class="p-3 bg-white/5 rounded-xl border border-white/10">
         <span class="text-[10px] text-purple-400 font-bold uppercase tracking-wider block mb-1">New Drop ✦</span>
-        <h4 class="text-xs font-bold text-white mb-1">CC1-10 Bundle Released ($20)</h4>
+        <h4 class="text-xs font-bold text-white mb-1">CC1-10 Bundle Released ($15)</h4>
         <p class="text-[11px] text-white/70">Check out the full CC bundle on BuyHub now!</p>
       </div>
     </div>
@@ -591,13 +607,14 @@
     </div>
   </section>
 
+  <!-- إعادة ترتيب وتنسيق CATEGORY STORE بشكل أنيق في أعلى اليسار مباشرة -->
   <section id="category-view" class="view view-hidden relative z-10 min-h-screen">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
       <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-10 pb-6 border-b border-white/10">
-        <div>
-          <span data-i18n="cat-view-sub" class="text-xs tracking-widest uppercase font-bold text-yellow-400">CATEGORY STORE</span>
-          <h2 id="cat-title" class="font-head font-bold text-2xl sm:text-4xl md:text-5xl mt-1 force-eng text-white tracking-wider leading-tight">CC COLLECTION</h2>
-          <p class="text-xs text-white/60 font-semibold mt-1" data-i18n="cat-view-desc">Explore all premium editing assets and bundles in this collection.</p>
+        <div class="flex flex-col items-start text-left">
+          <span data-i18n="cat-view-sub" class="inline-block px-3.5 py-1 rounded-full bg-yellow-500/10 border border-yellow-500/30 text-[10px] sm:text-xs font-mono font-black tracking-[0.25em] text-yellow-400 uppercase mb-2">CATEGORY STORE</span>
+          <h2 id="cat-title" class="font-head font-black text-3xl sm:text-5xl force-eng text-current tracking-wider leading-none">CC COLLECTION</h2>
+          <p class="text-xs sm:text-sm text-current opacity-70 font-semibold mt-2" data-i18n="cat-view-desc">Explore all premium editing assets and bundles in this collection.</p>
         </div>
         <button onclick="window.backToHome()" class="back-btn-pill shrink-0"><span>←</span> <span data-i18n="back-btn">Back</span></button>
       </div>
@@ -610,6 +627,7 @@
 
 <script>
   function runVxLoader() {
+    window.scrollTo(0, 0);
     const logoWord = document.getElementById('vx-logo-word');
     const barFill = document.getElementById('vx-bar-fill');
     const percentEl = document.getElementById('vx-percent');
@@ -648,6 +666,7 @@
           if (appContent) appContent.classList.add('vx-revealed');
           if (heroSection) heroSection.classList.add('revealed');
           document.body.classList.add('revealed');
+          window.scrollTo(0, 0);
         }, 200);
       }
     }
@@ -733,7 +752,7 @@
     }
   };
 
-  // ربط جميع منتجات CC بالروابط والصور الجديدة الـ 13 كاملاً
+  // ربط منتجات الـ CC بتحديث سعر Cc1-10 إلى $15
   window.openCategoryView = function(catKey) {
     document.querySelectorAll('.view').forEach(v => v.classList.add('view-hidden'));
     const catView = document.getElementById('category-view');
@@ -757,7 +776,7 @@
         { id: "Cc10", title: "Cc10🤍", tag: "CC PACK", price: 5, img: "Cc10.png", link: "https://payhip.com/b/82gk1" },
         { id: "Cc11", title: "Cc11🩵", tag: "CC PACK", price: 5, img: "Cc11.png", link: "https://payhip.com/b/CGIdB" },
         { id: "Cc12", title: "Cc12💜", tag: "CC PACK", price: 5, img: "Cc12.png", link: "https://payhip.com/b/9YDA7" },
-        { id: "Cc1-10", title: "Cc1-10🏅🔥", tag: "CC BUNDLE", price: 20, img: "Cc1-10.jpg", link: "https://payhip.com/b/fQ9Sa" }
+        { id: "Cc1-10", title: "Cc1-10🏅🔥", tag: "CC BUNDLE", price: 15, img: "Cc1-10.jpg", link: "https://payhip.com/b/fQ9Sa" }
       ];
     } else {
       const isFree = catKey === 'FREE';
@@ -777,15 +796,18 @@
     if (catGrid) {
       catGrid.innerHTML = products.map(p => `
         <div class="glass p-4 rounded-2xl border border-white/10 flex flex-col justify-between hover:border-yellow-500/40 transition-all duration-300 group">
-          <div>
-            <div onclick="window.openPreview('${p.title}', '${p.tag}', ${p.price}, 'url(\\'${p.img}\\')', '', '${p.link}')" class="aspect-[9/16] w-full rounded-xl border border-white/10 p-4 flex flex-col justify-between mb-4 relative overflow-hidden bg-cover bg-center shadow-lg cursor-pointer" style="background-image: url('${p.img}');">
-              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20 pointer-events-none"></div>
-              <span class="text-[9px] font-bold uppercase tracking-widest text-yellow-400 bg-black/80 px-2.5 py-1 rounded-full w-max relative z-10 backdrop-blur-md border border-white/10">${p.tag}</span>
-              <h4 class="font-head font-black text-xl text-white group-hover:text-yellow-400 transition relative z-10 drop-shadow-md">${p.title}</h4>
+          <div class="card-img-box">
+            <div onclick="window.openPreview('${p.title}', '${p.tag}', ${p.price}, 'url(\\'${p.img}\\')', '', '${p.link}')" class="aspect-[9/16] w-full rounded-xl border border-white/10 p-4 flex flex-col justify-between mb-4 relative overflow-hidden bg-cover bg-center shadow-lg cursor-pointer transform transition-transform duration-300 hover:scale-[1.03]" style="background-image: url('${p.img}');">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-black/40 pointer-events-none"></div>
+              <div class="flex justify-between items-center relative z-10 w-full">
+                <span class="text-[9px] font-black uppercase tracking-widest text-yellow-300 bg-black/80 px-2.5 py-1 rounded-full backdrop-blur-md border border-white/10 card-tag-badge">${p.tag}</span>
+                <span class="font-head font-black text-xs text-yellow-400 tracking-widest drop-shadow-md card-gold-brand">VORTX</span>
+              </div>
+              <h4 class="font-head font-black text-xl text-white group-hover:text-yellow-400 transition relative z-10 drop-shadow-md mb-1">${p.title}</h4>
             </div>
           </div>
           <div class="pt-3 border-t border-white/10 flex items-center justify-between">
-            <span class="font-mono text-xl font-black text-yellow-400">${p.price === 0 ? 'FREE' : '$' + p.price}</span>
+            <span class="font-mono text-xl font-black text-yellow-400 font-bold">${p.price === 0 ? 'FREE' : '$' + p.price}</span>
             <div class="flex gap-2">
               <button onclick="window.toggleFavorite('${p.id}', '${p.title}', '${p.tag}', ${p.price}, '${p.img}', '${p.link}')" class="px-3 py-1.5 rounded-xl bg-white/10 hover:bg-red-500/80 text-red-400 hover:text-white font-bold text-xs transition">${favText}</button>
               <button type="button" onclick="window.openPayhipOrder('${p.link}')" class="glass-btn-center !px-4 !py-1.5 !min-w-0">
@@ -1044,7 +1066,6 @@
       draw();
     })();
 
-    // قاموس الترجمة المطور والشامل
     window.translations = {
       en: { 
         "nav-bundles": "Bundles", "nav-packs": "Featured Packs", "nav-categories": "Categories", 
@@ -1091,7 +1112,6 @@
       document.querySelectorAll('[data-i18n]').forEach(el => { if (dict[el.getAttribute('data-i18n')]) el.textContent = dict[el.getAttribute('data-i18n')]; });
       document.querySelectorAll('[data-i18n-ph]').forEach(el => { if (dict[el.getAttribute('data-i18n-ph')]) el.setAttribute('placeholder', dict[el.getAttribute('data-i18n-ph')]); });
       
-      // التحديث اللحظي لجميع الأزرار داخل الأقسام والمفضلة
       renderFavoritesUI();
       const catView = document.getElementById('category-view');
       if (catView && !catView.classList.contains('view-hidden')) {
@@ -1134,7 +1154,7 @@
 document.addEventListener('DOMContentLoaded', function() {
   "use strict";
 
-  // إدراج كافة أصل الـ 13 منتج بدون مربع الصغير ملصق مع جميع الروابط المطلوبة
+  // إدراج 13 منتج وتحديد سعر Cc1-10 بـ 15 دولار
   window.CARDS_DATA_CURRENT = [
     { title: "Cc1💛", tag: "CC PACK", price: 5, bg: "url('Cc1.jpg')", border: "rgba(251, 191, 36, 0.4)", link: "https://payhip.com/b/gBzm3" },
     { title: "Cc2💙", tag: "CC PACK", price: 5, bg: "url('Cc2.jpg')", border: "rgba(34, 211, 238, 0.4)", link: "https://payhip.com/b/IB15F" },
@@ -1148,7 +1168,7 @@ document.addEventListener('DOMContentLoaded', function() {
     { title: "Cc10🤍", tag: "CC PACK", price: 5, bg: "url('Cc10.png')", border: "rgba(255, 255, 255, 0.4)", link: "https://payhip.com/b/82gk1" },
     { title: "Cc11🩵", tag: "CC PACK", price: 5, bg: "url('Cc11.png')", border: "rgba(56, 189, 248, 0.4)", link: "https://payhip.com/b/CGIdB" },
     { title: "Cc12💜", tag: "CC PACK", price: 5, bg: "url('Cc12.png')", border: "rgba(192, 132, 252, 0.4)", link: "https://payhip.com/b/9YDA7" },
-    { title: "Cc1-10🏅🔥", tag: "CC BUNDLE", price: 20, bg: "url('Cc1-10.jpg')", border: "rgba(234, 179, 8, 0.5)", link: "https://payhip.com/b/fQ9Sa" }
+    { title: "Cc1-10🏅🔥", tag: "CC BUNDLE", price: 15, bg: "url('Cc1-10.jpg')", border: "rgba(234, 179, 8, 0.5)", link: "https://payhip.com/b/fQ9Sa" }
   ];
 
   var stage = document.getElementById('carousel-stage'), track = document.getElementById('carousel-track');
@@ -1162,8 +1182,7 @@ document.addEventListener('DOMContentLoaded', function() {
       var card = document.createElement('div');
       card.className = 'card-3d'; card.style.background = data.bg; card.style.border = '1px solid ' + data.border;
       
-      // تصميم الكرت النقي بدون أي مربع برتقالي أو أزرق داخلي
-      card.innerHTML = '<div class="p-6 h-full flex flex-col justify-between text-white relative z-10 pointer-events-none"><div class="flex justify-between items-start"><div><p class="text-[10px] font-extrabold tracking-widest uppercase text-yellow-300 bg-black/80 px-2.5 py-1 rounded-full backdrop-blur-md border border-white/10 card-tag-badge">' + data.tag + '</p></div><span class="font-head font-black text-xs text-yellow-400 drop-shadow-md">VORTX</span></div><div class="flex justify-between items-end font-mono text-sm tracking-widest bg-black/80 p-3 rounded-xl backdrop-blur-md border border-white/15 card-info-box mt-auto"><h3 class="font-head font-black text-xl sm:text-2xl text-white drop-shadow-md leading-none">' + data.title + '</h3><span class="font-head font-bold text-sm text-yellow-400 shrink-0">' + (data.price === 0 ? 'FREE' : '$'+data.price) +'</span></div></div>';
+      card.innerHTML = '<div class="p-6 h-full flex flex-col justify-between text-white relative z-10 pointer-events-none"><div class="flex justify-between items-start"><p class="text-[10px] font-extrabold tracking-widest uppercase text-yellow-300 bg-black/80 px-2.5 py-1 rounded-full backdrop-blur-md border border-white/10 card-tag-badge">' + data.tag + '</p><span class="font-head font-black text-xs text-yellow-400 drop-shadow-md card-gold-brand">VORTX</span></div><div class="flex justify-between items-end font-mono text-sm tracking-widest bg-black/80 p-3 rounded-xl backdrop-blur-md border border-white/15 card-info-box mt-auto"><h3 class="font-head font-black text-xl sm:text-2xl text-white drop-shadow-md leading-none">' + data.title + '</h3><span class="font-head font-bold text-sm text-yellow-400 shrink-0">' + (data.price === 0 ? 'FREE' : '$'+data.price) +'</span></div></div>';
       
       card.addEventListener('click', function () {
         if (Math.abs(dragDeltaX) < 8) {
@@ -1199,7 +1218,7 @@ document.addEventListener('DOMContentLoaded', function() {
         { title: "Cc10🤍", tag: "CC PACK", price: 5, bg: "url('Cc10.png')", border: "rgba(255, 255, 255, 0.4)", link: "https://payhip.com/b/82gk1" },
         { title: "Cc11🩵", tag: "CC PACK", price: 5, bg: "url('Cc11.png')", border: "rgba(56, 189, 248, 0.4)", link: "https://payhip.com/b/CGIdB" },
         { title: "Cc12💜", tag: "CC PACK", price: 5, bg: "url('Cc12.png')", border: "rgba(192, 132, 252, 0.4)", link: "https://payhip.com/b/9YDA7" },
-        { title: "Cc1-10🏅🔥", tag: "CC BUNDLE", price: 20, bg: "url('Cc1-10.jpg')", border: "rgba(234, 179, 8, 0.5)", link: "https://payhip.com/b/fQ9Sa" }
+        { title: "Cc1-10🏅🔥", tag: "CC BUNDLE", price: 15, bg: "url('Cc1-10.jpg')", border: "rgba(234, 179, 8, 0.5)", link: "https://payhip.com/b/fQ9Sa" }
       ],
       'XML': [
         { title: "BLACK VIP", tag: "VFX PACK", price: 29, bg: "linear-gradient(135deg, #09090b, #27272a)", border: "rgba(255, 255, 255, 0.2)", link: "https://payhip.com/b/gBzm3" },
