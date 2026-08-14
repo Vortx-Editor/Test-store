@@ -62,209 +62,179 @@
   html.light p, html.light span, html.light h2, html.light h3, html.light h4 { color: var(--text-color); }
   html.light .text-white { color: #17131F !important; }
   html.light .text-slate-300 { color: #625D6B !important; }
-  html.light .text-purple-300, html.light .text-purple-400 { color: #94A3B8 !important; }
 
-  /* استثناء الكروت والـ Preview من نصوص الوضع النهاري لتبقى باللون الأبيض والذهبي الناصع دائماً */
-  .card-3d *, #preview-modal *, .card-img-box * { color: initial; }
-  html.light .card-3d .text-yellow-400, 
-  html.light #preview-modal .text-yellow-400, 
-  html.light .card-img-box .text-yellow-400,
-  html.light .card-gold-brand { color: #facc15 !important; display: inline-block !important; visibility: visible !important; opacity: 1 !important; text-shadow: 0 2px 4px rgba(0,0,0,0.8); }
+  /* تخصيص نصوص المودال والبطاقات لتظل دائماً واضحة وناصعة باللون الأبيض والذهبي */
+  #preview-card {
+    background: rgba(15, 15, 22, 0.96) !important;
+    border: 1px solid rgba(255, 255, 255, 0.25) !important;
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.9) !important;
+    color: #ffffff !important;
+  }
+  #preview-card * { color: #ffffff; }
   
-  html.light .card-3d .text-white, 
-  html.light #preview-modal .text-white, 
-  html.light .card-img-box .text-white { color: #ffffff !important; text-shadow: 0 2px 4px rgba(0,0,0,0.8); }
-  
-  html.light .card-3d .card-info-box,
-  html.light #preview-card .card-info-box,
-  html.light .card-img-box .card-info-box { background: rgba(0, 0, 0, 0.82) !important; border-color: rgba(255,255,255,0.2) !important; }
+  .card-tag-badge, #preview-tag {
+    background: rgba(0, 0, 0, 0.88) !important;
+    color: #facc15 !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    font-weight: 900 !important;
+    display: inline-block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  .card-gold-brand {
+    color: #facc15 !important;
+    font-weight: 900 !important;
+    display: inline-block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.9) !important;
+  }
+
+  #preview-title {
+    color: #ffffff !important;
+    font-weight: 900 !important;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.9) !important;
+  }
+
+  #preview-price-display {
+    color: #facc15 !important;
+    font-weight: 900 !important;
+  }
+
+  .modal-close-btn {
+    color: #ffffff !important;
+    background: rgba(0, 0, 0, 0.85) !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  }
+
+  #preview-modal .glass-btn-center {
+    background: linear-gradient(135deg, #7e22ce 0%, #a855f7 100%) !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    font-weight: 800 !important;
+    box-shadow: 0 4px 15px rgba(126, 34, 204, 0.5) !important;
+  }
+
+  #preview-fav-btn-text {
+    color: #f87171 !important;
+    font-weight: 800 !important;
+  }
 
   html.light .vortx-wet-oil-title { background: linear-gradient(110deg, #17131F 0%, #64748B 30%, #17131F 55%, #94A3B8 80%, #17131F 100%); background-size: 200% 100%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 4px 12px rgba(100, 116, 139, 0.15)); }
-  html.light .gold-heading { background: linear-gradient(100deg, #17131F 0%, #C49A3A 30%, #17131F 60%, #17131F 100%); background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 4px 12px rgba(196, 154, 58, 0.15)); }
-  html.light .glass, html.light .cat-card-glass, html.light .tier-card { background: rgba(255, 255, 255, 0.8) !important; border: 1px solid rgba(203, 213, 225, 0.4) !important; box-shadow: 0 15px 35px -10px rgba(100, 116, 139, 0.08), inset 0 0 20px rgba(255,255,255,0.8) !important; backdrop-filter: blur(24px) !important; }
-
-  html.light .container_chat_bot .chat { background-color: #e2e8f0 !important; border: 1px solid #cbd5e1 !important; color: #0f172a !important; }
-  html.light .container_chat_bot .container-chat-options { background: linear-gradient(to bottom right, #94a3b8, #cbd5e1, #94a3b8) !important; }
-  html.light .container_chat_bot .chat input, html.light .container_chat_bot .chat textarea { color: #0f172a !important; background: rgba(255,255,255,0.6) !important; }
-  html.light .container_chat_bot .chat input::placeholder, html.light .container_chat_bot .chat textarea::placeholder { color: #475569 !important; }
-  html.light #reviews-marquee-container { background: #e2e8f0 !important; border-color: #cbd5e1 !important; }
-  html.light #reviews-marquee-track > div { background: #ffffff !important; border-color: #cbd5e1 !important; color: #0f172a !important; }
-  html.light #reviews-marquee-track span { color: #0f172a !important; }
-  html.light #reviews-marquee-track span.text-yellow-400 { color: #d97706 !important; }
+  html.light .glass, html.light .cat-card-glass, html.light .tier-card { background: rgba(255, 255, 255, 0.85) !important; border: 1px solid rgba(203, 213, 225, 0.4) !important; box-shadow: 0 15px 35px -10px rgba(100, 116, 139, 0.08) !important; backdrop-filter: blur(24px) !important; }
 
   h1, h2, h3, .font-head { font-family: 'Cinzel', serif; letter-spacing: 1.5px; }
   .force-eng { font-family: 'Cinzel', serif !important; letter-spacing: 0.2em !important; direction: ltr !important; unicode-bidi: isolate-override !important; display: inline-block; }
   .stars-background-container { position: absolute; inset: 0; width: 100%; height: 100%; background: var(--star-bg); overflow: hidden; z-index: 0; pointer-events: none; transition: background .4s ease; }
   body > .stars-background-container { position: fixed; }
-  html.light .stars-background-container::after { content: ''; position: absolute; inset: 0; background-image: radial-gradient(rgba(100, 116, 139, 0.08) 1.5px, transparent 1.5px); background-size: 32px 32px; z-index: 1; }
-  #stars-canvas { position: absolute; inset: 0; z-index: 0; opacity: var(--star-opacity); transition: opacity .4s ease; }
-  html.light #stars-canvas { opacity: 0; } 
   #hero-section { position: relative; min-height: 85vh; display: flex; flex-direction: column; justify-content: center; }
   
   #globe { position: absolute; top: 48%; left: 50%; transform: translate(-50%,-50%) scale(0); z-index: 1; opacity: 0; pointer-events: none; }
-  @media (max-width: 640px) { #globe { top: 52%; } }
   .revealed #globe { animation: globeBounce 2.8s ease-in-out 0.1s both; }
   @keyframes globeBounce { 0% { opacity: 0; transform: translate(-50%,-50%) scale(0); } 45% { opacity: 1; transform: translate(-50%,-50%) scale(1.25); } 100% { opacity: 1; transform: translate(-50%,-50%) scale(1); } }
   .floor-glow { position: absolute; left: 50%; bottom: 6%; width: 60%; height: 220px; transform: translateX(-50%); background: radial-gradient(ellipse at center, rgba(255,255,255,.10), rgba(255,255,255,0) 70%); filter: blur(8px); z-index: 1; opacity: 0; pointer-events: none; animation: fadeGlow 3s ease 1.5s forwards; }
-  html.light .floor-glow { background: radial-gradient(ellipse at center, rgba(71, 85, 105, 0.22), rgba(244,242,247,0) 70%); }
   @keyframes fadeGlow { to { opacity: 1; } }
-  .animated-title .line { display: block; overflow: hidden; }
-  .animated-title .word { display: inline-block; margin-right: 0.22em; transform: translateY(110%); opacity: 0; }
-  .revealed .animated-title .word { animation: wordUp 1.2s cubic-bezier(.16,1,.3,1) forwards; }
-  @keyframes wordUp { to { transform: translateY(0); opacity: 1; } }
-  .revealed .fade-up-item { animation: upFade 1s ease forwards; opacity: 0; transform: translateY(16px); }
-  @keyframes upFade { to { opacity: 1; transform: translateY(0); } }
-  .vortx-wet-oil-title { display: inline-block; font-weight: 900; background: linear-gradient(110deg, #ffffff 0%, #e0e0e0 20%, #ffffff 35%, #a0a0a0 50%, #ffffff 65%, #606060 80%, #ffffff 100%); background-size: 200% 100%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; animation: oilShineSweep 4s linear infinite; filter: drop-shadow(0 10px 25px rgba(0,0,0,.8)) drop-shadow(0 0 20px rgba(255,255,255,.1)); }
+  
+  .vortx-wet-oil-title { display: inline-block; font-weight: 900; background: linear-gradient(110deg, #ffffff 0%, #e0e0e0 20%, #ffffff 35%, #a0a0a0 50%, #ffffff 65%, #606060 80%, #ffffff 100%); background-size: 200% 100%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; animation: oilShineSweep 4s linear infinite; filter: drop-shadow(0 10px 25px rgba(0,0,0,.8)); }
   @keyframes oilShineSweep { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
   
   .nav-btn-item { width: 38px; height: 38px; border-radius: 999px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.05); transition: all 0.3s ease; flex-shrink: 0; }
-  @media (min-width: 640px) { .nav-btn-item { width: 42px; height: 42px; } }
   .nav-btn-item:hover { background: rgba(255,255,255,0.12); transform: scale(1.05); }
   .theme-switch-btn { width: 56px; height: 30px; border-radius: 999px; background: transparent; border: 1px solid rgba(255,255,255,0.2); position: relative; cursor: pointer; transition: all .4s ease; display: flex; align-items: center; flex-shrink: 0; }
-  html.light .theme-switch-btn { background: #ffffff; border-color: rgba(203, 213, 225, 0.4); box-shadow: inset 0 2px 10px rgba(100, 116, 139, 0.05), 0 4px 12px rgba(100, 116, 139, 0.1); }
-  .theme-switch-ball { width: 22px; height: 22px; border-radius: 50%; position: absolute; left: 3px; background: rgba(255,255,255,0.15); color: white; transition: transform .4s cubic-bezier(0.25, 1, 0.5, 1), background .4s ease, color .4s ease; display: flex; align-items: center; justify-content: center; }
-  html.light .theme-switch-ball { transform: translateX(26px); background: linear-gradient(135deg, #64748B, #334155); box-shadow: 0 2px 8px rgba(100, 116, 139, 0.4); color: #ffffff; }
+  html.light .theme-switch-btn { background: #ffffff; border-color: rgba(203, 213, 225, 0.4); box-shadow: inset 0 2px 10px rgba(100, 116, 139, 0.05); }
+  .theme-switch-ball { width: 22px; height: 22px; border-radius: 50%; position: absolute; left: 3px; background: rgba(255,255,255,0.15); color: white; transition: transform .4s cubic-bezier(0.25, 1, 0.5, 1); display: flex; align-items: center; justify-content: center; }
+  html.light .theme-switch-ball { transform: translateX(26px); background: #334155; color: #ffffff; }
   .icon-moon { display: block; width: 12px; height: 12px; }
   .icon-sun { display: none; width: 13px; height: 13px; }
   html.light .icon-moon { display: none; }
   html.light .icon-sun { display: block; }
   
-  .vortx-explore-btn { position: relative; display: inline-flex; flex-direction: column; align-items: center; justify-content: center; padding: 0.85rem 2.2rem; border-radius: 999px; cursor: pointer; background: rgba(15, 15, 20, 0.6); border: 1px solid rgba(255, 255, 255, 0.2); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 25px rgba(226, 232, 240, 0.18); transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); min-width: 220px; text-align: center; }
+  .vortx-explore-btn { position: relative; display: inline-flex; flex-direction: column; align-items: center; justify-content: center; padding: 0.85rem 2.2rem; border-radius: 999px; cursor: pointer; background: rgba(15, 15, 20, 0.6); border: 1px solid rgba(255, 255, 255, 0.2); backdrop-filter: blur(12px); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4); transition: all 0.4s ease; min-width: 220px; text-align: center; }
   .perspective-container { perspective: 1350px; }
   .preserve-3d { transform-style: preserve-3d; }
 
-  /* الكروت وتأثير التكبير التفاعلي */
-  .card-3d { position: absolute; top: 50%; left: 50%; width: 280px; height: 440px; margin-top: -220px; margin-left: -140px; border-radius: 20px; transform-style: preserve-3d; will-change: transform, opacity; cursor: pointer; box-shadow: 0 30px 60px -12px rgba(0,0,0,0.85); overflow: hidden; background-size: cover !important; background-position: center !important; filter: none !important; transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.35s ease; }
-  .card-3d:hover { box-shadow: 0 40px 80px -10px rgba(234, 179, 8, 0.25); }
-  .card-3d::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 60%, rgba(0,0,0,0.85) 100%); pointer-events: none; }
-  .glass-sheen { display: none !important; }
+  /* الكروت وتأثير التكبير والتفاعل */
+  .card-3d { position: absolute; top: 50%; left: 50%; width: 280px; height: 440px; margin-top: -220px; margin-left: -140px; border-radius: 20px; transform-style: preserve-3d; will-change: transform, opacity; cursor: pointer; box-shadow: 0 30px 60px -12px rgba(0,0,0,0.85); overflow: hidden; background-size: cover !important; background-position: center !important; transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1); }
+  .card-3d:hover { box-shadow: 0 40px 80px -10px rgba(234, 179, 8, 0.3); }
   
-  .glass-tab-container { background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%); border: 1px solid rgba(255,255,255,0.15); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3); border-radius: 1.25rem; padding: 0.5rem; display: flex; width: 100%; gap: 0.5rem; }
-  .tab-btn { flex: 1; padding: 0.85rem 0; border-radius: 0.875rem; font-family: 'JetBrains Mono', monospace; font-weight: 800; font-size: 1rem; color: var(--text-color); opacity: 0.6; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); background: transparent; border: 1px solid transparent; cursor: pointer; }
-  .tab-btn.active { background: linear-gradient(135deg, #eab308 0%, #ca8a04 100%); color: #050505 !important; opacity: 1; border-color: rgba(255,255,255,0.4); box-shadow: 0 4px 15px rgba(234, 179, 8, 0.4), inset 0 2px 4px rgba(255,255,255,0.5); transform: scale(1.02); }
+  .glass-tab-container { background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%); border: 1px solid rgba(255,255,255,0.15); backdrop-filter: blur(20px); border-radius: 1.25rem; padding: 0.5rem; display: flex; width: 100%; gap: 0.5rem; }
+  .tab-btn { flex: 1; padding: 0.85rem 0; border-radius: 0.875rem; font-family: 'JetBrains Mono', monospace; font-weight: 800; font-size: 1rem; color: var(--text-color); opacity: 0.6; transition: all 0.4s ease; background: transparent; border: 1px solid transparent; cursor: pointer; }
+  .tab-btn.active { background: linear-gradient(135deg, #eab308 0%, #ca8a04 100%); color: #050505 !important; opacity: 1; border-color: rgba(255,255,255,0.4); box-shadow: 0 4px 15px rgba(234, 179, 8, 0.4); transform: scale(1.02); }
   
-  .cat-card-glass { background: var(--card-bg); backdrop-filter: blur(16px); border: 1px solid var(--card-border); border-radius: 1.75rem; padding: 1.75rem 2rem; cursor: pointer; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+  .cat-card-glass { background: var(--card-bg); backdrop-filter: blur(16px); border: 1px solid var(--card-border); border-radius: 1.75rem; padding: 1.75rem 2rem; cursor: pointer; transition: all 0.4s ease; }
   .cat-card-glass:hover { transform: translateY(-4px) scale(1.02); }
   .view { transition: opacity .4s ease; opacity: 1; display: block; }
   .view-hidden { display: none !important; opacity: 0; }
   
-  #vx-loader { position: fixed; inset: 0; z-index: 999999; background: var(--loader-bg); transition: background-color .4s ease, opacity 0.8s cubic-bezier(0.4,0,0.2,1), visibility 0.8s ease; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; }
+  #vx-loader { position: fixed; inset: 0; z-index: 999999; background: var(--loader-bg); transition: opacity 0.8s ease, visibility 0.8s ease; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; }
   #vx-loader.vx-hide { opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; }
-  #app-content { opacity: 0; filter: blur(20px); transform: scale(1.03); transition: opacity 1s cubic-bezier(0.16,1,0.3,1), filter 1s cubic-bezier(0.16,1,0.3,1), transform 1s cubic-bezier(0.16,1,0.3,1); }
+  #app-content { opacity: 0; filter: blur(20px); transform: scale(1.03); transition: opacity 1s ease, filter 1s ease, transform 1s ease; }
   #app-content.vx-revealed { opacity: 1; filter: blur(0); transform: scale(1); }
-  .vx-ambient-glow { position: absolute; width: min(80vw,900px); height: min(80vw,900px); border-radius: 50%; background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 45%, transparent 70%); filter: blur(60px); }
-  .vx-logo-word { display: flex; font-family: 'Cinzel', serif; font-weight: 900; font-size: clamp(3.5rem, 13vw, 7rem); letter-spacing: 0.25em; line-height: 1; position: relative; z-index: 2; perspective: 1000px; }
+  .vx-logo-word { display: flex; font-family: 'Cinzel', serif; font-weight: 900; font-size: clamp(3.5rem, 13vw, 7rem); letter-spacing: 0.25em; line-height: 1; position: relative; z-index: 2; }
   
-  .vx-letter { 
-    display: inline-block; 
-    background: linear-gradient(110deg, #888 0%, #fff 40%, #ffffff 60%, #888 100%);
-    background-size: 200% 100%;
-    -webkit-background-clip: text; 
-    background-clip: text; 
-    -webkit-text-fill-color: transparent; 
-    opacity: 0; 
-    transform: translateY(-70px) rotateX(45deg) scale(1.4); 
-    filter: blur(12px); 
-    animation: vxLetterDrop 0.9s cubic-bezier(0.19, 1, 0.22, 1) forwards, vxLogoShine 2.2s infinite linear; 
-    animation-delay: var(--ld, 0s), 1s; 
-  }
-  @keyframes vxLetterDrop { 0% { opacity: 0; transform: translateY(-70px) rotateX(45deg) scale(1.4); filter: blur(12px); } 100% { opacity: 1; transform: translateY(0) rotateX(0) scale(1); filter: drop-shadow(0 15px 30px rgba(255,255,255,0.15)); } }
-  @keyframes vxLogoShine { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+  .vx-letter { display: inline-block; background: linear-gradient(110deg, #888 0%, #fff 40%, #ffffff 60%, #888 100%); background-size: 200% 100%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; opacity: 0; transform: translateY(-70px) scale(1.4); animation: vxLetterDrop 0.9s cubic-bezier(0.19, 1, 0.22, 1) forwards; animation-delay: var(--ld, 0s); }
+  @keyframes vxLetterDrop { to { opacity: 1; transform: translateY(0) scale(1); } }
 
   .vx-bar-track { width: min(80vw, 340px); height: 5px; border-radius: 999px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); margin-top: 2rem; position: relative; overflow: hidden; z-index: 2; }
-  .vx-bar-fill { height: 100%; width: 0%; border-radius: 999px; background: linear-gradient(90deg, #555, #ccc, #fff); position: relative; transition: width 0.1s linear; }
-  
-  .hide-scrollbar::-webkit-scrollbar { display: none; }
-  .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; overflow-x: auto; cursor: grab; user-select: none; }
+  .vx-bar-fill { height: 100%; width: 0%; border-radius: 999px; background: linear-gradient(90deg, #555, #ccc, #fff); transition: width 0.1s linear; }
 
   .glass-btn-center {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: auto;
-    min-width: 120px;
-    padding: 0.45rem 1.25rem;
-    margin: 0 auto;
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.12);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    color: #ffffff;
-    font-weight: 800;
-    font-size: 0.82rem;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2), inset 0 1px 1px rgba(255,255,255,0.3);
+    display: inline-flex; align-items: center; justify-content: center; width: auto; min-width: 120px; padding: 0.55rem 1.4rem; margin: 0 auto; border-radius: 999px; background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.25); backdrop-filter: blur(12px); color: #ffffff !important; font-weight: 800; font-size: 0.85rem; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.3);
   }
-  .glass-btn-center:hover {
-    transform: translateY(-2px) scale(1.06);
-    background: rgba(255, 255, 255, 0.28);
-    border-color: rgba(255, 255, 255, 0.6);
-  }
+  .glass-btn-center:hover { transform: translateY(-2px) scale(1.05); background: rgba(255, 255, 255, 0.3); }
 
-  .back-btn-pill { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.6rem 1.4rem; border-radius: 999px; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.2); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); color: #eab308; font-weight: 800; font-size: 0.9rem; cursor: pointer; transition: all 0.2s ease; }
+  .back-btn-pill { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.6rem 1.4rem; border-radius: 999px; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.2); backdrop-filter: blur(16px); color: #eab308; font-weight: 800; font-size: 0.9rem; cursor: pointer; transition: all 0.2s ease; }
   .back-btn-pill:hover { transform: scale(1.05); }
 
   .radio { display: flex; justify-content: center; gap: 12px; margin-bottom: 1.5rem; direction: ltr; }
   .radio > input { position: absolute; appearance: none; opacity: 0; }
   .radio > label { cursor: pointer; font-size: 32px; position: relative; display: inline-block; transition: transform 0.3s ease; }
   .radio > label > svg { fill: #444; transition: fill 0.3s ease; }
-  html.light .radio > label > svg { fill: #94a3b8; }
   .radio > input:checked ~ label svg, .radio > label:hover svg, .radio > label:hover ~ label svg { fill: #ff9e0b !important; filter: drop-shadow(0 0 12px rgba(255, 158, 11, 0.8)); }
-  
-  .container_chat_bot { display: flex; flex-direction: column; max-width: 480px; width: 100%; margin: 0 auto; }
-  .container_chat_bot .container-chat-options { position: relative; display: flex; background: linear-gradient(to bottom right, #555, #1f1f23, #121215); border-radius: 20px; padding: 2px; overflow: hidden; }
-  .container_chat_bot .chat { display: flex; flex-direction: column; background-color: rgba(10, 10, 15, 0.85); border-radius: 18px; width: 100%; overflow: hidden; backdrop-filter: blur(12px); }
-  .container_chat_bot .chat input { background-color: transparent; border: none; border-bottom: 1px solid rgba(255, 255, 255, 0.08); width: 100%; color: #ffffff; font-family: 'Inter', 'Cairo', sans-serif; font-size: 12px; font-weight: 600; padding: 12px 14px; outline: none; }
-  .container_chat_bot .chat .chat-bot textarea { background-color: transparent; border: none; width: 100%; height: 75px; color: #ffffff; font-family: 'Inter', 'Cairo', sans-serif; font-size: 13px; font-weight: 500; padding: 12px 14px; resize: none; outline: none; }
-  .container_chat_bot .chat .options { display: flex; justify-content: flex-end; align-items: center; padding: 8px 12px; border-top: 1px solid rgba(255, 255, 255, 0.05); }
-  .container_chat_bot .chat .options .btn-submit { display: flex; padding: 2px; background-image: linear-gradient(to top, #292929, #555555, #292929); border-radius: 10px; cursor: pointer; border: none; }
-  .container_chat_bot .chat .options .btn-submit i { width: 34px; height: 32px; padding: 6px; background: rgba(0, 0, 0, 0.2); border-radius: 8px; color: #eab308; display: flex; align-items: center; justify-content: center; }
 </style>
 </head>
 <body>
 
 <div id="vx-loader">
-  <div class="vx-ambient-glow"></div>
   <div class="vx-logo-word" id="vx-logo-word"></div>
   <div class="vx-bar-track"><div class="vx-bar-fill" id="vx-bar-fill"></div></div>
-  <p class="loader-text text-xs font-bold uppercase tracking-[0.35em] mt-5 relative z-10">
+  <p class="loader-text text-xs font-bold uppercase tracking-[0.35em] mt-5 relative z-10 text-white">
     INITIALIZING VORTX <span id="vx-percent">0</span>%
   </p>
 </div>
 
+<!-- النافذة المنبثقة المحدثة بالكامل وبكل وضوح -->
 <div id="preview-modal" class="fixed inset-0 z-[10000] flex items-center justify-center p-3 sm:p-6 h-[100dvh] w-screen opacity-0 pointer-events-none transition-all duration-300">
   <div class="absolute inset-0 bg-black/90 backdrop-blur-xl" onclick="window.closePreview()"></div>
-  <div class="glass rounded-3xl max-w-xs sm:max-w-sm w-full relative z-10 p-4 sm:p-5 border border-white/20 shadow-2xl flex flex-col justify-between max-h-[92vh] overflow-y-auto" id="preview-card">
-    <button onclick="window.closePreview()" class="absolute top-3 right-3 text-white/80 hover:text-white font-black text-lg z-30 bg-black/70 w-8 h-8 rounded-full flex items-center justify-center border border-white/20">✕</button>
+  <div class="rounded-3xl max-w-xs sm:max-w-sm w-full relative z-10 p-4 sm:p-5 border shadow-2xl flex flex-col justify-between max-h-[92vh] overflow-y-auto" id="preview-card">
+    <button onclick="window.closePreview()" class="modal-close-btn absolute top-3 right-3 font-black text-base z-30 w-8 h-8 rounded-full flex items-center justify-center shadow-lg">✕</button>
     
     <div>
-      <div id="preview-chip-bg" class="aspect-[9/16] w-full max-w-[270px] mx-auto rounded-2xl p-4 flex flex-col justify-between text-white relative overflow-hidden shadow-2xl border border-white/20 mb-4 bg-cover bg-center bg-black transition-transform duration-300 hover:scale-[1.03]">
+      <!-- صورة كارت العرض واضحة 100% بدون أي طبقة سوداء أو تغبيش -->
+      <div id="preview-chip-bg" class="aspect-[9/16] w-full max-w-[270px] mx-auto rounded-2xl p-4 flex flex-col justify-between relative overflow-hidden shadow-2xl border border-white/20 mb-4 bg-cover bg-center bg-black transition-transform duration-300 hover:scale-[1.03]">
         
         <div class="flex justify-between items-start relative z-10 w-full">
-          <span id="preview-tag" class="text-[9px] font-black tracking-widest uppercase text-yellow-300 bg-black/80 px-2.5 py-1 rounded-full backdrop-blur-md border border-white/10 card-tag-badge">CC PACK</span>
-          <span class="font-head font-black text-xs text-yellow-400 tracking-widest drop-shadow-md card-gold-brand">VORTX</span>
+          <span id="preview-tag" class="text-[10px] font-black tracking-widest uppercase text-yellow-400 bg-black/90 px-3 py-1 rounded-full border border-white/20 card-tag-badge shadow-md">CC PACK</span>
+          <span class="font-head font-black text-sm text-yellow-400 tracking-widest drop-shadow-md card-gold-brand">VORTX</span>
         </div>
 
-        <div class="relative z-10 bg-black/80 p-3 rounded-xl backdrop-blur-md border border-white/15 flex items-center justify-between w-full card-info-box mt-auto">
-          <h3 id="preview-title" class="font-head font-black text-lg text-white drop-shadow truncate pr-2">Cc1💛</h3>
-          <span id="preview-price-display" class="font-mono text-base font-black text-yellow-400 shrink-0">$5</span>
+        <div class="relative z-10 bg-black/90 p-3.5 rounded-xl border border-white/20 flex items-center justify-between w-full shadow-2xl mt-auto">
+          <h3 id="preview-title" class="font-head font-black text-xl text-white drop-shadow truncate pr-2">Cc1💛</h3>
+          <span id="preview-price-display" class="font-mono text-lg font-black text-yellow-400 shrink-0">$5</span>
         </div>
       </div>
       
       <div class="space-y-1 mb-4 text-center">
-        <p class="text-[11px] text-white/70 leading-relaxed font-semibold" data-i18n="preview-desc">Includes full 4K vertical preset assets, color grade curves, and instant Payhip download integration.</p>
+        <p class="text-[11px] text-white/80 leading-relaxed font-semibold" data-i18n="preview-desc">Includes full 4K vertical preset assets, color grade curves, and instant Payhip download integration.</p>
       </div>
     </div>
 
-    <div class="flex items-center justify-center gap-3">
-      <button type="button" onclick="window.orderCurrentPreviewPayhip()" class="glass-btn-center !m-0 !py-2 !px-6">
+    <div class="flex items-center justify-center gap-3 pt-2 border-t border-white/10">
+      <button type="button" onclick="window.orderCurrentPreviewPayhip()" class="glass-btn-center !m-0 !py-2.5 !px-6">
         <span data-i18n="buy-now">Buy Now</span>
       </button>
-      <button type="button" onclick="window.togglePreviewFavorite()" class="glass-btn-center !bg-white/10 !m-0 !py-2 !px-4">
+      <button type="button" onclick="window.togglePreviewFavorite()" class="glass-btn-center !bg-white/10 !m-0 !py-2.5 !px-4">
         <span id="preview-fav-btn-text" class="text-red-400 font-extrabold" data-i18n="fav">♥ Favorite</span>
       </button>
     </div>
@@ -325,7 +295,7 @@
           </button>
 
           <a href="https://creators.sa/vortx" target="_blank" rel="noopener noreferrer" title="Support VORTX" class="nav-btn-item text-current opacity-70 hover:opacity-100 hover:text-yellow-400">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="relative z-10"><rect x="6" y="2" width="16" height="11" rx="2"/><circle cx="14" cy="7.5" r="2.5"/><path d="M14 4v7"/><path d="M2 14h3.5v5H2z"/><path d="M5.5 16.5c3 0 4.5 1 7.5 1l3.5-2.5 4.5 1.5-6.5 4.5h-9z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="16" height="11" rx="2"/><circle cx="14" cy="7.5" r="2.5"/><path d="M14 4v7"/><path d="M2 14h3.5v5H2z"/><path d="M5.5 16.5c3 0 4.5 1 7.5 1l3.5-2.5 4.5 1.5-6.5 4.5h-9z"/></svg>
           </a>
 
           <button type="button" onclick="window.toggleLanguage()" class="nav-btn-item px-2.5 !w-auto h-9 sm:h-10 text-brandLight font-extrabold text-xs cursor-pointer hover:bg-white/10 flex items-center gap-1 relative z-50">
@@ -353,8 +323,7 @@
       <div class="floor-glow"></div>
 
       <div class="relative z-20 flex flex-col items-center justify-center -mt-28 sm:-mt-16 pt-2 sm:pt-0 pb-28">
-        
-        <div class="fade-up-item inline-flex items-center gap-3 px-7 py-2.5 rounded-full text-xs sm:text-sm font-black tracking-widest uppercase glass backdrop-blur-xl shadow-lg border border-white/20 text-white z-30 mb-6 sm:mb-6 mt-4 sm:mt-0" style="animation-delay: 1.4s;">
+        <div class="fade-up-item inline-flex items-center gap-3 px-7 py-2.5 rounded-full text-xs sm:text-sm font-black tracking-widest uppercase glass backdrop-blur-xl shadow-lg border border-white/20 text-white z-30 mb-6 sm:mb-6 mt-4 sm:mt-0">
           <span class="w-2 h-2 rounded-full bg-white/70 animate-ping"></span>
           <span data-i18n="hero-tag">Digital Assets Hub</span>
           <span class="w-2 h-2 rounded-full bg-white/70 animate-ping"></span>
@@ -365,11 +334,11 @@
           <span class="line mt-2" data-text="Evolution of Digital Assets"></span>
         </h1>
         
-        <p data-i18n="hero-desc" class="fade-up-item font-semibold opacity-85 max-w-2xl mx-auto text-base sm:text-xl leading-relaxed mb-10" style="animation-delay: 1.6s;">
+        <p data-i18n="hero-desc" class="fade-up-item font-semibold opacity-85 max-w-2xl mx-auto text-base sm:text-xl leading-relaxed mb-10">
           Explore custom websites reflecting your unique identity, plus premium video editing and design assets.
         </p>
 
-        <div class="fade-up-item flex flex-col items-center justify-center gap-6" style="animation-delay: 1.8s;">
+        <div class="fade-up-item flex flex-col items-center justify-center gap-6">
           <div class="cursor-pointer text-base sm:text-lg font-bold opacity-80 hover:opacity-100 transition-opacity" onclick="window.scrollToId('bundles')">
             <span data-i18n="hero-btn">Explore Tiers</span>
           </div>
@@ -377,33 +346,27 @@
       </div>
 
       <div class="absolute bottom-2 sm:-bottom-8 md:-bottom-16 lg:-bottom-20 left-1/2 -translate-x-1/2 w-[90%] max-w-[520px] flex items-center justify-around px-6 sm:px-8 py-4 sm:py-5 rounded-full border border-white/10 glass backdrop-blur-md opacity-80 z-30" dir="rtl">
-        <a href="https://www.tiktok.com/@v_ortx?_r=1&_t=ZS-98pGOR9h9Ca" target="_blank" rel="noopener noreferrer" title="TikTok" class="hover:scale-110 hover:opacity-100 hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.8)] transition-all duration-300 text-current">
+        <a href="https://www.tiktok.com/@v_ortx?_r=1&_t=ZS-98pGOR9h9Ca" target="_blank" rel="noopener noreferrer" title="TikTok" class="hover:scale-110 hover:opacity-100 transition-all text-current">
           <svg class="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
         </a>
-        <a href="https://youtube.com/@v_ort_x?si=I0yNjdp3twt2Y32U" target="_blank" rel="noopener noreferrer" title="YouTube" class="hover:scale-110 hover:opacity-100 hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.8)] transition-all duration-300 text-current">
+        <a href="https://youtube.com/@v_ort_x?si=I0yNjdp3twt2Y32U" target="_blank" rel="noopener noreferrer" title="YouTube" class="hover:scale-110 hover:opacity-100 transition-all text-current">
           <svg class="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="4"/><path d="m10 9 5 3-5 3z"/></svg>
         </a>
-        <a href="https://t.me/wot_5" target="_blank" rel="noopener noreferrer" title="Telegram Personal" class="hover:scale-110 hover:opacity-100 hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.8)] transition-all duration-300 text-current">
+        <a href="https://t.me/wot_5" target="_blank" rel="noopener noreferrer" title="Telegram Personal" class="hover:scale-110 hover:opacity-100 transition-all text-current">
           <svg class="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 10-4 4 6 6 4-16-18 7 4 2 2 6 3-4"/></svg>
         </a>
-        <a href="https://www.instagram.com/toix.8i?igsh=Z3B1eWdwNGJocW9q" target="_blank" rel="noopener noreferrer" title="Instagram" class="hover:scale-110 hover:opacity-100 hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.8)] transition-all duration-300 text-current">
+        <a href="https://www.instagram.com/toix.8i?igsh=Z3B1eWdwNGJocW9q" target="_blank" rel="noopener noreferrer" title="Instagram" class="hover:scale-110 hover:opacity-100 transition-all text-current">
           <svg class="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
         </a>
       </div>
     </section>
 
     <section id="bundles" class="max-w-7xl mx-auto px-4 sm:px-6 pt-20 sm:pt-28 md:pt-36 pb-12 reveal-on-scroll">
-      <div class="relative w-full h-[360px] sm:h-[460px] rounded-3xl overflow-hidden shadow-2xl border border-white/10 group transition-all duration-500 hover:shadow-[0_20px_50px_rgba(226,232,240,0.15)]">
-        
+      <div class="relative w-full h-[360px] sm:h-[460px] rounded-3xl overflow-hidden shadow-2xl border border-white/10 group">
         <video 
           src="https://res.cloudinary.com/eon6wcph/video/upload/v1/VORTX_4K_CLEAN_FULL_kd7uui.mp4" 
-          autoplay 
-          loop 
-          muted 
-          playsinline 
-          preload="auto"
-          class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-102"
-          style="pointer-events: none;">
+          autoplay loop muted playsinline preload="auto"
+          class="w-full h-full object-cover" style="pointer-events: none;">
         </video>
 
         <div class="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black/80 via-black/40 to-transparent pointer-events-none"></div>
@@ -417,7 +380,6 @@
             </div>
           </div>
         </div>
-
       </div>
     </section>
 
@@ -607,7 +569,6 @@
     </div>
   </section>
 
-  <!-- إعادة ترتيب وتنسيق CATEGORY STORE بشكل أنيق في أعلى اليسار مباشرة -->
   <section id="category-view" class="view view-hidden relative z-10 min-h-screen">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
       <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-10 pb-6 border-b border-white/10">
@@ -752,7 +713,7 @@
     }
   };
 
-  // ربط منتجات الـ CC بتحديث سعر Cc1-10 إلى $15
+  /* عزل تام لخانة CC عن باقي الخانات لتظهر الصور في CC فقط */
   window.openCategoryView = function(catKey) {
     document.querySelectorAll('.view').forEach(v => v.classList.add('view-hidden'));
     const catView = document.getElementById('category-view');
@@ -779,13 +740,13 @@
         { id: "Cc1-10", title: "Cc1-10🏅🔥", tag: "CC BUNDLE", price: 15, img: "Cc1-10.jpg", link: "https://payhip.com/b/fQ9Sa" }
       ];
     } else {
-      const isFree = catKey === 'FREE';
-      products = Array.from({ length: 8 }).map((_, i) => ({
+      /* إبقاء الخانات الأخرى بدون صور الـ CC نهائياً */
+      products = Array.from({ length: 4 }).map((_, i) => ({
         id: `${catKey}_item_${i+1}`,
-        title: `${catKey} ${isFree ? 'Free Asset' : 'Pack'} Vol.${i+1}`,
+        title: `${catKey} Asset Pack Vol.${i+1}`,
         tag: catKey,
-        price: isFree ? 0 : 15 + (i * 3),
-        img: "Cc1.jpg",
+        price: 15 + (i * 5),
+        img: "", 
         link: "https://payhip.com/b/gBzm3"
       }));
     }
@@ -795,18 +756,23 @@
 
     if (catGrid) {
       catGrid.innerHTML = products.map(p => `
-        <div class="glass p-4 rounded-2xl border border-white/10 flex flex-col justify-between hover:border-yellow-500/40 transition-all duration-300 group">
-          <div class="card-img-box">
-            <div onclick="window.openPreview('${p.title}', '${p.tag}', ${p.price}, 'url(\\'${p.img}\\')', '', '${p.link}')" class="aspect-[9/16] w-full rounded-xl border border-white/10 p-4 flex flex-col justify-between mb-4 relative overflow-hidden bg-cover bg-center shadow-lg cursor-pointer transform transition-transform duration-300 hover:scale-[1.03]" style="background-image: url('${p.img}');">
-              <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-black/40 pointer-events-none"></div>
-              <div class="flex justify-between items-center relative z-10 w-full">
-                <span class="text-[9px] font-black uppercase tracking-widest text-yellow-300 bg-black/80 px-2.5 py-1 rounded-full backdrop-blur-md border border-white/10 card-tag-badge">${p.tag}</span>
-                <span class="font-head font-black text-xs text-yellow-400 tracking-widest drop-shadow-md card-gold-brand">VORTX</span>
+        <div class="glass p-5 rounded-2xl border border-white/10 flex flex-col justify-between hover:border-yellow-500/40 transition-all duration-300 group">
+          <div>
+            ${p.img ? `
+              <div onclick="window.openPreview('${p.title}', '${p.tag}', ${p.price}, 'url(\\'${p.img}\\')', '', '${p.link}')" class="aspect-[9/16] w-full rounded-xl border border-white/10 p-4 flex flex-col justify-between mb-4 relative overflow-hidden bg-cover bg-center shadow-lg cursor-pointer transform transition-transform duration-300 hover:scale-[1.03]" style="background-image: url('${p.img}');">
+                <div class="flex justify-between items-center relative z-10 w-full">
+                  <span class="text-[9px] font-black uppercase tracking-widest text-yellow-300 bg-black/90 px-2.5 py-1 rounded-full border border-white/10 card-tag-badge">${p.tag}</span>
+                  <span class="font-head font-black text-xs text-yellow-400 tracking-widest drop-shadow-md card-gold-brand">VORTX</span>
+                </div>
               </div>
-              <h4 class="font-head font-black text-xl text-white group-hover:text-yellow-400 transition relative z-10 drop-shadow-md mb-1">${p.title}</h4>
-            </div>
+            ` : `
+              <div class="aspect-video w-full rounded-xl bg-gradient-to-br from-white/10 to-white/5 border border-white/10 flex items-center justify-center mb-4 p-4 text-center">
+                <span class="font-head font-bold text-lg text-yellow-400 tracking-wider">${p.tag} ASSET</span>
+              </div>
+            `}
+            <h4 class="font-head font-black text-xl text-white group-hover:text-yellow-400 transition drop-shadow-md mb-2">${p.title}</h4>
           </div>
-          <div class="pt-3 border-t border-white/10 flex items-center justify-between">
+          <div class="pt-3 border-t border-white/10 flex items-center justify-between mt-4">
             <span class="font-mono text-xl font-black text-yellow-400 font-bold">${p.price === 0 ? 'FREE' : '$' + p.price}</span>
             <div class="flex gap-2">
               <button onclick="window.toggleFavorite('${p.id}', '${p.title}', '${p.tag}', ${p.price}, '${p.img}', '${p.link}')" class="px-3 py-1.5 rounded-xl bg-white/10 hover:bg-red-500/80 text-red-400 hover:text-white font-bold text-xs transition">${favText}</button>
@@ -888,7 +854,7 @@
       list.innerHTML = favItems.map(item => `
         <div class="p-3 bg-white/5 rounded-xl border border-white/10 flex items-center justify-between gap-2">
           <div class="flex items-center gap-3">
-            <img src="${item.img}" class="w-10 h-10 rounded-lg object-cover" />
+            ${item.img ? `<img src="${item.img}" class="w-10 h-10 rounded-lg object-cover" />` : `<div class="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center font-bold text-[9px]">${item.tag}</div>`}
             <div>
               <h4 class="text-xs font-bold text-white">${item.title}</h4>
               <span class="text-[10px] text-yellow-400 font-mono font-bold">${item.price === 0 ? 'FREE' : '$' + item.price}</span>
@@ -1154,7 +1120,7 @@
 document.addEventListener('DOMContentLoaded', function() {
   "use strict";
 
-  // إدراج 13 منتج وتحديد سعر Cc1-10 بـ 15 دولار
+  /* قائمة منتجات الـ CC فقط */
   window.CARDS_DATA_CURRENT = [
     { title: "Cc1💛", tag: "CC PACK", price: 5, bg: "url('Cc1.jpg')", border: "rgba(251, 191, 36, 0.4)", link: "https://payhip.com/b/gBzm3" },
     { title: "Cc2💙", tag: "CC PACK", price: 5, bg: "url('Cc2.jpg')", border: "rgba(34, 211, 238, 0.4)", link: "https://payhip.com/b/IB15F" },
@@ -1182,7 +1148,7 @@ document.addEventListener('DOMContentLoaded', function() {
       var card = document.createElement('div');
       card.className = 'card-3d'; card.style.background = data.bg; card.style.border = '1px solid ' + data.border;
       
-      card.innerHTML = '<div class="p-6 h-full flex flex-col justify-between text-white relative z-10 pointer-events-none"><div class="flex justify-between items-start"><p class="text-[10px] font-extrabold tracking-widest uppercase text-yellow-300 bg-black/80 px-2.5 py-1 rounded-full backdrop-blur-md border border-white/10 card-tag-badge">' + data.tag + '</p><span class="font-head font-black text-xs text-yellow-400 drop-shadow-md card-gold-brand">VORTX</span></div><div class="flex justify-between items-end font-mono text-sm tracking-widest bg-black/80 p-3 rounded-xl backdrop-blur-md border border-white/15 card-info-box mt-auto"><h3 class="font-head font-black text-xl sm:text-2xl text-white drop-shadow-md leading-none">' + data.title + '</h3><span class="font-head font-bold text-sm text-yellow-400 shrink-0">' + (data.price === 0 ? 'FREE' : '$'+data.price) +'</span></div></div>';
+      card.innerHTML = '<div class="p-6 h-full flex flex-col justify-between text-white relative z-10 pointer-events-none"><div class="flex justify-between items-start"><p class="text-[10px] font-extrabold tracking-widest uppercase text-yellow-300 bg-black/80 px-2.5 py-1 rounded-full border border-white/10 card-tag-badge">' + data.tag + '</p><span class="font-head font-black text-xs text-yellow-400 drop-shadow-md card-gold-brand">VORTX</span></div><div class="flex justify-between items-end font-mono text-sm tracking-widest bg-black/80 p-3 rounded-xl border border-white/15 card-info-box mt-auto"><h3 class="font-head font-black text-xl sm:text-2xl text-white drop-shadow-md leading-none">' + data.title + '</h3><span class="font-head font-bold text-sm text-yellow-400 shrink-0">' + (data.price === 0 ? 'FREE' : '$'+data.price) +'</span></div></div>';
       
       card.addEventListener('click', function () {
         if (Math.abs(dragDeltaX) < 8) {
@@ -1198,6 +1164,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   };
 
+  /* تبديل الكروت ثلاثية الأبعاد دون إدراج صور CC في الخانات الأخرى */
   window.activateCategoryCards = function(cat, btn) {
     if (btn) {
       const container = btn.parentElement;
@@ -1221,14 +1188,13 @@ document.addEventListener('DOMContentLoaded', function() {
         { title: "Cc1-10🏅🔥", tag: "CC BUNDLE", price: 15, bg: "url('Cc1-10.jpg')", border: "rgba(234, 179, 8, 0.5)", link: "https://payhip.com/b/fQ9Sa" }
       ],
       'XML': [
-        { title: "BLACK VIP", tag: "VFX PACK", price: 29, bg: "linear-gradient(135deg, #09090b, #27272a)", border: "rgba(255, 255, 255, 0.2)", link: "https://payhip.com/b/gBzm3" },
-        { title: "ROYAL GOLD", tag: "COLOR GRADE", price: 35, bg: "linear-gradient(135deg, #451a03, #b45309)", border: "rgba(251, 191, 36, 0.4)", link: "https://payhip.com/b/gBzm3" }
+        { title: "XML PACK Vol.1", tag: "XML", price: 20, bg: "linear-gradient(135deg, #18181b, #27272a)", border: "rgba(255, 255, 255, 0.2)", link: "https://payhip.com/b/gBzm3" }
       ],
       'SHAKE': [
-        { title: "WARP SHAKE", tag: "MOTION PRESET", price: 24, bg: "linear-gradient(135deg, #450a0a, #dc2626)", border: "rgba(248, 113, 113, 0.4)", link: "https://payhip.com/b/gBzm3" }
+        { title: "SHAKE PACK Vol.1", tag: "SHAKE", price: 15, bg: "linear-gradient(135deg, #450a0a, #7f1d1d)", border: "rgba(248, 113, 113, 0.4)", link: "https://payhip.com/b/gBzm3" }
       ],
       'FREE': [
-        { title: "FREE STARTER", tag: "FREE PACK", price: 0, bg: "linear-gradient(135deg, #18181b, #3f3f46)", border: "rgba(255, 255, 255, 0.2)", link: "https://payhip.com/b/gBzm3" }
+        { title: "FREE PACK Vol.1", tag: "FREE", price: 0, bg: "linear-gradient(135deg, #09090b, #18181b)", border: "rgba(255, 255, 255, 0.2)", link: "https://payhip.com/b/gBzm3" }
       ]
     };
     if (catDataMap[cat]) {
